@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 022b7da7fcf0043f891c2e8ccd8c241243018e2f
+ * https://github.com/espressif/esp32c3-bt-lib/commit/022b7da7fcf0043f891c2e8ccd8c241243018e2f
+ * Upstream date: 2021-04-20 16:00:04 +0800
+ * Upstream subject: ESP32-C3, ESP32-S3: update libbtdm_app.a(d1d0c6f1)
  * Source: libbtdm_app -> llm_init.o -> hci_le_ext_create_con_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -55,7 +55,7 @@ undefined4 hci_le_ext_create_con_cmd_handler(char *param_1,undefined4 param_2)
   bStack_e1 = 0;
   memset(local_a0,0,0x60);
   if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
-_L117:
+_L63:
     iVar7 = 0xc;
   }
   else {
@@ -67,7 +67,7 @@ _L117:
       bStack_e1 = bStack_e1 + 1;
     }
     iVar7 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-    if (bStack_e1 < *(byte *)(iVar7 + 0xd)) goto _L117;
+    if (bStack_e1 < *(byte *)(iVar7 + 0xd)) goto _L63;
     if ((*param_1 == '\0') &&
        (iVar7 = (**(code **)(_r_ip_funcs_p + 0x4d8))
                           (param_1 + 3,param_1[2],*(code **)(_r_ip_funcs_p + 0x4d8)), iVar7 != 0)) {
@@ -82,7 +82,7 @@ _L117:
         puVar9 = (ushort *)(param_1 + 10);
         for (; (int)uVar10 < (int)uVar5; uVar10 = uVar10 + 1) {
           if (((bVar1 & 2) == 0) || ((uVar11 & 1) != uVar10)) {
-            if ((*puVar9 < puVar9[1]) || ((puVar9[1] < 4 || (*puVar9 < 4)))) goto _L122;
+            if ((*puVar9 < puVar9[1]) || ((puVar9[1] < 4 || (*puVar9 < 4)))) goto _L68;
           }
           puVar9 = puVar9 + 8;
         }
@@ -95,7 +95,7 @@ _L117:
               ((0xc80 < uVar10 || (0xc76 < (*puVar9 - 10 & 0xffff))))) ||
              ((puVar3 = (ushort *)(pcVar15 + 0x12), 499 < *puVar3 ||
               (pcVar15 = pcVar15 + 0x10,
-              (int)((uint)*puVar9 * 10) < (int)((*puVar3 + 1) * uVar10 * 5 + 1) >> 1)))) goto _L122;
+              (int)((uint)*puVar9 * 10) < (int)((*puVar3 + 1) * uVar10 * 5 + 1) >> 1)))) goto _L68;
         }
         if ((((byte)param_1[2] < 2) && ((byte)param_1[1] < 4)) &&
            (((param_1[1] & 1U) == 0 ||
@@ -104,19 +104,19 @@ _L117:
             iVar7 == 0)))) {
           iVar7 = (**(code **)(_r_ip_funcs_p + 0x4ac))(&bStack_e1,*(code **)(_r_ip_funcs_p + 0x4ac))
           ;
-          if (iVar7 != 0) goto _L176;
+          if (iVar7 != 0) goto _L122;
           puVar17 = local_a0;
           pcVar19 = param_1;
-          goto _L133;
+          goto _L79;
         }
       }
-_L122:
+_L68:
       iVar7 = 0x12;
     }
   }
-_L176:
+_L122:
   uVar18 = 0;
-_L152:
+_L98:
   (**(code **)(_r_ip_funcs_p + 0x4bc))(param_2,iVar7,*(code **)(_r_ip_funcs_p + 0x4bc));
   return uVar18;
   while( true ) {
@@ -148,14 +148,14 @@ _L152:
     pcVar19 = pcVar19 + 0x10;
     puVar17 = puVar17 + 8;
     if (iVar7 != 0) break;
-_L133:
+_L79:
     if (pcVar19 == pcVar15) {
       if (*(int *)((uint)bStack_e1 * 0x44 + *(int *)(_p_llm_env + 8)) != 0) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"llm_init.c",0x299,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,"llm_init.c",0x1b9,*(code **)(_r_plf_funcs_p + 8));
       }
       cVar2 = param_1[1];
       if (cVar2 == '\x01') {
-_L141:
+_L87:
         memcpy((void *)(*(int *)(_p_llm_env + 8) + (uint)bStack_e1 * 0x44 + 4),
                (void *)(_p_llm_env + 0x12),6);
       }
@@ -166,8 +166,8 @@ _L141:
         *(undefined2 *)(iVar7 + 8) = uVar4;
       }
       else {
-        if (cVar2 == '\x03') goto _L141;
-        (**(code **)(_r_plf_funcs_p + 0xc))(0,"llm_init.c",0x2ae,*(code **)(_r_plf_funcs_p + 0xc));
+        if (cVar2 == '\x03') goto _L87;
+        (**(code **)(_r_plf_funcs_p + 0xc))(0,"llm_init.c",0x1ce,*(code **)(_r_plf_funcs_p + 0xc));
       }
       bVar1 = bStack_e1;
       iVar7 = _p_llm_env;
@@ -222,11 +222,11 @@ _L141:
         iVar7 = 3;
       }
       uVar18 = 1;
-      goto _L152;
+      goto _L98;
     }
   }
   iVar7 = 0x3b;
   uVar18 = 0;
-  goto _L152;
+  goto _L98;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 022b7da7fcf0043f891c2e8ccd8c241243018e2f
+ * https://github.com/espressif/esp32c3-bt-lib/commit/022b7da7fcf0043f891c2e8ccd8c241243018e2f
+ * Upstream date: 2021-04-20 16:00:04 +0800
+ * Upstream subject: ESP32-C3, ESP32-S3: update libbtdm_app.a(d1d0c6f1)
  * Source: libbtdm_app -> llm_init.o -> hci_le_create_con_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -69,7 +69,7 @@ undefined4 hci_le_create_con_cmd_handler(ushort *param_1,undefined4 param_2)
                           (param_1 + 3,*(undefined1 *)((int)param_1 + 5),
                            *(code **)(_r_ip_funcs_p + 0x4d8));
         iVar6 = 0xb;
-        if (iVar7 != 0) goto _L93;
+        if (iVar7 != 0) goto _L39;
       }
       if (param_1[1] <= *param_1) {
         uVar9 = (uint)param_1[8];
@@ -85,7 +85,7 @@ undefined4 hci_le_create_con_cmd_handler(ushort *param_1,undefined4 param_2)
               iVar6 == 0)))) {
             iVar6 = (**(code **)(_r_ip_funcs_p + 0x4ac))
                               (&bStack_a1,*(code **)(_r_ip_funcs_p + 0x4ac));
-            if (iVar6 != 0) goto _L93;
+            if (iVar6 != 0) goto _L39;
             uStack_a0 = (uint)param_1[7] << 1;
             uVar9 = (uint)param_1[0xb];
             if (uStack_a0 < param_1[0xb]) {
@@ -109,9 +109,9 @@ undefined4 hci_le_create_con_cmd_handler(ushort *param_1,undefined4 param_2)
             iVar7 = (**(code **)(_r_ip_funcs_p + 0x6f8))
                               (&uStack_a0,0,*(code **)(_r_ip_funcs_p + 0x6f8));
             iVar6 = 0xd;
-            if (iVar7 != 0) goto _L93;
+            if (iVar7 != 0) goto _L39;
             if (*(int *)(*(int *)(_p_llm_env + 8) + (uint)bStack_a1 * 0x44) != 0) {
-              (**(code **)(_r_plf_funcs_p + 8))("llm_init.c",0x1a5,*(code **)(_r_plf_funcs_p + 8));
+              (**(code **)(_r_plf_funcs_p + 8))("llm_init.c",0xc5,*(code **)(_r_plf_funcs_p + 8));
             }
             uVar4 = (uint)bStack_a1;
             iVar6 = *(int *)(_p_llm_env + 8);
@@ -138,7 +138,7 @@ undefined4 hci_le_create_con_cmd_handler(ushort *param_1,undefined4 param_2)
               *(short *)(puVar5 + 0x18) = (short)uVar11;
               *(ushort *)(puVar5 + 0x14) = uVar2;
               if (cVar1 == '\x01') {
-_L89:
+_L35:
                 memcpy(puVar10 + 1,(void *)(iVar6 + 0x12),6);
               }
               else if ((cVar1 == '\0') || (cVar1 == '\x02')) {
@@ -146,9 +146,9 @@ _L89:
                 *(undefined2 *)(puVar10 + 2) = *(undefined2 *)(iVar6 + 0x10);
               }
               else {
-                if (cVar1 == '\x03') goto _L89;
+                if (cVar1 == '\x03') goto _L35;
                 (**(code **)(_r_plf_funcs_p + 0xc))
-                          (cVar1,0,"llm_init.c",0x1cf,*(code **)(_r_plf_funcs_p + 0xc));
+                          (cVar1,0,"llm_init.c",0xef,*(code **)(_r_plf_funcs_p + 0xc));
               }
             }
             bVar3 = bStack_a1;
@@ -183,16 +183,16 @@ _L89:
             if (iVar6 != 0) {
               iVar6 = 3;
             }
-            goto _L93;
+            goto _L39;
           }
         }
       }
       iVar6 = 0x12;
-      goto _L93;
+      goto _L39;
     }
   }
   iVar6 = 0xc;
-_L93:
+_L39:
   (**(code **)(_r_ip_funcs_p + 0x4bc))(param_2,iVar6,*(code **)(_r_ip_funcs_p + 0x4bc));
   return 0;
 }
