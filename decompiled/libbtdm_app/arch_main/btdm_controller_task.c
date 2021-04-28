@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 90b025633add12d18ab056ce8db20d06deb40f06
+ * https://github.com/espressif/esp32c3-bt-lib/commit/90b025633add12d18ab056ce8db20d06deb40f06
+ * Upstream date: 2021-04-28 17:58:45 +0800
+ * Upstream subject: Update ESP32C3/ESP32S3 bt-lib(501d88d7)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_task
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,22 +43,18 @@ void btdm_controller_task(void)
       case '\n':
         if (cStack_38 == '\t') {
           uVar2 = 2;
-          (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
           (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-          r_intc_enable();
           (**(code **)(_r_modules_funcs_p + 0x1b8))(*(code **)(_r_modules_funcs_p + 0x1b8));
           btdm_controller_on_reset();
-          (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
+          r_intc_enable();
           (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
         }
         else {
           if (cStack_38 == '\n') {
-            (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
             (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
             r_intc_disable();
             btdm_controller_on_reset();
             (**(code **)(_r_ip_funcs_p + 0x124))(2,*(code **)(_r_ip_funcs_p + 0x124));
-            (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
           }
           else {
             if (cStack_38 == '\b') {
