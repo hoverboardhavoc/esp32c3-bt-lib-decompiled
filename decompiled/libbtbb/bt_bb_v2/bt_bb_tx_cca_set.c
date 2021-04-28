@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 2c453f09b7d1102ef496278d2cd2be96ff1ea071
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2c453f09b7d1102ef496278d2cd2be96ff1ea071
+ * Upstream date: 2021-04-28 17:55:23 +0800
+ * Upstream subject: update ESP32C3/ESP32S3 libbtbb.a
  * Source: libbtbb -> bt_bb_v2.o -> bt_bb_tx_cca_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -50,7 +50,8 @@ void bt_bb_tx_cca_set(int param_1,uint param_2,int param_3,uint param_4,uint par
     uVar1 = uVar1 | uVar2 & 0xffe01fff | 0x1000;
   }
   _DAT_600110bc =
-       (in_stack_00000004 & 0xf) << 4 | (in_stack_00000000 & 0xf) << 8 | uVar1 & 0xfffff00f;
+       (in_stack_00000004 & 0xf) << 4 | (in_stack_00000000 & 0xf) << 8 | uVar1 & 0xfffff00f |
+       0x80000000;
   return;
 }
 
