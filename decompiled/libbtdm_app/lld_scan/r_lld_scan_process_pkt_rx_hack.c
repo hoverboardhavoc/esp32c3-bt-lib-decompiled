@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 022b7da7fcf0043f891c2e8ccd8c241243018e2f
- * https://github.com/espressif/esp32c3-bt-lib/commit/022b7da7fcf0043f891c2e8ccd8c241243018e2f
- * Upstream date: 2021-04-20 16:00:04 +0800
- * Upstream subject: ESP32-C3, ESP32-S3: update libbtdm_app.a(d1d0c6f1)
+ * Last changed at upstream commit 78180e1b9c68c7068675e892df821bddefe5f88c
+ * https://github.com/espressif/esp32c3-bt-lib/commit/78180e1b9c68c7068675e892df821bddefe5f88c
+ * Upstream date: 2021-06-07 11:17:03 +0800
+ * Upstream subject: Update ESP32-C3 and ESP32-S3 libbtdm_app.a(a6bf46f8)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_process_pkt_rx_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -56,7 +56,7 @@ void r_lld_scan_process_pkt_rx_hack(int param_1)
         iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
         uVar7 = *(ushort *)(iVar4 + iVar10) & 0xf;
         if (((*(ushort *)(iVar4 + iVar10) & 8) != 0) || ((uVar7 - 3 & 0xfd) == 0)) {
-          (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x174,*(code **)(_r_plf_funcs_p + 8));
+          (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x18b,*(code **)(_r_plf_funcs_p + 8));
         }
         if (uVar7 < 7) {
           pcVar6 = *(code **)(_r_ip_funcs_p + 0x420);
