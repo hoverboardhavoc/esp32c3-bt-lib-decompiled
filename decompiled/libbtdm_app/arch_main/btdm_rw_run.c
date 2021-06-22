@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 90b025633add12d18ab056ce8db20d06deb40f06
- * https://github.com/espressif/esp32c3-bt-lib/commit/90b025633add12d18ab056ce8db20d06deb40f06
- * Upstream date: 2021-04-28 17:58:45 +0800
- * Upstream subject: Update ESP32C3/ESP32S3 bt-lib(501d88d7)
+ * Last changed at upstream commit 4b93865b52ab92f0b7777ed415b6598b96ac1d6d
+ * https://github.com/espressif/esp32c3-bt-lib/commit/4b93865b52ab92f0b7777ed415b6598b96ac1d6d
+ * Upstream date: 2021-06-22 22:28:01 +0800
+ * Upstream subject: Update ESP32-C3/ESP32-S3 bt-lib (e6e17bb4)
  * Source: libbtdm_app -> arch_main.o -> btdm_rw_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -58,7 +58,7 @@ _L134:
   }
                     /* WARNING: Could not recover jumptable at 0x0001136a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x333);
+  (**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x32d);
   return;
 }
 

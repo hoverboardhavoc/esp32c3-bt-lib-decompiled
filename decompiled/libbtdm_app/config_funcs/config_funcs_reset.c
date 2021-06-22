@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f45e6918026b6e8fdc6dec3f626a98c35960f50e
- * https://github.com/espressif/esp32c3-bt-lib/commit/f45e6918026b6e8fdc6dec3f626a98c35960f50e
- * Upstream date: 2021-06-21 17:00:22 +0530
- * Upstream subject: Fix MIC error issue during start_encryption procedure Update ESP32C3 and ESP32S3 libraries (a86af1e)
+ * Last changed at upstream commit 4b93865b52ab92f0b7777ed415b6598b96ac1d6d
+ * https://github.com/espressif/esp32c3-bt-lib/commit/4b93865b52ab92f0b7777ed415b6598b96ac1d6d
+ * Upstream date: 2021-06-22 22:28:01 +0800
+ * Upstream subject: Update ESP32-C3/ESP32-S3 bt-lib (e6e17bb4)
  * Source: libbtdm_app -> config_funcs.o -> config_funcs_reset
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,6 +22,7 @@ void config_funcs_reset(void)
   config_rf_espressif_funcs_reset();
   config_rf_txpwr_funcs_reset();
   lld_con_func_reset();
+  lld_sync_func_reset();
   llc_llcp_func_reset();
   sch_plan_func_reset();
   llc_con_upd_func_reset();

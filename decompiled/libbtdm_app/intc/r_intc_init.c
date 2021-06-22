@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 4b93865b52ab92f0b7777ed415b6598b96ac1d6d
+ * https://github.com/espressif/esp32c3-bt-lib/commit/4b93865b52ab92f0b7777ed415b6598b96ac1d6d
+ * Upstream date: 2021-06-22 22:28:01 +0800
+ * Upstream subject: Update ESP32-C3/ESP32-S3 bt-lib (e6e17bb4)
  * Source: libbtdm_app -> intc.o -> r_intc_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,10 +21,10 @@ void r_intc_init(void)
   iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   uVar1 = *(undefined1 *)(iVar2 + 0xb);
   if (*(int *)(_r_osi_funcs_p + 8) == 0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0x7e,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0x75,*(code **)(_r_plf_funcs_p + 8));
   }
   if (*(int *)(_r_osi_funcs_p + 0x10) == 0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0x7f,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0x76,*(code **)(_r_plf_funcs_p + 8));
   }
   (**(code **)(_r_osi_funcs_p + 8))(uVar1,8,5,1,*(code **)(_r_osi_funcs_p + 8));
   (**(code **)(_r_osi_funcs_p + 0x10))
