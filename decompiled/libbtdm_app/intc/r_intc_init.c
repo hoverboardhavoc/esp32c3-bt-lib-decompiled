@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4b93865b52ab92f0b7777ed415b6598b96ac1d6d
- * https://github.com/espressif/esp32c3-bt-lib/commit/4b93865b52ab92f0b7777ed415b6598b96ac1d6d
- * Upstream date: 2021-06-22 22:28:01 +0800
- * Upstream subject: Update ESP32-C3/ESP32-S3 bt-lib (e6e17bb4)
+ * Last changed at upstream commit b223604efd557d0a5314afb3b751229df424d244
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b223604efd557d0a5314afb3b751229df424d244
+ * Upstream date: 2021-06-24 21:26:02 +0800
+ * Upstream subject: Update ESP32-C3 and ESP32-S3 bt lib (9c99115)
  * Source: libbtdm_app -> intc.o -> r_intc_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,22 +21,18 @@ void r_intc_init(void)
   iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   uVar1 = *(undefined1 *)(iVar2 + 0xb);
   if (*(int *)(_r_osi_funcs_p + 8) == 0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0x75,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0xb4,*(code **)(_r_plf_funcs_p + 8));
   }
   if (*(int *)(_r_osi_funcs_p + 0x10) == 0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0x76,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0xb5,*(code **)(_r_plf_funcs_p + 8));
   }
   (**(code **)(_r_osi_funcs_p + 8))(uVar1,8,5,1,*(code **)(_r_osi_funcs_p + 8));
   (**(code **)(_r_osi_funcs_p + 0x10))
             (5,*(undefined4 *)(_r_plf_funcs_p + 0x90),0,*(code **)(_r_osi_funcs_p + 0x10));
-  iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-  if (*(char *)(iVar2 + 0x11) != '\0') {
-    (**(code **)(_r_osi_funcs_p + 8))(uVar1,5,8,1,*(code **)(_r_osi_funcs_p + 8));
-                    /* WARNING: Could not recover jumptable at 0x000100ba. Too many branches */
+  (**(code **)(_r_osi_funcs_p + 8))(uVar1,5,8,1,*(code **)(_r_osi_funcs_p + 8));
+                    /* WARNING: Could not recover jumptable at 0x000100ac. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_r_osi_funcs_p + 0x10))(8,*(undefined4 *)(_r_plf_funcs_p + 0x84),0);
-    return;
-  }
+  (**(code **)(_r_osi_funcs_p + 0x10))(8,bt_bb_isr_hack,0);
   return;
 }
 
