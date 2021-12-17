@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4b93865b52ab92f0b7777ed415b6598b96ac1d6d
- * https://github.com/espressif/esp32c3-bt-lib/commit/4b93865b52ab92f0b7777ed415b6598b96ac1d6d
- * Upstream date: 2021-06-22 22:28:01 +0800
- * Upstream subject: Update ESP32-C3/ESP32-S3 bt-lib (e6e17bb4)
+ * Last changed at upstream commit 86145c184578f9061d2d0efb30fefa20a91a75e9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/86145c184578f9061d2d0efb30fefa20a91a75e9
+ * Upstream date: 2021-12-17 19:26:32 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(68818697)
  * Source: libbtdm_app -> config_funcs.o -> config_funcs_reset
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,6 +16,7 @@ void config_funcs_reset(void)
   vshci_func_reset();
   llm_scan_func_reset();
   hci_msg_func_reset();
+  lld_adv_func_reset();
   lld_scan_func_reset();
   config_task_funcs_reset();
   config_rf_coexist_funcs_reset();
