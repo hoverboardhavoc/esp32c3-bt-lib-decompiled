@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b223604efd557d0a5314afb3b751229df424d244
- * https://github.com/espressif/esp32c3-bt-lib/commit/b223604efd557d0a5314afb3b751229df424d244
- * Upstream date: 2021-06-24 21:26:02 +0800
- * Upstream subject: Update ESP32-C3 and ESP32-S3 bt lib (9c99115)
+ * Last changed at upstream commit a3f7d7ffa2b261b1415042d8b7cd457cc2b4b1de
+ * https://github.com/espressif/esp32c3-bt-lib/commit/a3f7d7ffa2b261b1415042d8b7cd457cc2b4b1de
+ * Upstream date: 2021-12-28 18:10:18 +0800
+ * Upstream subject: Update ESP32-C3 and ESP32-S3 bt lib (33175c8)
  * Source: libbtdm_app -> bt_rw_v9.o -> r_rf_rw_v9_le_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -48,7 +48,8 @@ void r_rf_rw_v9_le_init(void)
   }
   iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   if (*(char *)(iVar1 + 0x11) != '\0') {
-    bt_bb_tx_cca_set(1,0xd3,1,9,9,0,0,0);
+    iVar1 = sdk_config_get_opts_ext();
+    bt_bb_tx_cca_set(1,0x100 - (uint)*(byte *)(iVar1 + 0x12),0,0,0,0,0,0);
   }
   return;
 }
