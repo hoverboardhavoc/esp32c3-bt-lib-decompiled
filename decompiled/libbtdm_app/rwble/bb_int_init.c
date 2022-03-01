@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b223604efd557d0a5314afb3b751229df424d244
- * https://github.com/espressif/esp32c3-bt-lib/commit/b223604efd557d0a5314afb3b751229df424d244
- * Upstream date: 2021-06-24 21:26:02 +0800
- * Upstream subject: Update ESP32-C3 and ESP32-S3 bt lib (9c99115)
+ * Last changed at upstream commit 98dcc9591365b5ac486a9f0b474c36bf8c4ca97b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/98dcc9591365b5ac486a9f0b474c36bf8c4ca97b
+ * Upstream date: 2022-03-01 14:41:26 +0800
+ * Upstream subject: Update ESP32-C3 and ESP32-S3 bt lib (d913766) Add the pll track feature to keep the ble connection stable when the environment temprature increase form 0 to 74.
  * Source: libbtdm_app -> rwble.o -> bb_int_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,12 +22,13 @@ void bb_int_init(undefined4 param_1)
     bb_hw_intr_set(0x10400);
   }
   iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-  if ((*(char *)(iVar1 + 0x11) == '\0') && (sdk_cfg_priv_opts == '\0')) {
+  if ((*(char *)(iVar1 + 0x11) != '\0') || (sdk_cfg_priv_opts != '\0')) {
+    (**(code **)(_r_ip_funcs_p + 0x120))(param_1,*(code **)(_r_ip_funcs_p + 0x120));
+  }
+  if (sdk_cfg_priv_opts_extend != '\0') {
+    bb_hw_intr_set(0x6000);
     return;
   }
-                    /* WARNING: Could not recover jumptable at 0x000101ec. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_ip_funcs_p + 0x120))(param_1);
   return;
 }
 
