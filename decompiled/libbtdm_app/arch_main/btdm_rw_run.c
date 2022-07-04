@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4b93865b52ab92f0b7777ed415b6598b96ac1d6d
- * https://github.com/espressif/esp32c3-bt-lib/commit/4b93865b52ab92f0b7777ed415b6598b96ac1d6d
- * Upstream date: 2021-06-22 22:28:01 +0800
- * Upstream subject: Update ESP32-C3/ESP32-S3 bt-lib (e6e17bb4)
+ * Last changed at upstream commit f3c359a685a17bcc301e43778e7f581605e32d0a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f3c359a685a17bcc301e43778e7f581605e32d0a
+ * Upstream date: 2022-07-04 22:08:59 +0800
+ * Upstream subject: fix ke_mem.c assert(0821b2a)
  * Source: libbtdm_app -> arch_main.o -> btdm_rw_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -56,7 +56,7 @@ _L134:
   if (param_1 < 2) {
     return;
   }
-                    /* WARNING: Could not recover jumptable at 0x0001136a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001138a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x32d);
   return;

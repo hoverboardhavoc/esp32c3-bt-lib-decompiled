@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit f3c359a685a17bcc301e43778e7f581605e32d0a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f3c359a685a17bcc301e43778e7f581605e32d0a
+ * Upstream date: 2022-07-04 22:08:59 +0800
+ * Upstream subject: fix ke_mem.c assert(0821b2a)
  * Source: libbtdm_app -> llm_scan.o -> llm_util_check_mesh_adv_report_list
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,7 +36,7 @@ undefined4 llm_util_check_mesh_adv_report_list(int param_1,uint param_2)
           llm_util_flush_list(&le_scan_duplicate_option);
         }
         iVar5 = (**(code **)(_r_modules_funcs_p + 0x120))
-                          (0xc,0,*(code **)(_r_modules_funcs_p + 0x120));
+                          (0xc,3,*(code **)(_r_modules_funcs_p + 0x120));
         iVar1 = _r_modules_funcs_p;
         if (iVar5 != 0) {
           *(uint *)(iVar5 + 4) = uVar2;

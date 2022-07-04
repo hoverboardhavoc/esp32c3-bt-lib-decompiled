@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit f3c359a685a17bcc301e43778e7f581605e32d0a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f3c359a685a17bcc301e43778e7f581605e32d0a
+ * Upstream date: 2022-07-04 22:08:59 +0800
+ * Upstream subject: fix ke_mem.c assert(0821b2a)
  * Source: libbtdm_app -> llm_scan.o -> hci_le_per_adv_create_sync_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -46,7 +46,7 @@ undefined4 hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 param
             piVar5 = (int *)(*(int *)(_p_llm_env + 8) + (uint)bStack_21 * 0x44);
             *(undefined1 *)(piVar5 + 0x10) = 0xe;
             if (*piVar5 != 0) {
-              (**(code **)(_r_plf_funcs_p + 8))("llm_scan.c",0x307,*(code **)(_r_plf_funcs_p + 8));
+              (**(code **)(_r_plf_funcs_p + 8))("llm_scan.c",0x2f5,*(code **)(_r_plf_funcs_p + 8));
             }
             bVar1 = param_1[7];
             uVar3 = 1;
