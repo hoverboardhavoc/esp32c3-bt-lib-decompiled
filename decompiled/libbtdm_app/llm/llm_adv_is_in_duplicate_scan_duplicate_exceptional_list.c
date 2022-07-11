@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit d1c2082e5633a89c6fd6051c7761c1e697cb7a2e
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d1c2082e5633a89c6fd6051c7761c1e697cb7a2e
+ * Upstream date: 2022-07-11 09:57:43 +0800
+ * Upstream subject: fix adv report duplicate check
  * Source: libbtdm_app -> llm.o -> llm_adv_is_in_duplicate_scan_duplicate_exceptional_list
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,7 +43,7 @@ bool llm_adv_is_in_duplicate_scan_duplicate_exceptional_list(void *param_1,int p
         }
       }
     }
-    if ((((*(char *)((int)param_1 + param_2 + -2) != '\x02') || ((uVar2 & 4) == 0)) ||
+    if ((((*(char *)((int)param_1 + param_2 + -2) != '\x03') || ((uVar2 & 4) == 0)) ||
         (bVar4 = true, cVar1 != '+')) &&
        ((((uVar2 & 8) == 0 || (bVar4 = true, *(int *)((int)param_1 + 9) != 0x18270303)) &&
         (bVar4 = false, (uVar2 & 0x10) != 0)))) {
