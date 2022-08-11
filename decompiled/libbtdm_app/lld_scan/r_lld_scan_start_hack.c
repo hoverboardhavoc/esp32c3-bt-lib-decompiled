@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4b93865b52ab92f0b7777ed415b6598b96ac1d6d
- * https://github.com/espressif/esp32c3-bt-lib/commit/4b93865b52ab92f0b7777ed415b6598b96ac1d6d
- * Upstream date: 2021-06-22 22:28:01 +0800
- * Upstream subject: Update ESP32-C3/ESP32-S3 bt-lib (e6e17bb4)
+ * Last changed at upstream commit 3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * Upstream date: 2022-08-11 21:28:16 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_start_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,19 +23,25 @@ int r_lld_scan_start_hack(void)
   int *piVar6;
   
   iVar3 = r_lld_scan_start();
-  if ((iVar3 == 0) && (_lld_scan_env != (int *)0x0)) {
-    piVar6 = _lld_scan_env + 2;
-    piVar2 = _lld_scan_env;
-    do {
-      if (*piVar2 != 0) {
-        iVar5 = (uint)*(byte *)(*piVar2 + 0x38) * 0x5a;
-        iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-        uVar1 = *(ushort *)(iVar4 + iVar5);
-        iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-        *(ushort *)(iVar4 + iVar5) = uVar1 & 0xffdf;
-      }
-      piVar2 = piVar2 + 1;
-    } while (piVar6 != piVar2);
+  if (iVar3 == 0) {
+    if (g_qa_test_config != '\0') {
+      _DAT_60031124 = 0x10001;
+      _DAT_60031364 = _DAT_60031364 & 0xfffffe00 | 1;
+    }
+    if (_lld_scan_env != (int *)0x0) {
+      piVar6 = _lld_scan_env + 2;
+      piVar2 = _lld_scan_env;
+      do {
+        if (*piVar2 != 0) {
+          iVar5 = (uint)*(byte *)(*piVar2 + 0x38) * 0x5a;
+          iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
+          uVar1 = *(ushort *)(iVar4 + iVar5);
+          iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
+          *(ushort *)(iVar4 + iVar5) = uVar1 & 0xffdf;
+        }
+        piVar2 = piVar2 + 1;
+      } while (piVar6 != piVar2);
+    }
   }
   return iVar3;
 }

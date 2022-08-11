@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 614154ba4a7b5e55e943f92c194de497e6ce4219
- * https://github.com/espressif/esp32c3-bt-lib/commit/614154ba4a7b5e55e943f92c194de497e6ce4219
- * Upstream date: 2022-06-29 19:01:17 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(16cffbc)
+ * Last changed at upstream commit 3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * Upstream date: 2022-08-11 21:28:16 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
  * Source: libbtdm_app -> arch_main.o -> rw_pre_main
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,7 +32,7 @@ void rw_pre_main(void)
       if (0 < _g_bt_plf_log_level) {
         ets_printf("H4TL EIF not registered\n");
       }
-      (**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x2a0,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x2d5,*(code **)(_r_plf_funcs_p + 8));
     }
     else {
       (**(code **)(_r_h4tl_eif_p + 0xc))(*(code **)(_r_h4tl_eif_p + 0xc));
@@ -45,7 +45,7 @@ void rw_pre_main(void)
     }
   }
   (**(code **)(_r_plf_funcs_p + 0x94))(*(code **)(_r_plf_funcs_p + 0x94));
-                    /* WARNING: Could not recover jumptable at 0x00010918. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010994. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0x27c))(0);
   return;

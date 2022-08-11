@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f3c359a685a17bcc301e43778e7f581605e32d0a
- * https://github.com/espressif/esp32c3-bt-lib/commit/f3c359a685a17bcc301e43778e7f581605e32d0a
- * Upstream date: 2022-07-04 22:08:59 +0800
- * Upstream subject: fix ke_mem.c assert(0821b2a)
+ * Last changed at upstream commit 3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * Upstream date: 2022-08-11 21:28:16 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
  * Source: libbtdm_app -> llm_scan.o -> llm_le_adv_report_ind_duplicate_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,16 +37,16 @@ uint llm_le_adv_report_ind_duplicate_check(int param_1,void *param_2)
   if ((*(char *)(_p_llm_env + 0xd7) == '\x01') &&
      (uVar4 = 1, (*(byte *)(_p_llm_env + 0xd4) & 1) != 0)) {
     cVar1 = (&adv_evt_prop2type)[*(byte *)(param_1 + 0x15)];
-    if (DAT_00012050 != '\0') {
+    if (DAT_00012060 != '\0') {
       llm_util_flush_list(&le_scan_duplicate_option);
       (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
-      DAT_00012050 = '\0';
+      DAT_00012060 = '\0';
       (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
     }
-    if ((DAT_00012051 != '\0') && (adv_evt_prop2type != '\0')) {
+    if ((DAT_00012061 != '\0') && (adv_evt_prop2type != '\0')) {
       llm_util_flush_list(&le_scan_duplicate_option);
       (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
-      DAT_00012051 = '\0';
+      DAT_00012061 = '\0';
       (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
     }
     uVar9 = (uint)*(byte *)(param_1 + 0x20);
@@ -65,11 +65,11 @@ uint llm_le_adv_report_ind_duplicate_check(int param_1,void *param_2)
     if (uVar4 == 0) {
       if ((((adv_evt_prop2type == '\0') || (cVar1 != '\x03')) || (acStack_52[1] != '*')) ||
          (uVar9 < 0xc)) {
-        if (DAT_00012035 == '\x01') {
+        if (DAT_00012045 == '\x01') {
           uVar10 = __n + 2;
           pcVar5 = acStack_52;
         }
-        else if (DAT_00012035 == '\x02') {
+        else if (DAT_00012045 == '\x02') {
           pcVar5 = acStack_58;
         }
         else {
@@ -83,12 +83,12 @@ uint llm_le_adv_report_ind_duplicate_check(int param_1,void *param_2)
             piVar8 = (int *)*piVar8) {
           if (iVar6 == piVar8[1]) {
             uVar4 = 1;
-            goto _L294;
+            goto _L322;
           }
         }
         uVar4 = (**(code **)(_r_modules_funcs_p + 0x50))
                           (&le_scan_duplicate_option,*(code **)(_r_modules_funcs_p + 0x50));
-        if (_DAT_00012036 <= uVar4) {
+        if (_DAT_00012046 <= uVar4) {
           llm_util_flush_list(&le_scan_duplicate_option);
         }
         iVar7 = (**(code **)(_r_modules_funcs_p + 0x120))
@@ -99,7 +99,7 @@ uint llm_le_adv_report_ind_duplicate_check(int param_1,void *param_2)
           *(int *)(iVar7 + 4) = iVar6;
           (**(code **)(iVar3 + 0x4c))(&le_scan_duplicate_option,iVar7,*(code **)(iVar3 + 0x4c));
         }
-_L294:
+_L322:
         uVar4 = uVar4 ^ 1;
       }
       else {

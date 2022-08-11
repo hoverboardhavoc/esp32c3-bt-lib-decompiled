@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f3c359a685a17bcc301e43778e7f581605e32d0a
- * https://github.com/espressif/esp32c3-bt-lib/commit/f3c359a685a17bcc301e43778e7f581605e32d0a
- * Upstream date: 2022-07-04 22:08:59 +0800
- * Upstream subject: fix ke_mem.c assert(0821b2a)
+ * Last changed at upstream commit 3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * Upstream date: 2022-08-11 21:28:16 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -171,7 +171,7 @@ undefined4 btdm_controller_init(int *param_1)
                                      (0xc,*(code **)(_r_osi_funcs_p + 0x78));
                   piVar8 = _btdm_env_p;
                   piVar7[9] = iVar11;
-                  if ((void *)piVar8[9] == (void *)0x0) goto _L239;
+                  if ((void *)piVar8[9] == (void *)0x0) goto _L249;
                   memset((void *)piVar8[9],0,0xc);
                 }
                 if (2 < _g_bt_plf_log_level) {
@@ -238,11 +238,11 @@ undefined4 btdm_controller_init(int *param_1)
                 }
                 _g_rw_init_sem = 0;
                 btdm_controller_env_deinit();
-                goto _L228;
+                goto _L238;
               }
             }
           }
-_L239:
+_L249:
           (**(code **)((int)_r_ip_funcs_p + 0x240))(*(code **)((int)_r_ip_funcs_p + 0x240));
           (**(code **)((int)_r_ip_funcs_p + 0x4cc))(*(code **)((int)_r_ip_funcs_p + 0x4cc));
           (**(code **)((int)_r_ip_funcs_p + 0xe0))(*(code **)((int)_r_ip_funcs_p + 0xe0));
@@ -270,17 +270,17 @@ _L239:
             _btdm_env_p = (int *)0x0;
             uVar16 = 0xfffffffc;
           }
-          goto _L228;
+          goto _L238;
         }
       }
       else if (0 < _g_bt_plf_log_level) {
         pcVar10 = "Default Tx Power Invalid: 0x%x\n";
-        goto _L335;
+        goto _L345;
       }
     }
     else if (0 < _g_bt_plf_log_level) {
       pcVar10 = "Hardware Target Code Invalid: 0x%x\n";
-_L335:
+_L345:
       ets_printf(pcVar10);
     }
   }
@@ -288,7 +288,7 @@ _L335:
     ets_printf("Config struct mismatch: magic=%08x, ver=%08x\n",0x5a5aa5a5,0x2112280);
   }
   uVar16 = 0xfffffffd;
-_L228:
+_L238:
   btdm_funcs_table_destroy();
   return uVar16;
 }

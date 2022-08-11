@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * Upstream date: 2022-08-11 21:28:16 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
  * Source: libbtdm_app -> llm_scan.o -> hci_le_rmv_dev_from_per_adv_list_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -55,12 +55,12 @@ undefined4 hci_le_rmv_dev_from_per_adv_list_cmd_handler(byte *param_1,undefined4
             uVar4 = 0;
           }
         }
-        goto _L227;
+        goto _L255;
       }
     }
     uVar4 = 0xc;
   }
-_L227:
+_L255:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,uVar4,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }

@@ -3,25 +3,18 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
  * Upstream date: 2022-08-11 21:28:16 +0800
  * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
- * Source: libbtdm_app -> llm_scan.o -> llm_cal_duplicate_scan_defer_count
+ * Source: libbtdm_app -> lld_adv.o -> ble_ll_qa_test_enable
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void llm_cal_duplicate_scan_defer_count(int param_1)
+void ble_ll_qa_test_enable(uint param_1)
 
 {
-  if (*(char *)(_p_llm_env + 0xd7) != '\x02') {
-    _r_llm_adv_rep_flow_control_update = 48000 / param_1;
-    if (_r_llm_adv_rep_flow_control_update == 0) {
-      _r_llm_adv_rep_flow_control_update = 1;
-    }
-    _DAT_00012058 = 0;
-  }
+  g_qa_test_config = (byte)param_1 & 1;
+  DAT_00010529 = (byte)(param_1 >> 1) & 1;
   return;
 }
 

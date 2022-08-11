@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * Upstream date: 2022-08-11 21:28:16 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
  * Source: libbtdm_app -> llm_scan.o -> llm_update_duplicate_scan_count
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,22 +18,22 @@ void llm_update_duplicate_scan_count(void)
   uint uVar1;
   
   if ((*(char *)(_p_llm_env + 0xd7) != '\x02') && ((*(byte *)(_p_llm_env + 0xd4) & 1) != 0)) {
-    _DAT_00012048 = _DAT_00012048 + 1;
-    if (_r_llm_adv_rep_flow_control_update <= _DAT_00012048) {
-      _DAT_00012048 = 0;
-      DAT_00012050 = 1;
+    _DAT_00012058 = _DAT_00012058 + 1;
+    if (_r_llm_adv_rep_flow_control_update <= _DAT_00012058) {
+      _DAT_00012058 = 0;
+      DAT_00012060 = 1;
     }
     if (adv_evt_prop2type != '\0') {
       uVar1 = 1;
       if (5 < _r_llm_adv_rep_flow_control_update) {
         uVar1 = _r_llm_adv_rep_flow_control_update / 6;
       }
-      if (_DAT_0001204c + 1 < uVar1) {
-        _DAT_0001204c = _DAT_0001204c + 1;
+      if (_DAT_0001205c + 1 < uVar1) {
+        _DAT_0001205c = _DAT_0001205c + 1;
         return;
       }
-      _DAT_0001204c = 0;
-      DAT_00012051 = 1;
+      _DAT_0001205c = 0;
+      DAT_00012061 = 1;
     }
   }
   return;

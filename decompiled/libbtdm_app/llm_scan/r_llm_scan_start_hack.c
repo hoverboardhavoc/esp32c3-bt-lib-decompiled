@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
  * Upstream date: 2022-08-11 21:28:16 +0800
  * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
- * Source: libbtdm_app -> arch_main.o -> btdm_controller_on_reset
+ * Source: libbtdm_app -> llm_scan.o -> r_llm_scan_start_hack
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,17 +12,13 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void btdm_controller_on_reset(void)
+void r_llm_scan_start_hack(void)
 
 {
-  (**(code **)(_r_modules_funcs_p + 0x280))(*(code **)(_r_modules_funcs_p + 0x280));
-  rw_rf_le_exit_test_mode();
-  if ((_bt_rf_coex_hooks_p != (undefined4 *)0x0) && ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
-                    /* WARNING: Could not recover jumptable at 0x000109f6. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*(code *)*_bt_rf_coex_hooks_p)(0xff,8,0);
-    return;
+  if (g_qa_test_config != '\0') {
+    _r_llm_adv_rep_flow_control_check = 0;
   }
+  r_llm_scan_start();
   return;
 }
 

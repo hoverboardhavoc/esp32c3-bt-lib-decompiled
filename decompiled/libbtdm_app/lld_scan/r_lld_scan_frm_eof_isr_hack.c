@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4b93865b52ab92f0b7777ed415b6598b96ac1d6d
- * https://github.com/espressif/esp32c3-bt-lib/commit/4b93865b52ab92f0b7777ed415b6598b96ac1d6d
- * Upstream date: 2021-06-22 22:28:01 +0800
- * Upstream subject: Update ESP32-C3/ESP32-S3 bt-lib (e6e17bb4)
+ * Last changed at upstream commit 3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * Upstream date: 2022-08-11 21:28:16 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_frm_eof_isr_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,7 +33,7 @@ void r_lld_scan_frm_eof_isr_hack(int param_1)
   }
   r_lld_scan_frm_eof_isr();
   if ((bVar1) && (*(char *)(iVar2 + 0x3d) == '\0')) {
-                    /* WARNING: Could not recover jumptable at 0x00010378. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001039e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_ip_funcs_p + 0x3d8))(iVar2,3);
     return;

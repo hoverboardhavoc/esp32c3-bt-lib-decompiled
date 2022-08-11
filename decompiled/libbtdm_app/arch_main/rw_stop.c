@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 614154ba4a7b5e55e943f92c194de497e6ce4219
- * https://github.com/espressif/esp32c3-bt-lib/commit/614154ba4a7b5e55e943f92c194de497e6ce4219
- * Upstream date: 2022-06-29 19:01:17 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(16cffbc)
+ * Last changed at upstream commit 3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
+ * Upstream date: 2022-08-11 21:28:16 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
  * Source: libbtdm_app -> arch_main.o -> rw_stop
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,12 +24,12 @@ void rw_stop(void)
   }
   else {
     iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-    if (*(char *)(iVar1 + 0x17) != '\x01') goto _L191;
+    if (*(char *)(iVar1 + 0x17) != '\x01') goto _L201;
     pcVar2 = *(code **)(_r_plf_funcs_p + 200);
   }
   (*pcVar2)(pcVar2);
-_L191:
-                    /* WARNING: Could not recover jumptable at 0x000109b6. Too many branches */
+_L201:
+                    /* WARNING: Could not recover jumptable at 0x00010a32. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_plf_funcs_p + 0xa0))();
   return;
