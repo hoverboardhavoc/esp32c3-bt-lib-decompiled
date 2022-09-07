@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/2a91d90e33b3b1104daf1bff898fe5bc3f814811
  * Upstream date: 2022-09-07 12:18:28 +0800
  * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(2ee0168e)
- * Source: libbtdm_app -> lld_con.o -> lld_con_func_reset
+ * Source: libbtdm_app -> sch_prog.o -> ble_do_master_soft_reset
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,19 +12,12 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void lld_con_func_reset(void)
+void ble_do_master_soft_reset(void)
 
 {
-  int iVar1;
-  
-  iVar1 = _r_ip_funcs_p;
-  *(code **)(_r_ip_funcs_p + 0x33c) = r_lld_con_evt_canceled_cbk_hack;
-  *(code **)(iVar1 + 0x34c) = r_lld_con_evt_time_update_hack;
-  *(code **)(iVar1 + 0x3b0) = r_lld_con_start_hack;
-  *(code **)(iVar1 + 0x35c) = r_lld_con_frm_isr_hack;
-  *(code **)(iVar1 + 0x790) = r_lld_con_tx_prog_new_packet_hack;
-  *(code **)(iVar1 + 0x3b8) = r_lld_con_tx_hack;
-  *(code **)(iVar1 + 0x3a8) = r_lld_con_sched_hack;
+  _DAT_60031000 = _DAT_60031000 | 0x80000000;
+  do {
+  } while ((int)_DAT_60031000 < 0);
   return;
 }
 

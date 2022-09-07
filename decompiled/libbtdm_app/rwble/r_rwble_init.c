@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 2a91d90e33b3b1104daf1bff898fe5bc3f814811
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2a91d90e33b3b1104daf1bff898fe5bc3f814811
+ * Upstream date: 2022-09-07 12:18:28 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(2ee0168e)
  * Source: libbtdm_app -> rwble.o -> r_rwble_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,7 +30,7 @@ void r_rwble_init(int param_1)
     (**(code **)(_r_ip_funcs_p + 0x254))(param_1,*(code **)(_r_ip_funcs_p + 0x254));
   }
   (**(code **)(_r_ip_funcs_p + 0x660))(param_1,*(code **)(_r_ip_funcs_p + 0x660));
-                    /* WARNING: Could not recover jumptable at 0x000100d2. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010150. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_ip_funcs_p + 0x4d4))(param_1);
   return;
