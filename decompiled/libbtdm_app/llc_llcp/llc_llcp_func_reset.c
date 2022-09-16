@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 022b7da7fcf0043f891c2e8ccd8c241243018e2f
- * https://github.com/espressif/esp32c3-bt-lib/commit/022b7da7fcf0043f891c2e8ccd8c241243018e2f
- * Upstream date: 2021-04-20 16:00:04 +0800
- * Upstream subject: ESP32-C3, ESP32-S3: update libbtdm_app.a(d1d0c6f1)
+ * Last changed at upstream commit 420ae1726dede6bbd4f3393744a8f3a252330b6a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/420ae1726dede6bbd4f3393744a8f3a252330b6a
+ * Upstream date: 2022-09-16 21:21:40 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(421c2790)
  * Source: libbtdm_app -> llc_llcp.o -> llc_llcp_func_reset
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,11 @@
 void llc_llcp_func_reset(void)
 
 {
+  int iVar1;
+  
+  iVar1 = _r_ip_funcs_p;
   *(code **)(_r_ip_funcs_p + 0x750) = r_lld_llcp_rx_ind_handler_hack;
+  *(code **)(iVar1 + 0x5b4) = r_llc_llcp_send_hack;
   return;
 }
 
