@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2a91d90e33b3b1104daf1bff898fe5bc3f814811
- * https://github.com/espressif/esp32c3-bt-lib/commit/2a91d90e33b3b1104daf1bff898fe5bc3f814811
- * Upstream date: 2022-09-07 12:18:28 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(2ee0168e)
+ * Last changed at upstream commit 4dd1838c81fc41eab863e284a53f029faab5372d
+ * https://github.com/espressif/esp32c3-bt-lib/commit/4dd1838c81fc41eab863e284a53f029faab5372d
+ * Upstream date: 2022-10-31 20:02:57 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(76c24c96)
  * Source: libbtdm_app -> rwble.o -> r_rwble_isr_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,10 +36,10 @@ _L6:
   }
   else {
     uVar1 = (_DAT_600312d8 << 1) >> 0xb;
-    if ((_DAT_600312d8 >> 5 & 0x1f) != 0) goto code_r0x00010374;
+    if ((_DAT_600312d8 >> 5 & 0x1f) != 0) goto code_r0x00010372;
   }
   return;
-code_r0x00010374:
+code_r0x00010372:
   _DAT_600312d8 = _DAT_600312d8 | 1;
   if (uVar1 != 0) {
 _L10:
@@ -49,11 +49,11 @@ _L10:
     if ((uVar1 & 0x100) != 0) {
       _DAT_60031018 = 0x100;
       if (_DAT_60031060 == 0x20000) {
-        _DAT_000905f8 = _DAT_000905f8 + 1;
+        DAT_00010628 = DAT_00010628 + 1;
       }
       else if (_DAT_60031060 == 0x400001) {
-        DAT_000105fc = DAT_000105fc + 1;
-        _DAT_010105f8 = _DAT_010105f8 + 1;
+        _LANCHOR1 = _LANCHOR1 + 1;
+        DAT_0001063c = DAT_0001063c + 1;
       }
       else {
         _DAT_60031050 = 0x838295a8;
