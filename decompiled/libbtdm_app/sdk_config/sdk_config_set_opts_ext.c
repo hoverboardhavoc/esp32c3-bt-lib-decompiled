@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 022b7da7fcf0043f891c2e8ccd8c241243018e2f
- * https://github.com/espressif/esp32c3-bt-lib/commit/022b7da7fcf0043f891c2e8ccd8c241243018e2f
- * Upstream date: 2021-04-20 16:00:04 +0800
- * Upstream subject: ESP32-C3, ESP32-S3: update libbtdm_app.a(d1d0c6f1)
+ * Last changed at upstream commit 976ca00e43905df9e910b400a9e17c311b085ce2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/976ca00e43905df9e910b400a9e17c311b085ce2
+ * Upstream date: 2022-11-03 19:06:39 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ef8a115a) - Added config to disable scan backoff - Fixed llm_scan.c assert at line 1485 during controller deinit if duplicate scan is not stopped - Call pll track in controller task
  * Source: libbtdm_app -> sdk_config.o -> sdk_config_set_opts_ext
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 void sdk_config_set_opts_ext(void *param_1)
 
 {
-  memcpy(&_LANCHOR2,param_1,0x14);
+  memcpy(&_LANCHOR2,param_1,0x18);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d1c2082e5633a89c6fd6051c7761c1e697cb7a2e
- * https://github.com/espressif/esp32c3-bt-lib/commit/d1c2082e5633a89c6fd6051c7761c1e697cb7a2e
- * Upstream date: 2022-07-11 09:57:43 +0800
- * Upstream subject: fix adv report duplicate check
+ * Last changed at upstream commit 976ca00e43905df9e910b400a9e17c311b085ce2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/976ca00e43905df9e910b400a9e17c311b085ce2
+ * Upstream date: 2022-11-03 19:06:39 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ef8a115a) - Added config to disable scan backoff - Fixed llm_scan.c assert at line 1485 during controller deinit if duplicate scan is not stopped - Call pll track in controller task
  * Source: libbtdm_app -> llm.o -> llm_adv_is_in_duplicate_scan_duplicate_exceptional_list
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,14 +19,14 @@ bool llm_adv_is_in_duplicate_scan_duplicate_exceptional_list(void *param_1,int p
   bool bVar4;
   int *piVar5;
   
-  uVar2 = DAT_000107f4;
+  uVar2 = DAT_00010818;
   if (param_1 == (void *)0x0) {
     return false;
   }
   bVar4 = false;
-  if (DAT_000107f4 != 0) {
-    piVar5 = DAT_000107f8;
-    if ((DAT_000107f4 & 1) != 0) {
+  if (DAT_00010818 != 0) {
+    piVar5 = DAT_0001081c;
+    if ((DAT_00010818 & 1) != 0) {
       for (; piVar5 != (int *)0x0; piVar5 = (int *)*piVar5) {
         iVar3 = memcmp(piVar5 + 1,param_1,6);
         if (iVar3 == 0) {
@@ -36,7 +36,7 @@ bool llm_adv_is_in_duplicate_scan_duplicate_exceptional_list(void *param_1,int p
     }
     cVar1 = *(char *)((int)param_1 + 7);
     if ((cVar1 == ')') && ((uVar2 & 2) != 0)) {
-      for (piVar5 = (int *)DAT_00010800; piVar5 != (int *)0x0; piVar5 = (int *)*piVar5) {
+      for (piVar5 = (int *)DAT_00010824; piVar5 != (int *)0x0; piVar5 = (int *)*piVar5) {
         iVar3 = memcmp(piVar5 + 1,(void *)((int)param_1 + 8),4);
         if (iVar3 == 0) {
           return true;

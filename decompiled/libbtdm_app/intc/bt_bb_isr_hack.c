@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2a91d90e33b3b1104daf1bff898fe5bc3f814811
- * https://github.com/espressif/esp32c3-bt-lib/commit/2a91d90e33b3b1104daf1bff898fe5bc3f814811
- * Upstream date: 2022-09-07 12:18:28 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(2ee0168e)
+ * Last changed at upstream commit 976ca00e43905df9e910b400a9e17c311b085ce2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/976ca00e43905df9e910b400a9e17c311b085ce2
+ * Upstream date: 2022-11-03 19:06:39 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ef8a115a) - Added config to disable scan backoff - Fixed llm_scan.c assert at line 1485 during controller deinit if duplicate scan is not stopped - Call pll track in controller task
  * Source: libbtdm_app -> intc.o -> bt_bb_isr_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,7 +34,7 @@ void bt_bb_isr_hack(void)
       uVar5 = _DAT_600110d8 >> 0x1e;
       uVar2 = _DAT_600110d8 >> 0x18 & 0x3f;
       if (0x27 < uVar2) {
-        (**(code **)(_r_plf_funcs_p + 0xc))(uVar2,0,"intc.c",0xd1,*(code **)(_r_plf_funcs_p + 0xc));
+        (**(code **)(_r_plf_funcs_p + 0xc))(uVar2,0,"intc.c",0xb9,*(code **)(_r_plf_funcs_p + 0xc));
       }
       (**(code **)(_r_ip_funcs_p + 0x250))
                 (uVar4 & 0xff,uVar2,uVar5,*(code **)(_r_ip_funcs_p + 0x250));
@@ -54,16 +54,9 @@ void bt_bb_isr_hack(void)
     if (*(char *)(iVar3 + 0x11) != '\0') {
       bt_bb_restart_hw_recorrect();
     }
-    if (_LANCHOR0 != '\0') {
-      bt_do_pll_track_one_shot();
-    }
   }
   if ((int)(uVar1 << 0x10) < 0) {
     _DAT_60011090 = _DAT_60011090 | 0x8000;
-    if (_LANCHOR0 != '\0') {
-      bt_do_pll_track_one_shot();
-      return;
-    }
   }
   return;
 }

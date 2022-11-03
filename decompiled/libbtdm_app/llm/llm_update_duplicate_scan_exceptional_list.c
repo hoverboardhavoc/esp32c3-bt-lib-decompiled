@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 976ca00e43905df9e910b400a9e17c311b085ce2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/976ca00e43905df9e910b400a9e17c311b085ce2
+ * Upstream date: 2022-11-03 19:06:39 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ef8a115a) - Added config to disable scan backoff - Fixed llm_scan.c assert at line 1485 during controller deinit if duplicate scan is not stopped - Call pll track in controller task
  * Source: libbtdm_app -> llm.o -> llm_update_duplicate_scan_exceptional_list
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,17 +34,17 @@ undefined4 llm_update_duplicate_scan_exceptional_list(int param_1,uint param_2,v
       else {
         if (param_2 != 1) {
           if (param_2 == 2) {
-            DAT_000107f4 = DAT_000107f4 | 4;
+            DAT_00010818 = DAT_00010818 | 4;
             return 0;
           }
           if (param_2 != 3) {
             if (param_2 != 4) {
               return 0x12;
             }
-            DAT_000107f4 = DAT_000107f4 | 0x10;
+            DAT_00010818 = DAT_00010818 | 0x10;
             return 0;
           }
-          DAT_000107f4 = DAT_000107f4 | 8;
+          DAT_00010818 = DAT_00010818 | 8;
           return 0;
         }
         sVar4 = 4;
@@ -61,15 +61,15 @@ undefined4 llm_update_duplicate_scan_exceptional_list(int param_1,uint param_2,v
       if (param_2 == 0) {
         memcpy((void *)(iVar3 + 4),param_3,6);
         (**(code **)(_r_modules_funcs_p + 0x4c))
-                  (&DAT_000107f8,iVar3,*(code **)(_r_modules_funcs_p + 0x4c));
-        DAT_000107f4 = DAT_000107f4 | 1;
+                  (&DAT_0001081c,iVar3,*(code **)(_r_modules_funcs_p + 0x4c));
+        DAT_00010818 = DAT_00010818 | 1;
         return 0;
       }
       if (param_2 == 1) {
         memcpy((void *)(iVar3 + 4),param_3,4);
         (**(code **)(_r_modules_funcs_p + 0x4c))
-                  (&DAT_00010800,iVar3,*(code **)(_r_modules_funcs_p + 0x4c));
-        DAT_000107f4 = DAT_000107f4 | 2;
+                  (&DAT_00010824,iVar3,*(code **)(_r_modules_funcs_p + 0x4c));
+        DAT_00010818 = DAT_00010818 | 2;
         return 0;
       }
     }
@@ -77,12 +77,12 @@ undefined4 llm_update_duplicate_scan_exceptional_list(int param_1,uint param_2,v
       if (param_1 != 2) {
         return 0xc;
       }
-      DAT_000107f4 = ~param_2 & DAT_000107f4;
+      DAT_00010818 = ~param_2 & DAT_00010818;
       if ((param_2 & 1) != 0) {
-        llm_util_flush_list_part_0(&DAT_000107f8);
+        llm_util_flush_list_part_0(&DAT_0001081c);
       }
       if ((param_2 & 2) != 0) {
-        llm_util_flush_list_part_0(&DAT_00010800);
+        llm_util_flush_list_part_0(&DAT_00010824);
       }
     }
     goto _L87;
@@ -94,11 +94,11 @@ undefined4 llm_update_duplicate_scan_exceptional_list(int param_1,uint param_2,v
   switch(param_2) {
   case 0:
     sVar4 = 6;
-    puVar5 = &DAT_000107f8;
+    puVar5 = &DAT_0001081c;
     goto _L60;
   case 1:
     sVar4 = 4;
-    puVar5 = &DAT_00010800;
+    puVar5 = &DAT_00010824;
 _L60:
     for (puVar2 = (undefined4 *)*puVar5; puVar2 != (undefined4 *)0x0; puVar2 = (undefined4 *)*puVar2
         ) {
@@ -110,21 +110,21 @@ _L60:
         break;
       }
     }
-    if (DAT_000107f8 == 0) {
-      DAT_000107f4 = DAT_000107f4 & 0xfffffffe;
+    if (DAT_0001081c == 0) {
+      DAT_00010818 = DAT_00010818 & 0xfffffffe;
     }
-    if (DAT_00010800 == 0) {
-      DAT_000107f4 = DAT_000107f4 & 0xfffffffd;
+    if (DAT_00010824 == 0) {
+      DAT_00010818 = DAT_00010818 & 0xfffffffd;
     }
     break;
   case 2:
-    DAT_000107f4 = DAT_000107f4 & 0xfffffffb;
+    DAT_00010818 = DAT_00010818 & 0xfffffffb;
     break;
   case 3:
-    DAT_000107f4 = DAT_000107f4 & 0xfffffff7;
+    DAT_00010818 = DAT_00010818 & 0xfffffff7;
     break;
   case 4:
-    DAT_000107f4 = DAT_000107f4 & 0xffffffef;
+    DAT_00010818 = DAT_00010818 & 0xffffffef;
     break;
   default:
     goto _L82;

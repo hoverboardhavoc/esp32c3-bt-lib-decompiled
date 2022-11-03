@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2a91d90e33b3b1104daf1bff898fe5bc3f814811
- * https://github.com/espressif/esp32c3-bt-lib/commit/2a91d90e33b3b1104daf1bff898fe5bc3f814811
- * Upstream date: 2022-09-07 12:18:28 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(2ee0168e)
+ * Last changed at upstream commit 976ca00e43905df9e910b400a9e17c311b085ce2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/976ca00e43905df9e910b400a9e17c311b085ce2
+ * Upstream date: 2022-11-03 19:06:39 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ef8a115a) - Added config to disable scan backoff - Fixed llm_scan.c assert at line 1485 during controller deinit if duplicate scan is not stopped - Call pll track in controller task
  * Source: libbtdm_app -> arch_main.o -> btdm_ble_power_down_dma_copy
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ void btdm_ble_power_down_dma_copy(int param_1)
     do {
       iVar1 = btdm_sleep_clock_sync();
     } while (iVar1 == 0);
-                    /* WARNING: Could not recover jumptable at 0x00011368. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011392. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_osi_funcs_p + 0xc4))();
     return;
@@ -40,7 +40,7 @@ void btdm_ble_power_down_dma_copy(int param_1)
   (**(code **)(_r_osi_funcs_p + 0xcc))
             (0x60011000,_LANCHOR2,0x38,0,*(code **)(_r_osi_funcs_p + 0xcc));
   ble_deepsleep_recover_hw_logic();
-                    /* WARNING: Could not recover jumptable at 0x000113de. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011408. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0xcc))(0x60011800,_LANCHOR3,0x2d,0);
   return;

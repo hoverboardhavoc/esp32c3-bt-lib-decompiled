@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 976ca00e43905df9e910b400a9e17c311b085ce2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/976ca00e43905df9e910b400a9e17c311b085ce2
+ * Upstream date: 2022-11-03 19:06:39 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ef8a115a) - Added config to disable scan backoff - Fixed llm_scan.c assert at line 1485 during controller deinit if duplicate scan is not stopped - Call pll track in controller task
  * Source: libbtdm_app -> llm.o -> r_llm_deinit
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void r_llm_deinit(int param_1)
 
 {
   if (param_1 == 2) {
-                    /* WARNING: Could not recover jumptable at 0x000107b4. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000107d6. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_ip_funcs_p + 0x548))();
     return;
