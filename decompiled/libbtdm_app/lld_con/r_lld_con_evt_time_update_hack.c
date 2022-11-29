@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 420ae1726dede6bbd4f3393744a8f3a252330b6a
- * https://github.com/espressif/esp32c3-bt-lib/commit/420ae1726dede6bbd4f3393744a8f3a252330b6a
- * Upstream date: 2022-09-16 21:21:40 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(421c2790)
+ * Last changed at upstream commit 79152b519023f26462498f3ef8805cff2a80e193
+ * https://github.com/espressif/esp32c3-bt-lib/commit/79152b519023f26462498f3ef8805cff2a80e193
+ * Upstream date: 2022-11-29 17:30:47 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(02bfb7f1) - Fixed lld_con.c line 3048 assert - Fixed crash sometimes when connected as a slave by the 8th device
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_evt_time_update_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,7 +33,7 @@ void r_lld_con_evt_time_update_hack(int param_1)
             (uint)_sdk_cfg_priv_opts;
     *(uint *)(iVar2 + 0x5c) = uVar3;
     *(uint *)(iVar2 + 0x10) = uVar3;
-                    /* WARNING: Could not recover jumptable at 0x00010b6e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010c2c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(iVar1 + 0x72c))
               (4,*(undefined1 *)(iVar2 + 0x8e),*(undefined4 *)(iVar2 + 100),uVar3 & 0xffff,0);
