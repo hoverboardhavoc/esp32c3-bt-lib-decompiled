@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 976ca00e43905df9e910b400a9e17c311b085ce2
- * https://github.com/espressif/esp32c3-bt-lib/commit/976ca00e43905df9e910b400a9e17c311b085ce2
- * Upstream date: 2022-11-03 19:06:39 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ef8a115a) - Added config to disable scan backoff - Fixed llm_scan.c assert at line 1485 during controller deinit if duplicate scan is not stopped - Call pll track in controller task
+ * Last changed at upstream commit 723f44c70ceea734bb9075b3c59993103d1dac23
+ * https://github.com/espressif/esp32c3-bt-lib/commit/723f44c70ceea734bb9075b3c59993103d1dac23
+ * Upstream date: 2022-12-08 17:22:39 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(2b9445a6) - Fixed some memory was not released after bluetooth controller init failed
  * Source: libbtdm_app -> arch_main.o -> btdm_rw_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,18 +25,18 @@ void btdm_rw_run(uint param_1)
     }
     _btdm_pwr_state = 0;
     if (param_1 != 2) {
-_L150:
+_L124:
       if (param_1 < 2) {
         return;
       }
-                    /* WARNING: Could not recover jumptable at 0x000114bc. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011458. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-      (**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x37a);
+      (**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x37b);
       return;
     }
   }
   else {
-    if (param_1 != 2) goto _L150;
+    if (param_1 != 2) goto _L124;
     if (_btdm_pwr_state == 2) {
       return;
     }
