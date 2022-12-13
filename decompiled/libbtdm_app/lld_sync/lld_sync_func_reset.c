@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4b93865b52ab92f0b7777ed415b6598b96ac1d6d
- * https://github.com/espressif/esp32c3-bt-lib/commit/4b93865b52ab92f0b7777ed415b6598b96ac1d6d
- * Upstream date: 2021-06-22 22:28:01 +0800
- * Upstream subject: Update ESP32-C3/ESP32-S3 bt-lib (e6e17bb4)
+ * Last changed at upstream commit 84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
+ * https://github.com/espressif/esp32c3-bt-lib/commit/84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
+ * Upstream date: 2022-12-13 21:37:30 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3 (edd93b0)
  * Source: libbtdm_app -> lld_sync.o -> lld_sync_func_reset
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,11 @@
 void lld_sync_func_reset(void)
 
 {
+  int iVar1;
+  
+  iVar1 = _r_ip_funcs_p;
   *(undefined4 *)(_r_ip_funcs_p + 0x170) = 0x10000;
+  *(code **)(iVar1 + 0x7a4) = r_lld_sync_insert_hack;
   return;
 }
 

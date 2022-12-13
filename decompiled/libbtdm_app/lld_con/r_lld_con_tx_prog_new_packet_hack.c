@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 79152b519023f26462498f3ef8805cff2a80e193
- * https://github.com/espressif/esp32c3-bt-lib/commit/79152b519023f26462498f3ef8805cff2a80e193
- * Upstream date: 2022-11-29 17:30:47 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(02bfb7f1) - Fixed lld_con.c line 3048 assert - Fixed crash sometimes when connected as a slave by the 8th device
+ * Last changed at upstream commit 84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
+ * https://github.com/espressif/esp32c3-bt-lib/commit/84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
+ * Upstream date: 2022-12-13 21:37:30 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3 (edd93b0)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_tx_prog_new_packet_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -58,7 +58,7 @@ void r_lld_con_tx_prog_new_packet_hack(int param_1,int param_2)
       if (piStack_58 == (int *)0x0) {
         return;
       }
-_L79:
+_L80:
       if ((*(short *)(iVar17 + 0x82) == 0) && (piVar12 = (int *)*piVar5, piVar12 != (int *)0x0)) {
         uVar3 = *(ushort *)((int)piVar12 + 6);
         *(int **)(iVar17 + 0x30) = piVar12;
@@ -82,7 +82,7 @@ _L79:
     }
     else {
       if (((param_2 == 2) && (piStack_58 != (int *)0x0)) &&
-         ((bVar16 != 1 && (DAT_00011046 != '\0')))) goto _L79;
+         ((bVar16 != 1 && (DAT_00011046 != '\0')))) goto _L80;
       uVar13 = (uint)*(byte *)(iVar22 + 6);
       uVar14 = (uint)*(ushort *)(iVar22 + 4);
       uVar23 = 3;
@@ -162,7 +162,7 @@ _L79:
         }
         else {
           (**(code **)(_r_plf_funcs_p + 0xc))
-                    (0,0,"lld_con.c",0x4a8,*(code **)(_r_plf_funcs_p + 0xc));
+                    (0,0,"lld_con.c",0x4ae,*(code **)(_r_plf_funcs_p + 0xc));
         }
       }
     }

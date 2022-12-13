@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 723f44c70ceea734bb9075b3c59993103d1dac23
- * https://github.com/espressif/esp32c3-bt-lib/commit/723f44c70ceea734bb9075b3c59993103d1dac23
- * Upstream date: 2022-12-08 17:22:39 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(2b9445a6) - Fixed some memory was not released after bluetooth controller init failed
+ * Last changed at upstream commit 84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
+ * https://github.com/espressif/esp32c3-bt-lib/commit/84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
+ * Upstream date: 2022-12-13 21:37:30 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3 (edd93b0)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_get_compile_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,6 +13,6 @@
 char * btdm_controller_get_compile_version(void)
 
 {
-  return "2b9445a";
+  return "edd93b0";
 }
 

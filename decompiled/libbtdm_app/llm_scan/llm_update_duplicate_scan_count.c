@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3b0038690a644498d6d80f1de8df0efff8cd8cf5
- * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
- * Upstream date: 2022-08-11 21:28:16 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
+ * Last changed at upstream commit 84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
+ * https://github.com/espressif/esp32c3-bt-lib/commit/84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
+ * Upstream date: 2022-12-13 21:37:30 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3 (edd93b0)
  * Source: libbtdm_app -> llm_scan.o -> llm_update_duplicate_scan_count
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,9 +18,9 @@ void llm_update_duplicate_scan_count(void)
   uint uVar1;
   
   if ((*(char *)(_p_llm_env + 0xd7) != '\x02') && ((*(byte *)(_p_llm_env + 0xd4) & 1) != 0)) {
-    _DAT_00012058 = _DAT_00012058 + 1;
-    if (_r_llm_adv_rep_flow_control_update <= _DAT_00012058) {
-      _DAT_00012058 = 0;
+    _co_rate_to_phy = _co_rate_to_phy + 1;
+    if (_r_llm_adv_rep_flow_control_update <= _co_rate_to_phy) {
+      _co_rate_to_phy = 0;
       DAT_00012060 = 1;
     }
     if (adv_evt_prop2type != '\0') {

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 79152b519023f26462498f3ef8805cff2a80e193
- * https://github.com/espressif/esp32c3-bt-lib/commit/79152b519023f26462498f3ef8805cff2a80e193
- * Upstream date: 2022-11-29 17:30:47 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(02bfb7f1) - Fixed lld_con.c line 3048 assert - Fixed crash sometimes when connected as a slave by the 8th device
+ * Last changed at upstream commit 84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
+ * https://github.com/espressif/esp32c3-bt-lib/commit/84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
+ * Upstream date: 2022-12-13 21:37:30 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3 (edd93b0)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_sched_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,6 +35,9 @@ void r_lld_con_sched_hack(int param_1,int param_2,int param_3)
   uVar1 = *(ushort *)(iVar4 + 0x84);
   uVar12 = (uint)DAT_0001101e << 1;
   uVar5 = *(uint *)(iVar4 + 0x48);
+  if ((uVar1 & 2) == 0) {
+    *(undefined1 *)(iVar4 + 0x16) = 0x1f;
+  }
   if (((uVar1 & 3) == 3) && (*(undefined1 *)(iVar4 + 0x96) = 0, param_3 != 0)) {
     uVar2 = *(ushort *)(iVar4 + 0x72);
     if ((uVar2 != 0) &&
@@ -99,7 +102,7 @@ void r_lld_con_sched_hack(int param_1,int param_2,int param_3)
       }
       if ((*(ushort *)(iVar4 + 0x84) & 2) == 0) {
         uVar12 = uVar12 + (uint)*(ushort *)(iVar4 + 0x70) * 0x271;
-_L73:
+_L74:
         bVar3 = true;
       }
       else {
@@ -116,7 +119,7 @@ _L73:
             uVar12 = uVar8;
           }
           *(ushort *)(con_sync_err_cnt + iVar14) = *(ushort *)(con_sync_err_cnt + iVar14) + 1;
-          goto _L73;
+          goto _L74;
         }
       }
       if (((*(char *)(iVar4 + 0x46) == '\x01') && (*(char *)(iVar4 + 0x42) != '\0')) &&
@@ -180,7 +183,7 @@ _L73:
   if ((*(ushort *)(iVar4 + 0x84) & 2) == 0) {
     uVar7 = 0x3e;
   }
-                    /* WARNING: Could not recover jumptable at 0x000105f2. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000105fe. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_ip_funcs_p + 800))(param_1,1,uVar7);
   return;

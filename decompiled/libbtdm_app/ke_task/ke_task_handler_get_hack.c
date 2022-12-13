@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f45e6918026b6e8fdc6dec3f626a98c35960f50e
- * https://github.com/espressif/esp32c3-bt-lib/commit/f45e6918026b6e8fdc6dec3f626a98c35960f50e
- * Upstream date: 2021-06-21 17:00:22 +0530
- * Upstream subject: Fix MIC error issue during start_encryption procedure Update ESP32C3 and ESP32S3 libraries (a86af1e)
+ * Last changed at upstream commit 84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
+ * https://github.com/espressif/esp32c3-bt-lib/commit/84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
+ * Upstream date: 2022-12-13 21:37:30 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3 (edd93b0)
  * Source: libbtdm_app -> ke_task.o -> ke_task_handler_get_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,11 +23,14 @@ undefined * ke_task_handler_get_hack(int param_1)
     return &lld_acl_rx_ind_handler_hack;
   }
   if (sVar1 != 0x213) {
-                    /* WARNING: Could not recover jumptable at 0x00010026. Too many branches */
+    if (sVar1 != 0x201) {
+                    /* WARNING: Could not recover jumptable at 0x0001002e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    puVar2 = (undefined *)
-             (**(code **)(_r_modules_funcs_p + 0x16c))(sVar1,*(undefined2 *)(param_1 + 6));
-    return puVar2;
+      puVar2 = (undefined *)
+               (**(code **)(_r_modules_funcs_p + 0x16c))(sVar1,*(undefined2 *)(param_1 + 6));
+      return puVar2;
+    }
+    return &lld_adv_rep_ind_handler_hack;
   }
   return &lld_con_estab_ind_handler_hack;
 }
