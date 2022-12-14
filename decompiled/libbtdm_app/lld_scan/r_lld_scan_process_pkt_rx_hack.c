@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 976ca00e43905df9e910b400a9e17c311b085ce2
- * https://github.com/espressif/esp32c3-bt-lib/commit/976ca00e43905df9e910b400a9e17c311b085ce2
- * Upstream date: 2022-11-03 19:06:39 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ef8a115a) - Added config to disable scan backoff - Fixed llm_scan.c assert at line 1485 during controller deinit if duplicate scan is not stopped - Call pll track in controller task
+ * Last changed at upstream commit bba9af9259e0999ef246426d31a793fe0a3ff4db
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bba9af9259e0999ef246426d31a793fe0a3ff4db
+ * Upstream date: 2022-12-14 15:32:37 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(80abacdd)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_process_pkt_rx_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -56,7 +56,7 @@ void r_lld_scan_process_pkt_rx_hack(int param_1)
         iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
         uVar7 = *(ushort *)(iVar4 + iVar10) & 0xf;
         if (((*(ushort *)(iVar4 + iVar10) & 8) != 0) || ((uVar7 - 3 & 0xfd) == 0)) {
-          (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x1c0,*(code **)(_r_plf_funcs_p + 8));
+          (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x1c3,*(code **)(_r_plf_funcs_p + 8));
         }
         if (uVar7 < 7) {
           pcVar6 = *(code **)(_r_ip_funcs_p + 0x420);

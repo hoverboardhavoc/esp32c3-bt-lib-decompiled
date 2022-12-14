@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
- * https://github.com/espressif/esp32c3-bt-lib/commit/84ebcda82aa5886d2a0b939dec1dbc62aa1c11c7
- * Upstream date: 2022-12-13 21:37:30 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3 (edd93b0)
+ * Last changed at upstream commit bba9af9259e0999ef246426d31a793fe0a3ff4db
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bba9af9259e0999ef246426d31a793fe0a3ff4db
+ * Upstream date: 2022-12-14 15:32:37 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(80abacdd)
  * Source: libbtdm_app -> llm_scan.o -> llm_update_duplicate_scan_count
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,25 +15,27 @@
 void llm_update_duplicate_scan_count(void)
 
 {
-  uint uVar1;
+  int iVar1;
+  uint uVar2;
   
-  if ((*(char *)(_p_llm_env + 0xd7) != '\x02') && ((*(byte *)(_p_llm_env + 0xd4) & 1) != 0)) {
-    _co_rate_to_phy = _co_rate_to_phy + 1;
-    if (_r_llm_adv_rep_flow_control_update <= _co_rate_to_phy) {
-      _co_rate_to_phy = 0;
+  if (((*(char *)(_p_llm_env + 0xd7) != '\x02') &&
+      (iVar1 = sdk_config_get_opts_ext(), *(short *)(iVar1 + 0x16) != 0)) &&
+     ((*(byte *)(_p_llm_env + 0xd4) & 1) != 0)) {
+    _sdk_config_get_opts_ext = _sdk_config_get_opts_ext + 1;
+    if (_r_llm_adv_rep_flow_control_update <= _sdk_config_get_opts_ext) {
+      _sdk_config_get_opts_ext = 0;
       DAT_00012060 = 1;
     }
-    if (adv_evt_prop2type != '\0') {
-      uVar1 = 1;
+    if (llm_util_flush_list != (code)0x0) {
+      uVar2 = 1;
+      _co_rate_to_phy = _co_rate_to_phy + 1;
       if (5 < _r_llm_adv_rep_flow_control_update) {
-        uVar1 = _r_llm_adv_rep_flow_control_update / 6;
+        uVar2 = _r_llm_adv_rep_flow_control_update / 6;
       }
-      if (_DAT_0001205c + 1 < uVar1) {
-        _DAT_0001205c = _DAT_0001205c + 1;
-        return;
+      if (uVar2 <= _co_rate_to_phy) {
+        _co_rate_to_phy = 0;
+        DAT_00012061 = 1;
       }
-      _DAT_0001205c = 0;
-      DAT_00012061 = 1;
     }
   }
   return;

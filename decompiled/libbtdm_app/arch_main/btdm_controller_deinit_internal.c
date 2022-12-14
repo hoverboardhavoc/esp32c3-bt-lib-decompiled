@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/bba9af9259e0999ef246426d31a793fe0a3ff4db
  * Upstream date: 2022-12-14 15:32:37 +0800
  * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(80abacdd)
- * Source: libbtdm_app -> arch_main.o -> btdm_controller_deinit
+ * Source: libbtdm_app -> arch_main.o -> btdm_controller_deinit_internal
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,17 +12,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void btdm_controller_deinit(void)
+void btdm_controller_deinit_internal(void)
 
 {
-  int iVar1;
-  
-  iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-  if (*(char *)(iVar1 + 0xc) != '\0') {
-    btdm_controller_disable();
-  }
-  (**(code **)(_r_plf_funcs_p + 0x28))(8,0,0,1,*(code **)(_r_plf_funcs_p + 0x28));
-  (**(code **)(_r_osi_funcs_p + 0x34))(_g_rw_init_sem,10000,*(code **)(_r_osi_funcs_p + 0x34));
   if (_g_rw_init_sem != 0) {
     (**(code **)(_r_osi_funcs_p + 0x28))(*(code **)(_r_osi_funcs_p + 0x28));
     _g_rw_init_sem = 0;

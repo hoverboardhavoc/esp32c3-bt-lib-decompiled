@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 723f44c70ceea734bb9075b3c59993103d1dac23
- * https://github.com/espressif/esp32c3-bt-lib/commit/723f44c70ceea734bb9075b3c59993103d1dac23
- * Upstream date: 2022-12-08 17:22:39 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(2b9445a6) - Fixed some memory was not released after bluetooth controller init failed
+ * Last changed at upstream commit bba9af9259e0999ef246426d31a793fe0a3ff4db
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bba9af9259e0999ef246426d31a793fe0a3ff4db
+ * Upstream date: 2022-12-14 15:32:37 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(80abacdd)
  * Source: libbtdm_app -> arch_main.o -> btdm_wakeup_request
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ void btdm_wakeup_request(void)
      200 < uVar2)) {
     _DAT_60042000 = _DAT_60042000 | 0x10;
   }
-                    /* WARNING: Could not recover jumptable at 0x00010122. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010276. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))();
   return;

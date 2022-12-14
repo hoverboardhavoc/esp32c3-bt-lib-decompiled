@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2a91d90e33b3b1104daf1bff898fe5bc3f814811
- * https://github.com/espressif/esp32c3-bt-lib/commit/2a91d90e33b3b1104daf1bff898fe5bc3f814811
- * Upstream date: 2022-09-07 12:18:28 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(2ee0168e)
+ * Last changed at upstream commit bba9af9259e0999ef246426d31a793fe0a3ff4db
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bba9af9259e0999ef246426d31a793fe0a3ff4db
+ * Upstream date: 2022-12-14 15:32:37 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(80abacdd)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_evt_start_cbk_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,7 +18,11 @@ void r_lld_scan_evt_start_cbk_hack(int param_1)
   byte bVar1;
   int iVar2;
   
-  llm_update_duplicate_scan_count();
+  if (param_1 != 0) {
+    if (*(uint *)(param_1 + 0x24) == (uint)*(ushort *)(param_1 + 0x32)) {
+      llm_update_duplicate_scan_count();
+    }
+  }
   if ((g_scan_forever != '\0') && (param_1 != 0)) {
     if (*(char *)(param_1 + 0x3c) != '\x02') {
       bVar1 = *(byte *)(param_1 + 0x38);
