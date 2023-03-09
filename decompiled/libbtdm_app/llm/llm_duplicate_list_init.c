@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 976ca00e43905df9e910b400a9e17c311b085ce2
- * https://github.com/espressif/esp32c3-bt-lib/commit/976ca00e43905df9e910b400a9e17c311b085ce2
- * Upstream date: 2022-11-03 19:06:39 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ef8a115a) - Added config to disable scan backoff - Fixed llm_scan.c assert at line 1485 during controller deinit if duplicate scan is not stopped - Call pll track in controller task
+ * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
+ * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
+ * Upstream date: 2023-03-09 14:58:19 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
  * Source: libbtdm_app -> llm.o -> llm_duplicate_list_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,38 +15,46 @@
 void llm_duplicate_list_init(void)
 
 {
-  uint uVar1;
+  undefined2 uVar1;
   int iVar2;
+  uint uVar3;
+  int iVar4;
   
-  uVar1 = sdk_config_get_mask();
-  if ((uVar1 & 1) != 0) {
-    iVar2 = (**(code **)(_r_modules_funcs_p + 0x50))
-                      (&DAT_00010800,*(code **)(_r_modules_funcs_p + 0x50));
-    if (iVar2 != 0) {
-      llm_util_flush_list_part_0(&DAT_00010800);
+  iVar2 = (**(code **)(_r_ip_funcs_p + 0x924))(*(code **)(_r_ip_funcs_p + 0x924));
+  uVar3 = sdk_config_get_mask();
+  if ((uVar3 & 1) != 0) {
+    iVar4 = (**(code **)(_r_modules_funcs_p + 0x50))
+                      (iVar2 + 0x10,*(code **)(_r_modules_funcs_p + 0x50));
+    if (iVar4 != 0) {
+      llm_util_flush_list(iVar2 + 0x10);
     }
-    iVar2 = (**(code **)(_r_modules_funcs_p + 0x50))
-                      (&le_scan_duplicate_option,*(code **)(_r_modules_funcs_p + 0x50));
-    if (iVar2 != 0) {
-      llm_util_flush_list_part_0(&le_scan_duplicate_option);
+    iVar4 = (**(code **)(_r_modules_funcs_p + 0x50))(iVar2,*(code **)(_r_modules_funcs_p + 0x50));
+    if (iVar4 != 0) {
+      llm_util_flush_list(iVar2);
     }
-    iVar2 = sdk_config_get_opts_ext();
-    DAT_000107f8 = *(char *)(iVar2 + 4) == '\x01';
-    iVar2 = sdk_config_get_opts_ext();
-    DAT_000107f9 = *(undefined1 *)(iVar2 + 5);
-    iVar2 = sdk_config_get_opts_ext();
-    DAT_000107fa = *(undefined2 *)(iVar2 + 6);
-    iVar2 = sdk_config_get_opts_ext();
-    DAT_000107fc = *(undefined2 *)(iVar2 + 8);
-    DAT_00010808 = 0;
-    DAT_0001080c = 0;
+    iVar4 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+    if (*(char *)(iVar4 + 4) == '\x01') {
+      *(undefined1 *)(iVar2 + 8) = 1;
+    }
+    else {
+      *(undefined1 *)(iVar2 + 8) = 0;
+    }
+    iVar4 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+    *(undefined1 *)(iVar2 + 9) = *(undefined1 *)(iVar4 + 5);
+    iVar4 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+    *(undefined2 *)(iVar2 + 10) = *(undefined2 *)(iVar4 + 6);
+    iVar4 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+    uVar1 = *(undefined2 *)(iVar4 + 8);
+    *(undefined4 *)(iVar2 + 0x18) = 0;
+    *(undefined4 *)(iVar2 + 0x1c) = 0;
+    *(undefined2 *)(iVar2 + 0xc) = uVar1;
   }
-  if (DAT_000107f8 != '\0') {
-    (**(code **)(_r_modules_funcs_p + 0x2c))(&DAT_00010800,*(code **)(_r_modules_funcs_p + 0x2c));
+  if (*(char *)(iVar2 + 8) != '\0') {
+    (**(code **)(_r_modules_funcs_p + 0x2c))(iVar2 + 0x10,*(code **)(_r_modules_funcs_p + 0x2c));
   }
-                    /* WARNING: Could not recover jumptable at 0x00010478. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000104ba. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_modules_funcs_p + 0x2c))(&le_scan_duplicate_option);
+  (**(code **)(_r_modules_funcs_p + 0x2c))(iVar2);
   return;
 }
 

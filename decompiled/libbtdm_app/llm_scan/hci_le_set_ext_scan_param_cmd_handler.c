@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3b0038690a644498d6d80f1de8df0efff8cd8cf5
- * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
- * Upstream date: 2022-08-11 21:28:16 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
+ * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
+ * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
+ * Upstream date: 2023-03-09 14:58:19 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
  * Source: libbtdm_app -> llm_scan.o -> hci_le_set_ext_scan_param_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ undefined4 hci_le_set_ext_scan_param_cmd_handler(byte *param_1,undefined4 param_
   byte bStack_21;
   
   if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
-_L74:
+_L34:
     iVar3 = 0xc;
   }
   else {
@@ -40,11 +40,11 @@ _L74:
     }
     iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
     if ((uint)bStack_21 < (uint)*(byte *)(iVar3 + 0xd)) {
-      if (*(char *)((uint)bStack_21 * 0x44 + *(int *)(_p_llm_env + 8) + 0x40) != '\x06') goto _L74;
+      if (*(char *)((uint)bStack_21 * 0x44 + *(int *)(_p_llm_env + 8) + 0x40) != '\x06') goto _L34;
     }
     else {
       iVar3 = (**(code **)(_r_ip_funcs_p + 0x4ac))(&bStack_21,*(code **)(_r_ip_funcs_p + 0x4ac));
-      if (iVar3 != 0) goto _L81;
+      if (iVar3 != 0) goto _L41;
     }
     bVar1 = param_1[2];
     if ((bVar1 == 1) || (bVar1 == 4)) {
@@ -53,13 +53,13 @@ _L74:
     else {
       iVar3 = 0x12;
       uVar5 = 2;
-      if (bVar1 != 5) goto _L81;
+      if (bVar1 != 5) goto _L41;
     }
     pbVar6 = param_1 + 4;
     iVar3 = 0;
     do {
       if ((((*(ushort *)(pbVar6 + 2) < *(ushort *)(pbVar6 + 4)) || (1 < *pbVar6)) ||
-          (*(ushort *)(pbVar6 + 4) < 4)) || (*(ushort *)(pbVar6 + 2) < 4)) goto _L96;
+          (*(ushort *)(pbVar6 + 4) < 4)) || (*(ushort *)(pbVar6 + 2) < 4)) goto _L56;
       uVar4 = iVar3 + 1;
       pbVar6 = pbVar6 + 6;
       iVar3 = 1;
@@ -76,14 +76,14 @@ _L74:
       puVar7 = (undefined4 *)(*(int *)(_p_llm_env + 8) + (uint)bStack_21 * 0x44);
       *puVar7 = param_1;
       *(undefined1 *)(puVar7 + 0x10) = 6;
-      goto _L86;
+      goto _L46;
     }
-_L96:
+_L56:
     iVar3 = 0x12;
   }
-_L81:
+_L41:
   uVar2 = 0;
-_L86:
+_L46:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,iVar3,*(code **)(_r_ip_funcs_p + 0x4b8));
   return uVar2;
 }

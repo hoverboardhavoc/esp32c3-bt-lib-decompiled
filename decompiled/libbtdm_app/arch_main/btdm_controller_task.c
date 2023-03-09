@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 90b025633add12d18ab056ce8db20d06deb40f06
- * https://github.com/espressif/esp32c3-bt-lib/commit/90b025633add12d18ab056ce8db20d06deb40f06
- * Upstream date: 2021-04-28 17:58:45 +0800
- * Upstream subject: Update ESP32C3/ESP32S3 bt-lib(501d88d7)
+ * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
+ * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
+ * Upstream date: 2023-03-09 14:58:19 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_task
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,23 +16,25 @@ void btdm_controller_task(void)
 
 {
   bool bVar1;
-  undefined4 uVar2;
-  int iVar3;
+  int iVar2;
+  undefined4 uVar3;
+  code *pcVar4;
   char cStack_38;
   undefined1 uStack_37;
   undefined1 *puStack_34;
   
-  uVar2 = 0;
+  uVar3 = 0;
   do {
-    iVar3 = (**(code **)(_r_osi_funcs_p + 0x34))
-                      (_g_rw_schd_sem,0xffffffff,*(code **)(_r_osi_funcs_p + 0x34));
-    if (iVar3 == 0) {
+    pcVar4 = *(code **)(_r_osi_funcs_p + 0x34);
+    iVar2 = (**(code **)(_r_plf_funcs_p + 0xf8))(*(code **)(_r_plf_funcs_p + 0xf8));
+    iVar2 = (*pcVar4)(*(undefined4 *)(iVar2 + 4),0xffffffff);
+    if (iVar2 == 0) {
       return;
     }
     bVar1 = false;
-    while (iVar3 = (**(code **)(_r_osi_funcs_p + 0x5c))
+    while (iVar2 = (**(code **)(_r_osi_funcs_p + 0x5c))
                              (_g_rw_schd_queue,&cStack_38,0,*(code **)(_r_osi_funcs_p + 0x5c)),
-          iVar3 == 1) {
+          iVar2 == 1) {
       switch(cStack_38) {
       case '\x02':
         (**(code **)(_r_ip_funcs_p + 0x4c))(*(code **)(_r_ip_funcs_p + 0x4c));
@@ -42,7 +44,7 @@ void btdm_controller_task(void)
       case '\t':
       case '\n':
         if (cStack_38 == '\t') {
-          uVar2 = 2;
+          uVar3 = 2;
           (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
           (**(code **)(_r_modules_funcs_p + 0x1b8))(*(code **)(_r_modules_funcs_p + 0x1b8));
           btdm_controller_on_reset();
@@ -59,14 +61,14 @@ void btdm_controller_task(void)
           else {
             if (cStack_38 == '\b') {
               rw_stop();
-              uVar2 = 0;
+              uVar3 = 0;
               (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38))
               ;
               break;
             }
             rw_pre_main();
           }
-          uVar2 = 1;
+          uVar3 = 1;
           (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
         }
         break;
@@ -74,14 +76,15 @@ void btdm_controller_task(void)
         ble_txpwr_set_inter(*puStack_34,puStack_34[1]);
         break;
       case '\r':
-        btdm_vnd_offload_process(uStack_37,puStack_34);
+        (**(code **)(_r_plf_funcs_p + 0x114))
+                  (uStack_37,puStack_34,*(code **)(_r_plf_funcs_p + 0x114));
       }
       bVar1 = true;
       (**(code **)(_r_plf_funcs_p + 0x30))(&cStack_38,*(code **)(_r_plf_funcs_p + 0x30));
-      btdm_rw_run(uVar2);
+      btdm_rw_run(uVar3);
     }
     if (!bVar1) {
-      btdm_rw_run(uVar2);
+      btdm_rw_run(uVar3);
     }
   } while( true );
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 976ca00e43905df9e910b400a9e17c311b085ce2
- * https://github.com/espressif/esp32c3-bt-lib/commit/976ca00e43905df9e910b400a9e17c311b085ce2
- * Upstream date: 2022-11-03 19:06:39 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ef8a115a) - Added config to disable scan backoff - Fixed llm_scan.c assert at line 1485 during controller deinit if duplicate scan is not stopped - Call pll track in controller task
+ * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
+ * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
+ * Upstream date: 2023-03-09 14:58:19 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
  * Source: libbtdm_app -> llm.o -> llm_exception_list_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,10 +15,13 @@
 void llm_exception_list_init(void)
 
 {
-  (**(code **)(_r_modules_funcs_p + 0x2c))(&DAT_0001081c,*(code **)(_r_modules_funcs_p + 0x2c));
-                    /* WARNING: Could not recover jumptable at 0x0001036c. Too many branches */
+  int iVar1;
+  
+  iVar1 = (**(code **)(_r_ip_funcs_p + 0x924))(*(code **)(_r_ip_funcs_p + 0x924));
+  (**(code **)(_r_modules_funcs_p + 0x2c))(iVar1 + 0x2c,*(code **)(_r_modules_funcs_p + 0x2c));
+                    /* WARNING: Could not recover jumptable at 0x0001039c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_modules_funcs_p + 0x2c))(&DAT_00010824);
+  (**(code **)(_r_modules_funcs_p + 0x2c))(iVar1 + 0x34);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 976ca00e43905df9e910b400a9e17c311b085ce2
- * https://github.com/espressif/esp32c3-bt-lib/commit/976ca00e43905df9e910b400a9e17c311b085ce2
- * Upstream date: 2022-11-03 19:06:39 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ef8a115a) - Added config to disable scan backoff - Fixed llm_scan.c assert at line 1485 during controller deinit if duplicate scan is not stopped - Call pll track in controller task
+ * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
+ * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
+ * Upstream date: 2023-03-09 14:58:19 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
  * Source: libbtdm_app -> llm.o -> r_llm_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -64,7 +64,7 @@ void r_llm_init(int param_1)
   *(undefined2 *)((int)_p_llm_env + 0xc4) = 900;
   *(undefined4 *)((int)pvVar4 + 0x9c) = 0x148001b;
   *(undefined2 *)((int)pvVar4 + 0xa2) = 0x707;
-  memcpy(pvVar4,&_LANCHOR1,8);
+  memcpy(pvVar4,&_LANCHOR3,8);
   pvVar4 = _p_llm_env;
   memset((void *)((int)_p_llm_env + 0x18),0xff,5);
   *(undefined1 *)((int)pvVar4 + 0x1c) = 0x1f;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bba9af9259e0999ef246426d31a793fe0a3ff4db
- * https://github.com/espressif/esp32c3-bt-lib/commit/bba9af9259e0999ef246426d31a793fe0a3ff4db
- * Upstream date: 2022-12-14 15:32:37 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(80abacdd)
+ * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
+ * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
+ * Upstream date: 2023-03-09 14:58:19 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
  * Source: libbtdm_app -> llm_scan.o -> lld_adv_rep_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -118,10 +118,10 @@ undefined4 lld_adv_rep_ind_handler_hack(char *param_1)
   ;
   if (iVar5 != 0) {
     cVar1 = param_1[0x20];
-    goto joined_r0x000119c8;
+    goto joined_r0x00011be0;
   }
   if ((bVar11 & 0xfd) != 1) {
-    (**(code **)(_r_plf_funcs_p + 8))("llm_scan.c",0x675,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))("llm_scan.c",0x681,*(code **)(_r_plf_funcs_p + 8));
   }
   if (((((param_1[0x15] & 4U) == 0) || ((uStack_44._1_1_ & 0xc0) != 0x40)) || (bVar4 != 0xfe)) ||
      (1 < pbVar17[1])) {
@@ -165,7 +165,7 @@ undefined4 lld_adv_rep_ind_handler_hack(char *param_1)
         bVar11 = (byte)(iVar6 << 4);
       }
       *(byte *)(_p_llm_env + 0xd4) = bVar13 | bVar11;
-      if (iVar5 != 0) goto _L473;
+      if (iVar5 != 0) goto _L478;
     }
     iVar5 = (**(code **)(_r_ip_funcs_p + 0x534))
                       (param_1,&uStack_60,*(code **)(_r_ip_funcs_p + 0x534));
@@ -217,7 +217,7 @@ undefined4 lld_adv_rep_ind_handler_hack(char *param_1)
           puVar9[1] = (ushort)(byte)param_1[0x15];
           if ((uVar18 < 0xe6) && ((param_1[0x16] & 0xfcU) != 0)) {
             (**(code **)(_r_plf_funcs_p + 0xc))
-                      (0x60,"llm_scan.c",0x707,*(code **)(_r_plf_funcs_p + 0xc));
+                      (0x60,"llm_scan.c",0x713,*(code **)(_r_plf_funcs_p + 0xc));
           }
           uVar15 = 0x20;
           if (uVar18 < 0xe6) {
@@ -250,9 +250,9 @@ undefined4 lld_adv_rep_ind_handler_hack(char *param_1)
       }
     }
   }
-_L473:
+_L478:
   cVar1 = param_1[0x20];
-joined_r0x000119c8:
+joined_r0x00011be0:
   if (cVar1 != '\0') {
     (**(code **)(_r_ip_funcs_p + 0x104))
               (*(undefined2 *)(param_1 + 0x22),*(undefined4 *)(param_1 + 0x24),

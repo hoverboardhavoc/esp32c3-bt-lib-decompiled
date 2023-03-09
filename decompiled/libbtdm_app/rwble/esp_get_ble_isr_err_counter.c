@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4dd1838c81fc41eab863e284a53f029faab5372d
- * https://github.com/espressif/esp32c3-bt-lib/commit/4dd1838c81fc41eab863e284a53f029faab5372d
- * Upstream date: 2022-10-31 20:02:57 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(76c24c96)
+ * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
+ * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
+ * Upstream date: 2023-03-09 14:58:19 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
  * Source: libbtdm_app -> rwble.o -> esp_get_ble_isr_err_counter
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,58 +10,88 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
 undefined4 esp_get_ble_isr_err_counter(undefined4 param_1)
 
 {
+  undefined4 *puVar1;
+  undefined4 uVar2;
+  
+  puVar1 = (undefined4 *)(**(code **)(_r_ip_funcs_p + 0x918))(*(code **)(_r_ip_funcs_p + 0x918));
   switch(param_1) {
   case 0:
-    return _LANCHOR1;
+    uVar2 = *puVar1;
+    break;
   case 1:
-    return DAT_000105e8;
+    uVar2 = puVar1[1];
+    break;
   case 2:
-    return DAT_000105ec;
+    uVar2 = puVar1[2];
+    break;
   case 3:
-    return DAT_000105f0;
+    uVar2 = puVar1[3];
+    break;
   case 4:
-    return DAT_000105f4;
+    uVar2 = puVar1[4];
+    break;
   case 5:
-    return DAT_000105f8;
+    uVar2 = puVar1[5];
+    break;
   case 6:
-    return DAT_000105fc;
+    uVar2 = puVar1[6];
+    break;
   case 7:
-    return DAT_00010600;
+    uVar2 = puVar1[7];
+    break;
   case 8:
-    return DAT_00010604;
+    uVar2 = puVar1[8];
+    break;
   case 9:
-    return DAT_00010608;
+    uVar2 = puVar1[9];
+    break;
   case 10:
-    return DAT_0001060c;
+    uVar2 = puVar1[10];
+    break;
   case 0xb:
-    return DAT_00010610;
+    uVar2 = puVar1[0xb];
+    break;
   case 0xc:
-    return DAT_00010614;
+    uVar2 = puVar1[0xc];
+    break;
   case 0xd:
-    return DAT_00010618;
+    uVar2 = puVar1[0xd];
+    break;
   case 0xe:
-    return DAT_0001061c;
+    uVar2 = puVar1[0xe];
+    break;
   case 0xf:
-    return DAT_00010620;
+    uVar2 = puVar1[0xf];
+    break;
   case 0x10:
-    return DAT_00010624;
+    uVar2 = puVar1[0x10];
+    break;
   case 0x11:
-    return DAT_00010628;
+    uVar2 = puVar1[0x11];
+    break;
   case 0x12:
-    return DAT_0001062c;
+    uVar2 = puVar1[0x12];
+    break;
   case 0x13:
-    return DAT_00010630;
+    uVar2 = puVar1[0x13];
+    break;
   case 0x14:
-    return DAT_00010634;
+    uVar2 = puVar1[0x14];
+    break;
   case 0x15:
-    return DAT_00010638;
+    uVar2 = puVar1[0x15];
+    break;
   case 0x16:
-    return DAT_0001063c;
+    uVar2 = puVar1[0x16];
+    break;
   default:
-    return 0;
+    uVar2 = 0;
   }
+  return uVar2;
 }
 

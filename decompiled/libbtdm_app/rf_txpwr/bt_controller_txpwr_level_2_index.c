@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
+ * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
+ * Upstream date: 2023-03-09 14:58:19 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
  * Source: libbtdm_app -> rf_txpwr.o -> bt_controller_txpwr_level_2_index
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,11 +18,11 @@ uint bt_controller_txpwr_level_2_index(uint param_1,uint param_2)
   uint uVar1;
   
   if (0xf < param_2) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"rf_txpwr.c",0x8a,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"rf_txpwr.c",0x8f,*(code **)(_r_plf_funcs_p + 8));
   }
   uVar1 = param_2 & 0xff;
   if ((param_1 >> 0x10 & 0xff) != 1) {
-    uVar1 = (uint)(byte)(&_LANCHOR0)[param_2 & 0xff];
+    uVar1 = (uint)(byte)(&_LANCHOR1)[param_2 & 0xff];
   }
   return uVar1;
 }

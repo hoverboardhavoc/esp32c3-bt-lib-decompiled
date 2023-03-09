@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3b0038690a644498d6d80f1de8df0efff8cd8cf5
- * https://github.com/espressif/esp32c3-bt-lib/commit/3b0038690a644498d6d80f1de8df0efff8cd8cf5
- * Upstream date: 2022-08-11 21:28:16 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f2e5d813)
+ * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
+ * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
+ * Upstream date: 2023-03-09 14:58:19 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
  * Source: libbtdm_app -> llm_scan.o -> hci_le_per_adv_create_sync_cancel_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -58,11 +58,11 @@ undefined4 hci_le_per_adv_create_sync_cancel_cmd_handler(undefined4 param_1,unde
       if ((puVar1 != (undefined4 *)0x0) && (pcVar6 = (code *)*puVar1, pcVar6 != (code *)0x0)) {
         (*pcVar6)(uVar2,6,0);
       }
-      goto _L209;
+      goto _L169;
     }
   }
   iVar3 = 0xc;
-_L209:
+_L169:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,iVar3,*(code **)(_r_ip_funcs_p + 0x4b8));
   if (iVar3 == 0) {
     puVar4 = (undefined2 *)

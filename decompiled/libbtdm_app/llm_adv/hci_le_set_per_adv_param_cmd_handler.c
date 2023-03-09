@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 022b7da7fcf0043f891c2e8ccd8c241243018e2f
- * https://github.com/espressif/esp32c3-bt-lib/commit/022b7da7fcf0043f891c2e8ccd8c241243018e2f
- * Upstream date: 2021-04-20 16:00:04 +0800
- * Upstream subject: ESP32-C3, ESP32-S3: update libbtdm_app.a(d1d0c6f1)
+ * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
+ * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
+ * Upstream date: 2023-03-09 14:58:19 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_set_per_adv_param_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,7 +30,7 @@ undefined4 hci_le_set_per_adv_param_cmd_handler(byte *param_1,undefined4 param_2
   undefined2 uStack_22;
   
   if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
-_L427:
+_L429:
     iVar4 = 0xc;
   }
   else {
@@ -39,13 +39,13 @@ _L427:
       iVar2 = (**(code **)(_r_ip_funcs_p + 0x544))(0,*(code **)(_r_ip_funcs_p + 0x544));
       if (iVar2 == 0xff) {
         iVar4 = 0x42;
-        goto _L429;
+        goto _L431;
       }
       iVar2 = iVar2 * 0x44;
       bStack_2d = *(byte *)(*(int *)(_p_llm_env + 8) + iVar2 + 0x3d);
       if (bStack_2d == 0xff) {
         iVar4 = (**(code **)(_r_ip_funcs_p + 0x4ac))(&bStack_2d,*(code **)(_r_ip_funcs_p + 0x4ac));
-        if (iVar4 != 0) goto _L429;
+        if (iVar4 != 0) goto _L431;
         iVar4 = *(int *)(_p_llm_env + 8);
         *(byte *)(iVar4 + iVar2 + 0x3d) = bStack_2d;
         *(undefined1 *)(iVar4 + (uint)bStack_2d * 0x44 + 0x32) = 0xff;
@@ -53,7 +53,7 @@ _L427:
       }
       else {
         uVar1 = extraout_a1;
-        if (*(char *)((uint)bStack_2d * 0x44 + *(int *)(_p_llm_env + 8) + 0x40) != '\n') goto _L427;
+        if (*(char *)((uint)bStack_2d * 0x44 + *(int *)(_p_llm_env + 8) + 0x40) != '\n') goto _L429;
       }
       if ((*param_1 < 0xf0) && (*(ushort *)(param_1 + 2) <= *(ushort *)(param_1 + 4))) {
         if ((*(ushort *)(*(int *)(*(int *)(_p_llm_env + 8) + iVar2) + 2) & 0x20) == 0) {
@@ -87,15 +87,15 @@ _L427:
           }
           iVar4 = 0;
           uVar1 = 1;
-          goto _L437;
+          goto _L439;
         }
       }
     }
     iVar4 = 0x12;
   }
-_L429:
+_L431:
   uVar1 = 0;
-_L437:
+_L439:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,iVar4,*(code **)(_r_ip_funcs_p + 0x4b8));
   return uVar1;
 }
