@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit d83f7d618a7a86f4703b909f8fc0ddcf8fd48a89
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d83f7d618a7a86f4703b909f8fc0ddcf8fd48a89
+ * Upstream date: 2023-03-29 17:09:21 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(921f253)
  * Source: libbtdm_app -> rwble.o -> r_rwble_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -49,8 +49,7 @@ _L86:
     }
     if ((uVar1 & 0x100) != 0) {
       _DAT_60031018 = 0x100;
-      iVar2 = (**(code **)(_r_ip_funcs_p + 0x90c))
-                        (_DAT_60031060 != 0,*(code **)(_r_ip_funcs_p + 0x90c));
+      iVar2 = (**(code **)(_r_ip_funcs_p + 0x90c))(_DAT_60031060,*(code **)(_r_ip_funcs_p + 0x90c));
       if (iVar2 != 0) {
         _DAT_60031050 = 0x838295a8;
         if ((0 < _g_bt_plf_log_level) &&
