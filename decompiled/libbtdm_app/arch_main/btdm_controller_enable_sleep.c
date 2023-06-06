@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 08e289633f823191a6c526377bfd68f31fb392e0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/08e289633f823191a6c526377bfd68f31fb392e0
+ * Upstream date: 2023-06-06 21:15:22 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(a186b41)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_enable_sleep
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void btdm_controller_enable_sleep(undefined4 param_1)
   
   iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   if (*(char *)(iVar1 + 0xe) == '\x01') {
-                    /* WARNING: Could not recover jumptable at 0x000103c2. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000103c8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_plf_funcs_p + 0x40))(param_1);
     return;

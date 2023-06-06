@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 08e289633f823191a6c526377bfd68f31fb392e0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/08e289633f823191a6c526377bfd68f31fb392e0
+ * Upstream date: 2023-06-06 21:15:22 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(a186b41)
  * Source: libbtdm_app -> arch_main.o -> ble_try_turn_on_pll_track
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,11 +21,11 @@ undefined4 ble_try_turn_on_pll_track(void)
   
   pll_track_state =
        (**(code **)(_r_modules_funcs_p + 0x2c4))(*(code **)(_r_modules_funcs_p + 0x2c4));
-  uVar2 = pll_track_state - DAT_00011730 & 0xfffffff;
+  uVar2 = pll_track_state - DAT_00011738 & 0xfffffff;
   uVar1 = 0;
-  DAT_0001172c = extraout_a1;
+  DAT_00011734 = extraout_a1;
   if ((uVar2 < 0x8000001) && (0xc80 < uVar2)) {
-    DAT_00011730 = pll_track_state;
+    DAT_00011738 = pll_track_state;
     bt_track_pll_cap(0);
     uVar1 = 1;
   }
