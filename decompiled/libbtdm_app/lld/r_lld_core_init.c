@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * Upstream date: 2023-08-03 10:45:08 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
  * Source: libbtdm_app -> lld.o -> r_lld_core_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -56,7 +56,7 @@ void r_lld_core_init(int param_1)
     }
     _DAT_60031050 = uStack_44 | 0x80808080;
   }
-  uVar3 = (uint)_DAT_0001103c;
+  uVar3 = (uint)_r_lld_sw_cca_isr;
   _DAT_60031000 = (int)(DAT_00011026 + 1) >> 1 | 0x100600;
   uVar7 = ((uint)_DAT_0001103a << 0x11) >> 0x10;
   if ((uVar3 << 0x11 & 0xfc000000) != 0) {
@@ -93,7 +93,7 @@ void r_lld_core_init(int param_1)
     if ((int)uVar3 < iVar4) {
       iVar4 = (**(code **)(_r_ip_funcs_p + 0xfc))(*(code **)(_r_ip_funcs_p + 0xfc));
       if (iVar4 == 0) {
-        (**(code **)(_r_plf_funcs_p + 8))("lld.c",0xe8,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))("lld.c",0xea,*(code **)(_r_plf_funcs_p + 8));
       }
       iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
       iVar5 = _p_lld_env;
@@ -145,7 +145,7 @@ void r_lld_core_init(int param_1)
   _DAT_60031000 = _DAT_60031000 | 0x100;
   if (_DAT_60031004 != 0x9001b00) {
     (**(code **)(_r_plf_funcs_p + 0xc))
-              (_DAT_60031004,"lld.c",0x124,*(code **)(_r_plf_funcs_p + 0xc));
+              (_DAT_60031004,"lld.c",0x126,*(code **)(_r_plf_funcs_p + 0xc));
   }
   return;
 }

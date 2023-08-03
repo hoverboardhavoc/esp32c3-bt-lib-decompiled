@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * Upstream date: 2023-08-03 10:45:08 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
  * Source: libbtdm_app -> llm.o -> r_llm_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -92,6 +92,10 @@ void r_llm_init(int param_1)
   }
   else {
     *(undefined1 *)((int)_p_llm_env + 0xd9) = 1;
+  }
+  iVar5 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+  if (*(char *)(iVar5 + 0x19) == '\x02') {
+    *(undefined1 *)((int)_p_llm_env + 0xd9) = 0;
   }
   uStack_23 = 1;
   iVar5 = (*_rwip_param)(0x16,&uStack_23,(int)_p_llm_env + 0xd5,_rwip_param);

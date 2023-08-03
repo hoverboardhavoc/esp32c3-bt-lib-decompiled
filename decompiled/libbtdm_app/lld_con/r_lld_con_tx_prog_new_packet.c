@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * Upstream date: 2023-08-03 10:45:08 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_tx_prog_new_packet
  *
  * (C) Espressif, Apache License 2.0.
@@ -55,7 +55,7 @@ void r_lld_con_tx_prog_new_packet(int param_1,int param_2)
       if (piVar15 == (int *)0x0) {
         return;
       }
-_L140:
+_L141:
       if ((*(short *)(iVar18 + 0x82) == 0) && (piVar15 = (int *)*piVar4, piVar15 != (int *)0x0)) {
         uVar2 = *(ushort *)((int)piVar15 + 6);
         *(int **)(iVar18 + 0x30) = piVar15;
@@ -78,8 +78,8 @@ _L140:
       *(ushort *)(iVar18 + 0x82) = uVar3 - (short)uVar12;
     }
     else {
-      if (((param_2 == 2) && (piVar15 != (int *)0x0)) && ((bVar17 != 1 && (DAT_0001104e != '\0'))))
-      goto _L140;
+      if (((param_2 == 2) && (piVar15 != (int *)0x0)) && ((bVar17 != 1 && (DAT_0001204e != '\0'))))
+      goto _L141;
       uVar12 = (uint)*(byte *)(iVar21 + 6);
       uVar16 = (uint)*(ushort *)(iVar21 + 4);
       uVar22 = 3;
@@ -146,8 +146,8 @@ _L140:
            (pcVar8 = (char *)(**(code **)(_r_plf_funcs_p + 0xbc))
                                        (uVar16,*(code **)(_r_plf_funcs_p + 0xbc)), *pcVar8 == '\x01'
            )) {
-          uVar16 = (uint)*(ushort *)(iVar18 + 0x7c) + (uint)*(ushort *)(iVar18 + 0x7e) +
-                   (*(ushort *)(iVar18 + 0x72) + 1) * 9;
+          uVar16 = (uint)*(ushort *)(iVar18 + 0x7c) + (uint)*(ushort *)(iVar18 + 0x7e) + 9 +
+                   (uint)*(ushort *)(iVar18 + 0x72);
           iVar5 = uVar16 * 0x10000;
           uVar16 = uVar16 & 0xffff;
           if (((uVar16 + 1) - (uint)uVar2 & 0xffff) < 0x7fff) {
@@ -160,7 +160,7 @@ _L140:
         }
         else {
           (**(code **)(_r_plf_funcs_p + 0xc))
-                    (0,0,"lld_con.c",0x4eb,*(code **)(_r_plf_funcs_p + 0xc));
+                    (0,0,"lld_con.c",0x4f2,*(code **)(_r_plf_funcs_p + 0xc));
         }
       }
     }

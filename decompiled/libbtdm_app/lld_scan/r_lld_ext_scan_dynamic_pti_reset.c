@@ -1,9 +1,9 @@
 /*
- * Last changed at upstream commit b438f60a295183e7c67eb42ae05f4580f4b1ced0
- * https://github.com/espressif/esp32c3-bt-lib/commit/b438f60a295183e7c67eb42ae05f4580f4b1ced0
- * Upstream date: 2023-06-12 21:42:40 +0800
- * Upstream subject: update libbtdm_app.a for ESP32C3 and ESP32S3(963cad48)
- * Source: libbtdm_app -> lld_scan.o -> lld_ext_scan_dynamic_pti_reset
+ * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * Upstream date: 2023-08-03 10:45:08 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
+ * Source: libbtdm_app -> lld_scan.o -> r_lld_ext_scan_dynamic_pti_reset
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void lld_ext_scan_dynamic_pti_reset(int param_1)
+void r_lld_ext_scan_dynamic_pti_reset(int param_1)
 
 {
   if (((param_1 != 0) && (*(char *)(_lld_scan_env + 0x17) != '\0')) &&

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * Upstream date: 2023-08-03 10:45:08 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
  * Source: libbtdm_app -> lld.o -> r_lld_env_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,20 +12,29 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 r_lld_env_init(void)
+int r_lld_env_init(void)
 
 {
   int iVar1;
-  undefined4 uVar2;
   
   _p_lld_env = (**(code **)(_r_osi_funcs_p + 0x78))(0x11c,*(code **)(_r_osi_funcs_p + 0x78));
-  uVar2 = 0;
-  if ((_p_lld_env != 0) &&
-     ((iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38)),
-      *(char *)(iVar1 + 0x11) != '\0' || (uVar2 = 1, sdk_cfg_priv_opts != '\0')))) {
-    (**(code **)(_r_ip_funcs_p + 0x49c))(*(code **)(_r_ip_funcs_p + 0x49c));
-    uVar2 = 1;
+  if (_p_lld_env == 0) {
+    iVar1 = 0;
   }
-  return uVar2;
+  else {
+    iVar1 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+    if (*(char *)(iVar1 + 0x19) == '\x02') {
+                    /* WARNING: Could not recover jumptable at 0x00010500. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      iVar1 = (**(code **)(_r_ip_funcs_p + 0x950))();
+      return iVar1;
+    }
+    iVar1 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+    if ((*(char *)(iVar1 + 0x19) == '\x01') || (iVar1 = 1, sdk_cfg_priv_opts != '\0')) {
+      (**(code **)(_r_ip_funcs_p + 0x49c))(iVar1,*(code **)(_r_ip_funcs_p + 0x49c));
+      iVar1 = 1;
+    }
+  }
+  return iVar1;
 }
 

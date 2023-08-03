@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * Upstream date: 2023-08-03 10:45:08 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
  * Source: libbtdm_app -> osi.o -> btdm_osi_funcs_register
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,10 +22,10 @@ undefined4 btdm_osi_funcs_register(int *param_1)
     return 0xffffffff;
   }
   if (3 < _g_bt_plf_log_level) {
-    ets_printf("MAGIC %08x VERSION %08x\n",0xfadebead,0x10006);
+    ets_printf("MAGIC %08x VERSION %08x\n",0xfadebead,0x10007);
   }
   if (*param_1 == -0x5214153) {
-    if (param_1[1] == 0x10006) {
+    if (param_1[1] == 0x10007) {
       _r_osi_funcs_p = param_1;
       return 0;
     }

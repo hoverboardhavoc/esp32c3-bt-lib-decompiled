@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * Upstream date: 2023-08-03 10:45:08 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
  * Source: libbtdm_app -> arch_main.o -> btdm_set_cca_sw_intr
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,13 +15,11 @@
 void btdm_set_cca_sw_intr(int param_1)
 
 {
-  if (sdk_cfg_priv_opts != '\0') {
-    if (param_1 == 0) {
-      _DAT_6003100c = _DAT_6003100c & 0xfff7ffff;
-    }
-    else {
-      _DAT_6003100c = _DAT_6003100c | 0x80000;
-    }
+  if (param_1 == 0) {
+    _DAT_6003100c = _DAT_6003100c & 0xfff7ffff;
+  }
+  else {
+    _DAT_6003100c = _DAT_6003100c | 0x80000;
   }
   return;
 }

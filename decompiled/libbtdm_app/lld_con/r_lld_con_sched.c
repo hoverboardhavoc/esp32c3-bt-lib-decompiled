@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * Upstream date: 2023-08-03 10:45:08 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_sched
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,7 +32,7 @@ void r_lld_con_sched(int param_1,int param_2,int param_3)
   
   iVar4 = *(int *)(&lld_con_env + param_1 * 4);
   uVar1 = *(ushort *)(iVar4 + 0x84);
-  uVar10 = (uint)DAT_00011026 << 1;
+  uVar10 = (uint)DAT_00012026 << 1;
   uVar5 = *(uint *)(iVar4 + 0x48);
   if ((uVar1 & 2) == 0) {
     *(undefined1 *)(iVar4 + 0x16) = 0x1f;
@@ -145,11 +145,11 @@ _L95:
       *(uint *)(iVar4 + 0x48) = uVar5;
       if ((*(ushort *)(iVar4 + 0x84) & 1) != 0) {
         *(short *)(iVar4 + 0x6c) = (short)iVar14;
-        *(uint *)(iVar4 + 0x4c) = uVar10 + (uint)DAT_00011026 * 2;
+        *(uint *)(iVar4 + 0x4c) = uVar10 + (uint)DAT_00012026 * 2;
       }
       return;
     }
-    *(char *)(iVar4 + 0x16) = *(char *)(iVar4 + 0x16) + DAT_00011019;
+    *(char *)(iVar4 + 0x16) = *(char *)(iVar4 + 0x16) + DAT_00012019;
     sVar8 = *(short *)(iVar4 + 0x7e);
     uVar5 = uVar5 + *(int *)(iVar4 + 100) & 0xfffffff;
     *(short *)(iVar4 + 0x7e) = sVar8 + 1;

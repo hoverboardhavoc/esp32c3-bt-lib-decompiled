@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b438f60a295183e7c67eb42ae05f4580f4b1ced0
- * https://github.com/espressif/esp32c3-bt-lib/commit/b438f60a295183e7c67eb42ae05f4580f4b1ced0
- * Upstream date: 2023-06-12 21:42:40 +0800
- * Upstream subject: update libbtdm_app.a for ESP32C3 and ESP32S3(963cad48)
+ * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * Upstream date: 2023-08-03 10:45:08 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_frm_eof_isr_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,18 +15,12 @@
 void r_lld_scan_frm_eof_isr_eco(int param_1)
 
 {
-  int iVar1;
-  
   r_lld_scan_frm_eof_isr();
-  if (((_lld_scan_env == 0) || (iVar1 = *(int *)(param_1 * 4 + _lld_scan_env), iVar1 == 0)) ||
-     (*(char *)(_lld_scan_env + 0x17) == '\0')) {
-    return;
-  }
-  if (((iVar1 != 0) && (*(char *)(_lld_scan_env + 0x17) != '\0')) &&
-     (*(char *)(iVar1 + 0x3d) == '\0')) {
-                    /* WARNING: Could not recover jumptable at 0x00010024. Too many branches */
+  if (((_lld_scan_env != 0) && (*(int *)(param_1 * 4 + _lld_scan_env) != 0)) &&
+     (*(char *)(_lld_scan_env + 0x17) != '\0')) {
+                    /* WARNING: Could not recover jumptable at 0x000106d8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_r_ip_funcs_p + 0x3d8))(1);
+    (**(code **)(_r_ip_funcs_p + 0x930))();
     return;
   }
   return;

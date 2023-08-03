@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 08e289633f823191a6c526377bfd68f31fb392e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/08e289633f823191a6c526377bfd68f31fb392e0
- * Upstream date: 2023-06-06 21:15:22 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(a186b41)
+ * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
+ * Upstream date: 2023-08-03 10:45:08 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
  * Source: libbtdm_app -> arch_main.o -> btdm_rw_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,18 +28,18 @@ char * btdm_rw_run(char *param_1)
     }
     _btdm_pwr_state = 0;
     if (param_1 != (char *)0x2) {
-_L255:
+_L250:
       if (param_1 < (char *)0x2) {
         return pcVar1;
       }
-                    /* WARNING: Could not recover jumptable at 0x00010de6. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010dca. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-      pcVar1 = (char *)(**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x3be);
+      pcVar1 = (char *)(**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x3bf);
       return pcVar1;
     }
   }
   else {
-    if (param_1 != (char *)0x2) goto _L255;
+    if (param_1 != (char *)0x2) goto _L250;
     if (_btdm_pwr_state == 2) {
       return pcVar1;
     }
@@ -49,11 +49,11 @@ _L255:
   if ((*pcVar1 != '\0') && (_btdm_pwr_state == 0)) {
     pll_track_state =
          (**(code **)(_r_modules_funcs_p + 0x2c4))(*(code **)(_r_modules_funcs_p + 0x2c4));
-    uVar2 = pll_track_state - DAT_00011738 & 0xfffffff;
+    uVar2 = pll_track_state - DAT_0001175c & 0xfffffff;
     pcVar1 = (char *)0x0;
-    DAT_00011734 = extraout_a1;
+    DAT_00011758 = extraout_a1;
     if ((uVar2 < 0x8000001) && (0xc80 < uVar2)) {
-      DAT_00011738 = pll_track_state;
+      DAT_0001175c = pll_track_state;
       bt_track_pll_cap(0);
       pcVar1 = (char *)0x1;
     }
