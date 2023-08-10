@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
+ * Upstream date: 2023-08-10 21:56:13 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(59725b5)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_set_adv_param_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -46,7 +46,7 @@ _L6:
   bVar1 = (byte)param_1[2];
   if (bVar1 < 5) {
     if (bVar1 != 1) {
-      if (((param_1[1] < *param_1) || (*param_1 < 0x20)) || (0x4000 < param_1[1])) goto _L12;
+      if (((param_1[1] < *param_1) || (*param_1 < 8)) || (0x4000 < param_1[1])) goto _L12;
     }
     if ((((byte)(*(char *)((int)param_1 + 0xd) - 1U) < 7) && ((byte)param_1[7] < 4)) &&
        ((*(byte *)((int)param_1 + 5) < 4 && ((byte)param_1[3] < 2)))) {

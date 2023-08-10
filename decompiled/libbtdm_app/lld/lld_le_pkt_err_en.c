@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
  * Upstream date: 2023-08-10 21:56:13 +0800
  * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(59725b5)
- * Source: libbtdm_app -> arch_main.o -> btdm_controller_on_reset
+ * Source: libbtdm_app -> lld.o -> lld_le_pkt_err_en
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,17 +12,18 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void btdm_controller_on_reset(void)
+undefined4 lld_le_pkt_err_en(uint param_1)
 
 {
-  (**(code **)(_r_modules_funcs_p + 0x280))(*(code **)(_r_modules_funcs_p + 0x280));
-  rw_rf_le_exit_test_mode();
-  if ((_bt_rf_coex_hooks_p != (undefined4 *)0x0) && ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
-                    /* WARNING: Could not recover jumptable at 0x00010c90. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*(code *)*_bt_rf_coex_hooks_p)(0xff,8,0);
-    return;
+  uint uVar1;
+  int iVar2;
+  
+  _LANCHOR0 = (undefined1)param_1;
+  _DAT_60031000 = (param_1 ^ 1) << 9 | _DAT_60031000 & 0xfffffdff;
+  for (uVar1 = 0; iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38)),
+      uVar1 < *(byte *)(iVar2 + 0xd); uVar1 = uVar1 + 1 & 0xff) {
+    (&lld_le_pkt_env)[uVar1] = 0;
   }
-  return;
+  return 0;
 }
 

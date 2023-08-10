@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
+ * Upstream date: 2023-08-10 21:56:13 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(59725b5)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_clear_adv_sets_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,11 +37,11 @@ undefined4 hci_le_clear_adv_sets_cmd_handler(undefined4 param_1)
         }
       }
       uVar4 = 0;
-      goto _L559;
+      goto _L553;
     }
   }
   uVar4 = 0xc;
-_L559:
+_L553:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_1,uVar4,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }

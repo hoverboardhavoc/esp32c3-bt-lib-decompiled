@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
+ * Upstream date: 2023-08-10 21:56:13 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(59725b5)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_set_ext_adv_en_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,7 +57,7 @@ undefined4 hci_le_set_ext_adv_en_cmd_handler(byte *param_1,undefined4 param_2)
   undefined2 uStack_4e;
   byte bStack_4c;
   undefined1 uStack_4b;
-  undefined1 uStack_4a;
+  byte bStack_4a;
   undefined1 uStack_49;
   undefined1 uStack_48;
   undefined1 uStack_47;
@@ -70,9 +70,9 @@ undefined4 hci_le_set_ext_adv_en_cmd_handler(byte *param_1,undefined4 param_2)
   
   iVar12 = _p_llm_env;
   if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
-_L318:
+_L309:
     iVar12 = 0xc;
-    goto _L309;
+    goto _L300;
   }
   *(undefined1 *)(_p_llm_env + 0xd7) = 2;
   if (*param_1 == 0) {
@@ -80,7 +80,7 @@ _L318:
     if (*(char *)(iVar12 + 0xd6) != '\0') {
       return 2;
     }
-_L312:
+_L303:
     if (*(short *)param_1 != 1) {
       if (param_1[1] == 0) {
         for (uVar9 = 0;
@@ -101,25 +101,25 @@ _L312:
       else {
         bVar8 = 0;
         for (uVar9 = 0; uVar9 < param_1[1]; uVar9 = uVar9 + 1 & 0xff) {
-          if (0xef < param_1[uVar9 + 2]) goto _L313;
+          if (0xef < param_1[uVar9 + 2]) goto _L304;
           pbVar3 = (byte *)(**(code **)(_r_ip_funcs_p + 0x544))(0,*(code **)(_r_ip_funcs_p + 0x544))
           ;
           if (pbVar3 == (byte *)0xff) {
             iVar12 = 0x42;
-            goto _L309;
+            goto _L300;
           }
           piVar13 = (int *)(*(int *)(_p_llm_env + 8) + (int)pbVar3 * 0x44);
-          if (((short)piVar13[0xb] != 0) || (*(short *)((int)piVar13 + 0x36) != 0)) goto _L313;
+          if (((short)piVar13[0xb] != 0) || (*(short *)((int)piVar13 + 0x36) != 0)) goto _L304;
           pbVar4 = pbVar3;
           if (*param_1 == 1) {
             iVar12 = *piVar13;
             uVar1 = *(ushort *)(iVar12 + 2);
-            if (((uVar1 & 2) != 0) && ((uVar1 & 0x10) == 0 && (short)piVar13[0xd] == 0)) goto _L318;
+            if (((uVar1 & 2) != 0) && ((uVar1 & 0x10) == 0 && (short)piVar13[0xd] == 0)) goto _L309;
             if (((uVar1 & 0x11) == 1) &&
                (pbVar4 = (byte *)(**(code **)(_r_ip_funcs_p + 0x540))
                                            (iVar12,*(undefined2 *)((int)piVar13 + 0x2a),
                                             *(code **)(_r_ip_funcs_p + 0x540)),
-               pbVar4 != (byte *)0x0)) goto _L313;
+               pbVar4 != (byte *)0x0)) goto _L304;
             if ((*(ushort *)(iVar12 + 2) & 1) != 0) {
               if (((*(ushort *)(iVar12 + 2) & 0xc) != 0) &&
                  (pbVar4 = (byte *)(**(code **)(_r_ip_funcs_p + 0x4d8))
@@ -127,19 +127,19 @@ _L312:
                                               *(code **)(_r_ip_funcs_p + 0x4d8)),
                  pbVar4 != (byte *)0x0)) {
                 iVar12 = 0xb;
-                goto _L309;
+                goto _L300;
               }
               if (((*(ushort *)(iVar12 + 2) & 8) != 0) &&
-                 (0x7f < (ushort)(*(short *)(param_1 + uVar9 * 2 + 0xc) - 1U))) goto _L313;
+                 (0x7f < (ushort)(*(short *)(param_1 + uVar9 * 2 + 0xc) - 1U))) goto _L304;
               bVar8 = bVar8 + 1;
             }
             if (((*(byte *)(iVar12 + 0xb) & 1) != 0) &&
                (pbVar4 = (byte *)(*(code *)*_r_modules_funcs_p)
                                            (*(int *)(_p_llm_env + 8) + (int)pbVar3 * 0x44 + 4,
                                             &co_null_bdaddr,(code *)*_r_modules_funcs_p),
-               pbVar4 != (byte *)0x0)) goto _L313;
+               pbVar4 != (byte *)0x0)) goto _L304;
           }
-          else if (((_DAT_00013032 & 2) == 0) && ((char)piVar13[0x10] != '\x02')) goto _L318;
+          else if (((_DAT_00013032 & 2) == 0) && ((char)piVar13[0x10] != '\x02')) goto _L309;
           param_1[uVar9 + 2] = (byte)pbVar3;
         }
         if (bVar8 != 0) {
@@ -149,19 +149,19 @@ _L312:
                                          (pbVar4,*(code **)(_r_plf_funcs_p + 0x38)),
               uVar9 < pbVar4[0xd]; uVar9 = uVar9 + 1 & 0xff) {
             bVar10 = bVar10 + (*(char *)(*(int *)(_p_llm_env + 8) + uVar9 * 0x44 + 0x40) == '\0');
-            if (bVar8 <= bVar10) goto _L333;
+            if (bVar8 <= bVar10) goto _L324;
           }
           iVar12 = 7;
-          if (bVar10 < bVar8) goto _L309;
+          if (bVar10 < bVar8) goto _L300;
         }
-_L333:
+_L324:
         for (uVar9 = 0; iVar12 = _p_llm_env, uVar9 < param_1[1]; uVar9 = uVar9 + 1 & 0xff) {
           uVar11 = (uint)param_1[uVar9 + 2];
           iVar2 = uVar11 * 0x44;
           piVar13 = (int *)(*(int *)(_p_llm_env + 8) + iVar2);
           if ((char)piVar13[0x10] == '\x02') {
             if (*param_1 == 0) {
-_L335:
+_L326:
               if ((((_DAT_00013032 & 2) == 0) || ((char)piVar13[0x10] == '\x02')) &&
                  (iVar5 = (**(code **)(_r_ip_funcs_p + 0x1e8))
                                     (uVar11,*(code **)(_r_ip_funcs_p + 0x1e8)), iVar12 = _p_llm_env,
@@ -179,7 +179,7 @@ _L335:
                 if (((*(byte *)(iVar12 + 0xd) <= uVar14) && (_bt_rf_coex_hooks_p != (int *)0x0)) &&
                    (pcVar7 = (code *)*_bt_rf_coex_hooks_p, pcVar7 != (code *)0x0)) {
                   uVar6 = 0;
-                  goto _L427;
+                  goto _L421;
                 }
               }
             }
@@ -203,22 +203,23 @@ _L335:
                   }
                   else {
                     (**(code **)(_r_plf_funcs_p + 0xc))
-                              (0,"llm_adv.c",0x5db,*(code **)(_r_plf_funcs_p + 0xc));
+                              (0,"llm_adv.c",0x5d6,*(code **)(_r_plf_funcs_p + 0xc));
                   }
                 }
               }
             }
           }
           else {
-            if (*param_1 == 0) goto _L335;
+            if (*param_1 == 0) goto _L326;
             iVar5 = *piVar13;
             uVar1 = *(ushort *)(iVar5 + 2);
             uStack_5c = (uint)*(byte *)(iVar5 + 9) << 0x10 | (uint)*(byte *)(iVar5 + 8) << 8 |
                         (uint)*(byte *)(iVar5 + 7);
             uStack_4b = *(undefined1 *)(iVar5 + 10);
-            uStack_4a = *(undefined1 *)(iVar5 + 0xb);
+            bVar8 = *(byte *)(iVar5 + 0xb);
             uStack_49 = *(undefined1 *)(iVar5 + 0xc);
             uStack_50 = uVar1;
+            bStack_4a = bVar8;
             memcpy(auStack_62,(void *)(iVar5 + 0xd),6);
             uStack_48 = 0;
             if ((uVar1 & 4) == 0) {
@@ -236,8 +237,14 @@ _L335:
             }
             uStack_43 = *(undefined1 *)(iVar5 + 0x18);
             uStack_42 = *(undefined1 *)(iVar5 + 0x19);
-            uStack_68 = piVar13[1];
-            uStack_64 = (undefined2)piVar13[2];
+            if ((bVar8 & 1) == 0) {
+              uStack_68 = *(uint *)(iVar12 + 0xc);
+              uStack_64 = *(undefined2 *)(iVar12 + 0x10);
+            }
+            else {
+              uStack_68 = piVar13[1];
+              uStack_64 = (undefined2)piVar13[2];
+            }
             uStack_58 = (undefined2)piVar13[10];
             uStack_54 = *(undefined2 *)((int)piVar13 + 0x2a);
             uStack_56 = *(undefined2 *)((int)piVar13 + 0x32);
@@ -249,8 +256,8 @@ _L335:
                                (uVar11,&uStack_68,*(code **)(_r_ip_funcs_p + 0x1e4));
             if (iVar12 != 0) {
               (**(code **)(_r_plf_funcs_p + 0xc))
-                        (uVar11,0,"llm_adv.c",0x664,*(code **)(_r_plf_funcs_p + 0xc));
-              goto _L309;
+                        (uVar11,0,"llm_adv.c",0x65f,*(code **)(_r_plf_funcs_p + 0xc));
+              goto _L300;
             }
             iVar12 = *(int *)(_p_llm_env + 8) + iVar2;
             *(undefined1 *)(iVar12 + 0x40) = 2;
@@ -258,10 +265,10 @@ _L335:
               bVar8 = *(byte *)(iVar12 + 0x3d);
               uVar14 = (uint)bVar8;
               iVar12 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-              if (*(byte *)(iVar12 + 0xd) <= uVar14) goto _L346;
+              if (*(byte *)(iVar12 + 0xd) <= uVar14) goto _L339;
               iVar12 = uVar14 * 0x44;
               piVar13 = (int *)(*(int *)(_p_llm_env + 8) + iVar12);
-              if ((char)piVar13[0x10] != '\v') goto _L346;
+              if ((char)piVar13[0x10] != '\v') goto _L339;
               iVar5 = *piVar13;
               iVar15 = *(int *)(iVar2 + *(int *)(_p_llm_env + 8));
               iStack_84 = (uint)*(ushort *)(iVar5 + 4) << 1;
@@ -306,7 +313,7 @@ _L335:
               }
             }
             else {
-_L346:
+_L339:
               if ((*(ushort *)(iVar5 + 2) & 1) != 0) {
                 iVar12 = (**(code **)(_r_ip_funcs_p + 0x4ac))
                                    (&uStack_88,*(code **)(_r_ip_funcs_p + 0x4ac));
@@ -317,7 +324,7 @@ _L346:
                 }
                 else {
                   (**(code **)(_r_plf_funcs_p + 8))
-                            (0,"llm_adv.c",0x658,*(code **)(_r_plf_funcs_p + 8));
+                            (0,"llm_adv.c",0x653,*(code **)(_r_plf_funcs_p + 8));
                 }
               }
             }
@@ -325,7 +332,7 @@ _L346:
               pcVar7 = (code *)*_bt_rf_coex_hooks_p;
               uVar6 = 1;
               if (pcVar7 != (code *)0x0) {
-_L427:
+_L421:
                 (*pcVar7)(uVar11,2,uVar6);
               }
             }
@@ -341,16 +348,16 @@ _L427:
       else {
         iVar12 = 0;
       }
-      goto _L309;
+      goto _L300;
     }
   }
   else {
     pbVar4 = param_1;
-    if (*param_1 < 2) goto _L312;
+    if (*param_1 < 2) goto _L303;
   }
-_L313:
+_L304:
   iVar12 = 0x12;
-_L309:
+_L300:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,iVar12,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }

@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
  * Upstream date: 2023-08-10 21:56:13 +0800
  * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(59725b5)
- * Source: libbtdm_app -> arch_main.o -> btdm_controller_on_reset
+ * Source: libbtdm_app -> lld.o -> lld_le_pkt_err_set
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,16 +12,20 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void btdm_controller_on_reset(void)
+void lld_le_pkt_err_set(uint param_1,uint param_2)
 
 {
-  (**(code **)(_r_modules_funcs_p + 0x280))(*(code **)(_r_modules_funcs_p + 0x280));
-  rw_rf_le_exit_test_mode();
-  if ((_bt_rf_coex_hooks_p != (undefined4 *)0x0) && ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
-                    /* WARNING: Could not recover jumptable at 0x00010c90. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*(code *)*_bt_rf_coex_hooks_p)(0xff,8,0);
-    return;
+  if (9 < param_1) {
+    (**(code **)(_r_plf_funcs_p + 0xc))(10,"lld.c",0x251,*(code **)(_r_plf_funcs_p + 0xc));
+  }
+  if ((param_2 & 0xf) != 0) {
+    if ((param_2 & 1) != 0) {
+      *(short *)(&lld_le_pkt_env + param_1) = *(short *)(&lld_le_pkt_env + param_1) + 1;
+    }
+    if ((param_2 & 8) != 0) {
+      *(short *)((int)&lld_le_pkt_env + param_1 * 4 + 2) =
+           *(short *)((int)&lld_le_pkt_env + param_1 * 4 + 2) + 1;
+    }
   }
   return;
 }
