@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 9e82ccc6cd24923b2e46e5b05064ccbbf1b2ac09
+ * https://github.com/espressif/esp32c3-bt-lib/commit/9e82ccc6cd24923b2e46e5b05064ccbbf1b2ac09
+ * Upstream date: 2023-09-04 20:35:54 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(3a1003fc)
  * Source: libbtdm_app -> llm.o -> llm_duplicate_list_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -52,7 +52,7 @@ void llm_duplicate_list_init(void)
   if (*(char *)(iVar2 + 8) != '\0') {
     (**(code **)(_r_modules_funcs_p + 0x2c))(iVar2 + 0x10,*(code **)(_r_modules_funcs_p + 0x2c));
   }
-                    /* WARNING: Could not recover jumptable at 0x000104ba. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001054e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0x2c))(iVar2);
   return;
