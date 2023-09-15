@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/e9ad3d704f1034310de8f747d503ea5443df6b67
  * Upstream date: 2023-09-15 17:47:18 +0800
  * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(29996e0)
- * Source: libbtdm_app -> llm_hci.o -> hci_le_set_addr_resol_en_cmd_handler
+ * Source: libbtdm_app -> lld.o -> r_lld_res_list_clear
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,22 +12,25 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 hci_le_set_addr_resol_en_cmd_handler(byte *param_1,undefined4 param_2)
+void r_lld_res_list_clear(void)
 
 {
-  int iVar1;
-  undefined4 uVar2;
+  ushort uVar1;
+  int iVar2;
+  undefined1 *__s;
+  int iVar3;
   
-  iVar1 = (**(code **)(_r_ip_funcs_p + 0x504))(*(code **)(_r_ip_funcs_p + 0x504));
-  uVar2 = 0xc;
-  if (iVar1 == 0) {
-    uVar2 = 0x12;
-    if (*param_1 < 2) {
-      uVar2 = 0;
-      *(byte *)(_p_llm_env + 0xc6) = *param_1 & 1;
-    }
-  }
-  (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,uVar2,*(code **)(_r_ip_funcs_p + 0x4b8));
-  return 0;
+  __s = &lld_rpa_res_list;
+  iVar2 = 0;
+  do {
+    iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
+    uVar1 = *(ushort *)(iVar3 + iVar2);
+    iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
+    *(ushort *)(iVar3 + iVar2) = uVar1 & 0x7fff;
+    iVar2 = iVar2 + 0x34;
+    memset(__s,0,0xd);
+    __s = __s + 0xd;
+  } while (iVar2 != 0x208);
+  return;
 }
 
