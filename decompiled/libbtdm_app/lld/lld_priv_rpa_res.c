@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e9ad3d704f1034310de8f747d503ea5443df6b67
- * https://github.com/espressif/esp32c3-bt-lib/commit/e9ad3d704f1034310de8f747d503ea5443df6b67
- * Upstream date: 2023-09-15 17:47:18 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(29996e0)
+ * Last changed at upstream commit 27af69ccbb02f3b820436f47eaa0b1cd544edfbc
+ * https://github.com/espressif/esp32c3-bt-lib/commit/27af69ccbb02f3b820436f47eaa0b1cd544edfbc
+ * Upstream date: 2023-09-26 16:09:19 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(c8aa206)
  * Source: libbtdm_app -> lld.o -> lld_priv_rpa_res
  *
  * (C) Espressif, Apache License 2.0.
@@ -100,10 +100,10 @@ _L185:
 _L182:
           *param_3 = ((ushort)iVar6 & 0xff) * 0x34 + 0xc60;
           if (param_1 != (void *)0x0) {
-            memcpy(&DAT_00010efd + iVar6 * 0xd,param_1,6);
+            memcpy(&DAT_00010f41 + iVar6 * 0xd,param_1,6);
           }
           if (param_2 != (void *)0x0) {
-            memcpy(&DAT_00010f03 + iVar6 * 0xd,param_2,6);
+            memcpy(&DAT_00010f47 + iVar6 * 0xd,param_2,6);
           }
           (&lld_rpa_res_list)[iVar6 * 0xd] = 1;
           return '\x01';
