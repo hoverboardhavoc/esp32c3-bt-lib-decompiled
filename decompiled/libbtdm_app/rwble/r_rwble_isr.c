@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * Upstream date: 2023-08-03 10:45:08 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
+ * Last changed at upstream commit 7fb979154bec81163d55aa4e3134425aea0d52ab
+ * https://github.com/espressif/esp32c3-bt-lib/commit/7fb979154bec81163d55aa4e3134425aea0d52ab
+ * Upstream date: 2023-10-09 11:09:21 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(510fd043)
  * Source: libbtdm_app -> rwble.o -> r_rwble_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void r_rwble_isr(void)
     if ((int)(_DAT_60031010 << 9) < 0) {
       _DAT_600312d8 = _DAT_600312d8 | 0x80000000;
       _DAT_60031018 = 0x7fffff;
-      (**(code **)(_r_plf_funcs_p + 8))(0,"rwble.c",0x160,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"rwble.c",0x165,*(code **)(_r_plf_funcs_p + 8));
     }
     if (((int)(_DAT_60031010 << 10) < 0) &&
        (_DAT_60031018 = _DAT_60031018 & 0xffdfffff | 0x200000, 1 < _g_bt_plf_log_level)) {
@@ -30,20 +30,20 @@ void r_rwble_isr(void)
                  _DAT_600312d8 >> 1 & 0xf);
     }
   }
-_L76:
+_L74:
   if (DAT_00011049 == '\0') {
     uVar1 = _DAT_60031010;
-    if (_DAT_60031010 != 0) goto _L80;
+    if (_DAT_60031010 != 0) goto _L78;
   }
   else {
     uVar1 = (_DAT_600312d8 << 1) >> 0xb;
-    if ((_DAT_600312d8 >> 5 & 0x1f) != 0) goto code_r0x00010452;
+    if ((_DAT_600312d8 >> 5 & 0x1f) != 0) goto code_r0x00010468;
   }
   return;
-code_r0x00010452:
+code_r0x00010468:
   _DAT_600312d8 = _DAT_600312d8 | 1;
   if (uVar1 != 0) {
-_L80:
+_L78:
     if ((uVar1 & 0x81e89) != 0) {
       (**(code **)(_r_modules_funcs_p + 0x2a8))(uVar1,*(code **)(_r_modules_funcs_p + 0x2a8));
     }
@@ -70,7 +70,7 @@ _L80:
         }
         if (*(code **)(_r_ip_funcs_p + 0x744) == (code *)0x0) {
           (**(code **)(_r_plf_funcs_p + 0xc))
-                    (_DAT_60031060,0,"rwble.c",0x1b0,*(code **)(_r_plf_funcs_p + 0xc));
+                    (_DAT_60031060,0,"rwble.c",0x1b5,*(code **)(_r_plf_funcs_p + 0xc));
         }
         else {
           (**(code **)(_r_ip_funcs_p + 0x744))();
@@ -98,6 +98,6 @@ _L80:
       (**(code **)(_r_ip_funcs_p + 0x6c0))(0xff,*(code **)(_r_ip_funcs_p + 0x6c0));
     }
   }
-  goto _L76;
+  goto _L74;
 }
 

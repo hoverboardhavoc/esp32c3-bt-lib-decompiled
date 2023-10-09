@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9e82ccc6cd24923b2e46e5b05064ccbbf1b2ac09
- * https://github.com/espressif/esp32c3-bt-lib/commit/9e82ccc6cd24923b2e46e5b05064ccbbf1b2ac09
- * Upstream date: 2023-09-04 20:35:54 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(3a1003fc)
+ * Last changed at upstream commit 7fb979154bec81163d55aa4e3134425aea0d52ab
+ * https://github.com/espressif/esp32c3-bt-lib/commit/7fb979154bec81163d55aa4e3134425aea0d52ab
+ * Upstream date: 2023-10-09 11:09:21 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(510fd043)
  * Source: libbtdm_app -> llm.o -> llm_adv_is_in_duplicate_scan_duplicate_exceptional_list
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,7 +57,7 @@ undefined4 llm_adv_is_in_duplicate_scan_duplicate_exceptional_list(void *param_1
     if (((uVar5 & 0x10) != 0) && (*(int *)((int)param_1 + 9) == 0x18280303)) {
       return 1;
     }
-    if (((uVar5 & 0x20) != 0) && (*(int *)((int)param_1 + 9) == 0x7fcb0303)) {
+    if (((uVar5 & 0x20) != 0) && (*(int *)((int)param_1 + 9) == 0x18590303)) {
       return 1;
     }
     if (cVar2 != '\x03') {
