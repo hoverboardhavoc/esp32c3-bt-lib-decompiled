@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
- * Upstream date: 2023-08-10 21:56:13 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(59725b5)
+ * Last changed at upstream commit af6be404ea583da57f9a4f0dfe7e02351ff5aa0d
+ * https://github.com/espressif/esp32c3-bt-lib/commit/af6be404ea583da57f9a4f0dfe7e02351ff5aa0d
+ * Upstream date: 2023-10-20 16:57:24 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ad8513)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_frm_isr_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void r_lld_adv_frm_isr_eco(int param_1,undefined4 param_2,int param_3)
   char *pcVar5;
   uint uVar6;
   int iVar7;
-  undefined4 unaff_s3;
+  undefined4 unaff_s4;
   
   iVar4 = *(int *)(&lld_adv_env + param_1 * 4);
   bVar3 = false;
@@ -37,7 +37,7 @@ void r_lld_adv_frm_isr_eco(int param_1,undefined4 param_2,int param_3)
     }
     if (bVar1 && bVar2) {
       g_adv_delay_dis = '\x01';
-      unaff_s3 = *(undefined4 *)(iVar4 + 100);
+      unaff_s4 = *(undefined4 *)(iVar4 + 100);
       uVar6 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
       uVar6 = uVar6 % 9;
       iVar7 = uVar6 << 1;
@@ -52,10 +52,26 @@ void r_lld_adv_frm_isr_eco(int param_1,undefined4 param_2,int param_3)
       *(uint *)(iVar4 + 100) = (uint)(iVar7 + *(int *)(iVar4 + 100) * 2) >> 1;
     }
   }
+  if ((adv_adv_data_need_to_set[param_1] != '\0') &&
+     (((*(ushort *)(iVar4 + 0x74) & 0x10) == 0 || ((*(ushort *)(iVar4 + 0x74) & 0x14) == 0x10)))) {
+    (**(code **)(_r_ip_funcs_p + 0x17c))
+              (param_1,*(undefined1 *)(iVar4 + 0x28),*(undefined2 *)(iVar4 + 0x24),1,1,
+               *(code **)(_r_ip_funcs_p + 0x17c));
+    *(undefined2 *)(iVar4 + 0x24) = 0;
+    adv_adv_data_need_to_set[param_1] = 0;
+  }
+  if ((adv_scan_rsp_data_need_to_set[param_1] != '\0') &&
+     (((*(ushort *)(iVar4 + 0x74) & 0x12) == 2 || ((*(ushort *)(iVar4 + 0x74) & 0x14) == 0x10)))) {
+    (**(code **)(_r_ip_funcs_p + 0x1d8))
+              (param_1,*(undefined1 *)(iVar4 + 0x2a),*(undefined2 *)(iVar4 + 0x26),1,1,
+               *(code **)(_r_ip_funcs_p + 0x1d8));
+    *(undefined2 *)(iVar4 + 0x26) = 0;
+    adv_scan_rsp_data_need_to_set[param_1] = 0;
+  }
   r_lld_adv_frm_isr(param_1,param_2,param_3);
-  if (bVar3) {
+  if ((iVar4 != 0) && (bVar3)) {
     g_adv_delay_dis = '\0';
-    *(undefined4 *)(iVar4 + 100) = unaff_s3;
+    *(undefined4 *)(iVar4 + 100) = unaff_s4;
   }
   return;
 }
