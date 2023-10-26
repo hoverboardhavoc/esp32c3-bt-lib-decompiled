@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 27af69ccbb02f3b820436f47eaa0b1cd544edfbc
- * https://github.com/espressif/esp32c3-bt-lib/commit/27af69ccbb02f3b820436f47eaa0b1cd544edfbc
- * Upstream date: 2023-09-26 16:09:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(c8aa206)
+ * Last changed at upstream commit ec7ef197cb8018c468cd59dca893dbe018f47a2a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ec7ef197cb8018c468cd59dca893dbe018f47a2a
+ * Upstream date: 2023-10-26 19:39:25 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f817304)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_set_ext_adv_en_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -203,7 +203,7 @@ _L326:
                   }
                   else {
                     (**(code **)(_r_plf_funcs_p + 0xc))
-                              (0,"llm_adv.c",0x5d6,*(code **)(_r_plf_funcs_p + 0xc));
+                              (0,"llm_adv.c",0x5d9,*(code **)(_r_plf_funcs_p + 0xc));
                   }
                 }
               }
@@ -249,7 +249,7 @@ _L326:
                                (uVar11,&uStack_68,*(code **)(_r_ip_funcs_p + 0x1e4));
             if (iVar12 != 0) {
               (**(code **)(_r_plf_funcs_p + 0xc))
-                        (uVar11,0,"llm_adv.c",0x65f,*(code **)(_r_plf_funcs_p + 0xc));
+                        (uVar11,0,"llm_adv.c",0x662,*(code **)(_r_plf_funcs_p + 0xc));
               goto _L300;
             }
             iVar12 = *(int *)(_p_llm_env + 8) + iVar2;
@@ -317,7 +317,7 @@ _L337:
                 }
                 else {
                   (**(code **)(_r_plf_funcs_p + 8))
-                            (0,"llm_adv.c",0x653,*(code **)(_r_plf_funcs_p + 8));
+                            (0,"llm_adv.c",0x656,*(code **)(_r_plf_funcs_p + 8));
                 }
               }
             }

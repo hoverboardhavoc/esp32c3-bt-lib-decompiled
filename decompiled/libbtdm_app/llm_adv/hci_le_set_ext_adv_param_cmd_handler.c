@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
- * Upstream date: 2023-08-10 21:56:13 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(59725b5)
+ * Last changed at upstream commit ec7ef197cb8018c468cd59dca893dbe018f47a2a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ec7ef197cb8018c468cd59dca893dbe018f47a2a
+ * Upstream date: 2023-10-26 19:39:25 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f817304)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_set_ext_adv_param_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -81,7 +81,7 @@ _L126:
           *(undefined1 *)((int)puVar9 + 0x3e) = 0xff;
           if (3 < param_1[0xb]) {
             (**(code **)(_r_plf_funcs_p + 0xc))
-                      (0,"llm_adv.c",0x309,*(code **)(_r_plf_funcs_p + 0xc));
+                      (0,"llm_adv.c",0x30c,*(code **)(_r_plf_funcs_p + 0xc));
           }
           *(undefined1 *)(*(int *)(_p_llm_env + 8) + (uint)bStack_2d * 0x44 + 0x40) = 1;
           pcVar2 = _memcpy;

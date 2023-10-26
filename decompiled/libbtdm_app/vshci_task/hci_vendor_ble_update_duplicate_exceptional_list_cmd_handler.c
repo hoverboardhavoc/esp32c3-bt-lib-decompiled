@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit ec7ef197cb8018c468cd59dca893dbe018f47a2a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ec7ef197cb8018c468cd59dca893dbe018f47a2a
+ * Upstream date: 2023-10-26 19:39:25 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(f817304)
  * Source: libbtdm_app -> vshci_task.o -> hci_vendor_ble_update_duplicate_exceptional_list_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -40,12 +40,12 @@ hci_vendor_ble_update_duplicate_exceptional_list_cmd_handler(char *param_1,undef
       if (uVar4 < 5) {
         *(undefined4 *)(puVar3 + 4) = 0;
       }
-      goto _L11;
+      goto _L13;
     }
     uVar5 = 6;
   }
   *(undefined4 *)(puVar3 + 4) = uVar5;
-_L11:
+_L13:
   if (cVar1 == '\x02') {
     *(undefined4 *)(puVar3 + 4) = 0;
   }
