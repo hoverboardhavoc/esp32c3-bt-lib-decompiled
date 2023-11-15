@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit cecbe387799b41346c0affab41f339306a33e518
+ * https://github.com/espressif/esp32c3-bt-lib/commit/cecbe387799b41346c0affab41f339306a33e518
+ * Upstream date: 2023-11-15 16:38:32 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2758518)
  * Source: libbtdm_app -> arch_main.o -> rw_schedule
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,14 +26,21 @@ void rw_schedule(void)
     (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
     (**(code **)(_r_osi_funcs_p + 0x38))(_g_waking_sleeping_sem,*(code **)(_r_osi_funcs_p + 0x38));
   }
+  if (_btdm_pwr_state != 1) {
+    return;
+  }
+  do {
+  } while (-1 < _DAT_60042000 << 0x10);
+  if (*(code **)(_r_osi_funcs_p + 0x9c) != (code *)0x0) {
+    (**(code **)(_r_osi_funcs_p + 0x9c))();
+  }
+  (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   if (_btdm_pwr_state == 1) {
-    do {
-    } while (-1 < _DAT_60042000 << 0x10);
-    if (*(code **)(_r_osi_funcs_p + 0x9c) != (code *)0x0) {
-      (**(code **)(_r_osi_funcs_p + 0x9c))();
-    }
     _btdm_pwr_state = 2;
   }
+                    /* WARNING: Could not recover jumptable at 0x0001082c. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(_r_osi_funcs_p + 0x18))();
   return;
 }
 
