@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a075a8fde411bdd92973051edf2cd234601b259c
- * https://github.com/espressif/esp32c3-bt-lib/commit/a075a8fde411bdd92973051edf2cd234601b259c
- * Upstream date: 2023-11-30 21:15:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(70ab55f)
+ * Last changed at upstream commit bb9f0f59db474924c9288ab92aed1abb88bc9419
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bb9f0f59db474924c9288ab92aed1abb88bc9419
+ * Upstream date: 2023-12-08 13:35:16 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(65db61f)
  * Source: libbtdm_app -> lld.o -> r_lld_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ void r_lld_init(int param_1)
   undefined1 auStack_28 [24];
   
   if (param_1 != 1) {
-    if (param_1 != 2) goto _L158;
+    if (param_1 != 2) goto _L161;
     if (_lld_rpa_renew_env != 0) {
       (**(code **)(_r_modules_funcs_p + 0x110))(*(code **)(_r_modules_funcs_p + 0x110));
     }
@@ -36,14 +36,14 @@ void r_lld_init(int param_1)
   iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
   if (*(char *)(iVar3 + 0x19) == '\x02') {
     pcVar5 = *(code **)(_r_ip_funcs_p + 0x948);
-_L183:
+_L186:
     (*pcVar5)(pcVar5);
   }
   else {
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
     if ((*(char *)(iVar3 + 0x19) == '\x01') || (sdk_cfg_priv_opts != '\0')) {
       pcVar5 = *(code **)(_r_ip_funcs_p + 0x4a4);
-      goto _L183;
+      goto _L186;
     }
   }
   pvVar2 = _p_lld_env;
@@ -63,33 +63,33 @@ _L183:
   uVar1 = *(ushort *)((int)_p_lld_env + 0xd4);
   if (uVar1 < 0x15) {
     uVar4 = 7;
-_L184:
+_L187:
     *(undefined2 *)((int)_p_lld_env + 0xd6) = uVar4;
   }
   else {
     if (uVar1 < 0x1f) {
       uVar4 = 6;
-      goto _L184;
+      goto _L187;
     }
     if (uVar1 < 0x33) {
       uVar4 = 5;
-      goto _L184;
+      goto _L187;
     }
     if (uVar1 < 0x4c) {
       uVar4 = 4;
-      goto _L184;
+      goto _L187;
     }
     if (uVar1 < 0x65) {
       uVar4 = 3;
-      goto _L184;
+      goto _L187;
     }
     if (uVar1 < 0x97) {
       uVar4 = 2;
-      goto _L184;
+      goto _L187;
     }
     if (uVar1 < 0xfb) {
       uVar4 = 1;
-      goto _L184;
+      goto _L187;
     }
     *(undefined2 *)((int)_p_lld_env + 0xd6) = 0;
   }
@@ -98,7 +98,7 @@ _L184:
   aa_gen = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
   DAT_0001204d = 0;
   DAT_0001204e = 0;
-_L158:
+_L161:
   (**(code **)(_r_ip_funcs_p + 0x238))(param_1,*(code **)(_r_ip_funcs_p + 0x238));
   (**(code **)(_r_ip_funcs_p + 0x1c0))(param_1,*(code **)(_r_ip_funcs_p + 0x1c0));
   (**(code **)(_r_ip_funcs_p + 0x2f8))(param_1,*(code **)(_r_ip_funcs_p + 0x2f8));
