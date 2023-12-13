@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit e651b371c861ba23111db51dd76fd01fc2a69079
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e651b371c861ba23111db51dd76fd01fc2a69079
+ * Upstream date: 2023-12-13 19:24:11 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(9129dec)
  * Source: libbtdm_app -> arch_main.o -> btdm_deep_sleep_mem_deinit
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,7 +20,7 @@ void btdm_deep_sleep_mem_deinit(void)
     _LANCHOR2 = 0;
   }
   if (_LANCHOR3 != 0) {
-    (**(code **)(_r_osi_funcs_p + 0x7c))(_LANCHOR2,*(code **)(_r_osi_funcs_p + 0x7c));
+    (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
     _LANCHOR3 = 0;
   }
   if (_LANCHOR4 != 0) {
