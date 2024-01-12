@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit af6be404ea583da57f9a4f0dfe7e02351ff5aa0d
- * https://github.com/espressif/esp32c3-bt-lib/commit/af6be404ea583da57f9a4f0dfe7e02351ff5aa0d
- * Upstream date: 2023-10-20 16:57:24 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ad8513)
+ * Last changed at upstream commit 9d40b3bc0ac38d72b66fe0f612a8dda64c7330d7
+ * https://github.com/espressif/esp32c3-bt-lib/commit/9d40b3bc0ac38d72b66fe0f612a8dda64c7330d7
+ * Upstream date: 2024-01-12 16:10:16 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(9359a4d)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_adv_data_update_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ void r_lld_adv_adv_data_update_hack(int param_1,int param_2)
       (*(char *)(*(int *)(&lld_adv_env + param_1 * 4) + 0x89) != '\0')) && (param_2 == 0)) {
     adv_adv_data_need_to_set[param_1] = 1;
   }
-                    /* WARNING: Could not recover jumptable at 0x00010c48. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010c68. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))();
   return;
