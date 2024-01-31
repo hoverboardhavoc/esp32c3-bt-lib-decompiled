@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/0caae2bd70a999ac8a1c07330f7168e185db81ba
  * Upstream date: 2024-01-31 19:37:46 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(91980c2)
- * Source: libbtdm_app -> arch_main.o -> btdm_sleep_clock_sync
+ * Source: libbtdm_app -> llc_llcp.o -> llc_llcp_phy_update_ind_ack
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,26 +12,18 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 btdm_sleep_clock_sync(void)
+void llc_llcp_phy_update_ind_ack(undefined4 param_1)
 
 {
-  uint uVar1;
-  undefined4 uVar2;
+  int iVar1;
   
-  uVar1 = _LANCHOR5;
-  if ((_DAT_60042000 >> 7 & 1) != 0) {
-    _LANCHOR5 = _LANCHOR5 + 1;
-    if (uVar1 < 1000000) {
-      return 1;
-    }
-    _DAT_60031050 = 0x87828180;
-    if ((_DAT_60042000 & 0x80) != 0 || _DAT_60031054 != 0) {
-      uVar2 = (**(code **)(_r_plf_funcs_p + 0xc))
-                        ("arch_main.c",0x251,*(code **)(_r_plf_funcs_p + 0xc));
-      return uVar2;
-    }
+  iVar1 = lld_con_llcp_proc_type_get();
+  if (iVar1 == 3) {
+                    /* WARNING: Could not recover jumptable at 0x0001005e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    (**(code **)(_r_ip_funcs_p + 0x7d4))(param_1);
+    return;
   }
-  _LANCHOR5 = 0;
-  return 0;
+  return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e651b371c861ba23111db51dd76fd01fc2a69079
- * https://github.com/espressif/esp32c3-bt-lib/commit/e651b371c861ba23111db51dd76fd01fc2a69079
- * Upstream date: 2023-12-13 19:24:11 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(9129dec)
+ * Last changed at upstream commit 0caae2bd70a999ac8a1c07330f7168e185db81ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0caae2bd70a999ac8a1c07330f7168e185db81ba
+ * Upstream date: 2024-01-31 19:37:46 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(91980c2)
  * Source: libbtdm_app -> arch_main.o -> btdm_in_wakeup_requesting_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,13 +16,13 @@ void btdm_in_wakeup_requesting_set(int param_1)
 
 {
   if (param_1 != 0) {
-                    /* WARNING: Could not recover jumptable at 0x00010756. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000107bc. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_osi_funcs_p + 0x34))(_g_waking_sleeping_sem,0xffffffff);
     return;
   }
   (**(code **)(_r_osi_funcs_p + 0x38))(_g_waking_sleeping_sem,*(code **)(_r_osi_funcs_p + 0x38));
-                    /* WARNING: Could not recover jumptable at 0x0001077a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000107e0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_plf_funcs_p + 0x28))(6,0,0,0);
   return;

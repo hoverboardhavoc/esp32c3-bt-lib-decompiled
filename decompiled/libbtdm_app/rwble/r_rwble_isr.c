@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 393ac4c33b419226aac9d1e8f1b5d553b7f3bc97
- * https://github.com/espressif/esp32c3-bt-lib/commit/393ac4c33b419226aac9d1e8f1b5d553b7f3bc97
- * Upstream date: 2023-12-19 16:42:02 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(b877d666)
+ * Last changed at upstream commit 0caae2bd70a999ac8a1c07330f7168e185db81ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0caae2bd70a999ac8a1c07330f7168e185db81ba
+ * Upstream date: 2024-01-31 19:37:46 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(91980c2)
  * Source: libbtdm_app -> rwble.o -> r_rwble_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,32 +18,40 @@ void r_rwble_isr(void)
   uint uVar1;
   int iVar2;
   
+  uVar1 = _DAT_60031010;
   if (DAT_00011049 != '\0') {
     if ((int)(_DAT_60031010 << 9) < 0) {
       _DAT_600312d8 = _DAT_600312d8 | 0x80000000;
       _DAT_60031018 = 0x7fffff;
-      (**(code **)(_r_plf_funcs_p + 8))(0,"rwble.c",0x167,*(code **)(_r_plf_funcs_p + 8));
+      if ((_DAT_60031010 & 0x1fffff) == 1) {
+        if (1 < _g_bt_plf_log_level) {
+          ets_printf("IRQ FIFO OVERFLOW\n");
+        }
+      }
+      else {
+        (**(code **)(_r_plf_funcs_p + 8))(0,"rwble.c",0x16b,*(code **)(_r_plf_funcs_p + 8));
+      }
     }
-    if (((int)(_DAT_60031010 << 10) < 0) &&
+    if (((int)(uVar1 << 10) < 0) &&
        (_DAT_60031018 = _DAT_60031018 & 0xffdfffff | 0x200000, 1 < _g_bt_plf_log_level)) {
       ets_printf("IRQ FIFO ALMOST FULL,cnt:%u,rem:%u\n",_DAT_600312d8 >> 5 & 0x1f,
                  _DAT_600312d8 >> 1 & 0xf);
     }
   }
-_L77:
+_L80:
   if (DAT_00011049 == '\0') {
     uVar1 = _DAT_60031010;
-    if (_DAT_60031010 != 0) goto _L81;
+    if (_DAT_60031010 != 0) goto _L84;
   }
   else {
     uVar1 = (_DAT_600312d8 << 1) >> 0xb;
-    if ((_DAT_600312d8 >> 5 & 0x1f) != 0) goto code_r0x00010478;
+    if ((_DAT_600312d8 >> 5 & 0x1f) != 0) goto code_r0x00010486;
   }
   return;
-code_r0x00010478:
+code_r0x00010486:
   _DAT_600312d8 = _DAT_600312d8 | 1;
   if (uVar1 != 0) {
-_L81:
+_L84:
     if ((uVar1 & 0x81e89) != 0) {
       (**(code **)(_r_modules_funcs_p + 0x2a8))(uVar1,*(code **)(_r_modules_funcs_p + 0x2a8));
     }
@@ -70,7 +78,7 @@ _L81:
         }
         if (*(code **)(_r_ip_funcs_p + 0x744) == (code *)0x0) {
           (**(code **)(_r_plf_funcs_p + 0xc))
-                    (_DAT_60031060,0,"rwble.c",0x1b7,*(code **)(_r_plf_funcs_p + 0xc));
+                    (_DAT_60031060,0,"rwble.c",0x1bd,*(code **)(_r_plf_funcs_p + 0xc));
         }
         else {
           (**(code **)(_r_ip_funcs_p + 0x744))();
@@ -98,6 +106,6 @@ _L81:
       (**(code **)(_r_ip_funcs_p + 0x6c0))(0xff,*(code **)(_r_ip_funcs_p + 0x6c0));
     }
   }
-  goto _L77;
+  goto _L80;
 }
 
