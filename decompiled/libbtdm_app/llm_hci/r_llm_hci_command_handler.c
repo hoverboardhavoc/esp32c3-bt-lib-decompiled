@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bb9f0f59db474924c9288ab92aed1abb88bc9419
- * https://github.com/espressif/esp32c3-bt-lib/commit/bb9f0f59db474924c9288ab92aed1abb88bc9419
- * Upstream date: 2023-12-08 13:35:16 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(65db61f)
+ * Last changed at upstream commit e5c0f7256ecf5b5f8eb28c1793051a6b88f95124
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e5c0f7256ecf5b5f8eb28c1793051a6b88f95124
+ * Upstream date: 2024-02-04 11:46:50 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(30b57c45)
  * Source: libbtdm_app -> llm_hci.o -> r_llm_hci_command_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ undefined4 r_llm_hci_command_handler(undefined4 param_1,uint param_2)
   if (*(code **)(puVar3 + 2) == (code *)0x0) {
     return 0;
   }
-                    /* WARNING: Could not recover jumptable at 0x000114b0. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000114e2. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   uVar2 = (**(code **)(puVar3 + 2))(param_1,param_2);
   return uVar2;

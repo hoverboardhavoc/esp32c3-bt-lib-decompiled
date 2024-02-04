@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/e5c0f7256ecf5b5f8eb28c1793051a6b88f95124
  * Upstream date: 2024-02-04 11:46:50 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(30b57c45)
- * Source: libbtdm_app -> lld.o -> lld_wl_res_rem
+ * Source: libbtdm_app -> lld_test.o -> lld_dtm_is_ongoing
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,16 +12,9 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void lld_wl_res_rem(uint param_1)
+bool lld_dtm_is_ongoing(void)
 
 {
-  if (0xb < param_1) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(0,"lld.c",0x3b1,*(code **)(_r_plf_funcs_p + 0xc));
-  }
-  if ((&lld_wl_res_list)[param_1] != 0) {
-    (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
-    (&lld_wl_res_list)[param_1] = 0;
-  }
-  return;
+  return _lld_test_env != 0;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a075a8fde411bdd92973051edf2cd234601b259c
- * https://github.com/espressif/esp32c3-bt-lib/commit/a075a8fde411bdd92973051edf2cd234601b259c
- * Upstream date: 2023-11-30 21:15:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(70ab55f)
+ * Last changed at upstream commit e5c0f7256ecf5b5f8eb28c1793051a6b88f95124
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e5c0f7256ecf5b5f8eb28c1793051a6b88f95124
+ * Upstream date: 2024-02-04 11:46:50 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(30b57c45)
  * Source: libbtdm_app -> lld.o -> lld_le_pkt_err_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void lld_le_pkt_err_set(uint param_1,uint param_2)
 
 {
   if (9 < param_1) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(10,"lld.c",0x2be,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(10,"lld.c",0x2c3,*(code **)(_r_plf_funcs_p + 0xc));
   }
   if ((param_2 & 0xf) != 0) {
     if ((param_2 & 1) != 0) {
