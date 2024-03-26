@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
  * Upstream date: 2024-03-26 14:09:42 +0800
  * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
- * Source: libbtdm_app -> task.o -> r_btdm_vnd_offload_post_from_isr
+ * Source: libbtdm_app -> lld_scan.o -> coex_schm_ble_scan_stop
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,17 +12,22 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 r_btdm_vnd_offload_post_from_isr(uint param_1,undefined4 param_2,undefined4 param_3)
+void coex_schm_ble_scan_stop(void)
 
 {
-  undefined4 uVar1;
+  int iVar1;
   
-  if (param_1 < 2) {
-                    /* WARNING: Could not recover jumptable at 0x0001024e. Too many branches */
+  iVar1 = adv_itf_version_is_legacy();
+  if (iVar1 != 0) {
+    (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
+    if (_lld_scan_env != 0) {
+      coex_lld_scan_stop();
+    }
+                    /* WARNING: Could not recover jumptable at 0x0001104c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    uVar1 = (**(code **)(_r_plf_funcs_p + 0x108))(0xd,param_1 & 0xff,param_2,param_3);
-    return uVar1;
+    (**(code **)(_r_osi_funcs_p + 0x18))();
+    return;
   }
-  return 0xffffffff;
+  return;
 }
 

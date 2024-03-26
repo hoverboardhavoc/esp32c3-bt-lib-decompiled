@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * Upstream date: 2024-03-26 14:09:42 +0800
+ * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
  * Source: libbtdm_app -> task.o -> btdm_vnd_offload_task_deregister
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,11 +10,11 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-undefined4 btdm_vnd_offload_task_deregister(int param_1)
+undefined4 btdm_vnd_offload_task_deregister(uint param_1)
 
 {
-  if (param_1 == 0) {
-    btdm_ol_task_env = 0;
+  if (param_1 < 2) {
+    *(undefined4 *)(btdm_ol_task_env + param_1 * 4) = 0;
     return 0;
   }
   return 0xffffffff;

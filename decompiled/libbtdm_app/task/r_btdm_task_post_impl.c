@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * Upstream date: 2024-03-26 14:09:42 +0800
+ * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
  * Source: libbtdm_app -> task.o -> r_btdm_task_post_impl
  *
  * (C) Espressif, Apache License 2.0.
@@ -52,7 +52,7 @@ r_btdm_task_post_impl(uint param_1,undefined1 param_2,void *param_3,size_t param
 _L3:
   pcVar3 = *(code **)(_r_osi_funcs_p + 0x38);
   iVar4 = (**(code **)(_r_plf_funcs_p + 0xf8))(*(code **)(_r_plf_funcs_p + 0xf8));
-  (*pcVar3)(*(undefined4 *)(iVar4 + 4));
+  (*pcVar3)(*(undefined4 *)(iVar4 + 8));
   return uVar2;
 }
 

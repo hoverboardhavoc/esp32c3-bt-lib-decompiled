@@ -3,24 +3,16 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
  * Upstream date: 2024-03-26 14:09:42 +0800
  * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
- * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_try_sched_eco
+ * Source: libbtdm_app -> coex_schm.o -> coex_schm_phase_end_ts_get
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void r_lld_scan_try_sched_eco(void)
+undefined4 coex_schm_phase_end_ts_get(void)
 
 {
-  undefined2 uVar1;
-  
-  uVar1 = _coex_schm_ble_scan_stop_interval_num_get;
-  _coex_schm_ble_scan_stop_interval_num_get = 0x9c4;
-  r_lld_scan_try_sched();
-  _coex_schm_ble_scan_stop_interval_num_get = uVar1;
-  return;
+  return coex_schm_btdm_env;
 }
 

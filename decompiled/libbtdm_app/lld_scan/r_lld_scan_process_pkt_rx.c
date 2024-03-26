@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 27af69ccbb02f3b820436f47eaa0b1cd544edfbc
- * https://github.com/espressif/esp32c3-bt-lib/commit/27af69ccbb02f3b820436f47eaa0b1cd544edfbc
- * Upstream date: 2023-09-26 16:09:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(c8aa206)
+ * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * Upstream date: 2024-03-26 14:09:42 +0800
+ * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_process_pkt_rx
  *
  * (C) Espressif, Apache License 2.0.
@@ -64,7 +64,7 @@ void r_lld_scan_process_pkt_rx(int param_1)
         iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
         uVar8 = *(ushort *)(iVar5 + iVar10) & 0xf;
         if (((*(ushort *)(iVar5 + iVar10) & 8) != 0) || ((uVar8 - 3 & 0xfd) == 0)) {
-          (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x230,*(code **)(_r_plf_funcs_p + 8));
+          (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x23b,*(code **)(_r_plf_funcs_p + 8));
         }
         if (uVar8 < 7) {
           pcVar7 = *(code **)(_r_ip_funcs_p + 0x420);

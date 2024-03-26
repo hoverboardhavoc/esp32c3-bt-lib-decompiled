@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 08e289633f823191a6c526377bfd68f31fb392e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/08e289633f823191a6c526377bfd68f31fb392e0
- * Upstream date: 2023-06-06 21:15:22 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(a186b41)
+ * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * Upstream date: 2024-03-26 14:09:42 +0800
+ * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_deinit
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,12 +38,12 @@ void btdm_controller_deinit(void)
   }
   if ((_r_plf_funcs_p != 0) &&
      (iVar2 = (**(code **)(_r_plf_funcs_p + 0xf8))(*(code **)(_r_plf_funcs_p + 0xf8)),
-     *(int *)(iVar2 + 4) != 0)) {
+     *(int *)(iVar2 + 8) != 0)) {
     pcVar1 = *(code **)(_r_osi_funcs_p + 0x28);
     iVar2 = (**(code **)(_r_plf_funcs_p + 0xf8))(*(code **)(_r_plf_funcs_p + 0xf8));
-    (*pcVar1)(*(undefined4 *)(iVar2 + 4));
+    (*pcVar1)(*(undefined4 *)(iVar2 + 8));
     iVar2 = (**(code **)(_r_plf_funcs_p + 0xf8))(*(code **)(_r_plf_funcs_p + 0xf8));
-    *(undefined4 *)(iVar2 + 4) = 0;
+    *(undefined4 *)(iVar2 + 8) = 0;
   }
   if (_g_rw_schd_queue != 0) {
     (**(code **)(_r_osi_funcs_p + 0x50))(*(code **)(_r_osi_funcs_p + 0x50));

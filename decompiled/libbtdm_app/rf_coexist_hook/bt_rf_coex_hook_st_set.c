@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * Upstream date: 2024-03-26 14:09:42 +0800
+ * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
  * Source: libbtdm_app -> rf_coexist_hook.o -> bt_rf_coex_hook_st_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,7 +32,7 @@ void bt_rf_coex_hook_st_set(uint param_1,uint param_2,int param_3)
     _LANCHOR0 = 0;
     _LANCHOR3 = 0;
     DAT_00010420 = 0;
-    pcVar5 = *(code **)(_r_osi_funcs_p + 0xb8);
+    pcVar5 = *(code **)(_r_osi_funcs_p + 0xbc);
     uVar4 = 0xffffffff;
   }
   else {
@@ -44,14 +44,14 @@ void bt_rf_coex_hook_st_set(uint param_1,uint param_2,int param_3)
       _LANCHOR0 = _LANCHOR0 | uVar2;
       *puVar6 = uVar2 | uVar1;
       if (uVar1 != 0) goto _L42;
-      pcVar5 = *(code **)(iVar3 + 0xb4);
+      pcVar5 = *(code **)(iVar3 + 0xb8);
     }
     else {
       _LANCHOR0 = _LANCHOR0 & ~uVar2;
       uVar2 = ~uVar2 & uVar1;
       *puVar6 = uVar2;
       if ((uVar1 == 0) || (uVar2 != 0)) goto _L42;
-      pcVar5 = *(code **)(iVar3 + 0xb8);
+      pcVar5 = *(code **)(iVar3 + 0xbc);
     }
   }
   (*pcVar5)(1,uVar4,pcVar5);

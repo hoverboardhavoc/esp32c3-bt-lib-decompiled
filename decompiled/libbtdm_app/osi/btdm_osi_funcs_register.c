@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * Upstream date: 2023-08-03 10:45:08 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
+ * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * Upstream date: 2024-03-26 14:09:42 +0800
+ * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
  * Source: libbtdm_app -> osi.o -> btdm_osi_funcs_register
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,10 +22,10 @@ undefined4 btdm_osi_funcs_register(int *param_1)
     return 0xffffffff;
   }
   if (3 < _g_bt_plf_log_level) {
-    ets_printf("MAGIC %08x VERSION %08x\n",0xfadebead,0x10007);
+    ets_printf("MAGIC %08x VERSION %08x\n",0xfadebead,0x10008);
   }
   if (*param_1 == -0x5214153) {
-    if (param_1[1] == 0x10007) {
+    if (param_1[1] == 0x10008) {
       _r_osi_funcs_p = param_1;
       return 0;
     }

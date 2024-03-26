@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * Upstream date: 2023-08-03 10:45:08 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
+ * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
+ * Upstream date: 2024-03-26 14:09:42 +0800
+ * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_task
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ void btdm_controller_task(void)
   do {
     pcVar4 = *(code **)(_r_osi_funcs_p + 0x34);
     iVar2 = (**(code **)(_r_plf_funcs_p + 0xf8))(*(code **)(_r_plf_funcs_p + 0xf8));
-    iVar2 = (*pcVar4)(*(undefined4 *)(iVar2 + 4),0xffffffff);
+    iVar2 = (*pcVar4)(*(undefined4 *)(iVar2 + 8),0xffffffff);
     if (iVar2 == 0) {
       return;
     }
@@ -44,13 +44,21 @@ void btdm_controller_task(void)
       case '\t':
       case '\n':
         if (cStack_38 == '\t') {
-          uVar3 = 2;
           (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
           bt_bb_v2_init_cmplx(0);
           (**(code **)(_r_modules_funcs_p + 0x1ac))(*(code **)(_r_modules_funcs_p + 0x1ac));
           (**(code **)(_r_modules_funcs_p + 0x1b8))(*(code **)(_r_modules_funcs_p + 0x1b8));
           btdm_controller_on_reset();
           r_intc_enable();
+          iVar2 = (**(code **)(_r_osi_funcs_p + 0xb4))
+                            (&coex_schm_btdm_callback,*(code **)(_r_osi_funcs_p + 0xb4));
+          if (iVar2 == 0) {
+            btdm_vnd_offload_task_register(1,&coex_schm_process);
+          }
+          else if (1 < _g_bt_plf_log_level) {
+            ets_printf("Coex register schm btdm cb faild\n");
+          }
+          uVar3 = 2;
           (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
         }
         else {
