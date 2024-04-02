@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * Upstream date: 2024-03-26 14:09:42 +0800
- * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
+ * Last changed at upstream commit 70f95a1b6f8f232018b17c687cc819044501774c
+ * https://github.com/espressif/esp32c3-bt-lib/commit/70f95a1b6f8f232018b17c687cc819044501774c
+ * Upstream date: 2024-04-02 18:59:02 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5274796)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_try_sched
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,8 +36,8 @@ void r_lld_scan_try_sched(int param_1,int param_2,int param_3)
   iVar7 = (**(code **)(_r_ip_funcs_p + 0x264))(*(code **)(_r_ip_funcs_p + 0x264));
   uVar12 = (iVar7 - param_2 & 0xfffffffU) + 1 >> 1;
   uVar6 = 0;
-  if (_LANCHOR1 == 1) {
-    _LANCHOR1 = 0;
+  if (_LANCHOR2 == 1) {
+    _LANCHOR2 = 0;
     iVar8 = coex_schm_phase_end_ts_get();
     if ((iVar8 - iVar7 & 0xfffffffU) < 0x8000001) {
       iVar8 = coex_schm_phase_end_ts_get();
@@ -96,7 +96,7 @@ void r_lld_scan_try_sched(int param_1,int param_2,int param_3)
       *(undefined4 *)(iVar4 + 0x28) = *(undefined4 *)(iVar4 + 4);
     }
     bVar2 = *(byte *)(iVar4 + 0x3b);
-    *(ushort *)(iVar4 + 0x14) = DAT_00012041 & 0xf | 0x6000;
+    *(ushort *)(iVar4 + 0x14) = DAT_00012045 & 0xf | 0x6000;
     if (((uint)bVar2 << 2 & 0xfffffff3) != 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",399,*(code **)(_r_plf_funcs_p + 8));
     }
@@ -172,7 +172,7 @@ void r_lld_scan_try_sched(int param_1,int param_2,int param_3)
       *(undefined2 *)(iVar4 + 0x36) = 0;
     }
     else {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x382,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x3ab,*(code **)(_r_plf_funcs_p + 8));
     }
   }
   return;

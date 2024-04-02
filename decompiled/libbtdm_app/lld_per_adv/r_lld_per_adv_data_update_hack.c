@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/70f95a1b6f8f232018b17c687cc819044501774c
  * Upstream date: 2024-04-02 18:59:02 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5274796)
- * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_frm_skip_isr_eco
+ * Source: libbtdm_app -> lld_per_adv.o -> r_lld_per_adv_data_update_hack
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,27 +12,18 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_lld_scan_frm_skip_isr_eco(int param_1)
+void r_lld_per_adv_data_update_hack(int param_1,int param_2)
 
 {
-  bool bVar1;
-  int iVar2;
-  
-  bVar1 = false;
-  if (_lld_scan_env != 0) {
-    iVar2 = *(int *)(_lld_scan_env + param_1 * 4);
-    if (iVar2 != 0) {
-      bVar1 = *(char *)(iVar2 + 0x3d) == '\x01';
-    }
+  r_lld_per_adv_data_update();
+  (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
+  if (((*(int *)(&lld_per_adv_env + param_1 * 4) != 0) &&
+      (*(char *)(*(int *)(&lld_per_adv_env + param_1 * 4) + 0x53) != '\0')) && (param_2 == 0)) {
+    periodic_adv_data_need_to_set[param_1] = 1;
   }
-  r_lld_scan_frm_skip_isr(param_1);
-  if ((((bVar1) && (_lld_scan_env != 0)) && (*(int *)(param_1 * 4 + _lld_scan_env) != 0)) &&
-     (*(char *)(_lld_scan_env + 0x17) != '\0')) {
-                    /* WARNING: Could not recover jumptable at 0x000108ca. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000101c0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_r_ip_funcs_p + 0x930))();
-    return;
-  }
+  (**(code **)(_r_osi_funcs_p + 0x18))();
   return;
 }
 

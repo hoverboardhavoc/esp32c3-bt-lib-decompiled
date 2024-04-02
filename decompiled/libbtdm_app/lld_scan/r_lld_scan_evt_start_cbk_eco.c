@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 27af69ccbb02f3b820436f47eaa0b1cd544edfbc
- * https://github.com/espressif/esp32c3-bt-lib/commit/27af69ccbb02f3b820436f47eaa0b1cd544edfbc
- * Upstream date: 2023-09-26 16:09:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(c8aa206)
+ * Last changed at upstream commit 70f95a1b6f8f232018b17c687cc819044501774c
+ * https://github.com/espressif/esp32c3-bt-lib/commit/70f95a1b6f8f232018b17c687cc819044501774c
+ * Upstream date: 2024-04-02 18:59:02 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5274796)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_evt_start_cbk_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,6 +37,9 @@ void r_lld_scan_evt_start_cbk_eco(int param_1)
       uVar3 = *(ushort *)(iVar4 + iVar5);
       iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
       *(ushort *)(iVar4 + iVar5) = uVar3 & 0xffc0 | uVar2 & 0xff;
+    }
+    if ((*(byte *)(_lld_scan_env + 0xc) & 3) == 3) {
+      lld_scan_sched_optimize_part_0(param_1,0xffffffff);
     }
   }
   if ((g_scan_forever != '\0') && (param_1 != 0)) {

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * Upstream date: 2024-03-26 14:09:42 +0800
- * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
+ * Last changed at upstream commit 70f95a1b6f8f232018b17c687cc819044501774c
+ * https://github.com/espressif/esp32c3-bt-lib/commit/70f95a1b6f8f232018b17c687cc819044501774c
+ * Upstream date: 2024-04-02 18:59:02 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5274796)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,7 +57,7 @@ undefined4 btdm_controller_init(int *param_1)
   memcpy(_r_modules_funcs_p,&r_modules_funcs_ro,0x3d0);
   memcpy(_r_ip_funcs_p,&r_ip_funcs_ro,0x9e0);
   (**(code **)(_r_osi_funcs_p + 0xe4))(*(code **)(_r_osi_funcs_p + 0xe4));
-  if ((*param_1 == 0x5a5aa5a5) && (param_1[1] == 0x2401120)) {
+  if ((*param_1 == 0x5a5aa5a5) && (param_1[1] == 0x2404010)) {
     if (((((uint)param_1[0xb] >> 0x10) - 1 & 0xff) < 2) &&
        ((((uint)param_1[0xb] >> 0x18) - 1 & 0xff) < 2)) {
       if (*(byte *)(param_1 + 0xc) < 2) {
@@ -284,7 +284,7 @@ _L426:
     }
   }
   else if (0 < _g_bt_plf_log_level) {
-    ets_printf("Config struct mismatch: magic=%08x, ver=%08x\n",0x5a5aa5a5,0x2401120);
+    ets_printf("Config struct mismatch: magic=%08x, ver=%08x\n",0x5a5aa5a5,0x2404010);
   }
   uVar16 = 0xfffffffd;
 _L314:

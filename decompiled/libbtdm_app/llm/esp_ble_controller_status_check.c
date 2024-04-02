@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e5c0f7256ecf5b5f8eb28c1793051a6b88f95124
- * https://github.com/espressif/esp32c3-bt-lib/commit/e5c0f7256ecf5b5f8eb28c1793051a6b88f95124
- * Upstream date: 2024-02-04 11:46:50 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(30b57c45)
+ * Last changed at upstream commit 70f95a1b6f8f232018b17c687cc819044501774c
+ * https://github.com/espressif/esp32c3-bt-lib/commit/70f95a1b6f8f232018b17c687cc819044501774c
+ * Upstream date: 2024-04-02 18:59:02 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5274796)
  * Source: libbtdm_app -> llm.o -> esp_ble_controller_status_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,94 +15,102 @@
 uint esp_ble_controller_status_check(void)
 
 {
-  uint uVar1;
+  byte bVar1;
   uint uVar2;
-  int iVar3;
+  uint uVar3;
   int iVar4;
-  char *pcVar5;
-  uint uVar6;
+  int iVar5;
+  char *pcVar6;
+  byte *pbVar7;
+  uint uVar8;
   undefined4 uStack_38;
   undefined2 uStack_34;
   
-  uVar1 = 0;
-  for (uVar2 = 0; iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38)),
-      uVar2 < *(byte *)(iVar3 + 0xd); uVar2 = uVar2 + 1 & 0xff) {
-    uVar6 = (uint)*(byte *)(*(int *)(_p_llm_env + 8) + uVar2 * 0x44 + 0x40);
-    if ((-0x454 >> (uVar6 & 0x1f) & 1U) != 0) {
-      uVar1 = uVar1 | 1 << (uVar6 & 0x1f);
+  uVar2 = 0;
+  for (uVar3 = 0; iVar4 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38)),
+      uVar3 < *(byte *)(iVar4 + 0xd); uVar3 = uVar3 + 1 & 0xff) {
+    uVar8 = (uint)*(byte *)(*(int *)(_p_llm_env + 8) + uVar3 * 0x44 + 0x40);
+    if ((-0x454 >> (uVar8 & 0x1f) & 1U) != 0) {
+      uVar2 = uVar2 | 1 << (uVar8 & 0x1f);
     }
   }
-  pcVar5 = (char *)(_p_llm_env + 0x2d);
+  pbVar7 = (byte *)(_p_llm_env + 0x2d);
   do {
-    if (*pcVar5 != '\0') {
-      uVar1 = uVar1 | 0x20000;
+    bVar1 = *pbVar7;
+    if (bVar1 != 0) {
+      if ((bVar1 & 2) != 0) {
+        uVar2 = uVar2 | 0x20000;
+      }
+      if ((bVar1 & 4) != 0) {
+        uVar2 = uVar2 | 2;
+      }
       break;
     }
-    pcVar5 = pcVar5 + 10;
-  } while (pcVar5 != (char *)(_p_llm_env + 0xa5));
-  iVar3 = 0;
-  while ((iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc)),
-         -1 < *(short *)(iVar4 + iVar3 * 0x34) || (iVar3 == 0))) {
-    iVar3 = iVar3 + 1;
-    if (iVar3 == 10) {
-_L226:
+    pbVar7 = pbVar7 + 10;
+  } while ((byte *)(_p_llm_env + 0xa5) != pbVar7);
+  iVar4 = 0;
+  while ((iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc)),
+         -1 < *(short *)(iVar5 + iVar4 * 0x34) || (iVar4 == 0))) {
+    iVar4 = iVar4 + 1;
+    if (iVar4 == 10) {
+_L228:
       if (g_scan_forever != '\0') {
-        uVar1 = uVar1 | 0x80000;
+        uVar2 = uVar2 | 0x80000;
       }
       if (g_adv_delay_dis != '\0') {
-        uVar1 = uVar1 | 0x100000;
+        uVar2 = uVar2 | 0x100000;
       }
-      iVar3 = lld_phy_coded_500k_get();
-      if (iVar3 != 0) {
-        uVar1 = uVar1 | 0x200000;
+      iVar4 = lld_phy_coded_500k_get();
+      if (iVar4 != 0) {
+        uVar2 = uVar2 | 0x200000;
       }
-      pcVar5 = (char *)(**(code **)(_r_ip_funcs_p + 0x914))(*(code **)(_r_ip_funcs_p + 0x914));
-      if (pcVar5 != (char *)0x0) {
-        if (*pcVar5 != '\0') {
-          uVar1 = uVar1 | 0x400000;
+      pcVar6 = (char *)(**(code **)(_r_ip_funcs_p + 0x914))(*(code **)(_r_ip_funcs_p + 0x914));
+      if (pcVar6 != (char *)0x0) {
+        if (*pcVar6 != '\0') {
+          uVar2 = uVar2 | 0x400000;
         }
-        if (*(int *)(pcVar5 + 0x10) != 0) {
-          uVar1 = uVar1 | 0x800000;
+        if (*(int *)(pcVar6 + 0x10) != 0) {
+          uVar2 = uVar2 | 0x800000;
         }
-        if (*(int *)(pcVar5 + 0x14) != 0) {
-          uVar1 = uVar1 | 0x1000000;
+        if (*(int *)(pcVar6 + 0x14) != 0) {
+          uVar2 = uVar2 | 0x1000000;
         }
-        if (pcVar5[1] != '\0') {
-          uVar1 = uVar1 | 0x2000000;
+        if (pcVar6[1] != '\0') {
+          uVar2 = uVar2 | 0x2000000;
         }
-        if (*(short *)(pcVar5 + 0x18) != 0) {
-          uVar1 = uVar1 | 0x4000000;
+        if (*(short *)(pcVar6 + 0x18) != 0) {
+          uVar2 = uVar2 | 0x4000000;
         }
         uStack_38 = 0;
         uStack_34 = 0;
-        iVar3 = memcmp(pcVar5 + 2,&uStack_38,6);
-        if (iVar3 != 0) {
-          uVar1 = uVar1 | 0x8000000;
+        iVar4 = memcmp(pcVar6 + 2,&uStack_38,6);
+        if (iVar4 != 0) {
+          uVar2 = uVar2 | 0x8000000;
         }
       }
-      iVar3 = ble_ll_rand_addr_check();
-      if (iVar3 != 0) {
-        uVar1 = uVar1 | 0x10000000;
+      iVar4 = ble_ll_rand_addr_check();
+      if (iVar4 != 0) {
+        uVar2 = uVar2 | 0x10000000;
       }
-      iVar3 = lld_le_pkt_err_state_check();
-      if (iVar3 != 0) {
-        uVar1 = uVar1 | 0x20000000;
+      iVar4 = lld_le_pkt_err_state_check();
+      if (iVar4 != 0) {
+        uVar2 = uVar2 | 0x20000000;
       }
-      iVar3 = lld_fixed_ch_idx_state_check();
-      if (iVar3 != 0) {
-        uVar1 = uVar1 | 0x40000000;
+      iVar4 = lld_fixed_ch_idx_state_check();
+      if (iVar4 != 0) {
+        uVar2 = uVar2 | 0x40000000;
       }
       if (privacy_en == '\0') {
-        uVar1 = uVar1 | 0x80000000;
+        uVar2 = uVar2 | 0x80000000;
       }
-      iVar3 = lld_dtm_is_ongoing();
-      if (iVar3 != 0) {
-        uVar1 = uVar1 | 1;
+      iVar4 = lld_dtm_is_ongoing();
+      if (iVar4 != 0) {
+        uVar2 = uVar2 | 1;
       }
-      return uVar1;
+      return uVar2;
     }
   }
-  uVar1 = uVar1 | 0x40000;
-  goto _L226;
+  uVar2 = uVar2 | 0x40000;
+  goto _L228;
 }
 

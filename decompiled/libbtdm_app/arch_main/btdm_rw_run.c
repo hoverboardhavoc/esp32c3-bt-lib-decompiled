@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * Upstream date: 2024-03-26 14:09:42 +0800
- * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
+ * Last changed at upstream commit 70f95a1b6f8f232018b17c687cc819044501774c
+ * https://github.com/espressif/esp32c3-bt-lib/commit/70f95a1b6f8f232018b17c687cc819044501774c
+ * Upstream date: 2024-04-02 18:59:02 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5274796)
  * Source: libbtdm_app -> arch_main.o -> btdm_rw_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,11 +39,11 @@ char * btdm_rw_run(char *param_1)
       if ((*pcVar1 != '\0') && (_btdm_pwr_state == 0)) {
         pll_track_state =
              (**(code **)(_r_modules_funcs_p + 0x2c4))(*(code **)(_r_modules_funcs_p + 0x2c4));
-        uVar2 = pll_track_state - DAT_00011888 & 0xfffffff;
+        uVar2 = pll_track_state - DAT_00011884 & 0xfffffff;
         pcVar1 = (char *)0x0;
-        DAT_00011884 = extraout_a1;
+        DAT_00011880 = extraout_a1;
         if ((uVar2 < 0x8000001) && (0xc80 < uVar2)) {
-          DAT_00011888 = pll_track_state;
+          DAT_00011884 = pll_track_state;
           bt_track_pll_cap(0);
           pcVar1 = (char *)0x1;
         }
