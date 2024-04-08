@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 70f95a1b6f8f232018b17c687cc819044501774c
- * https://github.com/espressif/esp32c3-bt-lib/commit/70f95a1b6f8f232018b17c687cc819044501774c
- * Upstream date: 2024-04-02 18:59:02 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5274796)
+ * Last changed at upstream commit e3971a15e5ea6c13affc45192625d2da23a5399b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e3971a15e5ea6c13affc45192625d2da23a5399b
+ * Upstream date: 2024-04-08 11:46:33 +0800
+ * Upstream subject: fix(ble/controller): Fixed LoadProhibited after bluetooth deinit(e07d7e27)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_get_compile_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,6 +13,6 @@
 char * btdm_controller_get_compile_version(void)
 
 {
-  return "5274796";
+  return "e07d7e2";
 }
 

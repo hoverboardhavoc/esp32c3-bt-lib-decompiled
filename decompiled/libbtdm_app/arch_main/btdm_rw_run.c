@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 70f95a1b6f8f232018b17c687cc819044501774c
- * https://github.com/espressif/esp32c3-bt-lib/commit/70f95a1b6f8f232018b17c687cc819044501774c
- * Upstream date: 2024-04-02 18:59:02 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5274796)
+ * Last changed at upstream commit e3971a15e5ea6c13affc45192625d2da23a5399b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e3971a15e5ea6c13affc45192625d2da23a5399b
+ * Upstream date: 2024-04-08 11:46:33 +0800
+ * Upstream subject: fix(ble/controller): Fixed LoadProhibited after bluetooth deinit(e07d7e27)
  * Source: libbtdm_app -> arch_main.o -> btdm_rw_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,11 +39,11 @@ char * btdm_rw_run(char *param_1)
       if ((*pcVar1 != '\0') && (_btdm_pwr_state == 0)) {
         pll_track_state =
              (**(code **)(_r_modules_funcs_p + 0x2c4))(*(code **)(_r_modules_funcs_p + 0x2c4));
-        uVar2 = pll_track_state - DAT_00011884 & 0xfffffff;
+        uVar2 = pll_track_state - DAT_00011890 & 0xfffffff;
         pcVar1 = (char *)0x0;
-        DAT_00011880 = extraout_a1;
+        DAT_0001188c = extraout_a1;
         if ((uVar2 < 0x8000001) && (0xc80 < uVar2)) {
-          DAT_00011884 = pll_track_state;
+          DAT_00011890 = pll_track_state;
           bt_track_pll_cap(0);
           pcVar1 = (char *)0x1;
         }
@@ -54,7 +54,7 @@ char * btdm_rw_run(char *param_1)
   else if ((char *)0x1 < param_1) {
                     /* WARNING: Could not recover jumptable at 0x00010e9c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    pcVar1 = (char *)(**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x419);
+    pcVar1 = (char *)(**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x41d);
     return pcVar1;
   }
   return pcVar1;

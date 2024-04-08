@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * Upstream date: 2024-03-26 14:09:42 +0800
- * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
+ * Last changed at upstream commit e3971a15e5ea6c13affc45192625d2da23a5399b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e3971a15e5ea6c13affc45192625d2da23a5399b
+ * Upstream date: 2024-04-08 11:46:33 +0800
+ * Upstream subject: fix(ble/controller): Fixed LoadProhibited after bluetooth deinit(e07d7e27)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_disable
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void btdm_controller_disable(void)
 
 {
   (**(code **)(_r_plf_funcs_p + 0x28))(10,0,0,1,*(code **)(_r_plf_funcs_p + 0x28));
-                    /* WARNING: Could not recover jumptable at 0x00011150. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001115c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x34))(_g_rw_init_sem,0xffffffff);
   return;
