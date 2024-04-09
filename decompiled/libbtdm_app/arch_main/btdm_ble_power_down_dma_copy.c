@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * Upstream date: 2024-03-26 14:09:42 +0800
- * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
+ * Last changed at upstream commit 76ed4114ee7d081435a3c65793b4c8eb1dfaf199
+ * https://github.com/espressif/esp32c3-bt-lib/commit/76ed4114ee7d081435a3c65793b4c8eb1dfaf199
+ * Upstream date: 2024-04-09 17:28:48 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(c23ab4c)
  * Source: libbtdm_app -> arch_main.o -> btdm_ble_power_down_dma_copy
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ void btdm_ble_power_down_dma_copy(int param_1)
               (0x60011800,_LANCHOR4,0x2d,1,*(code **)(_r_osi_funcs_p + 0xdc));
     do {
     } while ((_DAT_60042000 & 0x80) == 0);
-                    /* WARNING: Could not recover jumptable at 0x0001072a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010726. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_osi_funcs_p + 0xd4))();
     return;
@@ -37,7 +37,7 @@ void btdm_ble_power_down_dma_copy(int param_1)
   (**(code **)(_r_osi_funcs_p + 0xdc))
             (0x60011000,_LANCHOR3,0x38,0,*(code **)(_r_osi_funcs_p + 0xdc));
   ble_deepsleep_recover_hw_logic();
-                    /* WARNING: Could not recover jumptable at 0x000107a0. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001079c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0xdc))(0x60011800,_LANCHOR4,0x2d,0);
   return;

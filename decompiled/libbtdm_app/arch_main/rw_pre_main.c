@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * Upstream date: 2024-03-26 14:09:42 +0800
- * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
+ * Last changed at upstream commit 76ed4114ee7d081435a3c65793b4c8eb1dfaf199
+ * https://github.com/espressif/esp32c3-bt-lib/commit/76ed4114ee7d081435a3c65793b4c8eb1dfaf199
+ * Upstream date: 2024-04-09 17:28:48 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(c23ab4c)
  * Source: libbtdm_app -> arch_main.o -> rw_pre_main
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,7 +43,7 @@ void rw_pre_main(void)
     }
   }
   (**(code **)(_r_plf_funcs_p + 0x94))(*(code **)(_r_plf_funcs_p + 0x94));
-                    /* WARNING: Could not recover jumptable at 0x00010ccc. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010cc8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0x27c))(0);
   return;

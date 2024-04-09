@@ -3,23 +3,16 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/76ed4114ee7d081435a3c65793b4c8eb1dfaf199
  * Upstream date: 2024-04-09 17:28:48 +0800
  * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(c23ab4c)
- * Source: libbtdm_app -> arch_main.o -> esp_ble_scan_channel_setting
+ * Source: libbtdm_app -> hci_msg.o -> hci_vendor_ble_qa_test_cmd_cmp_evt_pk
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-undefined4 esp_ble_scan_channel_setting(uint param_1)
+undefined4 hci_vendor_ble_qa_test_cmd_cmp_evt_pk(void)
 
 {
-  if (param_1 < 4) {
-    if (param_1 != 0) {
-      param_1 = param_1 + 0x24 & 0xff;
-    }
-    ble_ll_scan_channel_setting(param_1);
-    return 0;
-  }
-  return 1;
+  return 0;
 }
 
