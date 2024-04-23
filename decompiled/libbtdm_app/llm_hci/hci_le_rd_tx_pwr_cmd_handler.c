@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a075a8fde411bdd92973051edf2cd234601b259c
- * https://github.com/espressif/esp32c3-bt-lib/commit/a075a8fde411bdd92973051edf2cd234601b259c
- * Upstream date: 2023-11-30 21:15:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(70ab55f)
+ * Last changed at upstream commit 9780fd66d97866977d972fb63319830f47f12785
+ * https://github.com/espressif/esp32c3-bt-lib/commit/9780fd66d97866977d972fb63319830f47f12785
+ * Upstream date: 2024-04-23 11:19:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a771b7c)
  * Source: libbtdm_app -> llm_hci.o -> hci_le_rd_tx_pwr_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,9 +22,9 @@ undefined4 hci_le_rd_tx_pwr_cmd_handler(void)
            (**(code **)(_r_modules_funcs_p + 200))
                      (0x1101,0,0x204b,3,*(code **)(_r_modules_funcs_p + 200));
   *puVar2 = 0;
-  uVar1 = (*_rw_rf_le_exit_test_mode)(memset,1,_rw_rf_le_exit_test_mode);
+  uVar1 = (*_memcpy)(memset,1,_memcpy);
   puVar2[1] = uVar1;
-  uVar1 = (*_rw_rf_le_exit_test_mode)(DAT_00012045,1,_rw_rf_le_exit_test_mode);
+  uVar1 = (*_memcpy)(DAT_00012045,1,_memcpy);
   puVar2[2] = uVar1;
   (**(code **)(_r_ip_funcs_p + 0x8c))(puVar2,*(code **)(_r_ip_funcs_p + 0x8c));
   return 0;
