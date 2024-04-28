@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
+ * Upstream date: 2024-04-28 11:58:26 +0800
+ * Upstream subject: fix(coex): Fixed some coexist issues(ba3b3e3)
  * Source: libbtdm_app -> rf_coexist_hook.o -> bt_rf_coex_hook_st_param_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -87,7 +87,7 @@ _L20:
   bVar2 = true;
 _L10:
   iVar4 = _g_bt_plf_log_level;
-  (&DAT_0001042d)[param_2 * 2] = bVar2;
+  (&DAT_00010489)[param_2 * 2] = bVar2;
   if (2 < iVar4) {
     ets_printf("CHK: st %d sleep %d\n",param_2,bVar2);
   }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e3971a15e5ea6c13affc45192625d2da23a5399b
- * https://github.com/espressif/esp32c3-bt-lib/commit/e3971a15e5ea6c13affc45192625d2da23a5399b
- * Upstream date: 2024-04-08 11:46:33 +0800
- * Upstream subject: fix(ble/controller): Fixed LoadProhibited after bluetooth deinit(e07d7e27)
+ * Last changed at upstream commit 4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
+ * Upstream date: 2024-04-28 11:58:26 +0800
+ * Upstream subject: fix(coex): Fixed some coexist issues(ba3b3e3)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_task
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,17 +17,16 @@ void btdm_controller_task(void)
 {
   bool bVar1;
   int iVar2;
-  undefined4 uVar3;
-  code *pcVar4;
+  code *pcVar3;
   char cStack_38;
   undefined1 uStack_37;
   undefined1 *puStack_34;
   
-  uVar3 = 0;
+  _LANCHOR6 = 0;
   do {
-    pcVar4 = *(code **)(_r_osi_funcs_p + 0x34);
+    pcVar3 = *(code **)(_r_osi_funcs_p + 0x34);
     iVar2 = (**(code **)(_r_plf_funcs_p + 0xf8))(*(code **)(_r_plf_funcs_p + 0xf8));
-    iVar2 = (*pcVar4)(*(undefined4 *)(iVar2 + 8),0xffffffff);
+    iVar2 = (*pcVar3)(*(undefined4 *)(iVar2 + 8),0xffffffff);
     if (iVar2 == 0) {
       return;
     }
@@ -58,8 +57,7 @@ void btdm_controller_task(void)
           else if (1 < _g_bt_plf_log_level) {
             ets_printf("Coex register schm btdm cb faild\n");
           }
-          uVar3 = 2;
-          (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
+          _LANCHOR6 = 2;
         }
         else {
           if (cStack_38 == '\n') {
@@ -72,16 +70,15 @@ void btdm_controller_task(void)
           else {
             if (cStack_38 == '\b') {
               rw_stop();
-              uVar3 = 0;
-              (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38))
-              ;
-              break;
+              _LANCHOR6 = 0;
+              goto _L307;
             }
             rw_pre_main();
           }
-          uVar3 = 1;
-          (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
+          _LANCHOR6 = 1;
         }
+_L307:
+        (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
         break;
       case '\v':
         ble_txpwr_set_inter(*puStack_34,puStack_34[1]);
@@ -92,10 +89,10 @@ void btdm_controller_task(void)
       }
       bVar1 = true;
       (**(code **)(_r_plf_funcs_p + 0x30))(&cStack_38,*(code **)(_r_plf_funcs_p + 0x30));
-      btdm_rw_run(uVar3);
+      btdm_rw_run(_LANCHOR6);
     }
     if (!bVar1) {
-      btdm_rw_run(uVar3);
+      btdm_rw_run(_LANCHOR6);
     }
   } while( true );
 }

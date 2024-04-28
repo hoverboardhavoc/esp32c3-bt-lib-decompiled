@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9780fd66d97866977d972fb63319830f47f12785
- * https://github.com/espressif/esp32c3-bt-lib/commit/9780fd66d97866977d972fb63319830f47f12785
- * Upstream date: 2024-04-23 11:19:15 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a771b7c)
+ * Last changed at upstream commit 4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
+ * Upstream date: 2024-04-28 11:58:26 +0800
+ * Upstream subject: fix(coex): Fixed some coexist issues(ba3b3e3)
  * Source: libbtdm_app -> ke_task.o -> r_ke_task_schedule
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,7 +33,7 @@ void r_ke_task_schedule(void)
                                  (puVar1,*(code **)(_r_modules_funcs_p + 0x3cc));
       if (pcVar3 == (code *)0x0) {
         (**(code **)(_r_plf_funcs_p + 0x10))
-                  (*(undefined2 *)(puVar1 + 1),*(undefined2 *)((int)puVar1 + 6),"ke_task.c",0xa4,
+                  (*(undefined2 *)(puVar1 + 1),*(undefined2 *)((int)puVar1 + 6),"ke_task.c",0xac,
                    *(code **)(_r_plf_funcs_p + 0x10));
         aiStack_24[0] = 0;
       }
@@ -44,26 +44,26 @@ void r_ke_task_schedule(void)
                        *(undefined2 *)(puVar1 + 2));
         (**(code **)(_r_modules_funcs_p + 0x3c8))
                   (aiStack_24,puVar1,*(code **)(_r_modules_funcs_p + 0x3c8));
-        if (aiStack_24[0] == 1) goto _L17;
+        if (aiStack_24[0] == 1) goto _L19;
         if (aiStack_24[0] == 2) {
           (**(code **)(_r_modules_funcs_p + 0x44))
                     (&ke_env,puVar1,*(code **)(_r_modules_funcs_p + 0x44));
-          goto _L17;
+          goto _L19;
         }
         if (aiStack_24[0] != 0) {
-          (**(code **)(_r_plf_funcs_p + 8))(0,"ke_task.c",199,*(code **)(_r_plf_funcs_p + 8));
-          goto _L17;
+          (**(code **)(_r_plf_funcs_p + 8))(0,"ke_task.c",0xcf,*(code **)(_r_plf_funcs_p + 8));
+          goto _L19;
         }
       }
       (**(code **)(_r_modules_funcs_p + 0xd8))(puVar1,*(code **)(_r_modules_funcs_p + 0xd8));
     }
     else {
       (**(code **)(_r_plf_funcs_p + 0xc))
-                (*(undefined2 *)(puVar1 + 1),*(undefined2 *)((int)puVar1 + 6),"ke_task.c",0x9d,
+                (*(undefined2 *)(puVar1 + 1),*(undefined2 *)((int)puVar1 + 6),"ke_task.c",0xa5,
                  *(code **)(_r_plf_funcs_p + 0xc));
     }
   }
-_L17:
+_L19:
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   if (_ke_env == 0) {
     (**(code **)(_r_modules_funcs_p + 0xec))(3,*(code **)(_r_modules_funcs_p + 0xec));
