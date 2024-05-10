@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * Upstream date: 2023-08-03 10:45:08 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
+ * Last changed at upstream commit 1a086eab61e78fa243d67c33206ece4022129ee1
+ * https://github.com/espressif/esp32c3-bt-lib/commit/1a086eab61e78fa243d67c33206ece4022129ee1
+ * Upstream date: 2024-05-10 19:28:08 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(eca46a0)
  * Source: libbtdm_app -> intc.o -> r_bt_bb_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,7 +34,7 @@ void r_bt_bb_isr(void)
       uVar5 = _DAT_600110d8 >> 0x1e;
       uVar2 = _DAT_600110d8 >> 0x18 & 0x3f;
       if (0x27 < uVar2) {
-        (**(code **)(_r_plf_funcs_p + 0xc))(uVar2,0,"intc.c",0xaa,*(code **)(_r_plf_funcs_p + 0xc));
+        (**(code **)(_r_plf_funcs_p + 0xc))(uVar2,0,"intc.c",0xac,*(code **)(_r_plf_funcs_p + 0xc));
       }
       (**(code **)(_r_ip_funcs_p + 0x250))
                 (uVar4 & 0xff,uVar2,uVar5,*(code **)(_r_ip_funcs_p + 0x250));

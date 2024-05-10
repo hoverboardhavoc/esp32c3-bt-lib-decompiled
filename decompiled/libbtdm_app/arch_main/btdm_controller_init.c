@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
- * https://github.com/espressif/esp32c3-bt-lib/commit/4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
- * Upstream date: 2024-04-28 11:58:26 +0800
- * Upstream subject: fix(coex): Fixed some coexist issues(ba3b3e3)
+ * Last changed at upstream commit 1a086eab61e78fa243d67c33206ece4022129ee1
+ * https://github.com/espressif/esp32c3-bt-lib/commit/1a086eab61e78fa243d67c33206ece4022129ee1
+ * Upstream date: 2024-05-10 19:28:08 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(eca46a0)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -77,10 +77,10 @@ undefined4 btdm_controller_init(int *param_1)
             iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                (*(code **)((int)_r_plf_funcs_p + 0x38));
             uStack_34 = *(undefined1 *)(iVar11 + 0xd);
-            bStack_33 = DAT_00012097;
+            bStack_33 = DAT_0001209b;
             (**(code **)((int)_r_plf_funcs_p + 0x24))
                       (&uStack_34,*(code **)((int)_r_plf_funcs_p + 0x24));
-            if (DAT_00012096 == '\0') {
+            if (DAT_0001209a == '\0') {
               btdm_hli_get_null_funcs();
             }
             else {
@@ -111,12 +111,12 @@ undefined4 btdm_controller_init(int *param_1)
                 iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                    (*(code **)((int)_r_plf_funcs_p + 0x38));
                 bVar2 = *(byte *)(iVar11 + 0xd);
-                uVar17 = (uint)DAT_00012097;
+                uVar17 = (uint)DAT_0001209b;
                 iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                    (*(code **)((int)_r_plf_funcs_p + 0x38));
                 piVar7 = _btdm_env_p;
                 iVar12 = 0;
-                if (DAT_00012096 != '\0') {
+                if (DAT_0001209a != '\0') {
                   iVar12 = uVar17 * 0xe0 + (uint)*(byte *)(iVar11 + 0xd) * 0x88;
                 }
                 pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
@@ -128,9 +128,9 @@ undefined4 btdm_controller_init(int *param_1)
                 iVar11 = (**(code **)((int)pvVar6 + 0x38))(*(code **)((int)pvVar6 + 0x38));
                 piVar7 = _btdm_env_p;
                 uVar17 = 0;
-                if (DAT_00012096 != '\0') {
-                  uVar17 = (uint)DAT_00012097 * 400;
-                  if ((uint)DAT_00012097 * 400 < 0x1800) {
+                if (DAT_0001209a != '\0') {
+                  uVar17 = (uint)DAT_0001209b * 400;
+                  if ((uint)DAT_0001209b * 400 < 0x1800) {
                     uVar17 = 0x1800;
                   }
                 }
@@ -149,7 +149,7 @@ undefined4 btdm_controller_init(int *param_1)
                 pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
                 _btdm_env_p[5] = (uint)*(ushort *)(iVar11 + 6) * 0xc + (uint)uVar4 * 0x10 + 0x29c;
                 iVar11 = (*pcVar15)(pcVar15);
-                cVar9 = DAT_00012096;
+                cVar9 = DAT_0001209a;
                 piVar7[4] = iVar11;
                 piVar7 = _btdm_env_p;
                 if (cVar9 != '\0') {

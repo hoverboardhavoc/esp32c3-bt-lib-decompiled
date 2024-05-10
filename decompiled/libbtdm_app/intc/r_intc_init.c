@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * Upstream date: 2023-08-03 10:45:08 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
+ * Last changed at upstream commit 1a086eab61e78fa243d67c33206ece4022129ee1
+ * https://github.com/espressif/esp32c3-bt-lib/commit/1a086eab61e78fa243d67c33206ece4022129ee1
+ * Upstream date: 2024-05-10 19:28:08 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(eca46a0)
  * Source: libbtdm_app -> intc.o -> r_intc_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,18 +21,23 @@ void r_intc_init(void)
   iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   uVar1 = *(undefined1 *)(iVar2 + 0xb);
   if (*(int *)(_r_osi_funcs_p + 8) == 0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0xd6,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0xd9,*(code **)(_r_plf_funcs_p + 8));
   }
-  if (*(int *)(_r_osi_funcs_p + 0x10) == 0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0xd7,*(code **)(_r_plf_funcs_p + 8));
+  iVar2 = (**(code **)(_r_osi_funcs_p + 8))
+                    (uVar1,8,*(undefined4 *)(_r_plf_funcs_p + 0x90),0,&_LANCHOR0,
+                     *(code **)(_r_osi_funcs_p + 8));
+  if (iVar2 != 0) {
+    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0xdd,*(code **)(_r_plf_funcs_p + 8));
   }
-  (**(code **)(_r_osi_funcs_p + 8))(uVar1,8,5,1,*(code **)(_r_osi_funcs_p + 8));
-  (**(code **)(_r_osi_funcs_p + 0x10))
-            (5,*(undefined4 *)(_r_plf_funcs_p + 0x90),0,*(code **)(_r_osi_funcs_p + 0x10));
-  (**(code **)(_r_osi_funcs_p + 8))(uVar1,5,8,1,*(code **)(_r_osi_funcs_p + 8));
-                    /* WARNING: Could not recover jumptable at 0x000102ca. Too many branches */
+  iVar2 = (**(code **)(_r_osi_funcs_p + 8))
+                    (uVar1,5,*(undefined4 *)(_r_plf_funcs_p + 0x84),0,&_LANCHOR1,
+                     *(code **)(_r_osi_funcs_p + 8));
+  if (iVar2 != 0) {
+                    /* WARNING: Could not recover jumptable at 0x000102d0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_osi_funcs_p + 0x10))(8,*(undefined4 *)(_r_plf_funcs_p + 0x84),0);
+    (**(code **)(_r_plf_funcs_p + 8))(0,"intc.c",0xe1);
+    return;
+  }
   return;
 }
 

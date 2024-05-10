@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * Upstream date: 2024-03-26 14:09:42 +0800
- * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
+ * Last changed at upstream commit 1a086eab61e78fa243d67c33206ece4022129ee1
+ * https://github.com/espressif/esp32c3-bt-lib/commit/1a086eab61e78fa243d67c33206ece4022129ee1
+ * Upstream date: 2024-05-10 19:28:08 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(eca46a0)
  * Source: libbtdm_app -> intc.o -> r_intc_disable
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,10 +15,10 @@
 void r_intc_disable(void)
 
 {
-  (**(code **)(_r_osi_funcs_p + 0xd0))(5,*(code **)(_r_osi_funcs_p + 0xd0));
-                    /* WARNING: Could not recover jumptable at 0x0001031a. Too many branches */
+  (**(code **)(_r_osi_funcs_p + 0xd0))(_LANCHOR0,*(code **)(_r_osi_funcs_p + 0xd0));
+                    /* WARNING: Could not recover jumptable at 0x00010376. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_osi_funcs_p + 0xd0))(8);
+  (**(code **)(_r_osi_funcs_p + 0xd0))(_LANCHOR1);
   return;
 }
 
