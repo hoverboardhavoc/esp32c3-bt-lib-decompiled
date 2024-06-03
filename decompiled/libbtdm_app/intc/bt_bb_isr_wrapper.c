@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/29d5555ca1febeb132f5a13556893f3419d2d640
  * Upstream date: 2024-06-03 11:12:02 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(0738a61)
- * Source: libbtdm_app -> intc.o -> r_intc_deinit
+ * Source: libbtdm_app -> intc.o -> bt_bb_isr_wrapper
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,17 +12,12 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_intc_deinit(void)
+void bt_bb_isr_wrapper(void)
 
 {
-  if (_LANCHOR0 != 0) {
-    (**(code **)(_r_osi_funcs_p + 0xc))(*(code **)(_r_osi_funcs_p + 0xc));
-    _LANCHOR0 = 0;
-  }
-  if (_LANCHOR1 != 0) {
-    (**(code **)(_r_osi_funcs_p + 0xc))(*(code **)(_r_osi_funcs_p + 0xc));
-    _LANCHOR1 = 0;
-  }
+                    /* WARNING: Could not recover jumptable at 0x0001000c. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(_r_plf_funcs_p + 0x84))();
   return;
 }
 

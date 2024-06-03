@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1a086eab61e78fa243d67c33206ece4022129ee1
- * https://github.com/espressif/esp32c3-bt-lib/commit/1a086eab61e78fa243d67c33206ece4022129ee1
- * Upstream date: 2024-05-10 19:28:08 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(eca46a0)
+ * Last changed at upstream commit 29d5555ca1febeb132f5a13556893f3419d2d640
+ * https://github.com/espressif/esp32c3-bt-lib/commit/29d5555ca1febeb132f5a13556893f3419d2d640
+ * Upstream date: 2024-06-03 11:12:02 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(0738a61)
  * Source: libbtdm_app -> intc.o -> r_intc_enable
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,10 +15,24 @@
 void r_intc_enable(void)
 
 {
-  (**(code **)(_r_osi_funcs_p + 0xcc))(_LANCHOR0,*(code **)(_r_osi_funcs_p + 0xcc));
-                    /* WARNING: Could not recover jumptable at 0x00010342. Too many branches */
+  code *UNRECOVERED_JUMPTABLE;
+  
+  if (_LANCHOR0 == 0) {
+    if (_LANCHOR1 == 0) {
+      return;
+    }
+    UNRECOVERED_JUMPTABLE = *(code **)(_r_osi_funcs_p + 0xcc);
+  }
+  else {
+    (**(code **)(_r_osi_funcs_p + 0xcc))(*(code **)(_r_osi_funcs_p + 0xcc));
+    if (_LANCHOR1 == 0) {
+      return;
+    }
+    UNRECOVERED_JUMPTABLE = *(code **)(_r_osi_funcs_p + 0xcc);
+  }
+                    /* WARNING: Could not recover jumptable at 0x00010390. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_osi_funcs_p + 0xcc))(_LANCHOR1);
+  (*UNRECOVERED_JUMPTABLE)();
   return;
 }
 
