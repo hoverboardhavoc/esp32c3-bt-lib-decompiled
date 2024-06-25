@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit a6ca5e21f7afabe00db544003419be77e89b9a99
+ * https://github.com/espressif/esp32c3-bt-lib/commit/a6ca5e21f7afabe00db544003419be77e89b9a99
+ * Upstream date: 2024-06-25 16:47:31 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(66b5cc0)
  * Source: libbtdm_app -> rwip_driver.o -> r_rwip_driver_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -69,7 +69,7 @@ void r_rwip_driver_init(uint param_1)
       _r_modules_funcs_p = 0;
       iVar2 = (*_rwip_param)(0xf,&uStack_28,auStack_22,_rwip_param);
       if (iVar2 != 0) {
-        auStack_22[0] = _DAT_0001102c;
+        auStack_22[0] = _r_rwip_timer_hus_handler;
       }
       uStack_28 = 2;
       iVar2 = (*_rwip_param)(0xe,&uStack_28,&uStack_24,_rwip_param);
