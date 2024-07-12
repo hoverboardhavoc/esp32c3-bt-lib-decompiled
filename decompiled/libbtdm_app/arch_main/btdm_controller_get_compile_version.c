@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d53a6a695af1e78a6f36691e2cf525f9787abfdb
- * https://github.com/espressif/esp32c3-bt-lib/commit/d53a6a695af1e78a6f36691e2cf525f9787abfdb
- * Upstream date: 2024-07-11 12:21:12 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(abd7733)
+ * Last changed at upstream commit 55485554203a225ff09a8dfcf5284c46b70aa0bd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/55485554203a225ff09a8dfcf5284c46b70aa0bd
+ * Upstream date: 2024-07-12 15:45:32 +0800
+ * Upstream subject: fix(coex): Fixed coexist LoadProhibited issue(e4ba7f6)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_get_compile_version
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,6 +13,6 @@
 char * btdm_controller_get_compile_version(void)
 
 {
-  return "abd7733";
+  return "e4ba7f6";
 }
 
