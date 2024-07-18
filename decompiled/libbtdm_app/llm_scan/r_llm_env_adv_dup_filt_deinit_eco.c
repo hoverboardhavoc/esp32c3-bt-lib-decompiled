@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit bfdfe8f851c99ced8316b133b0b15521917ea049
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bfdfe8f851c99ced8316b133b0b15521917ea049
+ * Upstream date: 2024-07-18 14:51:28 +0800
+ * Upstream subject: feat(bt): Support mesh duplicate with extend scan (aa16a46)
  * Source: libbtdm_app -> llm_scan.o -> r_llm_env_adv_dup_filt_deinit_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,10 +25,10 @@ void r_llm_env_adv_dup_filt_deinit_eco(void)
     UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0x8d8);
   }
   else {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"llm_scan.c",0x5ea,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"llm_scan.c",0x5eb,*(code **)(_r_plf_funcs_p + 8));
     UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0x8d8);
   }
-                    /* WARNING: Could not recover jumptable at 0x00011828. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001184a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*UNRECOVERED_JUMPTABLE)();
   return;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
- * https://github.com/espressif/esp32c3-bt-lib/commit/4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
- * Upstream date: 2024-04-28 11:58:26 +0800
- * Upstream subject: fix(coex): Fixed some coexist issues(ba3b3e3)
+ * Last changed at upstream commit bfdfe8f851c99ced8316b133b0b15521917ea049
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bfdfe8f851c99ced8316b133b0b15521917ea049
+ * Upstream date: 2024-07-18 14:51:28 +0800
+ * Upstream subject: feat(bt): Support mesh duplicate with extend scan (aa16a46)
  * Source: libbtdm_app -> llm_scan.o -> lld_scan_end_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,8 +28,8 @@ undefined4 lld_scan_end_ind_handler_hack(int param_1)
   iVar6 = *(int *)(_p_llm_env + 8) + iVar3;
   if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
     if (*(char *)(iVar6 + 0x40) != '\b') {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"llm_scan.c",0x74d,*(code **)(_r_plf_funcs_p + 8));
-      goto _L566;
+      (**(code **)(_r_plf_funcs_p + 8))(0,"llm_scan.c",0x782,*(code **)(_r_plf_funcs_p + 8));
+      goto _L586;
     }
     pcVar7 = *(code **)(_r_ip_funcs_p + 0x4b8);
     uVar4 = 0x200c;
@@ -53,14 +53,14 @@ undefined4 lld_scan_end_ind_handler_hack(int param_1)
          ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
         (*(code *)*_bt_rf_coex_hooks_p)((uint)bVar1,3,0);
       }
-      goto _L566;
+      goto _L586;
     }
     pcVar7 = *(code **)(_r_ip_funcs_p + 0x4b8);
     uVar4 = 0x2042;
   }
   (*pcVar7)(uVar4,0,pcVar7);
   *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar3 + 0x40) = 6;
-_L566:
+_L586:
   iVar6 = _p_llm_env;
   cVar2 = *(char *)(iVar3 + *(int *)(_p_llm_env + 8) + 0x40);
   if ((cVar2 == '\x06') || ((*(byte *)(_p_llm_env + 0xd4) & 2) != 0)) {

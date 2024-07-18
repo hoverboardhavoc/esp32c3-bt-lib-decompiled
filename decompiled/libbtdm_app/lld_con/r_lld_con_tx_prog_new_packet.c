@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0caae2bd70a999ac8a1c07330f7168e185db81ba
- * https://github.com/espressif/esp32c3-bt-lib/commit/0caae2bd70a999ac8a1c07330f7168e185db81ba
- * Upstream date: 2024-01-31 19:37:46 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(91980c2)
+ * Last changed at upstream commit bfdfe8f851c99ced8316b133b0b15521917ea049
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bfdfe8f851c99ced8316b133b0b15521917ea049
+ * Upstream date: 2024-07-18 14:51:28 +0800
+ * Upstream subject: feat(bt): Support mesh duplicate with extend scan (aa16a46)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_tx_prog_new_packet
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,7 +57,7 @@ void r_lld_con_tx_prog_new_packet(int param_1,uint param_2)
       if (piStack_60 == (int *)0x0) {
         return;
       }
-_L143:
+_L148:
       if ((*(short *)(iVar18 + 0x82) == 0) && (piVar11 = (int *)*piVar5, piVar11 != (int *)0x0)) {
         uVar2 = *(ushort *)((int)piVar11 + 6);
         *(int **)(iVar18 + 0x30) = piVar11;
@@ -81,7 +81,7 @@ _L143:
     }
     else {
       if (((param_2 == 2) && (piStack_60 != (int *)0x0)) &&
-         ((bVar16 != 1 && (DAT_0001204e != '\0')))) goto _L143;
+         ((bVar16 != 1 && (DAT_0001204e != '\0')))) goto _L148;
       uVar21 = 3;
       uVar13 = (uint)*(byte *)(iStack_68 + 6);
       uVar15 = (uint)*(ushort *)(iStack_68 + 4);
@@ -151,7 +151,7 @@ _L143:
         }
         else {
           (**(code **)(_r_plf_funcs_p + 0xc))
-                    (param_1,param_2,"lld_con.c",0x4fd,*(code **)(_r_plf_funcs_p + 0xc));
+                    (param_1,param_2,"lld_con.c",0x516,*(code **)(_r_plf_funcs_p + 0xc));
           iVar14 = 0;
         }
         iVar4 = _r_plf_funcs_p;

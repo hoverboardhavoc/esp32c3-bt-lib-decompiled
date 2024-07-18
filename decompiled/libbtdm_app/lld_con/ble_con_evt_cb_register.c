@@ -3,24 +3,17 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/bfdfe8f851c99ced8316b133b0b15521917ea049
  * Upstream date: 2024-07-18 14:51:28 +0800
  * Upstream subject: feat(bt): Support mesh duplicate with extend scan (aa16a46)
- * Source: libbtdm_app -> llm.o -> r_llm_deinit
+ * Source: libbtdm_app -> lld_con.o -> ble_con_evt_cb_register
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-void r_llm_deinit(int param_1)
+void ble_con_evt_cb_register(undefined4 param_1)
 
 {
-  if (param_1 == 2) {
-                    /* WARNING: Could not recover jumptable at 0x00010914. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(code **)(_r_ip_funcs_p + 0x548))();
-    return;
-  }
+  con_evt_func_cb = param_1;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9780fd66d97866977d972fb63319830f47f12785
- * https://github.com/espressif/esp32c3-bt-lib/commit/9780fd66d97866977d972fb63319830f47f12785
- * Upstream date: 2024-04-23 11:19:15 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a771b7c)
+ * Last changed at upstream commit bfdfe8f851c99ced8316b133b0b15521917ea049
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bfdfe8f851c99ced8316b133b0b15521917ea049
+ * Upstream date: 2024-07-18 14:51:28 +0800
+ * Upstream subject: feat(bt): Support mesh duplicate with extend scan (aa16a46)
  * Source: libbtdm_app -> llm.o -> llm_rpa_renew_timer_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void llm_rpa_renew_timer_start(void)
   
   iVar1 = (**(code **)(_r_modules_funcs_p + 0xb0))(6,0,*(code **)(_r_modules_funcs_p + 0xb0));
   if (iVar1 == 0) {
-                    /* WARNING: Could not recover jumptable at 0x00010cf2. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010cee. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_modules_funcs_p + 0xc4))(6,0,(uint)*(ushort *)(_p_llm_env + 0xc4) * 100);
     return;
