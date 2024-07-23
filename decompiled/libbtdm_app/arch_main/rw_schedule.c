@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 1a086eab61e78fa243d67c33206ece4022129ee1
- * https://github.com/espressif/esp32c3-bt-lib/commit/1a086eab61e78fa243d67c33206ece4022129ee1
- * Upstream date: 2024-05-10 19:28:08 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(eca46a0)
+ * Last changed at upstream commit d4922c5890feb6ee1733e6063369ff54a30f5930
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d4922c5890feb6ee1733e6063369ff54a30f5930
+ * Upstream date: 2024-07-23 16:16:25 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(4e58df9)
  * Source: libbtdm_app -> arch_main.o -> rw_schedule
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,7 +38,7 @@ void rw_schedule(void)
   if (_btdm_pwr_state == 1) {
     _btdm_pwr_state = 2;
   }
-                    /* WARNING: Could not recover jumptable at 0x0001088e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000108fa. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))();
   return;

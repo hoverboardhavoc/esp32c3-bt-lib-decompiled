@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit d4922c5890feb6ee1733e6063369ff54a30f5930
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d4922c5890feb6ee1733e6063369ff54a30f5930
+ * Upstream date: 2024-07-23 16:16:25 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(4e58df9)
  * Source: libbtdm_app -> rf_txpwr.o -> bt_controller_txpwr_level_2_index
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,7 +18,7 @@ uint bt_controller_txpwr_level_2_index(uint param_1,uint param_2)
   uint uVar1;
   
   if (0xf < param_2) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"rf_txpwr.c",0x8f,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"rf_txpwr.c",0x91,*(code **)(_r_plf_funcs_p + 8));
   }
   uVar1 = param_2 & 0xff;
   if ((param_1 >> 0x10 & 0xff) != 1) {

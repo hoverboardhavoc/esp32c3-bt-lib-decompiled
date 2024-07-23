@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 70f95a1b6f8f232018b17c687cc819044501774c
- * https://github.com/espressif/esp32c3-bt-lib/commit/70f95a1b6f8f232018b17c687cc819044501774c
- * Upstream date: 2024-04-02 18:59:02 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5274796)
+ * Last changed at upstream commit d4922c5890feb6ee1733e6063369ff54a30f5930
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d4922c5890feb6ee1733e6063369ff54a30f5930
+ * Upstream date: 2024-07-23 16:16:25 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(4e58df9)
  * Source: libbtdm_app -> llm.o -> esp_ble_controller_status_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -53,7 +53,7 @@ uint esp_ble_controller_status_check(void)
          -1 < *(short *)(iVar5 + iVar4 * 0x34) || (iVar4 == 0))) {
     iVar4 = iVar4 + 1;
     if (iVar4 == 10) {
-_L228:
+_L230:
       if (g_scan_forever != '\0') {
         uVar2 = uVar2 | 0x80000;
       }
@@ -111,6 +111,6 @@ _L228:
     }
   }
   uVar2 = uVar2 | 0x40000;
-  goto _L228;
+  goto _L230;
 }
 

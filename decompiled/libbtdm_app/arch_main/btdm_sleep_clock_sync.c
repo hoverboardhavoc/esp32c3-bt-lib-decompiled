@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * Upstream date: 2024-03-26 14:09:42 +0800
- * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
+ * Last changed at upstream commit d4922c5890feb6ee1733e6063369ff54a30f5930
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d4922c5890feb6ee1733e6063369ff54a30f5930
+ * Upstream date: 2024-07-23 16:16:25 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(4e58df9)
  * Source: libbtdm_app -> arch_main.o -> btdm_sleep_clock_sync
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ undefined4 btdm_sleep_clock_sync(void)
     _DAT_60031050 = 0x87828180;
     if ((_DAT_60042000 & 0x80) != 0 || _DAT_60031054 != 0) {
       uVar2 = (**(code **)(_r_plf_funcs_p + 0xc))
-                        ("arch_main.c",0x254,*(code **)(_r_plf_funcs_p + 0xc));
+                        ("arch_main.c",0x262,*(code **)(_r_plf_funcs_p + 0xc));
       return uVar2;
     }
   }

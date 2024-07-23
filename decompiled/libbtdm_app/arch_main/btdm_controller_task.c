@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
- * https://github.com/espressif/esp32c3-bt-lib/commit/4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
- * Upstream date: 2024-04-28 11:58:26 +0800
- * Upstream subject: fix(coex): Fixed some coexist issues(ba3b3e3)
+ * Last changed at upstream commit d4922c5890feb6ee1733e6063369ff54a30f5930
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d4922c5890feb6ee1733e6063369ff54a30f5930
+ * Upstream date: 2024-07-23 16:16:25 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(4e58df9)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_task
  *
  * (C) Espressif, Apache License 2.0.
@@ -71,17 +71,17 @@ void btdm_controller_task(void)
             if (cStack_38 == '\b') {
               rw_stop();
               _LANCHOR6 = 0;
-              goto _L307;
+              goto _L311;
             }
             rw_pre_main();
           }
           _LANCHOR6 = 1;
         }
-_L307:
+_L311:
         (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
         break;
       case '\v':
-        ble_txpwr_set_inter(*puStack_34,puStack_34[1]);
+        ble_txpwr_set_inter(*puStack_34,puStack_34[1],puStack_34[2]);
         break;
       case '\r':
         (**(code **)(_r_plf_funcs_p + 0x114))

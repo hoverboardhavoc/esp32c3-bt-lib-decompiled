@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 76ed4114ee7d081435a3c65793b4c8eb1dfaf199
- * https://github.com/espressif/esp32c3-bt-lib/commit/76ed4114ee7d081435a3c65793b4c8eb1dfaf199
- * Upstream date: 2024-04-09 17:28:48 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(c23ab4c)
+ * Last changed at upstream commit d4922c5890feb6ee1733e6063369ff54a30f5930
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d4922c5890feb6ee1733e6063369ff54a30f5930
+ * Upstream date: 2024-07-23 16:16:25 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(4e58df9)
  * Source: libbtdm_app -> vshci_task.o -> hci_vs_ble_qa_set_txpwr_lvl_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,7 +23,7 @@ hci_vs_ble_qa_set_txpwr_lvl_cmd_handler(undefined1 param_1,undefined1 *param_2,u
            (**(code **)(_r_modules_funcs_p + 200))
                      (0x1101,param_3,0xfd13,2,*(code **)(_r_modules_funcs_p + 200));
   *puVar1 = 0;
-  iVar2 = ble_txpwr_set(*param_2,*(undefined4 *)(param_2 + 1));
+  iVar2 = ble_txpwr_set(*param_2,0xffff,*(undefined4 *)(param_2 + 1));
   if (iVar2 != 0) {
     *puVar1 = 0x12;
   }

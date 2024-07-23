@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/d4922c5890feb6ee1733e6063369ff54a30f5930
  * Upstream date: 2024-07-23 16:16:25 +0800
  * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(4e58df9)
- * Source: libbtdm_app -> lld.o -> lld_le_pkt_err_set
+ * Source: libbtdm_app -> vshci_task.o -> hci_vs_ble_qa_ignore_wl_for_dir_adv_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,21 +12,17 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void lld_le_pkt_err_set(uint param_1,uint param_2)
+undefined4 hci_vs_ble_qa_ignore_wl_for_dir_adv_cmd_handler(undefined1 param_1,undefined4 param_2)
 
 {
-  if (9 < param_1) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(10,"lld.c",699,*(code **)(_r_plf_funcs_p + 0xc));
-  }
-  if ((param_2 & 0xf) != 0) {
-    if ((param_2 & 1) != 0) {
-      *(short *)(&lld_le_pkt_env + param_1) = *(short *)(&lld_le_pkt_env + param_1) + 1;
-    }
-    if ((param_2 & 8) != 0) {
-      *(short *)((int)&lld_le_pkt_env + param_1 * 4 + 2) =
-           *(short *)((int)&lld_le_pkt_env + param_1 * 4 + 2) + 1;
-    }
-  }
-  return;
+  undefined1 *puVar1;
+  
+  puVar1 = (undefined1 *)
+           (**(code **)(_r_modules_funcs_p + 200))
+                     (0x1101,param_2,0xfd13,2,*(code **)(_r_modules_funcs_p + 200));
+  puVar1[1] = param_1;
+  *puVar1 = 1;
+  (**(code **)(_r_ip_funcs_p + 0x8c))(*(code **)(_r_ip_funcs_p + 0x8c));
+  return 0;
 }
 
