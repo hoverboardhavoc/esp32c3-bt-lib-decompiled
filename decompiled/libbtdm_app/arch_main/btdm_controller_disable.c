@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d4922c5890feb6ee1733e6063369ff54a30f5930
- * https://github.com/espressif/esp32c3-bt-lib/commit/d4922c5890feb6ee1733e6063369ff54a30f5930
- * Upstream date: 2024-07-23 16:16:25 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(4e58df9)
+ * Last changed at upstream commit 929c19d35d3c2c5568206f22d077d2d3ee9f1883
+ * https://github.com/espressif/esp32c3-bt-lib/commit/929c19d35d3c2c5568206f22d077d2d3ee9f1883
+ * Upstream date: 2024-08-02 17:03:33 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b445b5f)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_disable
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void btdm_controller_disable(void)
 
 {
   (**(code **)(_r_plf_funcs_p + 0x28))(10,0,0,1,*(code **)(_r_plf_funcs_p + 0x28));
-                    /* WARNING: Could not recover jumptable at 0x000111d8. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011168. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x34))(_g_rw_init_sem,0xffffffff);
   return;

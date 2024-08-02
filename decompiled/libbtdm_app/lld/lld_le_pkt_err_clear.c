@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d4922c5890feb6ee1733e6063369ff54a30f5930
- * https://github.com/espressif/esp32c3-bt-lib/commit/d4922c5890feb6ee1733e6063369ff54a30f5930
- * Upstream date: 2024-07-23 16:16:25 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(4e58df9)
+ * Last changed at upstream commit 929c19d35d3c2c5568206f22d077d2d3ee9f1883
+ * https://github.com/espressif/esp32c3-bt-lib/commit/929c19d35d3c2c5568206f22d077d2d3ee9f1883
+ * Upstream date: 2024-08-02 17:03:33 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b445b5f)
  * Source: libbtdm_app -> lld.o -> lld_le_pkt_err_clear
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,10 +10,21 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-undefined4 lld_le_pkt_err_clear(int param_1)
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+bool lld_le_pkt_err_clear(void)
 
 {
-  (&lld_le_pkt_env)[param_1] = 0;
-  return 0;
+  bool bVar1;
+  uint uVar2;
+  int iVar3;
+  
+  uVar2 = llm_hdl_to_id();
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
+  bVar1 = *(byte *)(iVar3 + 0xd) <= uVar2;
+  if (!bVar1) {
+    (&lld_le_pkt_env)[uVar2] = 0;
+  }
+  return bVar1;
 }
 

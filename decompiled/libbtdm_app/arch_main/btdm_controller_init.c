@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d4922c5890feb6ee1733e6063369ff54a30f5930
- * https://github.com/espressif/esp32c3-bt-lib/commit/d4922c5890feb6ee1733e6063369ff54a30f5930
- * Upstream date: 2024-07-23 16:16:25 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(4e58df9)
+ * Last changed at upstream commit 929c19d35d3c2c5568206f22d077d2d3ee9f1883
+ * https://github.com/espressif/esp32c3-bt-lib/commit/929c19d35d3c2c5568206f22d077d2d3ee9f1883
+ * Upstream date: 2024-08-02 17:03:33 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b445b5f)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,7 +36,7 @@ undefined4 btdm_controller_init(int *param_1)
   byte bStack_33;
   
   uVar16 = 0xffffffff;
-  if (_g_rw_init_sem != 0) goto _L322;
+  if (_g_rw_init_sem != 0) goto _L318;
   _r_plf_funcs_p =
        (void *)(**(code **)(_r_osi_funcs_p + 0x78))(0x118,*(code **)(_r_osi_funcs_p + 0x78));
   if (((_r_plf_funcs_p == (void *)0x0) ||
@@ -51,7 +51,7 @@ undefined4 btdm_controller_init(int *param_1)
     }
     btdm_funcs_table_destroy();
     uVar16 = 0xfffffffe;
-    goto _L322;
+    goto _L318;
   }
   memcpy(_r_plf_funcs_p,&r_plf_funcs_ro,0x118);
   memcpy(_r_modules_funcs_p,&r_modules_funcs_ro,0x3d0);
@@ -77,10 +77,10 @@ undefined4 btdm_controller_init(int *param_1)
             iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                (*(code **)((int)_r_plf_funcs_p + 0x38));
             uStack_34 = *(undefined1 *)(iVar11 + 0xd);
-            bStack_33 = DAT_0001209f;
+            bStack_33 = DAT_0001209b;
             (**(code **)((int)_r_plf_funcs_p + 0x24))
                       (&uStack_34,*(code **)((int)_r_plf_funcs_p + 0x24));
-            if (DAT_0001209e == '\0') {
+            if (DAT_0001209a == '\0') {
               btdm_hli_get_null_funcs();
             }
             else {
@@ -111,12 +111,12 @@ undefined4 btdm_controller_init(int *param_1)
                 iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                    (*(code **)((int)_r_plf_funcs_p + 0x38));
                 bVar2 = *(byte *)(iVar11 + 0xd);
-                uVar17 = (uint)DAT_0001209f;
+                uVar17 = (uint)DAT_0001209b;
                 iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                    (*(code **)((int)_r_plf_funcs_p + 0x38));
                 piVar7 = _btdm_env_p;
                 iVar12 = 0;
-                if (DAT_0001209e != '\0') {
+                if (DAT_0001209a != '\0') {
                   iVar12 = uVar17 * 0xe0 + (uint)*(byte *)(iVar11 + 0xd) * 0x88;
                 }
                 pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
@@ -128,9 +128,9 @@ undefined4 btdm_controller_init(int *param_1)
                 iVar11 = (**(code **)((int)pvVar6 + 0x38))(*(code **)((int)pvVar6 + 0x38));
                 piVar7 = _btdm_env_p;
                 uVar17 = 0;
-                if (DAT_0001209e != '\0') {
-                  uVar17 = (uint)DAT_0001209f * 400;
-                  if ((uint)DAT_0001209f * 400 < 0x1800) {
+                if (DAT_0001209a != '\0') {
+                  uVar17 = (uint)DAT_0001209b * 400;
+                  if ((uint)DAT_0001209b * 400 < 0x1800) {
                     uVar17 = 0x1800;
                   }
                 }
@@ -149,7 +149,7 @@ undefined4 btdm_controller_init(int *param_1)
                 pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
                 _btdm_env_p[5] = (uint)*(ushort *)(iVar11 + 6) * 0xc + (uint)uVar4 * 0x10 + 0x29c;
                 iVar11 = (*pcVar15)(pcVar15);
-                cVar9 = DAT_0001209e;
+                cVar9 = DAT_0001209a;
                 piVar7[4] = iVar11;
                 piVar7 = _btdm_env_p;
                 if (cVar9 != '\0') {
@@ -174,7 +174,7 @@ undefined4 btdm_controller_init(int *param_1)
                                        (0xc,*(code **)(_r_osi_funcs_p + 0x78));
                     piVar8 = _btdm_env_p;
                     piVar7[9] = iVar11;
-                    if ((void *)piVar8[9] == (void *)0x0) goto _L340;
+                    if ((void *)piVar8[9] == (void *)0x0) goto _L336;
                     memset((void *)piVar8[9],0,0xc);
                   }
                   if (2 < _g_bt_plf_log_level) {
@@ -233,11 +233,11 @@ undefined4 btdm_controller_init(int *param_1)
                       }
                     }
                   }
-                  goto _L322;
+                  goto _L318;
                 }
               }
             }
-_L340:
+_L336:
             (**(code **)((int)_r_ip_funcs_p + 0x240))(*(code **)((int)_r_ip_funcs_p + 0x240));
             (**(code **)((int)_r_ip_funcs_p + 0x4cc))(*(code **)((int)_r_ip_funcs_p + 0x4cc));
             (**(code **)((int)_r_ip_funcs_p + 0xe0))(*(code **)((int)_r_ip_funcs_p + 0xe0));
@@ -264,22 +264,22 @@ _L340:
               (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
               _btdm_env_p = (int *)0x0;
             }
-            goto _L322;
+            goto _L318;
           }
         }
         else if (0 < _g_bt_plf_log_level) {
           pcVar10 = "Default Tx Power Invalid: 0x%x\n";
-          goto _L434;
+          goto _L430;
         }
       }
       else if (0 < _g_bt_plf_log_level) {
         pcVar10 = "Invalid scan backoff upperlimitmax: 0x%x\n";
-        goto _L434;
+        goto _L430;
       }
     }
     else if (0 < _g_bt_plf_log_level) {
       pcVar10 = "Hardware Target Code Invalid: 0x%x\n";
-_L434:
+_L430:
       ets_printf(pcVar10);
     }
   }
@@ -287,7 +287,7 @@ _L434:
     ets_printf("Config struct mismatch: magic=%08x, ver=%08x\n",0x5a5aa5a5,0x2404010);
   }
   uVar16 = 0xfffffffd;
-_L322:
+_L318:
   btdm_controller_deinit_internal();
   return uVar16;
 }

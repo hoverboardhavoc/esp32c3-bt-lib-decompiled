@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d4922c5890feb6ee1733e6063369ff54a30f5930
- * https://github.com/espressif/esp32c3-bt-lib/commit/d4922c5890feb6ee1733e6063369ff54a30f5930
- * Upstream date: 2024-07-23 16:16:25 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(4e58df9)
+ * Last changed at upstream commit 929c19d35d3c2c5568206f22d077d2d3ee9f1883
+ * https://github.com/espressif/esp32c3-bt-lib/commit/929c19d35d3c2c5568206f22d077d2d3ee9f1883
+ * Upstream date: 2024-08-02 17:03:33 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b445b5f)
  * Source: libbtdm_app -> arch_main.o -> esp_ble_get_rxerr_cnt
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,21 +10,10 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-undefined4 esp_ble_get_rxerr_cnt(undefined1 param_1,undefined4 param_2,undefined4 param_3)
+void esp_ble_get_rxerr_cnt(undefined1 param_1)
 
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  
-  uVar1 = llm_hdl_to_id(param_1);
-  iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-  if (uVar1 < *(byte *)(iVar2 + 0xd)) {
-    uVar3 = lld_le_pkt_err_get(uVar1,param_2,param_3);
-    return uVar3;
-  }
-  return 1;
+  lld_le_pkt_err_get(param_1);
+  return;
 }
 
