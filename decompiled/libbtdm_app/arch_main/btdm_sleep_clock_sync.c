@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 929c19d35d3c2c5568206f22d077d2d3ee9f1883
- * https://github.com/espressif/esp32c3-bt-lib/commit/929c19d35d3c2c5568206f22d077d2d3ee9f1883
- * Upstream date: 2024-08-02 17:03:33 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b445b5f)
+ * Last changed at upstream commit ef1dfc518572e9cda55f13906e32207b40ee280b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ef1dfc518572e9cda55f13906e32207b40ee280b
+ * Upstream date: 2024-08-07 12:57:51 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(f583012)
  * Source: libbtdm_app -> arch_main.o -> btdm_sleep_clock_sync
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ undefined4 btdm_sleep_clock_sync(void)
     _DAT_60031050 = 0x87828180;
     if ((_DAT_60042000 & 0x80) != 0 || _DAT_60031054 != 0) {
       uVar2 = (**(code **)(_r_plf_funcs_p + 0xc))
-                        ("arch_main.c",0x254,*(code **)(_r_plf_funcs_p + 0xc));
+                        ("arch_main.c",0x262,*(code **)(_r_plf_funcs_p + 0xc));
       return uVar2;
     }
   }
