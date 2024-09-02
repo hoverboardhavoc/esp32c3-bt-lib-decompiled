@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 76ed4114ee7d081435a3c65793b4c8eb1dfaf199
- * https://github.com/espressif/esp32c3-bt-lib/commit/76ed4114ee7d081435a3c65793b4c8eb1dfaf199
- * Upstream date: 2024-04-09 17:28:48 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(c23ab4c)
+ * Last changed at upstream commit d874f55e1132416fe18293ae1aa9ac73c40b3261
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d874f55e1132416fe18293ae1aa9ac73c40b3261
+ * Upstream date: 2024-09-02 19:56:58 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(8ce789b)
  * Source: libbtdm_app -> vshci_task.o -> hci_vs_ble_qa_get_max_txpwr_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ undefined4 hci_vs_ble_qa_get_max_txpwr_cmd_handler(undefined1 param_1,undefined4
                      (0x1101,param_2,0xfd13,3,*(code **)(_r_modules_funcs_p + 200));
   puVar1[1] = param_1;
   *puVar1 = 0;
-  ble_txpwr_lvl_range_get(puVar1 + 2,0);
+  esp_ble_txpower_lvl_range_get(puVar1 + 2,0);
   (**(code **)(_r_ip_funcs_p + 0x8c))(puVar1,*(code **)(_r_ip_funcs_p + 0x8c));
   return 0;
 }

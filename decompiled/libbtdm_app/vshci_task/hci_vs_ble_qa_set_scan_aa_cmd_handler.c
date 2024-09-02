@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 76ed4114ee7d081435a3c65793b4c8eb1dfaf199
- * https://github.com/espressif/esp32c3-bt-lib/commit/76ed4114ee7d081435a3c65793b4c8eb1dfaf199
- * Upstream date: 2024-04-09 17:28:48 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(c23ab4c)
+ * Last changed at upstream commit d874f55e1132416fe18293ae1aa9ac73c40b3261
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d874f55e1132416fe18293ae1aa9ac73c40b3261
+ * Upstream date: 2024-09-02 19:56:58 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(8ce789b)
  * Source: libbtdm_app -> vshci_task.o -> hci_vs_ble_qa_set_scan_aa_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,7 +23,7 @@ hci_vs_ble_qa_set_scan_aa_cmd_handler(undefined1 param_1,undefined2 *param_2,und
            (**(code **)(_r_modules_funcs_p + 200))
                      (0x1101,param_3,0xfd13,2,*(code **)(_r_modules_funcs_p + 200));
   *puVar1 = 0;
-  iVar2 = ble_ll_scan_aa_setting(*param_2,param_2[1]);
+  iVar2 = esp_ble_scan_aa_setting(*param_2,param_2[1]);
   if (iVar2 != 0) {
     *puVar1 = 0x12;
   }
