@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9780fd66d97866977d972fb63319830f47f12785
- * https://github.com/espressif/esp32c3-bt-lib/commit/9780fd66d97866977d972fb63319830f47f12785
- * Upstream date: 2024-04-23 11:19:15 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a771b7c)
+ * Last changed at upstream commit 5c913171361dac0821e15e83cc0cf604149e1b84
+ * https://github.com/espressif/esp32c3-bt-lib/commit/5c913171361dac0821e15e83cc0cf604149e1b84
+ * Upstream date: 2024-09-19 15:19:37 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(e9ae856)
  * Source: libbtdm_app -> lld_scan.o -> coex_schm_ble_scan_stop
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,7 +23,7 @@ void coex_schm_ble_scan_stop(void)
     if (_lld_scan_env != 0) {
       coex_lld_scan_stop();
     }
-                    /* WARNING: Could not recover jumptable at 0x000111ca. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000111ec. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_osi_funcs_p + 0x18))();
     return;

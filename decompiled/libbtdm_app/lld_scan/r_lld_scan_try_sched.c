@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9780fd66d97866977d972fb63319830f47f12785
- * https://github.com/espressif/esp32c3-bt-lib/commit/9780fd66d97866977d972fb63319830f47f12785
- * Upstream date: 2024-04-23 11:19:15 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a771b7c)
+ * Last changed at upstream commit 5c913171361dac0821e15e83cc0cf604149e1b84
+ * https://github.com/espressif/esp32c3-bt-lib/commit/5c913171361dac0821e15e83cc0cf604149e1b84
+ * Upstream date: 2024-09-19 15:19:37 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(e9ae856)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_try_sched
  *
  * (C) Espressif, Apache License 2.0.
@@ -172,7 +172,7 @@ void r_lld_scan_try_sched(int param_1,int param_2,int param_3)
       *(undefined2 *)(iVar4 + 0x36) = 0;
     }
     else {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x3ac,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x3b2,*(code **)(_r_plf_funcs_p + 8));
     }
   }
   return;
