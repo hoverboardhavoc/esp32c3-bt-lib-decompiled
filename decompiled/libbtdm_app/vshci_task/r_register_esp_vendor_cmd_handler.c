@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d874f55e1132416fe18293ae1aa9ac73c40b3261
- * https://github.com/espressif/esp32c3-bt-lib/commit/d874f55e1132416fe18293ae1aa9ac73c40b3261
- * Upstream date: 2024-09-02 19:56:58 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(8ce789b)
+ * Last changed at upstream commit eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
+ * https://github.com/espressif/esp32c3-bt-lib/commit/eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
+ * Upstream date: 2024-10-20 16:32:16 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(52ee788)
  * Source: libbtdm_app -> vshci_task.o -> r_register_esp_vendor_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void r_register_esp_vendor_cmd_handler(void)
 
 {
   _esp_handler = hci_command_handler_tab_esp_hack;
-  _DAT_00011060 = 6;
+  _DAT_0001206c = 7;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * Upstream date: 2023-08-03 10:45:08 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
+ * Last changed at upstream commit eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
+ * https://github.com/espressif/esp32c3-bt-lib/commit/eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
+ * Upstream date: 2024-10-20 16:32:16 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(52ee788)
  * Source: libbtdm_app -> llc_chmap_upd.o -> r_llc_loc_ch_map_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -72,7 +72,7 @@ void r_llc_loc_ch_map_proc_continue(int param_1,int param_2)
       if (iVar6 != 1) {
         pcVar3 = *(code **)(_r_plf_funcs_p + 0xc);
         uVar7 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar5,*(code **)(_r_ip_funcs_p + 0x680));
-        (*pcVar3)(param_1,uVar7,"llc_chmap_upd.c",0xca);
+        (*pcVar3)(param_1,uVar7,"llc_chmap_upd.c",0xcc);
         return;
       }
       memcpy((void *)(iVar2 + 8),(void *)(iVar5 + 8),5);
