@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * https://github.com/espressif/esp32c3-bt-lib/commit/0698a0dac04e7762ec555dca86bbfa2a631cefa3
- * Upstream date: 2024-03-26 14:09:42 +0800
- * Upstream subject: feat(ble/controller): Add coexist schm (bb95ac61)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> task.o -> r_btdm_task_post_from_isr_impl
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ r_btdm_task_post_from_isr_impl(uint param_1,undefined4 param_2,undefined4 param_
                       (_g_rw_schd_queue,&uStack_28,0,*(code **)(_r_osi_funcs_p + 0x58));
     if (iVar2 != 1) {
       (**(code **)(_r_plf_funcs_p + 0xc))
-                (param_1,param_2,"task.c",0x60,*(code **)(_r_plf_funcs_p + 0xc));
+                (param_1,param_2,"task.c",0x5f,*(code **)(_r_plf_funcs_p + 0xc));
     }
   }
   uStack_28 = 0;

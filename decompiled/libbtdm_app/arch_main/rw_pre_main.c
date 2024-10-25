@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ef1dfc518572e9cda55f13906e32207b40ee280b
- * https://github.com/espressif/esp32c3-bt-lib/commit/ef1dfc518572e9cda55f13906e32207b40ee280b
- * Upstream date: 2024-08-07 12:57:51 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(f583012)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> arch_main.o -> rw_pre_main
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,15 +22,19 @@ void rw_pre_main(void)
   (**(code **)(_r_plf_funcs_p + 0xb0))(*(code **)(_r_plf_funcs_p + 0xb0));
   (**(code **)(_r_plf_funcs_p + 0xc0))(*(code **)(_r_plf_funcs_p + 0xc0));
   (**(code **)(_r_plf_funcs_p + 0x8c))(*(code **)(_r_plf_funcs_p + 0x8c));
-  (**(code **)(_r_plf_funcs_p + 0x50))(*(code **)(_r_plf_funcs_p + 0x50));
-  (**(code **)(_r_modules_funcs_p + 0x240))(4,0x800,*(code **)(_r_modules_funcs_p + 0x240));
+  if (DAT_0001302d != '\0') {
+    (**(code **)(_r_plf_funcs_p + 0x50))(*(code **)(_r_plf_funcs_p + 0x50));
+  }
+  if (btdm_get_power_state_impl != (code)0x0) {
+    (**(code **)(_r_modules_funcs_p + 0x240))(4,0x800,*(code **)(_r_modules_funcs_p + 0x240));
+  }
   iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   if (*(char *)(iVar1 + 0x17) == '\0') {
     if (_r_h4tl_eif_p == 0) {
       if (0 < _g_bt_plf_log_level) {
         ets_printf("H4TL EIF not registered\n");
       }
-      (**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x37d,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"arch_main.c",0x382,*(code **)(_r_plf_funcs_p + 8));
     }
     else {
       (**(code **)(_r_h4tl_eif_p + 0xc))(*(code **)(_r_h4tl_eif_p + 0xc));
@@ -43,7 +47,7 @@ void rw_pre_main(void)
     }
   }
   (**(code **)(_r_plf_funcs_p + 0x94))(*(code **)(_r_plf_funcs_p + 0x94));
-                    /* WARNING: Could not recover jumptable at 0x00010d3c. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010d5e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0x27c))(0);
   return;

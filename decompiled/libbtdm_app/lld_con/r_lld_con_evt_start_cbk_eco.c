@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bfdfe8f851c99ced8316b133b0b15521917ea049
- * https://github.com/espressif/esp32c3-bt-lib/commit/bfdfe8f851c99ced8316b133b0b15521917ea049
- * Upstream date: 2024-07-18 14:51:28 +0800
- * Upstream subject: feat(bt): Support mesh duplicate with extend scan (aa16a46)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_evt_start_cbk_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,16 +29,16 @@ void r_lld_con_evt_start_cbk_eco(int param_1)
   int iVar12;
   uint uVar13;
   
-  if (param_1 == 0) goto _L205;
+  if (param_1 == 0) goto _L542;
   iVar6 = (**(code **)(_r_ip_funcs_p + 0x91c))(*(code **)(_r_ip_funcs_p + 0x91c));
   iVar6 = (uint)*(byte *)(param_1 + 0x8e) * 2 + iVar6;
   if (((*(char *)(iVar6 + 0x3d) == '\0') || (*(char *)(param_1 + 0x46) != *(char *)(iVar6 + 0x3d)))
      || (uVar13 = (uint)*(ushort *)(param_1 + 0x7c) + (uint)*(ushort *)(param_1 + 0x7e) & 0xffff,
-        0x7ffe < (uVar13 - *(ushort *)(param_1 + 0x44) & 0xffff))) goto _L205;
+        0x7ffe < (uVar13 - *(ushort *)(param_1 + 0x44) & 0xffff))) goto _L542;
   bVar1 = *(byte *)(iVar6 + 0x3c);
   iVar7 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
   iVar12 = (uint)bVar1 * 0xe;
-  if (*(short *)(iVar7 + iVar12) < 0) goto _L205;
+  if (*(short *)(iVar7 + iVar12) < 0) goto _L542;
   iVar7 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
   sVar3 = *(short *)(iVar7 + iVar12 + 4);
   iVar7 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
@@ -46,7 +46,7 @@ void r_lld_con_evt_start_cbk_eco(int param_1)
   uVar5 = (ushort)*(byte *)(iVar6 + 0x3d);
   if (uVar5 == 1) {
     uVar5 = 10;
-_L221:
+_L558:
     cVar11 = '\0';
   }
   else if (uVar5 == 2) {
@@ -57,10 +57,10 @@ _L221:
     cVar11 = '\x18';
     if (uVar5 != 3) {
       (**(code **)(_r_plf_funcs_p + 0xc))
-                (*(undefined1 *)(param_1 + 0x8e),0,"lld_con.c",0x58a,
+                (*(undefined1 *)(param_1 + 0x8e),0,"lld_con.c",0x55e,
                  *(code **)(_r_plf_funcs_p + 0xc));
       uVar5 = 0;
-      goto _L221;
+      goto _L558;
     }
   }
   if (((sVar3 == 0) || ((uVar4 & 3) != 3)) ||
@@ -88,7 +88,7 @@ _L221:
     puVar9[1] = (char)((uint)iVar6 >> 8);
     *(short *)(param_1 + 0x44) = (short)((uint)iVar7 >> 0x10);
   }
-_L205:
+_L542:
   r_lld_con_evt_start_cbk(param_1);
   iVar6 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
   if (*(char *)(iVar6 + 0x19) == '\x02') {

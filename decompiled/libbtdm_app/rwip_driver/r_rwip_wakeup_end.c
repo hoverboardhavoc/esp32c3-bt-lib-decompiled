@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0caae2bd70a999ac8a1c07330f7168e185db81ba
- * https://github.com/espressif/esp32c3-bt-lib/commit/0caae2bd70a999ac8a1c07330f7168e185db81ba
- * Upstream date: 2024-01-31 19:37:46 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(91980c2)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> rwip_driver.o -> r_rwip_wakeup_end
  *
  * (C) Espressif, Apache License 2.0.
@@ -59,14 +59,14 @@ void r_rwip_wakeup_end(void)
   }
   else {
     iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-    if (*(char *)(iVar2 + 0x17) != '\0') goto _L65;
+    if (*(char *)(iVar2 + 0x17) != '\0') goto _L70;
     pcVar3 = *(code **)(_r_modules_funcs_p + 0x8c);
   }
   (*pcVar3)(pcVar3);
-_L65:
+_L70:
   (**(code **)(_r_modules_funcs_p + 0x2b0))(1,*(code **)(_r_modules_funcs_p + 0x2b0));
   _btdm_pwr_state = 4;
-                    /* WARNING: Could not recover jumptable at 0x00010586. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001058c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_plf_funcs_p + 0x2c))(3);
   return;

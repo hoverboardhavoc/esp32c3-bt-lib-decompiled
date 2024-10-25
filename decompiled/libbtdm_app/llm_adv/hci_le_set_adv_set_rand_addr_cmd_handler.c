@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfac1b21ebc995e8e9aa040ab1ab29deee4f580
- * Upstream date: 2023-08-10 21:56:13 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(59725b5)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_set_adv_set_rand_addr_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,33 +18,38 @@ undefined4 hci_le_set_adv_set_rand_addr_cmd_handler(undefined1 *param_1,undefine
   char cVar1;
   uint uVar2;
   int iVar3;
-  undefined4 uVar4;
-  int iVar5;
+  int iVar4;
+  undefined4 uVar5;
   
+  iVar4 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
   iVar3 = _r_ip_funcs_p;
+  if (*(char *)(iVar4 + 0x18) == '\0') {
+    (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,0xc,*(code **)(_r_ip_funcs_p + 0x4b8));
+    return 0;
+  }
   if (*(char *)(_p_llm_env + 0xd7) != '\x01') {
     *(undefined1 *)(_p_llm_env + 0xd7) = 2;
-    uVar4 = 0x42;
+    uVar5 = 0x42;
     uVar2 = (**(code **)(iVar3 + 0x544))(*param_1,0,*(code **)(iVar3 + 0x544));
-    iVar5 = *(int *)(*(int *)(_p_llm_env + 8) + uVar2 * 0x44);
+    iVar4 = *(int *)(*(int *)(_p_llm_env + 8) + uVar2 * 0x44);
     iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-    if (*(byte *)(iVar3 + 0xd) <= uVar2) goto _L165;
+    if (*(byte *)(iVar3 + 0xd) <= uVar2) goto _L171;
     iVar3 = *(int *)(_p_llm_env + 8) + uVar2 * 0x44;
     cVar1 = *(char *)(iVar3 + 0x40);
-    if ((cVar1 != '\x02') || (*(short *)(iVar5 + 2) == 0)) {
+    if ((cVar1 != '\x02') || (*(short *)(iVar4 + 2) == 0)) {
       memcpy((void *)(iVar3 + 4),param_1 + 1,6);
-      uVar4 = 0;
+      uVar5 = 0;
       if (cVar1 == '\x02') {
         (**(code **)(_r_ip_funcs_p + 0x1d0))
                   (uVar2,*(undefined4 *)(param_1 + 1),*(undefined2 *)(param_1 + 5),
                    *(code **)(_r_ip_funcs_p + 0x1d0));
       }
-      goto _L165;
+      goto _L171;
     }
   }
-  uVar4 = 0xc;
-_L165:
-  (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,uVar4,*(code **)(_r_ip_funcs_p + 0x4b8));
+  uVar5 = 0xc;
+_L171:
+  (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,uVar5,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }
 

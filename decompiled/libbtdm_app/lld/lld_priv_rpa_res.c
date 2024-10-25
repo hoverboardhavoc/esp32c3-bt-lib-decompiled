@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * https://github.com/espressif/esp32c3-bt-lib/commit/eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * Upstream date: 2024-10-20 16:32:16 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(52ee788)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> lld.o -> lld_priv_rpa_res
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,12 +42,12 @@ char lld_priv_rpa_res(void *param_1,void *param_2,short *param_3)
     if ((*(byte *)((int)param_1 + 5) & 0xc0) != 0x40) {
       return '\0';
     }
-    if (param_2 == (void *)0x0) goto _L194;
+    if (param_2 == (void *)0x0) goto _L199;
   }
   if ((*(byte *)((int)param_2 + 5) & 0xc0) != 0x40) {
     return '\0';
   }
-_L194:
+_L199:
   pcVar10 = &lld_rpa_res_list;
   cVar11 = param_1 == (void *)0x0;
   cVar12 = param_2 == (void *)0x0;
@@ -56,12 +56,12 @@ _L194:
     cVar1 = *pcVar10;
     if (cVar1 != '\0') {
       if ((param_1 == (void *)0x0) || (iVar6 = memcmp(param_1,pcVar10 + 1,6), iVar6 != 0)) {
-        if (param_2 != (void *)0x0) goto _L214;
-_L198:
+        if (param_2 != (void *)0x0) goto _L219;
+_L203:
         cVar4 = cVar12;
         cVar5 = cVar1;
         cVar3 = cVar12;
-        if (cVar11 == '\0') goto _L195;
+        if (cVar11 == '\0') goto _L200;
       }
       else {
         cVar11 = cVar1;
@@ -69,12 +69,12 @@ _L198:
         cVar5 = cVar1;
         cVar3 = cVar12;
         if (param_2 != (void *)0x0) {
-_L214:
+_L219:
           iVar6 = memcmp(param_2,pcVar10 + 7,6);
           cVar4 = cVar1;
           cVar5 = cVar11;
           cVar3 = cVar11;
-          if (iVar6 != 0) goto _L198;
+          if (iVar6 != 0) goto _L203;
         }
       }
       cVar11 = cVar5;
@@ -84,7 +84,7 @@ _L214:
         return cVar1;
       }
     }
-_L195:
+_L200:
     uVar9 = uVar9 + 1 & 0xff;
     pcVar10 = pcVar10 + 0xd;
   } while (uVar9 != 10);
@@ -94,13 +94,13 @@ _L195:
     if ((*(short *)(iVar6 + uVar8 * 0x34) < 0) &&
        ((param_1 == (void *)0x0 || (iVar6 = lld_peer_rpa_res(param_1,uVar8 & 0xff), iVar6 != 0)))) {
       if (param_2 == (void *)0x0) {
-_L205:
+_L210:
         *param_3 = (short)(uVar8 & 0xff) * 0x34 + 0xc60;
         if (param_1 != (void *)0x0) {
-          memcpy(&DAT_00011411 + uVar8 * 0xd,param_1,6);
+          memcpy(&DAT_0001326d + uVar8 * 0xd,param_1,6);
         }
         if (param_2 != (void *)0x0) {
-          memcpy(&DAT_00011417 + uVar8 * 0xd,param_2,6);
+          memcpy(&DAT_00013273 + uVar8 * 0xd,param_2,6);
         }
         (&lld_rpa_res_list)[uVar8 * 0xd] = 1;
         return '\x01';
@@ -119,7 +119,7 @@ _L205:
         else {
           uVar7 = lld_rpa_res(param_2);
         }
-        if (uVar7 != 0) goto _L205;
+        if (uVar7 != 0) goto _L210;
       }
     }
     uVar8 = uVar8 + 1;

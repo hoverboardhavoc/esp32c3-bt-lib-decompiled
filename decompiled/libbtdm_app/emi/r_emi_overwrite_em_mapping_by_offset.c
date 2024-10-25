@@ -1,0 +1,60 @@
+/*
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Source: libbtdm_app -> emi.o -> r_emi_overwrite_em_mapping_by_offset
+ *
+ * (C) Espressif, Apache License 2.0.
+ * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
+ * Decompiler output may be incomplete or differ from original semantics.
+ */
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined4 r_emi_overwrite_em_mapping_by_offset(undefined4 param_1,undefined4 param_2)
+
+{
+  int iVar1;
+  uint uVar2;
+  undefined4 uVar3;
+  int iVar4;
+  uint *puVar5;
+  
+  iVar1 = (**(code **)(_r_osi_funcs_p + 0x78))(param_2,*(code **)(_r_osi_funcs_p + 0x78));
+  if (iVar1 == 0) {
+    uVar3 = 7;
+  }
+  else {
+    uVar2 = (**(code **)(_r_plf_funcs_p + 0xb8))(param_1,*(code **)(_r_plf_funcs_p + 0xb8));
+    if (0x37 < uVar2) {
+      (**(code **)(_r_plf_funcs_p + 8))(0,"emi.c",0x27c1,*(code **)(_r_plf_funcs_p + 8));
+    }
+    if ((int)uVar2 < 0x30) {
+      iVar4 = 0x1800c481;
+    }
+    else {
+      iVar4 = 0x1800c488;
+    }
+    puVar5 = (uint *)((iVar4 + uVar2) * 4);
+    *puVar5 = (uint)(iVar1 << 0xc) >> 0xe | *puVar5 & 0xfffc0000;
+    if (0x37 < uVar2) {
+      (**(code **)(_r_plf_funcs_p + 8))(0,"emi.c",0x27fa,*(code **)(_r_plf_funcs_p + 8));
+    }
+    if ((int)uVar2 < 0x20) {
+      uVar2 = 1 << (uVar2 & 0x1f);
+      _DAT_600312c4 = ~uVar2 & _DAT_600312c4 | uVar2;
+    }
+    else if ((int)uVar2 < 0x30) {
+      uVar2 = 1 << (uVar2 - 0x20 & 0x1f);
+      _DAT_600312c8 = ~uVar2 & _DAT_600312c8 | uVar2;
+    }
+    else {
+      uVar2 = 1 << (uVar2 - 0x30 & 0x1f);
+      _DAT_60031300 = ~uVar2 & _DAT_60031300 | uVar2;
+    }
+    uVar3 = 0;
+  }
+  return uVar3;
+}
+

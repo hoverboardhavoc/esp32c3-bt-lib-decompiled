@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 70f95a1b6f8f232018b17c687cc819044501774c
- * https://github.com/espressif/esp32c3-bt-lib/commit/70f95a1b6f8f232018b17c687cc819044501774c
- * Upstream date: 2024-04-02 18:59:02 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5274796)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> lld_per_adv.o -> r_lld_per_adv_sched
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,13 +35,13 @@ void r_lld_per_adv_sched(int param_1)
       return;
     }
     cVar2 = cVar2 + -1;
-    *(char *)(iVar1 + 0x16) = *(char *)(iVar1 + 0x16) + DAT_0001101b;
+    *(char *)(iVar1 + 0x16) = *(char *)(iVar1 + 0x16) + DAT_0001301b;
     *(uint *)(iVar1 + 4) = *(int *)(iVar1 + 4) + *(int *)(iVar1 + 0x40) & 0xfffffff;
     *(short *)(iVar1 + 0x4c) = *(short *)(iVar1 + 0x4c) + 1;
   } while (cVar2 != '\0');
                     /* WARNING: Could not recover jumptable at 0x000100cc. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_plf_funcs_p + 0xc))("lld_per_adv.c",0x13b);
+  (**(code **)(_r_plf_funcs_p + 0xc))("lld_per_adv.c",0x13e);
   return;
 }
 

@@ -1,0 +1,28 @@
+/*
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Source: libbtdm_app_flash -> hci_tl.o -> r_hci_tl_init
+ *
+ * (C) Espressif, Apache License 2.0.
+ * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
+ * Decompiler output may be incomplete or differ from original semantics.
+ */
+
+void r_hci_tl_init(int param_1)
+
+{
+  if (param_1 == 0) {
+    memset(&hci_tl_env,0,0x28);
+    r_co_list_init(&hci_tl_env);
+    r_co_list_init(&hci_tl_env);
+    r_assert_err = (code)0x1;
+    r_ke_event_callback_set(6,r_hci_tl_cmd_hdr_rx_evt_handler);
+    r_ke_event_callback_set(7,r_hci_tl_cmd_pld_rx_evt_handler);
+    r_ke_event_callback_set(5,r_hci_tl_hci_tx_done_evt_handler);
+  }
+  DAT_0001101d = 5;
+  return;
+}
+

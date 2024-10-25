@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a6ca5e21f7afabe00db544003419be77e89b9a99
- * https://github.com/espressif/esp32c3-bt-lib/commit/a6ca5e21f7afabe00db544003419be77e89b9a99
- * Upstream date: 2024-06-25 16:47:31 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(66b5cc0)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> rwip_driver.o -> r_rwip_timer_hus_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,7 +17,7 @@ void r_rwip_timer_hus_handler_hack(void)
 {
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   r_rwip_timer_hus_handler();
-                    /* WARNING: Could not recover jumptable at 0x000105fe. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001075e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))();
   return;

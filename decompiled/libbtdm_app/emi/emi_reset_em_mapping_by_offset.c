@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d874f55e1132416fe18293ae1aa9ac73c40b3261
- * https://github.com/espressif/esp32c3-bt-lib/commit/d874f55e1132416fe18293ae1aa9ac73c40b3261
- * Upstream date: 2024-09-02 19:56:58 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(8ce789b)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> emi.o -> emi_reset_em_mapping_by_offset
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,13 +36,13 @@ void emi_reset_em_mapping_by_offset(void)
   }
   if (((1 << (uVar5 & 0x1f) & uVar4) >> (uVar5 & 0x1f) & 0xff) == 0) {
     if (0x37 < uVar3) {
-_L89:
+_L164:
       (**(code **)(_r_plf_funcs_p + 8))(0,"emi.c",0x27c8,*(code **)(_r_plf_funcs_p + 8));
     }
     if (0x2f < (int)uVar3) {
-_L90:
+_L165:
       iVar1 = 0x488;
-      goto _L101;
+      goto _L176;
     }
   }
   else {
@@ -52,18 +52,18 @@ _L90:
     if (0x1f < (int)uVar3) {
       if ((int)uVar3 < 0x30) {
         _DAT_600312c8 = ~(1 << (uVar3 - 0x20 & 0x1f)) & _DAT_600312c8;
-        goto _L87;
+        goto _L162;
       }
       _DAT_60031300 = ~(1 << (uVar3 - 0x30 & 0x1f)) & _DAT_60031300;
-      if (0x37 < uVar3) goto _L89;
-      goto _L90;
+      if (0x37 < uVar3) goto _L164;
+      goto _L165;
     }
     _DAT_600312c4 = ~(1 << (uVar3 & 0x1f)) & _DAT_600312c4;
-_L87:
-    if (0x37 < uVar3) goto _L89;
+_L162:
+    if (0x37 < uVar3) goto _L164;
   }
   iVar1 = 0x481;
-_L101:
+_L176:
   puVar2 = (uint *)((iVar1 + 0x1800c000 + uVar3) * 4);
   if ((*puVar2 & 0x3ffff) != 0) {
     if (0x37 < uVar3) {

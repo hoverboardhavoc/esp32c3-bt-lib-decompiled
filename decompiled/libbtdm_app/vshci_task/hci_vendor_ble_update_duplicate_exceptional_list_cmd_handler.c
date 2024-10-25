@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * https://github.com/espressif/esp32c3-bt-lib/commit/eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * Upstream date: 2024-10-20 16:32:16 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(52ee788)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> vshci_task.o -> hci_vendor_ble_update_duplicate_exceptional_list_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,39 +18,52 @@ hci_vendor_ble_update_duplicate_exceptional_list_cmd_handler(char *param_1,undef
 {
   char cVar1;
   undefined1 uVar2;
-  undefined1 *puVar3;
-  uint uVar4;
-  undefined4 uVar5;
+  int iVar3;
+  undefined1 *puVar4;
+  uint uVar5;
+  undefined4 uVar6;
   
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+  if (*(char *)(iVar3 + 0x23) == '\0') {
+    puVar4 = (undefined1 *)
+             (**(code **)(_r_modules_funcs_p + 200))
+                       (0x1101,0xfd08,0x10,*(code **)(_r_modules_funcs_p + 200));
+    *puVar4 = 0xc;
+    cVar1 = *param_1;
+    *(undefined4 *)(puVar4 + 4) = 0;
+    puVar4[1] = cVar1;
+    (**(code **)(_r_ip_funcs_p + 0x8c))(*(code **)(_r_ip_funcs_p + 0x8c));
+    return 0;
+  }
   uVar2 = (**(code **)(_r_ip_funcs_p + 0x8cc))
                     (*param_1,*(undefined4 *)(param_1 + 4),param_1 + 8,
                      *(code **)(_r_ip_funcs_p + 0x8cc));
-  puVar3 = (undefined1 *)
+  puVar4 = (undefined1 *)
            (**(code **)(_r_modules_funcs_p + 200))
                      (0x1101,param_2,0xfd08,0x10,*(code **)(_r_modules_funcs_p + 200));
-  *puVar3 = uVar2;
+  *puVar4 = uVar2;
   cVar1 = *param_1;
-  puVar3[1] = cVar1;
-  uVar4 = *(uint *)(param_1 + 4);
-  if (uVar4 == 1) {
-    uVar5 = 4;
+  puVar4[1] = cVar1;
+  uVar5 = *(uint *)(param_1 + 4);
+  if (uVar5 == 1) {
+    uVar6 = 4;
   }
   else {
-    if (uVar4 != 0) {
-      if (uVar4 < 5) {
-        *(undefined4 *)(puVar3 + 4) = 0;
+    if (uVar5 != 0) {
+      if (uVar5 < 5) {
+        *(undefined4 *)(puVar4 + 4) = 0;
       }
-      goto _L42;
+      goto _L130;
     }
-    uVar5 = 6;
+    uVar6 = 6;
   }
-  *(undefined4 *)(puVar3 + 4) = uVar5;
-_L42:
+  *(undefined4 *)(puVar4 + 4) = uVar6;
+_L130:
   if (cVar1 == '\x02') {
-    *(undefined4 *)(puVar3 + 4) = 0;
+    *(undefined4 *)(puVar4 + 4) = 0;
   }
-  memcpy(puVar3 + 8,param_1 + 8,*(size_t *)(puVar3 + 4));
-  (**(code **)(_r_ip_funcs_p + 0x8c))(puVar3,*(code **)(_r_ip_funcs_p + 0x8c));
+  memcpy(puVar4 + 8,param_1 + 8,*(size_t *)(puVar4 + 4));
+  (**(code **)(_r_ip_funcs_p + 0x8c))(puVar4,*(code **)(_r_ip_funcs_p + 0x8c));
   return 0;
 }
 

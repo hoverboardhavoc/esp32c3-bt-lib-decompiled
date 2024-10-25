@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> llm_scan.o -> hci_le_rmv_dev_from_per_adv_list_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,13 +18,18 @@ undefined4 hci_le_rmv_dev_from_per_adv_list_cmd_handler(byte *param_1,undefined4
   byte bVar1;
   uint uVar2;
   int iVar3;
-  undefined4 uVar4;
-  uint uVar5;
-  int iVar6;
+  int iVar4;
+  undefined4 uVar5;
+  uint uVar6;
   
+  iVar4 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
   iVar3 = _r_ip_funcs_p;
-  uVar4 = 0x12;
-  if ((param_1[7] < 0x10) && (uVar4 = 0x12, *param_1 < 2)) {
+  if (*(char *)(iVar4 + 0x18) == '\0') {
+    (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,0xc,*(code **)(_r_ip_funcs_p + 0x4b8));
+    return 0;
+  }
+  uVar5 = 0x12;
+  if ((param_1[7] < 0x10) && (uVar5 = 0x12, *param_1 < 2)) {
     if (*(char *)(_p_llm_env + 0xd7) != '\x01') {
       *(undefined1 *)(_p_llm_env + 0xd7) = 2;
       uVar2 = (**(code **)(iVar3 + 0x510))(0x12,*(code **)(iVar3 + 0x510));
@@ -33,15 +38,15 @@ undefined4 hci_le_rmv_dev_from_per_adv_list_cmd_handler(byte *param_1,undefined4
         uVar2 = (**(code **)(_r_ip_funcs_p + 0x4c8))
                           (param_1 + 1,*param_1,*(code **)(_r_ip_funcs_p + 0x4c8));
         iVar3 = _r_ip_funcs_p;
-        uVar4 = 0x42;
+        uVar5 = 0x42;
         if (uVar2 < 0xc) {
-          iVar6 = _p_llm_env + uVar2 * 10;
-          uVar4 = 0x42;
-          if ((*(byte *)(iVar6 + 0x2d) & 4) != 0) {
-            uVar5 = 1 << (param_1[7] & 0x1f);
-            *(ushort *)(iVar6 + 0x2a) = ~(ushort)uVar5 & *(ushort *)(iVar6 + 0x2a);
+          iVar4 = _p_llm_env + uVar2 * 10;
+          uVar5 = 0x42;
+          if ((*(byte *)(iVar4 + 0x2d) & 4) != 0) {
+            uVar6 = 1 << (param_1[7] & 0x1f);
+            *(ushort *)(iVar4 + 0x2a) = ~(ushort)uVar6 & *(ushort *)(iVar4 + 0x2a);
             (**(code **)(iVar3 + 0x25c))
-                      (param_1 + 1,*param_1,uVar5 & 0xffff,*(code **)(iVar3 + 0x25c));
+                      (param_1 + 1,*param_1,uVar6 & 0xffff,*(code **)(iVar3 + 0x25c));
             iVar3 = _p_llm_env + uVar2 * 10;
             if (*(short *)(iVar3 + 0x2a) == 0) {
               if ((*(byte *)(iVar3 + 0x2d) & 2) == 0) {
@@ -52,16 +57,16 @@ undefined4 hci_le_rmv_dev_from_per_adv_list_cmd_handler(byte *param_1,undefined4
               }
               *(byte *)(iVar3 + 0x2d) = *(byte *)(iVar3 + 0x2d) & bVar1;
             }
-            uVar4 = 0;
+            uVar5 = 0;
           }
         }
-        goto _L215;
+        goto _L263;
       }
     }
-    uVar4 = 0xc;
+    uVar5 = 0xc;
   }
-_L215:
-  (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,uVar4,*(code **)(_r_ip_funcs_p + 0x4b8));
+_L263:
+  (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,uVar5,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }
 

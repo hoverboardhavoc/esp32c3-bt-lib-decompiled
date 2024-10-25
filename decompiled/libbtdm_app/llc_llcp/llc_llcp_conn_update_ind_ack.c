@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0caae2bd70a999ac8a1c07330f7168e185db81ba
- * https://github.com/espressif/esp32c3-bt-lib/commit/0caae2bd70a999ac8a1c07330f7168e185db81ba
- * Upstream date: 2024-01-31 19:37:46 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(91980c2)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> llc_llcp.o -> llc_llcp_conn_update_ind_ack
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void llc_llcp_conn_update_ind_ack(undefined4 param_1)
   
   iVar1 = lld_con_llcp_proc_type_get();
   if (iVar1 == 1) {
-                    /* WARNING: Could not recover jumptable at 0x0001002a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000100ce. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_ip_funcs_p + 0x7d4))(param_1);
     return;

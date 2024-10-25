@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b223604efd557d0a5314afb3b751229df424d244
- * https://github.com/espressif/esp32c3-bt-lib/commit/b223604efd557d0a5314afb3b751229df424d244
- * Upstream date: 2021-06-24 21:26:02 +0800
- * Upstream subject: Update ESP32-C3 and ESP32-S3 bt lib (9c99115)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> rwip.o -> r_rwip_reset
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,10 +15,15 @@
 void r_rwip_reset(void)
 
 {
+  int iVar1;
+  
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   (**(code **)(_r_modules_funcs_p + 0x268))(_LANCHOR0,*(code **)(_r_modules_funcs_p + 0x268));
   (**(code **)(_r_modules_funcs_p + 0x130))(*(code **)(_r_modules_funcs_p + 0x130));
-  (**(code **)(_r_modules_funcs_p + 0x378))(_LANCHOR0,*(code **)(_r_modules_funcs_p + 0x378));
+  iVar1 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+  if (*(char *)(iVar1 + 0x20) != '\0') {
+    (**(code **)(_r_modules_funcs_p + 0x378))(_LANCHOR0,*(code **)(_r_modules_funcs_p + 0x378));
+  }
   (**(code **)(_r_ip_funcs_p + 0x73c))(_LANCHOR0,*(code **)(_r_ip_funcs_p + 0x73c));
   (**(code **)(_r_ip_funcs_p + 0x84))(_LANCHOR0,*(code **)(_r_ip_funcs_p + 0x84));
   if (*(code **)(_r_hli_funcs_p + 8) != (code *)0x0) {
@@ -40,7 +45,7 @@ void r_rwip_reset(void)
   _LANCHOR0 = 2;
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   _btdm_pwr_state = 0;
-                    /* WARNING: Could not recover jumptable at 0x0001032e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001034a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x38))(g_waking_sleeping_sem);
   return;

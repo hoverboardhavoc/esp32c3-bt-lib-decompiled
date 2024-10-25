@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
- * https://github.com/espressif/esp32c3-bt-lib/commit/4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
- * Upstream date: 2024-04-28 11:58:26 +0800
- * Upstream subject: fix(coex): Fixed some coexist issues(ba3b3e3)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> rf_coexist_hook.o -> bt_rf_coex_hook_st_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,8 +34,8 @@ void bt_rf_coex_hook_st_set(uint param_1,uint param_2,int param_3)
     if (param_3 != 0) goto _L42;
     _LANCHOR0 = 0;
     _LANCHOR3 = 0;
-    DAT_00010478 = 0;
-    DAT_0001047c = 0;
+    DAT_00010484 = 0;
+    DAT_00010488 = 0;
     pcVar8 = *(code **)(_r_osi_funcs_p + 0xbc);
     uVar4 = 0xffffffff;
   }

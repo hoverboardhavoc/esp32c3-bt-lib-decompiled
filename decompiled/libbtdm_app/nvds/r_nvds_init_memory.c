@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> nvds.o -> r_nvds_init_memory
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,10 +13,10 @@
 void r_nvds_init_memory(void)
 
 {
-  (*DAT_000106a8)(0,DAT_000106b0,DAT_000106a8);
+  (*DAT_000106e8)(0,DAT_000106f0,DAT_000106e8);
                     /* WARNING: Could not recover jumptable at 0x00010258. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (*DAT_000106a4)(0,4,"NVDSNVDS MAGIC FAILED\n");
+  (*DAT_000106e4)(0,4,"NVDSNVDS MAGIC FAILED\n");
   return;
 }
 

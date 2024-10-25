@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> llm_scan.o -> r_llm_adv_rep_flow_control_update_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,22 +12,32 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 r_llm_adv_rep_flow_control_update_eco(int param_1,undefined4 param_2)
+char r_llm_adv_rep_flow_control_update_eco(int param_1)
 
 {
-  int iVar1;
-  undefined4 uVar2;
+  char cVar1;
+  int iVar2;
   
   if (((*(char *)(_p_llm_env + 0xd7) == '\x01') ||
       ((*(char *)(_p_llm_env + 0xd7) == '\x02' && ((*(byte *)(param_1 + 0x15) & 0x10) != 0)))) &&
      (0x1f < *(byte *)(param_1 + 0x20))) {
-    return 1;
+    return '\x01';
   }
-  iVar1 = (**(code **)(_r_ip_funcs_p + 0x8d4))(*(code **)(_r_ip_funcs_p + 0x8d4));
-  if (iVar1 != 0) {
-    uVar2 = r_llm_adv_rep_flow_control_update(param_1,param_2);
-    return uVar2;
+  iVar2 = (**(code **)(_r_ip_funcs_p + 0x8d4))(*(code **)(_r_ip_funcs_p + 0x8d4));
+  if (iVar2 == 0) {
+    return '\x01';
   }
-  return 1;
+  cVar1 = DAT_0001403e;
+  if (DAT_0001403e != '\0') {
+    if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
+      if (_llm_le_adv_flow_env == 0) {
+        _memcmp = _memcmp + 1;
+        return DAT_0001403e;
+      }
+      _llm_le_adv_flow_env = _llm_le_adv_flow_env + -1;
+    }
+    cVar1 = '\0';
+  }
+  return cVar1;
 }
 

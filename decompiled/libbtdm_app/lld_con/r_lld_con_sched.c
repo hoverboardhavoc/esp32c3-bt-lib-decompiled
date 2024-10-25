@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bfdfe8f851c99ced8316b133b0b15521917ea049
- * https://github.com/espressif/esp32c3-bt-lib/commit/bfdfe8f851c99ced8316b133b0b15521917ea049
- * Upstream date: 2024-07-18 14:51:28 +0800
- * Upstream subject: feat(bt): Support mesh duplicate with extend scan (aa16a46)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_sched
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,7 +32,7 @@ void r_lld_con_sched(int param_1,int param_2,int param_3)
   
   iVar4 = *(int *)(&lld_con_env + param_1 * 4);
   uVar1 = *(ushort *)(iVar4 + 0x84);
-  uVar10 = (uint)DAT_00012026 << 1;
+  uVar10 = (uint)DAT_00016026 << 1;
   uVar5 = *(uint *)(iVar4 + 0x48);
   if ((uVar1 & 2) == 0) {
     *(undefined1 *)(iVar4 + 0x16) = 0x1f;
@@ -145,11 +145,11 @@ _L100:
       *(uint *)(iVar4 + 0x48) = uVar5;
       if ((*(ushort *)(iVar4 + 0x84) & 1) != 0) {
         *(short *)(iVar4 + 0x6c) = (short)iVar14;
-        *(uint *)(iVar4 + 0x4c) = uVar10 + (uint)DAT_00012026 * 2;
+        *(uint *)(iVar4 + 0x4c) = uVar10 + (uint)DAT_00016026 * 2;
       }
       return;
     }
-    *(char *)(iVar4 + 0x16) = *(char *)(iVar4 + 0x16) + DAT_00012019;
+    *(char *)(iVar4 + 0x16) = *(char *)(iVar4 + 0x16) + DAT_00016019;
     sVar8 = *(short *)(iVar4 + 0x7e);
     uVar5 = uVar5 + *(int *)(iVar4 + 100) & 0xfffffff;
     *(short *)(iVar4 + 0x7e) = sVar8 + 1;

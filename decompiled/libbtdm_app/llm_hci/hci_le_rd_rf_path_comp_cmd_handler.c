@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> llm_hci.o -> hci_le_rd_rf_path_comp_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,20 +16,23 @@ undefined4 hci_le_rd_rf_path_comp_cmd_handler(void)
 
 {
   undefined2 uVar1;
-  undefined2 uVar2;
+  undefined1 *puVar2;
   int iVar3;
-  undefined1 *puVar4;
+  undefined1 uVar4;
   
-  puVar4 = (undefined1 *)
+  puVar2 = (undefined1 *)
            (**(code **)(_r_modules_funcs_p + 200))
                      (0x1101,0,0x204c,6,*(code **)(_r_modules_funcs_p + 200));
-  uVar1 = *(undefined2 *)(_p_llm_env + 200);
-  uVar2 = *(undefined2 *)(_p_llm_env + 0xca);
-  *puVar4 = 0;
-  iVar3 = _r_ip_funcs_p;
-  *(undefined2 *)(puVar4 + 4) = uVar1;
-  *(undefined2 *)(puVar4 + 2) = uVar2;
-  (**(code **)(iVar3 + 0x8c))(*(code **)(iVar3 + 0x8c));
+  uVar1 = *(undefined2 *)(_p_llm_env + 0xca);
+  *(undefined2 *)(puVar2 + 4) = *(undefined2 *)(_p_llm_env + 200);
+  *(undefined2 *)(puVar2 + 2) = uVar1;
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+  uVar4 = 0xc;
+  if (*(char *)(iVar3 + 0x18) != '\0') {
+    uVar4 = 0;
+  }
+  *puVar2 = uVar4;
+  (**(code **)(_r_ip_funcs_p + 0x8c))(puVar2,*(code **)(_r_ip_funcs_p + 0x8c));
   return 0;
 }
 

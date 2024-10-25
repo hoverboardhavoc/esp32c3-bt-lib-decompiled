@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> nvds.o -> r_nvds_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,13 +23,13 @@ undefined4 r_nvds_init(undefined4 param_1,undefined4 param_2)
     uVar2 = 7;
   }
   else {
-    (**(code **)(_r_plf_funcs_p + 0x6c))(&DAT_000106b4,0,*(code **)(_r_plf_funcs_p + 0x6c));
-    if ((byte)(DAT_000106b4 - 1U) < 4) {
+    (**(code **)(_r_plf_funcs_p + 0x6c))(&DAT_000106f4,0,*(code **)(_r_plf_funcs_p + 0x6c));
+    if ((byte)(DAT_000106f4 - 1U) < 4) {
       _LANCHOR0 = *(undefined4 *)(_r_modules_funcs_p + 0x25c);
-      DAT_000106a4 = *(undefined4 *)(_r_modules_funcs_p + 0x264);
-      DAT_000106a8 = *(undefined4 *)(_r_modules_funcs_p + 0x238);
-      DAT_000106ac = param_1;
-      DAT_000106b0 = param_2;
+      DAT_000106e4 = *(undefined4 *)(_r_modules_funcs_p + 0x264);
+      DAT_000106e8 = *(undefined4 *)(_r_modules_funcs_p + 0x238);
+      DAT_000106ec = param_1;
+      DAT_000106f0 = param_2;
       iVar1 = (**(code **)(_r_modules_funcs_p + 0x248))(*(code **)(_r_modules_funcs_p + 0x248));
       uVar2 = 0;
       if (iVar1 == 0) {

@@ -1,0 +1,139 @@
+/*
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Source: libbtdm_app_flash -> llm_scan.o -> hci_le_set_scan_en_cmd_handler
+ *
+ * (C) Espressif, Apache License 2.0.
+ * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
+ * Decompiler output may be incomplete or differ from original semantics.
+ */
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined4 hci_le_set_scan_en_cmd_handler(char *param_1,undefined4 param_2)
+
+{
+  char cVar1;
+  int iVar2;
+  int iVar3;
+  undefined4 uVar4;
+  undefined4 *puVar5;
+  undefined2 *puVar6;
+  code *pcVar7;
+  int *piVar8;
+  byte *pbVar9;
+  byte abStack_21 [5];
+  
+  iVar3 = r_sdk_config_get_opts_ext();
+  if (*(char *)(iVar3 + 0x23) == '\0') {
+    r_llm_cmd_cmp_send(param_2,0xc);
+    return 0;
+  }
+  if (*(char *)(_p_llm_env + 0xd7) == '\x02') {
+_L745:
+    iVar3 = 0xc;
+  }
+  else {
+    *(undefined1 *)(_p_llm_env + 0xd7) = 1;
+    abStack_21[0] = 0;
+    while( true ) {
+      iVar3 = r_sdk_config_get_opts();
+      if (((uint)*(byte *)(iVar3 + 0xd) <= (uint)abStack_21[0]) ||
+         ((byte)(*(char *)(*(int *)(_p_llm_env + 8) + (uint)abStack_21[0] * 0x44 + 0x40) - 6U) < 3))
+      break;
+      abStack_21[0] = abStack_21[0] + 1;
+    }
+    if (*param_1 == '\0') {
+      iVar3 = r_sdk_config_get_opts();
+      if (((uint)*(byte *)(iVar3 + 0xd) <= (uint)abStack_21[0]) ||
+         (*(char *)((uint)abStack_21[0] * 0x44 + *(int *)(_p_llm_env + 8) + 0x40) != '\a')) {
+        iVar3 = 0xfe;
+        if ((_sdk_cfg_priv_opts & 4) != 0) goto _L720;
+        goto _L745;
+      }
+      iVar3 = r_lld_scan_stop();
+      if (iVar3 != 0) goto _L720;
+      *(undefined1 *)((uint)abStack_21[0] * 0x44 + *(int *)(_p_llm_env + 8) + 0x40) = 8;
+      if (_bt_rf_coex_hooks_p != (int *)0x0) {
+        pcVar7 = (code *)*_bt_rf_coex_hooks_p;
+        uVar4 = 0;
+        if (pcVar7 != (code *)0x0) goto _L770;
+      }
+    }
+    else {
+      if (*param_1 != '\x01') {
+        iVar3 = 0x12;
+        goto _L720;
+      }
+      iVar3 = 0x12;
+      if (1 < (byte)param_1[1]) goto _L720;
+      iVar3 = r_sdk_config_get_opts();
+      if ((uint)abStack_21[0] < (uint)*(byte *)(iVar3 + 0xd)) {
+        cVar1 = *(char *)((uint)abStack_21[0] * 0x44 + *(int *)(_p_llm_env + 8) + 0x40);
+        if (cVar1 == '\b') goto _L745;
+        iVar3 = 0x12;
+        if (cVar1 == '\a') {
+          cVar1 = param_1[1];
+          if (cVar1 != '\0') {
+            r_llm_env_adv_dup_filt_init_eco();
+          }
+          *(byte *)(_p_llm_env + 0xd4) = *(byte *)(_p_llm_env + 0xd4) & 0xfe | cVar1 != '\0';
+          goto _L733;
+        }
+      }
+      else {
+        iVar3 = r_llm_activity_free_get(abStack_21);
+        if (iVar3 != 0) goto _L720;
+      }
+      piVar8 = (int *)(*(int *)(_p_llm_env + 8) + (uint)abStack_21[0] * 0x44);
+      if (*piVar8 == 0) {
+        iVar2 = r_ke_msg_alloc(0,0,0,0x10);
+        *piVar8 = iVar2;
+        puVar5 = (undefined4 *)(*(int *)(_p_llm_env + 8) + (uint)abStack_21[0] * 0x44);
+        puVar6 = (undefined2 *)*puVar5;
+        puVar6[3] = 0x10;
+        puVar6[4] = 0x10;
+        *(undefined1 *)(puVar6 + 2) = 0;
+        *puVar6 = 0;
+        *(undefined1 *)(puVar6 + 1) = 1;
+        *(undefined1 *)(puVar5 + 0x10) = 6;
+      }
+      pbVar9 = *(byte **)(*(int *)(_p_llm_env + 8) + (uint)abStack_21[0] * 0x44);
+      if (((*pbVar9 & 0xfd) == 1) &&
+         ((iVar2 = r_co_bdaddr_compare(_p_llm_env + 0x12,&co_null_bdaddr), iVar2 != 0 ||
+          (((*pbVar9 == 3 && (iVar2 = r_lld_res_list_is_empty(), iVar2 != 0)) &&
+           (iVar2 = r_co_bdaddr_compare(_p_llm_env + 0x12,&co_null_bdaddr), iVar2 != 0)))))) {
+        if (iVar3 != 0) goto _L720;
+      }
+      else {
+        cVar1 = param_1[1];
+        if (cVar1 != '\0') {
+          r_llm_env_adv_dup_filt_init_eco();
+          llm_cal_duplicate_scan_defer_count(*(undefined2 *)(pbVar9 + 6));
+        }
+        iVar3 = _p_llm_env;
+        *(byte *)(_p_llm_env + 0xd4) = *(byte *)(_p_llm_env + 0xd4) & 0xfe | cVar1 != '\0';
+        *(undefined4 *)(*(int *)(iVar3 + 8) + (uint)abStack_21[0] * 0x44 + 0x28) = 0;
+        r_llm_scan_start_eco(0);
+        *(undefined1 *)((uint)abStack_21[0] * 0x44 + *(int *)(_p_llm_env + 8) + 0x40) = 7;
+        if ((_bt_rf_coex_hooks_p != (int *)0x0) &&
+           (pcVar7 = (code *)*_bt_rf_coex_hooks_p, pcVar7 != (code *)0x0)) {
+          uVar4 = 1;
+_L770:
+          (*pcVar7)(1,uVar4);
+        }
+      }
+    }
+_L733:
+    iVar3 = 0;
+    if (*param_1 == '\0') {
+      return 0;
+    }
+  }
+_L720:
+  r_llm_cmd_cmp_send(param_2,iVar3);
+  return 0;
+}
+

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
- * https://github.com/espressif/esp32c3-bt-lib/commit/4b1338827fa19fbacc02dd9e46e76be2b0dd17a9
- * Upstream date: 2024-04-28 11:58:26 +0800
- * Upstream subject: fix(coex): Fixed some coexist issues(ba3b3e3)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> rf_coexist_hook.o -> coex_hook_check_wifi_sleep
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ char coex_hook_check_wifi_sleep(void)
         return pcVar2[1];
       }
       pcVar2 = pcVar2 + 2;
-    } while (pcVar2 != (char *)0x1049a);
+    } while (pcVar2 != (char *)0x104a6);
     cVar1 = '\0';
   }
   return cVar1;

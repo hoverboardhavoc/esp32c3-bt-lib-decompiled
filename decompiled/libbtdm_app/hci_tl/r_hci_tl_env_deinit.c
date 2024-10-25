@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> hci_tl.o -> r_hci_tl_env_deinit
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,9 +19,9 @@ void r_hci_tl_env_deinit(void)
   
   iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   if (*(char *)(iVar1 + 0x17) == '\x01') {
-    (**(code **)(_r_osi_funcs_p + 0x7c))(_DAT_00011030,*(code **)(_r_osi_funcs_p + 0x7c));
+    (**(code **)(_r_osi_funcs_p + 0x7c))(_DAT_00012030,*(code **)(_r_osi_funcs_p + 0x7c));
   }
-  _DAT_00011030 = 0;
+  _DAT_00012030 = 0;
   return;
 }
 

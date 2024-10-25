@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a075a8fde411bdd92973051edf2cd234601b259c
- * https://github.com/espressif/esp32c3-bt-lib/commit/a075a8fde411bdd92973051edf2cd234601b259c
- * Upstream date: 2023-11-30 21:15:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(70ab55f)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> aes.o -> rw_crypto_aes_encrypt_sync
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,11 +13,11 @@
 void rw_crypto_aes_encrypt_sync(int param_1,int param_2,char param_3,int param_4)
 
 {
-  if ((((DAT_00011008 == '\0') && ((byte)(param_3 - 1U) < 0x10)) && (param_1 != 0)) &&
+  if ((((r_modules_funcs_p == '\0') && ((byte)(param_3 - 1U) < 0x10)) && (param_1 != 0)) &&
      ((param_2 != 0 && (param_4 != 0)))) {
-    DAT_00011008 = 1;
+    r_modules_funcs_p = 1;
     rwip_aes_encrypt_sync();
-    DAT_00011008 = '\0';
+    r_modules_funcs_p = '\0';
   }
   return;
 }

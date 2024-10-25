@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 70f95a1b6f8f232018b17c687cc819044501774c
- * https://github.com/espressif/esp32c3-bt-lib/commit/70f95a1b6f8f232018b17c687cc819044501774c
- * Upstream date: 2024-04-02 18:59:02 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5274796)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> llm.o -> r_llm_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -48,23 +48,28 @@ void r_llm_init(int param_1)
   pvVar4 = *(void **)((int)_p_llm_env + 8);
   iVar5 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   memset(pvVar4,0,(uint)*(byte *)(iVar5 + 0xd) * 0x44);
-  if ((*(int *)((int)_p_llm_env + 0xcc) != 0) && (*(char *)((int)_p_llm_env + 0xd7) == '\x02')) {
+  if (((*(int *)((int)_p_llm_env + 0xcc) != 0) && (*(char *)((int)_p_llm_env + 0xd7) == '\x02')) &&
+     (iVar5 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0)),
+     *(char *)(iVar5 + 0x23) != '\0')) {
     (**(code **)(_r_ip_funcs_p + 0x53c))(*(code **)(_r_ip_funcs_p + 0x53c));
   }
-  uVar6 = *(undefined4 *)((int)_p_llm_env + 0xcc);
   uVar1 = *(undefined1 *)((int)_p_llm_env + 0xd0);
+  uVar6 = *(undefined4 *)((int)_p_llm_env + 0xcc);
   memset(_p_llm_env,0,0xdc);
   pvVar2 = _p_llm_env;
   *(void **)((int)_p_llm_env + 8) = pvVar4;
-  *(undefined4 *)((int)pvVar2 + 0xcc) = uVar6;
   *(undefined1 *)((int)pvVar2 + 0xd0) = uVar1;
-  llm_exception_list_init();
-  llm_duplicate_list_init();
+  *(undefined4 *)((int)pvVar2 + 0xcc) = uVar6;
+  iVar5 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+  if (*(char *)(iVar5 + 0x23) != '\0') {
+    llm_exception_list_init();
+    llm_duplicate_list_init();
+  }
   pvVar4 = _p_llm_env;
   *(undefined2 *)((int)_p_llm_env + 0xc4) = 900;
   *(undefined4 *)((int)pvVar4 + 0x9c) = 0x148001b;
   *(undefined2 *)((int)pvVar4 + 0xa2) = 0x707;
-  memcpy(pvVar4,&_LANCHOR3,8);
+  memcpy(pvVar4,&_LANCHOR2,8);
   pvVar4 = _p_llm_env;
   memset((void *)((int)_p_llm_env + 0x18),0xff,5);
   *(undefined1 *)((int)pvVar4 + 0x1c) = 0x1f;

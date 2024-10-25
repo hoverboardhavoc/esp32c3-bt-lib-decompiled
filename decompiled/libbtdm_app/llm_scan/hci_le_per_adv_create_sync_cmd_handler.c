@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> llm_scan.o -> hci_le_per_adv_create_sync_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,6 +23,11 @@ undefined4 hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 param
   code *pcVar6;
   byte bStack_21;
   
+  iVar4 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+  if (*(char *)(iVar4 + 0x18) == '\0') {
+    (**(code **)(_r_ip_funcs_p + 0x4bc))(param_2,0xc,*(code **)(_r_ip_funcs_p + 0x4bc));
+    return 0;
+  }
   if (((((ushort)(*(short *)(param_1 + 0xc) - 10U) < 0x3ff7) && (*param_1 < 2)) && (param_1[2] < 2))
      && ((param_1[1] < 0x10 && (*(ushort *)(param_1 + 10) < 500)))) {
     if (((*param_1 != 1) || (iVar4 = llm_is_pal_empty(), iVar4 == 0)) &&
@@ -46,7 +51,7 @@ undefined4 hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 param
             piVar5 = (int *)(*(int *)(_p_llm_env + 8) + (uint)bStack_21 * 0x44);
             *(undefined1 *)(piVar5 + 0x10) = 0xe;
             if (*piVar5 != 0) {
-              (**(code **)(_r_plf_funcs_p + 8))("llm_scan.c",0x30c,*(code **)(_r_plf_funcs_p + 8));
+              (**(code **)(_r_plf_funcs_p + 8))("llm_scan.c",0x334,*(code **)(_r_plf_funcs_p + 8));
             }
             bVar1 = param_1[7];
             uVar3 = 1;
@@ -62,7 +67,7 @@ undefined4 hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 param
             }
           }
         }
-        goto _L144;
+        goto _L168;
       }
     }
     uVar3 = 0;
@@ -72,7 +77,7 @@ undefined4 hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 param
     uVar3 = 0;
     iVar4 = 0x12;
   }
-_L144:
+_L168:
   (**(code **)(_r_ip_funcs_p + 0x4bc))(param_2,iVar4,*(code **)(_r_ip_funcs_p + 0x4bc));
   return uVar3;
 }

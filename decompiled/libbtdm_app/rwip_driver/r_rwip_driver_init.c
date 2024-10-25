@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a6ca5e21f7afabe00db544003419be77e89b9a99
- * https://github.com/espressif/esp32c3-bt-lib/commit/a6ca5e21f7afabe00db544003419be77e89b9a99
- * Upstream date: 2024-06-25 16:47:31 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(66b5cc0)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> rwip_driver.o -> r_rwip_driver_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,18 +26,24 @@ void r_rwip_driver_init(uint param_1)
   ushort auStack_22 [3];
   
   if (param_1 == 0) {
-    (**(code **)(_r_modules_funcs_p + 0x100))
-              (2,*(undefined4 *)(_r_modules_funcs_p + 0x294),*(code **)(_r_modules_funcs_p + 0x100))
-    ;
+    iVar2 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+    if (*(char *)(iVar2 + 0x20) != '\0') {
+      (**(code **)(_r_modules_funcs_p + 0x100))
+                (2,*(undefined4 *)(_r_modules_funcs_p + 0x294),
+                 *(code **)(_r_modules_funcs_p + 0x100));
+    }
     if (sdk_cfg_priv_opts != '\0') {
       _DAT_6003138c = 0x1000;
     }
     _DAT_6003100c = _DAT_6003100c | 0x1180;
     (**(code **)(_r_modules_funcs_p + 0x2b4))(0x100,*(code **)(_r_modules_funcs_p + 0x2b4));
-    (**(code **)(_r_modules_funcs_p + 0x100))
-              (0xe,*(undefined4 *)(_r_ip_funcs_p + 0x24c),*(code **)(_r_modules_funcs_p + 0x100));
-    (**(code **)(_r_modules_funcs_p + 0x100))
-              (0xd,*(undefined4 *)(_r_ip_funcs_p + 0x2ac),*(code **)(_r_modules_funcs_p + 0x100));
+    iVar2 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+    if (*(char *)(iVar2 + 0x19) != '\0') {
+      (**(code **)(_r_modules_funcs_p + 0x100))
+                (0xe,*(undefined4 *)(_r_ip_funcs_p + 0x24c),*(code **)(_r_modules_funcs_p + 0x100));
+      (**(code **)(_r_modules_funcs_p + 0x100))
+                (0xd,*(undefined4 *)(_r_ip_funcs_p + 0x2ac),*(code **)(_r_modules_funcs_p + 0x100));
+    }
   }
   else if (param_1 < 3) {
     _rwip_env = 0xffffffff;
@@ -58,28 +64,28 @@ void r_rwip_driver_init(uint param_1)
     if ((cVar1 == '\x01') &&
        (iVar2 = (**(code **)(_r_plf_funcs_p + 0x34))(*(code **)(_r_plf_funcs_p + 0x34)), iVar2 != 0)
        ) {
-      rwip_prog_delay = DAT_00011017;
+      rwip_prog_delay = DAT_00012017;
       uStack_28 = 2;
       cStack_27 = cVar1;
       iVar2 = (*_rwip_param)(0x2e,&uStack_28,&rwip_env,_rwip_param);
       if (iVar2 != 0) {
-        _r_ip_funcs_p = CONCAT22(_DAT_00011016,400);
+        _r_ip_funcs_p = CONCAT22(_DAT_00012016,400);
       }
       uStack_28 = 2;
       _r_modules_funcs_p = 0;
       iVar2 = (*_rwip_param)(0xf,&uStack_28,auStack_22,_rwip_param);
       if (iVar2 != 0) {
-        auStack_22[0] = _r_rwip_timer_hus_handler;
+        auStack_22[0] = _rwip_rf;
       }
       uStack_28 = 2;
       iVar2 = (*_rwip_param)(0xe,&uStack_28,&uStack_24,_rwip_param);
       if (iVar2 != 0) {
-        uStack_24 = _DAT_0001102e;
+        uStack_24 = _DAT_0001202e;
       }
       uStack_28 = 2;
       iVar2 = (*_rwip_param)(0xd,&uStack_28,&uStack_26,_rwip_param);
       if (iVar2 != 0) {
-        uStack_26 = _DAT_00011030;
+        uStack_26 = _DAT_00012030;
       }
       auStack_22[0] =
            (**(code **)(_r_modules_funcs_p + 0x2a4))

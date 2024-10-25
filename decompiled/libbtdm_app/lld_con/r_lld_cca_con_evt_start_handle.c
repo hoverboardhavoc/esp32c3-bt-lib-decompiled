@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bfdfe8f851c99ced8316b133b0b15521917ea049
- * https://github.com/espressif/esp32c3-bt-lib/commit/bfdfe8f851c99ced8316b133b0b15521917ea049
- * Upstream date: 2024-07-18 14:51:28 +0800
- * Upstream subject: feat(bt): Support mesh duplicate with extend scan (aa16a46)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> lld_con.o -> r_lld_cca_con_evt_start_handle
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,11 +34,11 @@ void r_lld_cca_con_evt_start_handle(int param_1)
   iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
   uVar2 = *(undefined2 *)(iVar9 + iVar5 + 0x50);
   *(byte *)((int)puVar7 + 0xd) = bVar1;
-  puVar11 = puVar7 + 8;
   *(short *)((int)puVar7 + 0xe) = (short)(*(uint *)(param_1 + 100) >> 1);
+  puVar11 = puVar7 + 8;
   *(short *)(puVar7 + 5) =
-       (short)(((*(ushort *)((int)&max_data_tx_time + (uint)*(byte *)(param_1 + 0x94) * 2) + 0x96 +
-                (uint)*(ushort *)((int)&fixed_tx_time + (uint)*(byte *)(param_1 + 0x93) * 2)) * 2) /
+       (short)(((*(ushort *)(&max_data_tx_time + (uint)*(byte *)(param_1 + 0x94) * 2) + 0x96 +
+                (uint)*(ushort *)(&fixed_tx_time + (uint)*(byte *)(param_1 + 0x93) * 2)) * 2) /
                0x271 + 1 >> 1);
   *(undefined1 *)((int)puVar7 + 0x26) = *(undefined1 *)(param_1 + 0x46);
   iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
@@ -69,7 +69,7 @@ void r_lld_cca_con_evt_start_handle(int param_1)
   }
   *(undefined1 *)(puVar7 + 2) = uVar6;
   if ((code *)*puVar7 != (code *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x000112da. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010d9a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (*(code *)*puVar7)(uVar8,0);
     return;

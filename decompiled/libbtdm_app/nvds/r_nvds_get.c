@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> nvds.o -> r_nvds_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,6 +20,9 @@ int r_nvds_get(byte *param_1,undefined4 param_2)
   byte bStack_16;
   int iStack_14;
   
+  if (sdk_cfg_priv_opts == '\0') {
+    return 7;
+  }
   iVar1 = 7;
   if (sdk_cfg_priv_opts != '\0') {
     iVar1 = (**(code **)(_r_modules_funcs_p + 0x230))

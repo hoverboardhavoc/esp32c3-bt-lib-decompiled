@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c913171361dac0821e15e83cc0cf604149e1b84
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c913171361dac0821e15e83cc0cf604149e1b84
- * Upstream date: 2024-09-19 15:19:37 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(e9ae856)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_process_pkt_rx_adv_rep
  *
  * (C) Espressif, Apache License 2.0.
@@ -50,7 +50,7 @@ void r_lld_scan_process_pkt_rx_adv_rep(int param_1,undefined1 param_2,int param_
         iVar8 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
         if (((*(ushort *)(iVar8 + iVar12) >> 6 & 1) == 0) &&
            ((*(char *)(iVar6 + 0x70) == '\0' || ((*(byte *)(iVar6 + 0x67) & 0xc0) == 0xc0))))
-        goto _L186;
+        goto _L100;
       }
       if (*(char *)(param_4 + 8) != -1) {
         pcVar11 = *(code **)(_r_plf_funcs_p + 0xbc);
@@ -70,12 +70,12 @@ void r_lld_scan_process_pkt_rx_adv_rep(int param_1,undefined1 param_2,int param_
         memcpy(pvVar9,(void *)(iVar6 + 0x58),0x2c);
         if (*(char *)(iVar6 + 0x6e) == '\x02') {
           uVar10 = 2;
-_L189:
+_L103:
           (**(code **)(_r_ip_funcs_p + 0x3d8))(iVar6,uVar10,*(code **)(_r_ip_funcs_p + 0x3d8));
         }
         else {
           uVar10 = 3;
-          if (*(char *)(iVar6 + 0x6e) == '\0') goto _L189;
+          if (*(char *)(iVar6 + 0x6e) == '\0') goto _L103;
         }
         cVar1 = *(char *)(param_4 + 5);
         *(char *)((int)pvVar9 + 0x20) = cVar1;
@@ -92,16 +92,16 @@ _L189:
         *(undefined1 *)((int)pvVar9 + 0x14) = *(undefined1 *)(_lld_scan_env + 0xd);
         (**(code **)(_r_modules_funcs_p + 0xe0))(pvVar9,*(code **)(_r_modules_funcs_p + 0xe0));
       }
-      if (*(char *)(iVar6 + 0x6e) != -1) goto _L192;
+      if (*(char *)(iVar6 + 0x6e) != -1) goto _L106;
     }
     else {
-_L186:
+_L100:
       *(undefined1 *)(iVar6 + 0x6e) = 0xff;
     }
   }
   *(undefined2 *)(iVar6 + 0x36) = 0x673;
   *(undefined1 *)(iVar6 + 0x3d) = 0;
-_L192:
+_L106:
   *(undefined1 *)(iVar6 + 0x3f) = param_2;
   return;
 }

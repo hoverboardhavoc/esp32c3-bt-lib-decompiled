@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ef1dfc518572e9cda55f13906e32207b40ee280b
- * https://github.com/espressif/esp32c3-bt-lib/commit/ef1dfc518572e9cda55f13906e32207b40ee280b
- * Upstream date: 2024-08-07 12:57:51 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(f583012)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> llm.o -> esp_ble_controller_status_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -53,7 +53,7 @@ uint esp_ble_controller_status_check(void)
          -1 < *(short *)(iVar5 + iVar4 * 0x34) || (iVar4 == 0))) {
     iVar4 = iVar4 + 1;
     if (iVar4 == 10) {
-_L230:
+_L240:
       if (g_scan_forever != '\0') {
         uVar2 = uVar2 | 0x80000;
       }
@@ -111,6 +111,6 @@ _L230:
     }
   }
   uVar2 = uVar2 | 0x40000;
-  goto _L230;
+  goto _L240;
 }
 

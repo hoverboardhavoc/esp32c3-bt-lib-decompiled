@@ -1,0 +1,24 @@
+/*
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Source: libbtdm_app -> rwble.o -> r_ble_sw_cca_check_isr
+ *
+ * (C) Espressif, Apache License 2.0.
+ * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
+ * Decompiler output may be incomplete or differ from original semantics.
+ */
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void r_ble_sw_cca_check_isr(void)
+
+{
+                    /* WARNING: Could not recover jumptable at 0x000103b2. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(_r_ip_funcs_p + 0x2b0))
+            (_DAT_60031360 >> 0xc & 0xff,_DAT_60031360 >> 4 & 0x7f,_DAT_60031360 >> 0x1d & 1);
+  return;
+}
+

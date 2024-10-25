@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 73ae8322b2d7c990c195bfe3dca118ff43196f70
- * https://github.com/espressif/esp32c3-bt-lib/commit/73ae8322b2d7c990c195bfe3dca118ff43196f70
- * Upstream date: 2024-09-28 12:07:47 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(01cc408)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_clear_adv_sets_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 hci_le_clear_adv_sets_cmd_handler(undefined4 param_1)
+undefined4 hci_le_clear_adv_sets_cmd_handler(int param_1,undefined4 param_2)
 
 {
   char cVar1;
@@ -20,12 +20,20 @@ undefined4 hci_le_clear_adv_sets_cmd_handler(undefined4 param_1)
   int iVar3;
   undefined4 uVar4;
   
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+  if (*(char *)(iVar3 + 0x18) == '\0') {
+    (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,0xc,*(code **)(_r_ip_funcs_p + 0x4b8));
+    return 0;
+  }
   if (*(char *)(_p_llm_env + 0xd7) != '\x01') {
     *(undefined1 *)(_p_llm_env + 0xd7) = 2;
-    for (uVar2 = 0; iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38)),
-        uVar2 < *(byte *)(iVar3 + 0xd); uVar2 = uVar2 + 1 & 0xff) {
-      cVar1 = *(char *)(*(int *)(_p_llm_env + 8) + uVar2 * 0x44 + 0x40);
-      if (((byte)(cVar1 - 2U) < 2) || ((byte)(cVar1 - 0xcU) < 2)) break;
+    uVar2 = 0;
+    while (((param_1 = (**(code **)(_r_plf_funcs_p + 0x38))
+                                 (param_1,*(code **)(_r_plf_funcs_p + 0x38)),
+            uVar2 < *(byte *)(param_1 + 0xd) &&
+            (cVar1 = *(char *)(*(int *)(_p_llm_env + 8) + uVar2 * 0x44 + 0x40),
+            1 < (byte)(cVar1 - 2U))) && (1 < (byte)(cVar1 - 0xcU)))) {
+      uVar2 = uVar2 + 1 & 0xff;
     }
     iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
     if (*(byte *)(iVar3 + 0xd) <= uVar2) {
@@ -37,12 +45,12 @@ undefined4 hci_le_clear_adv_sets_cmd_handler(undefined4 param_1)
         }
       }
       uVar4 = 0;
-      goto _L553;
+      goto _L619;
     }
   }
   uVar4 = 0xc;
-_L553:
-  (**(code **)(_r_ip_funcs_p + 0x4b8))(param_1,uVar4,*(code **)(_r_ip_funcs_p + 0x4b8));
+_L619:
+  (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,uVar4,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }
 

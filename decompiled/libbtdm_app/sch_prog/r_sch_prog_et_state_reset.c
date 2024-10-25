@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> sch_prog.o -> r_sch_prog_et_state_reset
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ void r_sch_prog_et_state_reset(void)
   
   pcVar2 = (char *)(**(code **)(_r_ip_funcs_p + 0x920))(*(code **)(_r_ip_funcs_p + 0x920));
   if (*pcVar2 != '\0') {
-_L21:
+_L23:
     while (DAT_00011106 != '\0') {
       uVar5 = (uint)DAT_00011104;
       iVar1 = uVar5 * 0x10;
@@ -54,16 +54,16 @@ _L21:
         pcVar4 = *(code **)(_r_ip_funcs_p + 0x904);
         break;
       default:
-        goto _L24;
+        goto _L26;
       }
       (*pcVar4)(0xff,pcVar4);
     }
     *pcVar2 = '\0';
   }
   return;
-_L24:
+_L26:
   (**(code **)(_r_plf_funcs_p + 0xc))
-            (uVar5,uVar6,"sch_prog.c",0x125,*(code **)(_r_plf_funcs_p + 0xc));
-  goto _L21;
+            (uVar5,uVar6,"sch_prog.c",0x130,*(code **)(_r_plf_funcs_p + 0xc));
+  goto _L23;
 }
 

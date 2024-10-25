@@ -1,0 +1,262 @@
+/*
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_frm_isr
+ *
+ * (C) Espressif, Apache License 2.0.
+ * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
+ * Decompiler output may be incomplete or differ from original semantics.
+ */
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void r_lld_adv_frm_isr(int param_1,int param_2,int param_3)
+
+{
+  int iVar1;
+  ushort uVar2;
+  undefined1 *puVar3;
+  int iVar4;
+  uint uVar5;
+  bool bVar6;
+  undefined4 uVar7;
+  uint uVar8;
+  char cVar9;
+  byte bVar10;
+  code cVar11;
+  
+  iVar1 = *(int *)(&lld_adv_env + param_1 * 4);
+  if (iVar1 == 0) {
+    uVar7 = 0xa4b;
+    goto _L883;
+  }
+  if ((*(char *)(iVar1 + 0x95) == '\0') || (iVar4 = iVar1 + 0x34, *(int *)(iVar1 + 0x38) != param_2)
+     ) {
+    iVar4 = iVar1;
+  }
+  r_sch_arb_remove(iVar4,1);
+  bVar10 = *(char *)(iVar1 + 0x86) + 1;
+  *(byte *)(iVar1 + 0x86) = bVar10;
+  if ((*(char *)(iVar1 + 0x89) == '\x02') ||
+     ((*(ushort *)(iVar1 + 0x78) != 0 && (*(ushort *)(iVar1 + 0x78) <= (ushort)bVar10)))) {
+    while (iVar4 = r_lld_rxdesc_check_hack(param_1), iVar4 != 0) {
+      r_lld_rxdesc_free();
+    }
+    cVar9 = '\0';
+    if ((*(ushort *)(iVar1 + 0x78) != 0) &&
+       (*(ushort *)(iVar1 + 0x78) <= (ushort)*(byte *)(iVar1 + 0x86))) {
+      cVar9 = 'C';
+    }
+  }
+  else {
+    iVar4 = r_lld_adv_pkt_rx(*(undefined1 *)(iVar1 + 0x87));
+    if (iVar4 != 0) {
+      cVar9 = '\0';
+      bVar6 = false;
+      goto _L882;
+    }
+    if ((*(short *)(iVar1 + 0x24) != 0) &&
+       (((*(ushort *)(iVar1 + 0x74) & 0x10) == 0 || ((*(ushort *)(iVar1 + 0x74) & 0x14) == 0x10))))
+    {
+      r_lld_adv_adv_data_set(param_1,*(undefined1 *)(iVar1 + 0x28),1,1);
+      *(undefined2 *)(iVar1 + 0x24) = 0;
+    }
+    if ((*(short *)(iVar1 + 0x26) != 0) &&
+       (((*(ushort *)(iVar1 + 0x74) & 0x12) == 2 || ((*(ushort *)(iVar1 + 0x74) & 0x14) == 0x10))))
+    {
+      r_lld_adv_scan_rsp_data_set(param_1,*(undefined1 *)(iVar1 + 0x2a),1,1);
+      *(undefined2 *)(iVar1 + 0x26) = 0;
+    }
+    if (((*(ushort *)(iVar1 + 0x74) & 0x13) == 0) && (*(char *)(iVar1 + 0x94) != '\0')) {
+      if (*(int *)(iVar1 + 0x68) != 0) {
+        uVar2 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
+        *(ushort *)(iVar1 + 0x76) = *(ushort *)(iVar1 + 0x76) & 0xf000 | uVar2 & 0xfff;
+      }
+      r_lld_adv_ext_chain_construct(*(undefined1 *)(iVar1 + 0x87));
+      *(undefined1 *)(iVar1 + 0x94) = 0;
+    }
+    bVar10 = DAT_0001600f;
+    if ((*(ushort *)(iVar1 + 0x74) & 8) == 0) {
+      if ((*(ushort *)(iVar1 + 0x74) & 0x10) == 0) {
+        if ((*(char *)(iVar1 + 0x95) == '\0') || (*(int *)(iVar1 + 0x38) == param_2)) {
+          iVar4 = r_sdk_config_get_opts_ext();
+          if (*(char *)(iVar4 + 0x18) == '\0') {
+            r_assert_err(0,"lld_adv.c",0x9c3);
+          }
+          r_lld_adv_aux_ch_idx_set(param_1);
+          goto _L814;
+        }
+_L816:
+        cVar11 = r_assert_err;
+        if (param_3 == 0) {
+_L881:
+          *(code *)(iVar1 + 0x16) = cVar11;
+        }
+        else if ((uint)(*(int *)(iVar1 + 100) << 1) <=
+                 (param_2 - *(int *)(iVar1 + 0x5c) & 0xfffffffU)) {
+          cVar11 = (code)(*(char *)(iVar1 + 0x16) + DAT_0001600d);
+          goto _L881;
+        }
+        *(int *)(iVar1 + 0x5c) = param_2;
+        if (*(char *)(iVar1 + 0x95) != '\0') goto _L822;
+_L825:
+        if (*(int *)(iVar1 + 0x58) == -1) {
+          *(ushort *)(iVar1 + 0x14) = DAT_0001600d & 0xf | 0x6000;
+        }
+        else {
+          *(ushort *)(iVar1 + 0x14) = DAT_0001600d & 0xf | 0xa000;
+          *(int *)(iVar1 + 0xc) = *(int *)(iVar1 + 0x58);
+        }
+      }
+      else {
+_L814:
+        if ((*(char *)(iVar1 + 0x95) == '\0') || (*(int *)(iVar1 + 0x38) != param_2)) goto _L816;
+        cVar11 = r_emi_get_mem_addr_by_offset;
+        if (param_3 == 0) {
+_L880:
+          *(code *)(iVar1 + 0x4a) = cVar11;
+        }
+        else if ((uint)(*(int *)(iVar1 + 100) << 1) <=
+                 (param_2 - *(int *)(iVar1 + 0x60) & 0xfffffffU)) {
+          cVar11 = (code)(*(char *)(iVar1 + 0x4a) + DAT_00016011);
+          goto _L880;
+        }
+        *(int *)(iVar1 + 0x60) = param_2;
+_L822:
+        if (*(int *)(iVar1 + 4) != param_2) goto _L825;
+        *(ushort *)(iVar1 + 0x14) = DAT_0001600d & 0xf | 0xa000;
+        *(uint *)(iVar1 + 0xc) = *(int *)(iVar1 + 0x38) - *(int *)(iVar1 + 100) & 0xfffffff;
+      }
+      uVar5 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
+      uVar5 = uVar5 % 0x11;
+      iVar4 = uVar5 << 1;
+      if (*(char *)(iVar1 + 0x95) != '\0') {
+        if (uVar5 == 0) {
+          iVar4 = 1;
+        }
+        else if (uVar5 == 0x10) {
+          iVar4 = 0x1f;
+        }
+      }
+      if (g_adv_delay_dis != '\0') {
+        iVar4 = 0;
+      }
+      *(uint *)(iVar1 + 4) = iVar4 + *(int *)(iVar1 + 100) * 2 + param_2 & 0xfffffff;
+      iVar4 = r_sch_arb_insert(iVar1);
+      cVar9 = *(char *)(iVar1 + 0x95);
+      if (iVar4 == 0) {
+        *(undefined1 *)(iVar1 + 0x89) = 0;
+        if ((cVar9 != '\0') && (*(int *)(iVar1 + 0x38) == param_2)) {
+          uVar8 = *(uint *)(iVar1 + 0x58);
+          uVar5 = (uint)*(byte *)(iVar1 + 0x8f) * *(int *)(iVar1 + 100) * 2 + *(int *)(iVar1 + 4) &
+                  0xfffffff;
+          if (uVar8 == 0xffffffff) {
+            *(ushort *)(iVar1 + 0x48) = DAT_00016011 & 0xf | 0x6000;
+          }
+          else {
+            *(ushort *)(iVar1 + 0x48) = DAT_00016011 & 0xf | 0xa000;
+            *(uint *)(iVar1 + 0x40) = uVar8;
+            if ((uVar5 - uVar8 & 0xfffffff) < 0x7ffffff) {
+              uVar5 = uVar8;
+            }
+          }
+          *(uint *)(iVar1 + 0x38) = uVar5;
+          iVar4 = r_sch_arb_insert(iVar1 + 0x34);
+          if (iVar4 != 0) {
+            *(undefined1 *)(iVar1 + 0x95) = 0;
+            *(undefined4 *)(iVar1 + 0x10) = *(undefined4 *)(iVar1 + 0x44);
+          }
+        }
+        return;
+      }
+      if (cVar9 != '\0') {
+        *(undefined4 *)(iVar1 + 4) = 0xffffffff;
+        *(undefined1 *)(iVar1 + 0x89) = 0;
+      }
+      if (*(int *)(iVar1 + 0x58) == -1) {
+        if (cVar9 != '\0') {
+          return;
+        }
+        uVar7 = 0xa42;
+_L883:
+        r_assert_err(0,"lld_adv.c",uVar7);
+        return;
+      }
+      if (*(int *)(iVar1 + 0x58) != *(int *)(iVar1 + 0xc)) {
+        return;
+      }
+    }
+    else {
+      cVar9 = DAT_0001600e;
+      if (param_3 != 0) {
+        cVar9 = *(char *)(iVar1 + 0x16) + DAT_0001600f;
+      }
+      *(char *)(iVar1 + 0x16) = cVar9;
+      *(ushort *)(iVar1 + 0x14) = bVar10 & 0xf | 0xa000;
+      *(int *)(iVar1 + 4) = param_2;
+      *(undefined4 *)(iVar1 + 0xc) = *(undefined4 *)(iVar1 + 0x58);
+      iVar4 = r_sch_arb_insert(iVar1);
+      if (iVar4 == 0) {
+        *(undefined1 *)(iVar1 + 0x89) = 0;
+        return;
+      }
+    }
+    cVar9 = '<';
+  }
+  bVar6 = true;
+_L882:
+  iVar1 = *(int *)(&lld_adv_env + param_1 * 4);
+  if (iVar1 != 0) {
+    if ((((*(short *)(iVar1 + 0x24) != 0) && (*(short *)(iVar1 + 0x7e) != 0)) &&
+        (*(short *)(iVar1 + 0x24) != *(short *)(iVar1 + 0x7e))) &&
+       (((*(ushort *)(iVar1 + 0x74) & 0x10) == 0 || ((*(ushort *)(iVar1 + 0x74) & 0x14) == 0x10))))
+    {
+      iVar4 = (**(code **)(_r_osi_funcs_p + 0x6c))(*(code **)(_r_osi_funcs_p + 0x6c));
+      if (iVar4 == 0) {
+        r_ble_util_buf_adv_tx_free(*(undefined2 *)(iVar1 + 0x7e));
+      }
+      else {
+        r_ble_util_buf_adv_tx_free_in_isr(*(undefined2 *)(iVar1 + 0x7e));
+      }
+    }
+    if (((*(short *)(iVar1 + 0x26) != 0) && (*(short *)(iVar1 + 0x80) != 0)) &&
+       ((*(short *)(iVar1 + 0x26) != *(short *)(iVar1 + 0x80) &&
+        (((*(ushort *)(iVar1 + 0x74) & 0x12) == 2 || ((*(ushort *)(iVar1 + 0x74) & 0x14) == 0x10))))
+       )) {
+      iVar4 = (**(code **)(_r_osi_funcs_p + 0x6c))(*(code **)(_r_osi_funcs_p + 0x6c));
+      if (iVar4 == 0) {
+        r_ble_util_buf_adv_tx_free(*(undefined2 *)(iVar1 + 0x80));
+      }
+      else {
+        r_ble_util_buf_adv_tx_free_in_isr(*(undefined2 *)(iVar1 + 0x80));
+      }
+    }
+  }
+  iVar1 = *(int *)(&lld_adv_env + param_1 * 4);
+  if (iVar1 != 0) {
+    r_sch_arb_remove(iVar1,0);
+    if (*(char *)(iVar1 + 0x95) != '\0') {
+      r_sch_arb_remove(iVar1 + 0x34,0);
+    }
+    if ((*(ushort *)(iVar1 + 0x74) & 8) != 0) {
+      r_sch_slice_fg_remove(2);
+    }
+    if (bVar6) {
+      puVar3 = (undefined1 *)r_ke_msg_alloc(0x207,0,0xff,0x3c);
+      *puVar3 = (char)param_1;
+      puVar3[1] = cVar9;
+      puVar3[0x35] = 0;
+      if ((cVar9 != '\0') && (cVar9 = '\0', *(short *)(iVar1 + 0x78) != 0)) {
+        cVar9 = *(char *)(iVar1 + 0x86);
+      }
+      puVar3[0x38] = cVar9;
+      r_ke_msg_send();
+    }
+    r_ke_free(*(undefined4 *)(&lld_adv_env + param_1 * 4));
+    *(undefined4 *)(&lld_adv_env + param_1 * 4) = 0;
+  }
+  return;
+}
+

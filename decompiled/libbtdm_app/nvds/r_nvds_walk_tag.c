@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> nvds.o -> r_nvds_walk_tag
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ undefined4 r_nvds_walk_tag(int param_1,char *param_2,uint *param_3)
     uVar1 = 0;
     uVar2 = (uint)(byte)param_2[2] + param_1 + 3;
     *param_3 = uVar2;
-    if (DAT_000106b0 - 1U < uVar2) {
+    if (DAT_000106f0 - 1U < uVar2) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"nvds.c",0x199,*(code **)(_r_plf_funcs_p + 8));
       uVar1 = 6;
     }

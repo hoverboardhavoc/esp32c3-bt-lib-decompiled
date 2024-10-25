@@ -1,0 +1,33 @@
+/*
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Source: libbtdm_app -> lld_sync.o -> r_lld_sync_ch_map_update
+ *
+ * (C) Espressif, Apache License 2.0.
+ * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
+ * Decompiler output may be incomplete or differ from original semantics.
+ */
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined4 r_lld_sync_ch_map_update(int param_1,void *param_2,undefined2 param_3)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
+  iVar1 = *(int *)(&lld_sync_env + param_1 * 4);
+  uVar2 = 0xc;
+  if (iVar1 != 0) {
+    *(undefined2 *)(iVar1 + 0x50) = param_3;
+    memcpy((void *)(iVar1 + 0x5c),param_2,5);
+    *(undefined1 *)(iVar1 + 0x61) = 1;
+    uVar2 = 0;
+  }
+  (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
+  return uVar2;
+}
+

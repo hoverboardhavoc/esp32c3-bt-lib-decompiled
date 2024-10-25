@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 70f95a1b6f8f232018b17c687cc819044501774c
- * https://github.com/espressif/esp32c3-bt-lib/commit/70f95a1b6f8f232018b17c687cc819044501774c
- * Upstream date: 2024-04-02 18:59:02 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5274796)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> llm_init.o -> hci_le_create_con_cancel_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,20 +20,25 @@ undefined4 hci_le_create_con_cancel_cmd_handler(undefined4 param_1,undefined4 pa
   int iVar3;
   undefined4 uVar4;
   
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+  if (*(char *)(iVar3 + 0x22) == '\0') {
+    (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,0xc,*(code **)(_r_ip_funcs_p + 0x4b8));
+    return 0;
+  }
   uVar1 = 0;
-  while ((iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38)),
-         uVar1 < *(byte *)(iVar2 + 0xd) &&
+  while ((iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38)),
+         uVar1 < *(byte *)(iVar3 + 0xd) &&
          (*(char *)(*(int *)(_p_llm_env + 8) + uVar1 * 0x44 + 0x40) != '\x05'))) {
     uVar1 = uVar1 + 1 & 0xff;
   }
-  iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-  if (uVar1 < *(byte *)(iVar2 + 0xd)) {
-    iVar2 = uVar1 * 0x44;
-    if (*(int *)(*(int *)(_p_llm_env + 8) + iVar2) == 0) {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"llm_init.c",0x229,*(code **)(_r_plf_funcs_p + 8));
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
+  if (uVar1 < *(byte *)(iVar3 + 0xd)) {
+    iVar3 = uVar1 * 0x44;
+    if (*(int *)(*(int *)(_p_llm_env + 8) + iVar3) == 0) {
+      (**(code **)(_r_plf_funcs_p + 8))(0,"llm_init.c",0x23f,*(code **)(_r_plf_funcs_p + 8));
     }
-    iVar3 = (**(code **)(_r_ip_funcs_p + 0x498))(*(code **)(_r_ip_funcs_p + 0x498));
-    if (iVar3 == 0xc) {
+    iVar2 = (**(code **)(_r_ip_funcs_p + 0x498))(*(code **)(_r_ip_funcs_p + 0x498));
+    if (iVar2 == 0xc) {
       (**(code **)(_r_modules_funcs_p + 0xd0))
                 (param_1,0,param_2,*(code **)(_r_modules_funcs_p + 0xd0));
       return 1;
@@ -47,9 +52,9 @@ undefined4 hci_le_create_con_cancel_cmd_handler(undefined4 param_1,undefined4 pa
       (*(code *)*_bt_rf_coex_hooks_p)(uVar1,uVar4,0);
     }
     (**(code **)(_r_modules_funcs_p + 0xd8))
-              (*(int *)(*(int *)(_p_llm_env + 8) + iVar2) + -0xc,
+              (*(int *)(*(int *)(_p_llm_env + 8) + iVar3) + -0xc,
                *(code **)(_r_modules_funcs_p + 0xd8));
-    *(undefined4 *)(iVar2 + *(int *)(_p_llm_env + 8)) = 0;
+    *(undefined4 *)(iVar3 + *(int *)(_p_llm_env + 8)) = 0;
   }
   else {
     uVar4 = 0xc;

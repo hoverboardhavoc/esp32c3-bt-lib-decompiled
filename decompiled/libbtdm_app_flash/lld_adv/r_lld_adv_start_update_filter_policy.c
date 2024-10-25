@@ -1,0 +1,81 @@
+/*
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_start_update_filter_policy
+ *
+ * (C) Espressif, Apache License 2.0.
+ * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
+ * Decompiler output may be incomplete or differ from original semantics.
+ */
+
+void r_lld_adv_start_update_filter_policy(int param_1,int param_2)
+
+{
+  byte bVar1;
+  byte bVar2;
+  uint uVar3;
+  int iVar4;
+  int iVar5;
+  void *__dest;
+  ushort uVar6;
+  short sVar7;
+  int iVar8;
+  int iVar9;
+  
+  iVar9 = *(int *)(&lld_adv_env + param_1 * 4);
+  if (((*(byte *)(param_2 + 0x1e) & 2) != 0) &&
+     (uVar3 = r_lld_ral_search(param_2 + 6,*(undefined1 *)(param_2 + 0x1f)), uVar3 < 10)) {
+    iVar4 = r_emi_get_mem_addr_by_offset(0xc60);
+    if ((*(ushort *)(iVar4 + uVar3 * 0x34) >> 5 & 1) != 0) {
+      uVar6 = 1;
+      iVar9 = 1;
+      iVar4 = 1;
+      sVar7 = (short)uVar3 * 0x34 + 0xc60;
+      goto _L69;
+    }
+    if (((*(ushort *)(iVar9 + 0x74) & 4) != 0) &&
+       (iVar4 = r_emi_get_mem_addr_by_offset(0xc60),
+       (*(ushort *)(iVar4 + uVar3 * 0x34) >> 1 & 1) != 0)) {
+      uVar6 = 1;
+      iVar9 = 1;
+      iVar4 = 0;
+      sVar7 = (short)((uVar3 * 0x34 + 0xc60) * 0x10000 >> 0x10);
+      goto _L69;
+    }
+  }
+  if (*(char *)(param_2 + 0x27) == '\0') {
+    uVar6 = 0;
+  }
+  else {
+    uVar6 = (*(ushort *)(iVar9 + 0x74) >> 2 ^ 1) & 1;
+  }
+  iVar9 = 0;
+  iVar4 = 0;
+  sVar7 = 0;
+_L69:
+  bVar1 = *(byte *)(param_2 + 0x20);
+  bVar2 = *(byte *)(param_2 + 0x27);
+  iVar8 = param_1 * 0x5a;
+  iVar5 = r_emi_get_mem_addr_by_offset(0x400);
+  *(ushort *)(iVar5 + iVar8 + 0x14) =
+       (ushort)bVar1 << 8 | (ushort)bVar2 << 6 | uVar6 | (ushort)(iVar4 << 2) | (ushort)(iVar9 << 1)
+  ;
+  if (iVar9 == 0) {
+    __dest = (void *)r_emi_get_mem_addr_by_offset(param_1 * 0x5a + 0x42c);
+    memcpy(__dest,(void *)(param_2 + 6),6);
+    bVar1 = *(byte *)(param_2 + 0x1f);
+    if ((bVar1 & 0xfe) != 0) {
+      r_assert_err(0,"lld_adv.c",0x79b);
+    }
+    iVar9 = r_emi_get_mem_addr_by_offset(0x400);
+    *(ushort *)(iVar8 + 0x32 + iVar9) = (ushort)bVar1;
+  }
+  else {
+    iVar9 = r_emi_get_mem_addr_by_offset(0x400);
+    *(short *)(iVar8 + 0x2c + iVar9) = sVar7;
+  }
+  return;
+}
+

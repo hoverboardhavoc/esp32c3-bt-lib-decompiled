@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * https://github.com/espressif/esp32c3-bt-lib/commit/eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * Upstream date: 2024-10-20 16:32:16 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(52ee788)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> llc_llcp.o -> r_lld_llcp_rx_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,10 +25,10 @@ undefined4 r_lld_llcp_rx_ind_handler(undefined2 *param_1,uint param_2)
   int iVar8;
   int iVar9;
   uint uVar10;
-  char cStack_6f;
-  undefined2 uStack_6e;
-  byte abStack_6c [28];
-  byte abStack_50 [48];
+  char cStack_7f;
+  undefined2 uStack_7e;
+  byte abStack_7c [28];
+  byte abStack_60 [60];
   
   uVar10 = param_2 >> 8;
   iVar9 = *(int *)(&llc_env + uVar10 * 4);
@@ -38,92 +38,95 @@ undefined4 r_lld_llcp_rx_ind_handler(undefined2 *param_1,uint param_2)
     ;
   }
   iVar2 = (**(code **)(_r_ip_funcs_p + 0x5c4))(*(code **)(_r_ip_funcs_p + 0x5c4));
-  if ((iVar9 == 0) || ((*(ushort *)(iVar9 + 0x42) & 0x40) != 0)) goto _L20;
-  memcpy(abStack_6c,*(void **)(param_1 + 4),0x1b);
-  abStack_50[0] = abStack_6c[0];
-  if (abStack_6c[0] < 0x23) {
-    iVar8 = (uint)abStack_6c[0] * 0xc + iVar2;
+  if ((iVar9 == 0) || ((*(ushort *)(iVar9 + 0x42) & 0x40) != 0)) goto _L26;
+  memcpy(abStack_7c,*(void **)(param_1 + 4),0x1b);
+  abStack_60[0] = abStack_7c[0];
+  if (abStack_7c[0] < 0x23) {
+    iVar8 = (uint)abStack_7c[0] * 0xc + iVar2;
     if (*(ushort *)(iVar8 + 8) == (ushort)*(byte *)(param_1 + 1)) {
-      uStack_6e = 0x30;
+      uStack_7e = 0x30;
       iVar8 = (**(code **)(_r_modules_funcs_p + 0x18))
-                        (abStack_50,abStack_6c,&uStack_6e,*(undefined4 *)(iVar8 + 4),
+                        (abStack_60,abStack_7c,&uStack_7e,*(undefined4 *)(iVar8 + 4),
                          *(code **)(_r_modules_funcs_p + 0x18));
       if (iVar8 == 0) {
-        cStack_6f = '\0';
+        cStack_7f = '\0';
       }
       else {
-        cStack_6f = '\x1e';
+        cStack_7f = '\x1e';
       }
       bVar7 = *(byte *)(iVar9 + 0x44) & 3;
       if (bVar7 != 2) {
-        uVar5 = (uint)abStack_50[0];
+        uVar5 = (uint)abStack_60[0];
         if (bVar7 == 3) {
           bVar7 = *(byte *)(uVar5 * 0xc + iVar2 + 10) & 8;
         }
         else {
           if (bVar7 == 1) {
-            if ((*(byte *)(uVar5 * 0xc + iVar2 + 10) & 4) == 0) goto _L58;
-            goto _L22;
+            if ((*(byte *)(uVar5 * 0xc + iVar2 + 10) & 4) == 0) goto _L68;
+            goto _L28;
           }
           bVar7 = *(byte *)(uVar5 * 0xc + iVar2 + 10) & 1;
         }
-        if (bVar7 == 0) goto _L20;
+        if (bVar7 == 0) goto _L26;
       }
     }
     else {
-      cStack_6f = '\x19';
+      cStack_7f = '\x19';
     }
-_L22:
-    if (cStack_6f == '\0') {
-      if (0x22 < abStack_50[0]) {
+_L28:
+    if (cStack_7f == '\0') {
+      if (0x22 < abStack_60[0]) {
         (**(code **)(_r_plf_funcs_p + 0xc))
                   (param_2,"llc_llcp.c",0x18a,*(code **)(_r_plf_funcs_p + 0xc));
       }
-      cStack_6f = (**(code **)(_r_ip_funcs_p + 0x8ec))
-                            (uVar1,abStack_50,*param_1,*(code **)(_r_ip_funcs_p + 0x8ec));
+      cStack_7f = (**(code **)(_r_ip_funcs_p + 0x8ec))
+                            (uVar1,abStack_60,*param_1,*(code **)(_r_ip_funcs_p + 0x8ec));
       pcVar3 = (code *)(**(code **)(_r_ip_funcs_p + 0x8e8))
-                                 (abStack_50[0],*(code **)(_r_ip_funcs_p + 0x8e8));
-      if ((cStack_6f == '\0') && (pcVar3 != (code *)0x0)) {
-        cStack_6f = (*pcVar3)(uVar1,abStack_50,*param_1,pcVar3);
+                                 (abStack_60[0],*(code **)(_r_ip_funcs_p + 0x8e8));
+      if ((cStack_7f == '\0') && (pcVar3 != (code *)0x0)) {
+        cStack_7f = (*pcVar3)(uVar1,abStack_60,*param_1,pcVar3);
         (**(code **)(_r_ip_funcs_p + 0x8f0))
-                  (&cStack_6f,uVar1,abStack_50,*param_1,*(code **)(_r_ip_funcs_p + 0x8f0));
+                  (&cStack_7f,uVar1,abStack_60,*param_1,*(code **)(_r_ip_funcs_p + 0x8f0));
       }
-      if (((abStack_50[0] == 6) && (cStack_6f == '\0')) && ((*(ushort *)(iVar9 + 0x42) & 1) == 0)) {
+      if (((abStack_60[0] == 6) && (cStack_7f == '\0')) && ((*(ushort *)(iVar9 + 0x42) & 1) == 0)) {
         puVar4 = (ushort *)(**(code **)(_r_ip_funcs_p + 0x910))(*(code **)(_r_ip_funcs_p + 0x910));
         *puVar4 = (ushort)(1 << (uVar10 & 0x1f)) | *puVar4;
       }
     }
-    else if (cStack_6f == '\x19') {
-      cStack_6f = (**(code **)(_r_ip_funcs_p + 0x5c0))
-                            (uVar1,abStack_50[0],*param_1,*(code **)(_r_ip_funcs_p + 0x5c0));
+    else if (cStack_7f == '\x19') {
+      cStack_7f = (**(code **)(_r_ip_funcs_p + 0x5c0))
+                            (uVar1,abStack_60[0],*param_1,*(code **)(_r_ip_funcs_p + 0x5c0));
     }
-    if ((cStack_6f != '(') && (cStack_6f != '=')) {
-      if (cStack_6f != '\0') {
+    if ((cStack_7f != '(') && (cStack_7f != '=')) {
+      if (cStack_7f != '\0') {
         (**(code **)(_r_ip_funcs_p + 0x5bc))
-                  (uVar1,abStack_50[0],cStack_6f,0,*(code **)(_r_ip_funcs_p + 0x5bc));
+                  (uVar1,abStack_60[0],cStack_7f,0,*(code **)(_r_ip_funcs_p + 0x5bc));
       }
-      goto _L20;
+      goto _L26;
     }
     pcVar3 = *(code **)(_r_ip_funcs_p + 0x55c);
-    cVar6 = cStack_6f;
+    cVar6 = cStack_7f;
   }
   else {
-    cStack_6f = '\x19';
+    cStack_7f = '\x19';
     bVar7 = *(byte *)(iVar9 + 0x44) & 3;
-    if ((*(byte *)(iVar9 + 0x44) & 3) == 0) goto _L22;
+    if ((*(byte *)(iVar9 + 0x44) & 3) == 0) goto _L28;
     if (2 < bVar7) {
-      if (bVar7 == 3) goto _L20;
-      goto _L22;
+      if (bVar7 == 3) goto _L26;
+      goto _L28;
     }
-_L58:
+_L68:
     cVar6 = '=';
     pcVar3 = *(code **)(_r_ip_funcs_p + 0x55c);
   }
   (*pcVar3)(uVar1,cVar6,1,pcVar3);
-_L20:
+_L26:
   (**(code **)(_r_ip_funcs_p + 0x104))
             (param_1[2],*(undefined4 *)(param_1 + 4),*(code **)(_r_ip_funcs_p + 0x104));
-  (**(code **)(_r_ip_funcs_p + 0x610))(uVar1,*(code **)(_r_ip_funcs_p + 0x610));
+  iVar9 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+  if (*(char *)(iVar9 + 0x20) != '\0') {
+    (**(code **)(_r_ip_funcs_p + 0x610))(uVar1,*(code **)(_r_ip_funcs_p + 0x610));
+  }
   return 0;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> llm_scan.o -> r_llm_scan_start_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,19 +12,84 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_llm_scan_start_eco(undefined4 param_1,undefined4 param_2)
+void r_llm_scan_start_eco(int param_1,undefined4 param_2)
 
 {
-  char *pcVar1;
+  bool bVar1;
+  int iVar2;
+  char *pcVar3;
+  undefined4 *puVar4;
+  uint uVar5;
+  undefined4 uStack_28;
+  undefined2 uStack_24;
+  undefined1 uStack_22;
+  byte bStack_21;
+  ushort uStack_20;
+  ushort uStack_1e;
+  ushort uStack_1c;
+  ushort uStack_1a;
+  char cStack_18;
+  char cStack_17;
+  char cStack_16;
+  char cStack_15;
+  undefined4 uStack_14;
   
-  pcVar1 = (char *)(**(code **)(_r_ip_funcs_p + 0x914))(*(code **)(_r_ip_funcs_p + 0x914));
-  if (*pcVar1 != '\0') {
-    pcVar1[8] = '\0';
-    pcVar1[9] = '\0';
-    pcVar1[10] = '\0';
-    pcVar1[0xb] = '\0';
+  uStack_14 = param_2;
+  pcVar3 = (char *)(**(code **)(_r_ip_funcs_p + 0x914))(*(code **)(_r_ip_funcs_p + 0x914));
+  if (*pcVar3 != '\0') {
+    pcVar3[8] = '\0';
+    pcVar3[9] = '\0';
+    pcVar3[10] = '\0';
+    pcVar3[0xb] = '\0';
   }
-  r_llm_scan_start(param_1,param_2);
+  puVar4 = (undefined4 *)(*(int *)(_p_llm_env + 8) + param_1 * 0x44);
+  pcVar3 = (char *)*puVar4;
+  bStack_21 = pcVar3[2];
+  uStack_1c = 0;
+  bVar1 = (bStack_21 & 1) != 0;
+  if (bVar1) {
+    cStack_18 = pcVar3[4];
+    uStack_20 = *(ushort *)(pcVar3 + 6);
+    uStack_1c = *(ushort *)(pcVar3 + 8);
+  }
+  uStack_1a = 0;
+  if ((bStack_21 & 4) != 0) {
+    cStack_17 = pcVar3[(uint)bVar1 * 6 + 4];
+    uStack_1e = *(ushort *)(pcVar3 + (uint)bVar1 * 6 + 6);
+    uStack_1a = *(ushort *)(pcVar3 + (uint)bVar1 * 6 + 8);
+  }
+  if (bStack_21 == 5) {
+    uVar5 = (uint)uStack_1c + (uint)uStack_1a;
+    if (uStack_20 < uVar5) {
+      uStack_20 = (ushort)uVar5;
+    }
+    if (uStack_1e < uVar5) {
+      uStack_1e = (ushort)uVar5;
+    }
+  }
+  cStack_16 = *pcVar3;
+  cStack_15 = pcVar3[1];
+  uStack_22 = (undefined1)uStack_14;
+  uStack_14 = CONCAT22(*(undefined2 *)(puVar4 + 10),(undefined2)uStack_14);
+  uStack_14 = CONCAT31(uStack_14._1_3_,*(undefined1 *)(_p_llm_env + 0xc6));
+  if (cStack_16 != '\x01') {
+    if ((cStack_16 == '\0') || (cStack_16 == '\x02')) {
+      uStack_28 = *(undefined4 *)(_p_llm_env + 0xc);
+      uStack_24 = *(undefined2 *)(_p_llm_env + 0x10);
+      goto _L671;
+    }
+    if (cStack_16 != '\x03') {
+      (**(code **)(_r_plf_funcs_p + 0xc))(0,"llm_scan.c",0x8c2,*(code **)(_r_plf_funcs_p + 0xc));
+      goto _L671;
+    }
+  }
+  memcpy(&uStack_28,(void *)(_p_llm_env + 0x12),6);
+_L671:
+  iVar2 = (**(code **)(_r_ip_funcs_p + 0x438))(param_1,&uStack_28,*(code **)(_r_ip_funcs_p + 0x438))
+  ;
+  if (iVar2 != 0) {
+    (**(code **)(_r_plf_funcs_p + 8))(0,"llm_scan.c",0x8ca,*(code **)(_r_plf_funcs_p + 8));
+  }
   return;
 }
 

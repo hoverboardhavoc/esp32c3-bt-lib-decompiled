@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ef1dfc518572e9cda55f13906e32207b40ee280b
- * https://github.com/espressif/esp32c3-bt-lib/commit/ef1dfc518572e9cda55f13906e32207b40ee280b
- * Upstream date: 2024-08-07 12:57:51 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(f583012)
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
  * Source: libbtdm_app -> lld.o -> lld_wl_rpa_res
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,7 +32,7 @@ int lld_wl_rpa_res(void *param_1,byte *param_2,int param_3)
         *param_2 = (byte)*(undefined2 *)(iVar2 + uVar3 * 0x34) & 1;
         __src = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
                                   ((uVar3 & 0xff) * 0x34 + 0xc78,*(code **)(_r_plf_funcs_p + 0xbc));
-        goto _L280;
+        goto _L285;
       }
       uVar3 = uVar3 + 1;
     } while (uVar3 != 10);
@@ -43,7 +43,7 @@ int lld_wl_rpa_res(void *param_1,byte *param_2,int param_3)
         if ((*piVar4 != 0) && (iVar1 = lld_rpa_res(*piVar4 + 7,param_1), iVar1 != 0)) {
           *param_2 = *(byte *)(&lld_wl_res_list)[iVar2];
           __src = (void *)((&lld_wl_res_list)[iVar2] + 1);
-_L280:
+_L285:
           memcpy(param_1,__src,6);
           return iVar1;
         }

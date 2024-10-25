@@ -1,0 +1,46 @@
+/*
+ * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
+ * Upstream date: 2024-10-25 10:35:57 +0800
+ * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Source: libbtdm_app -> lld_sync.o -> r_lld_sync_frm_skip_isr
+ *
+ * (C) Espressif, Apache License 2.0.
+ * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
+ * Decompiler output may be incomplete or differ from original semantics.
+ */
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void r_lld_sync_frm_skip_isr(int param_1)
+
+{
+  bool bVar1;
+  code *UNRECOVERED_JUMPTABLE;
+  int iVar2;
+  
+  iVar2 = *(int *)(&lld_sync_env + param_1 * 4);
+  if (iVar2 != 0) {
+    (**(code **)(_r_ip_funcs_p + 0x6b8))(iVar2,1,*(code **)(_r_ip_funcs_p + 0x6b8));
+    if (*(char *)(iVar2 + 99) == '\x01') {
+      (**(code **)(_r_ip_funcs_p + 0x178))(param_1,*(code **)(_r_ip_funcs_p + 0x178));
+      *(undefined1 *)(iVar2 + 99) = 0;
+    }
+    bVar1 = *(char *)(iVar2 + 0x5b) != '\x02';
+    if (bVar1) {
+      UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0x16c);
+    }
+    else {
+      UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0x13c);
+    }
+                    /* WARNING: Could not recover jumptable at 0x0001135e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    (*UNRECOVERED_JUMPTABLE)(*(undefined1 *)(iVar2 + 0x55),bVar1);
+    return;
+  }
+                    /* WARNING: Could not recover jumptable at 0x0001138c. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(_r_plf_funcs_p + 8))(0,"lld_sync.c",1099);
+  return;
+}
+
