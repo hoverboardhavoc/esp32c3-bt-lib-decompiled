@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
+ * Upstream date: 2024-11-25 10:28:56 +0800
+ * Upstream subject: fix(bt): Fixed BLE assert ke_mem.c line 267(d7561c2)
  * Source: libbtdm_app -> rwip.o -> r_rwip_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,16 +21,15 @@ void r_rwip_init(void)
   
   _rwip_param = *(undefined4 *)(_r_modules_funcs_p + 0x23c);
   _btdm_env_p = *(undefined4 **)(_r_modules_funcs_p + 600);
-  _sdk_cfg_priv_opts = *(undefined4 *)(_r_modules_funcs_p + 0x234);
+  _r_plf_funcs_p = *(int *)(_r_modules_funcs_p + 0x234);
   _LANCHOR0 = 0;
   (**(code **)(_r_modules_funcs_p + 0x134))(*(code **)(_r_modules_funcs_p + 0x134));
   (**(code **)(_r_modules_funcs_p + 0x124))
             (0,*_btdm_env_p,*(undefined2 *)(_btdm_env_p + 1),*(code **)(_r_modules_funcs_p + 0x124))
   ;
-  if (sdk_cfg_priv_opts != '\0') {
+  if (_btdm_env_p[7] != 0) {
     (**(code **)(_r_modules_funcs_p + 0x124))
-              (1,_btdm_env_p[6],*(undefined2 *)(_btdm_env_p + 7),
-               *(code **)(_r_modules_funcs_p + 0x124));
+              (1,_btdm_env_p[6],_btdm_env_p[7] & 0xffff,*(code **)(_r_modules_funcs_p + 0x124));
   }
   (**(code **)(_r_modules_funcs_p + 0x124))
             (2,_btdm_env_p[2],*(undefined2 *)(_btdm_env_p + 3),
@@ -73,7 +72,7 @@ void r_rwip_init(void)
   (**(code **)(_r_modules_funcs_p + 0x288))(1,*(code **)(_r_modules_funcs_p + 0x288));
   _LANCHOR0 = 1;
   _btdm_pwr_state = 0;
-                    /* WARNING: Could not recover jumptable at 0x000101cc. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000101c6. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x38))(g_waking_sleeping_sem);
   return;

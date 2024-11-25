@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
+ * Upstream date: 2024-11-25 10:28:56 +0800
+ * Upstream subject: fix(bt): Fixed BLE assert ke_mem.c line 267(d7561c2)
  * Source: libbtdm_app -> arch_main.o -> r_assert_err
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,7 +31,7 @@ void r_assert_err(undefined4 param_1,undefined4 param_2)
   uVar2 = (**(code **)(_r_modules_funcs_p + 0x278))
                     (uVar2,uVar3,uVar1,extraout_a1,1,*(code **)(_r_modules_funcs_p + 0x278));
   ebreak();
-                    /* WARNING: Could not recover jumptable at 0x000119b6. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000119be. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0x278))(uVar1,uVar4,uVar2,extraout_a1_00,0);
   return;

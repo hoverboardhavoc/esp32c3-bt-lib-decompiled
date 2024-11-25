@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
+ * Upstream date: 2024-11-25 10:28:56 +0800
+ * Upstream subject: fix(bt): Fixed BLE assert ke_mem.c line 267(d7561c2)
  * Source: libbtdm_app -> arch_main.o -> btdm_rw_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,11 +39,11 @@ char * btdm_rw_run(char *param_1)
       if ((*pcVar1 != '\0') && (_btdm_pwr_state == 0)) {
         pll_track_state =
              (**(code **)(_r_modules_funcs_p + 0x2c4))(*(code **)(_r_modules_funcs_p + 0x2c4));
-        uVar2 = pll_track_state - DAT_00011b58 & 0xfffffff;
+        uVar2 = pll_track_state - DAT_00011b60 & 0xfffffff;
         pcVar1 = (char *)0x0;
-        DAT_00011b54 = extraout_a1;
+        DAT_00011b5c = extraout_a1;
         if ((uVar2 < 0x8000001) && (0xc80 < uVar2)) {
-          DAT_00011b58 = pll_track_state;
+          DAT_00011b60 = pll_track_state;
           bt_track_pll_cap(0);
           pcVar1 = (char *)0x1;
         }

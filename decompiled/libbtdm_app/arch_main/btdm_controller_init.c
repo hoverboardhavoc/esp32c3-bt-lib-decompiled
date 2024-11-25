@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
+ * Upstream date: 2024-11-25 10:28:56 +0800
+ * Upstream subject: fix(bt): Fixed BLE assert ke_mem.c line 267(d7561c2)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -82,7 +82,7 @@ undefined4 btdm_controller_init(int *param_1)
           if ((*(char *)((int)param_1 + 0x17) == '\0') &&
              (iVar12 = (**(code **)((int)_r_plf_funcs_p + 0xe8))
                                  (param_1[6],*(code **)((int)_r_plf_funcs_p + 0xe8)), iVar12 != 0))
-          goto _L450;
+          goto _L448;
           iVar12 = (**(code **)((int)_r_plf_funcs_p + 0x38))(*(code **)((int)_r_plf_funcs_p + 0x38))
           ;
           uStack_34 = *(undefined1 *)(iVar12 + 0xd);
@@ -165,17 +165,20 @@ undefined4 btdm_controller_init(int *param_1)
               cVar10 = DAT_0001302e;
               piVar8[4] = iVar12;
               piVar8 = _btdm_env_p;
+              iVar12 = 1;
               if (cVar10 != '\0') {
-                pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
-                _btdm_env_p[7] = 0xc0c;
-                iVar12 = (*pcVar15)(pcVar15);
-                piVar8[6] = iVar12;
+                iVar12 = 0xc00;
               }
-              if ((((*_btdm_env_p != 0) && (_btdm_env_p[2] != 0)) && (_btdm_env_p[4] != 0)) &&
-                 ((_btdm_env_p[7] == 0 || (_btdm_env_p[6] != 0)))) {
+              pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
+              _btdm_env_p[7] = (iVar12 + 3U & 0xfffffffc) + 0xc;
+              iVar12 = (*pcVar15)(pcVar15);
+              piVar9 = _btdm_env_p;
+              piVar8[6] = iVar12;
+              if ((((*piVar9 != 0) && (piVar9[2] != 0)) && (piVar9[4] != 0)) &&
+                 ((piVar9[7] == 0 || (piVar9[6] != 0)))) {
                 if (2 < _g_bt_plf_log_level) {
                   ets_printf("RWIP Heap alloc: ENV [%p %d], MSG [%p %d], NORET [%p %d], DB [%p %d]\n"
-                             ,_btdm_env_p[1],_btdm_env_p[3],_btdm_env_p[5],_btdm_env_p[6]);
+                             ,piVar9[1],piVar9[3],piVar9[5],piVar9[6]);
                 }
                 iVar12 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                    (*(code **)((int)_r_plf_funcs_p + 0x38));
@@ -282,24 +285,24 @@ _L352:
         }
         if (0 < _g_bt_plf_log_level) {
           pcVar11 = "Default Tx Power Invalid: 0x%x\n";
-          goto _L451;
+          goto _L449;
         }
       }
       else if (0 < _g_bt_plf_log_level) {
         pcVar11 = "Invalid scan backoff upperlimitmax: 0x%x\n";
-        goto _L451;
+        goto _L449;
       }
     }
     else if (0 < _g_bt_plf_log_level) {
       pcVar11 = "Hardware Target Code Invalid: 0x%x\n";
-_L451:
+_L449:
       ets_printf(pcVar11);
     }
   }
   else if (0 < _g_bt_plf_log_level) {
     ets_printf("Config struct mismatch: magic=%08x, ver=%08x\n",0x5a5aa5a5,0x2410230);
   }
-_L450:
+_L448:
   uVar14 = 0xfffffffd;
 _L333:
   btdm_controller_deinit_internal();
