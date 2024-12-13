@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_frm_skip_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,13 +23,13 @@ void r_lld_adv_frm_skip_isr(uint param_1,int param_2)
   
   iVar1 = *(int *)(&lld_adv_env + param_1 * 4);
   if (iVar1 == 0) {
-    uVar5 = 0xab0;
-_L946:
+    uVar5 = 0xb35;
+_L983:
     r_assert_err(0,"lld_adv.c",uVar5);
     return;
   }
   if (1 < (byte)(*(char *)(iVar1 + 0x89) - 1U)) {
-    r_assert_err(0,"lld_adv.c",0xa65);
+    r_assert_err(0,"lld_adv.c",0xaea);
   }
   if (*(char *)(iVar1 + 0x89) == '\x02') {
     cVar4 = '\0';
@@ -47,13 +47,13 @@ _L946:
         *(char *)(iVar1 + 0x16) = *(char *)(iVar1 + 0x16) + rwip_priority;
       }
       iVar3 = r_sch_arb_insert(iVar1);
-      if (iVar3 == 0) goto _L939;
+      if (iVar3 == 0) goto _L976;
       if (*(char *)(iVar1 + 0x95) != '\0') {
         return;
       }
       if (*(int *)(iVar1 + 0x58) == -1) {
-        uVar5 = 0xaa4;
-        goto _L946;
+        uVar5 = 0xb29;
+        goto _L983;
       }
     }
     else {
@@ -65,13 +65,13 @@ _L946:
       }
       iVar3 = r_sch_arb_insert(iVar1 + 0x34);
       if (iVar3 == 0) {
-_L939:
+_L976:
         *(undefined1 *)(iVar1 + 0x89) = 0;
         return;
       }
       if (*(int *)(iVar1 + 0x58) == -1) {
-        uVar5 = 0xa82;
-        goto _L946;
+        uVar5 = 0xb07;
+        goto _L983;
       }
     }
     cVar4 = '<';

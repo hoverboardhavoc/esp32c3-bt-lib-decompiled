@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_frm_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,19 +31,19 @@ void r_lld_adv_frm_cbk(int param_1,uint param_2,int param_3)
         return;
       }
       if (param_3 != 4) {
-        r_assert_param(param_3,"lld_adv.c",0xad1);
+        r_assert_param(param_3,"lld_adv.c",0xb56);
         return;
       }
       param_2 = param_2 & 0xff;
       iVar2 = *(int *)(&lld_adv_env + param_2 * 4);
       if (iVar2 == 0) {
-        uVar7 = 0xab0;
-_L946:
+        uVar7 = 0xb35;
+_L983:
         r_assert_err(0,"lld_adv.c",uVar7);
         return;
       }
       if (1 < (byte)(*(char *)(iVar2 + 0x89) - 1U)) {
-        r_assert_err(0,"lld_adv.c",0xa65);
+        r_assert_err(0,"lld_adv.c",0xaea);
       }
       if (*(char *)(iVar2 + 0x89) == '\x02') {
         cVar6 = '\0';
@@ -62,13 +62,13 @@ _L946:
             *(char *)(iVar2 + 0x16) = *(char *)(iVar2 + 0x16) + rwip_priority;
           }
           iVar5 = r_sch_arb_insert(iVar2);
-          if (iVar5 == 0) goto _L939;
+          if (iVar5 == 0) goto _L976;
           if (*(char *)(iVar2 + 0x95) != '\0') {
             return;
           }
           if (*(int *)(iVar2 + 0x58) == -1) {
-            uVar7 = 0xaa4;
-            goto _L946;
+            uVar7 = 0xb29;
+            goto _L983;
           }
         }
         else {
@@ -81,13 +81,13 @@ _L946:
           }
           iVar5 = r_sch_arb_insert(iVar2 + 0x34);
           if (iVar5 == 0) {
-_L939:
+_L976:
             *(undefined1 *)(iVar2 + 0x89) = 0;
             return;
           }
           if (*(int *)(iVar2 + 0x58) == -1) {
-            uVar7 = 0xa82;
-            goto _L946;
+            uVar7 = 0xb07;
+            goto _L983;
           }
         }
         cVar6 = '<';
@@ -148,21 +148,21 @@ _L939:
   param_2 = param_2 & 0xff;
   iVar2 = *(int *)(&lld_adv_env + param_2 * 4);
   bVar1 = false;
-  if (iVar2 == 0) goto _L886;
+  if (iVar2 == 0) goto _L923;
   uVar8 = *(uint *)(iVar2 + 100);
   if ((uVar8 < 0x20) && (g_adv_delay_dis == '\0')) {
     bVar1 = true;
-    if (param_3 == 0) goto _L896;
+    if (param_3 == 0) goto _L933;
   }
   else {
     bVar1 = false;
-    if (param_3 != 0) goto _L886;
+    if (param_3 != 0) goto _L923;
     bVar1 = false;
-_L896:
+_L933:
     if (g_qa_test_config != '\0') {
-      DAT_00015cec = DAT_00015cec + 1;
+      DAT_00015e60 = DAT_00015e60 + 1;
     }
-    if (!bVar1) goto _L886;
+    if (!bVar1) goto _L923;
   }
   g_adv_delay_dis = '\x01';
   uVar4 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
@@ -179,7 +179,7 @@ _L896:
   bVar1 = true;
   *(uint *)(iVar2 + 100) = (uint)(iVar5 + *(int *)(iVar2 + 100) * 2) >> 1;
   unaff_s3 = uVar8;
-_L886:
+_L923:
   if ((adv_adv_data_need_to_set[param_2] != '\0') &&
      (((*(ushort *)(iVar2 + 0x74) & 0x10) == 0 || ((*(ushort *)(iVar2 + 0x74) & 0x14) == 0x10)))) {
     r_lld_adv_adv_data_set(param_2,*(undefined1 *)(iVar2 + 0x28),*(undefined2 *)(iVar2 + 0x24),1,1);

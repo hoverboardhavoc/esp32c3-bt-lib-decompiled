@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app_flash -> llm_scan.o -> f_lld_adv_rep_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -67,20 +67,20 @@ undefined4 f_lld_adv_rep_ind_handler_hack(char *param_1)
     if (uStack_62 == 0) {
       if (uVar6 != 0) {
         uVar5 = 0;
-        goto _L541;
+        goto _L556;
       }
-_L498:
+_L511:
       memcpy(&uStack_60,param_1 + 4,6);
     }
     else {
       uVar5 = (uStack_62 - 0xc60) / 0x34 & 0xff;
       if (uVar6 != 0) {
-_L541:
+_L556:
         iVar7 = r_emi_get_mem_addr_by_offset(0xc60);
         uVar18 = *(ushort *)(iVar7 + uVar5 * 0x34);
         memcpy(&uStack_50,param_1 + 4,6);
         uVar18 = uVar18 & 1 | 2;
-        if (uStack_62 == 0) goto _L498;
+        if (uStack_62 == 0) goto _L511;
       }
       iVar8 = r_emi_get_mem_addr_by_offset(0xc60);
       iVar7 = uVar5 * 0x34;
@@ -112,13 +112,13 @@ _L541:
       }
     }
     if ((param_1[0x15] & 4U) == 0) {
-_L511:
+_L524:
       bVar4 = 0;
     }
     else if (param_1[1] == '\0') {
       memcpy(&uStack_48,param_1 + 10,6);
       bVar4 = param_1[0x18];
-      if (bVar4 == 0) goto _L511;
+      if (bVar4 == 0) goto _L524;
       if ((param_1[0xf] & 0xc0U) != 0xc0) {
         bVar4 = 0xfe;
       }
@@ -134,7 +134,7 @@ _L511:
   iVar7 = r_llm_adv_rep_flow_control_check_eco(param_1,&uStack_60);
   if (iVar7 == 0) {
     if ((bVar13 & 0xfd) != 1) {
-      r_assert_err("llm_scan.c",0x71a);
+      r_assert_err("llm_scan.c",0x730);
     }
     if (((((param_1[0x15] & 4U) == 0) || ((uStack_44._1_1_ & 0xc0) != 0x40)) || (bVar4 != 0xfe)) ||
        (1 < pbVar19[1])) {
@@ -176,20 +176,36 @@ _L511:
         else if ((uVar6 & 3) == 2) {
           iVar7 = 1;
         }
-        iVar8 = 0;
         if (param_1[0x16] == '\x01') {
           iVar8 = (iVar7 != 0) + 1;
         }
+        else {
+          iVar8 = 0;
+          if ((iVar7 == 0) && (iVar8 = 0, param_1[0x16] == '\x02')) {
+            if (param_1[0x12] == '\0') {
+              uVar15 = 0;
+              uVar14 = 0xff;
+            }
+            else {
+              uVar14 = *(ushort *)(param_1 + 0x10) >> 0xc;
+              uVar15 = *(ushort *)(param_1 + 0x10) & 0xfff;
+            }
+            llm_adv_reports_list_remove
+                      (&uStack_60,uVar18,param_1[0x15],uVar14,uVar15,*(undefined2 *)(param_1 + 0x1e)
+                      );
+            iVar8 = 0;
+          }
+        }
         if (bVar13 == 1) {
-          bVar16 = *(byte *)(_p_llm_env + 0xd4) & 0xf3;
-          bVar13 = (byte)(iVar8 << 2);
+          bVar13 = *(byte *)(_p_llm_env + 0xd4) & 0xf3;
+          bVar16 = (byte)(iVar8 << 2);
         }
         else {
-          bVar16 = *(byte *)(_p_llm_env + 0xd4) & 0xcf;
-          bVar13 = (byte)(iVar8 << 4);
+          bVar13 = *(byte *)(_p_llm_env + 0xd4) & 0xcf;
+          bVar16 = (byte)(iVar8 << 4);
         }
         *(byte *)(_p_llm_env + 0xd4) = bVar16 | bVar13;
-        if (iVar7 != 0) goto _L517;
+        if (iVar7 != 0) goto _L530;
       }
       iVar7 = r_llm_adv_rep_flow_control_update_eco(param_1,&uStack_60);
       if (iVar7 == 0) {
@@ -237,7 +253,7 @@ _L511:
             *puVar12 = 0x10d;
             puVar12[1] = (ushort)(byte)param_1[0x15];
             if ((uVar5 < 0xe6) && ((param_1[0x16] & 0xfcU) != 0)) {
-              r_assert_param(0x60,"llm_scan.c",0x7bf);
+              r_assert_param(0x60,"llm_scan.c",0x7e2);
             }
             uVar18 = 0x20;
             if (uVar5 < 0xe6) {
@@ -271,7 +287,7 @@ _L511:
       }
     }
   }
-_L517:
+_L530:
   if (param_1[0x20] != '\0') {
     r_ble_util_buf_rx_free(*(undefined2 *)(param_1 + 0x22),*(undefined4 *)(param_1 + 0x24));
   }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app_flash -> llm_scan.o -> r_llm_send_adv_lost_event_to_host
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,13 +17,13 @@ void r_llm_send_adv_lost_event_to_host(void)
 {
   undefined1 *puVar1;
   
-  if ((DAT_00014086 != '\0') && (_llm_le_adv_flow_env != 0)) {
-    if (_memcmp <= _r_co_bdaddr_compare) {
+  if ((DAT_0001408a != '\0') && (_llm_le_adv_flow_env != 0)) {
+    if (_co_rate_to_phy <= _memcmp) {
       puVar1 = (undefined1 *)r_ke_msg_alloc(0x1104,0,0,8);
       *puVar1 = 0xf0;
-      *(uint *)(puVar1 + 4) = _r_co_bdaddr_compare;
+      *(uint *)(puVar1 + 4) = _memcmp;
       r_hci_send_2_host();
-      _r_co_bdaddr_compare = 0;
+      _memcmp = 0;
       _llm_le_adv_flow_env = _llm_le_adv_flow_env + -1;
     }
   }

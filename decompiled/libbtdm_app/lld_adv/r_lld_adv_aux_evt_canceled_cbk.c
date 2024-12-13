@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_aux_evt_canceled_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,9 +29,9 @@ void r_lld_adv_aux_evt_canceled_cbk(int param_1)
   cVar5 = rwip_priority;
   if (param_1 == 0) {
     UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
-    uVar8 = 0x941;
-_L801:
-                    /* WARNING: Could not recover jumptable at 0x00014394. Too many branches */
+    uVar8 = 0x9c6;
+_L836:
+                    /* WARNING: Could not recover jumptable at 0x00014526. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (*UNRECOVERED_JUMPTABLE)(0,"lld_adv.c",uVar8);
     return;
@@ -45,8 +45,8 @@ _L801:
   if (iVar7 != 0) {
     if (*(int *)(param_1 + 0x24) == -1) {
       UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
-      uVar8 = 0x93b;
-      goto _L801;
+      uVar8 = 0x9c0;
+      goto _L836;
     }
     bVar1 = *(byte *)(param_1 + 0x53);
     bVar2 = *(byte *)(param_1 + 0x5d);

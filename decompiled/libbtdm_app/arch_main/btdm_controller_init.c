@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
- * https://github.com/espressif/esp32c3-bt-lib/commit/d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
- * Upstream date: 2024-11-25 10:28:56 +0800
- * Upstream subject: fix(bt): Fixed BLE assert ke_mem.c line 267(d7561c2)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,7 +43,7 @@ undefined4 btdm_controller_init(int *param_1)
             (void *)(**(code **)(_r_osi_funcs_p + 0x78))(0x3d0,*(code **)(_r_osi_funcs_p + 0x78)),
       _r_modules_funcs_p == (void *)0x0)) ||
      (_r_ip_funcs_p =
-           (void *)(**(code **)(_r_osi_funcs_p + 0x78))(0x9e0,*(code **)(_r_osi_funcs_p + 0x78)),
+           (void *)(**(code **)(_r_osi_funcs_p + 0x78))(0x9e4,*(code **)(_r_osi_funcs_p + 0x78)),
      _r_ip_funcs_p == (void *)0x0)) {
     if (0 < _g_bt_plf_log_level) {
       ets_printf("Funcs table create fails\n");
@@ -54,7 +54,7 @@ undefined4 btdm_controller_init(int *param_1)
   }
   memcpy(_r_plf_funcs_p,&r_plf_funcs_ro,0x118);
   memcpy(_r_modules_funcs_p,&r_modules_funcs_ro,0x3d0);
-  memcpy(_r_ip_funcs_p,&r_ip_funcs_ro,0x9e0);
+  memcpy(_r_ip_funcs_p,&r_ip_funcs_ro,0x9e4);
   (**(code **)(_r_osi_funcs_p + 0xe4))(*(code **)(_r_osi_funcs_p + 0xe4));
   if ((*param_1 == 0x5a5aa5a5) && (param_1[1] == 0x2410230)) {
     if (((((uint)param_1[0xb] >> 0x10) - 1 & 0xff) < 2) &&

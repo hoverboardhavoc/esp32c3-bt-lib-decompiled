@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
- * https://github.com/espressif/esp32c3-bt-lib/commit/d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
- * Upstream date: 2024-11-25 10:28:56 +0800
- * Upstream subject: fix(bt): Fixed BLE assert ke_mem.c line 267(d7561c2)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_controller_get_compile_version_impl
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,6 +13,6 @@
 char * btdm_controller_get_compile_version_impl(void)
 
 {
-  return "d7561c2";
+  return "555b0a2";
 }
 

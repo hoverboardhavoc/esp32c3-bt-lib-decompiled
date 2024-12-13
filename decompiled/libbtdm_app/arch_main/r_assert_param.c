@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
- * https://github.com/espressif/esp32c3-bt-lib/commit/d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
- * Upstream date: 2024-11-25 10:28:56 +0800
- * Upstream subject: fix(bt): Fixed BLE assert ke_mem.c line 267(d7561c2)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app -> arch_main.o -> r_assert_param
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ void r_assert_param(undefined4 param_1,undefined4 param_2,undefined4 param_3,und
   uVar1 = (**(code **)(_r_modules_funcs_p + 0x278))
                     (param_3,param_4,param_1,param_2,1,*(code **)(_r_modules_funcs_p + 0x278));
   ebreak();
-                    /* WARNING: Could not recover jumptable at 0x000119be. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000119d8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0x278))(param_1,param_2,uVar1,extraout_a1,0);
   return;

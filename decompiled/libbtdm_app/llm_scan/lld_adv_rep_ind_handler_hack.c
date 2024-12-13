@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app -> llm_scan.o -> lld_adv_rep_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -114,13 +114,13 @@ undefined4 lld_adv_rep_ind_handler_hack(char *param_1)
       }
     }
     if ((param_1[0x15] & 4U) == 0) {
-_L508:
+_L521:
       bVar6 = 0;
     }
     else if (param_1[1] == '\0') {
       memcpy(&uStack_48,param_1 + 10,6);
       bVar6 = param_1[0x18];
-      if (bVar6 == 0) goto _L508;
+      if (bVar6 == 0) goto _L521;
       if ((param_1[0xf] & 0xc0U) != 0xc0) {
         bVar6 = 0xfe;
       }
@@ -137,10 +137,10 @@ _L508:
                      (param_1,&uStack_60,*(code **)(_r_ip_funcs_p + 0x530));
   if (iVar14 != 0) {
     cVar1 = param_1[0x20];
-    goto joined_r0x00011f08;
+    goto joined_r0x00011fc8;
   }
   if ((bVar15 & 0xfd) != 1) {
-    (**(code **)(_r_plf_funcs_p + 8))("llm_scan.c",0x71a,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))("llm_scan.c",0x730,*(code **)(_r_plf_funcs_p + 8));
   }
   if (((((param_1[0x15] & 4U) == 0) || ((uStack_44._1_1_ & 0xc0) != 0x40)) || (bVar6 != 0xfe)) ||
      (1 < pbVar19[1])) {
@@ -182,20 +182,35 @@ _L508:
       else if ((uVar8 & 3) == 2) {
         iVar14 = 1;
       }
-      iVar9 = 0;
       if (param_1[0x16] == '\x01') {
         iVar9 = (iVar14 != 0) + 1;
       }
+      else {
+        iVar9 = 0;
+        if ((iVar14 == 0) && (iVar9 = 0, param_1[0x16] == '\x02')) {
+          if (param_1[0x12] == '\0') {
+            uVar17 = 0;
+            uVar16 = 0xff;
+          }
+          else {
+            uVar16 = *(ushort *)(param_1 + 0x10) >> 0xc;
+            uVar17 = *(ushort *)(param_1 + 0x10) & 0xfff;
+          }
+          llm_adv_reports_list_remove
+                    (&uStack_60,uVar5,param_1[0x15],uVar16,uVar17,*(undefined2 *)(param_1 + 0x1e));
+          iVar9 = 0;
+        }
+      }
       if (bVar15 == 1) {
-        bVar18 = *(byte *)(_p_llm_env + 0xd4) & 0xf3;
-        bVar15 = (byte)(iVar9 << 2);
+        bVar15 = *(byte *)(_p_llm_env + 0xd4) & 0xf3;
+        bVar18 = (byte)(iVar9 << 2);
       }
       else {
-        bVar18 = *(byte *)(_p_llm_env + 0xd4) & 0xcf;
-        bVar15 = (byte)(iVar9 << 4);
+        bVar15 = *(byte *)(_p_llm_env + 0xd4) & 0xcf;
+        bVar18 = (byte)(iVar9 << 4);
       }
       *(byte *)(_p_llm_env + 0xd4) = bVar18 | bVar15;
-      if (iVar14 != 0) goto _L514;
+      if (iVar14 != 0) goto _L527;
     }
     iVar14 = (**(code **)(_r_ip_funcs_p + 0x534))
                        (param_1,&uStack_60,*(code **)(_r_ip_funcs_p + 0x534));
@@ -247,7 +262,7 @@ _L508:
           puVar13[1] = (ushort)(byte)param_1[0x15];
           if ((uVar7 < 0xe6) && ((param_1[0x16] & 0xfcU) != 0)) {
             (**(code **)(_r_plf_funcs_p + 0xc))
-                      (0x60,"llm_scan.c",0x7bf,*(code **)(_r_plf_funcs_p + 0xc));
+                      (0x60,"llm_scan.c",0x7e2,*(code **)(_r_plf_funcs_p + 0xc));
           }
           uVar5 = 0x20;
           if (uVar7 < 0xe6) {
@@ -280,9 +295,9 @@ _L508:
       }
     }
   }
-_L514:
+_L527:
   cVar1 = param_1[0x20];
-joined_r0x00011f08:
+joined_r0x00011fc8:
   if (cVar1 != '\0') {
     (**(code **)(_r_ip_funcs_p + 0x104))
               (*(undefined2 *)(param_1 + 0x22),*(undefined4 *)(param_1 + 0x24),

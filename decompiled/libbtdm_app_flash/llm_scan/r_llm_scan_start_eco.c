@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app_flash -> llm_scan.o -> r_llm_scan_start_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -76,18 +76,18 @@ void r_llm_scan_start_eco(int param_1,undefined4 param_2)
     if ((cStack_16 == '\0') || (cStack_16 == '\x02')) {
       uStack_28 = *(undefined4 *)(_p_llm_env + 0xc);
       uStack_24 = *(undefined2 *)(_p_llm_env + 0x10);
-      goto _L367;
+      goto _L380;
     }
     if (cStack_16 != '\x03') {
-      r_assert_param(0,"llm_scan.c",0x8c2);
-      goto _L367;
+      r_assert_param(0,"llm_scan.c",0x8e5);
+      goto _L380;
     }
   }
   memcpy(&uStack_28,(void *)(_p_llm_env + 0x12),6);
-_L367:
+_L380:
   iVar2 = r_lld_scan_start_eco(param_1,&uStack_28);
   if (iVar2 != 0) {
-    r_assert_err(0,"llm_scan.c",0x8ca);
+    r_assert_err(0,"llm_scan.c",0x8ed);
   }
   return;
 }

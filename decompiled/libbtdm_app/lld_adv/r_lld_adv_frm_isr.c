@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_frm_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,9 +28,9 @@ void r_lld_adv_frm_isr(int param_1,int param_2,int param_3)
   
   iVar1 = *(int *)(&lld_adv_env + param_1 * 4);
   if (iVar1 == 0) {
-    uVar6 = 0xa4b;
+    uVar6 = 0xad0;
     UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_plf_funcs_p + 8);
-    goto _L892;
+    goto _L927;
   }
   if ((*(char *)(iVar1 + 0x95) == '\0') || (iVar3 = iVar1 + 0x34, *(int *)(iVar1 + 0x38) != param_2)
      ) {
@@ -59,7 +59,7 @@ void r_lld_adv_frm_isr(int param_1,int param_2,int param_3)
       uVar6 = 0;
       uVar5 = 0;
       UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x1a0);
-      goto _L891;
+      goto _L926;
     }
     if ((*(short *)(iVar1 + 0x24) != 0) &&
        (((*(ushort *)(iVar1 + 0x74) & 0x10) == 0 || ((*(ushort *)(iVar1 + 0x74) & 0x14) == 0x10))))
@@ -84,56 +84,56 @@ void r_lld_adv_frm_isr(int param_1,int param_2,int param_3)
                 (*(undefined1 *)(iVar1 + 0x87),*(code **)(_r_ip_funcs_p + 0x1ac));
       *(undefined1 *)(iVar1 + 0x94) = 0;
     }
-    bVar9 = DAT_00017057;
+    bVar9 = DAT_0001705b;
     if ((*(ushort *)(iVar1 + 0x74) & 8) == 0) {
       if ((*(ushort *)(iVar1 + 0x74) & 0x10) == 0) {
         if ((*(char *)(iVar1 + 0x95) == '\0') || (*(int *)(iVar1 + 0x38) == param_2)) {
           iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
           if (*(char *)(iVar3 + 0x18) == '\0') {
-            (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x9c3,*(code **)(_r_plf_funcs_p + 8));
+            (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0xa48,*(code **)(_r_plf_funcs_p + 8));
           }
           (**(code **)(_r_ip_funcs_p + 0x184))(param_1,*(code **)(_r_ip_funcs_p + 0x184));
-          goto _L823;
+          goto _L858;
         }
-_L825:
+_L860:
         cVar8 = sch_slice_params;
         if (param_3 == 0) {
-_L890:
+_L925:
           *(char *)(iVar1 + 0x16) = cVar8;
         }
         else if ((uint)(*(int *)(iVar1 + 100) << 1) <=
                  (param_2 - *(int *)(iVar1 + 0x5c) & 0xfffffffU)) {
-          cVar8 = *(char *)(iVar1 + 0x16) + DAT_00017055;
-          goto _L890;
+          cVar8 = *(char *)(iVar1 + 0x16) + DAT_00017059;
+          goto _L925;
         }
         *(int *)(iVar1 + 0x5c) = param_2;
-        if (*(char *)(iVar1 + 0x95) != '\0') goto _L831;
-_L834:
+        if (*(char *)(iVar1 + 0x95) != '\0') goto _L866;
+_L869:
         if (*(int *)(iVar1 + 0x58) == -1) {
-          *(ushort *)(iVar1 + 0x14) = DAT_00017055 & 0xf | 0x6000;
+          *(ushort *)(iVar1 + 0x14) = DAT_00017059 & 0xf | 0x6000;
         }
         else {
-          *(ushort *)(iVar1 + 0x14) = DAT_00017055 & 0xf | 0xa000;
+          *(ushort *)(iVar1 + 0x14) = DAT_00017059 & 0xf | 0xa000;
           *(int *)(iVar1 + 0xc) = *(int *)(iVar1 + 0x58);
         }
       }
       else {
-_L823:
-        if ((*(char *)(iVar1 + 0x95) == '\0') || (*(int *)(iVar1 + 0x38) != param_2)) goto _L825;
+_L858:
+        if ((*(char *)(iVar1 + 0x95) == '\0') || (*(int *)(iVar1 + 0x38) != param_2)) goto _L860;
         cVar8 = rwip_coex_cfg;
         if (param_3 == 0) {
-_L889:
+_L924:
           *(char *)(iVar1 + 0x4a) = cVar8;
         }
         else if ((uint)(*(int *)(iVar1 + 100) << 1) <=
                  (param_2 - *(int *)(iVar1 + 0x60) & 0xfffffffU)) {
-          cVar8 = *(char *)(iVar1 + 0x4a) + DAT_00017059;
-          goto _L889;
+          cVar8 = *(char *)(iVar1 + 0x4a) + DAT_0001705d;
+          goto _L924;
         }
         *(int *)(iVar1 + 0x60) = param_2;
-_L831:
-        if (*(int *)(iVar1 + 4) != param_2) goto _L834;
-        *(ushort *)(iVar1 + 0x14) = DAT_00017055 & 0xf | 0xa000;
+_L866:
+        if (*(int *)(iVar1 + 4) != param_2) goto _L869;
+        *(ushort *)(iVar1 + 0x14) = DAT_00017059 & 0xf | 0xa000;
         *(uint *)(iVar1 + 0xc) = *(int *)(iVar1 + 0x38) - *(int *)(iVar1 + 100) & 0xfffffff;
       }
       uVar4 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
@@ -160,10 +160,10 @@ _L831:
           uVar4 = (uint)*(byte *)(iVar1 + 0x8f) * *(int *)(iVar1 + 100) * 2 + *(int *)(iVar1 + 4) &
                   0xfffffff;
           if (uVar7 == 0xffffffff) {
-            *(ushort *)(iVar1 + 0x48) = DAT_00017059 & 0xf | 0x6000;
+            *(ushort *)(iVar1 + 0x48) = DAT_0001705d & 0xf | 0x6000;
           }
           else {
-            *(ushort *)(iVar1 + 0x48) = DAT_00017059 & 0xf | 0xa000;
+            *(ushort *)(iVar1 + 0x48) = DAT_0001705d & 0xf | 0xa000;
             *(uint *)(iVar1 + 0x40) = uVar7;
             if ((uVar4 - uVar7 & 0xfffffff) < 0x7ffffff) {
               uVar4 = uVar7;
@@ -187,10 +187,10 @@ _L831:
         if (cVar8 != '\0') {
           return;
         }
-        uVar6 = 0xa42;
+        uVar6 = 0xac7;
         UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_plf_funcs_p + 8);
-_L892:
-                    /* WARNING: Could not recover jumptable at 0x000147d8. Too many branches */
+_L927:
+                    /* WARNING: Could not recover jumptable at 0x0001496a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
         (*UNRECOVERED_JUMPTABLE_00)(0,"lld_adv.c",uVar6);
         return;
@@ -200,9 +200,9 @@ _L892:
       }
     }
     else {
-      cVar8 = DAT_00017056;
+      cVar8 = DAT_0001705a;
       if (param_3 != 0) {
-        cVar8 = *(char *)(iVar1 + 0x16) + DAT_00017057;
+        cVar8 = *(char *)(iVar1 + 0x16) + DAT_0001705b;
       }
       *(char *)(iVar1 + 0x16) = cVar8;
       *(ushort *)(iVar1 + 0x14) = bVar9 & 0xf | 0xa000;
@@ -218,8 +218,8 @@ _L892:
     UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x1a0);
   }
   uVar5 = 1;
-_L891:
-                    /* WARNING: Could not recover jumptable at 0x00014458. Too many branches */
+_L926:
+                    /* WARNING: Could not recover jumptable at 0x000145ea. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*UNRECOVERED_JUMPTABLE_00)(param_1,uVar5,uVar6);
   return;

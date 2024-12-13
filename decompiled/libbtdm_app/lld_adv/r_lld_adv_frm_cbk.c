@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_frm_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,12 +28,12 @@ void r_lld_adv_frm_cbk(undefined4 param_1,undefined1 param_2,int param_3)
         return;
       }
       if (param_3 != 4) {
-                    /* WARNING: Could not recover jumptable at 0x00014b56. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00014ce8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-        (**(code **)(_r_plf_funcs_p + 0xc))(param_3,"lld_adv.c",0xad1);
+        (**(code **)(_r_plf_funcs_p + 0xc))(param_3,"lld_adv.c",0xb56);
         return;
       }
-                    /* WARNING: Could not recover jumptable at 0x00014b8e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00014d20. Too many branches */
                     /* WARNING: Treating indirect jump as call */
       (**(code **)(_r_ip_funcs_p + 0x1bc))(param_2,param_1);
       return;
@@ -41,7 +41,7 @@ void r_lld_adv_frm_cbk(undefined4 param_1,undefined1 param_2,int param_3)
     uVar1 = 0;
     UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0x1b8);
   }
-                    /* WARNING: Could not recover jumptable at 0x00014b6c. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00014cfe. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*UNRECOVERED_JUMPTABLE)(param_2,param_1,uVar1);
   return;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app -> arch_main.o -> r_rwip_eif_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,11 +18,11 @@ undefined * r_rwip_eif_get(int param_1)
   if (param_1 == 0) {
     _g_eif_api = *(undefined4 *)(_r_h4tl_eif_p + 0x18);
     _gpio_matrix_out = *(undefined4 *)(_r_h4tl_eif_p + 0x1c);
-    _DAT_00013118 = *(undefined4 *)(_r_h4tl_eif_p + 0x20);
-    _DAT_00013114 = *(undefined4 *)(_r_h4tl_eif_p + 0x24);
+    _DAT_0001311c = *(undefined4 *)(_r_h4tl_eif_p + 0x20);
+    _DAT_00013118 = *(undefined4 *)(_r_h4tl_eif_p + 0x24);
     return &g_eif_api;
   }
-  (**(code **)(_r_plf_funcs_p + 0xc))(0,"arch_main.c",0x758,*(code **)(_r_plf_funcs_p + 0xc));
+  (**(code **)(_r_plf_funcs_p + 0xc))(0,"arch_main.c",0x762,*(code **)(_r_plf_funcs_p + 0xc));
   return (undefined *)0x0;
 }
 

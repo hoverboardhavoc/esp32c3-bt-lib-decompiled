@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
+ * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
+ * Upstream date: 2024-12-13 13:39:25 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
  * Source: libbtdm_app_flash -> llm_scan.o -> lld_per_adv_rx_end_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,7 +38,7 @@ undefined4 lld_per_adv_rx_end_ind_handler_hack(byte *param_1,undefined4 param_2,
   bVar2 = *(byte *)(iVar4 + 0x40);
   if (bVar2 != 0xe) {
     if ((bVar2 < 0xe) || (0x10 < bVar2)) {
-      r_assert_err(0,"llm_scan.c",0xb49);
+      r_assert_err(0,"llm_scan.c",0xb6c);
     }
     else {
       uVar10 = *(undefined1 *)(iVar4 + 0x41);
@@ -76,13 +76,13 @@ undefined4 lld_per_adv_rx_end_ind_handler_hack(byte *param_1,undefined4 param_2,
         r_ke_msg_send();
       }
     }
-    goto _L675;
+    goto _L692;
   }
   if (param_1[1] == 0) {
     r_llm_cmd_cmp_send(0x2045,0,param_2,param_3);
     puVar8 = (undefined2 *)r_ke_msg_alloc(0x1104,0,0x3e,0x12);
     uVar11 = 0x440e;
-_L688:
+_L705:
     *puVar8 = uVar11;
     iVar4 = _p_llm_env;
     puVar8[1] = (ushort)bVar1;
@@ -99,13 +99,13 @@ _L688:
     if (param_1[1] == 8) {
       puVar8 = (undefined2 *)r_ke_msg_alloc(0x1104,0,0x3e,0x12);
       uVar11 = 0x3e0e;
-      goto _L688;
+      goto _L705;
     }
-    r_assert_param((uint)bVar1,"llm_scan.c",0xb3e);
+    r_assert_param((uint)bVar1,"llm_scan.c",0xb61);
   }
   r_ke_msg_free(*(int *)(*(int *)(_p_llm_env + 8) + iVar9) + -0xc);
   *(undefined4 *)(*(int *)(_p_llm_env + 8) + iVar9) = 0;
-_L675:
+_L692:
   *(undefined1 *)(iVar9 + *(int *)(_p_llm_env + 8) + 0x40) = 0;
   return 0;
 }
