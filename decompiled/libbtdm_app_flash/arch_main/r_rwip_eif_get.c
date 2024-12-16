@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
- * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
- * Upstream date: 2024-12-13 13:39:25 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
+ * Last changed at upstream commit 4c16da1a1a76b439e2cf981d2f915d94df364e58
+ * https://github.com/espressif/esp32c3-bt-lib/commit/4c16da1a1a76b439e2cf981d2f915d94df364e58
+ * Upstream date: 2024-12-16 11:11:02 +0800
+ * Upstream subject: fix(bt): Fixed that the resolvable private address does not change when light sleep is enabled(6bca137)
  * Source: libbtdm_app_flash -> arch_main.o -> r_rwip_eif_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ undefined * r_rwip_eif_get(int param_1)
 
 {
   if (param_1 != 0) {
-    r_assert_param(0,"arch_main.c",0x762);
+    r_assert_param(0,"arch_main.c",0x768);
   }
   _g_eif_api = *(undefined4 *)(_r_h4tl_eif_p + 0x18);
   _gpio_matrix_out = *(undefined4 *)(_r_h4tl_eif_p + 0x1c);
