@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_rxdesc_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,13 +31,13 @@ ushort r_lld_rxdesc_check(uint param_1)
     iVar7 = r_emi_get_mem_addr_by_offset(0x1000);
     if (-1 < *(short *)(uVar4 * 0x14 + iVar7)) {
       r_assert_param(*(undefined1 *)(_p_lld_env + 0xd9),*(undefined1 *)(_p_lld_env + 0xd8),"lld.c",
-                     0x4d0);
+                     0x4d8);
     }
     bVar2 = *(byte *)(_p_lld_env + 0xd9);
     iVar7 = r_emi_get_mem_addr_by_offset(0x1000);
     if (*(short *)((uint)bVar2 * 0x14 + 0x12 + iVar7) != 0) {
       r_assert_param(*(undefined1 *)(_p_lld_env + 0xd9),*(undefined1 *)(_p_lld_env + 0xd8),"lld.c",
-                     0x4d1);
+                     0x4d9);
     }
     bVar2 = *(byte *)(_p_lld_env + 0xd9);
     iVar6 = r_emi_get_mem_addr_by_offset(0x1000);

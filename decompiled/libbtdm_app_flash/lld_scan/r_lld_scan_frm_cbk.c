@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_frm_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,7 +41,7 @@ void r_lld_scan_frm_cbk(undefined4 param_1,uint param_2,int param_3)
   undefined2 uStack_44;
   
   if (1 < param_2) {
-    r_assert_param(param_2,param_3,"lld_scan.c",0xa01);
+    r_assert_param(param_2,param_3,"lld_scan.c",0xa04);
   }
   if (param_3 == 1) {
     uVar12 = 1;
@@ -51,7 +51,7 @@ void r_lld_scan_frm_cbk(undefined4 param_1,uint param_2,int param_3)
       if (param_3 == 2) {
         param_2 = param_2 & 0xff;
         if ((_lld_scan_env == 0) || (*(int *)(_lld_scan_env + param_2 * 4) == 0)) {
-          r_assert_err(0,"lld_scan.c",0x9a6);
+          r_assert_err(0,"lld_scan.c",0x9a9);
           return;
         }
         bVar1 = *(byte *)(_lld_scan_env + 0xd);
@@ -84,7 +84,7 @@ void r_lld_scan_frm_cbk(undefined4 param_1,uint param_2,int param_3)
                 r_lld_ext_scan_dynamic_pti_reset(iVar14);
               }
               uVar8 = uVar9;
-              if ((uVar6 - 3 & 0xfd) != 0) goto _L553;
+              if ((uVar6 - 3 & 0xfd) != 0) goto _L554;
             }
             else {
               iVar11 = r_emi_get_mem_addr_by_offset(0x1000);
@@ -92,7 +92,7 @@ void r_lld_scan_frm_cbk(undefined4 param_1,uint param_2,int param_3)
               iVar11 = r_emi_get_mem_addr_by_offset(0x1000);
               uVar8 = (uint)((uVar4 & 0x3f) < *(ushort *)(iVar11 + iVar10 + 4) >> 8);
               if (uVar6 < 9) {
-_L553:
+_L554:
                 uVar13 = (uint)(uVar6 == 8);
               }
             }
@@ -126,7 +126,7 @@ _L553:
         } while( true );
       }
       if (param_3 != 4) {
-        r_assert_param(param_2,param_3,"lld_scan.c",0xa17);
+        r_assert_param(param_2,param_3,"lld_scan.c",0xa1a);
         return;
       }
       param_2 = param_2 & 0xff;

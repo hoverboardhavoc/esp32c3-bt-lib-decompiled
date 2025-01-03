@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_core_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,8 +57,8 @@ void r_lld_core_init(int param_1)
     _DAT_60031050 = uStack_44 | 0x80808080;
   }
   uVar4 = (uint)_r_ble_util_buf_rx_alloc_in_isr;
-  _DAT_60031000 = (int)(DAT_00013056 + 1) >> 1 | 0x100600;
-  uVar5 = ((uint)_DAT_0001306a << 0x11) >> 0x10;
+  _DAT_60031000 = (int)(DAT_00014056 + 1) >> 1 | 0x100600;
+  uVar5 = ((uint)_DAT_0001406a << 0x11) >> 0x10;
   if ((uVar4 << 0x11 & 0xfc000000) != 0) {
     r_assert_err(0,"lld.c",0x1902);
   }
@@ -66,7 +66,7 @@ void r_lld_core_init(int param_1)
     r_assert_err(0,"lld.c",0x1903);
   }
   _DAT_600310e0 = uVar4 << 0x11 | uVar5;
-  if (DAT_00013081 == '\0') {
+  if (DAT_00014081 == '\0') {
     _DAT_6003100c = 0x40000;
   }
   else {
@@ -115,7 +115,7 @@ void r_lld_core_init(int param_1)
     uVar4 = uVar5;
   } while (uVar5 != 10);
   iVar3 = 3;
-  if (DAT_00013042 == '\0') {
+  if (DAT_00014042 == '\0') {
     iVar3 = 0;
   }
   _DAT_600312d4 = _DAT_600312d4 & 0xfffffe00 | iVar3 + 0xffU;
@@ -132,7 +132,7 @@ void r_lld_core_init(int param_1)
     iVar3 = iVar3 + 1;
   } while (iVar3 != 0xc);
   _lld_exp_sync_pos_tab = ((ushort)((uint)_DAT_60031090 >> 8) & 0x7f) + 0x28;
-  _DAT_00013056 = ((ushort)((uint)_DAT_60031094 >> 8) & 0x7f) + 0x18;
+  _DAT_00014056 = ((ushort)((uint)_DAT_60031094 >> 8) & 0x7f) + 0x18;
   uVar1 = (ushort)((uint)_DAT_60031098 >> 8);
   _r_osi_funcs_p = CONCAT22((uVar1 & 0xff) + 0x150,(uVar1 & 0xff) + 0x150);
   uVar4 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));

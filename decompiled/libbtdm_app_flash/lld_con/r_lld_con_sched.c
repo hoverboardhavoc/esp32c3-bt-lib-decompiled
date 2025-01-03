@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_sched
  *
  * (C) Espressif, Apache License 2.0.
@@ -101,11 +101,11 @@ void r_lld_con_sched(int param_1,int param_2,int param_3)
       uVar15 = ((*(ushort *)(iVar5 + 0x7a) + uVar16) * (uVar6 - iVar14 & 0xfffffff)) / 0x640 + 0x40;
       uVar16 = uVar15 * 2;
       if (param_3 != 0) {
-        *(undefined2 *)(&DAT_000149ac + iVar13) = 0;
+        *(undefined2 *)(&DAT_000149b8 + iVar13) = 0;
       }
       if ((*(ushort *)(iVar5 + 0x84) & 2) == 0) {
         uVar16 = uVar16 + (uint)*(ushort *)(iVar5 + 0x70) * 0x271;
-_L234:
+_L235:
         bVar4 = true;
       }
       else {
@@ -114,15 +114,15 @@ _L234:
            ((param_3 == 0 ||
             ((bVar4 = false, *(ushort *)(iVar5 + 0x7c) == 0 && (*(short *)(iVar5 + 0x98) == -1))))))
         {
-          uVar11 = ((int)((uint)*(ushort *)(&DAT_000149ac + iVar13) *
+          uVar11 = ((int)((uint)*(ushort *)(&DAT_000149b8 + iVar13) *
                           (uint)*(ushort *)(iVar5 + 0x70) * 0x271) >> 1) +
                    (uint)*(ushort *)(iVar5 + 0x70) * 0x271 + uVar16;
           uVar16 = *(int *)(iVar5 + 100) * 0x271;
           if (uVar11 < uVar16) {
             uVar16 = uVar11;
           }
-          *(ushort *)(&DAT_000149ac + iVar13) = *(ushort *)(&DAT_000149ac + iVar13) + 1;
-          goto _L234;
+          *(ushort *)(&DAT_000149b8 + iVar13) = *(ushort *)(&DAT_000149b8 + iVar13) + 1;
+          goto _L235;
         }
       }
       if (((*(char *)(iVar5 + 0x46) == '\x01') && (*(char *)(iVar5 + 0x42) != '\0')) &&
@@ -222,20 +222,20 @@ _L234:
     uVar3 = *(ushort *)(iVar17 + iVar14 + 2);
     uVar10 = uVar3 & 3;
     if ((uVar3 & 3) == 0) {
-_L139:
-      uVar9 = 0x793;
-_L160:
+_L140:
+      uVar9 = 0x795;
+_L161:
       r_assert_err(0,"lld_con.c",uVar9);
     }
     else if (2 < uVar10) {
-      if (uVar10 != 3) goto _L139;
+      if (uVar10 != 3) goto _L140;
       iVar17 = r_emi_get_mem_addr_by_offset(0x1400);
       r_ble_util_buf_llcp_tx_free(*(undefined2 *)(iVar14 + 4 + iVar17));
-      uVar9 = 0x78a;
-      if (*(int *)(iVar5 + 0x24) == 0) goto _L140;
-      goto _L160;
+      uVar9 = 0x78c;
+      if (*(int *)(iVar5 + 0x24) == 0) goto _L141;
+      goto _L161;
     }
-_L140:
+_L141:
     *(char *)(iVar5 + 0x92) = *(char *)(iVar5 + 0x92) + -1;
     *(byte *)(iVar5 + 0x90) = *(char *)(iVar5 + 0x90) + 1U & 1;
   } while( true );

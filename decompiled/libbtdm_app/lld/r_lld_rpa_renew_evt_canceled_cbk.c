@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app -> lld.o -> r_lld_rpa_renew_evt_canceled_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ void r_lld_rpa_renew_evt_canceled_cbk(int param_1)
   
   iVar1 = _r_ip_funcs_p;
   if (_lld_rpa_renew_env == 0) {
-    uVar2 = 0x496;
+    uVar2 = 0x49e;
     UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
   }
   else {
@@ -31,9 +31,9 @@ void r_lld_rpa_renew_evt_canceled_cbk(int param_1)
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
-    uVar2 = 0x491;
+    uVar2 = 0x499;
   }
-                    /* WARNING: Could not recover jumptable at 0x00011608. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000116b2. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*UNRECOVERED_JUMPTABLE)(0,"lld.c",uVar2);
   return;

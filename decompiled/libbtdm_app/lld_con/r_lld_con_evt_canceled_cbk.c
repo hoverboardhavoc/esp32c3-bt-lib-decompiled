@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_evt_canceled_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,20 +21,20 @@ void r_lld_con_evt_canceled_cbk(int param_1)
   if (param_1 != 0) {
     uVar2 = (**(code **)(_r_ip_funcs_p + 0x264))(*(code **)(_r_ip_funcs_p + 0x264));
     if (*(char *)(param_1 + 0x8f) != '\0') {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0xb8f,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0xb91,*(code **)(_r_plf_funcs_p + 8));
     }
     *(uint *)(param_1 + 0x48) = *(int *)(param_1 + 0x48) + *(int *)(param_1 + 100) & 0xfffffff;
     cVar1 = rwip_priority;
     *(short *)(param_1 + 0x7e) = *(short *)(param_1 + 0x7e) + 1;
     *(char *)(param_1 + 0x16) = *(char *)(param_1 + 0x16) + cVar1;
-                    /* WARNING: Could not recover jumptable at 0x00012e72. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00012e7e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_ip_funcs_p + 0x3a8))(*(undefined1 *)(param_1 + 0x8e),uVar2,0);
     return;
   }
-                    /* WARNING: Could not recover jumptable at 0x00012e8e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00012e9a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_plf_funcs_p + 8))("lld_con.c",0xb9d);
+  (**(code **)(_r_plf_funcs_p + 8))("lld_con.c",0xb9f);
   return;
 }
 

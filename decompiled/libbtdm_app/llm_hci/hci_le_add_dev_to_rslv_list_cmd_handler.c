@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app -> llm_hci.o -> hci_le_add_dev_to_rslv_list_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,7 +32,7 @@ undefined4 hci_le_add_dev_to_rslv_list_cmd_handler(byte *param_1,undefined4 para
       iVar6 = (**(code **)(_r_ip_funcs_p + 0x504))(0x12,*(code **)(_r_ip_funcs_p + 0x504));
       uVar4 = 0xc;
       uVar3 = 0xc;
-      if (iVar6 != 0) goto _L100;
+      if (iVar6 != 0) goto _L109;
     }
     __s1 = param_1 + 1;
     for (iVar6 = 0;
@@ -42,12 +42,12 @@ undefined4 hci_le_add_dev_to_rslv_list_cmd_handler(byte *param_1,undefined4 para
       iVar1 = memcmp(__s1,(void *)(iVar7 + 4),6);
       if ((iVar1 == 0) && (*(char *)(iVar7 + 0x40) == '\t')) {
         uVar3 = 1;
-        goto _L105;
+        goto _L114;
       }
       uVar4 = extraout_a1;
     }
     uVar3 = 0;
-_L105:
+_L114:
     uVar2 = (**(code **)(_r_ip_funcs_p + 0x4c8))(__s1,*param_1,*(code **)(_r_ip_funcs_p + 0x4c8));
     uVar5 = 0;
     if (uVar2 < 0xc) {
@@ -57,7 +57,7 @@ _L105:
                       (__s1,param_1 + 7,param_1 + 0x17,*param_1,uVar3,uVar5,
                        *(code **)(_r_ip_funcs_p + 0x274));
   }
-_L100:
+_L109:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,uVar3,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }

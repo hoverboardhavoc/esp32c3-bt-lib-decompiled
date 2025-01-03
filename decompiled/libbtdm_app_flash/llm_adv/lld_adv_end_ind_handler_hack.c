@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app_flash -> llm_adv.o -> lld_adv_end_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -73,7 +73,7 @@ _L127:
     }
     else {
       if (*(char *)(_p_llm_env + 0xd6) == '\0') {
-        r_assert_err(0,"llm_adv.c",0xa48);
+        r_assert_err(0,"llm_adv.c",0xa4e);
       }
       cVar12 = *(char *)(_p_llm_env + 0xd6) + -1;
       *(char *)(_p_llm_env + 0xd6) = cVar12;
@@ -106,7 +106,7 @@ _L41:
     if (iVar9 != 0) {
       memset(&uStack_58,0,0x28);
       if ((*(ushort *)(puVar14 + 2) & 0xc) != 0) {
-        r_assert_err(0,"llm_adv.c",0xa64);
+        r_assert_err(0,"llm_adv.c",0xa6a);
       }
       uStack_40 = *(ushort *)(puVar14 + 2);
       uVar2 = uStack_40 & 4;
@@ -145,7 +145,7 @@ _L41:
         }
       }
       else {
-        r_assert_err(0,"llm_adv.c",0xa92);
+        r_assert_err(0,"llm_adv.c",0xa98);
       }
       goto _L41;
     }
@@ -166,7 +166,7 @@ _L41:
     bStack_32 = param_1[0x36];
     bStack_31 = ((byte)(*(ushort *)(puVar14 + 2) >> 4) ^ 1) & 1;
     if (bStack_67 == 0xff) {
-      r_assert_err("llm_adv.c",0xb29);
+      r_assert_err("llm_adv.c",0xb2f);
     }
     else {
       if (*(char *)((uint)bStack_67 * 0x44 + *(int *)(_p_llm_env + 8) + 0x40) == '\0') {
@@ -178,12 +178,12 @@ _L41:
         }
         else {
           r_assert_param(uVar16,*(undefined1 *)((uint)bStack_67 * 0x44 + iVar11 + 0x40),"llm_adv.c",
-                         0xabc);
+                         0xac2);
         }
       }
       r_llc_start_eco(bStack_67,&uStack_58,_p_llm_env + 0x9c);
       if (*(char *)(*(int *)(_p_llm_env + 8) + (uint)bStack_67 * 0x44 + 0x40) != '\x04') {
-        r_assert_param("llm_adv.c",0xac3);
+        r_assert_param("llm_adv.c",0xac9);
       }
       bVar3 = bStack_67;
       iVar9 = _p_llm_env;

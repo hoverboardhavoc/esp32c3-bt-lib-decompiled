@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_tx_prog_new_packet
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,7 +57,7 @@ void r_lld_con_tx_prog_new_packet(int param_1,uint param_2)
       if (piStack_5c == (int *)0x0) {
         return;
       }
-_L406:
+_L407:
       if ((*(short *)(iVar17 + 0x82) == 0) && (piVar11 = (int *)*piVar5, piVar11 != (int *)0x0)) {
         uVar3 = *(ushort *)((int)piVar11 + 6);
         *(int **)(iVar17 + 0x30) = piVar11;
@@ -81,7 +81,7 @@ _L406:
     }
     else {
       if (((param_2 == 2) && (piStack_5c != (int *)0x0)) &&
-         ((bVar16 != 1 && (DAT_0001508e != '\0')))) goto _L406;
+         ((bVar16 != 1 && (DAT_0001508e != '\0')))) goto _L407;
       uVar12 = (uint)*(byte *)(iVar22 + 6);
       uVar6 = (uint)*(ushort *)(iVar22 + 4);
       uVar14 = 3;
@@ -137,22 +137,22 @@ _L406:
       }
       else if ((param_2 < 2) || (param_2 == 0x18)) {
         if (param_2 == 0) {
-          (&DAT_000149b1)[iVar15] = 1;
+          (&DAT_000149bd)[iVar15] = 1;
           iVar7 = 10;
         }
         else if (param_2 == 1) {
-          (&DAT_000149b1)[iVar15] = 2;
+          (&DAT_000149bd)[iVar15] = 2;
           iVar7 = 6;
         }
         else if (param_2 == 0x18) {
-          (&DAT_000149b1)[iVar15] = 3;
+          (&DAT_000149bd)[iVar15] = 3;
           iVar7 = 3;
         }
         else {
-          r_assert_param(param_1,param_2,"lld_con.c",0x4ea);
+          r_assert_param(param_1,param_2,"lld_con.c",0x4ec);
           iVar7 = 0;
         }
-        (&DAT_000149b0)[iVar15] = bVar18;
+        (&DAT_000149bc)[iVar15] = bVar18;
         uVar19 = uVar6 + iVar7 & 0xffff;
         puVar8 = (ushort *)r_emi_get_mem_addr_by_offset(uVar19);
         uVar4 = *puVar8;
@@ -178,7 +178,7 @@ _L406:
             ets_printf("llcp prog: %u %u %u %u %u\n",(uint)uVar14 + (uint)uVar3,*puVar10,(uint)uVar4
                        ,*(undefined1 *)(iVar17 + 0x46),*(undefined2 *)(iVar17 + 0x44));
           }
-          *(undefined2 *)(&DAT_000149b0 + iVar15) = 0;
+          *(undefined2 *)(&DAT_000149bc + iVar15) = 0;
         }
       }
     }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 4c16da1a1a76b439e2cf981d2f915d94df364e58
- * https://github.com/espressif/esp32c3-bt-lib/commit/4c16da1a1a76b439e2cf981d2f915d94df364e58
- * Upstream date: 2024-12-16 11:11:02 +0800
- * Upstream subject: fix(bt): Fixed that the resolvable private address does not change when light sleep is enabled(6bca137)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_rw_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,11 +36,11 @@ char * btdm_rw_run(char *param_1)
       pcVar1 = (char *)r_sdk_cfg_priv_opts_ext_get();
       if ((*pcVar1 != '\0') && (_btdm_pwr_state == 0)) {
         pll_track_state = r_rwip_time_get();
-        uVar2 = pll_track_state - DAT_00011940 & 0xfffffff;
+        uVar2 = pll_track_state - DAT_00011984 & 0xfffffff;
         pcVar1 = (char *)0x0;
-        DAT_0001193c = extraout_a1;
+        DAT_00011980 = extraout_a1;
         if ((uVar2 < 0x8000001) && (0xc80 < uVar2)) {
-          DAT_00011940 = pll_track_state;
+          DAT_00011984 = pll_track_state;
           bt_track_pll_cap(0);
           pcVar1 = (char *)0x1;
         }
@@ -49,7 +49,7 @@ char * btdm_rw_run(char *param_1)
     }
   }
   else if ((char *)0x1 < param_1) {
-    pcVar1 = (char *)r_assert_err(0,"arch_main.c",0x43a);
+    pcVar1 = (char *)r_assert_err(0,"arch_main.c",0x447);
   }
   return pcVar1;
 }

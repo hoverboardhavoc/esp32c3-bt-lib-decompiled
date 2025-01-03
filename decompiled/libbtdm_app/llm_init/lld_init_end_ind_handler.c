@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app -> llm_init.o -> lld_init_end_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -65,7 +65,7 @@ undefined4 lld_init_end_ind_handler(byte *param_1)
   iVar4 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   if (*(byte *)(iVar4 + 0xd) <= uVar12) {
     (**(code **)(_r_plf_funcs_p + 0xc))
-              (uVar12,0,"llm_init.c",0x278,*(code **)(_r_plf_funcs_p + 0xc));
+              (uVar12,0,"llm_init.c",0x288,*(code **)(_r_plf_funcs_p + 0xc));
   }
   iVar4 = uVar12 * 0x44;
   piVar9 = (int *)(*(int *)(_p_llm_env + 8) + iVar4);
@@ -275,7 +275,7 @@ undefined4 lld_init_end_ind_handler(byte *param_1)
   else {
     (**(code **)(_r_plf_funcs_p + 0xc))
               (uVar12,*(undefined1 *)(*(int *)(_p_llm_env + 8) + (uint)*param_1 * 0x44 + 0x40),
-               "llm_init.c",0x369,*(code **)(_r_plf_funcs_p + 0xc));
+               "llm_init.c",0x379,*(code **)(_r_plf_funcs_p + 0xc));
   }
   return 0;
 }

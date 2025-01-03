@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app -> ke_task.o -> r_ke_state_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,32 +26,32 @@ void r_ke_state_set(uint param_1,uint param_2)
   uVar1 = param_1 >> 8;
   if (uVar3 < 0x1f) {
     unaff_s1 = *(int *)(&ke_task_env + uVar3 * 4);
-    if (unaff_s1 == 0) goto _L86;
-    if (uVar1 < *(ushort *)(unaff_s1 + 8)) goto _L83;
+    if (unaff_s1 == 0) goto _L88;
+    if (uVar1 < *(ushort *)(unaff_s1 + 8)) goto _L85;
   }
   else {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"ke_task.c",0x1ae,*(code **)(_r_plf_funcs_p + 8));
-_L86:
+    (**(code **)(_r_plf_funcs_p + 8))(0,"ke_task.c",0x1b2,*(code **)(_r_plf_funcs_p + 8));
+_L88:
     (**(code **)(_r_plf_funcs_p + 0xc))
-              (uVar3,uVar1,"ke_task.c",0x1b5,*(code **)(_r_plf_funcs_p + 0xc));
+              (uVar3,uVar1,"ke_task.c",0x1b9,*(code **)(_r_plf_funcs_p + 0xc));
     ebreak();
     param_1 = unaff_s3;
     param_2 = unaff_s4;
   }
-  (**(code **)(_r_plf_funcs_p + 0xc))(uVar1,"ke_task.c",0x1b6,*(code **)(_r_plf_funcs_p + 0xc));
+  (**(code **)(_r_plf_funcs_p + 0xc))(uVar1,"ke_task.c",0x1ba,*(code **)(_r_plf_funcs_p + 0xc));
   if (*(ushort *)(unaff_s1 + 8) <= uVar1) {
     return;
   }
-_L83:
+_L85:
   pbVar2 = (byte *)(uVar1 + *(int *)(unaff_s1 + 4));
   if (pbVar2 == (byte *)0x0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"ke_task.c",0x1be,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"ke_task.c",0x1c2,*(code **)(_r_plf_funcs_p + 8));
   }
   if (*pbVar2 == param_2) {
     return;
   }
   *pbVar2 = (byte)param_2;
-                    /* WARNING: Could not recover jumptable at 0x0001056c. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010582. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0x178))(param_1);
   return;

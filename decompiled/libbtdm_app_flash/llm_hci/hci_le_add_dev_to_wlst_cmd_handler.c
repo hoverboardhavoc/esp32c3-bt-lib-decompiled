@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app_flash -> llm_hci.o -> hci_le_add_dev_to_wlst_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,23 +23,23 @@ undefined4 hci_le_add_dev_to_wlst_cmd_handler(char *param_1,undefined4 param_2)
   
   iVar1 = r_llm_is_wl_accessible();
   uVar3 = 0xc;
-  if (iVar1 == 0) goto _L217;
+  if (iVar1 == 0) goto _L237;
   if ((byte)(*param_1 - 2U) < 0xfd) {
-_L214:
+_L234:
     uVar3 = 0x12;
   }
   else {
     local_19 = *param_1;
     memcpy(auStack_18,param_1 + 1,6);
-    lld_wl_rpa_res(auStack_18,&local_19,1);
+    lld_peer_rpa_to_id(auStack_18,&local_19);
     uVar2 = r_llm_dev_list_search(auStack_18,local_19);
     if (uVar2 < 0xc) {
-      if ((*(byte *)(_p_llm_env + uVar2 * 10 + 0x2d) & 2) != 0) goto _L214;
+      if ((*(byte *)(_p_llm_env + uVar2 * 10 + 0x2d) & 2) != 0) goto _L234;
     }
     else {
       uVar2 = r_llm_dev_list_empty_entry();
       uVar3 = 7;
-      if (uVar2 == 0xc) goto _L217;
+      if (uVar2 == 0xc) goto _L237;
     }
     iVar1 = _p_llm_env + uVar2 * 10;
     memcpy((void *)(iVar1 + 0x24),auStack_18,6);
@@ -51,7 +51,7 @@ _L214:
     }
     uVar3 = 0;
   }
-_L217:
+_L237:
   r_llm_cmd_cmp_send(param_2,uVar3);
   return 0;
 }

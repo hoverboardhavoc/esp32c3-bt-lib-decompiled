@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app -> lld.o -> lld_wl_rpa_res
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,47 +10,26 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-int lld_wl_rpa_res(void *param_1,byte *param_2,int param_3)
+int lld_wl_rpa_res(void *param_1,char *param_2)
 
 {
   int iVar1;
   int iVar2;
-  void *__src;
-  uint uVar3;
-  int *piVar4;
+  int *piVar3;
   
-  if ((((param_2 != (byte *)0x0) && (param_1 != (void *)0x0)) && (*param_2 != 0)) &&
+  if ((((param_2 != (char *)0x0) && (param_1 != (void *)0x0)) && (*param_2 == '\x01')) &&
      ((*(byte *)((int)param_1 + 5) & 0xc0) == 0x40)) {
-    uVar3 = 0;
+    piVar3 = &lld_wl_res_list;
+    iVar1 = 0;
     do {
-      iVar1 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-      if ((*(short *)(iVar1 + uVar3 * 0x34) < 0) &&
-         (iVar1 = lld_peer_rpa_res(param_1,uVar3 & 0xff), iVar1 != 0)) {
-        iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-        *param_2 = (byte)*(undefined2 *)(iVar2 + uVar3 * 0x34) & 1;
-        __src = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
-                                  ((uVar3 & 0xff) * 0x34 + 0xc78,*(code **)(_r_plf_funcs_p + 0xbc));
-        goto _L285;
+      if ((*piVar3 != 0) && (iVar2 = lld_rpa_res(*piVar3 + 7,param_1), iVar2 != 0)) {
+        *param_2 = *(char *)(&lld_wl_res_list)[iVar1];
+        memcpy(param_1,(void *)((&lld_wl_res_list)[iVar1] + 1),6);
+        return iVar2;
       }
-      uVar3 = uVar3 + 1;
-    } while (uVar3 != 10);
-    if (param_3 == 0) {
-      piVar4 = &lld_wl_res_list;
-      iVar2 = 0;
-      do {
-        if ((*piVar4 != 0) && (iVar1 = lld_rpa_res(*piVar4 + 7,param_1), iVar1 != 0)) {
-          *param_2 = *(byte *)(&lld_wl_res_list)[iVar2];
-          __src = (void *)((&lld_wl_res_list)[iVar2] + 1);
-_L285:
-          memcpy(param_1,__src,6);
-          return iVar1;
-        }
-        iVar2 = iVar2 + 1;
-        piVar4 = piVar4 + 1;
-      } while (iVar2 != 0xc);
-    }
+      iVar1 = iVar1 + 1;
+      piVar3 = piVar3 + 1;
+    } while (iVar1 != 0xc);
   }
   return 0;
 }

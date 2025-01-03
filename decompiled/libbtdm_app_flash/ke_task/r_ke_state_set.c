@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app_flash -> ke_task.o -> r_ke_state_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,26 +29,26 @@ void r_ke_state_set(uint param_1,uint param_2)
   if (uVar5 < 0x1f) {
     piVar4 = (int *)(&ke_task_env + uVar5 * 4);
     unaff_s1 = *piVar4;
-    if (unaff_s1 == 0) goto _L83;
-    if (uVar1 < *(ushort *)(unaff_s1 + 8)) goto _L80;
+    if (unaff_s1 == 0) goto _L85;
+    if (uVar1 < *(ushort *)(unaff_s1 + 8)) goto _L82;
   }
   else {
-    r_assert_err(0,"ke_task.c",0x1ae);
-_L83:
-    r_assert_param(uVar5,uVar1,"ke_task.c",0x1b5);
+    r_assert_err(0,"ke_task.c",0x1b2);
+_L85:
+    r_assert_param(uVar5,uVar1,"ke_task.c",0x1b9);
     piVar4 = (int *)(uint)_DAT_00000008;
     ebreak();
     param_1 = unaff_s3;
     param_2 = unaff_s4;
   }
-  r_assert_param(uVar1,"ke_task.c",0x1b6,piVar4);
+  r_assert_param(uVar1,"ke_task.c",0x1ba,piVar4);
   if (*(ushort *)(unaff_s1 + 8) <= uVar1) {
     return;
   }
-_L80:
+_L82:
   pbVar2 = (byte *)(uVar1 + *(int *)(unaff_s1 + 4));
   if (pbVar2 == (byte *)0x0) {
-    r_assert_err(0,"ke_task.c",0x1be);
+    r_assert_err(0,"ke_task.c",0x1c2);
   }
   if (*pbVar2 == param_2) {
     return;

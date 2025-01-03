@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app_flash -> ke_task.o -> r_ke_task_handler_get_overwrite
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,11 +28,18 @@ undefined * r_ke_task_handler_get_overwrite(int param_1)
     if (uVar1 == 6) {
       return &llm_rpa_renew_to_handler_hack;
     }
-    if (uVar1 == 0x201) {
-      return &lld_adv_rep_ind_handler_hack;
+    if (uVar1 < 7) {
+      if (uVar1 == 3) {
+        return &llm_scan_period_to_handler_hack;
+      }
     }
-    if (uVar1 == 3) {
-      return &llm_scan_period_to_handler_hack;
+    else {
+      if (uVar1 == 0x201) {
+        return &lld_adv_rep_ind_handler_hack;
+      }
+      if (uVar1 == 0x203) {
+        return &lld_sync_start_req_handler_hack;
+      }
     }
   }
   else {
@@ -52,12 +59,12 @@ undefined * r_ke_task_handler_get_overwrite(int param_1)
   uVar2 = *(ushort *)(param_1 + 6);
   uVar4 = uVar2 & 0xff;
   if (0x1e < uVar4) {
-    r_assert_param(uVar4,"ke_task.c",0x14a);
+    r_assert_param(uVar4,"ke_task.c",0x14e);
   }
   piVar5 = *(int **)(&ke_task_env + uVar4 * 4);
   if ((*(ushort *)(piVar5 + 2) != 0) &&
      (((uVar2 >> 8 < *(ushort *)(piVar5 + 2) ||
-       (r_assert_param((uint)uVar2,uVar1,"ke_task.c",0x152), uVar2 >> 8 < *(ushort *)(piVar5 + 2)))
+       (r_assert_param((uint)uVar2,uVar1,"ke_task.c",0x156), uVar2 >> 8 < *(ushort *)(piVar5 + 2)))
       && (*piVar5 != 0)))) {
     iVar6 = *(ushort *)((int)piVar5 + 10) - 1;
     if (iVar6 == -1) {
@@ -72,7 +79,7 @@ undefined * r_ke_task_handler_get_overwrite(int param_1)
       }
     }
     if (*(int *)(puVar3 + 2) == 0) {
-      r_assert_err(0,"ke_task.c",0x12e);
+      r_assert_err(0,"ke_task.c",0x132);
     }
     return *(undefined **)(puVar3 + 2);
   }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
- * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
- * Upstream date: 2024-12-13 13:39:25 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_pkt_rx_send_scan_req_evt
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,56 +15,71 @@
 void r_lld_adv_pkt_rx_send_scan_req_evt(int param_1)
 
 {
-  undefined2 uVar1;
-  byte bVar2;
-  int iVar3;
-  uint uVar4;
-  int iVar5;
-  void *pvVar6;
-  undefined1 *puVar7;
-  undefined1 auStack_34 [8];
-  undefined1 auStack_2c [20];
+  byte bVar1;
+  undefined2 uVar2;
+  byte bVar3;
+  int iVar4;
+  uint uVar5;
+  int iVar6;
+  void *pvVar7;
+  undefined1 *puVar8;
+  int iVar9;
+  byte bVar10;
+  undefined1 auStack_34 [4];
+  undefined1 uStack_30;
+  byte bStack_2f;
+  undefined1 auStack_2c [4];
+  undefined1 uStack_28;
+  byte bStack_27;
   
-  bVar2 = *(byte *)(_p_lld_env + 0xd8);
-  iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-  iVar3 = (uint)bVar2 * 0x14;
-  if (((*(ushort *)(iVar5 + iVar3 + 4) & 0xf) == 3) &&
+  bVar1 = *(byte *)(_p_lld_env + 0xd8);
+  iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
+  iVar4 = (uint)bVar1 * 0x14;
+  iVar9 = iVar4 + 4;
+  if (((*(ushort *)(iVar6 + iVar9) & 0xf) == 3) &&
      (*(char *)(*(int *)(&lld_adv_env + param_1 * 4) + 0x8a) != '\0')) {
-    iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-    pvVar6 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
-                               (*(undefined2 *)(iVar5 + iVar3 + 0x12),
+    iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
+    pvVar7 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
+                               (*(undefined2 *)(iVar6 + iVar4 + 0x12),
                                 *(code **)(_r_plf_funcs_p + 0xbc));
-    memcpy(auStack_2c,pvVar6,0xc);
-    iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-    uVar4 = (uint)*(ushort *)(iVar3 + 0xe + iVar5);
-    if (uVar4 == 0) {
-      iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-      bVar2 = (byte)(*(ushort *)(iVar5 + iVar3 + 4) >> 6) & 1;
+    memcpy(auStack_2c,pvVar7,0xc);
+    bVar1 = bStack_27;
+    iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
+    uVar5 = (uint)*(ushort *)(iVar4 + 0xe + iVar6);
+    if (uVar5 == 0) {
+      iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
+      uStack_30 = uStack_28;
+      bVar3 = (byte)(*(ushort *)(iVar4 + iVar9) >> 6) & 1;
+      bVar10 = bVar1;
     }
     else {
-      pvVar6 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
-                                 (uVar4 + 0x18 & 0xffff,*(code **)(_r_plf_funcs_p + 0xbc));
-      memcpy(auStack_34,pvVar6,6);
-      iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-      iVar3 = ((uVar4 - 0xc60) / 0x34 & 0xff) * 0x34;
-      uVar1 = *(undefined2 *)(iVar5 + iVar3);
-      iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-      bVar2 = (byte)*(undefined2 *)(iVar5 + iVar3) & 2 | (byte)uVar1 & 1;
+      pvVar7 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
+                                 (uVar5 + 0x18 & 0xffff,*(code **)(_r_plf_funcs_p + 0xbc));
+      memcpy(auStack_34,pvVar7,6);
+      bVar10 = bStack_2f;
+      iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
+      uVar2 = *(undefined2 *)(iVar4 + ((uVar5 - 0xc60) / 0x34 & 0xff) * 0x34);
+      iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
+      bVar3 = (byte)uVar2 & 1;
+      if (((*(ushort *)(iVar4 + iVar9) >> 7 & 1) != 0) && ((bVar1 & 0xc0) == 0x40)) {
+        bVar3 = bVar3 | 2;
+      }
     }
-    puVar7 = (undefined1 *)
+    puVar8 = (undefined1 *)
              (**(code **)(_r_modules_funcs_p + 200))
                        (0x202,0,0xff,8,*(code **)(_r_modules_funcs_p + 200));
-    *puVar7 = (char)param_1;
-    puVar7[1] = bVar2;
-    memcpy(puVar7 + 2,auStack_34,6);
-                    /* WARNING: Could not recover jumptable at 0x00013a22. Too many branches */
+    *puVar8 = (char)param_1;
+    puVar8[1] = bVar3;
+    _uStack_30 = CONCAT11(bVar10,uStack_30);
+    memcpy(puVar8 + 2,auStack_34,6);
+                    /* WARNING: Could not recover jumptable at 0x00013a3a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_r_modules_funcs_p + 0xe0))(puVar7);
+    (**(code **)(_r_modules_funcs_p + 0xe0))(puVar8);
     return;
   }
-                    /* WARNING: Could not recover jumptable at 0x0001391c. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00013920. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x839);
+  (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x83a);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
- * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
- * Upstream date: 2024-12-13 13:39:25 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_duration_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,13 +21,13 @@ void r_lld_adv_duration_update(int param_1,int param_2)
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   iVar2 = *(int *)(&lld_adv_env + param_1 * 4);
   if (iVar2 == 0) {
-    r_assert_err(0,"lld_adv.c",0xdc3);
+    r_assert_err(0,"lld_adv.c",0xdc7);
   }
   else {
     if ((*(ushort *)(iVar2 + 0x74) & 8) == 0) {
       if (param_2 != 0) {
         *(uint *)(iVar2 + 0x58) = param_2 * 0x20 + *(int *)(iVar2 + 4) & 0xfffffff;
-        goto _L1155;
+        goto _L1158;
       }
       uVar1 = 0xffffffff;
     }
@@ -36,8 +36,8 @@ void r_lld_adv_duration_update(int param_1,int param_2)
     }
     *(uint *)(iVar2 + 0x58) = uVar1;
   }
-_L1155:
-                    /* WARNING: Could not recover jumptable at 0x00015690. Too many branches */
+_L1158:
+                    /* WARNING: Could not recover jumptable at 0x000156ac. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))();
   return;

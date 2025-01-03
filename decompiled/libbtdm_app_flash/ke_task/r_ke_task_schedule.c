@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
+ * Upstream date: 2025-01-03 16:50:09 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
  * Source: libbtdm_app_flash -> ke_task.o -> r_ke_task_schedule
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,35 +28,35 @@ void r_ke_task_schedule(void)
     if (iVar2 == 0) {
       pcVar3 = (code *)r_ke_task_handler_get_overwrite(puVar1);
       if (pcVar3 == (code *)0x0) {
-        r_assert_warn(*(undefined2 *)(puVar1 + 1),*(undefined2 *)((int)puVar1 + 6),"ke_task.c",0xb4)
+        r_assert_warn(*(undefined2 *)(puVar1 + 1),*(undefined2 *)((int)puVar1 + 6),"ke_task.c",0xb8)
         ;
       }
       else {
         r_ke_task_handler_pre(puVar1);
         iVar2 = (*pcVar3)(*(undefined2 *)(puVar1 + 1),puVar1 + 3,*(undefined2 *)((int)puVar1 + 6),
                           *(undefined2 *)(puVar1 + 2));
-        if (iVar2 == 1) goto _L46;
+        if (iVar2 == 1) goto _L48;
         if (iVar2 == 2) {
           r_co_list_push_back(&ke_env,puVar1);
-          goto _L46;
+          goto _L48;
         }
         if (iVar2 != 0) {
-          r_assert_err(0,"ke_task.c",0xd7);
-          goto _L46;
+          r_assert_err(0,"ke_task.c",0xdb);
+          goto _L48;
         }
       }
       r_ke_msg_free(puVar1);
     }
     else {
-      r_assert_param(*(undefined2 *)(puVar1 + 1),*(undefined2 *)((int)puVar1 + 6),"ke_task.c",0xad);
+      r_assert_param(*(undefined2 *)(puVar1 + 1),*(undefined2 *)((int)puVar1 + 6),"ke_task.c",0xb1);
     }
   }
-_L46:
+_L48:
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   if (_ke_env == 0) {
     r_ke_event_clear(3);
   }
-                    /* WARNING: Could not recover jumptable at 0x000102c0. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000102d6. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))();
   return;
