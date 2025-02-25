@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 29d5555ca1febeb132f5a13556893f3419d2d640
- * https://github.com/espressif/esp32c3-bt-lib/commit/29d5555ca1febeb132f5a13556893f3419d2d640
- * Upstream date: 2024-06-03 11:12:02 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(0738a61)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app -> rwip.o -> r_rwip_assert
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,10 +15,18 @@
 void r_rwip_assert(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
-  if (0 < _g_bt_plf_log_level) {
-    ets_printf("BLE assert %s %d, param %08x %08x\n",param_1,param_2,param_3,param_4);
-    return;
+  code *UNRECOVERED_JUMPTABLE;
+  
+  if (_g_bt_plf_log_level < 1) {
+    UNRECOVERED_JUMPTABLE = *(code **)(_r_osi_funcs_p + 0xf4);
   }
+  else {
+    ets_printf("BLE assert %s %d, param %08x %08x\n",param_1,param_2,param_3,param_4);
+    UNRECOVERED_JUMPTABLE = *(code **)(_r_osi_funcs_p + 0xf4);
+  }
+                    /* WARNING: Could not recover jumptable at 0x0001037e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*UNRECOVERED_JUMPTABLE)();
   return;
 }
 

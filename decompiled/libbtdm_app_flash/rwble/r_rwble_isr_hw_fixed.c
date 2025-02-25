@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> rwble.o -> r_rwble_isr_hw_fixed
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ undefined4 r_rwble_isr_hw_fixed(int param_1)
 
 {
   if (param_1 == 0x20000) {
-    DAT_000106ec = DAT_000106ec + 1;
+    DAT_000107a4 = DAT_000107a4 + 1;
   }
   else {
     if (param_1 != 0x400001) {
@@ -24,7 +24,7 @@ undefined4 r_rwble_isr_hw_fixed(int param_1)
       return 0xffffffff;
     }
     ble_isr_state = ble_isr_state + 1;
-    DAT_00010700 = DAT_00010700 + 1;
+    DAT_000107b8 = DAT_000107b8 + 1;
   }
   return 0;
 }

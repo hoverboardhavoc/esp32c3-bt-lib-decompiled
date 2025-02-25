@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
- * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
- * Upstream date: 2025-01-03 16:50:09 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_evt_time_update_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,26 +16,34 @@ void r_lld_con_evt_time_update_eco(int param_1)
 
 {
   int iVar1;
-  uint uVar2;
+  int iVar2;
+  uint uVar3;
   
+  iVar1 = *(int *)(&lld_con_env + param_1 * 4);
   r_lld_con_evt_time_update();
-  iVar1 = r_sdk_config_get_opts();
-  if (*(char *)(iVar1 + 0x15) == '\0') {
-    iVar1 = *(int *)(&lld_con_env + param_1 * 4);
-    uVar2 = (uint)*(ushort *)(iVar1 + 0x88);
+  iVar2 = r_sdk_config_get_opts();
+  if (*(char *)(iVar2 + 0x15) == '\0') {
+    uVar3 = (uint)*(ushort *)(iVar1 + 0x88);
     if ((uint)*(ushort *)(iVar1 + 0x88) < (uint)*(ushort *)(iVar1 + 0x8a)) {
-      uVar2 = (uint)*(ushort *)(iVar1 + 0x8a);
+      uVar3 = (uint)*(ushort *)(iVar1 + 0x8a);
     }
-    uVar2 = (uVar2 + 0x96 + (uint)*(ushort *)(&fixed_tx_time + (uint)*(byte *)(iVar1 + 0x93) * 2)) *
+    uVar3 = (uVar3 + 0x96 + (uint)*(ushort *)(&fixed_tx_time + (uint)*(byte *)(iVar1 + 0x93) * 2)) *
             2 + (uint)_sdk_cfg_priv_opts;
-    if (uVar2 < 0x9c4) {
-      uVar2 = 0x9c4;
+    if (uVar3 < 0x9c4) {
+      uVar3 = 0x9c4;
     }
-    *(uint *)(iVar1 + 0x5c) = uVar2;
-    *(uint *)(iVar1 + 0x10) = uVar2;
-    r_sch_slice_per_add(4,*(undefined1 *)(iVar1 + 0x8e),*(undefined4 *)(iVar1 + 100),uVar2 & 0xffff,
+    *(uint *)(iVar1 + 0x5c) = uVar3;
+    *(uint *)(iVar1 + 0x10) = uVar3;
+    r_sch_slice_per_add(4,*(undefined1 *)(iVar1 + 0x8e),*(undefined4 *)(iVar1 + 100),uVar3 & 0xffff,
                         0);
-    return;
+  }
+  iVar2 = r_sdk_config_get_opts_ext();
+  if ((*(uint *)(iVar2 + 0x28) & 0x20) != 0) {
+    iVar2 = r_sdk_config_get_opts_ext();
+    if (*(byte *)(iVar2 + 0x2c) < 3) {
+      r_ble_log_internal_x2(0x40030008,param_1,*(undefined4 *)(iVar1 + 0x5c));
+      return;
+    }
   }
   return;
 }

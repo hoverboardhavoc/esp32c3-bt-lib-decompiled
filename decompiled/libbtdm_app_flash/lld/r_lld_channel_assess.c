@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
- * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
- * Upstream date: 2025-01-03 16:50:09 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_channel_assess
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,20 +21,20 @@ void r_lld_channel_assess(uint param_1,int param_2,undefined4 param_3)
   
   iVar3 = _p_lld_env;
   if (0x24 < param_1) {
-    r_assert_err(0,"lld.c",0x4fb);
+    r_assert_err(0,"lld.c",0x4ff);
     return;
   }
   cVar1 = *(char *)(_p_lld_env + param_1 + 0x94);
   if (param_2 == 0) {
-    if (cVar1 <= DAT_00014055) goto _L324;
+    if (cVar1 <= DAT_00014061) goto _L330;
     cVar2 = -1;
   }
   else {
-    if (DAT_00014052 <= cVar1) goto _L324;
+    if (DAT_0001405e <= cVar1) goto _L330;
     cVar2 = '\x01';
   }
   *(char *)(_p_lld_env + param_1 + 0x94) = cVar1 + cVar2;
-_L324:
+_L330:
   *(undefined4 *)(param_1 * 4 + iVar3) = param_3;
   return;
 }

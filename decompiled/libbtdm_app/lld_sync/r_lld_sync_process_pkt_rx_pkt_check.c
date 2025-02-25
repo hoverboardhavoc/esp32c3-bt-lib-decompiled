@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app -> lld_sync.o -> r_lld_sync_process_pkt_rx_pkt_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -54,7 +54,7 @@ void r_lld_sync_process_pkt_rx_pkt_check(int param_1,int param_2)
   iVar9 = iVar19 + 4;
   iVar10 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   if ((*(ushort *)(iVar10 + iVar9) & 0xf) != 7) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_sync.c",0x1c8,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_sync.c",0x1cf,*(code **)(_r_plf_funcs_p + 8));
   }
   *(undefined4 *)(iVar20 + 0x3c) = *(undefined4 *)(iVar20 + 0x44);
   *(char *)(iVar20 + 100) = *(char *)(iVar20 + 100) + '\x01';
@@ -66,7 +66,7 @@ void r_lld_sync_process_pkt_rx_pkt_check(int param_1,int param_2)
   uVar6 = uVar15 & 0x3f;
   iVar10 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   if (*(ushort *)(iVar10 + iVar9) >> 8 <= uVar6) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_sync.c",0x1d7,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_sync.c",0x1de,*(code **)(_r_plf_funcs_p + 8));
   }
   cVar17 = '\0';
   if ((uVar15 & 0x3f) != 0) {

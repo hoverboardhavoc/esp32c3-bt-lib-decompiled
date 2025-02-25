@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app -> ble_util_buf.o -> r_ble_util_buf_adv_tx_free
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void r_ble_util_buf_adv_tx_free(int param_1)
   uVar1 = uVar2 & 0xff;
   if (9 < (uVar2 & 0xff)) {
     (**(code **)(_r_plf_funcs_p + 0xc))
-              (uVar1,param_1,"ble_util_buf.c",0x1d2,*(code **)(_r_plf_funcs_p + 0xc));
+              (uVar1,param_1,"ble_util_buf.c",0x1d3,*(code **)(_r_plf_funcs_p + 0xc));
   }
   (**(code **)(_r_plf_funcs_p + 0xb4))(param_1,*(code **)(_r_plf_funcs_p + 0xb4));
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));

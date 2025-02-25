@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app -> llc_llcp.o -> r_llc_llcp_tx_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,7 +42,7 @@ void r_llc_llcp_tx_check(int param_1)
       if ((bVar7 & 1) != 0) {
         iVar4 = (**(code **)(_r_ip_funcs_p + 0xf4))(*(code **)(_r_ip_funcs_p + 0xf4));
         if (iVar4 == 0) {
-          (**(code **)(_r_plf_funcs_p + 8))("llc_llcp.c",0x382,*(code **)(_r_plf_funcs_p + 8));
+          (**(code **)(_r_plf_funcs_p + 8))("llc_llcp.c",0x385,*(code **)(_r_plf_funcs_p + 8));
         }
         bVar7 = *(byte *)(piVar2 + 2);
         __dest = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))

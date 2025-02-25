@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_process_pkt_rx_aux_scan_rsp
  *
  * (C) Espressif, Apache License 2.0.
@@ -67,7 +67,7 @@ void r_lld_scan_process_pkt_rx_aux_scan_rsp(int param_1,int param_2,char *param_
   if (-1 < (int)((uint)uVar2 << 0x13)) {
     *(undefined1 *)(iVar3 + 0x6e) = 0;
     *(undefined1 *)(iVar3 + 0x3d) = 0;
-    goto _L270;
+    goto _L272;
   }
   __src = (void *)r_emi_get_mem_addr_by_offset(sVar1 + sVar4);
   memcpy(&uStack_24,__src,3);
@@ -75,18 +75,18 @@ void r_lld_scan_process_pkt_rx_aux_scan_rsp(int param_1,int param_2,char *param_
   if ((*(ushort *)(iVar9 + 2 + iVar5) >> 9 & 1) == 0) {
     iVar5 = r_lld_calc_aux_rx(iVar3 + 0x48,param_2);
     uVar8 = 1;
-    if (iVar5 != 0) goto _L290;
+    if (iVar5 != 0) goto _L292;
     *(undefined1 *)(iVar3 + 0x6e) = 2;
   }
   else {
     *(undefined4 *)(iVar3 + 0x2c) = uStack_24;
     uVar8 = 2;
-_L290:
+_L292:
     *(undefined1 *)(iVar3 + 0x3e) = uVar8;
   }
   *(undefined1 *)(iVar3 + 0x3d) = 3;
   sVar4 = sVar4 + 3;
-_L270:
+_L272:
   if ((int)((uint)*(ushort *)(param_3 + 6) << 0x12) < 0) {
     sVar4 = sVar4 + 0x12;
   }

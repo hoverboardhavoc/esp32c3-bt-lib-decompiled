@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
- * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
- * Upstream date: 2025-01-03 16:50:09 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> arch_main.o -> rw_schedule
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,21 +26,24 @@ void rw_schedule(void)
     (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
     (**(code **)(_r_osi_funcs_p + 0x38))(_g_waking_sleeping_sem,*(code **)(_r_osi_funcs_p + 0x38));
   }
-  if (_btdm_pwr_state != 1) {
-    return;
-  }
-  do {
-  } while (-1 < _DAT_60042000 << 0x10);
-  if (*(code **)(_r_osi_funcs_p + 0x9c) != (code *)0x0) {
-    (**(code **)(_r_osi_funcs_p + 0x9c))();
-  }
-  (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   if (_btdm_pwr_state == 1) {
-    _btdm_pwr_state = 2;
+    do {
+    } while (-1 < _DAT_60042000 << 0x10);
+    if (*(code **)(_r_osi_funcs_p + 0x9c) != (code *)0x0) {
+      (**(code **)(_r_osi_funcs_p + 0x9c))();
+    }
+    (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
+    if (_btdm_pwr_state == 1) {
+      _btdm_pwr_state = 2;
+    }
+    (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
+    iVar1 = r_sdk_config_get_opts_ext();
+    if (((*(uint *)(iVar1 + 0x28) & 0x200) != 0) &&
+       (iVar1 = r_sdk_config_get_opts_ext(), *(byte *)(iVar1 + 0x2c) < 3)) {
+      r_ble_log_internal_x2(0x400c0002,_btdm_pwr_state,_DAT_60042000);
+      return;
+    }
   }
-                    /* WARNING: Could not recover jumptable at 0x00010854. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_osi_funcs_p + 0x18))();
   return;
 }
 

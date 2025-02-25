@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
- * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
- * Upstream date: 2025-01-03 16:50:09 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_stop
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ undefined4 r_lld_con_stop(int param_1,int param_2)
     uVar1 = 0xc;
     if (*(byte *)(iVar2 + param_1 * 4 + 3) < 6) {
       (**(code **)(_r_plf_funcs_p + 0xc))
-                (param_1,param_2,"lld_con.c",0x5b5,*(code **)(_r_plf_funcs_p + 0xc));
+                (param_1,param_2,"lld_con.c",0x5c7,*(code **)(_r_plf_funcs_p + 0xc));
       uVar1 = 0xc;
     }
     goto _L179;

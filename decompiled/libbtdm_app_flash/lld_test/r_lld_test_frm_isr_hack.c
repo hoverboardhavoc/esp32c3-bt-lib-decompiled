@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> lld_test.o -> r_lld_test_frm_isr_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,9 +27,18 @@ void r_lld_test_frm_isr_hack(int param_1)
     r_assert_err(0,"lld_test.c",0x99);
   }
   iVar4 = _lld_test_env;
+  iVar2 = r_sdk_config_get_opts_ext();
+  if (((*(uint *)(iVar2 + 0x28) & 0x400) != 0) &&
+     (iVar2 = r_sdk_config_get_opts_ext(), *(byte *)(iVar2 + 0x2c) < 3)) {
+    r_ble_log_internal_x1
+              (0x402e0005,
+               param_1 << 0x10 |
+               (uint)CONCAT11(*(undefined1 *)(iVar4 + 0x26),*(undefined1 *)(iVar4 + 0x2a)));
+  }
+  iVar2 = _lld_test_env;
   _DAT_600310d0 = 0;
-  if ((*(char *)(_lld_test_env + 0x2a) == '\x02') && (*(char *)(_lld_test_env + 0x26) == '\x01')) {
-    r_sch_arb_remove(1);
+  if ((*(char *)(iVar4 + 0x2a) == '\x02') && (*(char *)(iVar4 + 0x26) == '\x01')) {
+    r_sch_arb_remove(iVar4,1);
     puVar3 = (undefined1 *)r_ke_msg_alloc(0x20a,0,0xff,4);
     *puVar3 = 0;
     iVar4 = r_emi_get_mem_addr_by_offset(0x400);
@@ -39,16 +48,16 @@ void r_lld_test_frm_isr_hack(int param_1)
     return;
   }
   if (_lld_test_env == 0) {
-    uVar5 = 0x21b;
+    uVar5 = 0x224;
   }
   else {
     r_sch_arb_remove(_lld_test_env,1);
-    bVar1 = DAT_00011015;
-    if (*(char *)(iVar4 + 0x2a) == '\x02') {
+    bVar1 = DAT_0001101d;
+    if (*(char *)(iVar2 + 0x2a) == '\x02') {
       puVar3 = (undefined1 *)r_ke_msg_alloc(0x20a,0,0xff,4);
       *puVar3 = 0;
       uVar7 = 0;
-      if (*(char *)(iVar4 + 0x26) == '\0') {
+      if (*(char *)(iVar2 + 0x26) == '\0') {
         iVar4 = r_emi_get_mem_addr_by_offset(0x400);
         uVar7 = *(undefined2 *)(iVar4 + 0x4a);
       }
@@ -59,16 +68,16 @@ void r_lld_test_frm_isr_hack(int param_1)
     }
     cVar6 = r_emi_get_mem_addr_by_offset;
     if (param_1 != 0) {
-      cVar6 = (code)(*(char *)(iVar4 + 0x16) + DAT_00011015);
+      cVar6 = (code)(*(char *)(iVar2 + 0x16) + DAT_0001101d);
     }
-    *(code *)(iVar4 + 0x16) = cVar6;
-    *(ushort *)(iVar4 + 0x14) = bVar1 & 0xf | 0x6000;
-    iVar2 = r_sch_arb_insert(iVar4);
-    if (iVar2 == 0) {
-      *(undefined1 *)(iVar4 + 0x2a) = 0;
+    *(code *)(iVar2 + 0x16) = cVar6;
+    *(ushort *)(iVar2 + 0x14) = bVar1 & 0xf | 0x6000;
+    iVar4 = r_sch_arb_insert(iVar2);
+    if (iVar4 == 0) {
+      *(undefined1 *)(iVar2 + 0x2a) = 0;
       return;
     }
-    uVar5 = 0x215;
+    uVar5 = 0x21e;
   }
   r_assert_err(0,"lld_test.c",uVar5);
   return;

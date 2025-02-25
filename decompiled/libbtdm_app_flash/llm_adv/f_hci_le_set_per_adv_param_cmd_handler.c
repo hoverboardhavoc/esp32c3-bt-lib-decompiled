@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> llm_adv.o -> f_hci_le_set_per_adv_param_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,7 +30,7 @@ undefined4 f_hci_le_set_per_adv_param_cmd_handler(byte *param_1,undefined4 param
   undefined2 uStack_22;
   
   if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
-_L678:
+_L690:
     iVar4 = 0xc;
   }
   else {
@@ -39,13 +39,13 @@ _L678:
       iVar2 = r_llm_adv_hdl_to_id(0);
       if (iVar2 == 0xff) {
         iVar4 = 0x42;
-        goto _L680;
+        goto _L692;
       }
       iVar2 = iVar2 * 0x44;
       bStack_2d = *(byte *)(*(int *)(_p_llm_env + 8) + iVar2 + 0x3d);
       if (bStack_2d == 0xff) {
         iVar4 = r_llm_activity_free_get(&bStack_2d);
-        if (iVar4 != 0) goto _L680;
+        if (iVar4 != 0) goto _L692;
         iVar4 = *(int *)(_p_llm_env + 8);
         *(byte *)(iVar4 + iVar2 + 0x3d) = bStack_2d;
         *(undefined1 *)(iVar4 + (uint)bStack_2d * 0x44 + 0x32) = 0xff;
@@ -53,7 +53,7 @@ _L678:
       }
       else {
         uVar1 = extraout_a1;
-        if (*(char *)((uint)bStack_2d * 0x44 + *(int *)(_p_llm_env + 8) + 0x40) != '\n') goto _L678;
+        if (*(char *)((uint)bStack_2d * 0x44 + *(int *)(_p_llm_env + 8) + 0x40) != '\n') goto _L690;
       }
       if ((*param_1 < 0xf0) && (*(ushort *)(param_1 + 2) <= *(ushort *)(param_1 + 4))) {
         if ((*(ushort *)(*(int *)(*(int *)(_p_llm_env + 8) + iVar2) + 2) & 0x20) == 0) {
@@ -86,15 +86,15 @@ _L678:
           }
           iVar4 = 0;
           uVar1 = 1;
-          goto _L688;
+          goto _L700;
         }
       }
     }
     iVar4 = 0x12;
   }
-_L680:
+_L692:
   uVar1 = 0;
-_L688:
+_L700:
   r_llm_cmd_cmp_send(param_2,iVar4);
   return uVar1;
 }

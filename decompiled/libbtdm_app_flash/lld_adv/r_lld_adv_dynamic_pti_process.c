@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
- * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
- * Upstream date: 2024-12-13 13:39:25 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_dynamic_pti_process
  *
  * (C) Espressif, Apache License 2.0.
@@ -111,7 +111,7 @@ void r_lld_adv_dynamic_pti_process(int param_1,undefined4 param_2,undefined4 par
         r_lld_ext_adv_dynamic_aux_pti_process_eco(bVar1 & 3,uVar9,&bStack_38);
         return;
       }
-      r_assert_err(0,"lld_adv.c",0x459);
+      r_assert_err(0,"lld_adv.c",0x46a);
       return;
     }
   }

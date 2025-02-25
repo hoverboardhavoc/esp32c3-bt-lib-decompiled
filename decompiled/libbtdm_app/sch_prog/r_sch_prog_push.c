@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app -> sch_prog.o -> r_sch_prog_push
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,7 +29,7 @@ void r_sch_prog_push(undefined4 *param_1)
   iVar7 = (uVar2 - 1 & 0xf) * 0x10;
   uVar8 = uVar2 - DAT_00011104 & 0xf;
   if (param_1[1] == *(int *)(&sch_prog_env + iVar7)) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"sch_prog.c",0x29f,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"sch_prog.c",0x2a1,*(code **)(_r_plf_funcs_p + 8));
   }
   iVar6 = uVar2 * 0x10;
   iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0,*(code **)(_r_plf_funcs_p + 0xbc));
@@ -37,14 +37,14 @@ void r_sch_prog_push(undefined4 *param_1)
      (iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0,*(code **)(_r_plf_funcs_p + 0xbc)),
      (*(ushort *)(iVar3 + iVar6) >> 3 & 7) == 2)) {
     (**(code **)(_r_plf_funcs_p + 0xc))
-              (DAT_00011104,uVar2,"sch_prog.c",0x2a4,*(code **)(_r_plf_funcs_p + 0xc));
+              (DAT_00011104,uVar2,"sch_prog.c",0x2a6,*(code **)(_r_plf_funcs_p + 0xc));
   }
   if (0xd < uVar8) {
     pcVar9 = *(code **)(_r_plf_funcs_p + 0x10);
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0,*(code **)(_r_plf_funcs_p + 0xbc));
     uVar1 = *(ushort *)(iVar3 + (uVar2 - 2 & 0xf) * 0x10);
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0,*(code **)(_r_plf_funcs_p + 0xbc));
-    (*pcVar9)((int)(uint)uVar1 >> 3 & 7,*(ushort *)(iVar3 + iVar7) >> 3 & 7,"sch_prog.c",0x2a7);
+    (*pcVar9)((int)(uint)uVar1 >> 3 & 7,*(ushort *)(iVar3 + iVar7) >> 3 & 7,"sch_prog.c",0x2a9);
   }
   uVar5 = param_1[1];
   uVar4 = param_1[4];
@@ -61,7 +61,7 @@ void r_sch_prog_push(undefined4 *param_1)
   uVar2 = param_1[2];
   *(ushort *)(iVar7 + iVar6 + 4) = uVar1 & 0xfff;
   if (0x270 < uVar2) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"sch_prog.c",0x2b2,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"sch_prog.c",0x2b4,*(code **)(_r_plf_funcs_p + 8));
   }
   iVar7 = param_1[2];
   if ((0x270U - iVar7 & 0xfc00) != 0) {

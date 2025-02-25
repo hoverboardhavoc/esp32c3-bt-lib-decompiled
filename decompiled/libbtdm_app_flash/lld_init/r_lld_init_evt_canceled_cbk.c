@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> lld_init.o -> r_lld_init_evt_canceled_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x000107c4) */
+/* WARNING: Removing unreachable block (ram,0x00010840) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void r_lld_init_evt_canceled_cbk(int param_1)
@@ -28,20 +28,28 @@ void r_lld_init_evt_canceled_cbk(int param_1)
   uint uVar10;
   
   if (param_1 == 0) {
-    uVar7 = 0x5ba;
-_L92:
+    uVar7 = 0x5c8;
+_L101:
     r_assert_err(0,"lld_init.c",uVar7);
     return;
   }
+  iVar6 = r_sdk_config_get_opts_ext();
+  if (((*(uint *)(iVar6 + 0x28) & 0x10) != 0) &&
+     (iVar6 = r_sdk_config_get_opts_ext(), *(byte *)(iVar6 + 0x2c) < 3)) {
+    r_ble_log_internal_x1
+              (0x404f0006,
+               (uint)*(byte *)(param_1 + 0x52) |
+               (uint)*(byte *)(param_1 + 0x16) << 0x10 | (uint)*(byte *)(param_1 + 0x31) << 8);
+  }
   if (*(char *)(param_1 + 0x31) != '\0') {
-    r_assert_param(*(undefined1 *)(param_1 + 0x51),"lld_init.c",0x5b5);
+    r_assert_param(*(undefined1 *)(param_1 + 0x51),"lld_init.c",0x5c3);
     return;
   }
   iVar6 = r_lld_read_clock();
   bVar1 = rwip_priority;
   if ((uint)*(ushort *)(param_1 + 0x2c) << 1 <= (iVar6 - *(int *)(param_1 + 0x28) & 0xfffffffU)) {
     if (0xff < (uint)*(byte *)(param_1 + 0x16) + (uint)rwip_priority) {
-      r_assert_err(0,"lld_init.c",0x59c);
+      r_assert_err(0,"lld_init.c",0x5aa);
     }
     *(int *)(param_1 + 0x28) = iVar6;
     *(byte *)(param_1 + 0x16) = bVar1 + *(char *)(param_1 + 0x16);
@@ -51,8 +59,8 @@ _L92:
     if (iVar6 == 0) {
       return;
     }
-    uVar7 = 0x5a8;
-    goto _L92;
+    uVar7 = 0x5b6;
+    goto _L101;
   }
   *(undefined1 *)(param_1 + 0x3d) = 0;
   iVar3 = *(int *)(_lld_init_env + (uint)*(byte *)(param_1 + 0x51) * 4);
@@ -66,12 +74,12 @@ _L92:
     *(uint *)(iVar3 + 0x10) =
          ((uint)*(ushort *)(&lld_init_max_aux_dur_tab + (uint)*(byte *)(iVar3 + 0x4d) * 2) +
          *(int *)(iVar3 + 0x48)) * 2 + (uint)_sdk_cfg_priv_opts;
-    bVar8 = DAT_00013036;
-    if (DAT_00013036 < *(byte *)(iVar3 + 0x16)) {
+    bVar8 = DAT_0001303e;
+    if (DAT_0001303e < *(byte *)(iVar3 + 0x16)) {
       bVar8 = *(byte *)(iVar3 + 0x16);
     }
     *(byte *)(iVar3 + 0x16) = bVar8;
-    *(ushort *)(iVar3 + 0x14) = DAT_00013037 & 0xf | 0x2000;
+    *(ushort *)(iVar3 + 0x14) = DAT_0001303f & 0xf | 0x2000;
     iVar6 = r_sch_arb_insert(iVar3);
     if (iVar6 == 0) {
       uVar10 = (uint)*(byte *)(iVar3 + 0x4d);
@@ -104,7 +112,7 @@ _L92:
       uVar2 = *(ushort *)(iVar4 + iVar6 + 0x26);
       iVar4 = r_emi_get_mem_addr_by_offset(0x400);
       *(ushort *)(iVar6 + 0x26 + iVar4) = uVar2 & 0x3ff | (ushort)uVar9;
-      goto _L81;
+      goto _L87;
     }
     *(undefined1 *)(iVar3 + 0x3d) = 0;
   }
@@ -130,7 +138,7 @@ _L92:
     uVar9 = (uint)_r_assert_param;
   }
   *(uint *)(iVar3 + 0x10) = uVar9;
-  *(ushort *)(iVar3 + 0x14) = DAT_0001303b & 0xf | 0x6000;
+  *(ushort *)(iVar3 + 0x14) = DAT_00013043 & 0xf | 0x6000;
   *(undefined1 *)(iVar3 + 0x3e) = 1;
   iVar5 = r_emi_get_mem_addr_by_offset(0x400);
   iVar4 = (uint)bVar1 * 0x5a;
@@ -145,10 +153,10 @@ _L92:
   *(undefined2 *)(iVar4 + 0x46 + iVar6) = 0;
   iVar6 = r_sch_arb_insert(iVar3);
   if (iVar6 != 0) {
-    r_assert_err(0,"lld_init.c",0x278);
+    r_assert_err(0,"lld_init.c",0x27b);
     return;
   }
-_L81:
+_L87:
   *(undefined1 *)(iVar3 + 0x50) = 0;
   return;
 }

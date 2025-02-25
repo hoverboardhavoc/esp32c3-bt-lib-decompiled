@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app -> lld_init.o -> r_lld_init_evt_canceled_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,21 +22,21 @@ void r_lld_init_evt_canceled_cbk(int param_1)
   undefined4 uVar4;
   
   if (param_1 == 0) {
-    uVar4 = 0x5ba;
+    uVar4 = 0x5c8;
     UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
   }
   else {
     if (*(char *)(param_1 + 0x31) != '\0') {
                     /* WARNING: Could not recover jumptable at 0x00011b18. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-      (**(code **)(_r_plf_funcs_p + 0xc))(*(undefined1 *)(param_1 + 0x51),"lld_init.c",0x5b5);
+      (**(code **)(_r_plf_funcs_p + 0xc))(*(undefined1 *)(param_1 + 0x51),"lld_init.c",0x5c3);
       return;
     }
     iVar3 = (**(code **)(_r_ip_funcs_p + 0x264))(*(code **)(_r_ip_funcs_p + 0x264));
     bVar2 = rwip_priority;
     if ((uint)*(ushort *)(param_1 + 0x2c) << 1 <= (iVar3 - *(int *)(param_1 + 0x28) & 0xfffffffU)) {
       if (0xff < (uint)*(byte *)(param_1 + 0x16) + (uint)rwip_priority) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_init.c",0x59c,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_init.c",0x5aa,*(code **)(_r_plf_funcs_p + 8));
       }
       *(int *)(param_1 + 0x28) = iVar3;
       *(byte *)(param_1 + 0x16) = bVar2 + *(char *)(param_1 + 0x16);
@@ -54,7 +54,7 @@ void r_lld_init_evt_canceled_cbk(int param_1)
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
-    uVar4 = 0x5a8;
+    uVar4 = 0x5b6;
   }
                     /* WARNING: Could not recover jumptable at 0x00011ad0. Too many branches */
                     /* WARNING: Treating indirect jump as call */

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_wakeup_request
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,18 +15,28 @@
 void btdm_wakeup_request(void)
 
 {
-  char cVar1;
+  int iVar1;
   uint uVar2;
+  int iVar3;
+  int iVar4;
   
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
-  cVar1 = btdm_get_power_state_impl();
-  if ((((byte)(cVar1 - 1U) < 2) && ((int)(_DAT_60042000 << 0x10) < 0)) &&
-     (uVar2 = (**(code **)(_r_osi_funcs_p + 0x8c))
-                        (_DAT_60042004 - _DAT_60042008,0,*(code **)(_r_osi_funcs_p + 0x8c)),
-     200 < uVar2)) {
-    _DAT_60042000 = _DAT_60042000 | 0x10;
+  iVar1 = btdm_get_power_state_impl();
+  if (((iVar1 - 1U & 0xff) < 2) && ((int)(_DAT_60042000 << 0x10) < 0)) {
+    iVar4 = _DAT_60042004 - _DAT_60042008;
+    uVar2 = (**(code **)(_r_osi_funcs_p + 0x8c))(iVar4,0,*(code **)(_r_osi_funcs_p + 0x8c));
+    if (200 < uVar2) {
+      _DAT_60042000 = _DAT_60042000 | 0x10;
+      iVar3 = r_sdk_config_get_opts_ext();
+      if ((*(uint *)(iVar3 + 0x28) & 0x200) != 0) {
+        iVar3 = r_sdk_config_get_opts_ext();
+        if (*(byte *)(iVar3 + 0x2c) < 3) {
+          r_ble_log_internal_x2(0x400c0006,iVar1,iVar4);
+        }
+      }
+    }
   }
-                    /* WARNING: Could not recover jumptable at 0x00010236. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001027c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))();
   return;

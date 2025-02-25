@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app -> llc_llcp.o -> lld_llcp_tx_cfm_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ undefined4 lld_llcp_tx_cfm_handler(uint param_1)
   iVar1 = *(int *)(&llc_env + (param_1 >> 8) * 4);
   uVar3 = param_1 >> 8 & 0xff;
   if (iVar1 == 0) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(0,"llc_llcp.c",0x3dc,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(0,"llc_llcp.c",0x3df,*(code **)(_r_plf_funcs_p + 0xc));
   }
   else {
     iVar2 = (**(code **)(_r_modules_funcs_p + 0x40))

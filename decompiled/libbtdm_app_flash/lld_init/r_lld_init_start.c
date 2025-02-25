@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> lld_init.o -> r_lld_init_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -114,13 +114,13 @@ undefined4 r_lld_init_start(undefined2 *param_1)
         pvVar15 = (void *)r_ke_malloc(0x54,0);
         *__s = (int)pvVar15;
         if (pvVar15 == (void *)0x0) {
-          r_assert_err("lld_init.c",0x6c5);
+          r_assert_err("lld_init.c",0x6d3);
         }
         else {
           memset(pvVar15,0,0x54);
           *(code **)((int)pvVar15 + 0x20) = r_lld_init_evt_canceled_cbk;
           *(code **)((int)pvVar15 + 0x18) = r_lld_init_evt_start_cbk;
-          uVar2 = DAT_0001303a;
+          uVar2 = DAT_00013042;
           *(undefined4 *)((int)pvVar15 + 0x1c) = 0;
           *(undefined4 *)((int)pvVar15 + 8) = 0;
           *(undefined1 *)((int)pvVar15 + 0x16) = uVar2;
@@ -131,7 +131,7 @@ undefined4 r_lld_init_start(undefined2 *param_1)
           }
           *(uint *)((int)pvVar15 + 0x10) = uVar14;
           iVar28 = 1;
-          *(ushort *)((int)pvVar15 + 0x14) = DAT_0001303b & 0xf | 0x6000;
+          *(ushort *)((int)pvVar15 + 0x14) = DAT_00013043 & 0xf | 0x6000;
           uVar8 = param_1[0xc];
           *(undefined1 *)((int)pvVar15 + 0x30) = 0;
           *(undefined1 *)((int)pvVar15 + 0x51) = 0;
@@ -176,13 +176,13 @@ undefined4 r_lld_init_start(undefined2 *param_1)
         pvVar15 = (void *)r_ke_malloc(0x54,0);
         __s[1] = (int)pvVar15;
         if (pvVar15 == (void *)0x0) {
-          r_assert_err("lld_init.c",0x726);
+          r_assert_err("lld_init.c",0x734);
         }
         else {
           memset(pvVar15,0,0x54);
           *(code **)((int)pvVar15 + 0x20) = r_lld_init_evt_canceled_cbk;
           *(code **)((int)pvVar15 + 0x18) = r_lld_init_evt_start_cbk;
-          uVar2 = DAT_0001303a;
+          uVar2 = DAT_00013042;
           *(undefined4 *)((int)pvVar15 + 0x1c) = 0;
           *(undefined1 *)((int)pvVar15 + 0x16) = uVar2;
           uVar33 = param_1[iVar28 * 6 + 0xd];
@@ -191,7 +191,7 @@ undefined4 r_lld_init_start(undefined2 *param_1)
             uVar14 = (uint)_sch_slice_params;
           }
           *(uint *)((int)pvVar15 + 0x10) = uVar14;
-          *(ushort *)((int)pvVar15 + 0x14) = DAT_0001303b & 0xf | 0x6000;
+          *(ushort *)((int)pvVar15 + 0x14) = DAT_00013043 & 0xf | 0x6000;
           uVar8 = param_1[iVar28 * 6 + 0xc];
           *(ushort *)((int)pvVar15 + 0x2e) = uVar33;
           *(uint *)((int)pvVar15 + 0x24) = (uint)uVar33;
@@ -219,16 +219,16 @@ undefined4 r_lld_init_start(undefined2 *param_1)
       memcpy(pvVar15,auStack_98,0x16);
       *(undefined1 *)((int)__s + 0x2a) = *(undefined1 *)((int)param_1 + 0x11);
       if (((*(byte *)(param_1 + 10) & 2) == 0) && (*(char *)(param_1 + 0x1e) == '\0')) {
-_L305:
+_L327:
         uVar33 = 0;
-_L412:
+_L434:
         uVar14 = 0;
       }
       else {
         uVar33 = 1;
-        if (*(char *)(param_1 + 0xb) != '\0') goto _L412;
+        if (*(char *)(param_1 + 0xb) != '\0') goto _L434;
         uVar14 = r_lld_ral_search(param_1 + 3,*(undefined1 *)((int)param_1 + 0x15));
-        if (9 < uVar14) goto _L305;
+        if (9 < uVar14) goto _L327;
         uVar33 = 1;
         uVar14 = uVar14 * 0x34 + 0xc60 & 0xffff;
       }
@@ -485,18 +485,18 @@ _L412:
             uVar12 = 0;
           }
           else {
-            r_assert_err(0,"lld_init.c",0x803);
+            r_assert_err(0,"lld_init.c",0x811);
             uVar12 = 0;
           }
         }
         __s = __s + 1;
       } while (piVar21 != __s);
-      goto _L293;
+      goto _L315;
     }
-    r_assert_err("lld_init.c",0x80b);
+    r_assert_err("lld_init.c",0x819);
   }
   uVar12 = 0xc;
-_L293:
+_L315:
   r_lld_init_start_hook_part_0(param_1);
   return uVar12;
 }

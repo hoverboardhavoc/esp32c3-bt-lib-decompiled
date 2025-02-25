@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> llc.o -> r_llc_proc_timer_pause_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void r_llc_proc_timer_pause_set(uint param_1,uint param_2,int param_3)
   
   iVar6 = *(int *)(&llc_env + param_1 * 4);
   if (1 < param_2) {
-    r_assert_param("llc.c",0x279);
+    r_assert_param("llc.c",0x27f);
   }
   if ((iVar6 != 0) && (iVar6 = *(int *)(*(int *)(&llc_env + param_1 * 4) + param_2 * 4), iVar6 != 0)
      ) {
@@ -31,7 +31,7 @@ void r_llc_proc_timer_pause_set(uint param_1,uint param_2,int param_3)
       if (param_3 != 0) {
         *(undefined1 *)(iVar6 + 6) = 2;
         bVar4 = false;
-_L193:
+_L204:
         uVar2 = param_1 << 8 | 1;
         iVar6 = (param_2 != 0) + 0x100;
         if (!bVar4) {
@@ -59,12 +59,12 @@ _L193:
       if (param_3 == 0) {
         *(undefined1 *)(iVar6 + 6) = 1;
         bVar4 = true;
-        goto _L193;
+        goto _L204;
       }
     }
     else {
       if (cVar1 != '\x03') {
-        r_assert_param(*(undefined1 *)(iVar6 + 4),"llc.c",0x2ad);
+        r_assert_param(*(undefined1 *)(iVar6 + 4),"llc.c",0x2b3);
         return;
       }
       if (param_3 == 0) {

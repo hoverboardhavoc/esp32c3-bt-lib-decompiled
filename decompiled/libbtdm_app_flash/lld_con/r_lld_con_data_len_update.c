@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_data_len_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,17 +13,26 @@
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 undefined4
-r_lld_con_data_len_update(int param_1,undefined2 param_2,undefined2 param_3,undefined2 param_4)
+r_lld_con_data_len_update
+          (int param_1,undefined2 param_2,undefined4 param_3,undefined2 param_4,undefined4 param_5)
 
 {
   int iVar1;
   undefined4 uVar2;
+  int iVar3;
   
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   iVar1 = *(int *)(&lld_con_env + param_1 * 4);
   uVar2 = 0xc;
   if (iVar1 != 0) {
-    *(undefined2 *)(iVar1 + 0x86) = param_3;
+    iVar3 = r_sdk_config_get_opts_ext();
+    if ((*(uint *)(iVar3 + 0x28) & 0x20) != 0) {
+      iVar3 = r_sdk_config_get_opts_ext();
+      if (*(byte *)(iVar3 + 0x2c) < 3) {
+        r_ble_log_internal_x3(0x40a30007,param_1,param_3,param_5);
+      }
+    }
+    *(short *)(iVar1 + 0x86) = (short)param_3;
     *(undefined2 *)(iVar1 + 0x88) = param_2;
     *(undefined2 *)(iVar1 + 0x8a) = param_4;
     r_lld_con_evt_time_update_eco(param_1);

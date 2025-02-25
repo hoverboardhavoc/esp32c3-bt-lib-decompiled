@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
- * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
- * Upstream date: 2025-01-03 16:50:09 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_controller_on_reset
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void btdm_controller_on_reset(void)
   ble_util_buf_reset();
   rw_rf_le_exit_test_mode();
   if ((_bt_rf_coex_hooks_p != (undefined4 *)0x0) && ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
-                    /* WARNING: Could not recover jumptable at 0x00010c14. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010c92. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (*(code *)*_bt_rf_coex_hooks_p)(0xff,8,0);
     return;

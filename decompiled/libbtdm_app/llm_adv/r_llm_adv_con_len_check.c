@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
- * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
- * Upstream date: 2025-01-03 16:50:09 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app -> llm_adv.o -> r_llm_adv_con_len_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,10 +20,10 @@ undefined4 r_llm_adv_con_len_check(int param_1,int param_2)
   int iVar3;
   
   if ((*(ushort *)(param_1 + 2) & 0x10) != 0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"llm_adv.c",0xc11,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"llm_adv.c",0xc16,*(code **)(_r_plf_funcs_p + 8));
   }
   if ((*(ushort *)(param_1 + 2) & 1) == 0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"llm_adv.c",0xc12,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"llm_adv.c",0xc17,*(code **)(_r_plf_funcs_p + 8));
   }
   iVar2 = 6;
   if ((*(ushort *)(param_1 + 2) & 4) != 0) {

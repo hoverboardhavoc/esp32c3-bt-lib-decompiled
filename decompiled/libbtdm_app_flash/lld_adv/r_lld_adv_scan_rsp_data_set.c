@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_scan_rsp_data_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,8 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_lld_adv_scan_rsp_data_set(int param_1,int param_2,undefined2 param_3,int param_4,int param_5)
+void r_lld_adv_scan_rsp_data_set
+               (uint param_1,int param_2,undefined4 param_3,int param_4,int param_5)
 
 {
   byte bVar1;
@@ -24,6 +25,14 @@ void r_lld_adv_scan_rsp_data_set(int param_1,int param_2,undefined2 param_3,int 
   int iVar7;
   
   iVar3 = *(int *)(&lld_adv_env + param_1 * 4);
+  iVar5 = r_sdk_config_get_opts_ext();
+  if ((*(uint *)(iVar5 + 0x28) & 4) != 0) {
+    iVar5 = r_sdk_config_get_opts_ext();
+    if (*(byte *)(iVar5 + 0x2c) < 3) {
+      r_ble_log_internal_x2
+                (0x40c00010,param_4 << 0x10 | param_5 << 8 | param_2 << 0x18 | param_1,param_3);
+    }
+  }
   uVar2 = param_1 * 9 & 0xff;
   if ((*(ushort *)(iVar3 + 0x74) & 0x10) == 0) {
     sVar6 = 0;
@@ -34,7 +43,7 @@ void r_lld_adv_scan_rsp_data_set(int param_1,int param_2,undefined2 param_3,int 
       sVar6 = *(short *)(iVar5 + (uVar2 + 2 & 0xff) * 0xe + 4);
     }
     *(short *)(iVar3 + 0x84) = (short)param_2;
-    *(undefined2 *)(iVar3 + 0x80) = param_3;
+    *(short *)(iVar3 + 0x80) = (short)param_3;
     r_lld_adv_ext_chain_construct(*(undefined1 *)(iVar3 + 0x87));
   }
   else {
@@ -54,7 +63,7 @@ void r_lld_adv_scan_rsp_data_set(int param_1,int param_2,undefined2 param_3,int 
     iVar5 = r_emi_get_mem_addr_by_offset(0x1400);
     *(ushort *)(iVar5 + iVar7) = (ushort)((param_2 + 6U & 0xff) << 8) | uVar4 & 0xff;
     iVar5 = r_emi_get_mem_addr_by_offset(0x1400);
-    *(undefined2 *)(iVar5 + iVar3 + 4) = param_3;
+    *(short *)(iVar5 + iVar3 + 4) = (short)param_3;
     iVar5 = r_emi_get_mem_addr_by_offset(0x1400);
     uVar4 = *(ushort *)(iVar5 + iVar3);
     iVar5 = r_emi_get_mem_addr_by_offset();

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
- * https://github.com/espressif/esp32c3-bt-lib/commit/d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
- * Upstream date: 2024-11-25 10:28:56 +0800
- * Upstream subject: fix(bt): Fixed BLE assert ke_mem.c line 267(d7561c2)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app -> rwip.o -> r_rwip_schedule
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ void r_rwip_schedule(void)
 
 {
   if ((_rwip_env & 1) == 0) {
-                    /* WARNING: Could not recover jumptable at 0x000103a6. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000103c8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_modules_funcs_p + 0x104))();
     return;

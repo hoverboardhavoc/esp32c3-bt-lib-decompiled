@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> rwip_driver.o -> rwip_aes_encrypt_sync
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,8 +10,8 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x000108bc) */
-/* WARNING: Removing unreachable block (ram,0x0001076c) */
+/* WARNING: Removing unreachable block (ram,0x00010938) */
+/* WARNING: Removing unreachable block (ram,0x000107e8) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void rwip_aes_encrypt_sync(void *param_1,size_t param_2)
@@ -20,9 +20,9 @@ void rwip_aes_encrypt_sync(void *param_1,size_t param_2)
   void *__dest;
   
   _LANCHOR0 = 0;
-  DAT_00011024 = 0;
-  DAT_00011028 = 0;
-  DAT_0001102c = 0;
+  DAT_00011100 = 0;
+  DAT_00011104 = 0;
+  DAT_00011108 = 0;
   memcpy(&_LANCHOR0,param_1,param_2);
   r_rwip_prevent_sleep_set(0x20);
   __dest = (void *)r_emi_get_mem_addr_by_offset(0x128);

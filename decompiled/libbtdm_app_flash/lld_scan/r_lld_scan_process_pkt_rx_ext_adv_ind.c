@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_process_pkt_rx_ext_adv_ind
  *
  * (C) Espressif, Apache License 2.0.
@@ -50,12 +50,12 @@ void r_lld_scan_process_pkt_rx_ext_adv_ind(int param_1,int param_2,char *param_3
   param_3[1] = (char)uVar11;
   if (uVar11 == 1) {
     bVar9 = *(byte *)(iVar4 + 0x6d) | 1;
-_L252:
+_L254:
     *(byte *)(iVar4 + 0x6d) = bVar9;
   }
   else if (uVar11 == 2) {
     bVar9 = *(byte *)(iVar4 + 0x6d) | 2;
-    goto _L252;
+    goto _L254;
   }
   *(undefined1 *)(iVar4 + 0x6a) = 0;
   if (*param_3 == '\0') {
@@ -108,13 +108,13 @@ _L252:
       iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
       if ((*(ushort *)(iVar14 + 2 + iVar5) >> 9 & 1) == 0) {
         if (2 < (auStack_24[0] >> 0x15 & 7)) {
-_L218:
+_L220:
           *(undefined1 *)(iVar4 + 0x6e) = 0xff;
           return;
         }
         iVar5 = r_lld_calc_aux_rx(iVar4 + 0x48,param_2);
         uVar10 = 1;
-        if (iVar5 == 0) goto _L218;
+        if (iVar5 == 0) goto _L220;
       }
       else {
         *(uint *)(iVar4 + 0x2c) = auStack_24[0];
@@ -134,7 +134,7 @@ _L218:
     }
     if ((int)(uVar12 << 0x11) < 0) {
       if ((*(char *)(iVar4 + 0x3b) != '\0') && ((param_3[1] != '\0' || ((int)(uVar12 << 0x13) < 0)))
-         ) goto _L224;
+         ) goto _L226;
       puVar8 = (undefined1 *)r_emi_get_mem_addr_by_offset(sVar1 + sVar13);
       uVar10 = *puVar8;
     }
@@ -143,7 +143,7 @@ _L218:
     }
     *(undefined1 *)(iVar4 + 0x73) = uVar10;
   }
-_L224:
+_L226:
   *(char *)(iVar4 + 0x6f) = param_3[8];
   param_3[5] = '\0';
   return;

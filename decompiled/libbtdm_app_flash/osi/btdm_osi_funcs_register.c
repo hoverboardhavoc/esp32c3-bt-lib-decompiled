@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
+ * Upstream date: 2025-02-25 15:16:47 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
  * Source: libbtdm_app_flash -> osi.o -> btdm_osi_funcs_register
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,10 +22,10 @@ undefined4 btdm_osi_funcs_register(int *param_1)
     return 0xffffffff;
   }
   if (3 < _g_bt_plf_log_level) {
-    ets_printf("MAGIC %08x VERSION %08x\n",0xfadebead,0x10009);
+    ets_printf("MAGIC %08x VERSION %08x\n",0xfadebead,0x1000a);
   }
   if (*param_1 == -0x5214153) {
-    if (param_1[1] == 0x10009) {
+    if (param_1[1] == 0x1000a) {
       _r_osi_funcs_p = param_1;
       return 0;
     }
