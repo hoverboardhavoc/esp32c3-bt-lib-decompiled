@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
+ * Upstream date: 2025-02-27 20:50:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_offset_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ uint r_lld_con_offset_get(int param_1)
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   iVar3 = *(int *)(&lld_con_env + param_1 * 4);
   if (iVar3 == 0) {
-    r_assert_param(0,"lld_con.c",0x10eb);
+    r_assert_param(0,"lld_con.c",0x10f5);
     uVar2 = 0;
   }
   else {

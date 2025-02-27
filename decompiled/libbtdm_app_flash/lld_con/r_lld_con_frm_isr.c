@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
+ * Upstream date: 2025-02-27 20:50:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_frm_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,7 +38,7 @@ void r_lld_con_frm_isr(uint param_1,int param_2)
   
   iVar4 = *(int *)(&lld_con_env + param_1 * 4);
   if (iVar4 == 0) {
-    r_assert_err(0,"lld_con.c",0xc07);
+    r_assert_err(0,"lld_con.c",0xc11);
     return;
   }
   r_sch_arb_remove(iVar4,1);
@@ -150,7 +150,7 @@ void r_lld_con_frm_isr(uint param_1,int param_2)
         ;
         uVar16 = uVar18 * 2;
         if (uVar12 != 0) {
-          *(undefined2 *)(&DAT_0001502c + iVar11) = 0;
+          *(undefined2 *)(&DAT_0001505c + iVar11) = 0;
         }
         if ((*(ushort *)(iVar4 + 0x84) & 2) == 0) {
           uVar16 = uVar16 + (uint)*(ushort *)(iVar4 + 0x70) * 0x271;
@@ -163,14 +163,14 @@ _L248:
              ((uVar12 == 0 ||
               ((bVar19 = false, *(ushort *)(iVar4 + 0x7c) == 0 && (*(short *)(iVar4 + 0x98) == -1)))
               ))) {
-            uVar10 = ((int)((uint)*(ushort *)(&DAT_0001502c + iVar11) *
+            uVar10 = ((int)((uint)*(ushort *)(&DAT_0001505c + iVar11) *
                             (uint)*(ushort *)(iVar4 + 0x70) * 0x271) >> 1) +
                      (uint)*(ushort *)(iVar4 + 0x70) * 0x271 + uVar16;
             uVar16 = *(int *)(iVar4 + 100) * 0x271;
             if (uVar10 < uVar16) {
               uVar16 = uVar10;
             }
-            *(ushort *)(&DAT_0001502c + iVar11) = *(ushort *)(&DAT_0001502c + iVar11) + 1;
+            *(ushort *)(&DAT_0001505c + iVar11) = *(ushort *)(&DAT_0001505c + iVar11) + 1;
             goto _L248;
           }
         }

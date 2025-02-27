@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
+ * Upstream date: 2025-02-27 20:50:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
  * Source: libbtdm_app -> llc_encrypt.o -> f_ll_pause_enc_rsp_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ undefined4 f_ll_pause_enc_rsp_handler(int param_1)
     if (iVar1 == 3) {
       uVar2 = 1;
       pcVar3 = *(code **)(_r_ip_funcs_p + 0x594);
-      goto _L149;
+      goto _L166;
     }
     if ((*(ushort *)(iVar4 + 0x42) & 1) != 0) {
       return 0x24;
@@ -38,7 +38,7 @@ undefined4 f_ll_pause_enc_rsp_handler(int param_1)
   }
   uVar2 = 0xb;
   pcVar3 = *(code **)(_r_ip_funcs_p + 0x59c);
-_L149:
+_L166:
   (*pcVar3)(param_1,uVar2,0,pcVar3);
   return 0;
 }

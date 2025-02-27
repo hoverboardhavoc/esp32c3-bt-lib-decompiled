@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
+ * Upstream date: 2025-02-27 20:50:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
  * Source: libbtdm_app_flash -> rf_txpwr.o -> ble_txpwr_set_inter
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,14 +37,14 @@ undefined4 ble_txpwr_set_inter(uint param_1,uint param_2,uint param_3)
   }
   else if ((int)param_1 < 3) {
     if (param_1 != 1) {
-_L64:
+_L68:
       iVar1 = r_sdk_cfg_priv_opts_ext_get();
       *(char *)(iVar1 + 1) = (char)uVar2;
       return 0;
     }
     iVar1 = r_sdk_config_get_opts();
     if (param_2 < *(byte *)(iVar1 + 0xd)) {
-_L74:
+_L78:
       r_bt_rtp_register_rule_cs_idx(param_2);
       return 0;
     }
@@ -57,9 +57,9 @@ _L74:
     uVar3 = 0xf;
   }
   else {
-    if (param_1 != 4) goto _L64;
+    if (param_1 != 4) goto _L68;
     iVar1 = r_sdk_config_get_opts();
-    if (param_2 < *(byte *)(iVar1 + 0xd)) goto _L74;
+    if (param_2 < *(byte *)(iVar1 + 0xd)) goto _L78;
     r_bt_rtp_register_rule_cs_fmt(2,uVar2);
     uVar3 = 3;
   }

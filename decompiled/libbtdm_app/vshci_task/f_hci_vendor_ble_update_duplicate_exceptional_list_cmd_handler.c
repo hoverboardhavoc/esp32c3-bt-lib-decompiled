@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
+ * Upstream date: 2025-02-27 20:50:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
  * Source: libbtdm_app -> vshci_task.o -> f_hci_vendor_ble_update_duplicate_exceptional_list_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -40,12 +40,12 @@ f_hci_vendor_ble_update_duplicate_exceptional_list_cmd_handler(char *param_1,und
       if (uVar4 < 5) {
         *(undefined4 *)(puVar3 + 4) = 0;
       }
-      goto _L130;
+      goto _L133;
     }
     uVar5 = 6;
   }
   *(undefined4 *)(puVar3 + 4) = uVar5;
-_L130:
+_L133:
   if (cVar1 == '\x02') {
     *(undefined4 *)(puVar3 + 4) = 0;
   }

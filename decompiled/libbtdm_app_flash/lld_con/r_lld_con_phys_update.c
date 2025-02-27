@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
+ * Upstream date: 2025-02-27 20:50:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_phys_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,12 +42,12 @@ undefined4 r_lld_con_phys_update(uint param_1,int param_2,int param_3,undefined2
       if (uVar2 < uVar1) {
         r_lld_con_tx_len_update(param_1,param_2,*(undefined4 *)(iVar3 + 100));
       }
-      goto _L850;
+      goto _L854;
     }
-    r_assert_param(*(char *)(iVar3 + 0x46),0,"lld_con.c",0xf86);
+    r_assert_param(*(char *)(iVar3 + 0x46),0,"lld_con.c",0xf90);
   }
   uVar4 = 0xc;
-_L850:
+_L854:
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   return uVar4;
 }
