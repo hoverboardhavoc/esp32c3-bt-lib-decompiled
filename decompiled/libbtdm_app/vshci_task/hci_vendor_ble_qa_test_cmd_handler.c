@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit b5ead6b6d5758629370c91897168b8bcdfdcc169
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b5ead6b6d5758629370c91897168b8bcdfdcc169
+ * Upstream date: 2025-03-12 20:14:26 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(9f6be86f)
  * Source: libbtdm_app -> vshci_task.o -> hci_vendor_ble_qa_test_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,30 +15,32 @@
 undefined4 hci_vendor_ble_qa_test_cmd_handler(byte *param_1,undefined4 param_2,undefined4 param_3)
 
 {
-  undefined4 uVar1;
-  int iVar2;
+  int iVar1;
+  undefined4 uVar2;
   ushort *puVar3;
+  uint uVar4;
   
-  iVar2 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
-  if (*(char *)(iVar2 + 0x21) == '\0') {
-    return 0;
-  }
-  puVar3 = &_LANCHOR0;
-  iVar2 = 0;
-  do {
-    if (*puVar3 == (ushort)*param_1) {
-      if ((code *)(&PTR_hci_vs_ble_qa_test_en_cmd_handler_0001120c)[iVar2 * 2] == (code *)0x0) {
-        return 0;
-      }
-                    /* WARNING: Could not recover jumptable at 0x000110d4. Too many branches */
+  if (DAT_000111f0 != 0) {
+    if (_LANCHOR0 != (ushort *)0x0) {
+      iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
+      if (*(char *)(iVar1 + 0x17) == '\x01') {
+        puVar3 = _LANCHOR0;
+        for (uVar4 = 0; uVar4 < DAT_000111f0; uVar4 = uVar4 + 1) {
+          if (*puVar3 == (ushort)*param_1) {
+            if (*(code **)(puVar3 + 2) != (code *)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000102d4. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-      uVar1 = (*(code *)(&PTR_hci_vs_ble_qa_test_en_cmd_handler_0001120c)[iVar2 * 2])
-                        (param_1 + 1,param_2,param_3);
-      return uVar1;
+              uVar2 = (**(code **)(puVar3 + 2))(param_1 + 1,param_2,param_3);
+              return uVar2;
+            }
+            break;
+          }
+          puVar3 = puVar3 + 4;
+        }
+      }
     }
-    iVar2 = iVar2 + 1;
-    puVar3 = puVar3 + 4;
-  } while (iVar2 != 0x20);
+  }
+  (**(code **)(_r_ip_funcs_p + 0x4b8))(0xfd13,1,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }
 
