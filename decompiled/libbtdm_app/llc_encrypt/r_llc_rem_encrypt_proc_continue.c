@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app -> llc_encrypt.o -> r_llc_rem_encrypt_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -126,7 +126,7 @@ _L89:
     uVar4 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar2,*(code **)(_r_ip_funcs_p + 0x680));
                     /* WARNING: Could not recover jumptable at 0x000109fe. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (*UNRECOVERED_JUMPTABLE)(param_1,uVar4,"llc_encrypt.c",0x473);
+    (*UNRECOVERED_JUMPTABLE)(param_1,uVar4,"llc_encrypt.c",0x452);
     return;
   }
   (*UNRECOVERED_JUMPTABLE)(iVar2,param_1,uVar4,UNRECOVERED_JUMPTABLE);

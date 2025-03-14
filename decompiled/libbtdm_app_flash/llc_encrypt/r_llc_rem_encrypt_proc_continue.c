@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app_flash -> llc_encrypt.o -> r_llc_rem_encrypt_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -102,7 +102,7 @@ _L107:
     goto _L75;
   default:
     uVar4 = r_llc_proc_state_get(iVar2);
-    r_assert_param(param_1,uVar4,"llc_encrypt.c",0x473);
+    r_assert_param(param_1,uVar4,"llc_encrypt.c",0x452);
     return;
   }
   r_llc_proc_state_set(iVar2,param_1,uVar4);

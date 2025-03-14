@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_evt_canceled_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,33 +15,26 @@
 void r_lld_con_evt_canceled_cbk(int param_1)
 
 {
-  byte bVar1;
-  byte bVar2;
-  char cVar3;
-  undefined4 uVar4;
+  char cVar1;
+  undefined4 uVar2;
   
   if (param_1 != 0) {
-    uVar4 = (**(code **)(_r_ip_funcs_p + 0x264))(*(code **)(_r_ip_funcs_p + 0x264));
-    bVar1 = *(byte *)(param_1 + 0x8f);
-    bVar2 = *(byte *)(param_1 + 0x8e);
-    if ((bVar1 & 0xfd) != 0) {
-      (**(code **)(_r_plf_funcs_p + 0xc))
-                ((uint)bVar2,bVar1,"lld_con.c",0xbb0,*(code **)(_r_plf_funcs_p + 0xc));
+    uVar2 = (**(code **)(_r_ip_funcs_p + 0x264))(*(code **)(_r_ip_funcs_p + 0x264));
+    if (*(char *)(param_1 + 0x8f) != '\0') {
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0xbac,*(code **)(_r_plf_funcs_p + 8));
     }
     *(uint *)(param_1 + 0x48) = *(int *)(param_1 + 0x48) + *(int *)(param_1 + 100) & 0xfffffff;
-    cVar3 = rwip_priority;
+    cVar1 = rwip_priority;
     *(short *)(param_1 + 0x7e) = *(short *)(param_1 + 0x7e) + 1;
-    *(char *)(param_1 + 0x16) = *(char *)(param_1 + 0x16) + cVar3;
-    (**(code **)(_r_ip_funcs_p + 0x3a8))
-              (*(undefined1 *)(param_1 + 0x8e),uVar4,0,*(code **)(_r_ip_funcs_p + 0x3a8));
-    if ((*(int *)(&lld_con_env + (uint)bVar2 * 4) != 0) && (bVar1 == 2)) {
-      *(undefined1 *)(param_1 + 0x8f) = 2;
-    }
+    *(char *)(param_1 + 0x16) = *(char *)(param_1 + 0x16) + cVar1;
+                    /* WARNING: Could not recover jumptable at 0x00012e7e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    (**(code **)(_r_ip_funcs_p + 0x3a8))(*(undefined1 *)(param_1 + 0x8e),uVar2,0);
     return;
   }
-                    /* WARNING: Could not recover jumptable at 0x00012ec8. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00012e9a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_plf_funcs_p + 8))("lld_con.c",0xbc4);
+  (**(code **)(_r_plf_funcs_p + 8))("lld_con.c",0xbba);
   return;
 }
 

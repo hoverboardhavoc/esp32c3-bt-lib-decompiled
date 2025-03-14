@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app -> llc_llcp.o -> r_llc_llcp_send
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,26 +33,21 @@ void r_llc_llcp_send(int param_1,byte *param_2,undefined4 param_3)
     else {
       uVar4 = (uint)*param_2;
     }
-    uVar5 = 0x346;
+    uVar5 = 0x33c;
   }
   else {
-    uStack_22 = *(ushort *)(&DAT_000108f4 + (uint)*param_2 * 0xc);
+    uStack_22 = *(ushort *)(&DAT_000108e4 + (uint)*param_2 * 0xc);
     iVar2 = (**(code **)(_r_modules_funcs_p + 0x120))
                       (uStack_22 + 0xc,2,*(code **)(_r_modules_funcs_p + 0x120));
     bVar1 = *param_2;
     *(undefined4 *)(iVar2 + 4) = param_3;
     iVar3 = (**(code **)(_r_modules_funcs_p + 0x10))
-                      (iVar2 + 9,param_2,&uStack_22,0x30,(&PTR__LC1_000108f0)[(uint)bVar1 * 3],
+                      (iVar2 + 9,param_2,&uStack_22,0x30,(&PTR__LC1_000108e0)[(uint)bVar1 * 3],
                        *(code **)(_r_modules_funcs_p + 0x10));
     if (iVar3 == 0) {
       *(char *)(iVar2 + 8) = (char)uStack_22;
-      if (*param_2 == 6) {
-        pcVar6 = *(code **)(_r_modules_funcs_p + 0x4c);
-      }
-      else {
-        pcVar6 = *(code **)(_r_modules_funcs_p + 0x44);
-      }
-      (*pcVar6)(iVar7 + 0x28,iVar2,pcVar6);
+      (**(code **)(_r_modules_funcs_p + 0x44))
+                (iVar7 + 0x28,iVar2,*(code **)(_r_modules_funcs_p + 0x44));
       (**(code **)(_r_ip_funcs_p + 0x5b8))(param_1,*(code **)(_r_ip_funcs_p + 0x5b8));
       return;
     }

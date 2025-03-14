@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b5ead6b6d5758629370c91897168b8bcdfdcc169
- * https://github.com/espressif/esp32c3-bt-lib/commit/b5ead6b6d5758629370c91897168b8bcdfdcc169
- * Upstream date: 2025-03-12 20:14:26 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(9f6be86f)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app -> vshci_task.o -> vnd_hci_command_handler_wrapper
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,7 @@
 void vnd_hci_command_handler_wrapper(void)
 
 {
-                    /* WARNING: Could not recover jumptable at 0x000111ea. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011154. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0x274))();
   return;

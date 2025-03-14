@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_tx_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,14 +17,14 @@ void r_lld_con_tx_isr(int param_1)
 {
   if (*(int *)(&lld_con_env + param_1 * 4) != 0) {
     (**(code **)(_r_ip_funcs_p + 0x3b8))(*(code **)(_r_ip_funcs_p + 0x3b8));
-                    /* WARNING: Could not recover jumptable at 0x00013260. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00013232. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_ip_funcs_p + 0x3d0))(param_1);
     return;
   }
-                    /* WARNING: Could not recover jumptable at 0x0001327e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00013250. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_plf_funcs_p + 0xc))(0,"lld_con.c",0xc46);
+  (**(code **)(_r_plf_funcs_p + 0xc))(0,"lld_con.c",0xc3c);
   return;
 }
 

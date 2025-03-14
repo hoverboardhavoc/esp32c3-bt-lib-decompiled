@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b5ead6b6d5758629370c91897168b8bcdfdcc169
- * https://github.com/espressif/esp32c3-bt-lib/commit/b5ead6b6d5758629370c91897168b8bcdfdcc169
- * Upstream date: 2025-03-12 20:14:26 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(9f6be86f)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app -> vshci_task.o -> hci_vendor_ble_qa_test_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,15 +20,15 @@ undefined4 hci_vendor_ble_qa_test_cmd_handler(byte *param_1,undefined4 param_2,u
   ushort *puVar3;
   uint uVar4;
   
-  if (DAT_000111f0 != 0) {
+  if (DAT_0001115c != 0) {
     if (_LANCHOR0 != (ushort *)0x0) {
       iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
       if (*(char *)(iVar1 + 0x17) == '\x01') {
         puVar3 = _LANCHOR0;
-        for (uVar4 = 0; uVar4 < DAT_000111f0; uVar4 = uVar4 + 1) {
+        for (uVar4 = 0; uVar4 < DAT_0001115c; uVar4 = uVar4 + 1) {
           if (*puVar3 == (ushort)*param_1) {
             if (*(code **)(puVar3 + 2) != (code *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x000102d4. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000102dc. Too many branches */
                     /* WARNING: Treating indirect jump as call */
               uVar2 = (**(code **)(puVar3 + 2))(param_1 + 1,param_2,param_3);
               return uVar2;

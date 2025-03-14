@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app -> llc_encrypt.o -> ll_enc_req_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -50,7 +50,7 @@ undefined4 ll_enc_req_handler(int param_1,int param_2,undefined4 param_3)
       memcpy((void *)(iVar2 + 8),(void *)(param_2 + 1),8);
       uVar4 = 0;
       pcVar5 = *(code **)(_r_ip_funcs_p + 0x59c);
-      goto _L178;
+      goto _L161;
     }
   }
   else {
@@ -59,7 +59,7 @@ undefined4 ll_enc_req_handler(int param_1,int param_2,undefined4 param_3)
       uVar4 = 0x3d;
       uVar3 = 9;
       pcVar5 = *(code **)(_r_ip_funcs_p + 0x594);
-_L178:
+_L161:
       (*pcVar5)(param_1,uVar3,uVar4,pcVar5);
       return 0;
     }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app_flash -> rf_txpwr.o -> ble_txpwr_set_inter
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,14 +37,14 @@ undefined4 ble_txpwr_set_inter(uint param_1,uint param_2,uint param_3)
   }
   else if ((int)param_1 < 3) {
     if (param_1 != 1) {
-_L68:
+_L64:
       iVar1 = r_sdk_cfg_priv_opts_ext_get();
       *(char *)(iVar1 + 1) = (char)uVar2;
       return 0;
     }
     iVar1 = r_sdk_config_get_opts();
     if (param_2 < *(byte *)(iVar1 + 0xd)) {
-_L78:
+_L74:
       r_bt_rtp_register_rule_cs_idx(param_2);
       return 0;
     }
@@ -57,9 +57,9 @@ _L78:
     uVar3 = 0xf;
   }
   else {
-    if (param_1 != 4) goto _L68;
+    if (param_1 != 4) goto _L64;
     iVar1 = r_sdk_config_get_opts();
-    if (param_2 < *(byte *)(iVar1 + 0xd)) goto _L78;
+    if (param_2 < *(byte *)(iVar1 + 0xd)) goto _L74;
     r_bt_rtp_register_rule_cs_fmt(2,uVar2);
     uVar3 = 3;
   }

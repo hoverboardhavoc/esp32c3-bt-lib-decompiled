@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_llcp_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ undefined1 r_lld_con_llcp_tx(int param_1,undefined4 param_2)
   }
   else {
     if (*(int *)(iVar1 + 0x24) != 0) {
-      r_assert_err(0,"lld_con.c",0xe3e);
+      r_assert_err(0,"lld_con.c",0xe34);
     }
     *(undefined4 *)(iVar1 + 0x24) = param_2;
     *(ushort *)(iVar1 + 0x84) = *(ushort *)(iVar1 + 0x84) | 8;
@@ -41,19 +41,19 @@ undefined1 r_lld_con_llcp_tx(int param_1,undefined4 param_2)
         while( true ) {
           if ((*(int *)(iVar1 + 0x48) - iVar2 & 0xfffffffU) <= *(uint *)(iVar1 + 100)) break;
           if (*(short *)(iVar1 + 0x7e) == 0) {
-            r_assert_err(0,"lld_con.c",0xe5a);
+            r_assert_err(0,"lld_con.c",0xe50);
           }
           *(uint *)(iVar1 + 0x48) = *(int *)(iVar1 + 0x48) - *(int *)(iVar1 + 100) & 0xfffffff;
           *(short *)(iVar1 + 0x7e) = *(short *)(iVar1 + 0x7e) + -1;
         }
         r_lld_con_sched(param_1,iVar2,0);
         uVar3 = 0;
-        goto _L775;
+        goto _L771;
       }
     }
     uVar3 = 0;
   }
-_L775:
+_L771:
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   return uVar3;
 }

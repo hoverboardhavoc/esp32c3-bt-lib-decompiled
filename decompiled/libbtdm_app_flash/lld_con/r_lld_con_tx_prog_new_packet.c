@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_tx_prog_new_packet
  *
  * (C) Espressif, Apache License 2.0.
@@ -138,15 +138,15 @@ _L444:
       }
       else if ((param_2 < 2) || (param_2 == 0x18)) {
         if (param_2 == 0) {
-          (&DAT_00015061)[iVar15] = 1;
+          (&DAT_00015031)[iVar15] = 1;
           iVar7 = 10;
         }
         else if (param_2 == 1) {
-          (&DAT_00015061)[iVar15] = 2;
+          (&DAT_00015031)[iVar15] = 2;
           iVar7 = 6;
         }
         else if (param_2 == 0x18) {
-          (&DAT_00015061)[iVar15] = 3;
+          (&DAT_00015031)[iVar15] = 3;
           iVar7 = 3;
         }
         else {
@@ -154,7 +154,7 @@ _L444:
           iVar7 = 0;
         }
         uVar12 = uVar6 + iVar7 & 0xffff;
-        (&DAT_00015060)[iVar15] = bVar16;
+        (&DAT_00015030)[iVar15] = bVar16;
         puVar8 = (ushort *)r_emi_get_mem_addr_by_offset(uVar12);
         uVar4 = *puVar8;
         uVar3 = *(ushort *)(iVar19 + 0x44);
@@ -179,7 +179,7 @@ _L444:
             ets_printf("llcp prog: %u %u %u %u %u\n",(uint)uVar14 + (uint)uVar3,*puVar10,(uint)uVar4
                        ,*(undefined1 *)(iVar19 + 0x46),*(undefined2 *)(iVar19 + 0x44));
           }
-          *(undefined2 *)(&DAT_00015060 + iVar15) = 0;
+          *(undefined2 *)(&DAT_00015030 + iVar15) = 0;
         }
       }
     }

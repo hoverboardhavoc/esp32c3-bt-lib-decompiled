@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app_flash -> llc_encrypt.o -> hci_le_ltk_req_neg_reply_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -40,12 +40,12 @@ undefined4 hci_le_ltk_req_neg_reply_cmd_handler(uint param_1,undefined4 param_2,
           r_llc_init_term_proc(param_1,6);
         }
         uVar3 = 0;
-        goto _L246;
+        goto _L229;
       }
     }
   }
   uVar3 = 0xc;
-_L246:
+_L229:
   r_llc_cmd_cmp_send(param_1,param_3,uVar3);
   return 0;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_tx_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,7 +42,7 @@ void r_lld_con_tx_isr(uint param_1)
   int *piStack_64;
   
   if (*(int *)(&lld_con_env + param_1 * 4) == 0) {
-    r_assert_param(0,"lld_con.c",0xc46);
+    r_assert_param(0,"lld_con.c",0xc3c);
     return;
   }
   r_lld_con_tx_eco();
@@ -181,15 +181,15 @@ _L444:
       }
       else if ((uVar12 < 2) || (uVar12 == 0x18)) {
         if (uVar12 == 0) {
-          (&DAT_00015061)[iVar19] = 1;
+          (&DAT_00015031)[iVar19] = 1;
           iVar8 = 10;
         }
         else if (uVar12 == 1) {
-          (&DAT_00015061)[iVar19] = 2;
+          (&DAT_00015031)[iVar19] = 2;
           iVar8 = 6;
         }
         else if (uVar12 == 0x18) {
-          (&DAT_00015061)[iVar19] = 3;
+          (&DAT_00015031)[iVar19] = 3;
           iVar8 = 3;
         }
         else {
@@ -197,7 +197,7 @@ _L444:
           iVar8 = 0;
         }
         uVar15 = uVar7 + iVar8 & 0xffff;
-        (&DAT_00015060)[iVar19] = bVar20;
+        (&DAT_00015030)[iVar19] = bVar20;
         puVar9 = (ushort *)r_emi_get_mem_addr_by_offset(uVar15);
         uVar3 = *puVar9;
         uVar4 = *(ushort *)(iVar17 + 0x44);
@@ -222,7 +222,7 @@ _L444:
             ets_printf("llcp prog: %u %u %u %u %u\n",(uint)uVar18 + (uint)uVar4,*puVar10,(uint)uVar3
                        ,*(undefined1 *)(iVar17 + 0x46),*(undefined2 *)(iVar17 + 0x44));
           }
-          *(undefined2 *)(&DAT_00015060 + iVar19) = 0;
+          *(undefined2 *)(&DAT_00015030 + iVar19) = 0;
         }
       }
     }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * https://github.com/espressif/esp32c3-bt-lib/commit/0cfafa1e0aa30b7d59f53c38588f0598e228d127
- * Upstream date: 2025-02-27 20:50:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b34b7d6)
+ * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
+ * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
+ * Upstream date: 2025-03-14 10:49:41 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
  * Source: libbtdm_app -> rf_txpwr.o -> ble_txpwr_set_inter
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,7 +42,7 @@ undefined4 ble_txpwr_set_inter(uint param_1,uint param_2,uint param_3)
   else {
     if ((int)param_1 < 3) {
       if (param_1 != 1) {
-_L65:
+_L57:
         iVar1 = (**(code **)(_r_plf_funcs_p + 0xf4))(*(code **)(_r_plf_funcs_p + 0xf4));
         *(char *)(iVar1 + 1) = (char)uVar2;
         return 0;
@@ -53,7 +53,7 @@ _L65:
         (**(code **)(_r_modules_funcs_p + 0x1f0))(5,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
         param_2 = 6;
         pcVar3 = *(code **)(_r_modules_funcs_p + 0x1f0);
-        goto _L77;
+        goto _L69;
       }
     }
     else {
@@ -61,20 +61,20 @@ _L65:
         (**(code **)(_r_modules_funcs_p + 0x1f0))(0xe,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
         param_2 = 0xf;
         pcVar3 = *(code **)(_r_modules_funcs_p + 0x1f0);
-        goto _L77;
+        goto _L69;
       }
-      if (param_1 != 4) goto _L65;
+      if (param_1 != 4) goto _L57;
       iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
       if (*(byte *)(iVar1 + 0xd) <= param_2) {
         (**(code **)(_r_modules_funcs_p + 0x1f0))(2,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
         param_2 = 3;
         pcVar3 = *(code **)(_r_modules_funcs_p + 0x1f0);
-        goto _L77;
+        goto _L69;
       }
     }
     pcVar3 = *(code **)(_r_modules_funcs_p + 0x1fc);
   }
-_L77:
+_L69:
   (*pcVar3)(param_2,uVar2,pcVar3);
   return 0;
 }
