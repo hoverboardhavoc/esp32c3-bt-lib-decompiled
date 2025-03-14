@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_evt_start_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -46,23 +46,14 @@ void r_lld_adv_evt_start_cbk(int param_1)
   undefined1 uStack_44;
   
   if (param_1 == 0) {
-    r_assert_err("lld_adv.c",0x916);
+    r_assert_err("lld_adv.c",0x8f4);
   }
   else {
     bVar1 = *(byte *)(param_1 + 0x87);
     uVar13 = (uint)bVar1;
     iVar5 = uVar13 * 0x5a;
     iVar6 = r_emi_get_mem_addr_by_offset(0x400);
-    uVar14 = *(ushort *)(iVar6 + iVar5);
-    iVar6 = r_sdk_config_get_opts_ext();
-    uVar14 = uVar14 & 0x1f;
-    if ((*(uint *)(iVar6 + 0x28) & 4) != 0) {
-      iVar6 = r_sdk_config_get_opts_ext();
-      if (*(byte *)(iVar6 + 0x2c) < 3) {
-        r_ble_log_internal_x2
-                  (0x40400008,*(undefined1 *)(param_1 + 0x87),*(undefined4 *)(param_1 + 4));
-      }
-    }
+    uVar14 = *(ushort *)(iVar6 + iVar5) & 0x1f;
     uVar12 = 0;
     if (((*(ushort *)(param_1 + 0x74) & 0x13) == 0) &&
        (uVar12 = *(ushort *)(param_1 + 0x74) & 0x13, *(int *)(param_1 + 0x68) != 0)) {
@@ -71,7 +62,7 @@ void r_lld_adv_evt_start_cbk(int param_1)
         if (*(char *)(param_1 + 0x95) == '\0') {
           iVar6 = r_sdk_config_get_opts_ext();
           if (*(char *)(iVar6 + 0x18) == '\0') {
-            r_assert_err(0,"lld_adv.c",0x8cf);
+            r_assert_err(0,"lld_adv.c",0x8ad);
           }
           uVar12 = 1;
           r_lld_adv_sync_info_set(*(undefined1 *)(param_1 + 0x87));
@@ -133,17 +124,17 @@ void r_lld_adv_evt_start_cbk(int param_1)
       r_assert_err(0,"lld_adv.c",0x82);
     }
     iVar6 = r_emi_get_mem_addr_by_offset(0x400);
-    uVar14 = *(ushort *)(iVar6 + iVar5);
+    uVar12 = *(ushort *)(iVar6 + iVar5);
     iVar6 = r_emi_get_mem_addr_by_offset(0x400);
-    *(ushort *)(iVar6 + iVar5) = uVar14 & 0xff7f | (ushort)((uint)bStack_61 << 7);
+    *(ushort *)(iVar6 + iVar5) = uVar12 & 0xff7f | (ushort)((uint)bStack_61 << 7);
     uVar15 = ((uint)pcStack_60 & 0xff) << 6;
     if ((uVar15 & 0xffffffbf) != 0) {
       r_assert_err(0,"lld_adv.c",0x8e);
     }
     iVar6 = r_emi_get_mem_addr_by_offset(0x400);
-    uVar14 = *(ushort *)(iVar6 + iVar5);
+    uVar12 = *(ushort *)(iVar6 + iVar5);
     iVar6 = r_emi_get_mem_addr_by_offset(0x400);
-    *(ushort *)(iVar6 + iVar5) = uVar14 & 0xffbf | (ushort)uVar15;
+    *(ushort *)(iVar6 + iVar5) = uVar12 & 0xffbf | (ushort)uVar15;
     pcStack_60 = r_lld_adv_frm_cbk;
     uStack_5c = *(undefined4 *)(param_1 + 4);
     iStack_58 = uVar11 << 1;

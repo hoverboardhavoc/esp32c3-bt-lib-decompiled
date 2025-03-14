@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> lld_per_adv.o -> r_lld_per_adv_sched
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,14 +10,12 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void r_lld_per_adv_sched(uint param_1)
+void r_lld_per_adv_sched(int param_1)
 
 {
   int iVar1;
-  uint uVar2;
+  char cVar2;
   int iVar3;
-  int iVar4;
-  int iVar5;
   
   iVar1 = *(int *)(&lld_per_adv_env + param_1 * 4);
   *(uint *)(iVar1 + 4) = *(int *)(iVar1 + 4) + *(int *)(iVar1 + 0x40) & 0xfffffff;
@@ -27,34 +25,19 @@ void r_lld_per_adv_sched(uint param_1)
     *(uint *)(iVar1 + 4) = *(int *)(iVar1 + 4) + *(int *)(iVar1 + 0x40) & 0xfffffff;
     *(short *)(iVar1 + 0x4c) = *(short *)(iVar1 + 0x4c) + 1;
   }
-  uVar2 = 0;
+  cVar2 = '\x0f';
   do {
-    iVar4 = r_sch_arb_insert(iVar1);
-    if (iVar4 == 0) {
-      iVar4 = 1;
-      goto _L4;
+    iVar3 = r_sch_arb_insert(iVar1);
+    if (iVar3 == 0) {
+      *(undefined1 *)(iVar1 + 0x53) = 0;
+      return;
     }
-    uVar2 = uVar2 + 1 & 0xff;
+    cVar2 = cVar2 + -1;
     *(char *)(iVar1 + 0x16) = *(char *)(iVar1 + 0x16) + DAT_0001301b;
     *(uint *)(iVar1 + 4) = *(int *)(iVar1 + 4) + *(int *)(iVar1 + 0x40) & 0xfffffff;
     *(short *)(iVar1 + 0x4c) = *(short *)(iVar1 + 0x4c) + 1;
-  } while (uVar2 != 0xf);
-  iVar4 = 0;
-_L4:
-  iVar5 = r_sdk_config_get_opts_ext();
-  if ((*(uint *)(iVar5 + 0x28) & 0x40) != 0) {
-    iVar5 = r_sdk_config_get_opts_ext();
-    if (*(byte *)(iVar5 + 0x2c) < 3) {
-      r_ble_log_internal_x1
-                (0x4048000b,
-                 iVar4 << 8 | uVar2 << 0x10 | (uint)*(byte *)(iVar1 + 0x53) << 0x18 | param_1);
-    }
-  }
-  if (iVar4 != 0) {
-    *(undefined1 *)(iVar1 + 0x53) = 0;
-    return;
-  }
-  r_assert_param(*(undefined4 *)(iVar1 + 4),iVar3,"lld_per_adv.c",0x13f);
+  } while (cVar2 != '\0');
+  r_assert_param("lld_per_adv.c",0x13e);
   return;
 }
 

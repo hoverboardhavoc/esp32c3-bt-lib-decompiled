@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
- * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
- * Upstream date: 2025-03-14 10:49:41 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,7 +23,7 @@ void r_lld_init(int param_1)
   undefined1 auStack_28 [24];
   
   if (param_1 != 1) {
-    if (param_1 != 2) goto _L564;
+    if (param_1 != 2) goto _L550;
     if (_lld_rpa_renew_env != 0) {
       r_ke_free();
     }
@@ -59,42 +59,42 @@ void r_lld_init(int param_1)
   uVar1 = *(ushort *)((int)_p_lld_env + 0xd4);
   if (uVar1 < 0x15) {
     uVar4 = 7;
-_L609:
+_L595:
     *(undefined2 *)((int)_p_lld_env + 0xd6) = uVar4;
   }
   else {
     if (uVar1 < 0x1f) {
       uVar4 = 6;
-      goto _L609;
+      goto _L595;
     }
     if (uVar1 < 0x33) {
       uVar4 = 5;
-      goto _L609;
+      goto _L595;
     }
     if (uVar1 < 0x4c) {
       uVar4 = 4;
-      goto _L609;
+      goto _L595;
     }
     if (uVar1 < 0x65) {
       uVar4 = 3;
-      goto _L609;
+      goto _L595;
     }
     if (uVar1 < 0x97) {
       uVar4 = 2;
-      goto _L609;
+      goto _L595;
     }
     if (uVar1 < 0xfb) {
       uVar4 = 1;
-      goto _L609;
+      goto _L595;
     }
     *(undefined2 *)((int)_p_lld_env + 0xd6) = 0;
   }
   uStack_29 = 1;
   (*_rwip_param)(0x85,&uStack_29,(int)pvVar2 + 0xda,_rwip_param);
   aa_gen = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
-  DAT_00014095 = 0;
-  DAT_00014096 = 0;
-_L564:
+  DAT_00014089 = 0;
+  DAT_0001408a = 0;
+_L550:
   r_lld_core_init(param_1);
   r_lld_adv_init(param_1);
   iVar3 = r_sdk_config_get_opts_ext();

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> ble_util_buf.o -> r_ble_util_buf_adv_tx_free
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,26 +16,19 @@ void r_ble_util_buf_adv_tx_free(int param_1)
 
 {
   uint uVar1;
-  int iVar2;
-  uint uVar3;
+  uint uVar2;
   
-  uVar3 = param_1 - 0x2400U >> 0xb;
-  uVar1 = uVar3 & 0xff;
-  if (9 < (uVar3 & 0xff)) {
-    r_assert_param(uVar1,param_1,"ble_util_buf.c",0x1d3);
+  uVar2 = param_1 - 0x2400U >> 0xb;
+  uVar1 = uVar2 & 0xff;
+  if (9 < (uVar2 & 0xff)) {
+    r_assert_param(uVar1,param_1,"ble_util_buf.c",0x1d2);
   }
   r_emi_free_em_mapping_by_offset(param_1);
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   r_co_list_push_back(_p_ble_util_buf_env + 0x18,(uVar1 + 0x2d) * 8 + _p_ble_util_buf_env);
-  (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
-  iVar2 = r_sdk_config_get_opts_ext();
-  if ((*(uint *)(iVar2 + 0x28) & 4) != 0) {
-    iVar2 = r_sdk_config_get_opts_ext();
-    if (*(byte *)(iVar2 + 0x2c) < 3) {
-      r_ble_log_internal_x2(0x40c00012,uVar1,param_1);
-      return;
-    }
-  }
+                    /* WARNING: Could not recover jumptable at 0x0001090c. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(_r_osi_funcs_p + 0x18))();
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_max_lat_calc
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ void r_lld_con_max_lat_calc(int param_1)
     uVar1 = (500000 - 0x8e300 / *(uint *)(iVar2 + 100)) /
             ((uint)*(ushort *)(_p_lld_env + 0xd4) + (uint)*(ushort *)(iVar2 + 0x7a)) - 1;
     if (*(uint *)(iVar2 + 0x68) <= *(uint *)(iVar2 + 100)) {
-      r_assert_err(0,"lld_con.c",0x65b);
+      r_assert_err(0,"lld_con.c",0x649);
     }
     uVar3 = *(uint *)(iVar2 + 0x68) / *(uint *)(iVar2 + 100) - 1;
     if (*(ushort *)(iVar2 + 0x72) < uVar3) {
@@ -35,7 +35,7 @@ void r_lld_con_max_lat_calc(int param_1)
     }
     *(short *)(iVar2 + 0x72) = (short)uVar3;
     if (499 < uVar3) {
-      r_assert_err(0,"lld_con.c",0x663);
+      r_assert_err(0,"lld_con.c",0x651);
       return;
     }
   }

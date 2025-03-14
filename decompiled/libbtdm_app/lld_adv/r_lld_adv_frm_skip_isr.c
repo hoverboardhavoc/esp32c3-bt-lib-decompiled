@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_frm_skip_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,16 +23,16 @@ void r_lld_adv_frm_skip_isr(uint param_1,int param_2)
   
   iVar2 = *(int *)(&lld_adv_env + param_1 * 4);
   if (iVar2 == 0) {
-    uVar4 = 0xb5f;
+    uVar4 = 0xb39;
     UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_plf_funcs_p + 8);
 _L992:
-                    /* WARNING: Could not recover jumptable at 0x00014c2c. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00014c2a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (*UNRECOVERED_JUMPTABLE_00)(0,"lld_adv.c",uVar4);
     return;
   }
   if (1 < (byte)(*(char *)(iVar2 + 0x89) - 1U)) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0xb14,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0xaee,*(code **)(_r_plf_funcs_p + 8));
   }
   if (*(char *)(iVar2 + 0x89) == '\x02') {
     UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x1a0);
@@ -56,7 +56,7 @@ _L992:
         return;
       }
       if (*(int *)(iVar2 + 0x58) == -1) {
-        uVar4 = 0xb53;
+        uVar4 = 0xb2d;
         UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_plf_funcs_p + 8);
         goto _L992;
       }
@@ -75,7 +75,7 @@ _L985:
         return;
       }
       if (*(int *)(iVar2 + 0x58) == -1) {
-        uVar4 = 0xb31;
+        uVar4 = 0xb0b;
         UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_plf_funcs_p + 8);
         goto _L992;
       }
@@ -84,7 +84,7 @@ _L985:
     UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x1a0);
     param_1 = (uint)*(byte *)(iVar2 + 0x87);
   }
-                    /* WARNING: Could not recover jumptable at 0x00014b94. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00014b92. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*UNRECOVERED_JUMPTABLE_00)(param_1,1,uVar4);
   return;

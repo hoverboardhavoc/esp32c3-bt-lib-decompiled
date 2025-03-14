@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> ke_mem.o -> r_ke_malloc
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,7 +29,7 @@ short * r_ke_malloc(int param_1,int param_2)
   iVar6 = 0;
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   while( true ) {
-    psVar5 = *(short **)(r_ble_log_internal_x2 + ((param_2 + iVar6 & 3U) + 4) * 4);
+    psVar5 = *(short **)(r_assert_err + ((param_2 + iVar6 & 3U) + 4) * 4);
     if (psVar5 == (short *)0x0) {
       r_assert_err(0,"ke_mem.c",0x10b);
     }
@@ -50,7 +50,7 @@ short * r_ke_malloc(int param_1,int param_2)
     if (iVar6 == 3) break;
     iVar6 = iVar6 + 1;
     if (psVar1 != (short *)0x0) {
-_L44:
+_L40:
       if ((ushort)psVar1[1] == uVar2) {
         if (*(int *)(psVar1 + 4) == 0) {
           r_assert_err(0,"ke_mem.c",0x15c);
@@ -70,15 +70,8 @@ _L44:
       psVar1[1] = (short)uVar2;
       *psVar1 = -0x7cc8;
       psVar1 = psVar1 + 2;
-_L45:
+_L41:
       (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
-      iVar6 = r_sdk_config_get_opts_ext();
-      if ((*(uint *)(iVar6 + 0x28) & 2) != 0) {
-        iVar6 = r_sdk_config_get_opts_ext();
-        if (*(byte *)(iVar6 + 0x2c) < 3) {
-          r_ble_log_internal_x3(0x40250006,param_2,param_1,psVar1);
-        }
-      }
       return psVar1;
     }
   }
@@ -86,8 +79,8 @@ _L45:
     r_assert_param(param_1,param_2,"ke_mem.c",0x150);
     r_platform_reset(0xf2f2f2f2);
     psVar1 = (short *)0x0;
-    goto _L45;
+    goto _L41;
   }
-  goto _L44;
+  goto _L40;
 }
 

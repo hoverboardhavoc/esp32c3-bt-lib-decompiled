@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,25 +43,25 @@ void r_lld_con_tx(int param_1)
     uVar10 = (uint)*(ushort *)(iVar4 + 4 + iVar6);
     uVar11 = uVar2 & 3;
     if ((uVar2 & 3) == 0) {
-_L377:
-      r_assert_err(0,"lld_con.c",0x9e1);
+_L343:
+      r_assert_err(0,"lld_con.c",0x9c7);
     }
     else {
       if (uVar11 < 3) {
         iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
         uVar12 = (uint)(*(ushort *)(iVar4 + iVar9) >> 8);
         if (uVar12 < 5) {
-          if (uVar12 == 0) goto _L379;
+          if (uVar12 == 0) goto _L345;
         }
         else if ((*(ushort *)(iVar5 + 0x84) & 0x40) != 0) {
           uVar12 = uVar12 - 4 & 0xffff;
         }
         iVar4 = *(int *)(iVar5 + 0x28);
         if (iVar4 == 0) {
-          r_assert_err(0,"lld_con.c",0x9c1);
+          r_assert_err(0,"lld_con.c",0x9a7);
         }
         if (uVar12 + uVar10 < (*(ushort *)(iVar4 + 6) & 0x3ff) + (uint)*(ushort *)(iVar4 + 4))
-        goto _L379;
+        goto _L345;
         r_co_list_pop_front(iVar5 + 0x28);
         if (*(int *)(iVar5 + 0x30) == iVar4) {
           *(undefined4 *)(iVar5 + 0x30) = 0;
@@ -70,13 +70,13 @@ _L377:
         uVar7 = 0x20e;
       }
       else {
-        if (uVar11 != 3) goto _L377;
+        if (uVar11 != 3) goto _L343;
         r_ble_util_buf_llcp_tx_free(uVar10);
         uVar7 = 0x20c;
       }
       r_ke_msg_send_basic(uVar7,param_1 << 8 | 1,0xff);
     }
-_L379:
+_L345:
     iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
     uVar2 = *(ushort *)(iVar4 + iVar9);
     iVar4 = r_emi_get_mem_addr_by_offset(0x1400);

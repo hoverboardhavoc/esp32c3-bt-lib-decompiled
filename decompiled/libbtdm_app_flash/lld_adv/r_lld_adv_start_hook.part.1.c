@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_start_hook.part.1
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,11 +21,11 @@ void r_lld_adv_start_hook_part_1(int param_1,int param_2)
   int iVar6;
   char cVar7;
   
-  sVar2 = DAT_00016468;
-  if (((DAT_00016468 != 0) && (DAT_0001646a != 0)) && (*(int *)(&lld_adv_env + param_1 * 4) != 0)) {
+  sVar2 = DAT_00015e80;
+  if (((DAT_00015e80 != 0) && (DAT_00015e82 != 0)) && (*(int *)(&lld_adv_env + param_1 * 4) != 0)) {
     iVar4 = r_emi_get_mem_addr_by_offset(0x400);
     *(short *)(iVar4 + param_1 * 0x5a + 0xc) = sVar2;
-    sVar2 = DAT_0001646a;
+    sVar2 = DAT_00015e82;
     iVar4 = r_emi_get_mem_addr_by_offset(0x400);
     *(short *)(param_1 * 0x5a + 0xe + iVar4) = sVar2;
   }

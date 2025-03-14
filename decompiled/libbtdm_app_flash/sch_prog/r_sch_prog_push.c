@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> sch_prog.o -> r_sch_prog_push
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,19 +26,19 @@ void r_sch_prog_push(undefined4 *param_1)
   iVar7 = (uVar2 - 1 & 0xf) * 0x10;
   uVar8 = uVar2 - DAT_00011100 & 0xf;
   if (param_1[1] == *(int *)(&sch_prog_env + iVar7)) {
-    r_assert_err(0,"sch_prog.c",0x2a1);
+    r_assert_err(0,"sch_prog.c",0x29f);
   }
   iVar4 = r_emi_get_mem_addr_by_offset(0);
   iVar3 = uVar2 * 0x10;
   if (((*(ushort *)(iVar4 + iVar3) >> 3 & 7) == 1) ||
      (iVar4 = r_emi_get_mem_addr_by_offset(0), (*(ushort *)(iVar4 + iVar3) >> 3 & 7) == 2)) {
-    r_assert_param(DAT_00011100,uVar2,"sch_prog.c",0x2a6);
+    r_assert_param(DAT_00011100,uVar2,"sch_prog.c",0x2a4);
   }
   if (0xd < uVar8) {
     iVar4 = r_emi_get_mem_addr_by_offset(0);
     uVar1 = *(ushort *)(iVar4 + (uVar2 - 2 & 0xf) * 0x10);
     iVar4 = r_emi_get_mem_addr_by_offset(0);
-    r_assert_warn((int)(uint)uVar1 >> 3 & 7,*(ushort *)(iVar4 + iVar7) >> 3 & 7,"sch_prog.c",0x2a9);
+    r_assert_warn((int)(uint)uVar1 >> 3 & 7,*(ushort *)(iVar4 + iVar7) >> 3 & 7,"sch_prog.c",0x2a7);
   }
   uVar6 = param_1[1];
   *(undefined4 *)(r_assert_err + iVar3) = param_1[4];
@@ -53,7 +53,7 @@ void r_sch_prog_push(undefined4 *param_1)
   uVar2 = param_1[2];
   *(ushort *)(iVar7 + iVar3 + 4) = uVar1 & 0xfff;
   if (0x270 < uVar2) {
-    r_assert_err(0,"sch_prog.c",0x2b4);
+    r_assert_err(0,"sch_prog.c",0x2b2);
   }
   iVar7 = param_1[2];
   if ((0x270U - iVar7 & 0xfc00) != 0) {

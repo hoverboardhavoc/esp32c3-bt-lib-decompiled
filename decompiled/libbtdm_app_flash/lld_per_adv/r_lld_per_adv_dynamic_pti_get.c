@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> lld_per_adv.o -> r_lld_per_adv_dynamic_pti_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -51,7 +51,7 @@ void r_lld_per_adv_dynamic_pti_get(int param_1,undefined1 *param_2)
     }
     if ((int)uVar4 < (int)(uVar3 << 1)) {
       uVar5 = *(undefined1 *)(*(int *)(_bt_rf_coex_cfg_p + 0x38) + 2);
-      goto _L48;
+      goto _L42;
     }
   }
   *(int *)(param_1 + 0x5c) = iVar1;
@@ -64,7 +64,7 @@ void r_lld_per_adv_dynamic_pti_get(int param_1,undefined1 *param_2)
   param_2[8] = puVar7[8];
   *param_2 = *puVar7;
   uVar5 = puVar7[1];
-_L48:
+_L42:
   param_2[1] = uVar5;
   return;
 }

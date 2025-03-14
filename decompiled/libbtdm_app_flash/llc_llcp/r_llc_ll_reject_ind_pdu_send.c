@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> llc_llcp.o -> r_llc_ll_reject_ind_pdu_send
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,7 +30,7 @@ void r_llc_ll_reject_ind_pdu_send(uint param_1,uint param_2,undefined1 param_3,u
     uStack_14 = 0xd;
     uStack_13 = param_3;
   }
-  r_llc_llcp_send_eco(param_1,&uStack_14,param_4);
+  r_llc_llcp_send(param_1,&uStack_14,param_4);
   return;
 }
 

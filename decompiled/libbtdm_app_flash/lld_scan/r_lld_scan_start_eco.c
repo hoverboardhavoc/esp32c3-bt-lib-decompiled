@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_start_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-byte r_lld_scan_start_eco(uint param_1,int param_2)
+char r_lld_scan_start_eco(undefined4 param_1)
 
 {
   byte bVar1;
@@ -22,11 +22,11 @@ byte r_lld_scan_start_eco(uint param_1,int param_2)
   int iVar5;
   undefined4 uVar6;
   int iVar7;
-  byte bStack_31;
+  char acStack_31 [5];
   
-  bStack_31 = 0xc;
+  acStack_31[0] = '\f';
   iVar4 = r_lld_scan_start();
-  bStack_31 = (byte)iVar4;
+  acStack_31[0] = (char)iVar4;
   if (iVar4 == 0) {
     iVar4 = r_ble_ll_qa_config_get();
     if (*(char *)(iVar4 + 1) == '\0') {
@@ -45,7 +45,7 @@ byte r_lld_scan_start_eco(uint param_1,int param_2)
       _DAT_60031124 = 0x10001;
       _DAT_60031364 = _DAT_60031364 & 0xfffffe00 | 1;
     }
-    if ((bStack_31 == 0) && (_lld_scan_env != 0)) {
+    if ((acStack_31[0] == '\0') && (_lld_scan_env != 0)) {
       iVar4 = 0;
       while( true ) {
         iVar7 = *(int *)(_lld_scan_env + iVar4 * 4);
@@ -64,18 +64,7 @@ byte r_lld_scan_start_eco(uint param_1,int param_2)
       }
     }
   }
-  r_lld_scan_start_hook_part_1(&bStack_31,param_2);
-  iVar4 = r_sdk_config_get_opts_ext();
-  if (((*(uint *)(iVar4 + 0x28) & 8) != 0) &&
-     (iVar4 = r_sdk_config_get_opts_ext(), *(byte *)(iVar4 + 0x2c) < 3)) {
-    r_ble_log_internal_x1
-              (0x40010000,(uint)*(byte *)(param_2 + 7) << 8 | (uint)bStack_31 << 0x10 | param_1);
-  }
-  iVar4 = r_sdk_config_get_opts_ext();
-  if (((*(uint *)(iVar4 + 0x28) & 8) != 0) &&
-     (iVar4 = r_sdk_config_get_opts_ext(), *(byte *)(iVar4 + 0x2c) < 3)) {
-    r_ble_log_internal_x2(0x40010005,_DAT_60031124,_DAT_60031364 & 0x1ff);
-  }
-  return bStack_31;
+  r_lld_scan_start_hook_part_1(acStack_31,param_1);
+  return acStack_31[0];
 }
 

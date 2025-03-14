@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_cleanup
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,70 +10,65 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void r_lld_con_cleanup(uint param_1,int param_2,int param_3)
+void r_lld_con_cleanup(int param_1,int param_2,undefined1 param_3)
 
 {
   byte bVar1;
   byte bVar2;
   ushort uVar3;
-  int iVar4;
+  undefined1 *puVar4;
   int iVar5;
-  undefined1 *puVar6;
-  int iVar7;
-  undefined4 uVar8;
-  ushort uVar9;
-  int iVar10;
-  uint uVar11;
+  int iVar6;
+  undefined4 uVar7;
+  ushort uVar8;
+  int iVar9;
+  uint uVar10;
+  int iVar11;
   
-  iVar4 = *(int *)(&lld_con_env + param_1 * 4);
-  if (iVar4 == 0) {
+  iVar11 = *(int *)(&lld_con_env + param_1 * 4);
+  if (iVar11 == 0) {
     return;
   }
-  iVar5 = r_sdk_config_get_opts_ext();
-  if (((*(uint *)(iVar5 + 0x28) & 0x20) != 0) &&
-     (iVar5 = r_sdk_config_get_opts_ext(), *(byte *)(iVar5 + 0x2c) < 3)) {
-    r_ble_log_internal_x1(0x40030003,param_2 << 8 | param_3 << 0x10 | param_1);
-  }
   if (param_2 != 0) {
-    uVar11 = param_1 << 8 | 1;
-    puVar6 = (undefined1 *)r_ke_msg_alloc(0x212,uVar11,0xff,1);
-    *puVar6 = (char)param_3;
+    uVar10 = param_1 << 8 | 1;
+    puVar4 = (undefined1 *)r_ke_msg_alloc(0x212,uVar10,0xff,1);
+    *puVar4 = param_3;
     r_ke_msg_send();
-    iVar5 = r_co_list_pop_front(iVar4 + 0x28);
-    while (*(char *)(iVar4 + 0x92) != '\0') {
-      bVar1 = *(byte *)(iVar4 + 0x8e);
-      bVar2 = *(byte *)(iVar4 + 0x90);
-      iVar7 = r_emi_get_mem_addr_by_offset(0x1400);
-      iVar10 = ((uint)bVar1 * 9 + (uint)bVar2 & 0xff) * 0xe;
-      uVar3 = *(ushort *)(iVar7 + iVar10 + 2);
-      uVar9 = uVar3 & 3;
+    iVar5 = r_co_list_pop_front(iVar11 + 0x28);
+    while (*(char *)(iVar11 + 0x92) != '\0') {
+      bVar1 = *(byte *)(iVar11 + 0x8e);
+      bVar2 = *(byte *)(iVar11 + 0x90);
+      iVar6 = r_emi_get_mem_addr_by_offset(0x1400);
+      iVar9 = ((uint)bVar1 * 9 + (uint)bVar2 & 0xff) * 0xe;
+      uVar3 = *(ushort *)(iVar6 + iVar9 + 2);
+      uVar8 = uVar3 & 3;
       if ((uVar3 & 3) == 0) {
-_L146:
-        uVar8 = 0x7a8;
-_L167:
-        r_assert_err(0,"lld_con.c",uVar8);
+_L140:
+        uVar7 = 0x795;
+_L161:
+        r_assert_err(0,"lld_con.c",uVar7);
       }
-      else if (2 < uVar9) {
-        if (uVar9 != 3) goto _L146;
-        iVar7 = r_emi_get_mem_addr_by_offset(0x1400);
-        r_ble_util_buf_llcp_tx_free(*(undefined2 *)(iVar10 + 4 + iVar7));
-        uVar8 = 0x79f;
-        if (*(int *)(iVar4 + 0x24) == 0) goto _L147;
-        goto _L167;
+      else if (2 < uVar8) {
+        if (uVar8 != 3) goto _L140;
+        iVar6 = r_emi_get_mem_addr_by_offset(0x1400);
+        r_ble_util_buf_llcp_tx_free(*(undefined2 *)(iVar9 + 4 + iVar6));
+        uVar7 = 0x78c;
+        if (*(int *)(iVar11 + 0x24) == 0) goto _L141;
+        goto _L161;
       }
-_L147:
-      *(char *)(iVar4 + 0x92) = *(char *)(iVar4 + 0x92) + -1;
-      *(byte *)(iVar4 + 0x90) = *(char *)(iVar4 + 0x90) + 1U & 1;
+_L141:
+      *(char *)(iVar11 + 0x92) = *(char *)(iVar11 + 0x92) + -1;
+      *(byte *)(iVar11 + 0x90) = *(char *)(iVar11 + 0x90) + 1U & 1;
     }
-    if (*(int *)(iVar4 + 0x24) != 0) {
-      r_ble_util_buf_llcp_tx_free(*(undefined2 *)(*(int *)(iVar4 + 0x24) + 4));
+    if (*(int *)(iVar11 + 0x24) != 0) {
+      r_ble_util_buf_llcp_tx_free(*(undefined2 *)(*(int *)(iVar11 + 0x24) + 4));
     }
     while (iVar5 != 0) {
       r_ble_util_buf_acl_tx_free_in_isr(*(undefined2 *)(iVar5 + 4));
-      if (DAT_0001608d != '\0') {
-        r_ke_msg_send_basic(0x20e,uVar11,0xff);
+      if (DAT_0001508d != '\0') {
+        r_ke_msg_send_basic(0x20e,uVar10,0xff);
       }
-      iVar5 = r_co_list_pop_front(iVar4 + 0x28);
+      iVar5 = r_co_list_pop_front(iVar11 + 0x28);
     }
   }
   r_sch_slice_per_remove(4,param_1);

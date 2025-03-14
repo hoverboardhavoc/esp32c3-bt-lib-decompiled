@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_start_init_evt_param
  *
  * (C) Espressif, Apache License 2.0.
@@ -73,7 +73,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
   uVar3 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
   *(ushort *)(iVar2 + 0x76) = *(ushort *)(iVar2 + 0x76) & 0xf000 | uVar3 & 0xfff;
   if ((*(byte *)(param_2 + 0x25) & 0xf0) != 0) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(0xf000,"lld_adv.c",0xbdb,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(0xf000,"lld_adv.c",0xbb5,*(code **)(_r_plf_funcs_p + 0xc));
   }
   iVar4 = _r_plf_funcs_p;
   *(ushort *)(iVar2 + 0x76) =
@@ -88,7 +88,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
     pcVar10 = *(code **)(iVar4 + 0xf0);
     iVar4 = (*pcVar10)(pcVar10);
     if (*(char *)(iVar4 + 0x18) == '\0') {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0xbe9,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0xbc3,*(code **)(_r_plf_funcs_p + 8));
     }
     *(bool *)(iVar2 + 0x95) = *(char *)(iVar2 + 0x8f) != '\0';
     (**(code **)(_r_ip_funcs_p + 0x1ac))
@@ -118,7 +118,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
     break;
   default:
     pcVar10 = *(code **)(iVar4 + 8);
-    (*pcVar10)(0,"lld_adv.c",0xc22,pcVar10);
+    (*pcVar10)(0,"lld_adv.c",0xbfc,pcVar10);
     break;
   case 2:
     uVar3 = 6;
@@ -257,7 +257,7 @@ _L1069:
   iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
   *(ushort *)(iVar2 + iVar16) = uVar3 & 0x7fff;
 _L1026:
-                    /* WARNING: Could not recover jumptable at 0x00015052. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00015050. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_ip_funcs_p + 0x810))(0,param_1,param_2);
   return;

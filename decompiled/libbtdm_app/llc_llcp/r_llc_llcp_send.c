@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
- * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
- * Upstream date: 2025-03-14 10:49:41 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app -> llc_llcp.o -> r_llc_llcp_send
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,7 +33,7 @@ void r_llc_llcp_send(int param_1,byte *param_2,undefined4 param_3)
     else {
       uVar4 = (uint)*param_2;
     }
-    uVar5 = 0x33c;
+    uVar5 = 0x339;
   }
   else {
     uStack_22 = *(ushort *)(&DAT_000108e4 + (uint)*param_2 * 0xc);
@@ -53,7 +53,7 @@ void r_llc_llcp_send(int param_1,byte *param_2,undefined4 param_3)
     }
     uVar4 = (uint)*param_2;
     pcVar6 = *(code **)(_r_plf_funcs_p + 0xc);
-    uVar5 = 0x32d;
+    uVar5 = 0x32b;
     param_1 = iVar3;
   }
   (*pcVar6)(param_1,uVar4,"llc_llcp.c",uVar5,pcVar6);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> lld_test.o -> r_lld_test_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,14 +38,14 @@ undefined4 r_lld_test_start(char *param_1)
   __s = (void *)r_ke_malloc(0x2c,0);
   _lld_test_env = __s;
   if (__s == (void *)0x0) {
-    r_assert_err("lld_test.c",0x31b);
+    r_assert_err("lld_test.c",0x312);
     return 0xc;
   }
   uVar6 = r_lld_read_clock();
   memset(__s,0,0x2c);
   *(undefined4 *)((int)__s + 0x20) = 0x10000;
   *(code **)((int)__s + 0x18) = r_lld_test_evt_start_cbk;
-  bVar2 = DAT_0001101d;
+  bVar2 = DAT_00011015;
   *(code *)((int)__s + 0x16) = r_emi_get_mem_addr_by_offset;
   *(undefined4 *)((int)__s + 0x10) = 0x9c4;
   *(ushort *)((int)__s + 0x14) = bVar2 & 0xf | 0x6000;
@@ -146,7 +146,7 @@ undefined4 r_lld_test_start(char *param_1)
       }
     }
     else {
-      r_assert_err(0,"lld_test.c",0x2c3);
+      r_assert_err(0,"lld_test.c",0x2ba);
     }
     bVar2 = param_1[3];
     cVar1 = param_1[2];
@@ -185,7 +185,7 @@ undefined4 r_lld_test_start(char *param_1)
     r_lld_test_set_tx_power(0,0x1c);
   }
   else {
-    r_assert_err(0,"lld_test.c",0x2ed);
+    r_assert_err(0,"lld_test.c",0x2e4);
   }
   iVar7 = r_emi_get_mem_addr_by_offset(0x400);
   *(undefined2 *)(iVar7 + 0xc) = 0x4129;
@@ -210,12 +210,12 @@ undefined4 r_lld_test_start(char *param_1)
     if (*param_1 == '\0') {
       uVar4 = (byte)param_1[4] - 1 & 0xff;
       uVar11 = 0;
-      goto _L122;
+      goto _L107;
     }
     uVar11 = 0;
   }
   uVar4 = 0;
-_L122:
+_L107:
   if ((uVar4 << 2 & 0xfffffff3) != 0) {
     r_assert_err(0,"lld_test.c",399);
   }
@@ -233,7 +233,7 @@ _L122:
   *(undefined4 *)((int)__s + 4) = uVar6;
   iVar7 = r_sch_arb_insert(__s);
   if (iVar7 != 0) {
-    r_assert_err(0,"lld_test.c",0x314);
+    r_assert_err(0,"lld_test.c",0x30b);
     return 0;
   }
   *(undefined1 *)((int)__s + 0x2a) = 0;

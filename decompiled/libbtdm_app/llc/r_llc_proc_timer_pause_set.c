@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app -> llc.o -> r_llc_proc_timer_pause_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void r_llc_proc_timer_pause_set(int param_1,uint param_2,int param_3)
   
   iVar3 = *(int *)(&llc_env + param_1 * 4);
   if (1 < param_2) {
-    (**(code **)(_r_plf_funcs_p + 0xc))("llc.c",0x27f,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))("llc.c",0x279,*(code **)(_r_plf_funcs_p + 0xc));
   }
   if ((iVar3 != 0) && (iVar3 = *(int *)(*(int *)(&llc_env + param_1 * 4) + param_2 * 4), iVar3 != 0)
      ) {
@@ -56,7 +56,7 @@ _L193:
       if (cVar1 != '\x03') {
                     /* WARNING: Could not recover jumptable at 0x00010c16. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-        (**(code **)(_r_plf_funcs_p + 0xc))(*(undefined1 *)(iVar3 + 4),"llc.c",0x2b3);
+        (**(code **)(_r_plf_funcs_p + 0xc))(*(undefined1 *)(iVar3 + 4),"llc.c",0x2ad);
         return;
       }
       if (param_3 == 0) {

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_aux_evt_canceled_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ void r_lld_adv_aux_evt_canceled_cbk(int param_1)
   
   cVar5 = rwip_priority;
   if (param_1 == 0) {
-    uVar8 = 0x9ed;
+    uVar8 = 0x9ca;
 _L24:
     r_assert_err(0,"lld_adv.c",uVar8);
     return;
@@ -40,7 +40,7 @@ _L24:
   iVar7 = r_sch_arb_insert(param_1);
   if (iVar7 != 0) {
     if (*(int *)(param_1 + 0x24) == -1) {
-      uVar8 = 0x9e7;
+      uVar8 = 0x9c4;
       goto _L24;
     }
     bVar1 = *(byte *)(param_1 + 0x53);

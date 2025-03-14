@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> llm_adv.o -> f_hci_le_set_adv_set_rand_addr_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ undefined4 f_hci_le_set_adv_set_rand_addr_cmd_handler(undefined1 *param_1,undefi
     uVar2 = r_llm_adv_hdl_to_id(*param_1,0);
     iVar5 = *(int *)(*(int *)(_p_llm_env + 8) + uVar2 * 0x44);
     iVar3 = r_sdk_config_get_opts();
-    if (*(byte *)(iVar3 + 0xd) <= uVar2) goto _L408;
+    if (*(byte *)(iVar3 + 0xd) <= uVar2) goto _L396;
     iVar3 = *(int *)(_p_llm_env + 8) + uVar2 * 0x44;
     cVar1 = *(char *)(iVar3 + 0x40);
     if ((cVar1 != '\x02') || (*(short *)(iVar5 + 2) == 0)) {
@@ -36,11 +36,11 @@ undefined4 f_hci_le_set_adv_set_rand_addr_cmd_handler(undefined1 *param_1,undefi
       if (cVar1 == '\x02') {
         r_lld_adv_rand_addr_update(uVar2,*(undefined4 *)(param_1 + 1),*(undefined2 *)(param_1 + 5));
       }
-      goto _L408;
+      goto _L396;
     }
   }
   uVar4 = 0xc;
-_L408:
+_L396:
   r_llm_cmd_cmp_send(param_2,uVar4);
   return 0;
 }

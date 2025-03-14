@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> lld_sync.o -> r_lld_sync_process_pkt_rx
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,17 +17,10 @@ void r_lld_sync_process_pkt_rx(int param_1)
   int iVar2;
   int iVar3;
   
-  iVar2 = r_sdk_config_get_opts_ext();
-  if ((*(uint *)(iVar2 + 0x28) & 0x80) != 0) {
-    iVar2 = r_sdk_config_get_opts_ext();
-    if (*(byte *)(iVar2 + 0x2c) < 2) {
-      r_ble_log_internal_x1(0x20a2000c,param_1);
-    }
-  }
-  iVar2 = *(int *)(&lld_sync_env + param_1 * 4);
-  while (iVar3 = r_lld_rxdesc_check_hack(param_1), iVar3 != 0) {
-    if (*(ushort *)(iVar2 + 0x52) < 0x673) {
-      bVar1 = *(char *)(iVar2 + 99) == '\0';
+  iVar3 = *(int *)(&lld_sync_env + param_1 * 4);
+  while (iVar2 = r_lld_rxdesc_check_hack(param_1), iVar2 != 0) {
+    if (*(ushort *)(iVar3 + 0x52) < 0x673) {
+      bVar1 = *(char *)(iVar3 + 99) == '\0';
       r_lld_sync_process_pkt_rx_aux_sync_ind(param_1,bVar1);
       r_lld_sync_process_pkt_rx_pkt_check(param_1,bVar1);
     }

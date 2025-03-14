@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app -> llc_llcp.o -> r_lld_llcp_rx_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -77,7 +77,7 @@ _L28:
     if (cStack_7f == '\0') {
       if (0x22 < abStack_60[0]) {
         (**(code **)(_r_plf_funcs_p + 0xc))
-                  (param_2,"llc_llcp.c",0x18b,*(code **)(_r_plf_funcs_p + 0xc));
+                  (param_2,"llc_llcp.c",0x18a,*(code **)(_r_plf_funcs_p + 0xc));
       }
       cStack_7f = (**(code **)(_r_ip_funcs_p + 0x8ec))
                             (uVar1,abStack_60,*param_1,*(code **)(_r_ip_funcs_p + 0x8ec));

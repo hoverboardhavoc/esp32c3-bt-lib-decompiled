@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * https://github.com/espressif/esp32c3-bt-lib/commit/2ce747aec8008d008fe34fa375a2aea3e7e48e9a
- * Upstream date: 2025-02-25 15:16:47 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(723439d)
+ * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
+ * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
+ * Upstream date: 2025-03-14 11:07:43 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
  * Source: libbtdm_app_flash -> rwble.o -> r_rwble_isr_hw_fixed
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ undefined4 r_rwble_isr_hw_fixed(int param_1)
 
 {
   if (param_1 == 0x20000) {
-    DAT_000107a4 = DAT_000107a4 + 1;
+    DAT_000106ec = DAT_000106ec + 1;
   }
   else {
     if (param_1 != 0x400001) {
@@ -24,7 +24,7 @@ undefined4 r_rwble_isr_hw_fixed(int param_1)
       return 0xffffffff;
     }
     ble_isr_state = ble_isr_state + 1;
-    DAT_000107b8 = DAT_000107b8 + 1;
+    DAT_00010700 = DAT_00010700 + 1;
   }
   return 0;
 }
