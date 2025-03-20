@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
- * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
- * Upstream date: 2025-03-14 10:49:41 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app_flash -> lld.o -> lld_peer_rpa_to_id
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,13 +18,12 @@ int lld_peer_rpa_to_id(void *param_1,byte *param_2)
   void *__src;
   uint uVar3;
   
-  iVar1 = 0;
   if ((((param_2 != (byte *)0x0) && (param_1 != (void *)0x0)) && (*param_2 == 1)) &&
      ((*(byte *)((int)param_1 + 5) & 0xc0) == 0x40)) {
     uVar3 = 0;
     do {
-      iVar2 = r_emi_get_mem_addr_by_offset(0xc60);
-      if ((*(short *)(iVar2 + uVar3 * 0x34) < 0) &&
+      iVar1 = r_emi_get_mem_addr_by_offset(0xc60);
+      if ((*(short *)(iVar1 + uVar3 * 0x34) < 0) &&
          (iVar1 = lld_peer_rpa_res(param_1,uVar3 & 0xff), iVar1 != 0)) {
         iVar2 = r_emi_get_mem_addr_by_offset(0xc60);
         *param_2 = (byte)*(undefined2 *)(iVar2 + uVar3 * 0x34) & 1;
@@ -35,6 +34,6 @@ int lld_peer_rpa_to_id(void *param_1,byte *param_2)
       uVar3 = uVar3 + 1;
     } while (uVar3 != 10);
   }
-  return iVar1;
+  return 0;
 }
 

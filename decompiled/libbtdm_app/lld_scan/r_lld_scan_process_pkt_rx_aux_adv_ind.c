@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
- * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
- * Upstream date: 2025-03-14 11:07:43 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_process_pkt_rx_aux_adv_ind
  *
  * (C) Espressif, Apache License 2.0.
@@ -192,7 +192,7 @@ _L400:
         uVar20 = (int)(((uVar16 & 0xffff) + (uint)_DAT_00015092 * -2) * 0x10000) >> 0x10;
       }
       if (0x751 < (uVar20 + 0x4e1 & 0xffff)) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x6b9,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x6c2,*(code **)(_r_plf_funcs_p + 8));
       }
       for (; (int)uVar20 < 0; uVar20 = (int)(((uVar20 & 0xffff) + 0x271) * 0x10000) >> 0x10) {
         *(uint *)(puVar11 + 0x18) = *(int *)(puVar11 + 0x18) - 1U & 0xfffffff;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
- * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
- * Upstream date: 2025-03-14 11:07:43 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app -> lld_init.o -> r_lld_init_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -83,7 +83,7 @@ undefined1 r_lld_init_start(undefined2 *param_1)
                                 (0x5c,0,*(code **)(_r_modules_funcs_p + 0x120));
   _lld_init_env = piStack_f4;
   if (piStack_f4 == (int *)0x0) {
-    (**(code **)(_r_plf_funcs_p + 8))("lld_init.c",0x80b,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))("lld_init.c",0x819,*(code **)(_r_plf_funcs_p + 8));
     goto _L296;
   }
   uVar16 = uVar16 & 0xffffff;
@@ -134,7 +134,7 @@ undefined1 r_lld_init_start(undefined2 *param_1)
                                 (0x54,0,*(code **)(_r_modules_funcs_p + 0x120));
     *piStack_f4 = (int)pvVar18;
     if (pvVar18 == (void *)0x0) {
-      (**(code **)(_r_plf_funcs_p + 8))("lld_init.c",0x6c5,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))("lld_init.c",0x6d3,*(code **)(_r_plf_funcs_p + 8));
     }
     else {
       memset(pvVar18,0,0x54);
@@ -199,7 +199,7 @@ undefined1 r_lld_init_start(undefined2 *param_1)
                                 (0x54,0,*(code **)(_r_modules_funcs_p + 0x120));
     piStack_f4[1] = (int)pvVar18;
     if (pvVar18 == (void *)0x0) {
-      (**(code **)(_r_plf_funcs_p + 8))("lld_init.c",0x726,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))("lld_init.c",0x734,*(code **)(_r_plf_funcs_p + 8));
     }
     else {
       memset(pvVar18,0,0x54);
@@ -528,7 +528,7 @@ _L417:
         uVar15 = uVar15 + (uint)*(ushort *)(iVar17 + 0x2e) * 2 & 0xfffffff;
       }
       else {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_init.c",0x803,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_init.c",0x811,*(code **)(_r_plf_funcs_p + 8));
       }
       uStack_b3 = 0;
     }

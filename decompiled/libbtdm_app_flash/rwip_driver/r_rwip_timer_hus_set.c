@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
- * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
- * Upstream date: 2025-03-14 11:07:43 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app_flash -> rwip_driver.o -> r_rwip_timer_hus_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ void r_rwip_timer_hus_set(uint param_1,uint param_2)
   }
   else {
     if (0x270 < param_2) {
-      r_assert_param(param_2,0,"rwip_driver.c",0x4b7);
+      r_assert_param(param_2,0,"rwip_driver.c",0x4bb);
     }
     if ((param_1 & 0xf0000000) != 0) {
       r_assert_err(0,"rwip_driver.c",0xc5d);

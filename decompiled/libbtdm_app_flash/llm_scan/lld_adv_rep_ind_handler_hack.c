@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
- * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
- * Upstream date: 2025-01-03 16:50:09 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app_flash -> llm_scan.o -> lld_adv_rep_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -72,20 +72,20 @@ undefined4 lld_adv_rep_ind_handler_hack(char *param_1)
     if (uStack_62 == 0) {
       if (uVar7 != 0) {
         uVar6 = 0;
-        goto _L556;
+        goto _L558;
       }
-_L511:
+_L513:
       memcpy(&uStack_60,param_1 + 4,6);
     }
     else {
       uVar6 = (uStack_62 - 0xc60) / 0x34 & 0xff;
       if (uVar7 != 0) {
-_L556:
+_L558:
         iVar13 = r_emi_get_mem_addr_by_offset(0xc60);
         uVar18 = *(ushort *)(iVar13 + uVar6 * 0x34);
         memcpy(&uStack_50,param_1 + 4,6);
         uVar18 = uVar18 & 1 | 2;
-        if (uStack_62 == 0) goto _L511;
+        if (uStack_62 == 0) goto _L513;
       }
       iVar8 = r_emi_get_mem_addr_by_offset(0xc60);
       iVar13 = uVar6 * 0x34;
@@ -117,14 +117,14 @@ _L556:
       }
     }
     if ((param_1[0x15] & 4U) == 0) {
-_L524:
+_L526:
       bVar19 = 0;
     }
     else {
       bVar19 = param_1[0x18];
       if (param_1[1] == '\0') {
         memcpy(&uStack_48,param_1 + 10,6);
-        if (bVar19 == 0) goto _L524;
+        if (bVar19 == 0) goto _L526;
         if ((param_1[0xf] & 0xc0U) != 0xc0) {
           bVar19 = 0xfe;
         }
@@ -214,7 +214,7 @@ _L524:
           bVar5 = (byte)(iVar8 << 4);
         }
         *(byte *)(_p_llm_env + 0xd4) = bVar5 | bVar14;
-        if (iVar13 != 0) goto _L530;
+        if (iVar13 != 0) goto _L532;
       }
       iVar13 = r_llm_adv_rep_flow_control_update_eco(param_1,&uStack_60);
       if (iVar13 == 0) {
@@ -296,7 +296,7 @@ _L524:
       }
     }
   }
-_L530:
+_L532:
   if (param_1[0x20] != '\0') {
     r_ble_util_buf_rx_free(*(undefined2 *)(param_1 + 0x22),*(undefined4 *)(param_1 + 0x24));
   }

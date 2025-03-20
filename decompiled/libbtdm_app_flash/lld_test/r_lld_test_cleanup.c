@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
- * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
- * Upstream date: 2025-03-14 11:07:43 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app_flash -> lld_test.o -> r_lld_test_cleanup
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,13 +12,24 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_lld_test_cleanup(int param_1)
+void r_lld_test_cleanup(uint param_1)
 
 {
+  int iVar1;
+  int iVar2;
+  
+  iVar1 = _lld_test_env;
   if (_lld_test_env != 0) {
-    if (*(char *)(_lld_test_env + 0x26) == '\x01') {
+    iVar2 = r_sdk_config_get_opts_ext();
+    if ((*(uint *)(iVar2 + 0x28) & 0x400) != 0) {
+      iVar2 = r_sdk_config_get_opts_ext();
+      if (*(byte *)(iVar2 + 0x2c) < 3) {
+        r_ble_log_internal_x1(0x400e0003,(uint)*(byte *)(iVar1 + 0x26) << 8 | param_1);
+      }
+    }
+    if (*(char *)(iVar1 + 0x26) == '\x01') {
       if (param_1 == 0) {
-        r_ble_util_buf_acl_tx_free(*(undefined2 *)(_lld_test_env + 0x24));
+        r_ble_util_buf_acl_tx_free(*(undefined2 *)(iVar1 + 0x24));
       }
       else {
         r_ble_util_buf_acl_tx_free_in_isr();

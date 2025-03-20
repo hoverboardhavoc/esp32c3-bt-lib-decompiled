@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
- * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
- * Upstream date: 2025-03-14 11:07:43 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_frm_skip_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,7 +39,7 @@ void r_lld_scan_frm_skip_isr(int param_1)
       if (*(char *)(iVar3 + 0x3d) == '\x03') {
         iVar5 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
         if (*(char *)(iVar5 + 0x18) == '\0') {
-          (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x9d3,*(code **)(_r_plf_funcs_p + 8));
+          (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x9dc,*(code **)(_r_plf_funcs_p + 8));
         }
         (**(code **)(_r_ip_funcs_p + 0x448))(param_1,*(code **)(_r_ip_funcs_p + 0x448));
         *(undefined1 *)(iVar3 + 0x3d) = 0;
@@ -47,7 +47,7 @@ void r_lld_scan_frm_skip_isr(int param_1)
       bVar2 = rwip_priority;
       if ((uint)*(ushort *)(iVar3 + 0x30) << 1 <= (iVar4 - *(int *)(iVar3 + 0x28) & 0xfffffffU)) {
         if (0xff < (uint)*(byte *)(iVar3 + 0x16) + (uint)rwip_priority) {
-          (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x9dd,*(code **)(_r_plf_funcs_p + 8));
+          (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x9e6,*(code **)(_r_plf_funcs_p + 8));
         }
         *(int *)(iVar3 + 0x28) = iVar4;
         *(byte *)(iVar3 + 0x16) = bVar2 + *(char *)(iVar3 + 0x16);
@@ -64,12 +64,12 @@ void r_lld_scan_frm_skip_isr(int param_1)
       if (iVar3 == 0) {
         return;
       }
-      uVar6 = 0x9e9;
+      uVar6 = 0x9f2;
       UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
       goto _L675;
     }
   }
-  uVar6 = 0x9f7;
+  uVar6 = 0xa00;
   UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
 _L675:
                     /* WARNING: Could not recover jumptable at 0x00013048. Too many branches */

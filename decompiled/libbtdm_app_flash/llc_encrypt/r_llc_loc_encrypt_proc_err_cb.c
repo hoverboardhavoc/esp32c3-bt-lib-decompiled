@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
- * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
- * Upstream date: 2025-03-14 10:49:41 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app_flash -> llc_encrypt.o -> r_llc_loc_encrypt_proc_err_cb
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,7 +32,7 @@ void r_llc_loc_encrypt_proc_err_cb(uint param_1,int param_2,byte *param_3)
   }
   else {
     if (param_2 != 3) {
-      r_assert_param("llc_encrypt.c",0x5ca);
+      r_assert_param("llc_encrypt.c",0x5eb);
       return;
     }
     if (param_3[1] == 3) {
@@ -49,7 +49,7 @@ void r_llc_loc_encrypt_proc_err_cb(uint param_1,int param_2,byte *param_3)
   iVar1 = r_llc_proc_get(0);
   iVar2 = r_llc_proc_state_get();
   if (iVar2 == 9) {
-    r_assert_param(param_1,9,"llc_encrypt.c",0x28b);
+    r_assert_param(param_1,9,"llc_encrypt.c",0x2ac);
     return;
   }
   if (bVar3 == 0x13) goto _L27;

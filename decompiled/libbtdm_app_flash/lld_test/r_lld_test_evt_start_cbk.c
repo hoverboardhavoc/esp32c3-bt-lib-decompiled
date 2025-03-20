@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
- * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
- * Upstream date: 2025-03-14 11:07:43 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app_flash -> lld_test.o -> r_lld_test_evt_start_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,7 +17,8 @@ void r_lld_test_evt_start_cbk(int param_1)
 {
   ushort uVar1;
   ushort *puVar2;
-  uint uVar3;
+  int iVar3;
+  uint uVar4;
   byte bStack_31;
   code *pcStack_30;
   undefined4 uStack_2c;
@@ -32,15 +33,22 @@ void r_lld_test_evt_start_cbk(int param_1)
   undefined1 uStack_14;
   
   if (_lld_test_env != param_1) {
-    r_assert_err(0,"lld_test.c",0x17b);
+    r_assert_err(0,"lld_test.c",0x17f);
   }
   if (param_1 == 0) {
-    r_assert_err(0,"lld_test.c",0x1a5);
+    r_assert_err(0,"lld_test.c",0x1ab);
   }
   else {
     puVar2 = (ushort *)r_emi_get_mem_addr_by_offset(0x400);
     uVar1 = *puVar2;
     r_lld_test_set_tx_power(0,uVar1 & 0x1f);
+    iVar3 = r_sdk_config_get_opts_ext();
+    if ((*(uint *)(iVar3 + 0x28) & 0x400) != 0) {
+      iVar3 = r_sdk_config_get_opts_ext();
+      if (*(byte *)(iVar3 + 0x2c) < 3) {
+        r_ble_log_internal_x1(0x402e0004,(uint)*(byte *)(param_1 + 0x26) << 8);
+      }
+    }
     r_bt_rma_get_ant_by_act(uVar1 & 0x1f,0,&bStack_31,&pcStack_30);
     if (((uint)bStack_31 << 7 & 0xffffff7f) != 0) {
       r_assert_err(0,"lld_test.c",0x82);
@@ -49,14 +57,14 @@ void r_lld_test_evt_start_cbk(int param_1)
     uVar1 = *puVar2;
     puVar2 = (ushort *)r_emi_get_mem_addr_by_offset(0x400);
     *puVar2 = uVar1 & 0xff7f | (ushort)((uint)bStack_31 << 7);
-    uVar3 = ((uint)pcStack_30 & 0xff) << 6;
-    if ((uVar3 & 0xffffffbf) != 0) {
+    uVar4 = ((uint)pcStack_30 & 0xff) << 6;
+    if ((uVar4 & 0xffffffbf) != 0) {
       r_assert_err(0,"lld_test.c",0x8e);
     }
     puVar2 = (ushort *)r_emi_get_mem_addr_by_offset(0x400);
     uVar1 = *puVar2;
     puVar2 = (ushort *)r_emi_get_mem_addr_by_offset(0x400);
-    *puVar2 = uVar1 & 0xffbf | (ushort)uVar3;
+    *puVar2 = uVar1 & 0xffbf | (ushort)uVar4;
     pcStack_30 = r_lld_test_frm_cbk;
     uStack_2c = *(undefined4 *)(param_1 + 4);
     uStack_28 = 0;

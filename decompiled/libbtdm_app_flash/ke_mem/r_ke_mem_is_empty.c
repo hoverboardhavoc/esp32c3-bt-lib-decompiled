@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
- * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
- * Upstream date: 2025-03-14 11:07:43 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app_flash -> ke_mem.o -> r_ke_mem_is_empty
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,8 +19,8 @@ bool r_ke_mem_is_empty(int param_1)
   ushort uVar2;
   int iVar3;
   
-  uVar1 = *(ushort *)(r_assert_err + (param_1 + 0x10) * 2);
-  iVar3 = *(int *)(r_assert_err + (param_1 + 4) * 4);
+  uVar1 = *(ushort *)(r_ble_log_internal_x2 + (param_1 + 0x10) * 2);
+  iVar3 = *(int *)(r_ble_log_internal_x2 + (param_1 + 4) * 4);
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   uVar2 = *(ushort *)(iVar3 + 2);
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
- * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
- * Upstream date: 2025-03-14 11:07:43 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app_flash -> rwble.o -> esp_get_ble_isr_err_counter
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,49 +17,49 @@ undefined4 esp_get_ble_isr_err_counter(undefined4 param_1)
   case 0:
     return ble_isr_state;
   case 1:
-    return DAT_000106ac;
+    return DAT_00010764;
   case 2:
-    return DAT_000106b0;
+    return DAT_00010768;
   case 3:
-    return DAT_000106b4;
+    return DAT_0001076c;
   case 4:
-    return DAT_000106b8;
+    return DAT_00010770;
   case 5:
-    return DAT_000106bc;
+    return DAT_00010774;
   case 6:
-    return DAT_000106c0;
+    return DAT_00010778;
   case 7:
-    return DAT_000106c4;
+    return DAT_0001077c;
   case 8:
-    return DAT_000106c8;
+    return DAT_00010780;
   case 9:
-    return DAT_000106cc;
+    return DAT_00010784;
   case 10:
-    return DAT_000106d0;
+    return DAT_00010788;
   case 0xb:
-    return DAT_000106d4;
+    return DAT_0001078c;
   case 0xc:
-    return DAT_000106d8;
+    return DAT_00010790;
   case 0xd:
-    return DAT_000106dc;
+    return DAT_00010794;
   case 0xe:
-    return DAT_000106e0;
+    return DAT_00010798;
   case 0xf:
-    return DAT_000106e4;
+    return DAT_0001079c;
   case 0x10:
-    return DAT_000106e8;
+    return DAT_000107a0;
   case 0x11:
-    return DAT_000106ec;
+    return DAT_000107a4;
   case 0x12:
-    return DAT_000106f0;
+    return DAT_000107a8;
   case 0x13:
-    return DAT_000106f4;
+    return DAT_000107ac;
   case 0x14:
-    return DAT_000106f8;
+    return DAT_000107b0;
   case 0x15:
-    return DAT_000106fc;
+    return DAT_000107b4;
   case 0x16:
-    return DAT_00010700;
+    return DAT_000107b8;
   default:
     return 0;
   }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
- * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
- * Upstream date: 2025-03-14 11:07:43 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_create_sync
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ r_lld_scan_create_sync
   uStack_28 = param_5;
   uStack_24 = param_6;
   if (_lld_scan_sync_env != (undefined1 *)0x0) {
-    r_assert_err(0,"lld_scan.c",0xcd7);
+    r_assert_err(0,"lld_scan.c",0xce4);
   }
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   puVar1 = (undefined1 *)r_ke_malloc(10,0);

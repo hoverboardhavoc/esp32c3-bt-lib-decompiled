@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bc9fd38197fb6a50e1b09791498782a1797e4757
- * https://github.com/espressif/esp32c3-bt-lib/commit/bc9fd38197fb6a50e1b09791498782a1797e4757
- * Upstream date: 2025-03-14 10:49:41 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(99e9a8dd)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app -> llc_encrypt.o -> f_ll_start_enc_req_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ undefined4 f_ll_start_enc_req_handler(int param_1)
       uVar3 = 0x3d;
       uVar2 = 0x13;
       pcVar4 = *(code **)(_r_ip_funcs_p + 0x59c);
-_L181:
+_L198:
       (*pcVar4)(param_1,uVar2,uVar3,pcVar4);
       return 0;
     }
@@ -37,7 +37,7 @@ _L181:
       uVar3 = 0;
       uVar2 = 5;
       pcVar4 = *(code **)(_r_ip_funcs_p + 0x594);
-      goto _L181;
+      goto _L198;
     }
   }
   return 0x24;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app -> llm_scan.o -> r_llm_adv_rep_flow_control_update_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,12 +27,12 @@ char r_llm_adv_rep_flow_control_update_eco(int param_1)
   if (iVar2 == 0) {
     return '\x01';
   }
-  cVar1 = DAT_0001403e;
-  if (DAT_0001403e != '\0') {
+  cVar1 = DAT_00014042;
+  if (DAT_00014042 != '\0') {
     if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
       if (_llm_le_adv_flow_env == 0) {
         _memcmp = _memcmp + 1;
-        return DAT_0001403e;
+        return DAT_00014042;
       }
       _llm_le_adv_flow_env = _llm_le_adv_flow_env + -1;
     }

@@ -1,0 +1,28 @@
+/*
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Source: libbtdm_app_flash -> vshci_task.o -> scan_stack_enableAdvFlowCtrlVsCmd
+ *
+ * (C) Espressif, Apache License 2.0.
+ * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
+ * Decompiler output may be incomplete or differ from original semantics.
+ */
+
+void scan_stack_enableAdvFlowCtrlVsCmd(int param_1)
+
+{
+  if (param_1 == 0) {
+    ble_cmd_handler_register(0xfd09,hci_unknown_hci_cmd_handler);
+    ble_cmd_handler_register(0xfd0a,hci_unknown_hci_cmd_handler);
+    *(undefined4 *)r_vs_funcs_p = 0;
+  }
+  else {
+    ble_cmd_handler_register(0xfd09,hci_vendor_ble_init_adv_flow_control_cmd_handler);
+    ble_cmd_handler_register(0xfd0a,hci_vendor_ble_update_adv_report_flow_control_cmd_handler);
+    *(undefined **)r_vs_funcs_p = &r_llm_send_adv_lost_event_to_host;
+  }
+  return;
+}
+

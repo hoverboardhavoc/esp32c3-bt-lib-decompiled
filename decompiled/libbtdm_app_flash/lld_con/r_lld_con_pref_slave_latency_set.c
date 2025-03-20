@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e668c2d101ee46ee1950819607694fb852aecae0
- * https://github.com/espressif/esp32c3-bt-lib/commit/e668c2d101ee46ee1950819607694fb852aecae0
- * Upstream date: 2025-03-14 11:07:43 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(6e312587)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_pref_slave_latency_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ void r_lld_con_pref_slave_latency_set(int param_1,uint param_2)
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   iVar2 = *(int *)(&lld_con_env + param_1 * 4);
   if (iVar2 == 0) {
-    r_assert_param(0,"lld_con.c",0x10d8);
+    r_assert_param(0,"lld_con.c",0x110c);
   }
   else {
     uVar1 = *(ushort *)(iVar2 + 0x72);
@@ -30,7 +30,7 @@ void r_lld_con_pref_slave_latency_set(int param_1,uint param_2)
     }
     *(ushort *)(iVar2 + 0x72) = uVar1;
   }
-                    /* WARNING: Could not recover jumptable at 0x00014754. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00014df8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))();
   return;

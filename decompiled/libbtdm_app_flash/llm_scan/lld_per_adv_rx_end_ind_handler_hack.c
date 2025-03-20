@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
- * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
- * Upstream date: 2025-01-03 16:50:09 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app_flash -> llm_scan.o -> lld_per_adv_rx_end_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,7 +38,7 @@ undefined4 lld_per_adv_rx_end_ind_handler_hack(byte *param_1,undefined4 param_2,
   bVar2 = *(byte *)(iVar4 + 0x40);
   if (bVar2 != 0xe) {
     if ((bVar2 < 0xe) || (0x10 < bVar2)) {
-      r_assert_err(0,"llm_scan.c",0xb72);
+      r_assert_err(0,"llm_scan.c",0xb7a);
     }
     else {
       uVar10 = *(undefined1 *)(iVar4 + 0x41);
@@ -76,13 +76,13 @@ undefined4 lld_per_adv_rx_end_ind_handler_hack(byte *param_1,undefined4 param_2,
         r_ke_msg_send();
       }
     }
-    goto _L694;
+    goto _L696;
   }
   if (param_1[1] == 0) {
     r_llm_cmd_cmp_send(0x2045,0,param_2,param_3);
     puVar8 = (undefined2 *)r_ke_msg_alloc(0x1104,0,0x3e,0x12);
     uVar11 = 0x440e;
-_L707:
+_L709:
     *puVar8 = uVar11;
     iVar4 = _p_llm_env;
     puVar8[1] = (ushort)bVar1;
@@ -99,13 +99,13 @@ _L707:
     if (param_1[1] == 8) {
       puVar8 = (undefined2 *)r_ke_msg_alloc(0x1104,0,0x3e,0x12);
       uVar11 = 0x3e0e;
-      goto _L707;
+      goto _L709;
     }
-    r_assert_param((uint)bVar1,"llm_scan.c",0xb67);
+    r_assert_param((uint)bVar1,"llm_scan.c",0xb6f);
   }
   r_ke_msg_free(*(int *)(*(int *)(_p_llm_env + 8) + iVar9) + -0xc);
   *(undefined4 *)(*(int *)(_p_llm_env + 8) + iVar9) = 0;
-_L694:
+_L696:
   *(undefined1 *)(iVar9 + *(int *)(_p_llm_env + 8) + 0x40) = 0;
   return 0;
 }

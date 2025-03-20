@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
- * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
- * Upstream date: 2024-12-13 13:39:25 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
+ * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
+ * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
+ * Upstream date: 2025-03-20 20:11:19 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
  * Source: libbtdm_app_flash -> llm_scan.o -> r_llm_ble_update_adv_flow_control
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,7 @@
 void r_llm_ble_update_adv_flow_control(short param_1)
 
 {
-  if (DAT_0001408a != '\0') {
+  if (DAT_0001408e != '\0') {
     _llm_le_adv_flow_env = param_1 + _llm_le_adv_flow_env;
   }
   return;
