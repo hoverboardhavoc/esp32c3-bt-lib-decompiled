@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
+ * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
+ * Upstream date: 2025-03-20 20:43:40 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_rw_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,8 +16,9 @@ char * btdm_rw_run(char *param_1)
 
 {
   char *pcVar1;
+  int iVar2;
   undefined4 extraout_a1;
-  uint uVar2;
+  uint uVar3;
   
   pcVar1 = param_1;
   if ((_btdm_pwr_state == 4) && (pcVar1 = (char *)r_sdk_config_get_opts(), pcVar1[0xe] == '\x01')) {
@@ -25,9 +26,14 @@ char * btdm_rw_run(char *param_1)
       (**(code **)(_r_osi_funcs_p + 0xa8))();
     }
     _btdm_pwr_state = 0;
-    pcVar1 = (char *)coex_schm_wakeup_flag_get();
-    if (pcVar1 != (char *)0x0) {
-      pcVar1 = (char *)coex_schm_process_in_active();
+    iVar2 = coex_schm_wakeup_flag_get();
+    if (iVar2 != 0) {
+      coex_schm_process_in_active();
+    }
+    pcVar1 = (char *)r_sdk_config_get_opts_ext();
+    if (((*(uint *)(pcVar1 + 0x28) & 0x200) != 0) &&
+       (pcVar1 = (char *)r_sdk_config_get_opts_ext(), (byte)pcVar1[0x2c] < 3)) {
+      pcVar1 = (char *)r_ble_log_internal_x1(0x400c0005,_btdm_pwr_state << 8 | (uint)param_1);
     }
   }
   if (param_1 == (char *)0x2) {
@@ -36,11 +42,11 @@ char * btdm_rw_run(char *param_1)
       pcVar1 = (char *)r_sdk_cfg_priv_opts_ext_get();
       if ((*pcVar1 != '\0') && (_btdm_pwr_state == 0)) {
         pll_track_state = r_rwip_time_get();
-        uVar2 = pll_track_state - DAT_00011984 & 0xfffffff;
+        uVar3 = pll_track_state - DAT_00011a38 & 0xfffffff;
         pcVar1 = (char *)0x0;
-        DAT_00011980 = extraout_a1;
-        if ((uVar2 < 0x8000001) && (0xc80 < uVar2)) {
-          DAT_00011984 = pll_track_state;
+        DAT_00011a34 = extraout_a1;
+        if ((uVar3 < 0x8000001) && (0xc80 < uVar3)) {
+          DAT_00011a38 = pll_track_state;
           bt_track_pll_cap(0);
           pcVar1 = (char *)0x1;
         }
@@ -49,7 +55,7 @@ char * btdm_rw_run(char *param_1)
     }
   }
   else if ((char *)0x1 < param_1) {
-    pcVar1 = (char *)r_assert_err(0,"arch_main.c",0x447);
+    pcVar1 = (char *)r_assert_err(0,"arch_main.c",0x44a);
   }
   return pcVar1;
 }

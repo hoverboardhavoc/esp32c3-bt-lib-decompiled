@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
+ * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
+ * Upstream date: 2025-03-20 20:43:40 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_restart
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,34 +12,47 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_lld_adv_restart(int param_1,int param_2,undefined2 param_3)
+void r_lld_adv_restart(uint param_1,int param_2,int param_3)
 
 {
-  uint uVar1;
+  int iVar1;
   int iVar2;
+  int iVar3;
+  uint uVar4;
   
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
-  iVar2 = *(int *)(&lld_adv_env + param_1 * 4);
-  if (iVar2 == 0) {
-    r_assert_err(0,"lld_adv.c",0xe05);
+  iVar1 = *(int *)(&lld_adv_env + param_1 * 4);
+  if (iVar1 == 0) {
+    r_assert_err(0,"lld_adv.c",0xe30);
+    goto _L1288;
+  }
+  *(undefined1 *)(iVar1 + 0x86) = 0;
+  *(short *)(iVar1 + 0x78) = (short)param_3;
+  if ((*(ushort *)(iVar1 + 0x74) & 8) == 0) {
+    uVar4 = 0xffffffff;
+    if (param_2 != 0) {
+      iVar3 = param_2 << 5;
+      iVar2 = *(int *)(iVar1 + 4);
+      goto _L1292;
+    }
   }
   else {
-    *(undefined1 *)(iVar2 + 0x86) = 0;
-    *(undefined2 *)(iVar2 + 0x78) = param_3;
-    if ((*(ushort *)(iVar2 + 0x74) & 8) == 0) {
-      if (param_2 != 0) {
-        *(uint *)(iVar2 + 0x58) = param_2 * 0x20 + *(int *)(iVar2 + 4) & 0xfffffff;
-        goto _L1219;
-      }
-      uVar1 = 0xffffffff;
-    }
-    else {
-      uVar1 = *(int *)(iVar2 + 4) + 0x1000U & 0xfffffff;
-    }
-    *(uint *)(iVar2 + 0x58) = uVar1;
+    iVar2 = *(int *)(iVar1 + 4);
+    iVar3 = 0x1000;
+_L1292:
+    uVar4 = iVar3 + iVar2 & 0xfffffff;
   }
-_L1219:
-                    /* WARNING: Could not recover jumptable at 0x00015d44. Too many branches */
+  *(uint *)(iVar1 + 0x58) = uVar4;
+  iVar2 = r_sdk_config_get_opts_ext();
+  if ((*(uint *)(iVar2 + 0x28) & 4) != 0) {
+    iVar2 = r_sdk_config_get_opts_ext();
+    if (*(byte *)(iVar2 + 0x2c) < 3) {
+      r_ble_log_internal_x2
+                (0x40000004,param_2 << 0x10 | param_3 << 8 | param_1,*(undefined4 *)(iVar1 + 0x58));
+    }
+  }
+_L1288:
+                    /* WARNING: Could not recover jumptable at 0x000162d8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))();
   return;

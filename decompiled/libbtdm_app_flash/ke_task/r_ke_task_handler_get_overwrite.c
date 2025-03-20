@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
+ * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
+ * Upstream date: 2025-03-20 20:43:40 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
  * Source: libbtdm_app_flash -> ke_task.o -> r_ke_task_handler_get_overwrite
  *
  * (C) Espressif, Apache License 2.0.
@@ -59,12 +59,12 @@ undefined * r_ke_task_handler_get_overwrite(int param_1)
   uVar2 = *(ushort *)(param_1 + 6);
   uVar4 = uVar2 & 0xff;
   if (0x1e < uVar4) {
-    r_assert_param(uVar4,"ke_task.c",0x14e);
+    r_assert_param(uVar4,"ke_task.c",0x151);
   }
   piVar5 = *(int **)(&ke_task_env + uVar4 * 4);
   if ((*(ushort *)(piVar5 + 2) != 0) &&
      (((uVar2 >> 8 < *(ushort *)(piVar5 + 2) ||
-       (r_assert_param((uint)uVar2,uVar1,"ke_task.c",0x156), uVar2 >> 8 < *(ushort *)(piVar5 + 2)))
+       (r_assert_param((uint)uVar2,uVar1,"ke_task.c",0x159), uVar2 >> 8 < *(ushort *)(piVar5 + 2)))
       && (*piVar5 != 0)))) {
     iVar6 = *(ushort *)((int)piVar5 + 10) - 1;
     if (iVar6 == -1) {
@@ -79,7 +79,7 @@ undefined * r_ke_task_handler_get_overwrite(int param_1)
       }
     }
     if (*(int *)(puVar3 + 2) == 0) {
-      r_assert_err(0,"ke_task.c",0x132);
+      r_assert_err(0,"ke_task.c",0x135);
     }
     return *(undefined **)(puVar3 + 2);
   }

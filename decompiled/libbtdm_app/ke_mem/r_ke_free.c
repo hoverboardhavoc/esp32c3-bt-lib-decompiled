@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
+ * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
+ * Upstream date: 2025-03-20 20:43:40 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
  * Source: libbtdm_app -> ke_mem.o -> r_ke_free
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,11 +25,11 @@ void r_ke_free(short *param_1)
   short *psVar8;
   
   if (param_1 == (short *)0x0) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(0,"ke_mem.c",0x19a,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(0,"ke_mem.c",0x19b,*(code **)(_r_plf_funcs_p + 0xc));
   }
   psVar8 = param_1 + -2;
   if (param_1[-2] != -0x7cc8) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(param_1,"ke_mem.c",0x1a1,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(param_1,"ke_mem.c",0x1a3,*(code **)(_r_plf_funcs_p + 0xc));
   }
   param_1[-2] = -0xff1;
   uVar1 = param_1[-1];
@@ -41,7 +41,7 @@ void r_ke_free(short *param_1)
       uVar6 = uVar6 + 1 & 0xff;
       if (uVar6 == 4) {
 _L69:
-        (**(code **)(_r_plf_funcs_p + 8))(0,"ke_mem.c",0x1c1,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,"ke_mem.c",0x1c3,*(code **)(_r_plf_funcs_p + 8));
         psVar7 = (short *)0x0;
         goto _L73;
       }
@@ -53,7 +53,7 @@ _L69:
     }
   } while (psVar2 == (short *)0x0);
   if (param_1 <= psVar2) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"ke_mem.c",0x1c2,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"ke_mem.c",0x1c4,*(code **)(_r_plf_funcs_p + 8));
   }
   psVar7 = (short *)0x0;
   do {
@@ -73,7 +73,7 @@ _L78:
       return;
     }
     if (*psVar3 != -0x5aa6) {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"ke_mem.c",0x1ca,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"ke_mem.c",0x1cc,*(code **)(_r_plf_funcs_p + 8));
     }
     if ((short *)((uint)(ushort)psVar3[1] + (int)psVar3) == psVar8) {
       uVar6 = (uint)(ushort)psVar3[1] + (uint)uVar1;
@@ -92,7 +92,7 @@ _L78:
     }
     if (psVar8 < psVar3) {
       if (psVar7 == (short *)0x0) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"ke_mem.c",0x1e5,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,"ke_mem.c",0x1e7,*(code **)(_r_plf_funcs_p + 8));
       }
       *(short **)(psVar7 + 2) = psVar8;
       param_1[-2] = -0x5aa6;

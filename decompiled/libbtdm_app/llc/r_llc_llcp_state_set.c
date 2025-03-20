@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
+ * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
+ * Upstream date: 2025-03-20 20:43:40 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
  * Source: libbtdm_app -> llc.o -> r_llc_llcp_state_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,7 +43,7 @@ _L84:
     if (param_2 == 0) {
       if ((param_3 & 0xfffffffc) != 0) {
         (**(code **)(_r_plf_funcs_p + 0xc))
-                  (3,param_3,"llc.c",0x1af,*(code **)(_r_plf_funcs_p + 0xc));
+                  (3,param_3,"llc.c",0x1b3,*(code **)(_r_plf_funcs_p + 0xc));
       }
       *(byte *)(iVar4 + 0x44) = (byte)param_3 | *(byte *)(iVar4 + 0x44) & 0xfc;
       return;
@@ -51,16 +51,16 @@ _L84:
     if (param_2 != 2) {
                     /* WARNING: Could not recover jumptable at 0x0001068c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-      (**(code **)(_r_plf_funcs_p + 0xc))(param_1,param_2,"llc.c",0x1c0);
+      (**(code **)(_r_plf_funcs_p + 0xc))(param_1,param_2,"llc.c",0x1c4);
       return;
     }
     if ((param_3 & 0xfffffffc) != 0) {
-      (**(code **)(_r_plf_funcs_p + 0xc))(3,param_3,"llc.c",0x1b4,*(code **)(_r_plf_funcs_p + 0xc));
+      (**(code **)(_r_plf_funcs_p + 0xc))(3,param_3,"llc.c",0x1b8,*(code **)(_r_plf_funcs_p + 0xc));
     }
     *(byte *)(iVar4 + 0x44) = *(byte *)(iVar4 + 0x44) & 0xfc | (byte)param_3;
   }
   if ((param_3 << 2 & 0xfffffff3) != 0) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(0xc,param_3,"llc.c",0x1b8,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(0xc,param_3,"llc.c",0x1bc,*(code **)(_r_plf_funcs_p + 0xc));
   }
   *(byte *)(iVar4 + 0x44) = *(byte *)(iVar4 + 0x44) & 0xf3 | (byte)(param_3 << 2);
                     /* WARNING: Could not recover jumptable at 0x00010766. Too many branches */

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
+ * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
+ * Upstream date: 2025-03-20 20:43:40 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
  * Source: libbtdm_app_flash -> ke_mem.o -> r_ke_free
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,11 +25,16 @@ void r_ke_free(short *param_1)
   short *psVar8;
   
   if (param_1 == (short *)0x0) {
-    r_assert_param(0,"ke_mem.c",0x19a);
+    r_assert_param(0,"ke_mem.c",0x19b);
   }
+  iVar4 = r_sdk_config_get_opts_ext();
   psVar8 = param_1 + -2;
+  if (((*(uint *)(iVar4 + 0x28) & 2) != 0) &&
+     (iVar4 = r_sdk_config_get_opts_ext(), *(byte *)(iVar4 + 0x2c) < 3)) {
+    r_ble_log_internal_x2(0x40250007,param_1,CONCAT22(param_1[-2],param_1[-1]));
+  }
   if (param_1[-2] != -0x7cc8) {
-    r_assert_param(param_1,"ke_mem.c",0x1a1);
+    r_assert_param(param_1,"ke_mem.c",0x1a3);
   }
   param_1[-2] = -0xff1;
   uVar1 = param_1[-1];
@@ -39,40 +44,40 @@ void r_ke_free(short *param_1)
     while (iVar4 = r_ke_mem_is_in_heap(uVar6,param_1), iVar4 == 0) {
       uVar6 = uVar6 + 1 & 0xff;
       if (uVar6 == 4) {
-_L69:
-        r_assert_err(0,"ke_mem.c",0x1c1);
-        psVar7 = (short *)0x0;
-        goto _L73;
+_L78:
+        r_assert_err(0,"ke_mem.c",0x1c3);
+        psVar2 = (short *)0x0;
+        goto _L79;
       }
     }
-    psVar2 = *(short **)(r_assert_err + (uVar6 + 4) * 4);
+    psVar2 = *(short **)(r_ble_log_internal_x2 + (uVar6 + 4) * 4);
     if (uVar6 == 4) {
-      if (psVar2 == (short *)0x0) goto _L69;
+      if (psVar2 == (short *)0x0) goto _L78;
       break;
     }
   } while (psVar2 == (short *)0x0);
+_L79:
   if (param_1 <= psVar2) {
-    r_assert_err(0,"ke_mem.c",0x1c2);
+    r_assert_err(0,"ke_mem.c",0x1c4);
   }
   psVar7 = (short *)0x0;
   do {
     psVar3 = psVar2;
     if (psVar3 == (short *)0x0) {
-_L73:
       *(short **)(psVar7 + 2) = psVar8;
       param_1[0] = 0;
       param_1[1] = 0;
       *(short **)(param_1 + 2) = psVar7;
       param_1[-1] = uVar1;
       param_1[-2] = -0x5aa6;
-_L78:
-                    /* WARNING: Could not recover jumptable at 0x000104ae. Too many branches */
+_L85:
+                    /* WARNING: Could not recover jumptable at 0x0001057e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
       (**(code **)(_r_osi_funcs_p + 0x18))();
       return;
     }
     if (*psVar3 != -0x5aa6) {
-      r_assert_err(0,"ke_mem.c",0x1ca);
+      r_assert_err(0,"ke_mem.c",0x1cc);
     }
     if ((short *)((uint)(ushort)psVar3[1] + (int)psVar3) == psVar8) {
       uVar6 = (uint)(ushort)psVar3[1] + (uint)uVar1;
@@ -87,11 +92,11 @@ _L78:
           *(short **)(iVar4 + 8) = psVar3;
         }
       }
-      goto _L78;
+      goto _L85;
     }
     if (psVar8 < psVar3) {
       if (psVar7 == (short *)0x0) {
-        r_assert_err(0,"ke_mem.c",0x1e5);
+        r_assert_err(0,"ke_mem.c",0x1e7);
       }
       *(short **)(psVar7 + 2) = psVar8;
       param_1[-2] = -0x5aa6;
@@ -108,7 +113,7 @@ _L78:
         *(short **)(psVar3 + 4) = psVar8;
         param_1[-1] = uVar1;
       }
-      goto _L78;
+      goto _L85;
     }
     psVar2 = *(short **)(psVar3 + 2);
     psVar7 = psVar3;

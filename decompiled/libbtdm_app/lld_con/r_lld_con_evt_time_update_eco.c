@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
+ * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
+ * Upstream date: 2025-03-20 20:43:40 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_evt_time_update_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,30 +15,31 @@
 void r_lld_con_evt_time_update_eco(int param_1)
 
 {
-  code *UNRECOVERED_JUMPTABLE;
   int iVar1;
-  uint uVar2;
+  int iVar2;
+  int iVar3;
+  uint uVar4;
   
+  iVar2 = *(int *)(&lld_con_env + param_1 * 4);
   r_lld_con_evt_time_update();
-  iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-  if (*(char *)(iVar1 + 0x15) == '\0') {
-    iVar1 = *(int *)(&lld_con_env + param_1 * 4);
-    uVar2 = (uint)*(ushort *)(iVar1 + 0x88);
-    if ((uint)*(ushort *)(iVar1 + 0x88) < (uint)*(ushort *)(iVar1 + 0x8a)) {
-      uVar2 = (uint)*(ushort *)(iVar1 + 0x8a);
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
+  iVar1 = _r_ip_funcs_p;
+  if (*(char *)(iVar3 + 0x15) == '\0') {
+    uVar4 = (uint)*(ushort *)(iVar2 + 0x88);
+    if ((uint)*(ushort *)(iVar2 + 0x88) < (uint)*(ushort *)(iVar2 + 0x8a)) {
+      uVar4 = (uint)*(ushort *)(iVar2 + 0x8a);
     }
-    uVar2 = (uVar2 + 0x96 + (uint)*(ushort *)(&fixed_tx_time + (uint)*(byte *)(iVar1 + 0x93) * 2)) *
+    uVar4 = (uVar4 + 0x96 + (uint)*(ushort *)(&fixed_tx_time + (uint)*(byte *)(iVar2 + 0x93) * 2)) *
             2 + (uint)_sdk_cfg_priv_opts;
-    if (uVar2 < 0x9c4) {
-      uVar2 = 0x9c4;
+    if (uVar4 < 0x9c4) {
+      uVar4 = 0x9c4;
     }
-    UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0x72c);
-    *(uint *)(iVar1 + 0x5c) = uVar2;
-    *(uint *)(iVar1 + 0x10) = uVar2;
+    *(uint *)(iVar2 + 0x5c) = uVar4;
+    *(uint *)(iVar2 + 0x10) = uVar4;
                     /* WARNING: Could not recover jumptable at 0x00011608. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (*UNRECOVERED_JUMPTABLE)
-              (4,*(undefined1 *)(iVar1 + 0x8e),*(undefined4 *)(iVar1 + 100),uVar2 & 0xffff,0);
+    (**(code **)(iVar1 + 0x72c))
+              (4,*(undefined1 *)(iVar2 + 0x8e),*(undefined4 *)(iVar2 + 100),uVar4 & 0xffff,0);
     return;
   }
   return;

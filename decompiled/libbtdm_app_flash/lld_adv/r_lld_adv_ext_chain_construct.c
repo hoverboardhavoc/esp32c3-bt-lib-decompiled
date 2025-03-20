@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
+ * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
+ * Upstream date: 2025-03-20 20:43:40 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_ext_chain_construct
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,12 +12,13 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_lld_adv_ext_chain_construct(int param_1)
+void r_lld_adv_ext_chain_construct(uint param_1)
 
 {
   byte bVar1;
   int iVar2;
   undefined1 uVar3;
+  int iVar4;
   
   iVar2 = *(int *)(&lld_adv_env + param_1 * 4);
   bVar1 = *(byte *)(iVar2 + 0x74);
@@ -31,7 +32,7 @@ void r_lld_adv_ext_chain_construct(int param_1)
   }
   else if ((bVar1 & 1) == 0) {
     if ((bVar1 & 2) == 0) {
-      r_assert_err(0,"lld_adv.c",0x667);
+      r_assert_err(0,"lld_adv.c",0x678);
     }
     else {
       r_lld_adv_ext_chain_scannable_construct(param_1);
@@ -42,6 +43,17 @@ void r_lld_adv_ext_chain_construct(int param_1)
   }
   *(uint *)(*(int *)(&lld_adv_env + param_1 * 4) + 0x10) =
        *(int *)(iVar2 + 0x6c) * 2 + (uint)_sdk_cfg_priv_opts;
+  iVar4 = r_sdk_config_get_opts_ext();
+  if ((*(uint *)(iVar4 + 0x28) & 4) != 0) {
+    iVar4 = r_sdk_config_get_opts_ext();
+    if (*(byte *)(iVar4 + 0x2c) < 3) {
+      r_ble_log_internal_x2
+                (0x40c00013,
+                 (uint)*(byte *)(iVar2 + 0x92) << 0x10 | (uint)*(byte *)(iVar2 + 0x91) << 8 |
+                 param_1,*(undefined4 *)(iVar2 + 0x6c));
+      return;
+    }
+  }
   return;
 }
 

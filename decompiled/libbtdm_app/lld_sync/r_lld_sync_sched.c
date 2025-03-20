@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
+ * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
+ * Upstream date: 2025-03-20 20:43:40 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
  * Source: libbtdm_app -> lld_sync.o -> r_lld_sync_sched
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,7 +37,7 @@ void r_lld_sync_sched(int param_1,char param_2)
     }
     else {
       if (0xff < (uint)*(byte *)(iVar3 + 0x16) + (uint)DAT_0001302d) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_sync.c",0x329,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_sync.c",0x337,*(code **)(_r_plf_funcs_p + 8));
       }
       *(byte *)(iVar3 + 0x16) = bVar1 + *(char *)(iVar3 + 0x16);
     }
