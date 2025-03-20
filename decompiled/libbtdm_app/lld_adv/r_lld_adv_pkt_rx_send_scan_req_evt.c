@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * Upstream date: 2025-03-20 20:31:24 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_pkt_rx_send_scan_req_evt
  *
  * (C) Espressif, Apache License 2.0.
@@ -72,14 +72,14 @@ void r_lld_adv_pkt_rx_send_scan_req_evt(int param_1)
     puVar8[1] = bVar3;
     _uStack_30 = CONCAT11(bVar10,uStack_30);
     memcpy(puVar8 + 2,auStack_34,6);
-                    /* WARNING: Could not recover jumptable at 0x00013a3c. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00013a3a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_modules_funcs_p + 0xe0))(puVar8);
     return;
   }
-                    /* WARNING: Could not recover jumptable at 0x00013922. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00013920. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x858);
+  (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x83a);
   return;
 }
 

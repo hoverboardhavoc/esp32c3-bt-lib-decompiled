@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * Upstream date: 2025-03-20 20:31:24 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
  * Source: libbtdm_app -> ke_task.o -> r_ke_task_handler_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,13 +21,13 @@ undefined4 r_ke_task_handler_get(undefined4 param_1,uint param_2)
   
   uVar1 = param_2 & 0xff;
   if (0x1e < uVar1) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(uVar1,"ke_task.c",0x151,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(uVar1,"ke_task.c",0x14e,*(code **)(_r_plf_funcs_p + 0xc));
   }
   piVar2 = *(int **)(&ke_task_env + uVar1 * 4);
   if ((*(ushort *)(piVar2 + 2) != 0) &&
      (((param_2 >> 8 < (uint)*(ushort *)(piVar2 + 2) ||
        ((**(code **)(_r_plf_funcs_p + 0xc))
-                  (param_2,param_1,"ke_task.c",0x159,*(code **)(_r_plf_funcs_p + 0xc)),
+                  (param_2,param_1,"ke_task.c",0x156,*(code **)(_r_plf_funcs_p + 0xc)),
        param_2 >> 8 < (uint)*(ushort *)(piVar2 + 2))) && (*piVar2 != 0)))) {
                     /* WARNING: Could not recover jumptable at 0x000103b0. Too many branches */
                     /* WARNING: Treating indirect jump as call */

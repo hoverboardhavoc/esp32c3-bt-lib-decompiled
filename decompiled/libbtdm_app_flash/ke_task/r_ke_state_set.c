@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * Upstream date: 2025-03-20 20:31:24 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
  * Source: libbtdm_app_flash -> ke_task.o -> r_ke_state_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,50 +17,48 @@ void r_ke_state_set(uint param_1,uint param_2)
 {
   uint uVar1;
   byte *pbVar2;
+  int unaff_s1;
   int iVar3;
-  int iVar4;
-  uint extraout_a1;
+  int *piVar4;
   uint uVar5;
+  uint unaff_s3;
+  uint unaff_s4;
   
   uVar5 = param_1 & 0xff;
   uVar1 = param_1 >> 8;
-  if (uVar5 < 0x1f) goto _L83;
-  r_assert_err(0,"ke_task.c",0x1b5);
-  do {
-    param_1 = r_assert_param(uVar5,uVar1,"ke_task.c",0x1bc);
+  if (uVar5 < 0x1f) {
+    piVar4 = (int *)(&ke_task_env + uVar5 * 4);
+    unaff_s1 = *piVar4;
+    if (unaff_s1 == 0) goto _L85;
+    if (uVar1 < *(ushort *)(unaff_s1 + 8)) goto _L82;
+  }
+  else {
+    r_assert_err(0,"ke_task.c",0x1b2);
+_L85:
+    r_assert_param(uVar5,uVar1,"ke_task.c",0x1b9);
+    piVar4 = (int *)(uint)_DAT_00000008;
     ebreak();
-    param_2 = extraout_a1;
-_L83:
-    iVar3 = *(int *)(&ke_task_env + uVar5 * 4);
-  } while (iVar3 == 0);
-  if (*(ushort *)(iVar3 + 8) <= uVar1) {
-    r_assert_param(uVar1,"ke_task.c",0x1bd);
+    param_1 = unaff_s3;
+    param_2 = unaff_s4;
   }
-  iVar4 = r_sdk_config_get_opts_ext();
-  if (((*(uint *)(iVar4 + 0x28) & 2) != 0) &&
-     (iVar4 = r_sdk_config_get_opts_ext(), *(byte *)(iVar4 + 0x2c) < 3)) {
-    r_ble_log_internal_x1(0x4065000e,param_2 << 0x10 | param_1);
+  r_assert_param(uVar1,"ke_task.c",0x1ba,piVar4);
+  if (*(ushort *)(unaff_s1 + 8) <= uVar1) {
+    return;
   }
-  if (uVar1 < *(ushort *)(iVar3 + 8)) {
-    pbVar2 = (byte *)(uVar1 + *(int *)(iVar3 + 4));
-    if (pbVar2 == (byte *)0x0) {
-      r_assert_err(0,"ke_task.c",0x1c6);
-    }
-    if (*pbVar2 != param_2) {
-      *pbVar2 = (byte)param_2;
-      while (iVar3 = r_ke_queue_extract(&ke_env,0x10000,param_1), iVar3 != 0) {
-        (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
-        r_co_list_push_back(&ke_env,iVar3);
-        (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
-        iVar4 = r_sdk_config_get_opts_ext();
-        if (((*(uint *)(iVar4 + 0x28) & 2) != 0) &&
-           (iVar4 = r_sdk_config_get_opts_ext(), *(byte *)(iVar4 + 0x2c) < 3)) {
-          r_ble_log_internal_x1(0x4045000c,iVar3);
-        }
-        r_ke_event_set(3);
-      }
-      return;
-    }
+_L82:
+  pbVar2 = (byte *)(uVar1 + *(int *)(unaff_s1 + 4));
+  if (pbVar2 == (byte *)0x0) {
+    r_assert_err(0,"ke_task.c",0x1c2);
+  }
+  if (*pbVar2 == param_2) {
+    return;
+  }
+  *pbVar2 = (byte)param_2;
+  while (iVar3 = r_ke_queue_extract(&ke_env,0x10000,param_1), iVar3 != 0) {
+    (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
+    r_co_list_push_back(&ke_env,iVar3);
+    (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
+    r_ke_event_set(3);
   }
   return;
 }

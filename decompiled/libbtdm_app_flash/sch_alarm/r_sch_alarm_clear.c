@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * Upstream date: 2025-03-20 20:31:24 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
  * Source: libbtdm_app_flash -> sch_alarm.o -> r_sch_alarm_clear
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,27 +20,20 @@ undefined4 r_sch_alarm_clear(int param_1)
   
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   if (param_1 == _sch_alarm_env) {
-    r_co_list_pop_front(&sch_alarm_env);
+    r_co_list_pop_front();
     if (_sch_alarm_env != 0) {
       r_sch_alarm_prog();
     }
   }
   else {
-    iVar2 = r_co_list_extract(&sch_alarm_env,param_1);
+    iVar2 = r_co_list_extract(&sch_alarm_env);
     if (iVar2 == 0) {
       uVar1 = 2;
-      goto _L35;
+      goto _L32;
     }
   }
   uVar1 = 0;
-_L35:
-  iVar2 = r_sdk_config_get_opts_ext();
-  if ((*(uint *)(iVar2 + 0x28) & 1) != 0) {
-    iVar2 = r_sdk_config_get_opts_ext();
-    if (*(byte *)(iVar2 + 0x2c) < 3) {
-      r_ble_log_internal_x2(0x40240001,param_1,uVar1);
-    }
-  }
+_L32:
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   return uVar1;
 }

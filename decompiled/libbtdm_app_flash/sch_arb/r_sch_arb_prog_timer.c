@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * Upstream date: 2025-03-20 20:31:24 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
  * Source: libbtdm_app_flash -> sch_arb.o -> r_sch_arb_prog_timer
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,36 +17,28 @@ void r_sch_arb_prog_timer(void)
 {
   uint uVar1;
   uint uVar2;
-  uint uVar3;
-  int iVar4;
   int extraout_a1;
+  uint uVar3;
   
-  uVar3 = r_rwip_time_get();
-  uVar2 = extraout_a1 + 400;
-  if (0x270 < uVar2) {
-    uVar2 = extraout_a1 - 0xe1;
-    uVar3 = uVar3 + 1 & 0xfffffff;
+  uVar1 = r_rwip_time_get();
+  uVar3 = extraout_a1 + 400;
+  if (0x270 < uVar3) {
+    uVar3 = extraout_a1 - 0xe1;
+    uVar1 = uVar1 + 1 & 0xfffffff;
   }
   if (_sch_arb_env == 0) {
-    r_rwip_timer_hus_set(0xffffffff,0);
-    uVar2 = 0;
-    uVar3 = 0xffffffff;
+    uVar3 = 0;
+    uVar1 = 0xffffffff;
   }
   else {
-    uVar1 = *(int *)(_sch_arb_env + 4) - (uint)rwip_prog_delay & 0xfffffff;
-    if (((uVar1 - uVar3 & 0xfffffff) < 0x7ffffff) &&
-       ((uVar1 != uVar3 || (uVar3 = uVar1, uVar2 < *(uint *)(_sch_arb_env + 8))))) {
-      uVar3 = uVar1;
-      uVar2 = *(uint *)(_sch_arb_env + 8);
+    uVar2 = *(int *)(_sch_arb_env + 4) - (uint)rwip_prog_delay & 0xfffffff;
+    if (((uVar2 - uVar1 & 0xfffffff) < 0x7ffffff) &&
+       ((uVar2 != uVar1 || (uVar1 = uVar2, uVar3 < *(uint *)(_sch_arb_env + 8))))) {
+      uVar1 = uVar2;
+      uVar3 = *(uint *)(_sch_arb_env + 8);
     }
-    r_rwip_timer_hus_set(uVar3,uVar2);
   }
-  iVar4 = r_sdk_config_get_opts_ext();
-  if (((*(uint *)(iVar4 + 0x28) & 1) != 0) &&
-     (iVar4 = r_sdk_config_get_opts_ext(), *(byte *)(iVar4 + 0x2c) < 2)) {
-    r_ble_log_internal_x2(0x20040003,uVar3,uVar2);
-    return;
-  }
+  r_rwip_timer_hus_set(uVar1,uVar3);
   return;
 }
 

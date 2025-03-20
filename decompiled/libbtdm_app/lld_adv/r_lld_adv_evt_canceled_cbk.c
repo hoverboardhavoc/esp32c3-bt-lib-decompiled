@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * Upstream date: 2025-03-20 20:31:24 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_evt_canceled_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,11 +23,11 @@ void r_lld_adv_evt_canceled_cbk(int param_1)
   
   if (param_1 == 0) {
     UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
-    uVar4 = 0x9bb;
+    uVar4 = 0x998;
   }
   else {
     if (*(char *)(param_1 + 0x89) != '\0') {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x989,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x966,*(code **)(_r_plf_funcs_p + 8));
     }
     cVar1 = rwip_priority;
     if ((*(ushort *)(param_1 + 0x74) & 8) == 0) {
@@ -60,15 +60,15 @@ void r_lld_adv_evt_canceled_cbk(int param_1)
       return;
     }
     if (*(int *)(param_1 + 0x58) != -1) {
-                    /* WARNING: Could not recover jumptable at 0x000142d2. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000142d0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
       (**(code **)(_r_ip_funcs_p + 0x1a0))(*(undefined1 *)(param_1 + 0x87),1,0x3c);
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
-    uVar4 = 0x9b4;
+    uVar4 = 0x991;
   }
-                    /* WARNING: Could not recover jumptable at 0x0001436c. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001436a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*UNRECOVERED_JUMPTABLE)(0,"lld_adv.c",uVar4);
   return;

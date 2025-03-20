@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * Upstream date: 2025-03-20 20:31:24 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
  * Source: libbtdm_app -> vshci_task.o -> hci_vendor_ble_qa_test_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,10 +25,10 @@ undefined4 hci_vendor_ble_qa_test_cmd_handler(byte *param_1,undefined4 param_2,u
     iVar1 = 0;
     do {
       if (*puVar3 == (ushort)*param_1) {
-        if ((code *)(&PTR_hci_vs_ble_qa_test_en_cmd_handler_00011170)[iVar1 * 2] != (code *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x000100a0. Too many branches */
+        if ((code *)(&PTR_hci_vs_ble_qa_test_en_cmd_handler_0001111c)[iVar1 * 2] != (code *)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000100e8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-          uVar2 = (*(code *)(&PTR_hci_vs_ble_qa_test_en_cmd_handler_00011170)[iVar1 * 2])
+          uVar2 = (*(code *)(&PTR_hci_vs_ble_qa_test_en_cmd_handler_0001111c)[iVar1 * 2])
                             (param_1 + 1);
           return uVar2;
         }

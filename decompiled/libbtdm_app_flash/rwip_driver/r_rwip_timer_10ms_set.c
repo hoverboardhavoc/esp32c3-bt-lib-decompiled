@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * Upstream date: 2025-03-20 20:31:24 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
  * Source: libbtdm_app_flash -> rwip_driver.o -> r_rwip_timer_10ms_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,7 +35,7 @@ void r_rwip_timer_10ms_set(uint param_1)
     _DAT_6003100c = _DAT_6003100c | 0x200;
     _DAT_600310e4 = param_1;
   }
-                    /* WARNING: Could not recover jumptable at 0x00010d26. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010c4c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))();
   return;

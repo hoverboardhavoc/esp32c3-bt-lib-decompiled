@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
+ * Upstream date: 2025-03-20 20:31:24 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
  * Source: libbtdm_app_flash -> lld_per_adv.o -> r_lld_per_adv_evt_start_chm_upd
  *
  * (C) Espressif, Apache License 2.0.
@@ -68,7 +68,7 @@ void r_lld_per_adv_evt_start_chm_upd(int param_1)
     iVar6 = uVar5 * 0xe;
     sVar2 = *(short *)(iVar7 + iVar6 + 0xc);
     if (sVar2 == 0) {
-      r_assert_err(0,"lld_per_adv.c",0x303);
+      r_assert_err(0,"lld_per_adv.c",0x2f9);
     }
     iVar7 = *(ushort *)(param_1 + 0x4c) + 10;
     iVar11 = iVar7 * 0x10000;
