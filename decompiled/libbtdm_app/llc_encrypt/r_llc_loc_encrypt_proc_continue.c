@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
+ * Upstream date: 2025-03-31 11:18:40 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
  * Source: libbtdm_app -> llc_encrypt.o -> r_llc_loc_encrypt_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -152,7 +152,7 @@ _L51:
     goto _L52;
   default:
     (**(code **)(_r_plf_funcs_p + 0xc))
-              (param_1,param_2,"llc_encrypt.c",0x28b,*(code **)(_r_plf_funcs_p + 0xc));
+              (param_1,param_2,"llc_encrypt.c",0x2ac,*(code **)(_r_plf_funcs_p + 0xc));
     param_3 = 0x1f;
     goto _L38;
   case 8:

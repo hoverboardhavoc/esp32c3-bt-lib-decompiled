@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
+ * Upstream date: 2025-03-31 11:18:40 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
  * Source: libbtdm_app -> llc_encrypt.o -> r_llc_ll_start_enc_rsp_ack_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void r_llc_ll_start_enc_rsp_ack_handler(undefined4 param_1)
   
   iVar1 = (**(code **)(_r_ip_funcs_p + 0x678))(1,*(code **)(_r_ip_funcs_p + 0x678));
   if (iVar1 == 3) {
-                    /* WARNING: Could not recover jumptable at 0x00010b30. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010c4c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_ip_funcs_p + 0x59c))(param_1,0x11,0);
     return;

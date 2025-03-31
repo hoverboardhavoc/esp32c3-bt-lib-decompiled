@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
  * Upstream date: 2025-03-31 11:18:40 +0800
  * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
- * Source: libbtdm_app -> llc_llcp.o -> lld_llcp_rx_ind_handler_wrapper
+ * Source: libbtdm_app -> vshci_task.o -> hci_vs_ble_qa_set_bb_agc_gain_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -12,12 +12,19 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void lld_llcp_rx_ind_handler_wrapper(void)
+undefined4
+hci_vs_ble_qa_set_bb_agc_gain_cmd_handler(undefined1 param_1,char *param_2,undefined4 param_3)
 
 {
-                    /* WARNING: Could not recover jumptable at 0x0001084e. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_ip_funcs_p + 0x750))();
-  return;
+  undefined1 *puVar1;
+  
+  puVar1 = (undefined1 *)
+           (**(code **)(_r_modules_funcs_p + 200))
+                     (0x1101,param_3,0xfd13,2,*(code **)(_r_modules_funcs_p + 200));
+  bt_bb_set_max_gain(*param_2 != '\0',param_2[1]);
+  puVar1[1] = param_1;
+  *puVar1 = 0;
+  (**(code **)(_r_ip_funcs_p + 0x8c))(puVar1,*(code **)(_r_ip_funcs_p + 0x8c));
+  return 0;
 }
 

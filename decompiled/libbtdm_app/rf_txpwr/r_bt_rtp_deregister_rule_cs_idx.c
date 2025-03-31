@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
+ * Upstream date: 2025-03-31 11:18:40 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
  * Source: libbtdm_app -> rf_txpwr.o -> r_bt_rtp_deregister_rule_cs_idx
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,8 +17,8 @@ undefined4 r_bt_rtp_deregister_rule_cs_idx(uint param_1)
 {
   if (param_1 < 0xc) {
     (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
-    if (*(char *)(param_1 + 0x11020) < '\0') {
-      *(undefined1 *)(param_1 + 0x11020) = 0;
+    if (*(char *)(param_1 + 0x11024) < '\0') {
+      *(undefined1 *)(param_1 + 0x11024) = 0;
       g_rtp_rule_db = g_rtp_rule_db + -1;
     }
     (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));

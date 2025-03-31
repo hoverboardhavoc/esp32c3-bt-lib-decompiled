@@ -3,7 +3,7 @@
  * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
  * Upstream date: 2025-03-31 11:18:40 +0800
  * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
- * Source: libbtdm_app -> vshci_task.o -> hci_vs_ble_qa_enable_cca_cmd_handler
+ * Source: libbtdm_app -> vshci_task.o -> hci_vs_ble_qa_set_rx_sense_thresh_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
  * Derivative work (this file): mechanical decompile via Ghidra (NSA, Apache 2.0).
@@ -13,26 +13,19 @@
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 undefined4
-hci_vs_ble_qa_enable_cca_cmd_handler(undefined1 param_1,undefined1 *param_2,undefined4 param_3)
+hci_vs_ble_qa_set_rx_sense_thresh_cmd_handler(undefined1 param_1,char *param_2,undefined4 param_3)
 
 {
   undefined1 *puVar1;
-  int iVar2;
-  uint uVar3;
+  uint uVar2;
   
   puVar1 = (undefined1 *)
            (**(code **)(_r_modules_funcs_p + 200))
                      (0x1101,param_3,0xfd13,2,*(code **)(_r_modules_funcs_p + 200));
-  iVar2 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
-  if (*(char *)(iVar2 + 0x19) == '\x01') {
-    uVar3 = (int)(char)param_2[1] >> 0x1f;
-    bt_bb_tx_cca_set(*param_2,(uVar3 - ((int)(char)param_2[1] ^ uVar3)) + 0x100,0,0,0,0,0,0);
-    *puVar1 = 0;
-  }
-  else {
-    *puVar1 = 1;
-  }
+  uVar2 = (int)param_2[2] >> 0x1f;
+  bt_bb_set_rx_sense(*param_2 != '\0',param_2[1],uVar2 - ((int)param_2[2] ^ uVar2) & 0xff);
   puVar1[1] = param_1;
+  *puVar1 = 0;
   (**(code **)(_r_ip_funcs_p + 0x8c))(puVar1,*(code **)(_r_ip_funcs_p + 0x8c));
   return 0;
 }

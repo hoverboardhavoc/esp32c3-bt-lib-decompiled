@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
+ * Upstream date: 2025-03-31 11:18:40 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_evt_start_cbk_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,10 +38,10 @@ void r_lld_con_evt_start_cbk_eco(int param_1)
                *(undefined4 *)(param_1 + 4));
   }
   iVar6 = (*(byte *)(param_1 + 0x8e) + 0x18) * 2;
-  if ((((&DAT_00015031)[iVar6] == '\0') || (*(char *)(param_1 + 0x46) != (&DAT_00015031)[iVar6])) ||
+  if ((((&DAT_00015061)[iVar6] == '\0') || (*(char *)(param_1 + 0x46) != (&DAT_00015061)[iVar6])) ||
      (uVar13 = (uint)*(ushort *)(param_1 + 0x7c) + (uint)*(ushort *)(param_1 + 0x7e) & 0xffff,
      0x7ffe < (uVar13 - *(ushort *)(param_1 + 0x44) & 0xffff))) goto _L573;
-  bVar1 = (&DAT_00015030)[iVar6];
+  bVar1 = (&DAT_00015060)[iVar6];
   iVar7 = r_emi_get_mem_addr_by_offset(0x1400);
   iVar12 = (uint)bVar1 * 0xe;
   if (*(short *)(iVar7 + iVar12) < 0) goto _L573;
@@ -49,7 +49,7 @@ void r_lld_con_evt_start_cbk_eco(int param_1)
   sVar3 = *(short *)(iVar7 + iVar12 + 4);
   iVar7 = r_emi_get_mem_addr_by_offset(0x1400);
   uVar4 = *(ushort *)(iVar12 + 2 + iVar7);
-  uVar5 = (ushort)(byte)(&DAT_00015031)[iVar6];
+  uVar5 = (ushort)(byte)(&DAT_00015061)[iVar6];
   if (uVar5 == 1) {
     uVar5 = 10;
 _L592:
@@ -76,7 +76,7 @@ _L592:
       ets_printf("llcp check: %u %u %u %u %u\n",uVar13,uVar2,*puVar10,
                  *(undefined1 *)(param_1 + 0x46),*(undefined2 *)(param_1 + 0x44));
     }
-    *(undefined2 *)(&DAT_00015030 + (*(byte *)(param_1 + 0x8e) + 0x18) * 2) = 0;
+    *(undefined2 *)(&DAT_00015060 + (*(byte *)(param_1 + 0x8e) + 0x18) * 2) = 0;
   }
   else {
     iVar6 = *(ushort *)(param_1 + 0x72) + 9 + uVar13;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * https://github.com/espressif/esp32c3-bt-lib/commit/aaf54a5f7e122db70b4a7ff02d2617858d43f649
- * Upstream date: 2025-03-20 20:31:24 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(d74042a8)
+ * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
+ * Upstream date: 2025-03-31 11:18:40 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
  * Source: libbtdm_app -> rf_txpwr.o -> ble_txpwr_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,52 +30,60 @@ uint ble_txpwr_get(uint param_1,int param_2)
   if ((*(byte *)(iVar1 + 0xc) & 1) == 0) {
     return 0xff;
   }
-  if (param_1 == 2) {
-    uVar3 = 0xff;
-    uVar2 = 8;
-    pcVar4 = *(code **)(_r_modules_funcs_p + 0x208);
-    goto _L32;
-  }
-  if ((int)param_1 < 3) {
-    if (param_1 == 1) {
-      if (param_2 == 0xffff) {
-        uVar3 = 0xff;
-        uVar2 = 4;
-        pcVar4 = *(code **)(_r_modules_funcs_p + 0x208);
-        goto _L32;
-      }
+  if (param_1 == 1) {
+    iVar1 = adv_itf_version_is_legacy();
+    if (iVar1 == 0) {
+_L17:
       uVar2 = 0;
-      goto _L35;
+      if (param_2 != 0xffff) {
+_L39:
+        uVar3 = llm_hdl_to_id(uVar2);
+        iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
+        if (*(byte *)(iVar1 + 0xd) <= uVar3) {
+          return 0xff;
+        }
+        pcVar4 = *(code **)(_r_modules_funcs_p + 0x208);
+        goto _L38;
+      }
     }
-_L19:
     uVar3 = 0xff;
+    uVar2 = 4;
     pcVar4 = *(code **)(_r_modules_funcs_p + 0x208);
   }
   else {
-    if (param_1 == 3) {
+    if (param_1 == 2) {
       uVar3 = 0xff;
-      uVar2 = 0xe;
+      uVar2 = 8;
       pcVar4 = *(code **)(_r_modules_funcs_p + 0x208);
-      goto _L32;
+      goto _L36;
     }
-    if (param_1 != 4) goto _L19;
-    if (param_2 == 0xffff) {
-      uVar3 = 0xff;
-      uVar2 = 2;
-      pcVar4 = *(code **)(_r_modules_funcs_p + 0x208);
-      goto _L32;
+    if ((int)param_1 < 3) {
+      if (param_1 == 1) goto _L17;
     }
-    uVar2 = 3;
-_L35:
-    uVar3 = llm_hdl_to_id(uVar2);
-    iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-    if (*(byte *)(iVar1 + 0xd) <= uVar3) {
-      return 0xff;
+    else {
+      if (param_1 == 3) {
+        uVar3 = 0xff;
+        uVar2 = 0xe;
+        pcVar4 = *(code **)(_r_modules_funcs_p + 0x208);
+        goto _L36;
+      }
+      if (param_1 == 4) {
+        uVar2 = 3;
+        if (param_2 == 0xffff) {
+          uVar3 = 0xff;
+          uVar2 = 2;
+          pcVar4 = *(code **)(_r_modules_funcs_p + 0x208);
+          goto _L36;
+        }
+        goto _L39;
+      }
     }
+    uVar3 = 0xff;
     pcVar4 = *(code **)(_r_modules_funcs_p + 0x208);
+_L38:
+    uVar2 = 0xff;
   }
-  uVar2 = 0xff;
-_L32:
+_L36:
   uVar3 = (*pcVar4)(uVar2,uVar3,pcVar4);
   iVar1 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
   if ((*(uint *)(iVar1 + 0xc) >> 0x10 & 0xff) == 1) {

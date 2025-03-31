@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
+ * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
+ * Upstream date: 2025-03-31 11:18:40 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
  * Source: libbtdm_app -> lld.o -> r_lld_rpa_renew_evt_canceled_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ void r_lld_rpa_renew_evt_canceled_cbk(int param_1)
   
   iVar1 = _r_ip_funcs_p;
   if (_lld_rpa_renew_env == 0) {
-    uVar2 = 0x4a2;
+    uVar2 = 0x4a4;
     UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
   }
   else {
@@ -31,7 +31,7 @@ void r_lld_rpa_renew_evt_canceled_cbk(int param_1)
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
-    uVar2 = 0x49d;
+    uVar2 = 0x49f;
   }
                     /* WARNING: Could not recover jumptable at 0x000116b2. Too many branches */
                     /* WARNING: Treating indirect jump as call */
