@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
- * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
- * Upstream date: 2025-01-03 16:50:09 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_process_pkt_rx_ext_adv_ind
  *
  * (C) Espressif, Apache License 2.0.
@@ -54,12 +54,12 @@ void r_lld_scan_process_pkt_rx_ext_adv_ind(int param_1,int param_2,char *param_3
   param_3[1] = (char)uVar12;
   if (uVar12 == 1) {
     bVar10 = *(byte *)(iVar4 + 0x6d) | 1;
-_L370:
+_L378:
     *(byte *)(iVar4 + 0x6d) = bVar10;
   }
   else if (uVar12 == 2) {
     bVar10 = *(byte *)(iVar4 + 0x6d) | 2;
-    goto _L370;
+    goto _L378;
   }
   *(undefined1 *)(iVar4 + 0x6a) = 0;
   if (*param_3 == '\0') {
@@ -117,14 +117,14 @@ _L370:
       iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
       if ((*(ushort *)(iVar16 + 2 + iVar6) >> 9 & 1) == 0) {
         if (2 < (auStack_34[0] >> 0x15 & 7)) {
-_L336:
+_L344:
           *(undefined1 *)(iVar4 + 0x6e) = 0xff;
           return;
         }
         iVar6 = (**(code **)(_r_ip_funcs_p + 0x224))
                           (iVar4 + 0x48,param_2,*(code **)(_r_ip_funcs_p + 0x224));
         uVar11 = 1;
-        if (iVar6 == 0) goto _L336;
+        if (iVar6 == 0) goto _L344;
       }
       else {
         *(uint *)(iVar4 + 0x2c) = auStack_34[0];
@@ -144,7 +144,7 @@ _L336:
     }
     if ((int)(uVar14 << 0x11) < 0) {
       if ((*(char *)(iVar4 + 0x3b) != '\0') && ((param_3[1] != '\0' || ((int)(uVar14 << 0x13) < 0)))
-         ) goto _L342;
+         ) goto _L350;
       puVar9 = (undefined1 *)
                (**(code **)(_r_plf_funcs_p + 0xbc))
                          (sVar1 + sVar15,*(code **)(_r_plf_funcs_p + 0xbc));
@@ -155,7 +155,7 @@ _L336:
     }
     *(undefined1 *)(iVar4 + 0x73) = uVar11;
   }
-_L342:
+_L350:
   *(char *)(iVar4 + 0x6f) = param_3[8];
   param_3[5] = '\0';
   return;

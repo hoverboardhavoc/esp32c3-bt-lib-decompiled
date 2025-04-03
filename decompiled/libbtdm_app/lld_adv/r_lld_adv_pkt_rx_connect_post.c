@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_pkt_rx_connect_post
  *
  * (C) Espressif, Apache License 2.0.
@@ -47,11 +47,11 @@ void r_lld_adv_pkt_rx_connect_post
   uVar6 = (uint)(*(ushort *)(iVar4 + iVar11 + 6) >> 0xe);
   uVar8 = (0x270 - (uVar1 & 0x3ff)) + (uint)*(ushort *)(&lld_exp_sync_pos_tab + uVar6 * 2) * -2;
   uVar10 = (uint)(short)uVar8;
-  if (((DAT_0001707c & 8) != 0) && ((uVar6 - 2 & 0xff) < 2)) {
-    uVar10 = (int)(((uVar8 & 0xffff) + (uint)_DAT_0001707e * -2) * 0x10000) >> 0x10;
+  if (((DAT_00017078 & 8) != 0) && ((uVar6 - 2 & 0xff) < 2)) {
+    uVar10 = (int)(((uVar8 & 0xffff) + (uint)_DAT_0001707a * -2) * 0x10000) >> 0x10;
   }
   if (0x751 < (uVar10 + 0x4e1 & 0xffff)) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x731,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x722,*(code **)(_r_plf_funcs_p + 8));
   }
   for (; (int)uVar10 < 0; uVar10 = (int)(((uVar10 & 0xffff) + 0x271) * 0x10000) >> 0x10) {
     uVar2 = uVar2 - 1 & 0xfffffff;
@@ -93,7 +93,7 @@ void r_lld_adv_pkt_rx_connect_post
   *(short *)(puVar3 + 0x2c) = (short)uVar10;
   iVar4 = (*pcVar9)(0x1000,pcVar9);
   puVar3[0x34] = (byte)((ushort)*(undefined2 *)(iVar4 + iVar11 + 6) >> 0xe);
-                    /* WARNING: Could not recover jumptable at 0x0001335a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00013462. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0xe0))(puVar3);
   return;

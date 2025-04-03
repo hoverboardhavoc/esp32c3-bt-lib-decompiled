@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> llm_adv.o -> r_llm_adv_con_len_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,10 +18,10 @@ undefined4 r_llm_adv_con_len_check(int param_1,int param_2)
   int iVar3;
   
   if ((*(ushort *)(param_1 + 2) & 0x10) != 0) {
-    r_assert_err(0,"llm_adv.c",0xc16);
+    r_assert_err(0,"llm_adv.c",0xc17);
   }
   if ((*(ushort *)(param_1 + 2) & 1) == 0) {
-    r_assert_err(0,"llm_adv.c",0xc17);
+    r_assert_err(0,"llm_adv.c",0xc18);
   }
   iVar2 = 6;
   if ((*(ushort *)(param_1 + 2) & 4) != 0) {

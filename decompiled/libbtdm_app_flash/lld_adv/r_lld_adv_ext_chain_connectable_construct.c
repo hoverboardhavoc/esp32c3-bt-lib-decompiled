@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_ext_chain_connectable_construct
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,7 +33,7 @@ void r_lld_adv_ext_chain_connectable_construct(int param_1)
   iVar5 = r_lld_adv_ext_pkt_prepare(param_1,uVar4,7,uVar7,1,*(ushort *)(iVar3 + 0x74) >> 2 & 1,1,0);
   *(int *)(iVar3 + 0x6c) = iVar5 + *(int *)(iVar3 + 0x6c);
   if (sVar2 != 0) {
-    r_assert_err(0,"lld_adv.c",0x636);
+    r_assert_err(0,"lld_adv.c",0x627);
   }
   uVar10 = (uint)*(byte *)(iVar3 + 0x91) << 10;
   if ((uVar10 & 0x30000) != 0) {

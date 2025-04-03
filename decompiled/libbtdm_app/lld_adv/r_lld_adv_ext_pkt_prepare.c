@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_ext_pkt_prepare
  *
  * (C) Espressif, Apache License 2.0.
@@ -64,18 +64,18 @@ void r_lld_adv_ext_pkt_prepare
     uVar10 = uVar3 + 3;
   }
   if (in_stack_00000000 == 0) {
-    if (in_stack_00000004 != 0) goto _L473;
-    if (uVar10 == 0) goto _L476;
+    if (in_stack_00000004 != 0) goto _L474;
+    if (uVar10 == 0) goto _L477;
   }
   else {
     uVar10 = uVar10 + 0x12;
     if (in_stack_00000004 != 0) {
-_L473:
+_L474:
       uVar10 = uVar10 + 1;
     }
   }
   uVar10 = uVar10 + 1 & 0xff;
-_L476:
+_L477:
   if ((0xfe < *in_stack_00000010 + uVar10) && (param_8 == 0)) {
     if (uVar10 == 0) {
       uVar10 = 1;

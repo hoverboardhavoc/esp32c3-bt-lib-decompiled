@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -54,7 +54,7 @@ undefined4 r_lld_scan_start(char param_1,undefined2 *param_2)
         pvVar12 = (void *)r_ke_malloc(0x84,0);
         *piVar10 = (int)pvVar12;
         if (pvVar12 == (void *)0x0) {
-          r_assert_err("lld_scan.c",0xb66);
+          r_assert_err("lld_scan.c",0xb75);
         }
         else {
           memset(pvVar12,0,0x84);
@@ -88,7 +88,7 @@ undefined4 r_lld_scan_start(char param_1,undefined2 *param_2)
         pvVar12 = (void *)r_ke_malloc(0x84,0);
         piVar10[1] = (int)pvVar12;
         if (pvVar12 == (void *)0x0) {
-          r_assert_err("lld_scan.c",0xb92);
+          r_assert_err("lld_scan.c",0xba1);
         }
         else {
           memset(pvVar12,0,0x84);
@@ -271,7 +271,7 @@ undefined4 r_lld_scan_start(char param_1,undefined2 *param_2)
           bVar2 = *(byte *)(iVar20 + 0x3a);
           if (bVar2 == 9) {
             uVar15 = 6;
-_L942:
+_L950:
             unaff_s3 = (byte *)r_bt_rf_coex_st_param_get(uVar15);
           }
           else {
@@ -281,14 +281,14 @@ _L942:
               }
               else {
                 uVar15 = 8;
-                if (bVar2 != 0xb) goto _L848;
+                if (bVar2 != 0xb) goto _L856;
               }
-              goto _L942;
+              goto _L950;
             }
             uVar15 = 5;
-            if (bVar2 == 8) goto _L942;
-_L848:
-            r_assert_err(0,"lld_scan.c",0xc40);
+            if (bVar2 == 8) goto _L950;
+_L856:
+            r_assert_err(0,"lld_scan.c",0xc4f);
           }
           if (unaff_s3 != (byte *)0x0) {
             bVar2 = unaff_s3[1];
@@ -426,7 +426,7 @@ _L848:
                 uVar11 = uVar11 + (uint)*(ushort *)(iVar20 + 0x32) * 2 & 0xfffffff;
               }
               else {
-                r_assert_err(0,"lld_scan.c",0xc92);
+                r_assert_err(0,"lld_scan.c",0xca1);
               }
             }
             piVar23 = piVar23 + 1;
@@ -439,7 +439,7 @@ _L848:
         }
       } while( true );
     }
-    r_assert_err("lld_scan.c",0xc9e);
+    r_assert_err("lld_scan.c",0xcad);
   }
   return 0xc;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_process_pkt_rx_adv_rep
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,7 +37,7 @@ void r_lld_scan_process_pkt_rx_adv_rep(uint param_1,undefined1 param_2,int param
     iVar12 = param_3 + 2;
     uVar4 = *(ushort *)(iVar9 + iVar12);
     if (((uVar4 & 0x10) == 0) || ((*(byte *)(iVar7 + 0x6d) & 4) != 0)) {
-_L157:
+_L165:
       if ((*(char *)(iVar7 + 0x6d) == '\x15') || ((*(ushort *)(param_4 + 6) & 0x200) != 0)) {
         pvVar10 = (void *)r_emi_get_mem_addr_by_offset((ushort)*(byte *)(param_4 + 2) + sVar3);
         memcpy((void *)(iVar7 + 0x62),pvVar10,6);
@@ -46,7 +46,7 @@ _L157:
         iVar9 = r_emi_get_mem_addr_by_offset(0x1000);
         if (((*(ushort *)(iVar9 + iVar12) >> 6 & 1) == 0) &&
            ((*(char *)(iVar7 + 0x70) == '\0' || ((*(byte *)(iVar7 + 0x67) & 0xc0) == 0xc0))))
-        goto _L161;
+        goto _L169;
       }
       if (*(char *)(param_4 + 8) != -1) {
         *(byte *)(iVar7 + 0x58) = (byte)(uVar4 >> 7) & 1;
@@ -64,12 +64,12 @@ _L157:
         memcpy(pvVar10,(void *)(iVar7 + 0x58),0x2c);
         if (*(char *)(iVar7 + 0x6e) == '\x02') {
           uVar11 = 2;
-_L164:
+_L172:
           r_lld_ext_scan_dynamic_pti_process_eco(iVar7,uVar11);
         }
         else {
           uVar11 = 3;
-          if (*(char *)(iVar7 + 0x6e) == '\0') goto _L164;
+          if (*(char *)(iVar7 + 0x6e) == '\0') goto _L172;
         }
         cVar1 = *(char *)(param_4 + 5);
         *(char *)((int)pvVar10 + 0x20) = cVar1;
@@ -85,20 +85,20 @@ _L164:
         *(undefined1 *)((int)pvVar10 + 0x14) = *(undefined1 *)(_lld_scan_env + 0xd);
         r_ke_msg_send(pvVar10);
       }
-      if (*(char *)(iVar7 + 0x6e) != -1) goto _L170;
+      if (*(char *)(iVar7 + 0x6e) != -1) goto _L178;
     }
     else {
       iVar9 = r_emi_get_mem_addr_by_offset(0x1000);
       if (((*(ushort *)(iVar9 + param_3 + 0x10) & 0x300) == 0) &&
-         ((*(byte *)(iVar7 + 0x6d) & 0x10) == 0)) goto _L157;
-_L161:
+         ((*(byte *)(iVar7 + 0x6d) & 0x10) == 0)) goto _L165;
+_L169:
       *(undefined1 *)(iVar7 + 0x6e) = 0xff;
     }
   }
   *(undefined2 *)(iVar7 + 0x36) = 0x673;
   *(undefined1 *)(iVar7 + 0x3d) = 0;
   *(undefined1 *)(iVar7 + 0x3e) = 0;
-_L170:
+_L178:
   *(undefined1 *)(iVar7 + 0x3f) = param_2;
   iVar9 = r_sdk_config_get_opts_ext();
   if ((*(uint *)(iVar9 + 0x28) & 8) != 0) {

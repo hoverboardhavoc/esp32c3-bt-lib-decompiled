@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_dynamic_pti_process
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,12 +25,12 @@ void r_lld_adv_dynamic_pti_process(int param_1,undefined4 param_2,undefined4 par
     if (iVar1 != 0) {
       iVar1 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
       if (*(char *)(iVar1 + 0x18) == '\0') {
-                    /* WARNING: Could not recover jumptable at 0x00011954. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001194c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x46a);
+        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x45b);
         return;
       }
-                    /* WARNING: Could not recover jumptable at 0x00011974. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001196c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
       (**(code **)(_r_ip_funcs_p + 0x764))(param_1,param_2,param_3);
       return;
@@ -39,7 +39,7 @@ void r_lld_adv_dynamic_pti_process(int param_1,undefined4 param_2,undefined4 par
   else {
     iVar1 = (**(code **)(_r_modules_funcs_p + 0x194))(*(code **)(_r_modules_funcs_p + 0x194));
     if (iVar1 != 0) {
-                    /* WARNING: Could not recover jumptable at 0x00011914. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001190c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
       (**(code **)(_r_ip_funcs_p + 0x758))(param_1);
       return;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_frm_skip_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ void r_lld_con_frm_skip_isr(int param_1)
   
   iVar2 = *(int *)(&lld_con_env + param_1 * 4);
   if (iVar2 == 0) {
-                    /* WARNING: Could not recover jumptable at 0x00013382. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00013358. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0xc76);
     return;
@@ -32,7 +32,7 @@ void r_lld_con_frm_skip_isr(int param_1)
   }
   (**(code **)(_r_ip_funcs_p + 0x6b8))(iVar2,1,*(code **)(_r_ip_funcs_p + 0x6b8));
   if (*(char *)(iVar2 + 0x8f) == '\x02') {
-                    /* WARNING: Could not recover jumptable at 0x0001330e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000132e4. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_ip_funcs_p + 800))(param_1,1,0x16);
     return;
@@ -41,7 +41,7 @@ void r_lld_con_frm_skip_isr(int param_1)
   cVar1 = rwip_priority;
   *(short *)(iVar2 + 0x7e) = *(short *)(iVar2 + 0x7e) + 1;
   *(char *)(iVar2 + 0x16) = *(char *)(iVar2 + 0x16) + cVar1;
-                    /* WARNING: Could not recover jumptable at 0x00013358. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001332e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_ip_funcs_p + 0x3a8))(*(undefined1 *)(iVar2 + 0x8e),uVar3,0);
   return;

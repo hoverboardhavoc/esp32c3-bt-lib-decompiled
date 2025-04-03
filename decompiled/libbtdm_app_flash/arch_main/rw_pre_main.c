@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> arch_main.o -> rw_pre_main
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void rw_pre_main(void)
   r_emi_base_reg_lut_show();
   r_emi_init();
   r_intc_init();
-  if (DAT_00012035 != '\0') {
+  if (DAT_00013035 != '\0') {
     r_flash_init();
   }
   if (btdm_env_p != '\0') {

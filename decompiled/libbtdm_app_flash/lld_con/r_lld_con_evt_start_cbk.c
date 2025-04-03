@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_evt_start_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -143,10 +143,10 @@ void r_lld_con_evt_start_cbk(int param_1)
     }
     cVar6 = '\x01';
     if ((*(char *)(param_1 + 0x46) != '\x01') || (cVar6 = *(char *)(param_1 + 0x43), cVar6 != '\0'))
-    goto _L532;
+    goto _L533;
   }
   cVar6 = '\0';
-_L532:
+_L533:
   pcStack_40 = r_lld_con_frm_cbk;
   uStack_3c = *(undefined4 *)(param_1 + 4);
   uStack_38 = *(undefined4 *)(param_1 + 8);

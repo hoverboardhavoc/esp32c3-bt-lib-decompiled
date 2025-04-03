@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld.o -> r_lld_core_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,7 +57,7 @@ void r_lld_core_init(int param_1)
     _DAT_60031050 = uStack_44 | 0x80808080;
   }
   uVar3 = (uint)_rwip_prog_delay;
-  _DAT_60031000 = (int)(DAT_0001402e + 1) >> 1 | 0x100600;
+  _DAT_60031000 = (int)(DAT_0001402e + 1) >> 1 | 0x100200;
   uVar7 = ((uint)_DAT_00014042 << 0x11) >> 0x10;
   if ((uVar3 << 0x11 & 0xfc000000) != 0) {
     (**(code **)(_r_plf_funcs_p + 8))(0,"lld.c",0x1902,*(code **)(_r_plf_funcs_p + 8));

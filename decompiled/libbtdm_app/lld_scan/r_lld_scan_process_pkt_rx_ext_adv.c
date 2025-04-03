@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_process_pkt_rx_ext_adv
  *
  * (C) Espressif, Apache License 2.0.
@@ -40,7 +40,7 @@ void r_lld_scan_process_pkt_rx_ext_adv(int param_1,uint param_2,int param_3,byte
   *param_4 = (byte)uVar8;
   iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   if (*(ushort *)(iVar2 + iVar5) >> 8 <= uVar8) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x816,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x825,*(code **)(_r_plf_funcs_p + 8));
   }
   bVar3 = *param_4;
   if (bVar3 != 0) {
@@ -67,14 +67,14 @@ void r_lld_scan_process_pkt_rx_ext_adv(int param_1,uint param_2,int param_3,byte
   }
   else {
     if (cVar1 != '\x03') {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x83d,*(code **)(_r_plf_funcs_p + 8));
-      goto _L533;
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x84c,*(code **)(_r_plf_funcs_p + 8));
+      goto _L541;
     }
     pcVar4 = *(code **)(_r_ip_funcs_p + 0x41c);
   }
   (*pcVar4)(param_1,param_2,param_3,param_4,pcVar4);
-_L533:
-                    /* WARNING: Could not recover jumptable at 0x00012486. Too many branches */
+_L541:
+                    /* WARNING: Could not recover jumptable at 0x000124d0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_ip_funcs_p + 0x7f8))(0,param_1,param_2,param_3,param_4);
   return;

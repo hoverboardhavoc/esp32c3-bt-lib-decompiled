@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_controller_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -65,7 +65,7 @@ undefined4 btdm_controller_init(int *param_1)
              (iVar11 = r_h4tl_eif_register(param_1[6]), iVar11 != 0)) goto _L354;
           iVar11 = r_sdk_config_get_opts();
           uStack_34 = *(undefined1 *)(iVar11 + 0xd);
-          uStack_33 = DAT_00012037;
+          uStack_33 = DAT_00013037;
           r_sdk_config_set_hl_derived_opts(&uStack_34);
           if (((uint)_btdm_env_p >> 0x10 & 0xff) == 0) {
             btdm_hli_get_null_funcs();
@@ -129,7 +129,7 @@ undefined4 btdm_controller_init(int *param_1)
               pcVar14 = *(code **)(_r_osi_funcs_p + 0x78);
               _btdm_env_p[5] = (uint)*(ushort *)(iVar11 + 6) * 0xc + (uint)uVar4 * 0x10 + 0x29c;
               iVar11 = (*pcVar14)(pcVar14);
-              cVar9 = DAT_00012036;
+              cVar9 = DAT_00013036;
               piVar7[4] = iVar11;
               piVar7 = _btdm_env_p;
               iVar11 = 1;

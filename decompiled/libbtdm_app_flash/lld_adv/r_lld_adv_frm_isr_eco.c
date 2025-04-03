@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_frm_isr_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,7 +36,7 @@ void r_lld_adv_frm_isr_eco(uint param_1,undefined4 param_2,int param_3)
                 (0x40400009,(uint)*(byte *)(iVar4 + 0x89) << 0x10 | param_3 << 8 | param_1);
     }
     if ((param_3 == 0) && (g_ble_ext_config != '\0')) {
-      DAT_00016464 = DAT_00016464 + 1;
+      DAT_000164bc = DAT_000164bc + 1;
     }
     if (bVar1 && bVar2) {
       g_adv_delay_dis = '\x01';
@@ -57,13 +57,14 @@ void r_lld_adv_frm_isr_eco(uint param_1,undefined4 param_2,int param_3)
   }
   if ((adv_adv_data_need_to_set[param_1] != '\0') &&
      (((*(ushort *)(iVar4 + 0x74) & 0x10) == 0 || ((*(ushort *)(iVar4 + 0x74) & 0x14) == 0x10)))) {
-    r_lld_adv_adv_data_set(param_1,*(undefined1 *)(iVar4 + 0x28),*(undefined2 *)(iVar4 + 0x24),1,1);
+    r_lld_adv_adv_data_set_hack
+              (param_1,*(undefined1 *)(iVar4 + 0x28),*(undefined2 *)(iVar4 + 0x24),1,1);
     *(undefined2 *)(iVar4 + 0x24) = 0;
     adv_adv_data_need_to_set[param_1] = 0;
   }
   if ((adv_scan_rsp_data_need_to_set[param_1] != '\0') &&
      (((*(ushort *)(iVar4 + 0x74) & 0x12) == 2 || ((*(ushort *)(iVar4 + 0x74) & 0x14) == 0x10)))) {
-    r_lld_adv_scan_rsp_data_set
+    r_lld_adv_scan_rsp_data_set_hack
               (param_1,*(undefined1 *)(iVar4 + 0x2a),*(undefined2 *)(iVar4 + 0x26),1,1);
     *(undefined2 *)(iVar4 + 0x26) = 0;
     adv_scan_rsp_data_need_to_set[param_1] = 0;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_end
  *
  * (C) Espressif, Apache License 2.0.
@@ -44,7 +44,7 @@ void r_lld_scan_end(void)
         if (*(char *)(iVar3 + 0x3d) == '\x03') {
           iVar3 = r_sdk_config_get_opts_ext();
           if (*(char *)(iVar3 + 0x18) == '\0') {
-            r_assert_err(0,"lld_scan.c",0x49b);
+            r_assert_err(0,"lld_scan.c",0x4aa);
           }
           r_lld_scan_trunc_ind(uVar7);
         }

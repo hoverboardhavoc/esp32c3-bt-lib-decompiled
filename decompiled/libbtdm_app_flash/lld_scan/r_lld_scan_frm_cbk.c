@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_frm_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,12 +10,12 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x00010688) */
-/* WARNING: Removing unreachable block (ram,0x000105a4) */
-/* WARNING: Removing unreachable block (ram,0x000104e4) */
-/* WARNING: Removing unreachable block (ram,0x00010544) */
-/* WARNING: Removing unreachable block (ram,0x00010604) */
-/* WARNING: Removing unreachable block (ram,0x000106f2) */
+/* WARNING: Removing unreachable block (ram,0x000106c8) */
+/* WARNING: Removing unreachable block (ram,0x000105e4) */
+/* WARNING: Removing unreachable block (ram,0x00010524) */
+/* WARNING: Removing unreachable block (ram,0x00010584) */
+/* WARNING: Removing unreachable block (ram,0x00010644) */
+/* WARNING: Removing unreachable block (ram,0x00010732) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void r_lld_scan_frm_cbk(undefined4 param_1,uint param_2,int param_3)
@@ -43,7 +43,7 @@ void r_lld_scan_frm_cbk(undefined4 param_1,uint param_2,int param_3)
   undefined2 uStack_44;
   
   if (1 < param_2) {
-    r_assert_param(param_2,param_3,"lld_scan.c",0xa0d);
+    r_assert_param(param_2,param_3,"lld_scan.c",0xa1c);
   }
   if (param_3 == 1) {
     iVar14 = 1;
@@ -53,7 +53,7 @@ void r_lld_scan_frm_cbk(undefined4 param_1,uint param_2,int param_3)
       if (param_3 == 2) {
         param_2 = param_2 & 0xff;
         if ((_lld_scan_env == 0) || (*(int *)(_lld_scan_env + param_2 * 4) == 0)) {
-          r_assert_err(0,"lld_scan.c",0x9b2);
+          r_assert_err(0,"lld_scan.c",0x9c1);
           return;
         }
         bVar1 = *(byte *)(_lld_scan_env + 0xd);
@@ -88,7 +88,7 @@ void r_lld_scan_frm_cbk(undefined4 param_1,uint param_2,int param_3)
                 r_lld_ext_scan_dynamic_pti_reset(iVar14);
               }
               uVar9 = uVar10;
-              if ((uVar7 - 3 & 0xfd) != 0) goto _L559;
+              if ((uVar7 - 3 & 0xfd) != 0) goto _L567;
             }
             else {
               iVar11 = r_emi_get_mem_addr_by_offset(0x1000);
@@ -96,7 +96,7 @@ void r_lld_scan_frm_cbk(undefined4 param_1,uint param_2,int param_3)
               iVar13 = r_emi_get_mem_addr_by_offset(0x1000);
               uVar9 = (uint)((uVar5 & 0x3f) < *(ushort *)(iVar13 + iVar16) >> 8);
               if (uVar7 < 9) {
-_L559:
+_L567:
                 uVar15 = (uint)(uVar7 == 8);
               }
             }
@@ -118,7 +118,7 @@ _L559:
               uStack_48 = 0;
               *(undefined1 *)(iVar14 + 0x43) = 1;
               if (((uVar4 & 8) != 0) || ((uVar7 - 3 & 0xfd) == 0)) {
-                r_assert_err(0,"lld_scan.c",0x263);
+                r_assert_err(0,"lld_scan.c",0x272);
               }
               if (uVar7 < 7) {
                 r_lld_scan_process_pkt_rx_legacy_adv();
@@ -146,7 +146,7 @@ _L559:
         } while( true );
       }
       if (param_3 != 4) {
-        r_assert_param(param_2,param_3,"lld_scan.c",0xa23);
+        r_assert_param(param_2,param_3,"lld_scan.c",0xa32);
         return;
       }
       param_2 = param_2 & 0xff;
@@ -165,7 +165,7 @@ _L559:
          (*(char *)(_lld_scan_env + 0x17) == '\0')) {
         return;
       }
-      goto code_r0x000107a8;
+      goto code_r0x000107e8;
     }
     iVar14 = 0;
   }
@@ -180,7 +180,7 @@ _L559:
      (*(char *)(_lld_scan_env + 0x17) == '\0')) {
     return;
   }
-code_r0x000107a8:
+code_r0x000107e8:
   if (((iVar14 != 0) && (*(char *)(_lld_scan_env + 0x17) != '\0')) &&
      (*(char *)(iVar14 + 0x3d) == '\0')) {
     if ((iVar14 != 0) && (_lld_scan_env != 0)) {

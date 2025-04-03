@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_adv_data_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,7 +42,7 @@ void r_lld_adv_adv_data_set(int param_1,int param_2,undefined2 param_3,int param
     UNRECOVERED_JUMPTABLE = *(code **)(iVar5 + 0x1ac);
     *(undefined2 *)(iVar10 + 0x7e) = param_3;
     (*UNRECOVERED_JUMPTABLE)(*(undefined1 *)(iVar10 + 0x87),UNRECOVERED_JUMPTABLE);
-    goto _L547;
+    goto _L548;
   }
   iVar5 = uVar4 * 0xe;
   sVar9 = 0;
@@ -59,22 +59,22 @@ void r_lld_adv_adv_data_set(int param_1,int param_2,undefined2 param_3,int param
   *(undefined2 *)(iVar7 + iVar5 + 4) = param_3;
   if ((*(ushort *)(iVar10 + 0x74) & 4) == 0) {
     iVar10 = (**(code **)(_r_modules_funcs_p + 0x1a0))(2,*(code **)(_r_modules_funcs_p + 0x1a0));
-    if (iVar10 == 0) goto _L547;
+    if (iVar10 == 0) goto _L548;
     if (2 < _g_bt_plf_log_level) {
       uVar1 = *(undefined1 *)(iVar10 + 5);
       uVar2 = *(undefined1 *)(iVar10 + 4);
       pcVar8 = "TX PTI [LDC ADV] [EN%d] [%d] \n";
-      goto _L581;
+      goto _L582;
     }
   }
   else {
     iVar10 = (**(code **)(_r_modules_funcs_p + 0x1a0))(3,*(code **)(_r_modules_funcs_p + 0x1a0));
-    if (iVar10 == 0) goto _L547;
+    if (iVar10 == 0) goto _L548;
     if (2 < _g_bt_plf_log_level) {
       uVar1 = *(undefined1 *)(iVar10 + 5);
       uVar2 = *(undefined1 *)(iVar10 + 4);
       pcVar8 = "TX PTI [HDC ADV] [EN%d] [%d] \n";
-_L581:
+_L582:
       ets_printf(pcVar8,uVar2,uVar1);
     }
   }
@@ -93,7 +93,7 @@ _L581:
   uVar6 = *(ushort *)(iVar10 + iVar5);
   iVar10 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
   *(ushort *)(iVar5 + iVar10) = uVar6 & 0xefff | (ushort)bVar3 << 0xc;
-_L547:
+_L548:
   if ((param_4 != 0) && (sVar9 != 0)) {
     if (param_5 == 0) {
       UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0xd8);
@@ -101,7 +101,7 @@ _L547:
     else {
       UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0xdc);
     }
-                    /* WARNING: Could not recover jumptable at 0x00012cbc. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00012cae. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (*UNRECOVERED_JUMPTABLE)(sVar9);
     return;

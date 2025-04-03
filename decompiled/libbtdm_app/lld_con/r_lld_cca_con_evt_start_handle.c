@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld_con.o -> r_lld_cca_con_evt_start_handle
  *
  * (C) Espressif, Apache License 2.0.
@@ -69,7 +69,7 @@ void r_lld_cca_con_evt_start_handle(int param_1)
   }
   *(undefined1 *)(puVar7 + 2) = uVar6;
   if ((code *)*puVar7 != (code *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x00010d9a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010d70. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (*(code *)*puVar7)(uVar8,0);
     return;

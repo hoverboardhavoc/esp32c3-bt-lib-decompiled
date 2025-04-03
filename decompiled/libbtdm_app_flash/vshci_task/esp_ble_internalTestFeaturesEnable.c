@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> vshci_task.o -> esp_ble_internalTestFeaturesEnable
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,8 +14,6 @@ void esp_ble_internalTestFeaturesEnable(int param_1)
 
 {
   code *pcVar1;
-  short *psVar2;
-  int iVar3;
   
   if (param_1 == 0) {
     pcVar1 = hci_unknown_hci_cmd_handler;
@@ -23,16 +21,8 @@ void esp_ble_internalTestFeaturesEnable(int param_1)
   else {
     pcVar1 = hci_vendor_ble_qa_test_cmd_handler;
   }
-  psVar2 = &hci_command_handler_tab_esp_hack;
-  iVar3 = 0;
-  do {
-    if (*psVar2 == -0x2ed) {
-      (&PTR_hci_unknown_hci_cmd_handler_0001103c)[iVar3 * 2] = pcVar1;
-      return;
-    }
-    iVar3 = iVar3 + 1;
-    psVar2 = psVar2 + 4;
-  } while (iVar3 != 7);
+  ble_cmd_handler_register(0xfd13,pcVar1);
+  btdm_linkbl_filter_init(param_1);
   return;
 }
 

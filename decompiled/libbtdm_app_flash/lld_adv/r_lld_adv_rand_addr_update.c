@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_rand_addr_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ void r_lld_adv_rand_addr_update(int param_1,undefined4 param_2,undefined2 param_
   
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   if (*(int *)(&lld_adv_env + param_1 * 4) == 0) {
-    r_assert_err(0,"lld_adv.c",0xe08);
+    r_assert_err(0,"lld_adv.c",0xe07);
   }
   else if ((*(byte *)(*(int *)(&lld_adv_env + param_1 * 4) + 0x8b) & 1) != 0) {
     uStack_18 = (undefined2)param_2;
@@ -34,7 +34,7 @@ void r_lld_adv_rand_addr_update(int param_1,undefined4 param_2,undefined2 param_
     iVar1 = r_emi_get_mem_addr_by_offset(0x400);
     *(undefined2 *)(param_1 + 10 + iVar1) = param_3;
   }
-                    /* WARNING: Could not recover jumptable at 0x00016218. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00016270. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))();
   return;

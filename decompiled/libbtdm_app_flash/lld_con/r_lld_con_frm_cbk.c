@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_frm_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -169,7 +169,7 @@ void r_lld_con_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
         if (piStack_64 == (int *)0x0) {
           return;
         }
-_L444:
+_L445:
         if ((*(short *)(iVar13 + 0x82) == 0) && (piVar15 = (int *)*piVar5, piVar15 != (int *)0x0)) {
           uVar14 = *(ushort *)((int)piVar15 + 6);
           *(int **)(iVar13 + 0x30) = piVar15;
@@ -193,7 +193,7 @@ _L444:
       }
       else {
         if ((((uVar12 == 2) && (piStack_64 != (int *)0x0)) && (bVar22 != 1)) &&
-           (DAT_0001608e != '\0')) goto _L444;
+           (DAT_0001608e != '\0')) goto _L445;
         uVar16 = (uint)*(byte *)(iVar11 + 6);
         uVar6 = (uint)*(ushort *)(iVar11 + 4);
         uVar18 = 3;
@@ -250,15 +250,15 @@ _L444:
         }
         else if ((uVar12 < 2) || (uVar12 == 0x18)) {
           if (uVar12 == 0) {
-            (&DAT_00015061)[iVar7] = 1;
+            (&DAT_0001505d)[iVar7] = 1;
             iVar19 = 10;
           }
           else if (uVar12 == 1) {
-            (&DAT_00015061)[iVar7] = 2;
+            (&DAT_0001505d)[iVar7] = 2;
             iVar19 = 6;
           }
           else if (uVar12 == 0x18) {
-            (&DAT_00015061)[iVar7] = 3;
+            (&DAT_0001505d)[iVar7] = 3;
             iVar19 = 3;
           }
           else {
@@ -266,7 +266,7 @@ _L444:
             iVar19 = 0;
           }
           uVar16 = uVar6 + iVar19 & 0xffff;
-          (&DAT_00015060)[iVar7] = bVar20;
+          (&DAT_0001505c)[iVar7] = bVar20;
           puVar8 = (ushort *)r_emi_get_mem_addr_by_offset(uVar16);
           uVar3 = *puVar8;
           uVar14 = *(ushort *)(iVar13 + 0x44);
@@ -291,7 +291,7 @@ _L444:
               ets_printf("llcp prog: %u %u %u %u %u\n",(uint)uVar18 + (uint)uVar14,*puVar9,
                          (uint)uVar3,*(undefined1 *)(iVar13 + 0x46),*(undefined2 *)(iVar13 + 0x44));
             }
-            *(undefined2 *)(&DAT_00015060 + iVar7) = 0;
+            *(undefined2 *)(&DAT_0001505c + iVar7) = 0;
           }
         }
       }

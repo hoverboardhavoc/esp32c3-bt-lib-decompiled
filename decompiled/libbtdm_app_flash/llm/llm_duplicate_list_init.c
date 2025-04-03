@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> llm.o -> llm_duplicate_list_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,9 +18,9 @@ void llm_duplicate_list_init(void)
   
   uVar1 = sdk_config_get_mask();
   if ((uVar1 & 1) != 0) {
-    iVar2 = r_co_list_size(0x11360);
+    iVar2 = r_co_list_size(0x11364);
     if (iVar2 != 0) {
-      llm_util_flush_list_part_0(0x11360);
+      llm_util_flush_list_part_0(0x11364);
     }
     iVar2 = r_co_list_size(le_scan_duplicate_option);
     if (iVar2 != 0) {
@@ -38,7 +38,7 @@ void llm_duplicate_list_init(void)
     le_scan_duplicate_option._28_4_ = 0;
   }
   if (le_scan_duplicate_option[8] != '\0') {
-    r_co_list_init(0x11360);
+    r_co_list_init(0x11364);
   }
   r_co_list_init(le_scan_duplicate_option);
   return;

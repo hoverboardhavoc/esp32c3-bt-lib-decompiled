@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> vshci_task.o -> ble_cmd_handler_register
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,7 +20,7 @@ void ble_cmd_handler_register(uint param_1,undefined *param_2)
   iVar2 = 0;
   do {
     if (*puVar1 == param_1) {
-      (&PTR_hci_unknown_hci_cmd_handler_00011214)[iVar2 * 2] = param_2;
+      (&PTR_hci_unknown_hci_cmd_handler_000112f4)[iVar2 * 2] = param_2;
       return;
     }
     iVar2 = iVar2 + 1;

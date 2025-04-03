@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_evt_start_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -46,7 +46,7 @@ void r_lld_adv_evt_start_cbk(int param_1)
   undefined1 uStack_44;
   
   if (param_1 == 0) {
-    r_assert_err("lld_adv.c",0x916);
+    r_assert_err("lld_adv.c",0x907);
   }
   else {
     bVar1 = *(byte *)(param_1 + 0x87);
@@ -71,7 +71,7 @@ void r_lld_adv_evt_start_cbk(int param_1)
         if (*(char *)(param_1 + 0x95) == '\0') {
           iVar6 = r_sdk_config_get_opts_ext();
           if (*(char *)(iVar6 + 0x18) == '\0') {
-            r_assert_err(0,"lld_adv.c",0x8cf);
+            r_assert_err(0,"lld_adv.c",0x8c0);
           }
           uVar12 = 1;
           r_lld_adv_sync_info_set(*(undefined1 *)(param_1 + 0x87));

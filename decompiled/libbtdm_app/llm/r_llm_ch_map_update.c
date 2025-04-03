@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> llm.o -> r_llm_ch_map_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,21 +43,21 @@ void r_llm_ch_map_update(void)
     iVar7 = ((int)uVar6 >> 3) + iVar5;
     uVar10 = uVar6 & 7;
     if (((int)(uint)*(byte *)(iVar7 + 0x18) >> uVar10 & 1U) == 0) {
-_L419:
+_L416:
       bVar9 = ~(byte)(1 << uVar10) & *(byte *)(iVar7 + 0x1d);
-_L418:
+_L415:
       *(byte *)(iVar7 + 0x1d) = bVar9;
     }
     else if (*(char *)(iVar11 + 0xd9) != '\0') {
       uVar8 = iVar3 - *(int *)(uVar6 * 4 + iVar4) & 0xfffffff;
       if (uVar8 < uVar13) {
-        if (*(char *)(iVar4 + uVar6 + 0x94) <= cVar2) goto _L419;
+        if (*(char *)(iVar4 + uVar6 + 0x94) <= cVar2) goto _L416;
       }
       else {
         *(undefined1 *)(iVar4 + uVar6 + 0x94) = 0;
         if (uVar14 < uVar8) {
           bVar9 = (byte)(1 << uVar10) | *(byte *)(iVar7 + 0x1d);
-          goto _L418;
+          goto _L415;
         }
       }
     }
@@ -100,7 +100,7 @@ _L418:
     *(undefined1 *)(_p_llm_env + 0x22) = 0;
     return;
   }
-                    /* WARNING: Could not recover jumptable at 0x00011270. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011274. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0xc4))(4,0,(uint)_DAT_0001206c * 100);
   return;

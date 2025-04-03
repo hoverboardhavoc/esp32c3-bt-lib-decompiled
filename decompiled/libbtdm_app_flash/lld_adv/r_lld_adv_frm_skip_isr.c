@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_frm_skip_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,8 +24,8 @@ void r_lld_adv_frm_skip_isr(uint param_1,int param_2)
   
   iVar2 = *(int *)(&lld_adv_env + param_1 * 4);
   if (iVar2 == 0) {
-    uVar6 = 0xb5f;
-_L1026:
+    uVar6 = 0xb50;
+_L1050:
     r_assert_err(0,"lld_adv.c",uVar6);
     return;
   }
@@ -35,7 +35,7 @@ _L1026:
     r_ble_log_internal_x2(0x4040000a,(uint)*(byte *)(iVar2 + 0x89) << 8 | param_1,param_2);
   }
   if (1 < (byte)(*(char *)(iVar2 + 0x89) - 1U)) {
-    r_assert_err(0,"lld_adv.c",0xb14);
+    r_assert_err(0,"lld_adv.c",0xb05);
   }
   if (*(char *)(iVar2 + 0x89) == '\x02') {
     uVar5 = 0;
@@ -53,13 +53,13 @@ _L1026:
         *(char *)(iVar2 + 0x16) = *(char *)(iVar2 + 0x16) + rwip_priority;
       }
       iVar4 = r_sch_arb_insert(iVar2);
-      if (iVar4 == 0) goto _L1019;
+      if (iVar4 == 0) goto _L1043;
       if (*(char *)(iVar2 + 0x95) != '\0') {
         return;
       }
       if (*(int *)(iVar2 + 0x58) == -1) {
-        uVar6 = 0xb53;
-        goto _L1026;
+        uVar6 = 0xb44;
+        goto _L1050;
       }
     }
     else {
@@ -71,13 +71,13 @@ _L1026:
       }
       iVar4 = r_sch_arb_insert(iVar2 + 0x34);
       if (iVar4 == 0) {
-_L1019:
+_L1043:
         *(undefined1 *)(iVar2 + 0x89) = 0;
         return;
       }
       if (*(int *)(iVar2 + 0x58) == -1) {
-        uVar6 = 0xb31;
-        goto _L1026;
+        uVar6 = 0xb22;
+        goto _L1050;
       }
     }
     uVar5 = 0x3c;

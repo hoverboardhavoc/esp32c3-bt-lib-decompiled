@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> llm_adv.o -> hci_le_set_ext_scan_rsp_data_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -110,7 +110,7 @@ _L554:
     if ((byte)(param_1[1] - 2) < 2) {
       iVar10 = *(int *)(_p_llm_env + 8) + iVar4;
       if (*(char *)(iVar10 + 0x40) == '\x02') {
-        r_lld_adv_scan_rsp_data_update_hack
+        r_lld_adv_scan_rsp_data_update
                   (iVar7,*(undefined1 *)(iVar10 + 0x38),*(undefined2 *)(iVar10 + 0x36));
       }
       else if (*(short *)(iVar10 + 0x32) != 0) {
@@ -148,7 +148,7 @@ _L554:
       }
     }
     else if (param_1[1] == '\x04') {
-      r_lld_adv_scan_rsp_data_update_hack(iVar7,0,0);
+      r_lld_adv_scan_rsp_data_update(iVar7,0,0);
     }
     uVar8 = 0;
   }

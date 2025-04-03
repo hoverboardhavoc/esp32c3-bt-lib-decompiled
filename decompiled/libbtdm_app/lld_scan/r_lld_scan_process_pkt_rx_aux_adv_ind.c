@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_process_pkt_rx_aux_adv_ind
  *
  * (C) Espressif, Apache License 2.0.
@@ -109,7 +109,7 @@ void r_lld_scan_process_pkt_rx_aux_adv_ind(int param_1,int param_2,char *param_3
   }
   sVar18 = sVar19 + 2;
   if (*(char *)(iVar7 + 0x6e) == -1) {
-    if ((*(ushort *)(param_3 + 6) & 0x1000) != 0) goto _L447;
+    if ((*(ushort *)(param_3 + 6) & 0x1000) != 0) goto _L455;
   }
   else {
     if ((*(ushort *)(param_3 + 6) & 0x1000) == 0) {
@@ -121,7 +121,7 @@ void r_lld_scan_process_pkt_rx_aux_adv_ind(int param_1,int param_2,char *param_3
         *(undefined1 *)(iVar7 + 0x6e) = 0;
         *(undefined1 *)(iVar7 + 0x3d) = 2;
       }
-      goto _L397;
+      goto _L405;
     }
     pvVar9 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
                                (sVar2 + sVar18,*(code **)(_r_plf_funcs_p + 0xbc));
@@ -131,23 +131,23 @@ void r_lld_scan_process_pkt_rx_aux_adv_ind(int param_1,int param_2,char *param_3
       iVar8 = (**(code **)(_r_ip_funcs_p + 0x224))
                         (iVar7 + 0x48,param_2,*(code **)(_r_ip_funcs_p + 0x224));
       uVar15 = 1;
-      if (iVar8 != 0) goto _L446;
+      if (iVar8 != 0) goto _L454;
       *(undefined1 *)(iVar7 + 0x6e) = 2;
     }
     else {
       *(undefined4 *)(iVar7 + 0x2c) = auStack_44[0];
       uVar15 = 2;
-_L446:
+_L454:
       *(undefined1 *)(iVar7 + 0x3e) = uVar15;
     }
     *(undefined1 *)(iVar7 + 0x3d) = 3;
-_L447:
+_L455:
     sVar18 = sVar19 + 5;
   }
-_L397:
-  if (-1 < (int)((uint)*(ushort *)(param_3 + 6) << 0x12)) goto _L399;
+_L405:
+  if (-1 < (int)((uint)*(ushort *)(param_3 + 6) << 0x12)) goto _L407;
   if (bVar1 || puVar11 == (undefined1 *)0x0) {
-_L400:
+_L408:
     puVar13 = (undefined2 *)
               (**(code **)(_r_plf_funcs_p + 0xbc))
                         (sVar2 + 2 + sVar18,*(code **)(_r_plf_funcs_p + 0xbc));
@@ -159,7 +159,7 @@ _L400:
                       (param_1,param_2,*(undefined1 *)(iVar7 + 0x6f),*(undefined4 *)(iVar7 + 0x5c),
                        *(undefined4 *)(iVar7 + 0x60),uVar3 >> 0xc,*(code **)(_r_ip_funcs_p + 0x440))
     ;
-    if (iVar8 == 0) goto _L400;
+    if (iVar8 == 0) goto _L408;
     puVar11 = (undefined1 *)
               (**(code **)(_r_modules_funcs_p + 200))
                         (0x203,0,0xff,0x30,*(code **)(_r_modules_funcs_p + 200));
@@ -192,7 +192,7 @@ _L400:
         uVar20 = (int)(((uVar16 & 0xffff) + (uint)_DAT_00015092 * -2) * 0x10000) >> 0x10;
       }
       if (0x751 < (uVar20 + 0x4e1 & 0xffff)) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x6c2,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x6d1,*(code **)(_r_plf_funcs_p + 8));
       }
       for (; (int)uVar20 < 0; uVar20 = (int)(((uVar20 & 0xffff) + 0x271) * 0x10000) >> 0x10) {
         *(uint *)(puVar11 + 0x18) = *(int *)(puVar11 + 0x18) - 1U & 0xfffffff;
@@ -212,7 +212,7 @@ _L400:
     }
   }
   sVar18 = sVar18 + 0x12;
-_L399:
+_L407:
   if ((int)((uint)*(ushort *)(param_3 + 6) << 0x11) < 0) {
     puVar11 = (undefined1 *)
               (**(code **)(_r_plf_funcs_p + 0xbc))(sVar2 + sVar18,*(code **)(_r_plf_funcs_p + 0xbc))

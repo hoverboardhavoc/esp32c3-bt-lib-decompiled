@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,7 +45,7 @@ void r_lld_con_tx(int param_1)
     iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
     uVar11 = (uint)*(ushort *)(iVar4 + 4 + iVar6);
     if ((uVar2 & 3) == 0) {
-_L406:
+_L403:
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x9e1,*(code **)(_r_plf_funcs_p + 8));
     }
     else {
@@ -53,7 +53,7 @@ _L406:
         iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
         uVar13 = (uint)(*(ushort *)(iVar4 + iVar10) >> 8);
         if (uVar13 < 5) {
-          if (uVar13 == 0) goto _L408;
+          if (uVar13 == 0) goto _L405;
         }
         else if ((*(ushort *)(iVar5 + 0x84) & 0x40) != 0) {
           uVar13 = uVar13 - 4 & 0xffff;
@@ -63,7 +63,7 @@ _L406:
           (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x9c1,*(code **)(_r_plf_funcs_p + 8));
         }
         if (uVar13 + uVar11 < (*(ushort *)(iVar4 + 6) & 0x3ff) + (uint)*(ushort *)(iVar4 + 4))
-        goto _L408;
+        goto _L405;
         (**(code **)(_r_modules_funcs_p + 0x40))(iVar5 + 0x28,*(code **)(_r_modules_funcs_p + 0x40))
         ;
         if (*(int *)(iVar5 + 0x30) == iVar4) {
@@ -75,14 +75,14 @@ _L406:
         uVar7 = 0x20e;
       }
       else {
-        if (uVar12 != 3) goto _L406;
+        if (uVar12 != 3) goto _L403;
         (**(code **)(_r_ip_funcs_p + 0xf8))(uVar11,*(code **)(_r_ip_funcs_p + 0xf8));
         pcVar8 = *(code **)(_r_modules_funcs_p + 0xe4);
         uVar7 = 0x20c;
       }
       (*pcVar8)(uVar7,param_1 << 8 | 1,0xff,pcVar8);
     }
-_L408:
+_L405:
     iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
     uVar2 = *(ushort *)(iVar4 + iVar10);
     iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));

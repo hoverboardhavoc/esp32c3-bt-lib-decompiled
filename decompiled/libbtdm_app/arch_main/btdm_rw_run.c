@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> arch_main.o -> btdm_rw_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,11 +39,11 @@ char * btdm_rw_run(char *param_1)
       if ((*pcVar1 != '\0') && (_btdm_pwr_state == 0)) {
         pll_track_state =
              (**(code **)(_r_modules_funcs_p + 0x2c4))(*(code **)(_r_modules_funcs_p + 0x2c4));
-        uVar2 = pll_track_state - DAT_00011bf8 & 0xfffffff;
+        uVar2 = pll_track_state - DAT_00011c1c & 0xfffffff;
         pcVar1 = (char *)0x0;
-        DAT_00011bf4 = extraout_a1;
+        DAT_00011c18 = extraout_a1;
         if ((uVar2 < 0x8000001) && (0xc80 < uVar2)) {
-          DAT_00011bf8 = pll_track_state;
+          DAT_00011c1c = pll_track_state;
           bt_track_pll_cap(0);
           pcVar1 = (char *)0x1;
         }

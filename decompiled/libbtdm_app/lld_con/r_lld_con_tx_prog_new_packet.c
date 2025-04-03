@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_tx_prog_new_packet
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,7 +57,7 @@ void r_lld_con_tx_prog_new_packet(int param_1,uint param_2)
       if (piStack_60 == (int *)0x0) {
         return;
       }
-_L126:
+_L123:
       if ((*(short *)(iVar18 + 0x82) == 0) && (piVar11 = (int *)*piVar5, piVar11 != (int *)0x0)) {
         uVar2 = *(ushort *)((int)piVar11 + 6);
         *(int **)(iVar18 + 0x30) = piVar11;
@@ -81,7 +81,7 @@ _L126:
     }
     else {
       if (((param_2 == 2) && (piStack_60 != (int *)0x0)) &&
-         ((bVar16 != 1 && (DAT_0001604e != '\0')))) goto _L126;
+         ((bVar16 != 1 && (DAT_0001604e != '\0')))) goto _L123;
       uVar21 = 3;
       uVar13 = (uint)*(byte *)(iStack_68 + 6);
       uVar15 = (uint)*(ushort *)(iStack_68 + 4);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> llm_adv.o -> r_llm_adv_set_dft_params
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ void r_llm_adv_set_dft_params(int param_1)
   
   iVar2 = param_1 * 0x44;
   if (*(int *)(*(int *)(_p_llm_env + 8) + iVar2) != 0) {
-    r_assert_err(0,"llm_adv.c",0xc44);
+    r_assert_err(0,"llm_adv.c",0xc45);
   }
   iVar4 = *(int *)(_p_llm_env + 8);
   uVar3 = r_ke_msg_alloc(0,0,0,0x1a);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app_flash -> llm_adv.o -> lld_scan_req_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ undefined4 lld_scan_req_ind_handler(byte *param_1)
   puVar2 = (undefined4 *)(*(int *)(_p_llm_env + 8) + (uint)*param_1 * 0x44);
   puVar3 = (undefined1 *)*puVar2;
   if (1 < (byte)(*(char *)(puVar2 + 0x10) - 2U)) {
-    r_assert_param("llm_adv.c",0xcad);
+    r_assert_param("llm_adv.c",0xcae);
   }
   if (puVar3[0x19] != '\0') {
     puVar1 = (undefined1 *)r_ke_msg_alloc(0x1104,0,0x3e,9);

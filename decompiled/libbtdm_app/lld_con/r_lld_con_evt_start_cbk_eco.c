@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
+ * Upstream date: 2025-04-03 18:07:15 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_evt_start_cbk_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,16 +29,16 @@ void r_lld_con_evt_start_cbk_eco(int param_1)
   int iVar12;
   uint uVar13;
   
-  if (param_1 == 0) goto _L543;
+  if (param_1 == 0) goto _L540;
   iVar6 = (**(code **)(_r_ip_funcs_p + 0x91c))(*(code **)(_r_ip_funcs_p + 0x91c));
   iVar6 = (uint)*(byte *)(param_1 + 0x8e) * 2 + iVar6;
   if (((*(char *)(iVar6 + 0x3d) == '\0') || (*(char *)(param_1 + 0x46) != *(char *)(iVar6 + 0x3d)))
      || (uVar13 = (uint)*(ushort *)(param_1 + 0x7c) + (uint)*(ushort *)(param_1 + 0x7e) & 0xffff,
-        0x7ffe < (uVar13 - *(ushort *)(param_1 + 0x44) & 0xffff))) goto _L543;
+        0x7ffe < (uVar13 - *(ushort *)(param_1 + 0x44) & 0xffff))) goto _L540;
   bVar1 = *(byte *)(iVar6 + 0x3c);
   iVar7 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
   iVar12 = (uint)bVar1 * 0xe;
-  if (*(short *)(iVar7 + iVar12) < 0) goto _L543;
+  if (*(short *)(iVar7 + iVar12) < 0) goto _L540;
   iVar7 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
   sVar3 = *(short *)(iVar7 + iVar12 + 4);
   iVar7 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
@@ -46,7 +46,7 @@ void r_lld_con_evt_start_cbk_eco(int param_1)
   uVar5 = (ushort)*(byte *)(iVar6 + 0x3d);
   if (uVar5 == 1) {
     uVar5 = 10;
-_L559:
+_L556:
     cVar11 = '\0';
   }
   else if (uVar5 == 2) {
@@ -60,7 +60,7 @@ _L559:
                 (*(undefined1 *)(param_1 + 0x8e),0,"lld_con.c",0x56f,
                  *(code **)(_r_plf_funcs_p + 0xc));
       uVar5 = 0;
-      goto _L559;
+      goto _L556;
     }
   }
   if (((sVar3 == 0) || ((uVar4 & 3) != 3)) ||
@@ -88,7 +88,7 @@ _L559:
     puVar9[1] = (char)((uint)iVar6 >> 8);
     *(short *)(param_1 + 0x44) = (short)((uint)iVar7 >> 0x10);
   }
-_L543:
+_L540:
   r_lld_con_evt_start_cbk(param_1);
   iVar6 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
   if (*(char *)(iVar6 + 0x19) == '\x02') {
