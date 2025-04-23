@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit c57c0b11c3c0065a16b66685715100a189ef9b27
- * https://github.com/espressif/esp32c3-bt-lib/commit/c57c0b11c3c0065a16b66685715100a189ef9b27
- * Upstream date: 2024-12-13 13:39:25 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(555b0a2)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_scan.o -> f_lld_scan_end_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,7 +29,7 @@ undefined4 f_lld_scan_end_ind_handler_hack(int param_1)
   if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
     if (*(char *)(iVar6 + 0x40) != '\b') {
       (**(code **)(_r_plf_funcs_p + 8))(0,"llm_scan.c",0x81f,*(code **)(_r_plf_funcs_p + 8));
-      goto _L626;
+      goto _L610;
     }
     pcVar7 = *(code **)(_r_ip_funcs_p + 0x4b8);
     uVar4 = 0x200c;
@@ -39,7 +39,7 @@ undefined4 f_lld_scan_end_ind_handler_hack(int param_1)
       if (*(ushort *)(iVar6 + 0x2a) == 0) {
         puVar5 = (undefined1 *)
                  (**(code **)(_r_modules_funcs_p + 200))
-                           (0x1104,0,0x3e,1,*(code **)(_r_modules_funcs_p + 200));
+                           (0x1104,0,0x3e,*(code **)(_r_modules_funcs_p + 200));
         *puVar5 = 0x11;
         (**(code **)(_r_ip_funcs_p + 0x8c))(*(code **)(_r_ip_funcs_p + 0x8c));
         *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar3 + 0x40) = 6;
@@ -53,16 +53,16 @@ undefined4 f_lld_scan_end_ind_handler_hack(int param_1)
          ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
         (*(code *)*_bt_rf_coex_hooks_p)((uint)bVar1,3,0);
       }
-      goto _L626;
+      goto _L610;
     }
     pcVar7 = *(code **)(_r_ip_funcs_p + 0x4b8);
     uVar4 = 0x2042;
   }
   (*pcVar7)(uVar4,0,pcVar7);
   *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar3 + 0x40) = 6;
-_L626:
+_L610:
   iVar6 = _p_llm_env;
-  cVar2 = *(char *)(iVar3 + *(int *)(_p_llm_env + 8) + 0x40);
+  cVar2 = *(char *)(*(int *)(_p_llm_env + 8) + iVar3 + 0x40);
   if ((cVar2 == '\x06') || ((*(byte *)(_p_llm_env + 0xd4) & 2) != 0)) {
     *(undefined1 *)(_p_llm_env + 0xd2) = 0;
     *(undefined1 *)(iVar6 + 0xd1) = 0;

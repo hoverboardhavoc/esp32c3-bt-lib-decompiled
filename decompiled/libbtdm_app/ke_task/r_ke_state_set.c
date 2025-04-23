@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> ke_task.o -> r_ke_state_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,45 +15,39 @@
 void r_ke_state_set(uint param_1,uint param_2)
 
 {
-  uint uVar1;
+  int iVar1;
   byte *pbVar2;
-  int unaff_s1;
   uint uVar3;
-  uint unaff_s3;
-  uint unaff_s4;
+  uint uVar4;
   
-  uVar3 = param_1 & 0xff;
-  uVar1 = param_1 >> 8;
-  if (uVar3 < 0x1f) {
-    unaff_s1 = *(int *)(&ke_task_env + uVar3 * 4);
-    if (unaff_s1 == 0) goto _L88;
-    if (uVar1 < *(ushort *)(unaff_s1 + 8)) goto _L85;
+  uVar4 = param_1 & 0xff;
+  uVar3 = param_1 >> 8;
+  if (0x1e < uVar4) goto _L78;
+  iVar1 = *(int *)(&ke_task_env + uVar4 * 4);
+  if (iVar1 == 0) {
+    do {
+      (**(code **)(_r_plf_funcs_p + 0xc))
+                (uVar4,uVar3,"ke_task.c",0x1bc,*(code **)(_r_plf_funcs_p + 0xc));
+      ebreak();
+_L78:
+      (**(code **)(_r_plf_funcs_p + 8))(0,"ke_task.c",0x1b5,*(code **)(_r_plf_funcs_p + 8));
+    } while( true );
   }
-  else {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"ke_task.c",0x1b5,*(code **)(_r_plf_funcs_p + 8));
-_L88:
-    (**(code **)(_r_plf_funcs_p + 0xc))
-              (uVar3,uVar1,"ke_task.c",0x1bc,*(code **)(_r_plf_funcs_p + 0xc));
-    ebreak();
-    param_1 = unaff_s3;
-    param_2 = unaff_s4;
-  }
-  (**(code **)(_r_plf_funcs_p + 0xc))(uVar1,"ke_task.c",0x1bd,*(code **)(_r_plf_funcs_p + 0xc));
-  if (*(ushort *)(unaff_s1 + 8) <= uVar1) {
-    return;
-  }
-_L85:
-  pbVar2 = (byte *)(uVar1 + *(int *)(unaff_s1 + 4));
-  if (pbVar2 == (byte *)0x0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"ke_task.c",0x1c6,*(code **)(_r_plf_funcs_p + 8));
-  }
-  if (*pbVar2 == param_2) {
-    return;
-  }
-  *pbVar2 = (byte)param_2;
-                    /* WARNING: Could not recover jumptable at 0x00010582. Too many branches */
+  if ((uVar3 < *(ushort *)(iVar1 + 8)) ||
+     ((**(code **)(_r_plf_funcs_p + 0xc))(uVar3,"ke_task.c",0x1bd,*(code **)(_r_plf_funcs_p + 0xc)),
+     uVar3 < *(ushort *)(iVar1 + 8))) {
+    pbVar2 = (byte *)(*(int *)(iVar1 + 4) + uVar3);
+    if (pbVar2 == (byte *)0x0) {
+      (**(code **)(_r_plf_funcs_p + 8))(0,"ke_task.c",0x1c6,*(code **)(_r_plf_funcs_p + 8));
+    }
+    if (*pbVar2 != param_2) {
+      *pbVar2 = (byte)param_2;
+                    /* WARNING: Could not recover jumptable at 0x0001059e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_modules_funcs_p + 0x178))(param_1);
+      (**(code **)(_r_modules_funcs_p + 0x178))(param_1,*(code **)(_r_modules_funcs_p + 0x178));
+      return;
+    }
+  }
   return;
 }
 

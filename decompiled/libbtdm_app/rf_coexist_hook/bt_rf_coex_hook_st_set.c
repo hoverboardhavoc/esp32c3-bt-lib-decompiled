@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> rf_coexist_hook.o -> bt_rf_coex_hook_st_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,73 +17,57 @@ void bt_rf_coex_hook_st_set(uint param_1,uint param_2,int param_3)
 {
   ushort uVar1;
   ushort uVar2;
-  int iVar3;
-  uint uVar4;
-  bool bVar5;
-  ushort *puVar6;
-  int iVar7;
-  code *pcVar8;
-  int iVar9;
+  ushort *puVar3;
+  int iVar4;
+  int iVar5;
+  uint uVar6;
+  code *pcVar7;
+  ushort uVar8;
   
   if (8 < param_2) {
     return;
   }
-  (&_LANCHOR1)[param_2 * 2] = (char)param_3;
-  iVar3 = _r_osi_funcs_p;
+  (&coex_hook_wifi_sleep_flag)[param_2 * 2] = (char)param_3;
+  iVar4 = _r_osi_funcs_p;
   if (param_2 == 8) {
-    if (param_3 != 0) goto _L42;
-    _LANCHOR0 = 0;
-    _LANCHOR3 = 0;
-    DAT_00010484 = 0;
-    DAT_00010488 = 0;
-    pcVar8 = *(code **)(_r_osi_funcs_p + 0xbc);
-    uVar4 = 0xffffffff;
+    if (param_3 != 0) goto _L46;
+    coex_hook_act_id_map = 0;
+    s_ble_st_group_map = 0;
+    DAT_000104f8 = 0;
+    DAT_000104fc = 0;
+    pcVar7 = *(code **)(_r_osi_funcs_p + 0xbc);
+    uVar6 = 0xffffffff;
   }
   else {
-    iVar9 = (uint)(byte)(&_LANCHOR4)[param_2] * 2;
-    puVar6 = (ushort *)((int)&_LANCHOR3 + iVar9);
-    uVar1 = *puVar6;
+    puVar3 = (ushort *)((int)&s_ble_st_group_map + (uint)(byte)coex_hook_st_group_tab[param_2] * 2);
+    uVar6 = (uint)(byte)(&coex_hook_st_group_to_coex_schm_st_tab)
+                        [(byte)coex_hook_st_group_tab[param_2]];
+    uVar1 = *puVar3;
     uVar2 = (ushort)(1 << (param_1 & 0x1f));
-    uVar4 = (uint)(byte)(&_LANCHOR5)[(byte)(&_LANCHOR4)[param_2]];
     if (param_3 == 1) {
-      iVar7 = 0;
-      do {
-        if ((uVar4 == (byte)(&_LANCHOR5)[iVar7]) && (*(short *)((int)&_LANCHOR3 + iVar7 * 2) != 0))
-        {
-          bVar5 = true;
-          goto _L45;
-        }
-        iVar7 = iVar7 + 1;
-      } while (iVar7 != 5);
-      bVar5 = false;
-_L45:
-      _LANCHOR0 = _LANCHOR0 | uVar2;
-      *(ushort *)((int)&_LANCHOR3 + iVar9) = uVar2 | uVar1;
-      if (bVar5) goto _L42;
-      pcVar8 = *(code **)(iVar3 + 0xb8);
+      uVar8 = uVar2 | coex_hook_act_id_map;
+      iVar5 = coex_hook_check_coex_schm_st(uVar6);
+      coex_hook_act_id_map = uVar8;
+      *puVar3 = uVar1 | uVar2;
+      if (iVar5 != 0) goto _L46;
+      pcVar7 = *(code **)(iVar4 + 0xb8);
     }
     else {
-      _LANCHOR0 = _LANCHOR0 & ~uVar2;
-      *puVar6 = ~uVar2 & uVar1;
-      iVar9 = 0;
-      do {
-        if ((uVar4 == (byte)(&_LANCHOR5)[iVar9]) && (*(short *)((int)&_LANCHOR3 + iVar9 * 2) != 0))
-        goto _L42;
-        iVar9 = iVar9 + 1;
-      } while (iVar9 != 5);
-      if (uVar1 == 0) goto _L42;
-      pcVar8 = *(code **)(iVar3 + 0xbc);
+      coex_hook_act_id_map = ~uVar2 & coex_hook_act_id_map;
+      *puVar3 = ~uVar2 & uVar1;
+      if ((uVar1 == 0) || (iVar5 = coex_hook_check_coex_schm_st(uVar6), iVar5 != 0)) goto _L46;
+      pcVar7 = *(code **)(iVar4 + 0xbc);
     }
   }
-  (*pcVar8)(1,uVar4,pcVar8);
-_L42:
-  iVar3 = coex_hook_check_wifi_sleep();
-  if (iVar3 != 0) {
-    iVar3 = 1;
+  (*pcVar7)(1,uVar6,pcVar7);
+_L46:
+  iVar4 = coex_hook_check_wifi_sleep();
+  if (iVar4 != 0) {
+    iVar4 = 1;
   }
-                    /* WARNING: Could not recover jumptable at 0x00010368. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000103fc. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_osi_funcs_p + 0xac))(iVar3);
+  (**(code **)(_r_osi_funcs_p + 0xac))(iVar4,*(code **)(_r_osi_funcs_p + 0xac));
   return;
 }
 

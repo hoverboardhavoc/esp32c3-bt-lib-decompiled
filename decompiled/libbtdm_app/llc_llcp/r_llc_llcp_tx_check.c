@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_llcp.o -> r_llc_llcp_tx_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_llc_llcp_tx_check(int param_1)
+void r_llc_llcp_tx_check(uint param_1)
 
 {
   bool bVar1;
@@ -29,7 +29,7 @@ void r_llc_llcp_tx_check(int param_1)
     bVar1 = true;
     for (piVar2 = *(int **)(iVar3 + 0x28); piVar2 != (int *)0x0; piVar2 = (int *)*piVar2) {
       uVar6 = (int)(uint)*(byte *)(iVar3 + 0x44) >> 2 & 3;
-      bVar7 = (&DAT_000108f6)[(uint)*(byte *)((int)piVar2 + 9) * 0xc];
+      bVar7 = llcp_pdu_handler[(uint)*(byte *)((int)piVar2 + 9) * 0xc + 10];
       if (uVar6 == 2) {
         bVar7 = bVar7 >> 1;
       }
@@ -39,10 +39,15 @@ void r_llc_llcp_tx_check(int param_1)
       else if (uVar6 == 1) {
         bVar7 = bVar7 >> 2;
       }
-      if ((bVar7 & 1) != 0) {
+      if (((int)(uint)llc_enc_state._2_2_ >> (param_1 & 0x1f) & 1U) == 0) {
+        if ((bVar7 & 1) != 0) goto _L117;
+      }
+      else if ((*(byte *)((int)piVar2 + 9) == 6) && ((bVar7 & 1) != 0)) {
+        llc_enc_state._2_2_ = ~(ushort)(1 << (param_1 & 0x1f)) & llc_enc_state._2_2_;
+_L117:
         iVar4 = (**(code **)(_r_ip_funcs_p + 0xf4))(*(code **)(_r_ip_funcs_p + 0xf4));
         if (iVar4 == 0) {
-          (**(code **)(_r_plf_funcs_p + 8))("llc_llcp.c",0x38f,*(code **)(_r_plf_funcs_p + 8));
+          (**(code **)(_r_plf_funcs_p + 8))("llc_llcp.c",0x392,*(code **)(_r_plf_funcs_p + 8));
         }
         bVar7 = *(byte *)(piVar2 + 2);
         __dest = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
@@ -58,14 +63,16 @@ void r_llc_llcp_tx_check(int param_1)
           }
           (**(code **)(_r_modules_funcs_p + 0x1c))
                     (iVar3 + 0x28,piVar2,*(code **)(_r_modules_funcs_p + 0x1c));
-                    /* WARNING: Could not recover jumptable at 0x0001083a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001087e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-          (**(code **)(_r_modules_funcs_p + 0x4c))(iVar3 + 0x28,piVar2);
+          (**(code **)(_r_modules_funcs_p + 0x4c))
+                    (iVar3 + 0x28,piVar2,*(code **)(_r_modules_funcs_p + 0x4c));
           return;
         }
-                    /* WARNING: Could not recover jumptable at 0x000107f6. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010834. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-        (**(code **)(_r_ip_funcs_p + 0xf8))(*(undefined2 *)(iVar4 + 4));
+        (**(code **)(_r_ip_funcs_p + 0xf8))
+                  (*(undefined2 *)(iVar4 + 4),*(code **)(_r_ip_funcs_p + 0xf8));
         return;
       }
       bVar1 = false;

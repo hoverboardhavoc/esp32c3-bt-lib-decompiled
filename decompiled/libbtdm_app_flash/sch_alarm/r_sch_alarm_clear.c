@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> sch_alarm.o -> r_sch_alarm_clear
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,11 +12,12 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 r_sch_alarm_clear(int param_1)
+int r_sch_alarm_clear(int param_1)
 
 {
-  undefined4 uVar1;
+  int iVar1;
   int iVar2;
+  uint uVar3;
   
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   if (param_1 == _sch_alarm_env) {
@@ -24,24 +25,20 @@ undefined4 r_sch_alarm_clear(int param_1)
     if (_sch_alarm_env != 0) {
       r_sch_alarm_prog();
     }
+    iVar1 = 0;
   }
   else {
-    iVar2 = r_co_list_extract(&sch_alarm_env,param_1);
-    if (iVar2 == 0) {
-      uVar1 = 2;
-      goto _L35;
-    }
+    uVar3 = r_co_list_extract(&sch_alarm_env,param_1);
+    iVar1 = ((uVar3 ^ 1) & 0x7f) << 1;
   }
-  uVar1 = 0;
-_L35:
   iVar2 = r_sdk_config_get_opts_ext();
   if ((*(uint *)(iVar2 + 0x28) & 1) != 0) {
     iVar2 = r_sdk_config_get_opts_ext();
     if (*(byte *)(iVar2 + 0x2c) < 3) {
-      r_ble_log_internal_x2(0x40240001,param_1,uVar1);
+      r_ble_log_internal_x2(0x40240001,param_1,iVar1);
     }
   }
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
-  return uVar1;
+  return iVar1;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> hci_tl.o -> r_hci_acl_tx_data_alloc
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,15 +13,14 @@
 int r_hci_acl_tx_data_alloc(uint param_1,uint param_2)
 
 {
-  int iVar1;
-  byte *pbVar2;
+  byte *pbVar1;
+  int iVar2;
   undefined1 *puVar3;
   
-  pbVar2 = (byte *)r_sdk_config_get_hl_derived_opts();
-  if ((param_1 & 0xfff) < (uint)*pbVar2) {
-    iVar1 = 0;
-    if (((param_1 >> 0xe == 0) && (param_2 < 0xfc)) &&
-       (iVar1 = r_ble_util_buf_acl_tx_alloc(param_2), iVar1 == 0)) {
+  pbVar1 = (byte *)r_sdk_config_get_hl_derived_opts();
+  if (((param_1 & 0xfff) < (uint)*pbVar1) && (param_1 >> 0xe == 0)) {
+    iVar2 = 0;
+    if ((param_2 < 0xfc) && (iVar2 = r_ble_util_buf_acl_tx_alloc(param_2), iVar2 == 0)) {
       puVar3 = (undefined1 *)r_ke_msg_alloc(0x1103,0,0x1a,1);
       *puVar3 = 1;
       r_hci_send_2_host();
@@ -29,8 +28,8 @@ int r_hci_acl_tx_data_alloc(uint param_1,uint param_2)
     }
   }
   else {
-    iVar1 = 0;
+    iVar2 = 0;
   }
-  return iVar1;
+  return iVar2;
 }
 

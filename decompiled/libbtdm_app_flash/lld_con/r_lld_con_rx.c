@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_rx
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,16 +36,16 @@ void r_lld_con_rx(uint param_1)
     bVar1 = *(byte *)(_p_lld_env + 0xd8);
     iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
     iVar7 = (uint)bVar1 * 0x14;
-    uVar6 = *(ushort *)(iVar5 + iVar7 + 2);
+    uVar6 = *(ushort *)(iVar7 + 2 + iVar5);
     iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
-    uVar2 = *(ushort *)(iVar5 + iVar7 + 4);
+    uVar2 = *(ushort *)(iVar7 + 4 + iVar5);
     if (((uVar6 & 1) == 0) && (r_lld_con_rx_sync_time_update(param_1,iVar3), (uVar6 & 8) == 0)) {
       *(undefined4 *)(iVar3 + 0x58) = *(undefined4 *)(iVar3 + 0x50);
       if ((uVar6 & 0x66) == 0) {
         if ((uVar6 & 0x10) == 0) {
           iVar5 = r_emi_get_mem_addr_by_offset(0x400);
           uVar6 = uVar2 >> 8;
-          *(undefined2 *)(iVar3 + 0x98) = *(undefined2 *)(iVar5 + param_1 * 0x5a + 0x50);
+          *(undefined2 *)(iVar3 + 0x98) = *(undefined2 *)(param_1 * 0x5a + 0x50 + iVar5);
           if ((uVar6 != 0) && ((uVar2 & 3) != 0)) {
             if ((4 < uVar6) && ((*(ushort *)(iVar3 + 0x84) & 0x20) != 0)) {
               uVar6 = uVar6 - 4;
@@ -65,8 +65,8 @@ void r_lld_con_rx(uint param_1)
               r_ble_log_internal_x1(0x40c30023,(uint)bVar1 << 8 | param_1 | (uint)uVar6 << 0x10);
             }
           }
-          *(undefined1 *)(iVar3 + 0x8f) = 2;
           *(ushort *)(iVar3 + 0x84) = *(ushort *)(iVar3 + 0x84) | 0x80;
+          *(undefined1 *)(iVar3 + 0x8f) = 2;
         }
       }
     }

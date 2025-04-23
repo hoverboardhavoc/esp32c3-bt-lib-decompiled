@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> sch_alarm.o -> r_sch_alarm_prog
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,27 +16,23 @@ void r_sch_alarm_prog(void)
 
 {
   int iVar1;
-  undefined4 uVar2;
-  int iVar3;
-  uint uVar4;
+  int iVar2;
+  uint uVar3;
   int extraout_a1;
-  int iVar5;
+  uint uVar4;
   
   iVar1 = _sch_alarm_env;
-  uVar2 = 0xffffffff;
+  uVar3 = 0xffffffff;
   if (_sch_alarm_env != 0) {
-    iVar3 = r_rwip_time_get(0xffffffff);
-    iVar5 = 2;
-    if (400 < 0x270U - extraout_a1) {
-      iVar5 = 1;
-    }
-    uVar4 = iVar3 + iVar5 & 0xfffffff;
-    if (0x7fffffe < (*(int *)(iVar1 + 4) - uVar4 & 0xfffffff)) {
+    iVar2 = r_rwip_time_get(0xffffffff);
+    uVar3 = *(uint *)(iVar1 + 4);
+    uVar4 = (0x270U - extraout_a1 < 0x191) + 1 + iVar2 & 0xfffffff;
+    if (0x7fffffe < (uVar3 - uVar4 & 0xfffffff)) {
       *(uint *)(iVar1 + 4) = uVar4;
+      uVar3 = uVar4;
     }
-    uVar2 = *(undefined4 *)(iVar1 + 4);
   }
-  r_rwip_timer_hs_set(uVar2);
+  r_rwip_timer_hs_set(uVar3);
   return;
 }
 

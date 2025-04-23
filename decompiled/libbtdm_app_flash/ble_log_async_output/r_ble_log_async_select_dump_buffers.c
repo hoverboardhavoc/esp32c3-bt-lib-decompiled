@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> ble_log_async_output.o -> r_ble_log_async_select_dump_buffers
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,32 +15,29 @@
 void r_ble_log_async_select_dump_buffers(uint param_1)
 
 {
-  int iVar1;
-  byte bVar2;
-  int iVar3;
+  int *piVar1;
+  int iVar2;
+  byte bVar3;
   int *piVar4;
-  int iVar5;
   
-  iVar1 = _ble_log_async_env;
   piVar4 = *(int **)(_ble_log_async_env + 0xc);
+  piVar1 = piVar4 + 3;
   *(byte *)(*piVar4 + 0x18) = *(byte *)(*piVar4 + 0x18) & 0xfe;
   *(byte *)(piVar4[1] + 0x18) = *(byte *)(piVar4[1] + 0x18) & 0xfe;
-  iVar1 = *(int *)(iVar1 + 0xc);
   *(byte *)(piVar4[2] + 0x18) = *(byte *)(piVar4[2] + 0x18) & 0xfe;
-  iVar5 = 0;
   do {
     if (param_1 == 0) {
       return;
     }
-    iVar3 = *(int *)(iVar1 + iVar5);
-    if (((param_1 & 1) == 0) ||
-       (bVar2 = *(byte *)(iVar3 + 0x18) | 1, (*(byte *)(iVar3 + 0x18) & 2) == 0)) {
-      bVar2 = *(byte *)(iVar3 + 0x18) & 0xfe;
+    iVar2 = *piVar4;
+    bVar3 = 0;
+    if ((param_1 & 1) != 0) {
+      bVar3 = (byte)(*(uint *)(iVar2 + 0x18) >> 1) & 1;
     }
-    *(byte *)(iVar3 + 0x18) = bVar2;
-    iVar5 = iVar5 + 4;
+    piVar4 = piVar4 + 1;
     param_1 = param_1 >> 1;
-  } while (iVar5 != 0xc);
+    *(byte *)(iVar2 + 0x18) = bVar3 | *(byte *)(iVar2 + 0x18) & 0xfe;
+  } while (piVar4 != piVar1);
   return;
 }
 

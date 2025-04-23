@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> hci.o -> r_hci_send_2_controller
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,42 +21,43 @@ void r_hci_send_2_controller(ushort *param_1)
   
   if (hci_ext_host != '\0') {
     r_assert_err(0,"hci.c",0x4cf);
-    goto _L67;
+    goto _L71;
   }
   uVar1 = param_1[-4];
   if (uVar1 == 0x1105) {
     iVar4 = r_hci_look_for_cmd_desc(param_1[-2]);
     if (iVar4 != 0) {
       uVar5 = *(byte *)(iVar4 + 2) & 0xf;
-      if (uVar5 != 1) {
-        if (((*(byte *)(iVar4 + 2) & 0xf) == 0) || (uVar5 == 2)) {
-          uVar1 = 0;
-          goto _L58;
+      if (uVar5 != 2) {
+        if (2 < uVar5) {
+          uVar1 = 3;
+          goto _L70;
         }
-        uVar1 = 3;
-        goto _L66;
+        if ((*(byte *)(iVar4 + 2) & 0xf) != 0) goto _L63;
       }
-      goto _L57;
+      uVar1 = 0;
+_L61:
+      param_1[-3] = uVar1;
+      r_ke_msg_send(param_1);
+      return;
     }
   }
   else {
     uVar5 = 0x1106;
-_L66:
+_L70:
     if (uVar1 == uVar5) {
-_L57:
-      uVar2 = *param_1 & 0xfff;
+_L63:
+      uVar1 = *param_1;
       pbVar3 = (byte *)r_sdk_config_get_hl_derived_opts();
+      uVar2 = uVar1 & 0xfff;
       if ((uVar2 < *pbVar3) && (r_hci_look_for_le_evt_desc[uVar2] != (code)0x0)) {
         uVar1 = (ushort)(uVar2 << 8) | 1;
-_L58:
-        param_1[-3] = uVar1;
-        r_ke_msg_send(param_1);
-        return;
+        goto _L61;
       }
     }
   }
   r_assert_warn(param_1[-4],param_1[-2],"hci.c",0x4c5);
-_L67:
+_L71:
   r_ke_msg_free(param_1 + -6);
   return;
 }

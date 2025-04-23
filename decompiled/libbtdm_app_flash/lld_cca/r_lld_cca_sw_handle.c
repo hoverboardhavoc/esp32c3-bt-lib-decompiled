@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_cca.o -> r_lld_cca_sw_handle
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,25 +13,27 @@
 void r_lld_cca_sw_handle(int param_1,uint param_2,int param_3)
 
 {
-  int iVar1;
+  ushort uVar1;
   byte *pbVar2;
   int iVar3;
   byte *pbVar4;
   byte bVar5;
+  int iVar6;
   
   if ((byte)ble_2_rf_chan_tab[*(byte *)(p_lld_cca + 8)] == param_2) {
     iVar3 = r_lld_read_clock();
-    iVar1 = p_lld_cca;
+    iVar6 = p_lld_cca;
     pbVar2 = (byte *)(*(int *)(p_lld_cca + 0x28) + (uint)*(byte *)(p_lld_cca + 8) * 0xc);
     if ((0x7fffffe < (iVar3 - *(int *)(pbVar2 + 4) & 0xfffffffU)) && (param_3 == 0)) {
       pbVar2[1] = (byte)param_1;
-      iVar3 = (int)*(char *)(iVar1 + 7);
-      if ((*(ushort *)(iVar1 + 4) & 0x10) == 0) {
-        if (iVar3 < param_1) {
+      uVar1 = *(ushort *)(iVar6 + 4);
+      iVar6 = (int)*(char *)(iVar6 + 7);
+      if ((uVar1 & 0x10) == 0) {
+        if (iVar6 < param_1) {
           r_lld_cca_set_thresh(0xffffff88);
           *pbVar2 = *pbVar2 | 0x20;
           pbVar2[8] = pbVar2[8] + 1;
-          if ((*(ushort *)(p_lld_cca + 4) & 4) != 0) {
+          if ((uVar1 & 4) != 0) {
             if (pbVar2[8] == *(byte *)(p_lld_cca + 0x1a)) {
               pbVar4 = (byte *)(*(int *)(p_lld_cca + 0x1c) + (uint)(*(byte *)(p_lld_cca + 8) >> 3));
               *pbVar4 = ~(byte)(1 << (*(byte *)(p_lld_cca + 8) & 7)) & *pbVar4;
@@ -47,7 +49,7 @@ void r_lld_cca_sw_handle(int param_1,uint param_2,int param_3)
         }
       }
       else {
-        if (iVar3 < param_1) {
+        if (iVar6 < param_1) {
           r_lld_cca_chan_handle(1);
           bVar5 = *pbVar2 | 8;
         }

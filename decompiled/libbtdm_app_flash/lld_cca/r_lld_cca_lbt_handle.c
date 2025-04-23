@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_cca.o -> r_lld_cca_lbt_handle
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,30 +14,31 @@ void r_lld_cca_lbt_handle(int param_1)
 
 {
   byte bVar1;
-  short sVar2;
+  ushort uVar2;
   short sVar3;
-  byte *pbVar4;
-  int iVar5;
-  uint uVar6;
+  short sVar4;
+  byte *pbVar5;
+  int iVar6;
   
-  pbVar4 = (byte *)(*(int *)(p_lld_cca + 0x28) + (uint)*(byte *)(p_lld_cca + 8) * 0xc);
-  if (((int)(uint)*(ushort *)(p_lld_cca + 4) >> 8 & 0xfU) == 2) {
+  iVar6 = p_lld_cca;
+  uVar2 = *(ushort *)(p_lld_cca + 4);
+  pbVar5 = (byte *)(*(int *)(p_lld_cca + 0x28) + (uint)*(byte *)(p_lld_cca + 8) * 0xc);
+  if ((uVar2 & 0xf00) == 0x200) {
     r_lld_cca_set_thresh(0);
-    *pbVar4 = *pbVar4 & 0x7f;
+    *pbVar5 = *pbVar5 & 0x7f;
   }
   else {
     r_lld_cca_set_thresh((int)*(char *)(p_lld_cca + 7));
   }
-  if (*(ushort *)(p_lld_cca + 4) >> 0xc == 1) {
-    bVar1 = *(byte *)(p_lld_cca + 0xd);
-    sVar2 = *(short *)(p_lld_cca + 0x10);
-    sVar3 = *(short *)(p_lld_cca + 0x14);
-    iVar5 = r_emi_get_mem_addr_by_offset(0x400);
-    *(short *)(iVar5 + (uint)bVar1 * 0x5a + 0x20) = sVar2 - sVar3;
+  if (uVar2 >> 0xc == 1) {
+    sVar3 = *(short *)(iVar6 + 0x10);
+    sVar4 = *(short *)(iVar6 + 0x14);
+    bVar1 = *(byte *)(iVar6 + 0xd);
+    iVar6 = r_emi_get_mem_addr_by_offset(0x400);
+    *(short *)((uint)bVar1 * 0x5a + 0x20 + iVar6) = sVar3 - sVar4;
   }
-  uVar6 = (uint)rwip_prog_delay;
-  *pbVar4 = *pbVar4 & 0xf5 | 0x41;
-  *(uint *)(pbVar4 + 4) = (uVar6 - 1) + param_1;
+  *(uint *)(pbVar5 + 4) = (rwip_prog_delay - 1) + param_1;
+  *pbVar5 = *pbVar5 & 0xf5 | 0x41;
   return;
 }
 

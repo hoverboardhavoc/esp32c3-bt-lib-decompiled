@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> hci_tl.o -> r_hci_tl_hci_pkt_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,18 +22,18 @@ void r_hci_tl_hci_pkt_handler(void)
   void *__dest;
   undefined2 uVar5;
   
-  pcVar1 = _hci_tl_env;
-  if (*_hci_tl_env == '\x01') {
+  pcVar1 = _memcpy;
+  if (*_memcpy == '\x01') {
     uVar3 = 6;
-    if (_hci_tl_env[3] != '\0') {
+    if (_memcpy[3] != '\0') {
       uVar3 = 7;
     }
     r_ke_event_set(uVar3);
     return;
   }
-  if (*_hci_tl_env == '\x02') {
-    uVar2 = *(undefined2 *)(_hci_tl_env + 1);
-    if (*(short *)(_hci_tl_env + 3) == 0) {
+  if (*_memcpy == '\x02') {
+    uVar2 = *(undefined2 *)(_memcpy + 1);
+    if (*(short *)(_memcpy + 3) == 0) {
       iVar4 = 0;
       uVar5 = 0;
     }
@@ -44,7 +44,7 @@ void r_hci_tl_hci_pkt_handler(void)
         if (1 < _g_bt_plf_log_level) {
           ets_printf("HCITL: fail to alloc acl %0x, %0x\n",iVar4,0);
         }
-        goto _L227;
+        goto _L235;
       }
       memcpy(__dest,pcVar1 + 5,(uint)*(ushort *)(pcVar1 + 3));
       uVar5 = *(undefined2 *)(pcVar1 + 3);
@@ -52,7 +52,7 @@ void r_hci_tl_hci_pkt_handler(void)
     }
     r_hci_acl_tx_data_received(uVar2,uVar5,iVar4);
   }
-_L227:
+_L235:
   r_vhci_notify_host_send_available();
   return;
 }

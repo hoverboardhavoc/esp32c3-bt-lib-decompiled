@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> h4tl.o -> r_h4tl_tx_evt_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,30 +15,40 @@
 void r_h4tl_tx_evt_handler(void)
 
 {
-  int iVar1;
+  bool bVar1;
+  bool bVar2;
+  int iVar3;
   
   (**(code **)(_r_modules_funcs_p + 0xec))(8,*(code **)(_r_modules_funcs_p + 0xec));
-  if (DAT_0001103c != 0xff) {
-    iVar1 = (uint)DAT_0001103c * 0xc;
-    if (*(int *)(&DAT_00011030 + iVar1) != 0) {
+  bVar1 = false;
+  bVar2 = false;
+  while ((!bVar1 && (DAT_00011040 != 0xff))) {
+    iVar3 = (uint)DAT_00011040 * 0xc;
+    if (*(int *)(&DAT_00011034 + iVar3) != 0) {
       return;
     }
-    if (*(code **)(&DAT_00011034 + iVar1) != (code *)0x0) {
-      (**(code **)(&DAT_00011034 + iVar1))();
+    if (*(code **)(&DAT_00011038 + iVar3) != (code *)0x0) {
+      (**(code **)(&DAT_00011038 + iVar3))();
     }
-    if ((_DAT_00011030 != 0) && (DAT_0001103a != '\0')) {
-      DAT_0001103c = 0;
-                    /* WARNING: Could not recover jumptable at 0x000102c6. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
+    DAT_00011040 = 0xff;
+    if ((!bVar1) && (_DAT_00011034 != 0)) {
+      DAT_00011040 = -(DAT_0001103e == '\0');
+    }
+    bVar1 = true;
+    if (DAT_00011040 != 0xff) {
       (**(code **)(_h4tl_env + 4))
-                (_DAT_00011038 + 1,*(undefined4 *)(_r_modules_funcs_p + 0x94),&h4tl_env);
-      return;
+                (_DAT_0001103c + 1,*(undefined4 *)(_r_modules_funcs_p + 0x94),&h4tl_env,
+                 *(code **)(_h4tl_env + 4));
+      bVar1 = true;
+      bVar2 = true;
     }
-    DAT_0001103c = 0xff;
   }
-                    /* WARNING: Could not recover jumptable at 0x000102e2. Too many branches */
+  if (bVar2) {
+    return;
+  }
+                    /* WARNING: Could not recover jumptable at 0x000102b4. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_modules_funcs_p + 0x2b0))(2);
+  (**(code **)(_r_modules_funcs_p + 0x2b0))(2,*(code **)(_r_modules_funcs_p + 0x2b0));
   return;
 }
 

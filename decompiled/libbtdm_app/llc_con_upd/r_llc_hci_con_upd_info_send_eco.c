@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_con_upd.o -> r_llc_hci_con_upd_info_send_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_llc_hci_con_upd_info_send_eco(uint param_1,int param_2,int param_3)
+void r_llc_hci_con_upd_info_send_eco(int param_1,int param_2,int param_3)
 
 {
   undefined2 uVar1;
@@ -24,9 +24,12 @@ void r_llc_hci_con_upd_info_send_eco(uint param_1,int param_2,int param_3)
   undefined2 uStack_2c;
   undefined2 uStack_2a;
   undefined2 uStack_28;
-  ushort uStack_26;
-  undefined2 uStack_24;
-  undefined2 uStack_22;
+  byte bStack_26;
+  undefined1 uStack_25;
+  undefined1 uStack_24;
+  undefined1 uStack_23;
+  undefined1 uStack_22;
+  undefined1 uStack_21;
   
   (**(code **)(_r_ip_funcs_p + 2000))(*(code **)(_r_ip_funcs_p + 2000));
   if (((param_3 != 0) && (param_2 == 0)) &&
@@ -51,7 +54,7 @@ void r_llc_hci_con_upd_info_send_eco(uint param_1,int param_2,int param_3)
   if (bVar6 != 0) {
     puVar2 = (undefined1 *)
              (**(code **)(_r_modules_funcs_p + 200))
-                       (0x1104,param_1 & 0xffff,0,10,*(code **)(_r_modules_funcs_p + 200));
+                       (0x1104,param_1,0,10,*(code **)(_r_modules_funcs_p + 200));
     *puVar2 = 3;
     puVar2[1] = (char)param_2;
     iVar3 = _r_ip_funcs_p;
@@ -68,12 +71,15 @@ void r_llc_hci_con_upd_info_send_eco(uint param_1,int param_2,int param_3)
   }
   if (((bVar6 != 0) && (_bt_rf_coex_hooks_p != 0)) && (*(int *)(_bt_rf_coex_hooks_p + 4) != 0)) {
     iVar3 = (**(code **)(_r_ip_funcs_p + 0x4f0))(param_1,*(code **)(_r_ip_funcs_p + 0x4f0));
+    uStack_25 = 0;
     uStack_24 = 0;
     uStack_2c = (undefined2)*(undefined4 *)(iVar3 + 4);
     uStack_2a = *(undefined2 *)(iVar4 + 0x10);
+    uStack_23 = 0;
     uStack_22 = 0;
+    uStack_21 = 0;
     uStack_28 = (undefined2)*(undefined4 *)(iVar3 + 0x10);
-    uStack_26 = *(byte *)(iVar4 + 0x42) & 0xff01;
+    bStack_26 = (byte)*(undefined2 *)(iVar4 + 0x42) & 1;
     (**(code **)(_bt_rf_coex_hooks_p + 4))(param_1,7,&uStack_2c,*(code **)(_bt_rf_coex_hooks_p + 4))
     ;
   }

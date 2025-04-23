@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_current_tx_power_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,9 @@ undefined4 r_lld_con_current_tx_power_get(int param_1,undefined4 param_2)
   }
   else {
     iVar1 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-    uVar2 = (*_rwip_rf)(*(ushort *)(param_1 * 0x5a + 0x18 + iVar1) & 0xff,param_2,_rwip_rf);
+    uVar2 = (*_lld_exp_sync_pos_tab)
+                      (*(ushort *)(param_1 * 0x5a + 0x18 + iVar1) & 0xff,param_2,
+                       _lld_exp_sync_pos_tab);
   }
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   return uVar2;

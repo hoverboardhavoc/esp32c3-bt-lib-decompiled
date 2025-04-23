@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_dl_upd.o -> r_llc_rem_dl_upd_proc
  *
  * (C) Espressif, Apache License 2.0.
@@ -49,10 +49,8 @@ void r_llc_rem_dl_upd_proc(uint param_1,uint param_2,uint param_3,uint param_4,u
     uVar1 = uVar3;
     if (iVar2 != 0) {
       iVar2 = r_bt_rf_coex_conn_phy_coded_data_time_limit_en_get();
-      if (iVar2 == 0) {
-        uVar1 = 0xa90;
-      }
-      else {
+      uVar1 = 0xa90;
+      if (iVar2 != 0) {
         uVar1 = (uint)*(ushort *)(*(int *)(_bt_rf_coex_cfg_p + 0x44) + 2);
       }
       if (uVar1 < 0xa90) {
@@ -79,7 +77,7 @@ void r_llc_rem_dl_upd_proc(uint param_1,uint param_2,uint param_3,uint param_4,u
           param_2 = 0x848;
         }
       }
-      goto _L90;
+      goto _L92;
     }
   }
   if (*(char *)(iVar4 + 0x1d) == '\x03') {
@@ -91,10 +89,8 @@ void r_llc_rem_dl_upd_proc(uint param_1,uint param_2,uint param_3,uint param_4,u
     param_2 = uVar3;
     if (iVar2 != 0) {
       iVar2 = r_bt_rf_coex_conn_phy_coded_data_time_limit_en_get();
-      if (iVar2 == 0) {
-        param_2 = 0xa90;
-      }
-      else {
+      param_2 = 0xa90;
+      if (iVar2 != 0) {
         param_2 = (uint)**(ushort **)(_bt_rf_coex_cfg_p + 0x44);
       }
       if (param_2 < 0xa90) {
@@ -105,7 +101,7 @@ void r_llc_rem_dl_upd_proc(uint param_1,uint param_2,uint param_3,uint param_4,u
       }
     }
   }
-_L90:
+_L92:
   if (((*(ushort *)(iVar4 + 0x16) != uVar7) || (*(ushort *)(iVar4 + 0x14) != uVar6)) ||
      ((*(ushort *)(iVar4 + 0x1a) != param_2 || (*(ushort *)(iVar4 + 0x18) != uVar1)))) {
     *(short *)(iVar4 + 0x16) = (short)param_3;

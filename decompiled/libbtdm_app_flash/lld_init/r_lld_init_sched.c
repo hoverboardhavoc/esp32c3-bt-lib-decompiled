@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_init.o -> r_lld_init_sched
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,114 +16,114 @@ void r_lld_init_sched(int param_1,int param_2,int param_3)
 
 {
   byte bVar1;
-  ushort uVar2;
-  int iVar3;
-  int iVar4;
+  int iVar2;
+  ushort uVar3;
+  uint uVar4;
   int iVar5;
   int iVar6;
-  byte bVar7;
+  int iVar7;
   uint uVar8;
   uint uVar9;
+  byte bVar10;
   
-  iVar3 = *(int *)(_lld_init_env + param_1 * 4);
-  iVar4 = r_lld_read_clock();
-  uVar8 = (iVar4 - param_2 & 0xfffffffU) + 1 >> 1;
-  bVar1 = *(byte *)(iVar3 + 0x52);
-  if (*(char *)(iVar3 + 0x3d) == '\x01') {
-    r_sch_slice_bg_remove(1);
-    *(undefined4 *)(iVar3 + 4) = *(undefined4 *)(iVar3 + 0x40);
-    *(undefined4 *)(iVar3 + 8) = *(undefined4 *)(iVar3 + 0x44);
-    *(uint *)(iVar3 + 0x10) =
-         ((uint)*(ushort *)(&lld_init_max_aux_dur_tab + (uint)*(byte *)(iVar3 + 0x4d) * 2) +
-         *(int *)(iVar3 + 0x48)) * 2 + (uint)_sdk_cfg_priv_opts;
-    bVar7 = DAT_0001303e;
-    if (DAT_0001303e < *(byte *)(iVar3 + 0x16)) {
-      bVar7 = *(byte *)(iVar3 + 0x16);
+  iVar2 = *(int *)(_lld_init_env + param_1 * 4);
+  iVar5 = r_lld_read_clock();
+  bVar1 = *(byte *)(iVar2 + 0x52);
+  uVar4 = (iVar5 - param_2 & 0xfffffffU) + 1 >> 1;
+  if (*(char *)(iVar2 + 0x3d) == '\x01') {
+    r_sch_slice_bg_remove();
+    *(undefined4 *)(iVar2 + 4) = *(undefined4 *)(iVar2 + 0x40);
+    *(undefined4 *)(iVar2 + 8) = *(undefined4 *)(iVar2 + 0x44);
+    *(uint *)(iVar2 + 0x10) =
+         ((uint)*(ushort *)(&lld_init_max_aux_dur_tab + (uint)*(byte *)(iVar2 + 0x4d) * 2) +
+         *(int *)(iVar2 + 0x48)) * 2 + (uint)_sdk_cfg_priv_opts;
+    bVar10 = DAT_0001303e;
+    if (DAT_0001303e < *(byte *)(iVar2 + 0x16)) {
+      bVar10 = *(byte *)(iVar2 + 0x16);
     }
-    *(byte *)(iVar3 + 0x16) = bVar7;
-    *(ushort *)(iVar3 + 0x14) = DAT_0001303f & 0xf | 0x2000;
-    iVar5 = r_sch_arb_insert(iVar3);
-    if (iVar5 == 0) {
-      uVar9 = (uint)*(byte *)(iVar3 + 0x4d);
-      uVar8 = *(uint *)(iVar3 + 0x48);
-      *(char *)(iVar3 + 0x3e) = (1 < uVar9) + '\x02';
-      if ((uVar9 << 4 & 0xffffffcf) != 0) {
-        r_assert_err("lld_init.c",0x1bf);
+    *(byte *)(iVar2 + 0x16) = bVar10;
+    *(ushort *)(iVar2 + 0x14) = DAT_0001303f & 0xf | 0x2000;
+    iVar6 = r_sch_arb_insert(iVar2);
+    if (iVar6 == 0) {
+      bVar10 = *(byte *)(iVar2 + 0x4d);
+      uVar4 = *(uint *)(iVar2 + 0x48);
+      *(char *)(iVar2 + 0x3e) = (1 < bVar10) + '\x02';
+      if ((bVar10 & 0xfc) != 0) {
+        r_assert_err(0x10000,0x1bf);
       }
+      iVar6 = (uint)bVar1 * 0x5a;
       iVar5 = r_emi_get_mem_addr_by_offset(0x400);
-      iVar4 = (uint)bVar1 * 0x5a;
-      uVar2 = *(ushort *)(iVar5 + iVar4 + 4);
+      uVar3 = *(ushort *)(iVar5 + iVar6 + 4);
       iVar5 = r_emi_get_mem_addr_by_offset(0x400);
-      *(ushort *)(iVar5 + iVar4 + 4) = uVar2 & 0xffcf | (ushort)(uVar9 << 4);
-      uVar2 = *(ushort *)(&lld_init_max_aux_dur_tab + uVar9 * 2);
+      *(ushort *)(iVar5 + iVar6 + 4) = uVar3 & 0xffcf | (ushort)bVar10 << 4;
+      uVar3 = *(ushort *)(&lld_init_max_aux_dur_tab + (uint)bVar10 * 2);
       iVar5 = r_emi_get_mem_addr_by_offset(0x400);
-      *(ushort *)(iVar5 + iVar4 + 0x20) = (ushort)(((uint)uVar2 + uVar8 + 0x270) / 0x271) & 0xff;
-      if (uVar8 < 0x4000) {
+      *(ushort *)(iVar6 + 0x20 + iVar5) = (ushort)(((uint)uVar3 + uVar4 + 0x270) / 0x271) & 0xff;
+      if (uVar4 < 0x4000) {
         iVar5 = r_emi_get_mem_addr_by_offset(0x400);
-        *(short *)(iVar5 + iVar4 + 0x1a) = (short)(uVar8 + 1 >> 1);
+        uVar3 = (ushort)(uVar4 + 1 >> 1);
       }
       else {
         iVar5 = r_emi_get_mem_addr_by_offset(0x400);
-        *(ushort *)(iVar5 + iVar4 + 0x1a) = (ushort)((uVar8 + 0x270) / 0x271) & 0xff | 0x8000;
+        uVar3 = (ushort)((uVar4 + 0x270) / 0x271) & 0xff | 0x8000;
       }
-      uVar8 = (uint)*(byte *)(iVar3 + 0x4c) << 10;
-      if ((uVar8 & 0x30000) != 0) {
-        r_assert_err(0,"lld_init.c",0x635);
+      *(ushort *)(iVar5 + iVar6 + 0x1a) = uVar3;
+      bVar1 = *(byte *)(iVar2 + 0x4c);
+      if ((bVar1 & 0xc0) != 0) {
+        r_assert_err(0,0x10000,0x635);
       }
       iVar5 = r_emi_get_mem_addr_by_offset(0x400);
-      uVar2 = *(ushort *)(iVar5 + iVar4 + 0x26);
+      uVar3 = *(ushort *)(iVar5 + iVar6 + 0x26);
       iVar5 = r_emi_get_mem_addr_by_offset(0x400);
-      *(ushort *)(iVar4 + 0x26 + iVar5) = uVar2 & 0x3ff | (ushort)uVar8;
-      goto _L87;
+      *(ushort *)(iVar5 + iVar6 + 0x26) = uVar3 & 0x3ff | (ushort)bVar1 << 10;
+      goto _L88;
     }
-    *(undefined1 *)(iVar3 + 0x3d) = 0;
+    *(undefined1 *)(iVar2 + 0x3d) = 0;
   }
-  if (uVar8 < *(uint *)(iVar3 + 0x24)) {
-    *(uint *)(iVar3 + 0x24) = *(uint *)(iVar3 + 0x24) - uVar8;
+  if (uVar4 < *(uint *)(iVar2 + 0x24)) {
+    uVar4 = *(uint *)(iVar2 + 0x24) - uVar4;
   }
   else {
     r_sch_slice_bg_remove(1);
-    if (_sch_slice_params == -1) {
-      *(uint *)(iVar3 + 4) =
-           ((uint)*(ushort *)(iVar3 + 0x2c) - (uint)*(ushort *)(iVar3 + 0x2e)) * 2 + iVar4 &
-           0xffffffc;
+    uVar4 = (uint)*(ushort *)(iVar2 + 0x2e);
+    uVar9 = _sch_slice_params;
+    if (_sch_slice_params == 0xffffffff) {
+      uVar9 = (*(ushort *)(iVar2 + 0x2c) - uVar4) * 2 + iVar5 & 0xffffffc;
     }
-    else {
-      *(int *)(iVar3 + 4) = _sch_slice_params;
-    }
-    *(undefined4 *)(iVar3 + 8) = 0;
-    *(uint *)(iVar3 + 0x24) = (uint)*(ushort *)(iVar3 + 0x2e);
+    *(uint *)(iVar2 + 4) = uVar9;
+    *(undefined4 *)(iVar2 + 8) = 0;
   }
-  iVar4 = *(int *)(iVar3 + 0x24);
-  uVar8 = iVar4 * 0x4e2;
-  if (_r_assert_param < uVar8) {
-    uVar8 = (uint)_r_assert_param;
+  uVar8 = (uint)_r_assert_param;
+  *(uint *)(iVar2 + 0x24) = uVar4;
+  uVar9 = uVar4 * 0x4e2;
+  if (uVar8 < uVar4 * 0x4e2) {
+    uVar9 = uVar8;
   }
-  *(uint *)(iVar3 + 0x10) = uVar8;
+  *(uint *)(iVar2 + 0x10) = uVar9;
   if (param_3 == 0) {
-    *(undefined1 *)(iVar3 + 0x16) = DAT_00013042;
-    *(undefined4 *)(iVar3 + 0x28) = *(undefined4 *)(iVar3 + 4);
+    *(undefined1 *)(iVar2 + 0x16) = DAT_00013042;
+    *(undefined4 *)(iVar2 + 0x28) = *(undefined4 *)(iVar2 + 4);
   }
-  *(ushort *)(iVar3 + 0x14) = DAT_00013043 & 0xf | 0x6000;
-  *(undefined1 *)(iVar3 + 0x3e) = 1;
-  iVar6 = r_emi_get_mem_addr_by_offset(0x400);
-  iVar5 = (uint)bVar1 * 0x5a;
-  *(short *)(iVar6 + iVar5 + 0x20) = (short)iVar4;
-  iVar4 = *(int *)(iVar3 + 0x24);
-  if (iVar4 << 0x10 < 0) {
-    r_assert_err(0,"lld_init.c",0x4ab);
+  iVar6 = (uint)bVar1 * 0x5a;
+  *(ushort *)(iVar2 + 0x14) = DAT_00013043 & 0xf | 0x6000;
+  *(undefined1 *)(iVar2 + 0x3e) = 1;
+  iVar5 = r_emi_get_mem_addr_by_offset(0x400);
+  *(short *)(iVar6 + 0x20 + iVar5) = (short)uVar4;
+  iVar5 = *(int *)(iVar2 + 0x24);
+  if (iVar5 << 0x10 < 0) {
+    r_assert_err(0,0x10000,0x4ab);
   }
-  iVar6 = r_emi_get_mem_addr_by_offset(0x400);
-  *(ushort *)(iVar6 + iVar5 + 0x1a) = (ushort)iVar4 | 0x8000;
-  iVar4 = r_emi_get_mem_addr_by_offset(0x400);
-  *(undefined2 *)(iVar5 + 0x46 + iVar4) = 0;
-  iVar4 = r_sch_arb_insert(iVar3);
-  if (iVar4 != 0) {
-    r_assert_err(0,"lld_init.c",0x27b);
+  iVar7 = r_emi_get_mem_addr_by_offset(0x400);
+  *(ushort *)(iVar6 + 0x1a + iVar7) = (ushort)iVar5 | 0x8000;
+  iVar5 = r_emi_get_mem_addr_by_offset(0x400);
+  *(undefined2 *)(iVar6 + 0x46 + iVar5) = 0;
+  iVar5 = r_sch_arb_insert(iVar2);
+  if (iVar5 != 0) {
+    r_assert_err(0,0x10000,0x27b);
     return;
   }
-_L87:
-  *(undefined1 *)(iVar3 + 0x50) = 0;
+_L88:
+  *(undefined1 *)(iVar2 + 0x50) = 0;
   return;
 }
 

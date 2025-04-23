@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> sch_plan.o -> r_sch_plan_interval_req
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,6 +23,7 @@ void r_sch_plan_interval_req(uint *param_1)
   uint uVar6;
   char cVar7;
   uint uVar8;
+  uint uVar9;
   
   uVar6 = param_1[1];
   uVar2 = *param_1;
@@ -44,31 +45,32 @@ void r_sch_plan_interval_req(uint *param_1)
     uVar8 = (uint)*(byte *)((int)param_1 + 0x12);
     if (uVar8 == 0) {
       uVar8 = 0xffffffff;
-      goto _L112;
+      goto _L99;
     }
     uVar5 = uVar6 / uVar8;
-_L121:
+_L108:
     uVar8 = uVar5 * uVar8;
   }
   else {
     if (uVar5 <= uVar6) {
       uVar8 = uVar6 / uVar5;
-      goto _L121;
+      goto _L108;
     }
-    uVar8 = 0xffffffff;
     uVar4 = uVar6;
+    uVar9 = 0xffffffff;
     do {
       bVar1 = uVar5 % uVar4 != 0;
-      if (!bVar1) {
-        uVar8 = uVar4;
+      uVar8 = uVar4;
+      if (bVar1) {
+        uVar8 = uVar9;
       }
       uVar4 = uVar4 - 2;
-    } while ((uVar2 <= uVar4) && (bVar1));
+    } while ((uVar2 <= uVar4) && (uVar9 = uVar8, bVar1));
   }
   if (uVar8 < uVar2) {
     return;
   }
-_L112:
+_L99:
   if (uVar8 <= uVar6) {
     param_1[5] = uVar8;
   }

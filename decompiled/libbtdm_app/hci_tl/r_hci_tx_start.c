@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> hci_tl.o -> r_hci_tx_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -78,16 +78,18 @@ _L127:
   memcpy = (code)0x0;
   iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   if (*(char *)(iVar2 + 0x17) != '\x01') {
-                    /* WARNING: Could not recover jumptable at 0x00010920. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010956. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_r_modules_funcs_p + 0x88))(uVar5,iVar1,*(undefined4 *)(_r_ip_funcs_p + 100));
+    (**(code **)(_r_modules_funcs_p + 0x88))
+              (uVar5,iVar1,*(undefined4 *)(_r_ip_funcs_p + 100),
+               *(code **)(_r_modules_funcs_p + 0x88));
     return;
   }
   *(undefined1 *)(iVar1 + -1) = uVar5;
   (**(code **)(_r_plf_funcs_p + 0xe0))(iVar1 + -1,uVar3 + 1,*(code **)(_r_plf_funcs_p + 0xe0));
-                    /* WARNING: Could not recover jumptable at 0x0001086a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000108a0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_modules_funcs_p + 0x108))(5);
+  (**(code **)(_r_modules_funcs_p + 0x108))(5,*(code **)(_r_modules_funcs_p + 0x108));
   return;
 }
 

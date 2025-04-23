@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> task.o -> r_btdm_task_post
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,8 +16,8 @@ undefined4 r_btdm_task_post(uint param_1,void *param_2,size_t param_3,int param_
 
 {
   void *pvVar1;
-  undefined4 uVar2;
-  int iVar3;
+  int iVar2;
+  undefined4 uVar3;
   uint uStack_28;
   void *pvStack_24;
   
@@ -30,28 +30,28 @@ undefined4 r_btdm_task_post(uint param_1,void *param_2,size_t param_3,int param_
     pvVar1 = param_2;
     if ((param_2 != (void *)0x0) && (pvVar1 = param_2, 0 < (int)param_3)) {
       uStack_28 = uStack_28 | 0x80000000;
-      uVar2 = 0xfffffffe;
+      uVar3 = 0xfffffffe;
       pvStack_24 = (void *)(**(code **)(_r_osi_funcs_p + 0x74))
                                      (param_3,*(code **)(_r_osi_funcs_p + 0x74));
-      if (pvStack_24 == (void *)0x0) goto _L3;
+      if (pvStack_24 == (void *)0x0) goto _L9;
       memcpy(pvStack_24,param_2,param_3);
       pvVar1 = pvStack_24;
     }
     pvStack_24 = pvVar1;
-    iVar3 = (**(code **)(_r_osi_funcs_p + 0x54))
+    iVar2 = (**(code **)(_r_osi_funcs_p + 0x54))
                       (_g_rw_schd_queue,&uStack_28,-param_4,*(code **)(_r_osi_funcs_p + 0x54));
-    if ((param_4 != 0) && (iVar3 != 1)) {
+    if ((param_4 != 0) && (iVar2 != 1)) {
       if (0 < _g_bt_plf_log_level) {
         ets_printf("Send Queue Failed\n");
       }
-      uVar2 = 0xfffffffd;
+      uVar3 = 0xfffffffd;
       (**(code **)(_r_osi_funcs_p + 0x7c))(pvStack_24,*(code **)(_r_osi_funcs_p + 0x7c));
-      goto _L3;
+      goto _L9;
     }
   }
-  uVar2 = 0;
-_L3:
-  (**(code **)(_r_osi_funcs_p + 0x38))(btdm_ol_task_env,*(code **)(_r_osi_funcs_p + 0x38));
-  return uVar2;
+  uVar3 = 0;
+_L9:
+  (**(code **)(_r_osi_funcs_p + 0x38))(btdm_ol_task_env._8_4_,*(code **)(_r_osi_funcs_p + 0x38));
+  return uVar3;
 }
 

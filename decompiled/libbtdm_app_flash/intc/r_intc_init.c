@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> intc.o -> r_intc_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ void r_intc_init(void)
     r_assert_err(0,"intc.c",0xda);
   }
   iVar2 = (**(code **)(_r_osi_funcs_p + 8))
-                    (uVar1,8,0x10000,0,&_LANCHOR0,*(code **)(_r_osi_funcs_p + 8));
+                    (uVar1,8,0x10000,0,&rwble_intr_handle,*(code **)(_r_osi_funcs_p + 8));
   if (iVar2 != 0) {
     r_assert_param(8,iVar2,"intc.c",0xde);
   }
@@ -32,8 +32,8 @@ void r_intc_init(void)
   if (((*(char *)(iVar2 + 0x11) != '\0') ||
       (iVar2 = r_sdk_config_get_opts_ext(), *(char *)(iVar2 + 0x19) != '\0')) &&
      (iVar2 = (**(code **)(_r_osi_funcs_p + 8))
-                        (uVar1,5,bt_bb_isr_wrapper,0,&_LANCHOR1,*(code **)(_r_osi_funcs_p + 8)),
-     iVar2 != 0)) {
+                        (uVar1,5,bt_bb_isr_wrapper,0,&bt_bb_intr_handle,
+                         *(code **)(_r_osi_funcs_p + 8)), iVar2 != 0)) {
     r_assert_param(5,iVar2,"intc.c",0xe4);
     return;
   }

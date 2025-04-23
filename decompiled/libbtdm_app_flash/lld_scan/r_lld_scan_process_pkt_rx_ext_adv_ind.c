@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * Upstream date: 2025-04-03 18:07:15 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_process_pkt_rx_ext_adv_ind
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,7 +37,7 @@ void r_lld_scan_process_pkt_rx_ext_adv_ind(int param_1,int param_2,char *param_3
   }
   iVar14 = param_2 * 0x14;
   iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
-  sVar1 = *(short *)(iVar5 + iVar14 + 0x12);
+  sVar1 = *(short *)(iVar14 + 0x12 + iVar5);
   memset((void *)(iVar4 + 0x58),0,0x2c);
   *(undefined2 *)(iVar4 + 0x36) = 0;
   *(undefined1 *)(iVar4 + 0x41) = 0;
@@ -45,17 +45,17 @@ void r_lld_scan_process_pkt_rx_ext_adv_ind(int param_1,int param_2,char *param_3
   *(undefined1 *)(iVar4 + 0x6e) = 1;
   *(undefined1 *)(iVar4 + 0x71) = *(undefined1 *)(iVar4 + 0x3b);
   iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
-  uVar2 = *(ushort *)(iVar5 + iVar14 + 0x10) >> 6;
+  uVar2 = *(ushort *)(iVar14 + 0x10 + iVar5) >> 6;
   uVar11 = uVar2 & 3;
   param_3[1] = (char)uVar11;
   if (uVar11 == 1) {
     bVar9 = *(byte *)(iVar4 + 0x6d) | 1;
-_L262:
+_L244:
     *(byte *)(iVar4 + 0x6d) = bVar9;
   }
   else if (uVar11 == 2) {
     bVar9 = *(byte *)(iVar4 + 0x6d) | 2;
-    goto _L262;
+    goto _L244;
   }
   *(undefined1 *)(iVar4 + 0x6a) = 0;
   if (*param_3 == '\0') {
@@ -68,7 +68,7 @@ _L262:
       if (((uVar2 & 3) == 0) &&
          ((*(char *)(iVar4 + 0x3b) == '\0' || (-1 < (int)((uint)uVar11 << 0x13))))) {
         iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
-        param_3[8] = (byte)(*(ushort *)(iVar5 + iVar14 + 4) >> 6) & 1;
+        param_3[8] = (byte)(*(ushort *)(iVar14 + 4 + iVar5) >> 6) & 1;
         pvVar6 = (void *)r_emi_get_mem_addr_by_offset((ushort)(byte)param_3[3] + sVar1);
         memcpy((void *)(iVar4 + 0x5c),pvVar6,6);
       }
@@ -83,7 +83,7 @@ _L262:
          ((*(char *)(iVar4 + 0x3b) == '\0' || (-1 < (int)((uint)uVar2 << 0x13))))) {
         *(byte *)(iVar4 + 0x6d) = *(byte *)(iVar4 + 0x6d) | 4;
         iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
-        *(byte *)(iVar4 + 0x70) = (byte)(*(ushort *)(iVar5 + iVar14 + 4) >> 7) & 1;
+        *(byte *)(iVar4 + 0x70) = (byte)(*(ushort *)(iVar14 + 4 + iVar5) >> 7) & 1;
         param_3[2] = (char)sVar13;
       }
       else {
@@ -91,9 +91,7 @@ _L262:
       }
       sVar13 = sVar13 + 6;
     }
-    if ((*(ushort *)(param_3 + 6) & 0x400) != 0) {
-      sVar13 = sVar13 + 1;
-    }
+    sVar13 = sVar13 + (ushort)((*(ushort *)(param_3 + 6) & 0x400) != 0);
     if ((int)((uint)*(ushort *)(param_3 + 6) << 0x14) < 0) {
       puVar7 = (undefined2 *)r_emi_get_mem_addr_by_offset(sVar1 + sVar13);
       uVar3 = *puVar7;
@@ -106,19 +104,19 @@ _L262:
       pvVar6 = (void *)r_emi_get_mem_addr_by_offset(sVar1 + sVar13);
       memcpy(auStack_24,pvVar6,3);
       iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
+      uVar10 = 2;
       if ((*(ushort *)(iVar14 + 2 + iVar5) >> 9 & 1) == 0) {
         if (2 < (auStack_24[0] >> 0x15 & 7)) {
-_L228:
+_L208:
           *(undefined1 *)(iVar4 + 0x6e) = 0xff;
           return;
         }
         iVar5 = r_lld_calc_aux_rx(iVar4 + 0x48,param_2);
         uVar10 = 1;
-        if (iVar5 == 0) goto _L228;
+        if (iVar5 == 0) goto _L208;
       }
       else {
         *(uint *)(iVar4 + 0x2c) = auStack_24[0];
-        uVar10 = 2;
       }
       *(undefined1 *)(iVar4 + 0x3e) = uVar10;
       *(undefined1 *)(iVar4 + 0x3d) = 1;
@@ -134,7 +132,7 @@ _L228:
     }
     if ((int)(uVar12 << 0x11) < 0) {
       if ((*(char *)(iVar4 + 0x3b) != '\0') && ((param_3[1] != '\0' || ((int)(uVar12 << 0x13) < 0)))
-         ) goto _L234;
+         ) goto _L214;
       puVar8 = (undefined1 *)r_emi_get_mem_addr_by_offset(sVar1 + sVar13);
       uVar10 = *puVar8;
     }
@@ -143,7 +141,7 @@ _L228:
     }
     *(undefined1 *)(iVar4 + 0x73) = uVar10;
   }
-_L234:
+_L214:
   *(char *)(iVar4 + 0x6f) = param_3[8];
   param_3[5] = '\0';
   return;

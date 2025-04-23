@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit a075a8fde411bdd92973051edf2cd234601b259c
- * https://github.com/espressif/esp32c3-bt-lib/commit/a075a8fde411bdd92973051edf2cd234601b259c
- * Upstream date: 2023-11-30 21:15:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(70ab55f)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld.o -> lld_ch_idx_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,7 +14,7 @@ undefined4 lld_ch_idx_set(uint param_1)
 
 {
   if (param_1 < 0x25) {
-    _LANCHOR5 = (char)param_1;
+    aux_chan_idx = (char)param_1;
     return 0;
   }
   return 1;

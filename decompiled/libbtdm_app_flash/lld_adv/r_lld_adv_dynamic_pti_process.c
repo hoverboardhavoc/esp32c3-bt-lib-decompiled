@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * Upstream date: 2025-04-03 18:07:15 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_dynamic_pti_process
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,194 +13,195 @@
 void r_lld_adv_dynamic_pti_process(int param_1,undefined4 param_2,undefined4 param_3)
 
 {
-  byte bVar1;
+  ushort uVar1;
   ushort uVar2;
-  uint *puVar3;
-  int iVar4;
-  int iVar5;
+  ushort uVar3;
+  uint uVar4;
+  uint uVar5;
   uint uVar6;
-  int iVar7;
+  uint *puVar7;
   uint uVar8;
-  uint uVar9;
-  byte bStack_38;
-  byte bStack_37;
-  byte bStack_35;
-  byte bStack_34;
-  byte bStack_33;
-  byte bStack_32;
-  uint uStack_30;
-  uint uStack_2c;
-  undefined4 uStack_28;
-  undefined2 uStack_24;
+  int iVar9;
+  int iVar10;
+  uint uVar11;
+  uint uVar12;
+  uint uVar13;
+  uint uVar14;
+  uint uVar15;
+  uint uVar16;
+  int iVar17;
+  uint uStack_50;
+  uint uStack_4c;
+  undefined4 uStack_48;
+  undefined2 uStack_44;
+  byte bStack_42;
   
   if (param_1 == 0) {
     return;
   }
   if ((*(ushort *)(param_1 + 0x74) & 0x10) == 0) {
-    iVar5 = r_bt_rf_coex_ext_adv_dynamic_pti_en_get();
-    if (iVar5 != 0) {
-      iVar5 = r_sdk_config_get_opts_ext();
-      if (*(char *)(iVar5 + 0x18) != '\0') {
-        memset(&bStack_38,0,0x18);
-        uVar8 = (uint)*(byte *)(param_1 + 0x87);
-        bVar1 = *(byte *)(param_1 + 0x74);
-        r_lld_ext_adv_dynamic_pti_get(param_1,param_2,param_3,&bStack_38);
-        uVar6 = uVar8 * 9 & 0xff;
-        uVar9 = uVar6 + 1 & 0xff;
-        if (0xb < uVar8) {
-          r_assert_err(0,"lld_adv.c",0x29bb);
+    iVar10 = r_bt_rf_coex_ext_adv_dynamic_pti_en_get();
+    if (iVar10 != 0) {
+      iVar10 = r_sdk_config_get_opts_ext();
+      if (*(char *)(iVar10 + 0x18) != '\0') {
+        memset(&uStack_48,0,0x18);
+        uVar13 = (uint)*(byte *)(param_1 + 0x87);
+        uVar1 = *(ushort *)(param_1 + 0x74);
+        r_lld_ext_adv_dynamic_pti_get(param_1,param_2,param_3,&uStack_48);
+        uVar8 = uVar13 * 9 & 0xff;
+        uVar14 = uVar8 + 1 & 0xff;
+        if (0xb < uVar13) {
+          r_assert_err(0,0x10000,0x29bb);
         }
-        if ((bStack_33 & 0xf0) != 0) {
-          r_assert_err(0,"lld_adv.c",0x29bd);
+        if (0xf < uStack_44._1_1_) {
+          r_assert_err(0,0x10000,0x29bd);
         }
-        puVar3 = (uint *)((uVar8 + 0x1800c4cb) * 4);
-        *puVar3 = *puVar3 & 0xfffffff0 | (uint)bStack_33;
-        if (0xb < uVar8) {
-          r_assert_err(0,"lld_adv.c",0x295a);
+        puVar7 = (uint *)((uVar13 + 0x1800c4cb) * 4);
+        *puVar7 = *puVar7 & 0xfffffff0 | (uint)uStack_44._1_1_;
+        if (0xb < uVar13) {
+          r_assert_err(0,0x10000,0x295a);
         }
-        if (((uint)bStack_32 << 0x1d & 0xc0000000) != 0) {
-          r_assert_err(0,"lld_adv.c",0x295c);
+        if ((bStack_42 & 6) != 0) {
+          r_assert_err(0,0x10000,0x295c);
         }
-        *puVar3 = *puVar3 & 0xdfffffff | (uint)bStack_32 << 0x1d;
-        if (0xb < uVar8) {
-          r_assert_err(0,"lld_adv.c",0x299b);
+        *puVar7 = *puVar7 & 0xdfffffff | (uint)bStack_42 << 0x1d;
+        if (0xb < uVar13) {
+          r_assert_err(0,0x10000,0x299b);
         }
-        if (((uint)bStack_38 << 8 & 0xf000) != 0) {
-          r_assert_err(0,"lld_adv.c",0x299d);
+        if ((uStack_48 & 0xf0) != 0) {
+          r_assert_err(0,0x10000,0x299d);
         }
-        *puVar3 = *puVar3 & 0xfffff0ff | (uint)bStack_38 << 8;
-        if (0xb < uVar8) {
-          r_assert_err(0,"lld_adv.c",0x294a);
+        *puVar7 = *puVar7 & 0xfffff0ff | (uStack_48 & 0xff) << 8;
+        if (0xb < uVar13) {
+          r_assert_err(0,0x10000,0x294a);
         }
-        if ((int)((uint)bStack_37 << 0x1e) < 0) {
-          r_assert_err(0,"lld_adv.c",0x294c);
+        if ((uStack_48 & 0x200) != 0) {
+          r_assert_err(0,0x10000,0x294c);
         }
-        *puVar3 = *puVar3 & 0xbfffffff | (uint)bStack_37 << 0x1e;
-        uVar8 = (uint)bStack_35;
-        if ((uVar8 << 8 & 0xf000) != 0) {
-          r_assert_err(0,"lld_adv.c",0x33f);
+        *puVar7 = *puVar7 & 0xbfffffff | (uStack_48 >> 8) << 0x1e;
+        if ((uStack_48 & 0xf0000000) != 0) {
+          r_assert_err(0,0x10000,0x33f);
         }
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        iVar5 = uVar6 * 0xe + 10;
-        uVar2 = *(ushort *)(iVar4 + iVar5);
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        *(ushort *)(iVar4 + iVar5) = uVar2 & 0xf0ff | (ushort)(uVar8 << 8);
-        uVar6 = (uint)bStack_34;
-        if ((uVar6 << 0xc & 0xffffefff) != 0) {
-          r_assert_err(0,"lld_adv.c",0x333);
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        iVar10 = uVar8 * 0xe + 10;
+        uVar2 = *(ushort *)(iVar9 + iVar10);
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        *(ushort *)(iVar9 + iVar10) = (ushort)uStack_48._3_1_ << 8 | uVar2 & 0xf0ff;
+        if ((uStack_44 & 0xfe) != 0) {
+          r_assert_err(0,0x10000,0x333);
         }
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        uVar2 = *(ushort *)(iVar4 + iVar5);
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        *(ushort *)(iVar4 + iVar5) = uVar2 & 0xefff | (ushort)(uVar6 << 0xc);
-        if (((uint)bStack_35 << 8 & 0xfffff0ff) != 0) {
-          r_assert_err(0,"lld_adv.c",0x33f);
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        uVar2 = *(ushort *)(iVar9 + iVar10);
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        uVar3 = (ushort)(((uint)(byte)uStack_44 << 0x1c) >> 0x10);
+        *(ushort *)(iVar10 + iVar9) = uVar3 | uVar2 & 0xefff;
+        if ((uStack_48 & 0xf0000000) != 0) {
+          r_assert_err(0,0x10000,0x33f);
         }
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        iVar5 = uVar9 * 0xe + 10;
-        uVar2 = *(ushort *)(iVar4 + iVar5);
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        *(ushort *)(iVar4 + iVar5) = uVar2 & 0xf0ff | (ushort)((uint)bStack_35 << 8);
-        if (((uint)bStack_34 << 0xc & 0xffffefff) != 0) {
-          r_assert_err(0,"lld_adv.c",0x333);
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        iVar10 = uVar14 * 0xe + 10;
+        uVar2 = *(ushort *)(iVar9 + iVar10);
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        *(ushort *)(iVar9 + iVar10) = (ushort)uStack_48._3_1_ << 8 | uVar2 & 0xf0ff;
+        if ((uStack_44 & 0xfe) != 0) {
+          r_assert_err(0,0x10000,0x333);
         }
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        uVar2 = *(ushort *)(iVar4 + iVar5);
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        *(ushort *)(iVar4 + iVar5) = uVar2 & 0xefff | (ushort)((uint)bStack_34 << 0xc);
-        r_lld_ext_adv_dynamic_aux_pti_process_eco(bVar1 & 3,uVar9,&bStack_38);
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        uVar2 = *(ushort *)(iVar9 + iVar10);
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        *(ushort *)(iVar9 + iVar10) = uVar3 | uVar2 & 0xefff;
+        r_lld_ext_adv_dynamic_aux_pti_process_eco(uVar1 & 3,uVar14,&uStack_48);
         return;
       }
-      r_assert_err(0,"lld_adv.c",0x45b);
+      r_assert_err(0,0x10000,0x45b);
       return;
     }
   }
   else {
-    iVar5 = r_bt_rf_coex_legacy_adv_dynamic_pti_en_get();
-    if (iVar5 != 0) {
-      uVar6 = (uint)*(byte *)(param_1 + 0x87);
-      uStack_30 = 0;
-      uStack_2c = 0;
-      uStack_28 = 0;
-      uStack_24 = 0;
-      r_lld_legacy_adv_dynamic_pti_get(&uStack_30);
-      uVar9 = (uStack_30 & 0xff) << 8;
-      if ((uVar9 & 0xf000) != 0) {
-        r_assert_err(0,"lld_adv.c",0x33f);
+    iVar10 = r_bt_rf_coex_legacy_adv_dynamic_pti_en_get();
+    if (iVar10 != 0) {
+      uVar12 = (uint)*(byte *)(param_1 + 0x87);
+      uStack_50 = 0;
+      uStack_4c = 0;
+      uStack_48 = 0;
+      uStack_44 = 0;
+      r_lld_legacy_adv_dynamic_pti_get(&uStack_50);
+      uVar6 = uStack_4c;
+      uVar5 = uStack_50;
+      uVar11 = uStack_50 & 0xff;
+      uVar13 = uStack_50 >> 8;
+      uVar16 = uStack_50 >> 0x10 & 0xff;
+      uVar8 = uStack_50 & 0xf0;
+      uVar14 = uStack_50 >> 0x18;
+      uVar15 = uStack_4c & 0xff;
+      uVar4 = uStack_4c >> 8;
+      if ((uStack_50 & 0xf0) != 0) {
+        r_assert_err(0,0x10000,0x33f);
       }
-      iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-      iVar5 = (uVar6 * 9 & 0xff) * 0xe;
-      iVar7 = iVar5 + 10;
-      uVar2 = *(ushort *)(iVar4 + iVar7);
-      iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-      *(ushort *)(iVar4 + iVar7) = uVar2 & 0xf0ff | (ushort)uVar9;
-      uVar9 = (uStack_30 >> 8 & 0xff) << 0xc;
-      if ((uVar9 & 0xffffefff) != 0) {
-        r_assert_err(0,"lld_adv.c",0x333);
+      iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+      iVar10 = (uVar12 * 9 & 0xff) * 0xe;
+      iVar17 = iVar10 + 10;
+      uVar1 = *(ushort *)(iVar9 + iVar17);
+      iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+      uVar2 = (ushort)(uVar11 << 8);
+      *(ushort *)(iVar9 + iVar17) = uVar2 | uVar1 & 0xf0ff;
+      if ((uVar5 & 0xfe00) != 0) {
+        r_assert_err(0,0x10000,0x333);
       }
-      iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-      uVar2 = *(ushort *)(iVar4 + iVar7);
-      iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-      *(ushort *)(iVar4 + iVar7) = uVar2 & 0xefff | (ushort)uVar9;
-      iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-      if ((*(ushort *)(iVar4 + iVar5) & 0x7fff) != 0) {
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        uVar2 = *(ushort *)(iVar4 + iVar5);
-        uVar9 = (uStack_30 & 0xff) << 8;
-        if ((uVar9 & 0xfffff0ff) != 0) {
-          r_assert_err(0,"lld_adv.c",0x33f);
+      iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+      uVar1 = *(ushort *)(iVar9 + iVar17);
+      iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+      uVar3 = (ushort)((uVar13 << 0x1c) >> 0x10);
+      *(ushort *)(iVar17 + iVar9) = uVar3 | uVar1 & 0xefff;
+      iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+      if ((*(ushort *)(iVar9 + iVar10) & 0x7fff) != 0) {
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        uVar1 = *(ushort *)(iVar10 + iVar9);
+        if (uVar8 != 0) {
+          r_assert_err(0,0x10000,0x33f);
         }
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        iVar5 = (((uVar2 & 0x7fff) - 0x1400) / 0xe) * 0xe + 10;
-        uVar2 = *(ushort *)(iVar4 + iVar5);
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        *(ushort *)(iVar4 + iVar5) = uVar2 & 0xf0ff | (ushort)uVar9;
-        uVar9 = (uStack_30 >> 8 & 0xff) << 0xc;
-        if ((uVar9 & 0xffffefff) != 0) {
-          r_assert_err(0,"lld_adv.c",0x333);
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        iVar10 = (((uVar1 & 0x7fff) - 0x1400) / 0xe) * 0xe + 10;
+        uVar1 = *(ushort *)(iVar9 + iVar10);
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        *(ushort *)(iVar9 + iVar10) = uVar2 | uVar1 & 0xf0ff;
+        if ((uVar5 & 0xfe00) != 0) {
+          r_assert_err(0,0x10000,0x333);
         }
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        uVar2 = *(ushort *)(iVar4 + iVar5);
-        iVar4 = r_emi_get_mem_addr_by_offset(0x1400);
-        *(ushort *)(iVar4 + iVar5) = uVar2 & 0xefff | (ushort)uVar9;
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        uVar1 = *(ushort *)(iVar9 + iVar10);
+        iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
+        *(ushort *)(iVar9 + iVar10) = uVar3 | uVar1 & 0xefff;
       }
-      uVar8 = uStack_30;
-      uVar9 = uStack_30 >> 0x10;
-      if (0xb < uVar6) {
-        r_assert_err(0,"lld_adv.c",0x29bb);
+      if (0xb < uVar12) {
+        r_assert_err(0,0x10000,0x29bb);
       }
-      if ((uVar8 & 0xf00000) != 0) {
-        r_assert_err(0,"lld_adv.c",0x29bd);
+      if (0xf < uVar16) {
+        r_assert_err(0,0x10000,0x29bd);
       }
-      puVar3 = (uint *)((uVar6 + 0x1800c4cb) * 4);
-      *puVar3 = *puVar3 & 0xfffffff0 | uVar9 & 0xff;
-      uVar9 = uStack_30 >> 0x18;
-      if (0xb < uVar6) {
-        r_assert_err(0,"lld_adv.c",0x295a);
+      puVar7 = (uint *)((uVar12 + 0x1800c4cb) * 4);
+      *puVar7 = *puVar7 & 0xfffffff0 | uVar16;
+      if (0xb < uVar12) {
+        r_assert_err(0,0x10000,0x295a);
       }
-      uVar9 = uVar9 << 0x1d;
-      if ((uVar9 & 0xc0000000) != 0) {
-        r_assert_err(0,"lld_adv.c",0x295c);
+      if ((uVar5 & 0x6000000) != 0) {
+        r_assert_err(0,0x10000,0x295c);
       }
-      *puVar3 = *puVar3 & 0xdfffffff | uVar9;
-      uVar9 = uStack_2c & 0xff;
-      if (0xb < uVar6) {
-        r_assert_err(0,"lld_adv.c",0x299b);
+      *puVar7 = *puVar7 & 0xdfffffff | uVar14 << 0x1d;
+      if (0xb < uVar12) {
+        r_assert_err(0,0x10000,0x299b);
       }
-      uVar9 = uVar9 << 8;
-      if ((uVar9 & 0xf000) != 0) {
-        r_assert_err(0,"lld_adv.c",0x299d);
+      if ((uVar6 & 0xf0) != 0) {
+        r_assert_err(0,0x10000,0x299d);
       }
-      *puVar3 = *puVar3 & 0xfffff0ff | uVar9;
-      uVar9 = uStack_2c >> 8;
-      if (0xb < uVar6) {
-        r_assert_err(0,"lld_adv.c",0x294a);
+      *puVar7 = *puVar7 & 0xfffff0ff | uVar15 << 8;
+      if (0xb < uVar12) {
+        r_assert_err(0,0x10000,0x294a);
       }
-      uVar9 = uVar9 << 0x1e;
-      if ((int)uVar9 < 0) {
-        r_assert_err(0,"lld_adv.c",0x294c);
+      if ((uVar6 & 0x200) != 0) {
+        r_assert_err(0,0x10000,0x294c);
       }
-      *puVar3 = *puVar3 & 0xbfffffff | uVar9;
+      *puVar7 = *puVar7 & 0xbfffffff | uVar4 << 0x1e;
       return;
     }
   }

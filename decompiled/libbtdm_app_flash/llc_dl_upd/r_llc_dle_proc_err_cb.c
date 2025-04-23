@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_dl_upd.o -> r_llc_dle_proc_err_cb
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_llc_dle_proc_err_cb(uint param_1,int param_2,char *param_3)
+void r_llc_dle_proc_err_cb(uint param_1,uint param_2,char *param_3)
 
 {
   undefined2 uVar1;
@@ -26,26 +26,16 @@ void r_llc_dle_proc_err_cb(uint param_1,int param_2,char *param_3)
   ushort uVar9;
   ushort uVar10;
   
-  if (param_2 == 1) {
-    if (param_3[1] != '\x14') {
+  if (param_2 == 2) {
+    cVar8 = param_3[1];
+_L71:
+    if (cVar8 == '\0') {
       return;
     }
-    cVar8 = '\x19';
-_L70:
-    iVar7 = r_sdk_config_get_opts();
-    if ((param_1 < *(byte *)(iVar7 + 0xd)) && (iVar7 = *(int *)(&llc_env + param_1 * 4), iVar7 != 0)
-       ) {
-      *(byte *)(iVar7 + 0x30) = *(byte *)(iVar7 + 0x30) & 0xdf;
-    }
+    if ((byte)(cVar8 - 0x19U) < 2) goto _L72;
   }
   else {
-    if (param_2 == 0) {
-      cVar8 = *param_3;
-    }
-    else if (param_2 == 2) {
-      cVar8 = param_3[1];
-    }
-    else {
+    if (2 < param_2) {
       if (param_2 != 3) {
         return;
       }
@@ -53,11 +43,22 @@ _L70:
         return;
       }
       cVar8 = param_3[2];
+      goto _L71;
     }
-    if (cVar8 == '\0') {
+    if (param_2 == 0) {
+      cVar8 = *param_3;
+      goto _L71;
+    }
+    if (param_3[1] != '\x14') {
       return;
     }
-    if ((byte)(cVar8 - 0x19U) < 2) goto _L70;
+    cVar8 = '\x19';
+_L72:
+    iVar7 = r_sdk_config_get_opts();
+    if ((param_1 < *(byte *)(iVar7 + 0xd)) && (iVar7 = *(int *)(&llc_env + param_1 * 4), iVar7 != 0)
+       ) {
+      *(byte *)(iVar7 + 0x30) = *(byte *)(iVar7 + 0x30) & 0xdf;
+    }
   }
   iVar7 = *(int *)(&llc_env + param_1 * 4);
   iVar4 = r_llc_proc_get(0);
@@ -116,10 +117,8 @@ _L70:
     iVar5 = r_bt_rf_coex_conn_phy_coded_data_time_limit_en_get();
     if (iVar5 != 0) {
       iVar5 = r_bt_rf_coex_conn_phy_coded_data_time_limit_en_get();
-      if (iVar5 == 0) {
-        uVar9 = 0xa90;
-      }
-      else {
+      uVar9 = 0xa90;
+      if (iVar5 != 0) {
         uVar9 = *(ushort *)(*(int *)(_bt_rf_coex_cfg_p + 0x44) + 2);
       }
       if (uVar9 < 0xa90) {
@@ -131,7 +130,7 @@ _L70:
       }
       *(ushort *)(iVar4 + 10) = uVar10;
     }
-    if (*(char *)(iVar7 + 0x1d) != '\x03') goto _L26;
+    if (*(char *)(iVar7 + 0x1d) != '\x03') goto _L25;
   }
   else if (*(char *)(iVar7 + 0x1d) != '\x03') {
     if ((((*(ushort *)(iVar7 + 0x42) & 0x80) == 0) ||
@@ -142,14 +141,14 @@ _L70:
       if (0x848 < uVar9) {
         uVar9 = 0x848;
       }
+      uVar10 = *(ushort *)(iVar4 + 0xe);
       *(ushort *)(iVar4 + 10) = uVar9;
-      uVar9 = *(ushort *)(iVar4 + 0xe);
-      if (0x848 < uVar9) {
-        uVar9 = 0x848;
+      if (0x848 < uVar10) {
+        uVar10 = 0x848;
       }
-      *(ushort *)(iVar4 + 0xe) = uVar9;
+      *(ushort *)(iVar4 + 0xe) = uVar10;
     }
-    goto _L26;
+    goto _L25;
   }
   uVar9 = *(ushort *)(iVar4 + 0xe);
   if (*(ushort *)(iVar4 + 0xe) < 0xa90) {
@@ -159,10 +158,8 @@ _L70:
   iVar7 = r_bt_rf_coex_conn_phy_coded_data_time_limit_en_get();
   if (iVar7 != 0) {
     iVar7 = r_bt_rf_coex_conn_phy_coded_data_time_limit_en_get();
-    if (iVar7 == 0) {
-      uVar9 = 0xa90;
-    }
-    else {
+    uVar9 = 0xa90;
+    if (iVar7 != 0) {
       uVar9 = **(ushort **)(_bt_rf_coex_cfg_p + 0x44);
     }
     if (uVar9 < 0xa90) {
@@ -174,7 +171,7 @@ _L70:
     }
     *(ushort *)(iVar4 + 0xe) = uVar10;
   }
-_L26:
+_L25:
   llc_ll_length_req_pdu_send
             (param_1,*(undefined2 *)(iVar4 + 10),*(undefined2 *)(iVar4 + 8),
              *(undefined2 *)(iVar4 + 0xe),*(undefined2 *)(iVar4 + 0xc));

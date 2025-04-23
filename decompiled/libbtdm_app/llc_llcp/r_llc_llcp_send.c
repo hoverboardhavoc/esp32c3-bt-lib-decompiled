@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_llcp.o -> r_llc_llcp_send
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,49 +19,46 @@ void r_llc_llcp_send(int param_1,byte *param_2,undefined4 param_3)
   int iVar2;
   int iVar3;
   uint uVar4;
-  undefined4 uVar5;
-  code *pcVar6;
-  int iVar7;
-  ushort uStack_22;
+  int iVar5;
+  ushort auStack_32 [7];
   
-  if (((param_2 == (byte *)0x0) || (iVar7 = *(int *)(&llc_env + param_1 * 4), iVar7 == 0)) ||
-     (0x22 < *param_2)) {
-    pcVar6 = *(code **)(_r_plf_funcs_p + 0xc);
-    if (param_2 == (byte *)0x0) {
-      uVar4 = 0xffff;
+  if (param_2 != (byte *)0x0) {
+    iVar5 = *(int *)(&llc_env + param_1 * 4);
+    if (iVar5 != 0) {
+      if (*param_2 < 0x23) {
+        auStack_32[0] = *(ushort *)(llcp_pdu_handler + (uint)*param_2 * 0xc + 8);
+        iVar2 = (**(code **)(_r_modules_funcs_p + 0x120))
+                          (auStack_32[0] + 0xc,2,*(code **)(_r_modules_funcs_p + 0x120));
+        bVar1 = *param_2;
+        *(undefined4 *)(iVar2 + 4) = param_3;
+        iVar3 = (**(code **)(_r_modules_funcs_p + 0x10))
+                          (iVar2 + 9,param_2,auStack_32,0x30,
+                           *(undefined4 *)(llcp_pdu_handler + (uint)bVar1 * 0xc + 4),
+                           *(code **)(_r_modules_funcs_p + 0x10));
+        if (iVar3 == 0) {
+          *(char *)(iVar2 + 8) = (char)auStack_32[0];
+          (**(code **)(_r_modules_funcs_p + 0x44))
+                    (iVar5 + 0x28,iVar2,*(code **)(_r_modules_funcs_p + 0x44));
+          (**(code **)(_r_ip_funcs_p + 0x5b8))(param_1,*(code **)(_r_ip_funcs_p + 0x5b8));
+        }
+        else {
+          (**(code **)(_r_plf_funcs_p + 0xc))
+                    (*param_2,"llc_llcp.c",0x32f,*(code **)(_r_plf_funcs_p + 0xc));
+        }
+        return;
+      }
     }
-    else {
-      uVar4 = (uint)*param_2;
-    }
-    uVar5 = 0x346;
+  }
+  if (param_2 == (byte *)0x0) {
+    uVar4 = 0xffff;
   }
   else {
-    uStack_22 = *(ushort *)(&DAT_000108f4 + (uint)*param_2 * 0xc);
-    iVar2 = (**(code **)(_r_modules_funcs_p + 0x120))
-                      (uStack_22 + 0xc,2,*(code **)(_r_modules_funcs_p + 0x120));
-    bVar1 = *param_2;
-    *(undefined4 *)(iVar2 + 4) = param_3;
-    iVar3 = (**(code **)(_r_modules_funcs_p + 0x10))
-                      (iVar2 + 9,param_2,&uStack_22,0x30,(&PTR__LC1_000108f0)[(uint)bVar1 * 3],
-                       *(code **)(_r_modules_funcs_p + 0x10));
-    if (iVar3 == 0) {
-      *(char *)(iVar2 + 8) = (char)uStack_22;
-      if (*param_2 == 6) {
-        pcVar6 = *(code **)(_r_modules_funcs_p + 0x4c);
-      }
-      else {
-        pcVar6 = *(code **)(_r_modules_funcs_p + 0x44);
-      }
-      (*pcVar6)(iVar7 + 0x28,iVar2,pcVar6);
-      (**(code **)(_r_ip_funcs_p + 0x5b8))(param_1,*(code **)(_r_ip_funcs_p + 0x5b8));
-      return;
-    }
     uVar4 = (uint)*param_2;
-    pcVar6 = *(code **)(_r_plf_funcs_p + 0xc);
-    uVar5 = 0x32d;
-    param_1 = iVar3;
   }
-  (*pcVar6)(param_1,uVar4,"llc_llcp.c",uVar5,pcVar6);
+                    /* WARNING: Could not recover jumptable at 0x0001064e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(_r_plf_funcs_p + 0xc))
+            (param_1,uVar4,"llc_llcp.c",0x33e,*(code **)(_r_plf_funcs_p + 0xc));
   return;
 }
 

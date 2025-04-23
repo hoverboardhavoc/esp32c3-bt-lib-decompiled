@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * Upstream date: 2025-04-03 18:07:15 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_sched
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,11 +20,11 @@ void r_lld_scan_sched(int param_1,undefined4 param_2,undefined4 param_3)
   ushort uVar3;
   int iVar4;
   int iVar5;
-  byte bVar6;
-  int iVar7;
-  ushort uVar8;
+  int iVar6;
+  byte bVar7;
+  int iVar8;
   uint uVar9;
-  uint uVar10;
+  ushort uVar10;
   
   iVar4 = *(int *)(_lld_scan_env + param_1 * 4);
   bVar1 = *(byte *)(iVar4 + 0x38);
@@ -41,64 +41,64 @@ void r_lld_scan_sched(int param_1,undefined4 param_2,undefined4 param_3)
          ((uint)*(ushort *)(&lld_scan_max_aux_dur_tab + (uint)*(byte *)(iVar4 + 0x55) * 2) +
          *(int *)(iVar4 + 0x50)) * 2 + (uint)_sdk_cfg_priv_opts;
     bVar2 = DAT_00015033;
-    bVar6 = DAT_00015032;
+    bVar7 = DAT_00015032;
     if (DAT_00015032 < *(byte *)(iVar4 + 0x16)) {
-      bVar6 = *(byte *)(iVar4 + 0x16);
+      bVar7 = *(byte *)(iVar4 + 0x16);
     }
-    *(byte *)(iVar4 + 0x16) = bVar6;
+    *(byte *)(iVar4 + 0x16) = bVar7;
     *(ushort *)(iVar4 + 0x14) = bVar2 & 0xf | 0x2000;
     iVar5 = (**(code **)(_r_ip_funcs_p + 0x6b0))(iVar4,*(code **)(_r_ip_funcs_p + 0x6b0));
     if (iVar5 == 0) {
       bVar2 = *(byte *)(iVar4 + 0x55);
       uVar9 = *(uint *)(iVar4 + 0x50);
-      uVar10 = (uint)bVar2 << 4;
-      if ((uVar10 & 0xffffffcf) != 0) {
+      if ((bVar2 & 0xfc) != 0) {
         (**(code **)(_r_plf_funcs_p + 8))("lld_scan.c",0x1bf,*(code **)(_r_plf_funcs_p + 8));
       }
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-      iVar7 = (uint)bVar1 * 0x5a;
-      uVar8 = *(ushort *)(iVar5 + iVar7 + 4);
+      iVar8 = (uint)bVar1 * 0x5a;
+      uVar10 = *(ushort *)(iVar5 + iVar8 + 4);
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-      *(ushort *)(iVar5 + iVar7 + 4) = uVar8 & 0xffcf | (ushort)uVar10;
-      uVar8 = *(ushort *)(&lld_scan_max_aux_dur_tab + (uint)bVar2 * 2);
+      *(ushort *)(iVar5 + iVar8 + 4) = uVar10 & 0xffcf | (ushort)bVar2 << 4;
+      uVar10 = *(ushort *)(&lld_scan_max_aux_dur_tab + (uint)bVar2 * 2);
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-      *(ushort *)(iVar5 + iVar7 + 0x20) = (ushort)(((uint)uVar8 + uVar9 + 0x270) / 0x271) & 0xff;
-      uVar8 = 0x672 - *(short *)(iVar4 + 0x36);
-      if ((uVar8 & 0xf800) != 0) {
+      *(ushort *)(iVar8 + 0x20 + iVar5) = (ushort)(((uint)uVar10 + uVar9 + 0x270) / 0x271) & 0xff;
+      uVar10 = 0x672 - *(short *)(iVar4 + 0x36);
+      if (0x7ff < uVar10) {
         (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x6c0,*(code **)(_r_plf_funcs_p + 8));
       }
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-      uVar3 = *(ushort *)(iVar5 + iVar7 + 0x28);
-      iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-      *(ushort *)(iVar5 + iVar7 + 0x28) = uVar3 & 0xf800 | uVar8;
+      uVar3 = *(ushort *)(iVar5 + iVar8 + 0x28);
+      iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
+      iVar5 = _r_plf_funcs_p;
+      *(ushort *)(iVar6 + iVar8 + 0x28) = uVar10 | uVar3 & 0xf800;
       if (uVar9 < 0x4000) {
-        iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-        *(short *)(iVar5 + iVar7 + 0x1a) = (short)(uVar9 + 1 >> 1);
+        iVar5 = (**(code **)(iVar5 + 0xbc))(0x400);
+        *(short *)(iVar5 + iVar8 + 0x1a) = (short)(uVar9 + 1 >> 1);
       }
       else {
-        iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-        *(ushort *)(iVar5 + iVar7 + 0x1a) = (ushort)((uVar9 + 0x270) / 0x271) & 0xff | 0x8000;
+        iVar5 = (**(code **)(iVar5 + 0xbc))(0x400);
+        *(ushort *)(iVar5 + iVar8 + 0x1a) = (ushort)((uVar9 + 0x270) / 0x271) & 0xff | 0x8000;
       }
-      uVar9 = (uint)*(byte *)(iVar4 + 0x54) << 10;
-      if ((uVar9 & 0x30000) != 0) {
+      bVar1 = *(byte *)(iVar4 + 0x54);
+      if ((bVar1 & 0xc0) != 0) {
         (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x635,*(code **)(_r_plf_funcs_p + 8));
       }
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-      uVar8 = *(ushort *)(iVar5 + iVar7 + 0x26);
+      uVar10 = *(ushort *)(iVar5 + iVar8 + 0x26);
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-      *(ushort *)(iVar5 + iVar7 + 0x26) = uVar8 & 0x3ff | (ushort)uVar9;
+      *(ushort *)(iVar5 + iVar8 + 0x26) = uVar10 & 0x3ff | (ushort)bVar1 << 10;
       if (*(char *)(iVar4 + 0x6f) != -1) {
         iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-        *(undefined2 *)(iVar5 + iVar7 + 0x14) = 0;
+        *(undefined2 *)(iVar8 + 0x14 + iVar5) = 0;
       }
       if ((*(char *)(iVar4 + 0x3d) == '\x03') && (*(char *)(iVar4 + 0x39) == '\x01')) {
         iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-        uVar8 = *(ushort *)(iVar5 + iVar7);
+        uVar10 = *(ushort *)(iVar5 + iVar8);
         iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-        *(ushort *)(iVar5 + iVar7) = uVar8 & 0xffe0 | 10;
+        *(ushort *)(iVar8 + iVar5) = uVar10 & 0xffe0 | 10;
       }
       *(undefined1 *)(iVar4 + 0x43) = 0;
-      goto _L607;
+      goto _L579;
     }
     if (*(char *)(iVar4 + 0x3d) == '\x03') {
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
@@ -111,10 +111,10 @@ void r_lld_scan_sched(int param_1,undefined4 param_2,undefined4 param_3)
     }
   }
   (**(code **)(_r_ip_funcs_p + 0x7a0))(param_1,param_2,param_3,*(code **)(_r_ip_funcs_p + 0x7a0));
-_L607:
-                    /* WARNING: Could not recover jumptable at 0x00012c24. Too many branches */
+_L579:
+                    /* WARNING: Could not recover jumptable at 0x00012bd2. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_ip_funcs_p + 0x7fc))(0,param_1,param_2,param_3);
+  (**(code **)(_r_ip_funcs_p + 0x7fc))(0,param_1,param_2,param_3,*(code **)(_r_ip_funcs_p + 0x7fc));
   return;
 }
 

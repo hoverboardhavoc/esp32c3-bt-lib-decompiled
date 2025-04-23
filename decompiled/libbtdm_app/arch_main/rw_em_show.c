@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> arch_main.o -> rw_em_show
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,17 +20,17 @@ void rw_em_show(void)
     if (2 < _g_bt_plf_log_level) {
       ets_printf("EM_FT_OFFSET: 0x%08x, EM_FT_END: 0x%08x\n",0x100,0x128);
       if (2 < _g_bt_plf_log_level) {
-        ets_printf("EM_RF_SW_SPI_OFFSET: 0x%08x, EM_RF_SW_SPI_END: 0x%08x\n",0x128,0x128);
+        ets_printf("EM_RF_SW_SPI_OFFSET: 0x%08x, EM_RF_SW_SPI_END: 0x%08x\n",0x128);
         if (2 < _g_bt_plf_log_level) {
-          ets_printf("EM_RF_SW_SPI_OFFSET: 0x%08x, EM_RF_SW_SPI_END: 0x%08x\n",0x128,0x128);
+          ets_printf("EM_RF_SW_SPI_OFFSET: 0x%08x, EM_RF_SW_SPI_END: 0x%08x\n",0x128);
           if (2 < _g_bt_plf_log_level) {
-            ets_printf("EM_RF_SW_SPI_OFFSET: 0x%08x, EM_RF_SW_SPI_END: 0x%08x\n",0x128,0x128);
+            ets_printf("EM_RF_SW_SPI_OFFSET: 0x%08x, EM_RF_SW_SPI_END: 0x%08x\n",0x128);
             if (2 < _g_bt_plf_log_level) {
-              ets_printf("EM_RF_HW_SPI_OFFSET: 0x%08x, EM_RF_HW_SPI_END: 0x%08x\n",0x128,0x128);
+              ets_printf("EM_RF_HW_SPI_OFFSET: 0x%08x, EM_RF_HW_SPI_END: 0x%08x\n",0x128);
               if (2 < _g_bt_plf_log_level) {
-                ets_printf("EM_RF_HW_SPI_OFFSET: 0x%08x, EM_RF_HW_SPI_END: 0x%08x\n",0x128,0x128);
+                ets_printf("EM_RF_HW_SPI_OFFSET: 0x%08x, EM_RF_HW_SPI_END: 0x%08x\n",0x128);
                 if (2 < _g_bt_plf_log_level) {
-                  ets_printf("EM_RF_HW_SPI_OFFSET: 0x%08x, EM_RF_HW_SPI_END: 0x%08x\n",0x128,0x128);
+                  ets_printf("EM_RF_HW_SPI_OFFSET: 0x%08x, EM_RF_HW_SPI_END: 0x%08x\n",0x128);
                   if (2 < _g_bt_plf_log_level) {
                     ets_printf("EM_ENC_OFFSET: 0x%08x, EM_ENC_END: 0x%08x\n",0x128,0x148);
                     if (2 < _g_bt_plf_log_level) {

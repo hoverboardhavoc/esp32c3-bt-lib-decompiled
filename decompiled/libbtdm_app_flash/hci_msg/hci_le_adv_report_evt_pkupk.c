@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> hci_msg.o -> hci_le_adv_report_evt_pkupk
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,60 +16,62 @@ int hci_le_adv_report_evt_pkupk(undefined1 *param_1,undefined1 *param_2,ushort *
   undefined1 *puVar1;
   int iVar2;
   int iVar3;
-  undefined1 *puVar4;
+  ushort uVar4;
   undefined1 *puVar5;
-  int iVar6;
+  undefined1 *puVar6;
+  int iVar7;
   undefined1 *puStack_64;
   undefined1 *puStack_60;
   undefined1 auStack_5c [43];
   undefined1 auStack_31 [13];
   
   if (param_2 == (undefined1 *)0x0) {
-    *param_3 = 0;
+    uVar4 = 0;
     iVar2 = 0;
   }
   else {
     if (param_1 == (undefined1 *)0x0) {
-      puVar1 = auStack_31;
+      puVar5 = auStack_31;
       param_1 = auStack_5c;
     }
     else {
-      puVar1 = param_1 + *param_3;
+      puVar5 = param_1 + *param_3;
     }
-    puVar4 = param_2 + param_4;
+    puVar1 = param_2 + param_4;
     puStack_64 = param_2;
     puStack_60 = param_1;
-    iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar4,puVar1,1);
+    iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar1,puVar5,1);
     if (iVar2 == 0) {
       puStack_64 = param_2 + 1;
-      iVar3 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar4,puVar1,1);
+      iVar3 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar1,puVar5,1);
       iVar2 = iVar3;
       if (iVar3 == 0) {
-        puVar5 = param_2 + 10;
-        for (iVar6 = 0; iVar2 = iVar3, iVar6 < (int)(uint)(byte)param_2[1]; iVar6 = iVar6 + 1) {
-          puStack_64 = puVar5 + -8;
-          iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar4,puVar1,1);
+        puVar6 = param_2 + 10;
+        for (iVar7 = 0; iVar2 = iVar3, iVar7 < (int)(uint)(byte)param_2[1]; iVar7 = iVar7 + 1) {
+          puStack_64 = puVar6 + -8;
+          iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar1,puVar5,1);
           if (iVar2 != 0) break;
-          puStack_64 = puVar5 + -7;
-          iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar4,puVar1,1);
+          puStack_64 = puVar6 + -7;
+          iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar1,puVar5,1);
           if (iVar2 != 0) break;
-          puStack_64 = puVar5 + -6;
-          iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar4,puVar1,6);
+          puStack_64 = puVar6 + -6;
+          iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar1,puVar5,6);
           if ((iVar2 != 0) ||
-             (puStack_64 = puVar5, iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar4,puVar1,1)
+             (puStack_64 = puVar6, iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar1,puVar5,1)
              , iVar2 != 0)) break;
-          puStack_64 = puVar5 + 1;
-          iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar4,puVar1,*puVar5);
+          puStack_64 = puVar6 + 1;
+          iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar1,puVar5,*puVar6);
           if (iVar2 != 0) break;
-          puStack_64 = puVar5 + 0x20;
-          iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar4,puVar1,1);
-          puVar5 = puVar5 + 0x29;
+          puStack_64 = puVar6 + 0x20;
+          iVar2 = r_hci_pack_bytes(&puStack_64,&puStack_60,puVar1,puVar5,1);
+          puVar6 = puVar6 + 0x29;
           if (iVar2 != 0) break;
         }
       }
     }
-    *param_3 = (short)puStack_60 - (short)param_1;
+    uVar4 = (short)puStack_60 - (short)param_1;
   }
+  *param_3 = uVar4;
   return iVar2;
 }
 

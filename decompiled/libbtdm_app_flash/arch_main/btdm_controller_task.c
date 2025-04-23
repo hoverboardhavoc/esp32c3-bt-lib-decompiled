@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_controller_task
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,11 +18,11 @@ void btdm_controller_task(void)
   bool bVar1;
   int iVar2;
   code *pcVar3;
-  char cStack_38;
+  byte bStack_38;
   undefined1 uStack_37;
   undefined1 *puStack_34;
   
-  _LANCHOR5 = 0;
+  s_btdm_state = 0;
   do {
     pcVar3 = *(code **)(_r_osi_funcs_p + 0x34);
     iVar2 = r_btdm_vnd_ol_task_env_get();
@@ -32,66 +32,64 @@ void btdm_controller_task(void)
     }
     bVar1 = false;
     while (iVar2 = (**(code **)(_r_osi_funcs_p + 0x5c))
-                             (_g_rw_schd_queue,&cStack_38,0,*(code **)(_r_osi_funcs_p + 0x5c)),
+                             (_g_rw_schd_queue,&bStack_38,0,*(code **)(_r_osi_funcs_p + 0x5c)),
           iVar2 == 1) {
-      switch(cStack_38) {
-      case '\x02':
-        r_hci_tl_hci_pkt_handler();
-        break;
-      case '\a':
-      case '\b':
-      case '\t':
-      case '\n':
-        if (cStack_38 == '\t') {
-          r_sdk_config_get_opts();
-          bt_bb_v2_init_cmplx(0);
-          r_cali_phase_match_p();
-          r_rf_rw_v9_le_init();
-          btdm_controller_on_reset();
-          r_intc_enable();
-          iVar2 = (**(code **)(_r_osi_funcs_p + 0xb4))
-                            (&coex_schm_btdm_callback,*(code **)(_r_osi_funcs_p + 0xb4));
-          if (iVar2 == 0) {
-            btdm_vnd_offload_task_register(1,&coex_schm_process);
-          }
-          else if (1 < _g_bt_plf_log_level) {
-            ets_printf("Coex register schm btdm cb faild\n");
-          }
-          _LANCHOR5 = 2;
+      if (bStack_38 == 0xb) {
+        ble_txpwr_set_inter(*puStack_34,puStack_34[1],puStack_34[2]);
+      }
+      else if (bStack_38 < 0xc) {
+        if (bStack_38 == 2) {
+          r_hci_tl_hci_pkt_handler();
         }
-        else {
-          if (cStack_38 == '\n') {
-            (**(code **)(_r_osi_funcs_p + 0xb4))(0,*(code **)(_r_osi_funcs_p + 0xb4));
+        else if ((byte)(bStack_38 - 7) < 4) {
+          if (bStack_38 == 9) {
             r_sdk_config_get_opts();
-            r_intc_disable();
+            bt_bb_v2_init_cmplx(0);
+            r_cali_phase_match_p();
+            r_rf_rw_v9_le_init();
             btdm_controller_on_reset();
-            r_rwble_hw_disable(2);
+            r_intc_enable();
+            iVar2 = (**(code **)(_r_osi_funcs_p + 0xb4))
+                              (&coex_schm_btdm_callback,*(code **)(_r_osi_funcs_p + 0xb4));
+            if (iVar2 == 0) {
+              btdm_vnd_offload_task_register(1,&coex_schm_process);
+            }
+            else if (1 < _g_bt_plf_log_level) {
+              ets_printf("Coex register schm btdm cb faild\n");
+            }
+            s_btdm_state = 2;
           }
           else {
-            if (cStack_38 == '\b') {
-              rw_stop();
-              _LANCHOR5 = 0;
-              goto _L424;
+            if (bStack_38 == 10) {
+              (**(code **)(_r_osi_funcs_p + 0xb4))(0,*(code **)(_r_osi_funcs_p + 0xb4));
+              r_sdk_config_get_opts();
+              r_intc_disable();
+              btdm_controller_on_reset();
+              r_rwble_hw_disable(2);
             }
-            rw_pre_main();
+            else {
+              if (bStack_38 == 8) {
+                rw_stop();
+                s_btdm_state = 0;
+                goto _L422;
+              }
+              rw_pre_main();
+            }
+            s_btdm_state = 1;
           }
-          _LANCHOR5 = 1;
+_L422:
+          (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
         }
-_L424:
-        (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
-        break;
-      case '\v':
-        ble_txpwr_set_inter(*puStack_34,puStack_34[1],puStack_34[2]);
-        break;
-      case '\r':
+      }
+      else if (bStack_38 == 0xd) {
         r_btdm_vnd_offload_process(uStack_37,puStack_34);
       }
-      r_btdm_task_recycle(&cStack_38);
+      r_btdm_task_recycle(&bStack_38);
       bVar1 = true;
-      btdm_rw_run(_LANCHOR5);
+      btdm_rw_run(s_btdm_state);
     }
     if (!bVar1) {
-      btdm_rw_run(_LANCHOR5);
+      btdm_rw_run(s_btdm_state);
     }
   } while( true );
 }

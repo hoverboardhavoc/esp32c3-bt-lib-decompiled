@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> ke_mem.o -> r_ke_check_malloc
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,16 +19,16 @@ bool r_ke_check_malloc(int param_1,int param_2)
   short *psVar2;
   uint uVar3;
   short *psVar4;
-  int iVar5;
+  uint uVar5;
   
   uVar1 = (param_1 + 3U & 0xfffffffc) + 4;
   if (uVar1 < 0xc) {
     uVar1 = 0xc;
   }
-  iVar5 = 0;
+  uVar5 = 0;
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   do {
-    psVar2 = *(short **)(&r_plf_funcs_p + ((param_2 + iVar5 & 3U) + 4) * 4);
+    psVar2 = *(short **)(&r_plf_funcs_p + ((param_2 + uVar5 & 3) + 4) * 4);
     if (psVar2 == (short *)0x0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"ke_mem.c",0xbd,*(code **)(_r_plf_funcs_p + 8));
     }
@@ -46,7 +46,8 @@ bool r_ke_check_malloc(int param_1,int param_2)
     if ((psVar4 != (short *)0x0) && ((uint)(ushort)psVar4[1] < uVar1 + 0xc)) {
       uVar1 = (uint)(ushort)psVar4[1];
     }
-  } while ((iVar5 != 3) && (iVar5 = iVar5 + 1, psVar4 == (short *)0x0));
+    uVar5 = uVar5 + 1 & 0xff;
+  } while ((uVar5 != 4) && (psVar4 == (short *)0x0));
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   return psVar4 != (short *)0x0;
 }

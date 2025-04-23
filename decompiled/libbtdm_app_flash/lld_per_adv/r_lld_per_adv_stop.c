@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_per_adv.o -> r_lld_per_adv_stop
  *
  * (C) Espressif, Apache License 2.0.
@@ -56,7 +56,7 @@ undefined4 r_lld_per_adv_stop(uint param_1)
       bVar1 = *(byte *)(iVar2 + 0x52);
       iVar3 = r_emi_get_mem_addr_by_offset(0x400);
       *(undefined2 *)((uint)bVar1 * 0x5a + 0x20 + iVar3) = 1;
-      _DAT_60031000 = _DAT_60031000 & 0xfdffffff | 0x2000000;
+      _DAT_60031000 = _DAT_60031000 | 0x2000000;
       *(undefined1 *)(iVar2 + 0x53) = 2;
     }
     uVar4 = 0;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_scan.o -> f_lld_scan_end_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,14 +28,14 @@ undefined4 f_lld_scan_end_ind_handler_hack(int param_1)
   if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
     if (*(char *)(iVar6 + 0x40) != '\b') {
       r_assert_err(0,"llm_scan.c",0x81f);
-      goto _L898;
+      goto _L889;
     }
     uVar4 = 0x200c;
   }
   else {
     if (*(char *)(iVar6 + 0x40) != '\b') {
       if (*(ushort *)(iVar6 + 0x2a) == 0) {
-        puVar5 = (undefined1 *)r_ke_msg_alloc(0x1104,0,0x3e,1);
+        puVar5 = (undefined1 *)r_ke_msg_alloc(0x1104,0,0x3e);
         *puVar5 = 0x11;
         r_hci_send_2_host();
         *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar3 + 0x40) = 6;
@@ -48,15 +48,15 @@ undefined4 f_lld_scan_end_ind_handler_hack(int param_1)
          ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
         (*(code *)*_bt_rf_coex_hooks_p)((uint)bVar1,3,0);
       }
-      goto _L898;
+      goto _L889;
     }
     uVar4 = 0x2042;
   }
   r_llm_cmd_cmp_send(uVar4,0);
   *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar3 + 0x40) = 6;
-_L898:
+_L889:
   iVar6 = _p_llm_env;
-  cVar2 = *(char *)(iVar3 + *(int *)(_p_llm_env + 8) + 0x40);
+  cVar2 = *(char *)(*(int *)(_p_llm_env + 8) + iVar3 + 0x40);
   if ((cVar2 == '\x06') || ((*(byte *)(_p_llm_env + 0xd4) & 2) != 0)) {
     *(undefined1 *)(_p_llm_env + 0xd2) = 0;
     *(undefined1 *)(iVar6 + 0xd1) = 0;

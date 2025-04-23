@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> ecc_p256.o -> r_ecc_generate_key256
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,10 +27,12 @@ r_ecc_generate_key256
   undefined1 *puVar7;
   undefined1 *puVar8;
   int iVar9;
-  int iVar10;
-  undefined4 uVar11;
-  undefined1 *puVar12;
+  undefined1 *puVar10;
+  short *psVar11;
+  undefined4 uVar12;
   short *psVar13;
+  short *psVar14;
+  int iVar15;
   short local_174 [18];
   int iStack_150;
   undefined4 uStack_14c;
@@ -52,90 +54,89 @@ r_ecc_generate_key256
   undefined4 uStack_48;
   undefined4 uStack_44;
   
-  puVar12 = (undefined1 *)(param_2 + 0x1f);
+  psVar13 = local_11c;
+  psVar11 = local_174;
+  puVar10 = (undefined1 *)(param_2 + 0x1f);
   local_174[0] = 0;
   local_11c[0] = 0;
   asStack_f0[0] = 0;
   puVar7 = (undefined1 *)(param_3 + 0x1f);
   puVar8 = (undefined1 *)(param_4 + 0x1f);
-  psVar5 = local_11c;
-  psVar13 = local_174;
+  psVar5 = psVar11;
+  psVar14 = psVar13;
   do {
-    uVar2 = *puVar12;
-    puVar1 = puVar12 + -1;
-    puVar12 = puVar12 + -2;
-    psVar13[1] = CONCAT11(uVar2,*puVar1);
-    psVar13 = psVar13 + 1;
-    uVar2 = *puVar8;
-    psVar5[1] = CONCAT11(*puVar7,puVar7[-1]);
-    psVar5[0x17] = CONCAT11(uVar2,puVar8[-1]);
+    uVar2 = *puVar10;
+    puVar1 = puVar10 + -1;
+    puVar10 = puVar10 + -2;
+    psVar5[1] = CONCAT11(uVar2,*puVar1);
+    psVar5 = psVar5 + 1;
+    psVar14[1] = CONCAT11(*puVar7,puVar7[-1]);
+    psVar14[0x17] = CONCAT11(*puVar8,puVar8[-1]);
     puVar7 = puVar7 + -2;
     puVar8 = puVar8 + -2;
-    psVar5 = psVar5 + 1;
-  } while ((undefined1 *)(param_2 + -1) != puVar12);
+    psVar14 = psVar14 + 1;
+  } while ((undefined1 *)(param_2 + -1) != puVar10);
+  iVar15 = 0;
+  do {
+    if (*psVar11 != 0) break;
+    iVar15 = iVar15 + 1;
+    psVar11 = psVar11 + 1;
+  } while (iVar15 != 0x11);
+  iStack_150 = 0x11 - iVar15;
   iVar9 = 0;
-  psVar5 = local_174;
+  psVar5 = psVar13;
   do {
     if (*psVar5 != 0) break;
     iVar9 = iVar9 + 1;
     psVar5 = psVar5 + 1;
   } while (iVar9 != 0x11);
-  iStack_150 = 0x11 - iVar9;
-  iVar10 = 0;
-  psVar5 = local_11c;
-  do {
-    if (*psVar5 != 0) break;
-    iVar10 = iVar10 + 1;
-    psVar5 = psVar5 + 1;
-  } while (iVar10 != 0x11);
-  iStack_f8 = 0x11 - iVar10;
+  iStack_f8 = 0x11 - iVar9;
   iStack_cc = 0;
-  psVar5 = local_11c;
   do {
-    if (psVar5[0x16] != 0) break;
+    if (psVar13[0x16] != 0) break;
     iStack_cc = iStack_cc + 1;
-    psVar5 = psVar5 + 1;
+    psVar13 = psVar13 + 1;
   } while (iStack_cc != 0x11);
   iStack_cc = 0x11 - iStack_cc;
   uStack_f4 = 0;
   uStack_c8 = 0;
-  iVar10 = (**(code **)(_r_modules_funcs_p + 0x37c))
-                     (local_11c,asStack_f0,*(code **)(_r_modules_funcs_p + 0x37c));
-  uVar11 = 0x12;
-  if (iVar10 != 0) {
+  iVar9 = (**(code **)(_r_modules_funcs_p + 0x37c))
+                    (local_11c,asStack_f0,*(code **)(_r_modules_funcs_p + 0x37c));
+  uVar12 = 0x12;
+  if (iVar9 != 0) {
     iVar6 = (**(code **)(_r_modules_funcs_p + 0x120))
                       (0x14c,3,*(code **)(_r_modules_funcs_p + 0x120));
-    *(undefined2 *)(iVar6 + 0x13c) = param_5;
     *(undefined2 *)(iVar6 + 0x13e) = param_6;
     *(undefined4 *)(iVar6 + 0x148) = 0;
     *(char *)(iVar6 + 0x144) = (char)param_1;
+    *(undefined2 *)(iVar6 + 0x13c) = param_5;
     memset(auStack_148,0,0x20);
-    uStack_128 = 1;
     memcpy(auStack_c4,local_11c,0x22);
-    uVar11 = uStack_f4;
-    iVar10 = iStack_f8;
+    uVar12 = uStack_f4;
+    iVar9 = iStack_f8;
     uStack_9c = uStack_f4;
     iStack_a0 = iStack_f8;
     memcpy(auStack_98,asStack_f0,0x22);
     uVar4 = uStack_c8;
     iVar3 = iStack_cc;
-    uStack_70 = uStack_c8;
     iStack_74 = iStack_cc;
+    uStack_70 = uStack_c8;
+    uStack_128 = 1;
     memcpy(auStack_6c,auStack_148,0x22);
     uStack_48 = 1;
     uStack_44 = 0;
     memcpy((void *)(iVar6 + 0x8c),auStack_c4,0x22);
-    *(undefined4 *)(iVar6 + 0xb4) = uVar11;
-    *(int *)(iVar6 + 0xb0) = iVar10;
+    *(undefined4 *)(iVar6 + 0xb4) = uVar12;
+    *(int *)(iVar6 + 0xb0) = iVar9;
     memcpy((void *)(iVar6 + 0xb8),auStack_98,0x22);
-    *(undefined4 *)(iVar6 + 0xe0) = uVar4;
     *(int *)(iVar6 + 0xdc) = iVar3;
+    *(undefined4 *)(iVar6 + 0xe0) = uVar4;
     memcpy((void *)(iVar6 + 0xe4),auStack_6c,0x22);
     *(undefined4 *)(iVar6 + 0x108) = 1;
     *(undefined4 *)(iVar6 + 0x10c) = 0;
     memcpy((void *)(iVar6 + 0x110),local_174,0x22);
     *(undefined4 *)(iVar6 + 0x138) = uStack_14c;
-    *(int *)(iVar6 + 0x134) = 0x11 - iVar9;
+    *(int *)(iVar6 + 0x134) = 0x11 - iVar15;
     memset(auStack_148,0,0x22);
     memcpy((void *)(iVar6 + 8),auStack_148,0x22);
     *(undefined4 *)(iVar6 + 0x2c) = 1;
@@ -168,8 +169,8 @@ r_ecc_generate_key256
     }
     (**(code **)(_r_modules_funcs_p + 0x44))(&ecc_env,iVar6,*(code **)(_r_modules_funcs_p + 0x44));
     (**(code **)(_r_modules_funcs_p + 0x108))(1,*(code **)(_r_modules_funcs_p + 0x108));
-    uVar11 = 0;
+    uVar12 = 0;
   }
-  return uVar11;
+  return uVar12;
 }
 

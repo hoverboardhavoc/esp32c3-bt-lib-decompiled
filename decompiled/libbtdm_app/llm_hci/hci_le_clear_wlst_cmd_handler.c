@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bb9f0f59db474924c9288ab92aed1abb88bc9419
- * https://github.com/espressif/esp32c3-bt-lib/commit/bb9f0f59db474924c9288ab92aed1abb88bc9419
- * Upstream date: 2023-12-08 13:35:16 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(65db61f)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_hci.o -> hci_le_clear_wlst_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,19 +28,17 @@ undefined4 hci_le_clear_wlst_cmd_handler(undefined4 param_1)
     uVar3 = 0;
     do {
       iVar4 = _p_llm_env;
-      iVar6 = uVar3 * 10 + _p_llm_env;
-      bVar1 = *(byte *)(iVar6 + 0x2d);
+      bVar1 = *(byte *)(uVar3 * 10 + _p_llm_env + 0x2d);
       if ((bVar1 & 1) != 0) {
-        if ((bVar1 & 4) == 0) {
-          bVar2 = 0xfc;
-        }
-        else {
+        bVar2 = 0xfc;
+        if ((bVar1 & 4) != 0) {
           bVar2 = 0xfd;
         }
+        iVar6 = _p_llm_env + uVar3 * 10;
         *(byte *)(iVar6 + 0x2d) = bVar1 & bVar2;
         (**(code **)(_r_ip_funcs_p + 0x2c0))
-                  (uVar3 & 0xff,iVar4 + uVar3 * 10 + 0x24,*(undefined1 *)(iVar4 + uVar3 * 10 + 0x2c)
-                   ,*(code **)(_r_ip_funcs_p + 0x2c0));
+                  (iVar4 + uVar3 * 10 + 0x24,*(undefined1 *)(iVar6 + 0x2c),
+                   *(code **)(_r_ip_funcs_p + 0x2c0));
         lld_wl_res_rem(uVar3 & 0xff);
       }
       uVar3 = uVar3 + 1;

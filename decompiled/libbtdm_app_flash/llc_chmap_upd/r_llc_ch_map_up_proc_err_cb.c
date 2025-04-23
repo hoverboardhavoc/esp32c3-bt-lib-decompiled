@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_chmap_upd.o -> r_llc_ch_map_up_proc_err_cb
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void r_llc_ch_map_up_proc_err_cb(int param_1,uint param_2,undefined1 *param_3)
+void r_llc_ch_map_up_proc_err_cb(int param_1,int param_2,undefined1 *param_3)
 
 {
   byte bVar1;
@@ -27,10 +27,10 @@ void r_llc_ch_map_up_proc_err_cb(int param_1,uint param_2,undefined1 *param_3)
   byte abStack_28 [16];
   
   if (param_2 != 0) {
-    if (param_2 < 4) {
+    if (2 < (param_2 - 1U & 0xff)) {
+      r_assert_param(0x10000,0x166);
       return;
     }
-    r_assert_param("llc_chmap_upd.c",0x166);
     return;
   }
   uVar2 = *param_3;
@@ -57,7 +57,7 @@ void r_llc_ch_map_up_proc_err_cb(int param_1,uint param_2,undefined1 *param_3)
       else {
         if (iVar5 != 4) {
           uVar7 = r_llc_proc_state_get(iVar10);
-          r_assert_param(param_1,uVar7,"llc_chmap_upd.c",0x11d);
+          r_assert_param(param_1,uVar7,0x10000,0x11d);
           return;
         }
         memcpy((void *)(iVar6 + 8),(void *)(iVar10 + 8),5);
@@ -81,7 +81,7 @@ void r_llc_ch_map_up_proc_err_cb(int param_1,uint param_2,undefined1 *param_3)
         uVar11 = 0;
         do {
           if (((int)(uint)abStack_28[(int)uVar11 >> 3] >> (uVar11 & 7) & 1U) == 0) {
-            abStack_28[(int)uVar11 >> 3] = (byte)(1 << (uVar11 & 7)) | abStack_28[(int)uVar11 >> 3];
+            abStack_28[(int)uVar11 >> 3] = abStack_28[(int)uVar11 >> 3] | (byte)(1 << (uVar11 & 7));
             uVar9 = uVar9 + 1 & 0xff;
             if (bVar1 <= uVar9) break;
           }
@@ -93,7 +93,7 @@ void r_llc_ch_map_up_proc_err_cb(int param_1,uint param_2,undefined1 *param_3)
         pvVar8 = (void *)(iVar5 + 8);
         *(ushort *)(iVar10 + 0x42) = *(ushort *)(iVar10 + 0x42) | 0x10;
         sVar4 = r_lld_con_event_counter_get(param_1);
-        sVar4 = *(short *)(iVar10 + 0x10) + 9 + sVar4;
+        sVar4 = sVar4 + *(short *)(iVar10 + 0x10) + 9;
         *(short *)(iVar5 + 0xe) = sVar4;
         memcpy(pvVar8,abStack_28,5);
         iVar6 = r_lld_con_ch_map_update(param_1,pvVar8,sVar4);
@@ -107,7 +107,7 @@ void r_llc_ch_map_up_proc_err_cb(int param_1,uint param_2,undefined1 *param_3)
     else {
       if (iVar6 != 1) {
         uVar7 = r_llc_proc_state_get(iVar5);
-        r_assert_param(param_1,uVar7,"llc_chmap_upd.c",0xcc);
+        r_assert_param(param_1,uVar7,0x10000,0xcc);
         return;
       }
       memcpy((void *)(iVar10 + 8),(void *)(iVar5 + 8),5);

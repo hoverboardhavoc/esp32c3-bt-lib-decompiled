@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> ecc_p256.o -> r_SubtractFromSelfBigHexSign256
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ void r_SubtractFromSelfBigHexSign256(void *param_1,int param_2)
       uVar3 = *(uint *)((int)param_1 + 0x24);
       if (uVar3 <= *(uint *)(param_2 + 0x24)) {
         if (uVar3 < *(uint *)(param_2 + 0x24)) {
-_L77:
+_L71:
           (**(code **)(_r_modules_funcs_p + 0x3ac))
                     (param_2,param_1,auStack_3c,*(code **)(_r_modules_funcs_p + 0x3ac));
           memcpy(param_1,auStack_3c,0x22);
@@ -37,11 +37,13 @@ _L77:
         for (uVar3 = 0x11 - uVar3; uVar3 < 0x11; uVar3 = uVar3 + 1) {
           uVar1 = *(ushort *)(param_2 + uVar3 * 2);
           uVar2 = *(ushort *)(uVar3 * 2 + (int)param_1);
-          if (uVar2 < uVar1) goto _L77;
+          if (uVar2 < uVar1) goto _L71;
           if (uVar1 < uVar2) break;
         }
       }
-_L83:
+_L77:
+                    /* WARNING: Could not recover jumptable at 0x000103aa. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
       (**(code **)(_r_modules_funcs_p + 0x3b8))
                 (param_1,param_2,*(code **)(_r_modules_funcs_p + 0x3b8));
       return;
@@ -50,11 +52,11 @@ _L83:
   else if (*(int *)(param_2 + 0x28) != 0) {
     uVar3 = *(uint *)(param_2 + 0x24);
     if (uVar3 <= *(uint *)((int)param_1 + 0x24)) {
-      if (uVar3 < *(uint *)((int)param_1 + 0x24)) goto _L83;
+      if (uVar3 < *(uint *)((int)param_1 + 0x24)) goto _L77;
       for (uVar3 = 0x11 - uVar3; uVar3 < 0x11; uVar3 = uVar3 + 1) {
         uVar1 = *(ushort *)((int)param_1 + uVar3 * 2);
         uVar2 = *(ushort *)(uVar3 * 2 + param_2);
-        if (uVar2 < uVar1) goto _L83;
+        if (uVar2 < uVar1) goto _L77;
         if (uVar1 < uVar2) break;
       }
     }
@@ -65,6 +67,8 @@ _L83:
     *(undefined4 *)((int)param_1 + 0x24) = uStack_18;
     return;
   }
+                    /* WARNING: Could not recover jumptable at 0x00010402. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0x34c))(*(code **)(_r_modules_funcs_p + 0x34c));
   return;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * Upstream date: 2025-04-03 18:07:15 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_process_pkt_rx_ext_adv
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,12 +12,12 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_lld_scan_process_pkt_rx_ext_adv(int param_1,uint param_2,int param_3,byte *param_4)
+void r_lld_scan_process_pkt_rx_ext_adv(int param_1,uint param_2,int param_3,char *param_4)
 
 {
-  char cVar1;
+  byte bVar1;
   int iVar2;
-  byte bVar3;
+  char cVar3;
   code *pcVar4;
   int iVar5;
   int iVar6;
@@ -32,51 +32,54 @@ void r_lld_scan_process_pkt_rx_ext_adv(int param_1,uint param_2,int param_3,byte
   if (iVar2 != 0) {
     return;
   }
-  iVar7 = *(int *)(_lld_scan_env + param_1 * 4);
-  iVar6 = param_3 * 0x14 + 0x10;
-  iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
+  iVar6 = *(int *)(_lld_scan_env + param_1 * 4);
+  iVar7 = param_3 * 0x14 + 0x10;
   iVar5 = param_3 * 0x14 + 4;
-  uVar8 = *(ushort *)(iVar2 + iVar6) & 0x3f;
-  *param_4 = (byte)uVar8;
+  iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
+  uVar8 = *(ushort *)(iVar2 + iVar7) & 0x3f;
+  *param_4 = (char)uVar8;
   iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   if (*(ushort *)(iVar2 + iVar5) >> 8 <= uVar8) {
     (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x825,*(code **)(_r_plf_funcs_p + 8));
   }
-  bVar3 = *param_4;
-  if (bVar3 != 0) {
-    bVar3 = bVar3 - 1;
+  cVar3 = *param_4;
+  if (cVar3 != '\0') {
+    cVar3 = cVar3 + -1;
   }
-  param_4[4] = bVar3;
+  param_4[4] = cVar3;
   iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-  bVar3 = *param_4;
-  param_4[5] = (char)((ushort)*(undefined2 *)(iVar2 + iVar5) >> 8) + ~bVar3;
-  *(undefined1 *)(iVar7 + 0x3e) = 0;
-  if (bVar3 != 0) {
+  cVar3 = *param_4;
+  param_4[5] = ((char)((ushort)*(undefined2 *)(iVar2 + iVar5) >> 8) - cVar3) + -1;
+  *(undefined1 *)(iVar6 + 0x3e) = 0;
+  if (cVar3 != '\0') {
     iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-    *(undefined2 *)(param_4 + 6) = *(undefined2 *)(iVar2 + iVar6);
+    *(undefined2 *)(param_4 + 6) = *(undefined2 *)(iVar2 + iVar7);
   }
-  cVar1 = *(char *)(iVar7 + 0x3d);
-  if (cVar1 == '\x01') {
-    pcVar4 = *(code **)(_r_ip_funcs_p + 0x414);
-  }
-  else if (cVar1 == '\0') {
-    pcVar4 = *(code **)(_r_ip_funcs_p + 0x410);
-  }
-  else if (cVar1 == '\x02') {
+  bVar1 = *(byte *)(iVar6 + 0x3d);
+  if (bVar1 == 2) {
     pcVar4 = *(code **)(_r_ip_funcs_p + 0x418);
   }
+  else if (bVar1 < 3) {
+    if (bVar1 == 0) {
+      pcVar4 = *(code **)(_r_ip_funcs_p + 0x410);
+    }
+    else {
+      pcVar4 = *(code **)(_r_ip_funcs_p + 0x414);
+    }
+  }
   else {
-    if (cVar1 != '\x03') {
+    if (bVar1 != 3) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x84c,*(code **)(_r_plf_funcs_p + 8));
-      goto _L541;
+      goto _L515;
     }
     pcVar4 = *(code **)(_r_ip_funcs_p + 0x41c);
   }
   (*pcVar4)(param_1,param_2,param_3,param_4,pcVar4);
-_L541:
-                    /* WARNING: Could not recover jumptable at 0x000124d0. Too many branches */
+_L515:
+                    /* WARNING: Could not recover jumptable at 0x00012484. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_ip_funcs_p + 0x7f8))(0,param_1,param_2,param_3,param_4);
+  (**(code **)(_r_ip_funcs_p + 0x7f8))
+            (0,param_1,param_2,param_3,param_4,*(code **)(_r_ip_funcs_p + 0x7f8));
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
- * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
- * Upstream date: 2025-01-03 16:50:09 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_hci.o -> hci_le_wr_rf_path_comp_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,21 +24,17 @@ undefined4 hci_le_wr_rf_path_comp_cmd_handler(short *param_1)
   puVar3 = (undefined1 *)r_ke_msg_alloc(0x1101,0,0x204d,1);
   iVar4 = r_sdk_config_get_opts_ext();
   iVar2 = _p_llm_env;
-  if (*(char *)(iVar4 + 0x18) == '\0') {
-    uVar5 = 0xc;
-  }
-  else {
+  uVar5 = 0xc;
+  if (*(char *)(iVar4 + 0x18) != '\0') {
+    uVar5 = 0x12;
     if (((ushort)(param_1[1] + 0x500U) < 0xa01) &&
        (sVar1 = *param_1, (ushort)(sVar1 + 0x500U) < 0xa01)) {
+      uVar5 = 0;
       *(short *)(_p_llm_env + 200) = param_1[1];
       *(short *)(iVar2 + 0xca) = sVar1;
-      *puVar3 = 0;
-      goto _L46;
     }
-    uVar5 = 0x12;
   }
   *puVar3 = uVar5;
-_L46:
   r_hci_send_2_host(puVar3);
   return 0;
 }

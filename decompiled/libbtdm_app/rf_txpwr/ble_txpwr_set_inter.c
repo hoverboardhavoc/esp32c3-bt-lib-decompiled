@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> rf_txpwr.o -> ble_txpwr_set_inter
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,55 +26,52 @@ undefined4 ble_txpwr_set_inter(uint param_1,uint param_2,uint param_3)
     return 0xfffffffe;
   }
   if ((_r_plf_funcs_p == 0) ||
-     (iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38)),
+     (iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(0xfffffffe,*(code **)(_r_plf_funcs_p + 0x38)),
      (*(byte *)(iVar1 + 0xc) & 1) == 0)) {
     return 0xfffffffd;
   }
   iVar1 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
   uVar2 = bt_controller_txpwr_level_2_index(*(undefined4 *)(iVar1 + 0xc),param_3);
-  if (param_1 == 2) {
-    (**(code **)(_r_modules_funcs_p + 0x1f0))(8,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
-    (**(code **)(_r_modules_funcs_p + 0x1f0))(9,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
-    (**(code **)(_r_modules_funcs_p + 0x1f0))(10,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
-    param_2 = 0xb;
+  if (param_1 == 3) {
+    (**(code **)(_r_modules_funcs_p + 0x1f0))(0xe,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
+    param_2 = 0xf;
     pcVar3 = *(code **)(_r_modules_funcs_p + 0x1f0);
+    goto _L75;
+  }
+  if (param_1 == 4) {
+    iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
+    if (*(byte *)(iVar1 + 0xd) <= param_2) {
+      (**(code **)(_r_modules_funcs_p + 0x1f0))(2,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
+      param_2 = 3;
+      pcVar3 = *(code **)(_r_modules_funcs_p + 0x1f0);
+      goto _L75;
+    }
   }
   else {
-    if ((int)param_1 < 3) {
-      if (param_1 != 1) {
-_L65:
+    if (param_1 != 1) {
+      if (param_1 != 2) {
         iVar1 = (**(code **)(_r_plf_funcs_p + 0xf4))(*(code **)(_r_plf_funcs_p + 0xf4));
         *(char *)(iVar1 + 1) = (char)uVar2;
         return 0;
       }
-      iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-      if (*(byte *)(iVar1 + 0xd) <= param_2) {
-        (**(code **)(_r_modules_funcs_p + 0x1f0))(4,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
-        (**(code **)(_r_modules_funcs_p + 0x1f0))(5,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
-        param_2 = 6;
-        pcVar3 = *(code **)(_r_modules_funcs_p + 0x1f0);
-        goto _L77;
-      }
+      (**(code **)(_r_modules_funcs_p + 0x1f0))(8,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
+      (**(code **)(_r_modules_funcs_p + 0x1f0))(9,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
+      (**(code **)(_r_modules_funcs_p + 0x1f0))(10,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
+      param_2 = 0xb;
+      pcVar3 = *(code **)(_r_modules_funcs_p + 0x1f0);
+      goto _L75;
     }
-    else {
-      if (param_1 == 3) {
-        (**(code **)(_r_modules_funcs_p + 0x1f0))(0xe,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
-        param_2 = 0xf;
-        pcVar3 = *(code **)(_r_modules_funcs_p + 0x1f0);
-        goto _L77;
-      }
-      if (param_1 != 4) goto _L65;
-      iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-      if (*(byte *)(iVar1 + 0xd) <= param_2) {
-        (**(code **)(_r_modules_funcs_p + 0x1f0))(2,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
-        param_2 = 3;
-        pcVar3 = *(code **)(_r_modules_funcs_p + 0x1f0);
-        goto _L77;
-      }
+    iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
+    if (*(byte *)(iVar1 + 0xd) <= param_2) {
+      (**(code **)(_r_modules_funcs_p + 0x1f0))(4,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
+      (**(code **)(_r_modules_funcs_p + 0x1f0))(5,uVar2,*(code **)(_r_modules_funcs_p + 0x1f0));
+      param_2 = 6;
+      pcVar3 = *(code **)(_r_modules_funcs_p + 0x1f0);
+      goto _L75;
     }
-    pcVar3 = *(code **)(_r_modules_funcs_p + 0x1fc);
   }
-_L77:
+  pcVar3 = *(code **)(_r_modules_funcs_p + 0x1fc);
+_L75:
   (*pcVar3)(param_2,uVar2,pcVar3);
   return 0;
 }

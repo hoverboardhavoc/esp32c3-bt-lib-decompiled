@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bfdfe8f851c99ced8316b133b0b15521917ea049
- * https://github.com/espressif/esp32c3-bt-lib/commit/bfdfe8f851c99ced8316b133b0b15521917ea049
- * Upstream date: 2024-07-18 14:51:28 +0800
- * Upstream subject: feat(bt): Support mesh duplicate with extend scan (aa16a46)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm.o -> llm_duplicate_list_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,12 +33,7 @@ void llm_duplicate_list_init(void)
       llm_util_flush_list(iVar2);
     }
     iVar4 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
-    if (*(char *)(iVar4 + 4) == '\x01') {
-      *(undefined1 *)(iVar2 + 8) = 1;
-    }
-    else {
-      *(undefined1 *)(iVar2 + 8) = 0;
-    }
+    *(bool *)(iVar2 + 8) = *(char *)(iVar4 + 4) == '\x01';
     iVar4 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
     *(undefined1 *)(iVar2 + 9) = *(undefined1 *)(iVar4 + 5);
     iVar4 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
@@ -52,9 +47,9 @@ void llm_duplicate_list_init(void)
   if (*(char *)(iVar2 + 8) != '\0') {
     (**(code **)(_r_modules_funcs_p + 0x2c))(iVar2 + 0x10,*(code **)(_r_modules_funcs_p + 0x2c));
   }
-                    /* WARNING: Could not recover jumptable at 0x0001054a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010526. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_modules_funcs_p + 0x2c))(iVar2);
+  (**(code **)(_r_modules_funcs_p + 0x2c))(iVar2,*(code **)(_r_modules_funcs_p + 0x2c));
   return;
 }
 

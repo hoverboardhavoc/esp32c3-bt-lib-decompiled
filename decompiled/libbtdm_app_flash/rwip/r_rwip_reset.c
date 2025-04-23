@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
- * https://github.com/espressif/esp32c3-bt-lib/commit/d23ae97bb91d66e08c58bfaabaeed0a5ba7b7b5d
- * Upstream date: 2024-11-25 10:28:56 +0800
- * Upstream subject: fix(bt): Fixed BLE assert ke_mem.c line 267(d7561c2)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> rwip.o -> r_rwip_reset
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,36 +18,36 @@ void r_rwip_reset(void)
   int iVar1;
   
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
-  r_vshci_init(_LANCHOR0);
+  r_vshci_init(rwip_rst_state);
   r_ke_flush();
   iVar1 = r_sdk_config_get_opts_ext();
   if (*(char *)(iVar1 + 0x20) != '\0') {
-    r_ecc_init(_LANCHOR0);
+    r_ecc_init(rwip_rst_state);
   }
-  r_misc_init(_LANCHOR0);
-  r_hci_init(_LANCHOR0);
+  r_misc_init(rwip_rst_state);
+  r_hci_init(rwip_rst_state);
   if (*(code **)(_r_hli_funcs_p + 8) != (code *)0x0) {
-    (**(code **)(_r_hli_funcs_p + 8))(_LANCHOR0);
+    (**(code **)(_r_hli_funcs_p + 8))(rwip_rst_state);
   }
-  r_rwble_init(_LANCHOR0);
-  bb_int_init(_LANCHOR0);
-  r_rw_crypto_aes_init(_LANCHOR0);
-  r_sch_arb_init(_LANCHOR0);
-  r_sch_prog_init(_LANCHOR0);
-  r_sch_plan_init(_LANCHOR0);
-  r_sch_alarm_init(_LANCHOR0);
-  r_sch_slice_init(_LANCHOR0);
-  r_rwip_driver_init(_LANCHOR0);
+  r_rwble_init(rwip_rst_state);
+  bb_int_init(rwip_rst_state);
+  r_rw_crypto_aes_init(rwip_rst_state);
+  r_sch_arb_init(rwip_rst_state);
+  r_sch_prog_init(rwip_rst_state);
+  r_sch_plan_init(rwip_rst_state);
+  r_sch_alarm_init(rwip_rst_state);
+  r_sch_slice_init(rwip_rst_state);
+  r_rwip_driver_init(rwip_rst_state);
   r_rwip_wlcoex_set_part_0();
-  if (_LANCHOR0 == '\x02') {
+  if (rwip_rst_state == '\x02') {
     (*_rwip_rf)(_rwip_rf);
   }
-  _LANCHOR0 = 2;
+  rwip_rst_state = 2;
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   _btdm_pwr_state = 0;
-                    /* WARNING: Could not recover jumptable at 0x00010328. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010318. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_osi_funcs_p + 0x38))(g_waking_sleeping_sem);
+  (**(code **)(_r_osi_funcs_p + 0x38))(g_waking_sleeping_sem,*(code **)(_r_osi_funcs_p + 0x38));
   return;
 }
 

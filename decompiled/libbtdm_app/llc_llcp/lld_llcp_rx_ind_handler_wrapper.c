@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_llcp.o -> lld_llcp_rx_ind_handler_wrapper
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,9 +15,9 @@
 void lld_llcp_rx_ind_handler_wrapper(void)
 
 {
-                    /* WARNING: Could not recover jumptable at 0x0001084e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001088c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_ip_funcs_p + 0x750))();
+  (**(code **)(_r_ip_funcs_p + 0x750))(*(code **)(_r_ip_funcs_p + 0x750));
   return;
 }
 

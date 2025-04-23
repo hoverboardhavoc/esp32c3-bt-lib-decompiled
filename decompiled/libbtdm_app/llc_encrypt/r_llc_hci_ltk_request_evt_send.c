@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_encrypt.o -> r_llc_hci_ltk_request_evt_send
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,9 +24,9 @@ void r_llc_hci_ltk_request_evt_send(undefined4 param_1,undefined2 param_2,void *
   *(short *)(puVar1 + 2) = (short)param_1;
   *(undefined2 *)(puVar1 + 0xc) = param_2;
   memcpy(puVar1 + 4,param_3,8);
-                    /* WARNING: Could not recover jumptable at 0x00010cfe. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010cf2. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_ip_funcs_p + 0x8c))(puVar1);
+  (**(code **)(_r_ip_funcs_p + 0x8c))(puVar1,*(code **)(_r_ip_funcs_p + 0x8c));
   return;
 }
 

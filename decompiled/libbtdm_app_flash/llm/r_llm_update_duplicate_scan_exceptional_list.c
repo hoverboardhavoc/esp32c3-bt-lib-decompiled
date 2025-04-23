@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * Upstream date: 2025-04-03 18:07:15 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm.o -> r_llm_update_duplicate_scan_exceptional_list
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,128 +14,121 @@ undefined4 r_llm_update_duplicate_scan_exceptional_list(int param_1,uint param_2
 
 {
   undefined4 uVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int *piVar4;
-  undefined4 *puVar5;
-  size_t sVar6;
+  int iVar2;
+  int *piVar3;
+  size_t sVar4;
   
   if (param_1 != 1) {
-    if (param_1 != 0) {
-      if (param_1 != 2) {
-        return 0xc;
-      }
-      le_scan_duplicate_option._40_4_ = ~param_2 & le_scan_duplicate_option._40_4_;
+    if (param_1 == 2) {
+      DAT_000113a8 = DAT_000113a8 & ~param_2;
       if ((param_2 & 1) != 0) {
-        llm_util_flush_list_part_0(0x11380);
+        llm_util_flush_list_part_0(&le_scan_duplicate_option);
       }
       if ((param_2 & 2) != 0) {
-        llm_util_flush_list_part_0(0x11388);
+        llm_util_flush_list_part_0(&le_scan_duplicate_option);
       }
-      goto _L109;
+      goto _L69;
     }
+    if (param_1 != 0) {
+      return 0xc;
+    }
+    uVar1 = 0x12;
     if (param_3 == (void *)0x0) {
-_L104:
       return 0x12;
     }
+    piVar3 = le_scan_duplicate_option;
     switch(param_2) {
     case 0:
-      sVar6 = 6;
-      piVar4 = (int *)(le_scan_duplicate_option + 0x2c);
-      goto _L69;
+      sVar4 = 6;
+      goto _L70;
     case 1:
-      sVar6 = 4;
-      piVar4 = (int *)(le_scan_duplicate_option + 0x34);
-_L69:
-      for (piVar4 = (int *)*piVar4; piVar4 != (int *)0x0; piVar4 = (int *)*piVar4) {
-        iVar3 = memcmp(piVar4 + 1,param_3,sVar6);
-        if (iVar3 == 0) goto _L109;
+      sVar4 = 4;
+_L70:
+      for (; piVar3 != (int *)0x0; piVar3 = (int *)*piVar3) {
+        iVar2 = memcmp(piVar3 + 1,param_3,sVar4);
+        if (iVar2 == 0) goto _L69;
       }
-      iVar3 = r_ke_malloc(0xc,0);
-      if (iVar3 == 0) {
+      iVar2 = r_ke_malloc(0xc,0);
+      if (iVar2 == 0) {
         return 7;
       }
       if (param_2 == 0) {
-        memcpy((void *)(iVar3 + 4),param_3,6);
-        r_co_list_push_front(0x11380,iVar3);
-        le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ | 1;
-        return 0;
+        memcpy((void *)(iVar2 + 4),param_3,6);
+        r_co_list_push_front(&le_scan_duplicate_option,iVar2);
+        DAT_000113a8 = DAT_000113a8 | 1;
       }
-      if (param_2 == 1) {
-        memcpy((void *)(iVar3 + 4),param_3,4);
-        r_co_list_push_front(0x11388,iVar3);
-        le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ | 2;
-        return 0;
+      else {
+        memcpy((void *)(iVar2 + 4),param_3,4);
+        r_co_list_push_front(&le_scan_duplicate_option,iVar2);
+        DAT_000113a8 = DAT_000113a8 | 2;
       }
-      goto _L109;
+      break;
     case 2:
-      le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ | 4;
+      DAT_000113a8 = DAT_000113a8 | 4;
       break;
     case 3:
-      le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ | 8;
+      DAT_000113a8 = DAT_000113a8 | 8;
       break;
     case 4:
-      le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ | 0x10;
+      DAT_000113a8 = DAT_000113a8 | 0x10;
       break;
     case 5:
-      le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ | 0x20;
+      DAT_000113a8 = DAT_000113a8 | 0x20;
       break;
     case 6:
-      le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ | 0x40;
+      DAT_000113a8 = DAT_000113a8 | 0x40;
       break;
     default:
       goto _L104;
     }
-    return 0;
+    goto _L69;
   }
   uVar1 = 0x12;
   if (param_3 == (void *)0x0) {
     return 0x12;
   }
+  piVar3 = le_scan_duplicate_option;
   switch(param_2) {
   case 0:
-    sVar6 = 6;
-    puVar5 = (undefined4 *)(le_scan_duplicate_option + 0x2c);
+    sVar4 = 6;
     goto _L83;
   case 1:
-    sVar6 = 4;
-    puVar5 = (undefined4 *)(le_scan_duplicate_option + 0x34);
+    sVar4 = 4;
 _L83:
-    for (puVar2 = (undefined4 *)*puVar5; puVar2 != (undefined4 *)0x0; puVar2 = (undefined4 *)*puVar2
-        ) {
-      iVar3 = memcmp(puVar2 + 1,param_3,sVar6);
-      if (iVar3 == 0) {
-        r_co_list_extract(puVar5,puVar2);
-        r_ke_free(puVar2);
+    for (; piVar3 != (int *)0x0; piVar3 = (int *)*piVar3) {
+      iVar2 = memcmp(piVar3 + 1,param_3,sVar4);
+      if (iVar2 == 0) {
+        r_co_list_extract(&le_scan_duplicate_option,piVar3);
+        r_ke_free(piVar3);
         break;
       }
     }
-    if (le_scan_duplicate_option._44_4_ == 0) {
-      le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ & 0xfffffffe;
+    if (DAT_000113ac == 0) {
+      DAT_000113a8 = DAT_000113a8 & 0xfffffffe;
     }
-    if (le_scan_duplicate_option._52_4_ == 0) {
-      le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ & 0xfffffffd;
+    if (DAT_000113b4 == 0) {
+      DAT_000113a8 = DAT_000113a8 & 0xfffffffd;
     }
     break;
   case 2:
-    le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ & 0xfffffffb;
+    DAT_000113a8 = DAT_000113a8 & 0xfffffffb;
     break;
   case 3:
-    le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ & 0xfffffff7;
+    DAT_000113a8 = DAT_000113a8 & 0xfffffff7;
     break;
   case 4:
-    le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ & 0xffffffef;
+    DAT_000113a8 = DAT_000113a8 & 0xffffffef;
     break;
   case 5:
-    le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ & 0xffffffdf;
+    DAT_000113a8 = DAT_000113a8 & 0xffffffdf;
     break;
   case 6:
-    le_scan_duplicate_option._40_4_ = le_scan_duplicate_option._40_4_ & 0xffffffbf;
+    DAT_000113a8 = DAT_000113a8 & 0xffffffbf;
     break;
   default:
     goto _L104;
   }
-_L109:
+_L69:
   uVar1 = 0;
 _L104:
   return uVar1;

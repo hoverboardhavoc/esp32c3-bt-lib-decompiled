@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> ke_timer.o -> r_ke_timer_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,9 +21,12 @@ void r_ke_timer_set(uint param_1,uint param_2,uint param_3)
   int iVar4;
   uint uVar5;
   
-  uVar5 = 0x3fffff;
-  if ((param_3 < 0x400000) && (uVar5 = param_3, param_3 == 0)) {
-    uVar5 = 1;
+  uVar5 = 1;
+  if (param_3 != 0) {
+    uVar5 = param_3;
+  }
+  if (0x3fffff < uVar5) {
+    uVar5 = 0x3fffff;
   }
   bVar1 = false;
   if ((_r_ke_msg_send_basic != 0) && (*(ushort *)(_r_ke_msg_send_basic + 4) == param_1)) {

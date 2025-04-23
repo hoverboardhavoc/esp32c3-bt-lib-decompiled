@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * https://github.com/espressif/esp32c3-bt-lib/commit/eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * Upstream date: 2024-10-20 16:32:16 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(52ee788)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> vshci_task.o -> hci_vs_ble_qa_get_txpwr_lvl_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,16 +25,24 @@ hci_vs_ble_qa_get_txpwr_lvl_cmd_handler(undefined1 param_1,byte *param_2,undefin
   
   bVar1 = *param_2;
   iVar2 = 4;
-  if ((((8 < bVar1) && (iVar2 = 1, bVar1 != 9)) && (iVar2 = 2, bVar1 != 10)) &&
-     (iVar2 = 0, bVar1 != 0xb)) {
-    iVar2 = 5;
+  if (8 < bVar1) {
+    iVar2 = 1;
+    if (bVar1 != 9) {
+      iVar2 = 2;
+      if (bVar1 != 10) {
+        iVar2 = 5;
+        if (bVar1 == 0xb) {
+          iVar2 = 0;
+        }
+      }
+    }
   }
   puVar3 = (undefined1 *)
            (**(code **)(_r_modules_funcs_p + 200))
                      (0x1101,param_3,0xfd13,6,*(code **)(_r_modules_funcs_p + 200));
-  uVar5 = 0x12;
-  if (iVar2 != 5) {
-    uVar5 = 0;
+  uVar5 = 0;
+  if (iVar2 == 5) {
+    uVar5 = 0x12;
   }
   *puVar3 = uVar5;
   puVar3[1] = param_1;

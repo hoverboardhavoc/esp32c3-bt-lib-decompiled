@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> ecc_p256.o -> r_specialModP256
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,67 +12,89 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_specialModP256(int param_1)
+void r_specialModP256(void *param_1)
 
 {
   ushort uVar1;
-  uint uVar2;
+  ushort uVar2;
+  ushort *puVar3;
+  uint uVar4;
+  int iVar5;
+  undefined1 auStack_4c [16];
   undefined1 auStack_3c [36];
   undefined4 uStack_18;
-  undefined4 uStack_14;
   
-  memset(auStack_3c,0,0x22);
-  uStack_18 = 0;
-  uStack_14 = 0;
-  if (*(int *)(param_1 + 0x28) == 0) {
-    uVar2 = *(uint *)(param_1 + 0x24);
-    if (uVar2 <= _r_co_list_push_back) {
-      if (uVar2 < _r_co_list_push_back) {
+  iVar5 = *(int *)((int)param_1 + 0x28);
+  if (iVar5 == 0) {
+    uVar4 = *(uint *)((int)param_1 + 0x24);
+    if (uVar4 <= _r_co_list_push_back) {
+      if (uVar4 < _r_co_list_push_back) {
         return;
       }
-      for (uVar2 = 0x11 - uVar2; uVar2 < 0x11; uVar2 = uVar2 + 1) {
-        uVar1 = *(ushort *)(uVar2 * 2 + param_1);
-        if (uVar1 < *(ushort *)(&bigHexP256 + uVar2 * 2)) {
+      for (uVar4 = 0x11 - uVar4; uVar4 < 0x11; uVar4 = uVar4 + 1) {
+        uVar2 = *(ushort *)(uVar4 * 2 + (int)param_1);
+        if (uVar2 < *(ushort *)(&bigHexP256 + uVar4 * 2)) {
           return;
         }
-        if (*(ushort *)(&bigHexP256 + uVar2 * 2) < uVar1) break;
+        if (*(ushort *)(&bigHexP256 + uVar4 * 2) < uVar2) break;
       }
     }
   }
-  else if (*(int *)(param_1 + 0x28) != 1) {
+  else if (iVar5 != 1) {
     return;
   }
-  if (_r_co_list_push_back < *(uint *)(param_1 + 0x24)) {
+  if (_r_co_list_push_back < *(uint *)((int)param_1 + 0x24)) {
     r_MultiplyByU16ModP256
-              (*(undefined2 *)((0x11 - *(uint *)(param_1 + 0x24)) * 2 + param_1),auStack_3c);
-    if (*(int *)(param_1 + 0x28) == 0) {
-      r_SubtractFromSelfBigHexSign256(param_1,auStack_3c);
+              (*(undefined2 *)((0x11 - *(uint *)((int)param_1 + 0x24)) * 2 + (int)param_1),
+               auStack_4c);
+    if (iVar5 == 0) {
+      r_SubtractFromSelfBigHexSign256(param_1,auStack_4c);
     }
     else {
-      *(undefined4 *)(param_1 + 0x28) = 0;
-      r_SubtractFromSelfBigHexSign256(param_1,auStack_3c);
-      *(undefined4 *)(param_1 + 0x28) = 1;
+      *(undefined4 *)((int)param_1 + 0x28) = 0;
+      r_SubtractFromSelfBigHexSign256(param_1,auStack_4c);
+      *(undefined4 *)((int)param_1 + 0x28) = 1;
     }
   }
-  if (*(int *)(param_1 + 0x28) == 0) {
-    uVar2 = *(uint *)(param_1 + 0x24);
-    if (uVar2 <= _r_co_list_push_back) {
-      if (uVar2 < _r_co_list_push_back) {
+  if (*(int *)((int)param_1 + 0x28) != 0) {
+    if (*(int *)((int)param_1 + 0x28) != 1) {
+      return;
+    }
+    r_SubtractBigHex256(&bigHexP256,param_1,auStack_3c);
+    memcpy(param_1,auStack_3c,0x22);
+    *(undefined4 *)((int)param_1 + 0x28) = 0;
+    *(undefined4 *)((int)param_1 + 0x24) = uStack_18;
+    return;
+  }
+  uVar4 = *(uint *)((int)param_1 + 0x24);
+  if (uVar4 <= _r_co_list_push_back) {
+    if (uVar4 < _r_co_list_push_back) {
+      return;
+    }
+    for (uVar4 = 0x11 - uVar4; uVar4 < 0x11; uVar4 = uVar4 + 1) {
+      uVar2 = *(ushort *)(uVar4 * 2 + (int)param_1);
+      if (uVar2 < *(ushort *)(&bigHexP256 + uVar4 * 2)) {
         return;
       }
-      for (uVar2 = 0x11 - uVar2; uVar2 < 0x11; uVar2 = uVar2 + 1) {
-        uVar1 = *(ushort *)(uVar2 * 2 + param_1);
-        if (uVar1 < *(ushort *)(&bigHexP256 + uVar2 * 2)) {
-          return;
-        }
-        if (*(ushort *)(&bigHexP256 + uVar2 * 2) < uVar1) break;
-      }
+      if (*(ushort *)(&bigHexP256 + uVar4 * 2) < uVar2) break;
     }
-    r_SubtractFromSelfBigHex256(param_1,&bigHexP256);
   }
-  else if (*(int *)(param_1 + 0x28) == 1) {
-    r_AddP256(param_1);
-  }
+  iVar5 = 0x20;
+  uVar4 = 0;
+  do {
+    puVar3 = (ushort *)((int)param_1 + iVar5);
+    uVar2 = *puVar3;
+    uVar1 = *(ushort *)(&bigHexP256 + iVar5);
+    iVar5 = iVar5 + -2;
+    *puVar3 = (uVar2 - (short)uVar4) - uVar1;
+    uVar4 = (uint)((uint)uVar2 < uVar4 + uVar1);
+  } while (iVar5 != -2);
+  iVar5 = 0;
+  do {
+    if (*(short *)(iVar5 * 2 + (int)param_1) != 0) break;
+    iVar5 = iVar5 + 1;
+  } while (iVar5 != 0x11);
+  *(int *)((int)param_1 + 0x24) = 0x11 - iVar5;
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> r_llc_loc_con_upd_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -54,7 +54,7 @@ void r_llc_loc_con_upd_proc_continue(uint param_1,int param_2,int param_3)
         *(undefined4 *)(iVar9 + 0x18) = 0;
         *(undefined1 *)(iVar9 + 0x16) = 0;
       }
-      goto _L119;
+      goto _L136;
     }
   case 1:
     if ((*(ushort *)(iVar8 + 0x42) & 1) == 0) {
@@ -83,7 +83,7 @@ void r_llc_loc_con_upd_proc_continue(uint param_1,int param_2,int param_3)
         r_llc_llcp_send_eco(param_1,&stack0xffffffe4,0);
         return;
       }
-_L119:
+_L136:
       if (*(char *)(iVar4 + 0x2d) == '\0') {
         *(byte *)(iVar8 + 0x45) = *(byte *)(iVar8 + 0x45) & 0x7f;
       }
@@ -109,17 +109,17 @@ _L119:
     break;
   case 3:
     r_llc_proc_timer_set(param_1,0,0);
-    if (param_3 != 0) goto _L119;
+    if (param_3 != 0) goto _L136;
     param_3 = r_lld_con_param_update
                         (param_1,*(undefined1 *)(iVar4 + 0x26),*(undefined2 *)(iVar4 + 0x22),
                          *(undefined2 *)(iVar4 + 0x28),*(undefined2 *)(iVar4 + 0xc),
                          *(undefined2 *)(iVar4 + 0xe),*(undefined2 *)(iVar4 + 0x24));
     uVar6 = 4;
-    if (param_3 != 0) goto _L119;
+    if (param_3 != 0) goto _L136;
     break;
   case 4:
   case 6:
-    goto _L119;
+    goto _L136;
   default:
     uVar6 = r_llc_proc_state_get(iVar4);
     r_assert_param(param_1,uVar6,"llc_con_upd.c",0x1c0);

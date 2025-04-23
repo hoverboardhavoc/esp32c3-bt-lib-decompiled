@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld.o -> r_lld_per_adv_list_rem
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,34 +15,34 @@
 void r_lld_per_adv_list_rem(int param_1,undefined4 param_2,undefined4 param_3,ushort param_4)
 
 {
-  uint uVar1;
-  ushort uVar2;
+  int iVar1;
+  uint uVar2;
   int iVar3;
-  code *pcVar4;
+  ushort uVar4;
   
   iVar3 = _p_lld_env + param_1 * 2;
-  uVar2 = ~param_4 & *(ushort *)(iVar3 + 0xbc);
-  *(ushort *)(iVar3 + 0xbc) = uVar2;
-  if (uVar2 == 0) {
-    iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
+  uVar4 = *(ushort *)(iVar3 + 0xbc) & ~param_4;
+  *(ushort *)(iVar3 + 0xbc) = uVar4;
+  if (uVar4 == 0) {
     param_1 = param_1 * 8;
-    uVar2 = *(ushort *)(iVar3 + param_1);
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
-    pcVar4 = *(code **)(_r_plf_funcs_p + 0xbc);
-    *(ushort *)(iVar3 + param_1) = uVar2 & 0xfffe;
-    iVar3 = (*pcVar4)(0xc00,pcVar4);
+    uVar4 = *(ushort *)(iVar3 + param_1);
+    iVar1 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
+    iVar3 = _r_plf_funcs_p;
+    *(ushort *)(iVar1 + param_1) = uVar4 & 0xfffe;
+    iVar3 = (**(code **)(iVar3 + 0xbc))(0xc00,*(code **)(iVar3 + 0xbc));
     if ((*(ushort *)(iVar3 + param_1) >> 1 & 1) == 0) {
       iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
-      uVar2 = *(ushort *)(iVar3 + param_1);
+      uVar4 = *(ushort *)(iVar3 + param_1);
       iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
-      *(ushort *)(iVar3 + param_1) = uVar2 & 0x7fff;
+      *(ushort *)(param_1 + iVar3) = (ushort)(((uint)uVar4 << 0x11) >> 0x11);
     }
-    uVar1 = (**(code **)(_r_ip_funcs_p + 0x260))(param_2,param_3,*(code **)(_r_ip_funcs_p + 0x260));
-    if (uVar1 < 10) {
+    uVar2 = (**(code **)(_r_ip_funcs_p + 0x260))(param_2,param_3,*(code **)(_r_ip_funcs_p + 0x260));
+    if (uVar2 < 10) {
       iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-      uVar2 = *(ushort *)(iVar3 + uVar1 * 0x34);
+      uVar4 = *(ushort *)(iVar3 + uVar2 * 0x34);
       iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-      *(ushort *)(iVar3 + uVar1 * 0x34) = uVar2 & 0xefff;
+      *(ushort *)(uVar2 * 0x34 + iVar3) = uVar4 & 0xefff;
     }
     return;
   }

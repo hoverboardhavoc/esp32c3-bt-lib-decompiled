@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> hci.o -> r_hci_evt_mask_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,19 +13,17 @@
 uint r_hci_evt_mask_check(int param_1)
 
 {
-  uint uVar1;
-  byte bVar2;
-  uint uVar3;
-  uint uVar4;
+  byte bVar1;
+  uint uVar2;
   
   if (*(short *)(param_1 + 4) == 0x1103) {
-    uVar3 = (uint)*(byte *)(param_1 + 8);
-    if (0x3f < uVar3) {
-      if (0x58 < uVar3) {
+    uVar2 = (uint)*(byte *)(param_1 + 8);
+    if (0x3f < uVar2) {
+      if (0x58 < uVar2) {
         return 0;
       }
-      uVar3 = uVar3 - 0x40 & 0xff;
-      bVar2 = (&r_modules_funcs_p)[uVar3 >> 3];
+      uVar2 = uVar2 - 0x40 & 0xff;
+      bVar1 = (&r_modules_funcs_p)[uVar2 >> 3];
       goto _L17;
     }
   }
@@ -33,23 +31,21 @@ uint r_hci_evt_mask_check(int param_1)
     if (*(short *)(param_1 + 4) != 0x1104) {
       return 0;
     }
-    uVar3 = 0x3e;
+    uVar2 = 0x3e;
   }
-  uVar1 = (int)(uint)(byte)(&hci_env)[(uVar3 - 1 & 0xff) >> 3] >> (uVar3 - 1 & 7);
-  uVar4 = ~uVar1 & 1;
-  if ((uVar1 & 1) == 0) {
-    return uVar4;
+  if (((int)(uint)(byte)(&hci_env)[(uVar2 - 1 & 0xff) >> 3] >> (uVar2 - 1 & 7) & 1U) == 0) {
+    return 1;
   }
-  if (uVar3 != 0x3e) {
-    return uVar4;
+  if (uVar2 != 0x3e) {
+    return 0;
   }
   if (0xef < *(byte *)(param_1 + 0xc)) {
     return 0;
   }
-  bVar2 = *(byte *)(param_1 + 0xc) - 1;
-  uVar3 = (uint)bVar2;
-  bVar2 = (&r_hli_funcs_p)[bVar2 >> 3];
+  bVar1 = *(byte *)(param_1 + 0xc) - 1;
+  uVar2 = (uint)bVar1;
+  bVar1 = (&r_hli_funcs_p)[bVar1 >> 3];
 _L17:
-  return ~((int)(uint)bVar2 >> (uVar3 & 7)) & 1;
+  return ~((int)(uint)bVar1 >> (uVar2 & 7)) & 1;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_set_per_adv_param_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,13 +15,13 @@
 undefined4 hci_le_set_per_adv_param_cmd_handler(byte *param_1,undefined4 param_2)
 
 {
-  undefined4 uVar1;
-  int iVar2;
+  int iVar1;
+  undefined4 uVar2;
   int iVar3;
   int iVar4;
   undefined4 extraout_a1;
   char cVar5;
-  undefined4 *puVar6;
+  int *piVar6;
   byte bStack_2d;
   uint uStack_2c;
   undefined2 uStack_28;
@@ -35,7 +35,7 @@ undefined4 hci_le_set_per_adv_param_cmd_handler(byte *param_1,undefined4 param_2
     return 0;
   }
   if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
-_L453:
+_L456:
     iVar4 = 0xc;
   }
   else {
@@ -44,39 +44,40 @@ _L453:
       iVar3 = (**(code **)(_r_ip_funcs_p + 0x544))(0,*(code **)(_r_ip_funcs_p + 0x544));
       if (iVar3 == 0xff) {
         iVar4 = 0x42;
-        goto _L455;
+        goto _L458;
       }
       iVar3 = iVar3 * 0x44;
       bStack_2d = *(byte *)(*(int *)(_p_llm_env + 8) + iVar3 + 0x3d);
       if (bStack_2d == 0xff) {
         iVar4 = (**(code **)(_r_ip_funcs_p + 0x4ac))(&bStack_2d,*(code **)(_r_ip_funcs_p + 0x4ac));
-        if (iVar4 != 0) goto _L455;
+        if (iVar4 != 0) goto _L458;
         iVar4 = *(int *)(_p_llm_env + 8);
         *(byte *)(iVar4 + iVar3 + 0x3d) = bStack_2d;
         *(undefined1 *)(iVar4 + (uint)bStack_2d * 0x44 + 0x32) = 0xff;
-        uVar1 = 0;
+        uVar2 = 0;
       }
       else {
-        uVar1 = extraout_a1;
-        if (*(char *)((uint)bStack_2d * 0x44 + *(int *)(_p_llm_env + 8) + 0x40) != '\n') goto _L453;
+        uVar2 = extraout_a1;
+        if (*(char *)(*(int *)(_p_llm_env + 8) + (uint)bStack_2d * 0x44 + 0x40) != '\n') goto _L456;
       }
       if (((*param_1 < 0xf0) && (*(ushort *)(param_1 + 2) <= *(ushort *)(param_1 + 4))) &&
-         ((*(ushort *)(*(int *)(*(int *)(_p_llm_env + 8) + iVar3) + 2) & 0x20) == 0)) {
-        iVar4 = *(int *)(*(int *)(_p_llm_env + 8) + (uint)bStack_2d * 0x44);
-        if (iVar4 != 0) {
+         (iVar4 = *(int *)(_p_llm_env + 8), (*(ushort *)(*(int *)(iVar4 + iVar3) + 2) & 0x20) == 0))
+      {
+        piVar6 = (int *)((uint)bStack_2d * 0x44 + iVar4);
+        if (*piVar6 != 0) {
           (**(code **)(_r_modules_funcs_p + 0xd8))
-                    (iVar4 + -0xc,uVar1,*(code **)(_r_modules_funcs_p + 0xd8));
-          *(undefined4 *)(*(int *)(_p_llm_env + 8) + (uint)bStack_2d * 0x44) = 0;
+                    (*piVar6 + -0xc,uVar2,*(code **)(_r_modules_funcs_p + 0xd8));
+          iVar4 = *(int *)(_p_llm_env + 8);
+          piVar6 = (int *)((uint)bStack_2d * 0x44 + iVar4);
+          *piVar6 = 0;
         }
-        iVar2 = *(int *)(_p_llm_env + 8);
-        puVar6 = (undefined4 *)((uint)bStack_2d * 0x44 + iVar2);
-        *(undefined1 *)(puVar6 + 0x10) = 10;
-        iVar4 = _bt_rf_coex_hooks_p;
-        *puVar6 = param_1;
-        if ((iVar4 != 0) && (*(int *)(iVar4 + 4) != 0)) {
-          iVar3 = *(int *)(iVar2 + iVar3);
+        *(undefined1 *)(piVar6 + 0x10) = 10;
+        iVar1 = _bt_rf_coex_hooks_p;
+        *piVar6 = (int)param_1;
+        if ((iVar1 != 0) && (*(int *)(iVar1 + 4) != 0)) {
+          iVar3 = *(int *)(iVar4 + iVar3);
           uStack_2c = (uint)*(ushort *)(param_1 + 4);
-          uStack_28 = *(undefined2 *)((int)puVar6 + 0x2a);
+          uStack_28 = *(undefined2 *)((int)piVar6 + 0x2a);
           uStack_26 = 0;
           uStack_24 = 0;
           uStack_22 = 0;
@@ -91,16 +92,16 @@ _L453:
                     (bStack_2d,4,&uStack_2c,*(code **)(_bt_rf_coex_hooks_p + 4));
         }
         iVar4 = 0;
-        uVar1 = 1;
-        goto _L463;
+        uVar2 = 1;
+        goto _L467;
       }
     }
     iVar4 = 0x12;
   }
-_L455:
-  uVar1 = 0;
-_L463:
+_L458:
+  uVar2 = 0;
+_L467:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,iVar4,*(code **)(_r_ip_funcs_p + 0x4b8));
-  return uVar1;
+  return uVar2;
 }
 

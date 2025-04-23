@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_adv.o -> ble_ll_get_adv_txed_cnt
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,11 +10,9 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 undefined4 ble_ll_get_adv_txed_cnt(void)
 
 {
-  return _g_ble_ext_config;
+  return DAT_00016460;
 }
 

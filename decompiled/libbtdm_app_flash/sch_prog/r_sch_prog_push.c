@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> sch_prog.o -> r_sch_prog_push
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,9 +16,9 @@ void r_sch_prog_push(undefined4 *param_1)
   ushort uVar1;
   uint uVar2;
   int iVar3;
-  int iVar4;
+  undefined4 uVar4;
   undefined4 uVar5;
-  undefined4 uVar6;
+  int iVar6;
   int iVar7;
   uint uVar8;
   
@@ -28,40 +28,40 @@ void r_sch_prog_push(undefined4 *param_1)
   if (param_1[1] == *(int *)(&sch_prog_env + iVar7)) {
     r_assert_err(0,"sch_prog.c",0x2a1);
   }
-  iVar4 = r_emi_get_mem_addr_by_offset(0);
-  iVar3 = uVar2 * 0x10;
-  if (((*(ushort *)(iVar4 + iVar3) >> 3 & 7) == 1) ||
-     (iVar4 = r_emi_get_mem_addr_by_offset(0), (*(ushort *)(iVar4 + iVar3) >> 3 & 7) == 2)) {
-    r_assert_param(DAT_00011100,uVar2,"sch_prog.c",0x2a6);
+  iVar3 = r_emi_get_mem_addr_by_offset(0);
+  iVar6 = uVar2 * 0x10;
+  if (((*(ushort *)(iVar3 + iVar6) >> 3 & 7) == 1) ||
+     (iVar3 = r_emi_get_mem_addr_by_offset(0), (*(ushort *)(iVar3 + iVar6) >> 3 & 7) == 2)) {
+    r_assert_param(DAT_00011100,uVar2,"sch_prog.c",0x2a4);
   }
   if (0xd < uVar8) {
-    iVar4 = r_emi_get_mem_addr_by_offset(0);
-    uVar1 = *(ushort *)(iVar4 + (uVar2 - 2 & 0xf) * 0x10);
-    iVar4 = r_emi_get_mem_addr_by_offset(0);
-    r_assert_warn((int)(uint)uVar1 >> 3 & 7,*(ushort *)(iVar4 + iVar7) >> 3 & 7,"sch_prog.c",0x2a9);
+    iVar3 = r_emi_get_mem_addr_by_offset(0);
+    uVar1 = *(ushort *)((uVar2 - 2 & 0xf) * 0x10 + iVar3);
+    iVar3 = r_emi_get_mem_addr_by_offset(0);
+    r_assert_warn((int)(uint)uVar1 >> 3 & 7,*(ushort *)(iVar7 + iVar3) >> 3 & 7,"sch_prog.c",0x2a9);
   }
-  uVar6 = param_1[1];
-  *(undefined4 *)(r_assert_err + iVar3) = param_1[4];
-  uVar5 = *param_1;
-  *(undefined4 *)(&sch_prog_env + iVar3) = uVar6;
-  *(undefined4 *)(r_emi_get_mem_addr_by_offset + iVar3) = uVar5;
-  r_assert_param[iVar3] = (code)0x1;
+  uVar5 = param_1[1];
+  *(undefined4 *)(r_assert_err + iVar6) = param_1[4];
+  uVar4 = *param_1;
+  *(undefined4 *)(&sch_prog_env + iVar6) = uVar5;
+  *(undefined4 *)(r_emi_get_mem_addr_by_offset + iVar6) = uVar4;
+  r_assert_param[iVar6] = (code)0x1;
   iVar7 = r_emi_get_mem_addr_by_offset(0);
-  *(short *)(iVar7 + iVar3 + 2) = (short)uVar6;
+  *(short *)(iVar6 + 2 + iVar7) = (short)uVar5;
   uVar1 = *(ushort *)((int)param_1 + 6);
   iVar7 = r_emi_get_mem_addr_by_offset(0);
   uVar2 = param_1[2];
-  *(ushort *)(iVar7 + iVar3 + 4) = uVar1 & 0xfff;
+  *(ushort *)(iVar6 + 4 + iVar7) = (ushort)(((uint)uVar1 << 0x14) >> 0x14);
   if (0x270 < uVar2) {
     r_assert_err(0,"sch_prog.c",0x2b4);
   }
   iVar7 = param_1[2];
-  if ((0x270U - iVar7 & 0xfc00) != 0) {
+  if (0x3ff < (0x270U - iVar7 & 0xffff)) {
     r_assert_err(0,"sch_prog.c",0x1f7);
   }
-  iVar4 = r_emi_get_mem_addr_by_offset(0);
+  iVar3 = r_emi_get_mem_addr_by_offset(0);
+  *(short *)(iVar6 + 6 + iVar3) = (short)((0x270U - iVar7) * 0x10000 >> 0x10);
   uVar2 = param_1[3];
-  *(short *)(iVar4 + iVar3 + 6) = (short)((0x270U - iVar7) * 0x10000 >> 0x10);
   if (uVar2 < 0x8000) {
     iVar7 = r_emi_get_mem_addr_by_offset(0);
     uVar1 = (ushort)(uVar2 + 1 >> 1);
@@ -74,7 +74,7 @@ void r_sch_prog_push(undefined4 *param_1)
     iVar7 = r_emi_get_mem_addr_by_offset(0);
     uVar1 = (ushort)uVar2 | 0x8000;
   }
-  *(ushort *)(iVar7 + iVar3 + 10) = uVar1;
+  *(ushort *)(iVar7 + iVar6 + 10) = uVar1;
   uVar2 = (uint)*(byte *)((int)param_1 + 0x16);
   if (0x1f < uVar2) {
     uVar2 = 0x1f;
@@ -84,7 +84,7 @@ void r_sch_prog_push(undefined4 *param_1)
     uVar1 = 0x1f;
   }
   iVar7 = r_emi_get_mem_addr_by_offset(0);
-  *(ushort *)(iVar3 + 0xc + iVar7) = (ushort)(uVar2 << 8) | uVar1;
+  *(ushort *)(iVar6 + 0xc + iVar7) = (ushort)(uVar2 << 8) | uVar1;
   r_sch_prog_ble_push(param_1,0xd < uVar8);
   DAT_00011101 = DAT_00011101 + 1 & 0xf;
   DAT_00011102 = DAT_00011102 + '\x01';

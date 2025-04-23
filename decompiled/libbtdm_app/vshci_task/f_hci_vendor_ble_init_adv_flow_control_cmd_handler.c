@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> vshci_task.o -> f_hci_vendor_ble_init_adv_flow_control_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,20 +16,20 @@ undefined4
 f_hci_vendor_ble_init_adv_flow_control_cmd_handler(undefined1 *param_1,undefined4 param_2)
 
 {
-  undefined1 uVar1;
-  undefined1 *puVar2;
+  undefined1 *puVar1;
+  undefined1 uVar2;
   
-  uVar1 = 0x12;
+  uVar2 = 0x12;
   if (param_1 != (undefined1 *)0x0) {
-    uVar1 = 0;
+    uVar2 = 0;
     (**(code **)(_r_ip_funcs_p + 0x528))
               (*param_1,*(undefined2 *)(param_1 + 2),*(undefined2 *)(param_1 + 4),
                *(code **)(_r_ip_funcs_p + 0x528));
   }
-  puVar2 = (undefined1 *)
+  puVar1 = (undefined1 *)
            (**(code **)(_r_modules_funcs_p + 200))
                      (0x1101,param_2,0xfd09,1,*(code **)(_r_modules_funcs_p + 200));
-  *puVar2 = uVar1;
+  *puVar1 = uVar2;
   (**(code **)(_r_ip_funcs_p + 0x8c))(*(code **)(_r_ip_funcs_p + 0x8c));
   return 0;
 }

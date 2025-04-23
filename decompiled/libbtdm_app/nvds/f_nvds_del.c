@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> nvds.o -> f_nvds_del
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,7 +31,7 @@ int f_nvds_del(void)
     }
     else {
       bStack_19 = bStack_17 & 0xfb;
-      (*_LANCHOR0)(aiStack_14[0] + 1,1,&bStack_19,_LANCHOR0);
+      (*DAT_000106f0)(aiStack_14[0] + 1,&bStack_19,DAT_000106f0);
     }
   }
   return iVar1;

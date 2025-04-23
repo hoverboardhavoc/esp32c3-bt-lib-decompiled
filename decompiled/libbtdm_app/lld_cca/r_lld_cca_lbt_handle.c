@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * Upstream date: 2023-08-03 10:45:08 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_cca.o -> r_lld_cca_lbt_handle
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,10 +20,9 @@ void r_lld_cca_lbt_handle(int param_1)
   short sVar3;
   byte *pbVar4;
   int iVar5;
-  uint uVar6;
   
   pbVar4 = (byte *)(*(int *)(p_lld_cca + 0x28) + (uint)*(byte *)(p_lld_cca + 8) * 0xc);
-  if (((int)(uint)*(ushort *)(p_lld_cca + 4) >> 8 & 0xfU) == 2) {
+  if ((*(ushort *)(p_lld_cca + 4) & 0xf00) == 0x200) {
     (**(code **)(_r_ip_funcs_p + 0x97c))(0);
     *pbVar4 = *pbVar4 & 0x7f;
   }
@@ -35,11 +34,10 @@ void r_lld_cca_lbt_handle(int param_1)
     sVar2 = *(short *)(p_lld_cca + 0x10);
     sVar3 = *(short *)(p_lld_cca + 0x14);
     iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-    *(short *)(iVar5 + (uint)bVar1 * 0x5a + 0x20) = sVar2 - sVar3;
+    *(short *)((uint)bVar1 * 0x5a + 0x20 + iVar5) = sVar2 - sVar3;
   }
-  uVar6 = (uint)rwip_prog_delay;
+  *(uint *)(pbVar4 + 4) = (rwip_prog_delay - 1) + param_1;
   *pbVar4 = *pbVar4 & 0xf5 | 0x41;
-  *(uint *)(pbVar4 + 4) = (uVar6 - 1) + param_1;
   return;
 }
 

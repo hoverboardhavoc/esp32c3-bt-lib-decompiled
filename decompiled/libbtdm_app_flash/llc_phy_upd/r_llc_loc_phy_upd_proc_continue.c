@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_phy_upd.o -> r_llc_loc_phy_upd_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,9 +37,9 @@ void r_llc_loc_phy_upd_proc_continue(int param_1,int param_2,int param_3)
   uVar2 = *(undefined1 *)(iVar10 + 0x1d);
   if (param_3 != 0) {
     r_llc_proc_timer_set(param_1,0,0);
-_L115:
+_L113:
     r_lld_con_tx_len_update_for_rate(param_1,4);
-    goto _L30;
+    goto _L26;
   }
   iVar13 = r_llc_proc_state_get();
   if (iVar13 != param_2) {
@@ -68,9 +68,9 @@ _L115:
           bVar16 = ~*(byte *)(iVar12 + 10) & 1;
         }
         else {
-          bVar16 = 2;
-          if (*(short *)(iVar12 + 0x10) != 2) {
-            bVar16 = 3;
+          bVar16 = 3;
+          if (*(short *)(iVar12 + 0x10) == 2) {
+            bVar16 = 2;
           }
         }
         r_lld_con_tx_len_update_for_rate(param_1,bVar16);
@@ -79,9 +79,9 @@ _L115:
       else {
         uVar14 = 2;
       }
-      goto _L116;
+      goto _L114;
     }
-    if ((*(byte *)(iVar10 + 0x1c) != 3) || ((sVar8 == 0 || (sVar8 == sVar11)))) goto _L30;
+    if ((*(byte *)(iVar10 + 0x1c) != 3) || ((sVar8 == 0 || (sVar8 == sVar11)))) goto _L26;
     uVar17 = (&co_phy_to_rate)[*(byte *)(iVar10 + 0x1d)];
     uVar14 = 3;
     if (sVar8 == 2) {
@@ -93,7 +93,7 @@ _L115:
     if (param_3 != 0) {
       *(undefined2 *)(iVar12 + 8) = 0;
       *(undefined2 *)(iVar12 + 0xc) = 0;
-      goto _L30;
+      goto _L26;
     }
     break;
   case 2:
@@ -176,7 +176,7 @@ _L115:
       }
       uVar7 = (&co_phy_to_rate)[bVar16];
       sVar11 = r_lld_con_event_counter_get(param_1);
-      *(short *)(iVar12 + 8) = *(short *)(iVar10 + 0x10) + 9 + sVar11;
+      *(short *)(iVar12 + 8) = sVar11 + *(short *)(iVar10 + 0x10) + 9;
       param_3 = r_lld_con_phys_update(param_1,uVar17,uVar7);
       if (param_3 == 0) {
         r_llc_proc_state_set(iVar12,param_1,4);
@@ -194,7 +194,7 @@ _L115:
     if (!bVar9) {
       return;
     }
-_L30:
+_L26:
     *(ushort *)(iVar10 + 0x42) = *(ushort *)(iVar10 + 0x42) & 0xffef;
     if ((*(uint *)(iVar12 + 0xc) & 0xffffff) != 0) {
       r_llc_hci_le_phy_upd_cmp_evt_send
@@ -208,7 +208,7 @@ _L30:
     return;
   case 3:
     r_llc_proc_timer_set(param_1,0,0);
-    if (*(short *)(iVar12 + 0xc) == 0) goto _L115;
+    if (*(short *)(iVar12 + 0xc) == 0) goto _L113;
     if (*(byte *)(iVar12 + 0xd) == 0) {
       bVar16 = *(byte *)(iVar10 + 0x1c);
     }
@@ -230,7 +230,7 @@ _L30:
     if (param_3 != 0) {
       r_assert_param(*(undefined1 *)(iVar12 + 0xd),*(undefined1 *)(iVar12 + 0xc),"llc_phy_upd.c",
                      0x1a2);
-      goto _L30;
+      goto _L26;
     }
     break;
   case 4:
@@ -250,14 +250,14 @@ _L30:
         *(undefined *)(iVar10 + 0x1d) = (&co_phy_mask_to_value)[*(byte *)(iVar12 + 0xd)];
       }
     }
-    goto _L30;
+    goto _L26;
   default:
     uVar14 = r_llc_proc_state_get(iVar12);
     r_assert_param(param_1,uVar14,"llc_phy_upd.c",0x1ca);
     return;
   }
   uVar14 = 4;
-_L116:
+_L114:
   r_llc_proc_state_set(iVar12,param_1,uVar14);
   return;
 }

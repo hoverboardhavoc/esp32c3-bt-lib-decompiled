@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_count_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,15 +16,18 @@ char r_lld_con_count_get(void)
 
 {
   char cVar1;
-  int iVar2;
+  int *piVar2;
   int iVar3;
+  int iVar4;
   
+  piVar2 = (int *)&lld_con_env;
   cVar1 = '\0';
-  for (iVar2 = 0; iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38)),
-      iVar2 < (int)(uint)*(byte *)(iVar3 + 0xd); iVar2 = iVar2 + 1) {
-    if (*(int *)(&lld_con_env + iVar2 * 4) != 0) {
+  for (iVar4 = 0; iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38)),
+      iVar4 < (int)(uint)*(byte *)(iVar3 + 0xd); iVar4 = iVar4 + 1) {
+    if (*piVar2 != 0) {
       cVar1 = cVar1 + '\x01';
     }
+    piVar2 = piVar2 + 1;
   }
   return cVar1;
 }

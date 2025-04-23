@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> ecc_p256.o -> r_SubtractBigHex256
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,26 +13,25 @@
 void r_SubtractBigHex256(int param_1,int param_2,int param_3)
 
 {
-  ushort uVar1;
-  ushort uVar2;
-  uint uVar3;
-  int iVar4;
+  short sVar1;
+  uint uVar2;
+  int iVar3;
   
-  iVar4 = 0x20;
-  uVar3 = 0;
+  iVar3 = 0x20;
+  uVar2 = 0;
   do {
-    uVar1 = *(ushort *)(param_2 + iVar4);
-    uVar2 = *(ushort *)(param_1 + iVar4);
-    *(short *)(param_3 + iVar4) = (short)(((uVar2 - uVar3) - (uint)uVar1) * 0x10000 >> 0x10);
-    uVar3 = (uint)((uint)uVar2 < uVar3 + uVar1);
-    iVar4 = iVar4 + -2;
-  } while (iVar4 != -2);
-  iVar4 = 0;
+    sVar1 = (short)uVar2;
+    uVar2 = (uint)((uint)*(ushort *)(param_1 + iVar3) < uVar2 + *(ushort *)(param_2 + iVar3));
+    *(ushort *)(param_3 + iVar3) =
+         (*(ushort *)(param_1 + iVar3) - sVar1) - *(ushort *)(param_2 + iVar3);
+    iVar3 = iVar3 + -2;
+  } while (iVar3 != -2);
+  iVar3 = 0;
   do {
-    if (*(short *)(iVar4 * 2 + param_3) != 0) break;
-    iVar4 = iVar4 + 1;
-  } while (iVar4 != 0x11);
-  *(int *)(param_3 + 0x24) = 0x11 - iVar4;
+    if (*(short *)(iVar3 * 2 + param_3) != 0) break;
+    iVar3 = iVar3 + 1;
+  } while (iVar3 != 0x11);
+  *(int *)(param_3 + 0x24) = 0x11 - iVar3;
   return;
 }
 

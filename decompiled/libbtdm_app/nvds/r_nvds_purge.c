@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 352d001fc7f5d34243047454b3f9e684577ce3e0
- * https://github.com/espressif/esp32c3-bt-lib/commit/352d001fc7f5d34243047454b3f9e684577ce3e0
- * Upstream date: 2021-04-20 15:58:00 +0800
- * Upstream subject: ESP32C3, ESP32S3: update libbtdm_app.a(47235b66)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> nvds.o -> r_nvds_purge
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void r_nvds_purge(uint param_1,void *param_2)
   undefined1 uStack_38;
   byte bStack_37;
   byte bStack_36;
-  int aiStack_34 [2];
+  int aiStack_34 [4];
   
   aiStack_34[0] = 4;
   uVar2 = 0;
@@ -38,12 +38,12 @@ void r_nvds_purge(uint param_1,void *param_2)
         (**(code **)(_r_plf_funcs_p + 8))("nvds.c",0x20c,*(code **)(_r_plf_funcs_p + 8));
       }
       memcpy(__dest,&uStack_38,3);
-      (*_LANCHOR0)(iVar1 + 3,bStack_36,(int)__dest + 3,_LANCHOR0);
+      (*nvds_env)(iVar1 + 3,bStack_36,(int)__dest + 3,nvds_env);
       __dest = (void *)((int)__dest + 3 + (uint)bStack_36);
     }
   }
   (**(code **)(_r_modules_funcs_p + 0x244))(*(code **)(_r_modules_funcs_p + 0x244));
-  (*_LANCHOR0)(4,uVar2,param_2,_LANCHOR0);
+  (*DAT_000106f0)(4,uVar2,param_2,DAT_000106f0);
   return;
 }
 

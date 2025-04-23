@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_sync.o -> r_lld_sync_process_pkt_rx_aux_sync_ind
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,42 +19,46 @@ void r_lld_sync_process_pkt_rx_aux_sync_ind(int param_1,int param_2)
   ushort uVar2;
   uint uVar3;
   int iVar4;
-  uint uVar5;
-  int iVar6;
+  int iVar5;
+  uint uVar6;
+  uint uVar7;
   
+  iVar4 = *(int *)(&lld_sync_env + param_1 * 4);
   bVar1 = *(byte *)(_p_lld_env + 0xd8);
-  iVar6 = *(int *)(&lld_sync_env + param_1 * 4);
-  iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-  if ((param_2 != 0) && ((*(ushort *)(iVar4 + (uint)bVar1 * 0x14 + 2) & 1) == 0)) {
+  iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
+  if ((param_2 != 0) && ((*(ushort *)((uint)bVar1 * 0x14 + 2 + iVar5) & 1) == 0)) {
     bVar1 = *(byte *)(_p_lld_env + 0xd8);
-    iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-    uVar2 = *(ushort *)((uint)bVar1 * 0x14 + 10 + iVar4);
-    if ((uVar2 & 0xf000) != 0) {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_sync.c",1000,*(code **)(_r_plf_funcs_p + 8));
+    iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
+    uVar2 = *(ushort *)((uint)bVar1 * 0x14 + 10 + iVar5);
+    if (0xfff < uVar2) {
+      (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,1000,*(code **)(_r_plf_funcs_p + 8));
     }
     bVar1 = *(byte *)(_p_lld_env + 0xd8);
-    iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-    uVar3 = CONCAT22(uVar2,*(undefined2 *)((uint)bVar1 * 0x14 + 8 + iVar4));
+    iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
+    uVar7 = CONCAT22(uVar2,*(undefined2 *)((uint)bVar1 * 0x14 + 8 + iVar5));
     bVar1 = *(byte *)(_p_lld_env + 0xd8);
-    iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-    uVar5 = ((uint)*(ushort *)(&lld_exp_sync_pos_tab + (uint)*(byte *)(iVar6 + 0x58) * 2) * -2 +
-            0x270) - (*(ushort *)(iVar4 + (uint)bVar1 * 0x14 + 0xc) & 0x3ff);
-    iVar4 = (int)(short)uVar5;
-    if (((DAT_00013058 & 4) != 0) && ((*(byte *)(iVar6 + 0x58) - 2 & 0xff) < 2)) {
-      iVar4 = (int)(((uVar5 & 0xffff) + (uint)_DAT_0001305a * -2) * 0x10000) >> 0x10;
+    iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
+    uVar3 = ((uint)*(ushort *)(&lld_exp_sync_pos_tab + (uint)*(byte *)(iVar4 + 0x58) * 2) * -2 +
+            0x270) - (*(ushort *)((uint)bVar1 * 0x14 + 0xc + iVar5) & 0x3ff);
+    uVar6 = uVar3 & 0xffff;
+    iVar5 = (int)(uVar3 * 0x10000) >> 0x10;
+    if (((DAT_00013058 & 4) != 0) && ((*(byte *)(iVar4 + 0x58) - 2 & 0xff) < 2)) {
+      uVar3 = uVar6 + (uint)_DAT_0001305a * -2;
+      uVar6 = uVar3 & 0xffff;
+      iVar5 = (int)(uVar3 * 0x10000) >> 0x10;
     }
-    uVar5 = uVar3;
-    if (0x751 < (iVar4 + 0x4e1U & 0xffff)) {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_sync.c",0x19d,*(code **)(_r_plf_funcs_p + 8));
+    uVar3 = uVar7;
+    if (0x751 < (uVar6 + 0x4e1 & 0xffff)) {
+      (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x19d,*(code **)(_r_plf_funcs_p + 8));
     }
-    for (; iVar4 < 0; iVar4 = (iVar4 + 0x271) * 0x10000 >> 0x10) {
-      uVar5 = uVar5 - 1 & 0xfffffff;
+    for (; iVar5 < 0; iVar5 = (iVar5 + 0x271) * 0x10000 >> 0x10) {
+      uVar3 = uVar3 - 1 & 0xfffffff;
     }
-    *(uint *)(iVar6 + 0x44) = uVar5;
-    *(short *)(iVar6 + 0x48) = (short)iVar4;
-    *(uint *)(iVar6 + 0x38) = uVar3;
-    *(undefined2 *)(iVar6 + 0x52) = 0;
-    *(undefined1 *)(iVar6 + 0x54) = 0;
+    *(uint *)(iVar4 + 0x44) = uVar3;
+    *(short *)(iVar4 + 0x48) = (short)iVar5;
+    *(uint *)(iVar4 + 0x38) = uVar7;
+    *(undefined2 *)(iVar4 + 0x52) = 0;
+    *(undefined1 *)(iVar4 + 0x54) = 0;
   }
   return;
 }

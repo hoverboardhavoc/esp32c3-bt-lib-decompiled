@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_llcp.o -> r_llc_llcp_send_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,47 +35,44 @@ void r_llc_llcp_send_eco(uint param_1,byte *param_2,code *param_3)
   }
   else if (bVar1 == 0x18) {
     iVar5 = r_sdk_config_get_opts_ext();
-    param_3 = llc_llcp_phy_update_ind_ack;
     if (*(char *)(iVar5 + 0x18) == '\0') {
       r_assert_err(0,"llc_llcp.c",0x1e9);
     }
+    param_3 = llc_llcp_phy_update_ind_ack;
   }
+  else if (bVar1 == 6) {
+    DAT_00010a8a = (ushort)(1 << (param_1 & 0x1f)) | DAT_00010a8a;
+  }
+  iVar5 = *(int *)(&llc_env + param_1 * 4);
   if (param_2 == (byte *)0x0) {
     uVar6 = 0xffff;
   }
   else {
-    iVar5 = *(int *)(&llc_env + param_1 * 4);
     uVar6 = (uint)*param_2;
     if ((iVar5 != 0) && (uVar6 < 0x23)) {
-      uStack_22 = *(ushort *)(&DAT_00010850 + uVar6 * 0xc);
+      uStack_22 = *(ushort *)(llcp_pdu_handler + uVar6 * 0xc + 8);
       iVar2 = r_ke_malloc(uStack_22 + 0xc,2);
       bVar1 = *param_2;
       *(code **)(iVar2 + 4) = param_3;
-      iVar3 = r_co_util_pack(iVar2 + 9,param_2,&uStack_22,0x30,(&PTR__LC1_0001084c)[(uint)bVar1 * 3]
-                            );
+      iVar3 = r_co_util_pack(iVar2 + 9,param_2,&uStack_22,0x30,
+                             *(undefined4 *)(llcp_pdu_handler + (uint)bVar1 * 0xc + 4));
       if (iVar3 != 0) {
-        r_assert_param(*param_2,"llc_llcp.c",0x32d);
+        r_assert_param(*param_2,"llc_llcp.c",0x32f);
       }
       iVar4 = r_sdk_config_get_opts_ext();
       if (((*(uint *)(iVar4 + 0x28) & 0x20) != 0) &&
          (iVar4 = r_sdk_config_get_opts_ext(), *(byte *)(iVar4 + 0x2c) < 2)) {
         r_ble_log_internal_hex(0x20e30016,uStack_22,iVar2 + 9);
       }
-      if (iVar3 != 0) {
-        return;
-      }
-      *(char *)(iVar2 + 8) = (char)uStack_22;
-      if (*param_2 == 6) {
-        r_co_list_push_front();
-      }
-      else {
+      if (iVar3 == 0) {
+        *(char *)(iVar2 + 8) = (char)uStack_22;
         r_co_list_push_back(iVar5 + 0x28,iVar2);
+        r_llc_llcp_tx_check(param_1);
       }
-      r_llc_llcp_tx_check(param_1);
       return;
     }
   }
-  r_assert_param(param_1,uVar6,"llc_llcp.c",0x346);
+  r_assert_param(param_1,uVar6,"llc_llcp.c",0x33e);
   return;
 }
 

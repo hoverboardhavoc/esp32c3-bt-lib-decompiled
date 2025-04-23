@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_init.o -> r_lld_init_process_pkt_rx
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,9 +25,9 @@ void r_lld_init_process_pkt_rx(int param_1)
   
   iVar2 = _lld_init_env;
   if ((_lld_init_env == 0) || (iVar3 = *(int *)(param_1 * 4 + _lld_init_env), iVar3 == 0)) {
-                    /* WARNING: Could not recover jumptable at 0x00010f44. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010ed2. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_init.c",0x3a4);
+    (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x3a4,*(code **)(_r_plf_funcs_p + 8));
     return;
   }
   do {
@@ -42,15 +42,15 @@ void r_lld_init_process_pkt_rx(int param_1)
     }
     iVar4 = (uint)*(byte *)(_p_lld_env + 0xd8) * 0x14;
     iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-    if (((*(ushort *)(iVar5 + iVar4 + 2) & 0x603d) == 0) && (*(char *)(iVar2 + 0x50) == '\0')) {
+    if (((*(ushort *)(iVar4 + 2 + iVar5) & 0x603d) == 0) && (*(char *)(iVar2 + 0x50) == '\0')) {
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-      uVar7 = *(ushort *)(iVar5 + iVar4 + 4);
+      uVar7 = *(ushort *)(iVar4 + 4 + iVar5);
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-      uVar1 = *(undefined2 *)(iVar5 + iVar4 + 0x12);
+      uVar1 = *(undefined2 *)(iVar4 + 0x12 + iVar5);
       *(undefined1 *)(iVar3 + 0x50) = 1;
       if ((uVar7 & 0xe) == 0) {
         pcVar6 = *(code **)(_r_ip_funcs_p + 0x478);
-        goto _L150;
+        goto _L145;
       }
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
       if (*(char *)(iVar5 + 0x18) != '\0') {
@@ -59,13 +59,13 @@ void r_lld_init_process_pkt_rx(int param_1)
         if (uVar7 == 7) {
           if ((*(ushort *)(iVar4 + 0x10 + iVar5) & 0x40) != 0) {
             pcVar6 = *(code **)(_r_ip_funcs_p + 0x47c);
-_L150:
+_L145:
             (*pcVar6)(param_1,uVar1,pcVar6);
           }
         }
         else if (uVar7 == 8) {
           pcVar6 = *(code **)(_r_ip_funcs_p + 0x480);
-          goto _L150;
+          goto _L145;
         }
       }
     }

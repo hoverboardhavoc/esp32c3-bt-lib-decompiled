@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_con.o -> r_lld_conn_dynamic_pti_process
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,35 +57,32 @@ void r_lld_conn_dynamic_pti_process(uint param_1)
     if (0xb < param_1) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x298b,*(code **)(_r_plf_funcs_p + 8));
     }
-    uVar5 = (uint)bVar1 << 0xc;
-    if ((uVar5 & 0xf0000) != 0) {
+    if ((bVar1 & 0xf0) != 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x298d,*(code **)(_r_plf_funcs_p + 8));
     }
     puVar2 = (uint *)((param_1 + 0x1800c4cb) * 4);
-    *puVar2 = *puVar2 & 0xffff0fff | uVar5;
+    *puVar2 = *puVar2 & 0xffff0fff | (uint)bVar1 << 0xc;
     bVar1 = *(byte *)(*(int *)(_bt_rf_coex_cfg_p + 0x30) + 2);
     if (0xb < param_1) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x29ab,*(code **)(_r_plf_funcs_p + 8));
     }
-    uVar5 = (uint)bVar1 << 4;
-    if ((uVar5 & 0xffffff0f) != 0) {
+    if ((bVar1 & 0xf0) != 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x29ad,*(code **)(_r_plf_funcs_p + 8));
     }
-    *puVar2 = *puVar2 & 0xffffff0f | uVar5;
+    *puVar2 = *puVar2 & 0xffffff0f | (uint)bVar1 << 4;
     bVar1 = *(byte *)(*(int *)(_bt_rf_coex_cfg_p + 0x30) + 1);
     if (0xb < param_1) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x297b,*(code **)(_r_plf_funcs_p + 8));
     }
-    uVar5 = (uint)bVar1 << 0x10;
-    if ((uVar5 & 0xf00000) != 0) {
+    if ((bVar1 & 0xf0) != 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x297d,*(code **)(_r_plf_funcs_p + 8));
     }
-    *puVar2 = *puVar2 & 0xfff0ffff | uVar5;
+    *puVar2 = *puVar2 & 0xfff0ffff | (uint)bVar1 << 0x10;
     bVar1 = **(byte **)(_bt_rf_coex_cfg_p + 0x30);
     if (0xb < param_1) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x296a,*(code **)(_r_plf_funcs_p + 8));
     }
-    *puVar2 = (uint)bVar1 << 0x14 | *puVar2 & 0xe00fffff;
+    *puVar2 = *puVar2 & 0xe00fffff | (uint)bVar1 << 0x14;
     if (0xb < param_1) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x293a,*(code **)(_r_plf_funcs_p + 8));
     }

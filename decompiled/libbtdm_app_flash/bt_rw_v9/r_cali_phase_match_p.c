@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> bt_rw_v9.o -> r_cali_phase_match_p
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,74 +28,46 @@ void r_cali_phase_match_p(void)
   iVar3 = 0;
   do {
     if ((_DAT_600310f8 & 0x1000) != 0) {
-_L28:
+_L29:
       if (_g_bt_plf_log_level < 3) {
         return;
       }
-      ets_printf("hi%d, lo%d\n",iVar3,iVar2);
+      ets_printf("hi%d, lo%d\n",iVar2);
       return;
     }
-    if (iVar3 == 0) {
-      iVar1 = iVar2;
-      if (iVar2 == 0) {
-_L40:
-        iVar3 = iVar1;
+    iVar1 = 0;
+    if (iVar2 == 0) {
+      if (iVar3 == 3) {
         iVar2 = 1;
       }
-      else if (iVar2 == 1) {
-_L41:
-        iVar2 = 2;
+      else {
+_L36:
+        iVar1 = iVar3 + 1;
       }
-      else if (iVar2 == 2) {
-_L42:
-        iVar2 = 3;
-      }
-      else if (iVar2 == 3) {
-        iVar2 = 0;
-        iVar3 = 1;
-      }
+    }
+    else if (iVar2 == 1) {
+      if (iVar3 != 3) goto _L36;
+      iVar2 = 2;
+    }
+    else if (iVar2 == 2) {
+      if (iVar3 != 3) goto _L36;
+      iVar2 = 3;
     }
     else {
-      iVar1 = iVar3;
-      if (iVar3 == 1) {
-        if (iVar2 == 0) goto _L40;
-        if (iVar2 == 1) {
-          iVar3 = 1;
-          goto _L41;
+      if (iVar3 == 3) {
+        if (_g_bt_plf_log_level < 3) {
+          return;
         }
-        if (iVar2 == 2) goto _L42;
-        if (iVar2 == 3) {
-          iVar2 = 0;
-          iVar3 = 2;
-        }
+        ets_printf("phase match cali failed!\n");
+        iVar2 = 3;
+        goto _L29;
       }
-      else if (iVar3 == 2) {
-        if (iVar2 == 0) goto _L40;
-        if (iVar2 == 1) goto _L41;
-        if (iVar2 == 2) {
-          iVar3 = 2;
-          goto _L42;
-        }
-        if (iVar2 == 3) {
-          iVar3 = 3;
-          iVar2 = 0;
-        }
-      }
-      else if (iVar3 == 3) {
-        if (iVar2 == 0) goto _L40;
-        if (iVar2 == 1) goto _L41;
-        if (iVar2 == 2) goto _L42;
-        if (iVar2 == 3) {
-          iVar3 = iVar2;
-          if (2 < _g_bt_plf_log_level) {
-            ets_printf("phase match cali failed!\n",3);
-          }
-          goto _L28;
-        }
-      }
+      iVar1 = iVar3 + 1;
+      iVar2 = 3;
     }
-    _DAT_600310f8 = _DAT_600310f8 & 0xfffff88e | iVar3 << 8 | iVar2 << 4 | 1;
+    _DAT_600310f8 = _DAT_600310f8 & 0xfffff88e | iVar2 << 8 | iVar1 << 4 | 1;
     ets_delay_us(1);
+    iVar3 = iVar1;
   } while( true );
 }
 

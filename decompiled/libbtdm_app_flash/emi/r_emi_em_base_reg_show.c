@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> emi.o -> r_emi_em_base_reg_show
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,22 +15,23 @@
 void r_emi_em_base_reg_show(void)
 
 {
-  int iVar1;
+  uint *puVar1;
   int iVar2;
   uint *puVar3;
   
+  puVar1 = (uint *)&DAT_60031204;
   iVar2 = 0;
   do {
     if (2 < _g_bt_plf_log_level) {
-      iVar1 = 0x220;
-      if (iVar2 < 0x30) {
-        iVar1 = 0x204;
+      puVar3 = puVar1;
+      if (0x2f < iVar2) {
+        puVar3 = puVar1 + 7;
       }
-      puVar3 = (uint *)(iVar2 * 4 + iVar1 + 0x60031000);
       ets_printf("EM_BASE_REG[%d], %04x, %08x\n",iVar2,(*puVar3 >> 0x12) << 2,
                  (*puVar3 & 0x3ffff) << 2 | 0x3fc00000);
     }
     iVar2 = iVar2 + 1;
+    puVar1 = puVar1 + 1;
   } while (iVar2 != 0x38);
   return;
 }

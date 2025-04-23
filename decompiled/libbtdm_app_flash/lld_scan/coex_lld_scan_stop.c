@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_scan.o -> coex_lld_scan_stop
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,40 +15,41 @@
 void coex_lld_scan_stop(void)
 
 {
-  byte bVar1;
-  int iVar2;
+  bool bVar1;
+  byte bVar2;
   int iVar3;
   int iVar4;
-  int iStack_24;
+  int iVar5;
+  int local_24 [3];
   
-  iVar4 = 0;
-  while( true ) {
-    iVar2 = *(int *)(_lld_scan_env + iVar4 * 4);
-    if (iVar2 != 0) {
-      if (*(char *)(iVar2 + 0x3c) == '\0') {
-        r_sch_arb_remove(iVar2,0);
+  iVar5 = 0;
+  do {
+    iVar3 = *(int *)(_lld_scan_env + iVar5 * 4);
+    if (iVar3 != 0) {
+      if (*(char *)(iVar3 + 0x3c) == '\0') {
+        r_sch_arb_remove(iVar3,0);
         r_sch_slice_bg_remove(0);
-        iStack_24 = 0;
-        iVar3 = coex_schm_ble_scan_stop_interval_num_get
-                          (*(undefined2 *)(iVar2 + 0x30),*(undefined2 *)(iVar2 + 0x32),
-                           *(undefined4 *)(iVar2 + 4),&iStack_24);
-        *(uint *)(iVar2 + 4) =
-             ((uint)*(ushort *)(iVar2 + 0x30) * iVar3 + iStack_24) * 2 + *(int *)(iVar2 + 4) &
+        local_24[0] = 0;
+        iVar4 = coex_schm_ble_scan_stop_interval_num_get
+                          (*(undefined2 *)(iVar3 + 0x30),*(undefined2 *)(iVar3 + 0x32),
+                           *(undefined4 *)(iVar3 + 4),local_24);
+        *(uint *)(iVar3 + 4) =
+             ((uint)*(ushort *)(iVar3 + 0x30) * iVar4 + local_24[0]) * 2 + *(int *)(iVar3 + 4) &
              0xffffffe;
-        *(uint *)(iVar2 + 0x24) = (uint)*(ushort *)(iVar2 + 0x32) - iStack_24;
-        r_sch_arb_insert(iVar2);
+        *(uint *)(iVar3 + 0x24) = (uint)*(ushort *)(iVar3 + 0x32) - local_24[0];
+        r_sch_arb_insert(iVar3);
       }
-      else if (*(char *)(iVar2 + 0x3c) == '\x01') {
-        bVar1 = *(byte *)(iVar2 + 0x38);
-        iVar2 = r_emi_get_mem_addr_by_offset(0x400);
-        *(undefined2 *)(iVar2 + (uint)bVar1 * 0x5a + 0x20) = 1;
-        _DAT_60031000 = _DAT_60031000 & 0xfeffffff | 0x1000000;
-        _LANCHOR2 = 1;
+      else if (*(char *)(iVar3 + 0x3c) == '\x01') {
+        bVar2 = *(byte *)(iVar3 + 0x38);
+        iVar3 = r_emi_get_mem_addr_by_offset(0x400);
+        *(undefined2 *)((uint)bVar2 * 0x5a + 0x20 + iVar3) = 1;
+        _DAT_60031000 = _DAT_60031000 | 0x1000000;
+        lld_scan_evt_end_reason = 1;
       }
     }
-    if (iVar4 == 1) break;
-    iVar4 = 1;
-  }
+    bVar1 = iVar5 != 1;
+    iVar5 = 1;
+  } while (bVar1);
   return;
 }
 

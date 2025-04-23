@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * Upstream date: 2025-04-03 18:07:15 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_duration_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,21 +23,21 @@ void r_lld_adv_duration_update(uint param_1,int param_2)
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   iVar1 = *(int *)(&lld_adv_env + param_1 * 4);
   if (iVar1 == 0) {
-    r_assert_err(0,"lld_adv.c",0xdef);
-    goto _L1220;
+    r_assert_err(0,0x10000,0xdef);
+    goto _L1159;
   }
   if ((*(ushort *)(iVar1 + 0x74) & 8) == 0) {
     uVar4 = 0xffffffff;
     if (param_2 != 0) {
-      iVar3 = param_2 << 5;
       iVar2 = *(int *)(iVar1 + 4);
-      goto _L1224;
+      iVar3 = param_2 << 5;
+      goto _L1164;
     }
   }
   else {
-    iVar2 = *(int *)(iVar1 + 4);
-    iVar3 = 0x1000;
-_L1224:
+    iVar3 = *(int *)(iVar1 + 4);
+    iVar2 = 0x1000;
+_L1164:
     uVar4 = iVar3 + iVar2 & 0xfffffff;
   }
   *(uint *)(iVar1 + 0x58) = uVar4;
@@ -48,10 +48,10 @@ _L1224:
       r_ble_log_internal_x2(0x4040000c,param_2 << 0x10 | param_1,*(undefined4 *)(iVar1 + 0x58));
     }
   }
-_L1220:
-                    /* WARNING: Could not recover jumptable at 0x00015b72. Too many branches */
+_L1159:
+                    /* WARNING: Could not recover jumptable at 0x00015b1e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_osi_funcs_p + 0x18))();
+  (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   return;
 }
 

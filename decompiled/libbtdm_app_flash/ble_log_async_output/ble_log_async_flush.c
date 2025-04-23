@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> ble_log_async_output.o -> ble_log_async_flush
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,137 +15,136 @@
 void ble_log_async_flush(int *param_1)
 
 {
-  uint uVar1;
-  char cVar2;
-  int iVar3;
-  undefined1 *puVar4;
+  char cVar1;
+  int iVar2;
+  undefined4 uVar3;
+  int iVar4;
   undefined2 uVar5;
   uint uVar6;
   uint uVar7;
-  uint uVar8;
-  int *piVar9;
-  uint uVar10;
-  uint uVar11;
-  int *piVar12;
-  int iVar13;
-  int iVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
-  code *pcVar18;
+  int iVar8;
+  uint uVar9;
+  int iVar10;
+  int *piVar11;
+  uint uVar12;
+  uint uVar13;
+  uint uVar14;
+  undefined1 *puVar15;
+  int *piVar16;
+  int iVar17;
+  int *piVar18;
+  code *pcVar19;
+  int iVar20;
+  uint uVar21;
   int aiStack_44 [4];
   
-  piVar12 = param_1 + 1;
-  iVar14 = 0;
-  iVar3 = -1;
-  puVar4 = (undefined1 *)((int)param_1 + 0x2e);
+  iVar2 = -1;
+  piVar16 = param_1 + 1;
+  piVar18 = param_1 + 10;
+  puVar15 = (undefined1 *)((int)param_1 + 0x2e);
+  iVar4 = 0;
   do {
-    piVar9 = *(int **)(*(int *)(_ble_log_async_env + 0xc) + iVar14);
-    if ((*(byte *)(piVar9 + 6) & 1) == 0) {
-_L17:
-      *puVar4 = 0;
+    piVar11 = *(int **)(*(int *)(_ble_log_async_env + 0xc) + iVar4 * 4);
+    if ((*(byte *)(piVar11 + 6) & 1) == 0) {
+_L19:
+      *puVar15 = 0;
     }
     else {
-      iVar13 = piVar9[1];
-      piVar12[3] = iVar13;
-      iVar15 = *piVar9;
-      *piVar12 = iVar15;
-      if (iVar13 == iVar15) goto _L17;
-      *puVar4 = 1;
-      if (iVar3 == -1) {
-        iVar3 = ((int)puVar4 - ((int)param_1 + 0x2e)) * 0x1000000 >> 0x18;
+      iVar17 = piVar11[1];
+      piVar16[3] = iVar17;
+      iVar10 = *piVar11;
+      *piVar16 = iVar10;
+      if (iVar17 == iVar10) goto _L19;
+      *puVar15 = 1;
+      if (iVar2 == -1) {
+        iVar2 = (int)(char)iVar4;
       }
-      iVar16 = piVar9[2];
-      iVar15 = ble_log_async_timestamp_get(piVar9[5],iVar16);
-      iVar13 = _ble_log_async_env;
-      piVar12[6] = iVar15;
-      uVar5 = ble_log_async_length_get
-                        (*(undefined4 *)(*(int *)(*(int *)(iVar13 + 0xc) + iVar14) + 0x14),
-                         piVar12[3],iVar16);
-      *(undefined2 *)(((int)puVar4 * 2 - (int)param_1) + -0x34) = uVar5;
+      iVar20 = piVar11[5];
+      iVar8 = piVar11[2];
+      iVar10 = ble_log_async_timestamp_get(iVar20);
+      piVar16[6] = iVar10;
+      uVar5 = ble_log_async_length_get(iVar20,iVar17,iVar8);
+      *(undefined2 *)piVar18 = uVar5;
     }
-    iVar14 = iVar14 + 4;
-    puVar4 = puVar4 + 1;
-    piVar12 = piVar12 + 1;
-    if (iVar14 == 0xc) {
+    iVar4 = iVar4 + 1;
+    piVar16 = piVar16 + 1;
+    piVar18 = (int *)((int)piVar18 + 2);
+    puVar15 = puVar15 + 1;
+    if (iVar4 == 3) {
+      if (iVar2 == -1) {
+        return;
+      }
       do {
-        if (iVar3 == -1) {
-          return;
-        }
-        uVar8 = param_1[iVar3 + 7];
-        for (uVar10 = iVar3 + 1U & 0xff; (uVar10 & 0xff) < 3; uVar10 = uVar10 + 1) {
-          if ((*(char *)((int)param_1 + uVar10 + 0x2e) != '\0') &&
-             ((uint)param_1[uVar10 + 7] < uVar8)) {
-            iVar3 = (int)(char)uVar10;
-            uVar8 = param_1[uVar10 + 7];
+        uVar9 = param_1[iVar2 + 7];
+        for (uVar12 = iVar2 + 1U & 0xff; (uVar12 & 0xff) != 3; uVar12 = uVar12 + 1) {
+          if ((*(char *)((int)param_1 + uVar12 + 0x2e) != '\0') &&
+             ((uint)param_1[uVar12 + 7] < uVar9)) {
+            iVar2 = (int)(char)uVar12;
+            uVar9 = param_1[uVar12 + 7];
           }
         }
-        iVar15 = iVar3 * 4;
-        uVar10 = param_1[iVar3 + 4];
-        iVar13 = *(int *)(*(int *)(_ble_log_async_env + 0xc) + iVar15);
-        uVar17 = *(uint *)(iVar13 + 8);
-        pcVar18 = *(code **)(*param_1 + 4);
-        iVar14 = *(int *)(iVar13 + 0x14);
-        uVar11 = (uint)*(ushort *)((int)param_1 + iVar3 * 2 + 0x28);
-        uVar6 = ble_log_async_length_get(iVar14,uVar10,uVar17);
+        uVar12 = param_1[iVar2 + 4];
+        iVar17 = *(int *)(*(int *)(_ble_log_async_env + 0xc) + iVar2 * 4);
+        uVar21 = *(uint *)(iVar17 + 8);
+        iVar4 = *(int *)(iVar17 + 0x14);
+        uVar14 = (uint)*(ushort *)((int)param_1 + iVar2 * 2 + 0x28);
+        pcVar19 = *(code **)(*param_1 + 4);
+        uVar6 = ble_log_async_length_get(iVar4,uVar12,uVar21);
         aiStack_44[0] = 0;
-        uVar8 = uVar10;
-        for (uVar7 = 0; uVar6 != uVar7; uVar7 = uVar7 + 1 & 0xffff) {
-          aiStack_44[0] = aiStack_44[0] + (uint)*(byte *)(iVar14 + uVar8);
-          uVar1 = uVar8 + 1;
-          if (uVar17 <= uVar1) {
-            uVar1 = (1 - uVar17) + uVar8;
+        uVar9 = uVar12;
+        for (uVar13 = 0; uVar6 != uVar13; uVar13 = uVar13 + 1 & 0xffff) {
+          aiStack_44[0] = aiStack_44[0] + (uint)*(byte *)(iVar4 + uVar9);
+          uVar7 = uVar9 + 1;
+          if (uVar21 <= uVar7) {
+            uVar7 = (1 - uVar21) + uVar9;
           }
-          uVar8 = uVar1;
+          uVar9 = uVar7;
         }
-        iVar14 = iVar14 + uVar10;
-        uVar8 = uVar10 + uVar11;
-        if (uVar17 - uVar10 < uVar11) {
-          (*pcVar18)(uVar17 - uVar10,iVar14,0);
-          iVar14 = *(int *)(iVar13 + 0x14);
-          uVar11 = uVar8 - uVar17;
+        iVar4 = iVar4 + uVar12;
+        uVar9 = uVar12 + uVar14;
+        if (uVar21 - uVar12 < uVar14) {
+          (*pcVar19)(uVar21 - uVar12,iVar4,0);
+          iVar4 = *(int *)(iVar17 + 0x14);
+          uVar14 = uVar9 - uVar21;
         }
-        (*pcVar18)(uVar11,iVar14,0);
-        (*pcVar18)(4,aiStack_44,1);
-        if (uVar8 < *(uint *)(iVar13 + 8)) {
-          *(uint *)(iVar13 + 4) = uVar8;
+        (*pcVar19)(uVar14,iVar4,0);
+        (*pcVar19)(4,aiStack_44,1);
+        uVar12 = uVar9;
+        if (*(uint *)(iVar17 + 8) <= uVar9) {
+          uVar12 = uVar9 - *(uint *)(iVar17 + 8);
+        }
+        *(uint *)(iVar17 + 4) = uVar12;
+        iVar4 = *(int *)(*(int *)(_ble_log_async_env + 0xc) + iVar2 * 4);
+        uVar12 = *(uint *)(iVar4 + 8);
+        if (uVar12 <= uVar9) {
+          uVar9 = uVar9 - uVar12;
+        }
+        param_1[iVar2 + 4] = uVar9;
+        if (uVar9 == param_1[iVar2 + 1]) {
+          *(undefined1 *)((int)param_1 + iVar2 + 0x2e) = 0;
         }
         else {
-          *(uint *)(iVar13 + 4) = uVar8 - *(uint *)(iVar13 + 8);
-        }
-        iVar14 = *(int *)(*(int *)(_ble_log_async_env + 0xc) + iVar15);
-        uVar10 = *(uint *)(iVar14 + 8);
-        if (uVar10 <= uVar8) {
-          uVar8 = uVar8 - uVar10;
-        }
-        param_1[iVar3 + 4] = uVar8;
-        if (param_1[iVar3 + 4] == param_1[iVar3 + 1]) {
-          *(undefined1 *)((int)param_1 + iVar3 + 0x2e) = 0;
-        }
-        else {
-          iVar13 = ble_log_async_timestamp_get(*(undefined4 *)(iVar14 + 0x14),uVar10);
-          iVar14 = _ble_log_async_env;
-          param_1[iVar3 + 7] = iVar13;
-          uVar5 = ble_log_async_length_get
-                            (*(undefined4 *)(*(int *)(iVar15 + *(int *)(iVar14 + 0xc)) + 0x14),
-                             param_1[iVar3 + 4],uVar10);
-          *(undefined2 *)((int)param_1 + iVar3 * 2 + 0x28) = uVar5;
+          uVar3 = *(undefined4 *)(iVar4 + 0x14);
+          iVar4 = ble_log_async_timestamp_get(uVar3,uVar9);
+          param_1[iVar2 + 7] = iVar4;
+          uVar5 = ble_log_async_length_get(uVar3,uVar9,uVar12);
+          *(undefined2 *)((int)param_1 + iVar2 * 2 + 0x28) = uVar5;
         }
         if (*(char *)((int)param_1 + 0x2e) == '\0') {
           if (*(char *)((int)param_1 + 0x2f) == '\0') {
             if ((char)param_1[0xc] == '\0') {
               return;
             }
-            cVar2 = '\x02';
+            cVar1 = '\x02';
           }
           else {
-            cVar2 = '\x01';
+            cVar1 = '\x01';
           }
         }
         else {
-          cVar2 = '\0';
+          cVar1 = '\0';
         }
-        iVar3 = (int)cVar2;
+        iVar2 = (int)cVar1;
       } while( true );
     }
   } while( true );

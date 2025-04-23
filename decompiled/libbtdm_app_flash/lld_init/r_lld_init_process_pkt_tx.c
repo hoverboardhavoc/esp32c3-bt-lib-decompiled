@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_init.o -> r_lld_init_process_pkt_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -85,15 +85,15 @@ void r_lld_init_process_pkt_tx(int param_1)
       *__s = *(undefined1 *)(iVar9 + 0x2c);
       *(undefined1 **)(iVar9 + 8) = __s;
       r_lld_init_end();
-      goto _L215;
+      goto _L212;
     }
   }
   *(undefined1 *)(iVar9 + 0x50) = 0;
-_L215:
+_L212:
   iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
   uVar4 = *(ushort *)(iVar9 + iVar11);
   iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
-  *(ushort *)(iVar9 + iVar11) = uVar4 & 0x7fff;
+  *(ushort *)(iVar9 + iVar11) = (ushort)(((uint)uVar4 << 0x11) >> 0x11);
   return;
 }
 

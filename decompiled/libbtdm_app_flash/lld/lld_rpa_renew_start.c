@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld.o -> lld_rpa_renew_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,12 +17,12 @@ void lld_rpa_renew_start(uint param_1)
 {
   uint uVar1;
   
-  if (_LANCHOR6 != '\0') {
+  if (first_boot_0 != '\0') {
     uVar1 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
     _DAT_60031178 = uVar1 & 0x3fffff | 0x80000000;
     uVar1 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
     _DAT_6003117c = uVar1 & 0x3fffff | 0x80000000;
-    _LANCHOR6 = '\0';
+    first_boot_0 = '\0';
   }
   if ((param_1 & 2) != 0) {
     llm_rpa_renew_timer_start();

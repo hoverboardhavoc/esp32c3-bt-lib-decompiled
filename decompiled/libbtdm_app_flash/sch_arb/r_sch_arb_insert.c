@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> sch_arb.o -> r_sch_arb_insert
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,8 +23,8 @@ uint r_sch_arb_insert(int param_1)
   uint uVar5;
   int *piVar6;
   int *piVar7;
-  int *piVar8;
-  char cVar9;
+  char cVar8;
+  int *piVar9;
   
   if (0x6180f < *(int *)(param_1 + 0x10) - 0x271U) {
     r_assert_param(0,"sch_arb.c",0x295);
@@ -41,21 +41,21 @@ uint r_sch_arb_insert(int param_1)
   }
   if (((*(uint *)(param_1 + 4) - uVar4 & 0xfffffff) < 0x7ffffff) &&
      ((*(uint *)(param_1 + 4) != uVar4 || (uVar5 <= *(uint *)(param_1 + 8))))) {
-_L90:
+_L93:
     if (1 < *(ushort *)(param_1 + 0x14) >> 0xe) {
       uVar4 = *(int *)(param_1 + 0xc) - *(int *)(param_1 + 4) & 0xfffffff;
       if (0x8000000 < uVar4) {
         uVar4 = -(*(int *)(param_1 + 4) - *(int *)(param_1 + 0xc) & 0xfffffffU);
       }
-      if ((int)uVar4 < (int)(*(uint *)(param_1 + 0x10) / 0x271)) goto _L97;
+      if ((int)uVar4 < (int)(*(uint *)(param_1 + 0x10) / 0x271)) goto _L99;
     }
     piVar1 = _r_co_list_extract_after;
     if (_r_co_list_extract_after == (int *)0x0) {
       piVar1 = _sch_arb_env;
     }
-    cVar9 = '\0';
+    cVar8 = '\0';
+    piVar9 = (int *)0x0;
     piVar7 = (int *)0x0;
-    piVar8 = (int *)0x0;
     piVar6 = (int *)0x0;
     while (piVar2 = piVar1, piVar2 != (int *)0x0) {
       if (piVar2 == (int *)param_1) {
@@ -66,27 +66,25 @@ _L90:
       if (uVar4 != 5) {
         if ((*(byte *)((int)piVar2 + 0x16) < *(byte *)(param_1 + 0x16)) &&
            (_r_co_list_extract_after != piVar2)) {
-          if (piVar8 == (int *)0x0) {
-            piVar8 = piVar2;
+          if (piVar7 == (int *)0x0) {
+            piVar7 = piVar2;
           }
-          cVar9 = cVar9 + '\x01';
-          piVar7 = piVar2;
-          if ((uVar4 & 0xfd) == 1) break;
+          cVar8 = cVar8 + '\x01';
+          piVar9 = piVar2;
+          if ((uVar4 & 0xfd) == 1) goto _L107;
         }
         else if (*(ushort *)(param_1 + 0x14) >> 0xe == 0) {
           if (((*(byte *)(param_1 + 0x16) <= *(byte *)((int)piVar2 + 0x16)) ||
-              (_r_co_list_extract_after != piVar2)) || (1 < (uVar4 - 3 & 0xff))) goto _L97;
+              (_r_co_list_extract_after != piVar2)) || (1 < (uVar4 - 3 & 0xff))) goto _L99;
           if (uVar4 == 3) break;
         }
         else {
-          uVar4 = (uint)(piVar2[2] + piVar2[4]) / 0x271 + piVar2[1];
-          if (*(uint *)(param_1 + 8) < (uint)(piVar2[2] + piVar2[4]) % 0x271) {
-            uVar4 = uVar4 + 1;
-          }
-          *(uint *)(param_1 + 4) = uVar4 & 0xfffffff;
-          cVar9 = '\0';
+          cVar8 = '\0';
+          piVar9 = (int *)0x0;
           piVar7 = (int *)0x0;
-          piVar8 = (int *)0x0;
+          *(uint *)(param_1 + 4) =
+               (uint)(piVar2[2] + piVar2[4]) / 0x271 + piVar2[1] +
+               (uint)(*(uint *)(param_1 + 8) < (uint)(piVar2[2] + piVar2[4]) % 0x271) & 0xfffffff;
         }
       }
       if (1 < *(ushort *)(param_1 + 0x14) >> 0xe) {
@@ -94,19 +92,20 @@ _L90:
         if (0x8000000 < uVar4) {
           uVar4 = -(*(int *)(param_1 + 4) - *(int *)(param_1 + 0xc) & 0xfffffffU);
         }
-        if ((int)uVar4 < (int)(*(uint *)(param_1 + 0x10) / 0x271)) goto _L97;
+        if ((int)uVar4 < (int)(*(uint *)(param_1 + 0x10) / 0x271)) goto _L99;
       }
       piVar1 = _sch_arb_env;
       if (_r_co_list_extract_after != piVar2) {
-        if (cVar9 == '\0') {
+        if (cVar8 == '\0') {
           piVar6 = piVar2;
         }
         piVar1 = (int *)*piVar2;
       }
     }
-    if (piVar8 != (int *)0x0) {
-      r_co_list_extract_sublist(&sch_arb_env,piVar6,piVar7);
-      r_co_list_push_back_sublist(&sch_arb_env,piVar8,piVar7);
+    if (piVar7 != (int *)0x0) {
+_L107:
+      r_co_list_extract_sublist(&sch_arb_env,piVar6,piVar9);
+      r_co_list_push_back_sublist(&sch_arb_env,piVar7,piVar9);
     }
     if (piVar6 == (int *)0x0) {
       r_co_list_push_front(&sch_arb_env,param_1);
@@ -115,11 +114,10 @@ _L90:
     else {
       r_co_list_insert_after(&sch_arb_env,piVar6,param_1);
     }
-    uVar4 = 0;
-    if (piVar8 != (int *)0x0) {
+    if (piVar7 != (int *)0x0) {
       r_sch_arb_elt_cancel(param_1);
-      uVar4 = 0;
     }
+    uVar4 = 0;
   }
   else {
     if (*(ushort *)(param_1 + 0x14) >> 0xe != 0) {
@@ -127,9 +125,9 @@ _L90:
       if (*(uint *)(param_1 + 8) < uVar5) {
         *(uint *)(param_1 + 4) = uVar4 + 1 & 0xfffffff;
       }
-      goto _L90;
+      goto _L93;
     }
-_L97:
+_L99:
     uVar4 = 1;
   }
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));

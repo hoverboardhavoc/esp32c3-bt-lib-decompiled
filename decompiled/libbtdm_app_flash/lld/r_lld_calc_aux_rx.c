@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_calc_aux_rx
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,63 +18,59 @@ undefined4 r_lld_calc_aux_rx(uint *param_1,int param_2,uint param_3)
   ushort uVar1;
   undefined2 uVar2;
   ushort uVar3;
-  int iVar4;
+  uint uVar4;
   int iVar5;
-  uint uVar6;
+  int iVar6;
   int iVar7;
-  uint uVar8;
-  int iVar9;
+  undefined4 uVar8;
+  uint uVar9;
   uint uVar10;
   
-  uVar6 = (param_3 << 0xb) >> 0x13;
-  if (uVar6 != 0) {
+  uVar4 = (param_3 << 0xb) >> 0x13;
+  if (uVar4 == 0) {
+    uVar8 = 0;
+  }
+  else {
     uVar10 = param_3 >> 7 & 1;
-    uVar8 = param_3 >> 0x15 & 7;
-    iVar7 = 300;
-    if (uVar10 == 0) {
-      iVar7 = 0x1e;
+    iVar5 = uVar4 * ((uVar10 - 1 & 0xfffffef2) + 300);
+    uVar9 = param_3 >> 0x15 & 7;
+    iVar6 = r_rwip_active_check();
+    uVar4 = 0x14;
+    if (iVar6 == 0) {
+      uVar4 = (uint)*(ushort *)(_p_lld_env + 0xd4);
     }
-    iVar9 = uVar6 * iVar7;
-    iVar4 = r_rwip_active_check();
-    uVar6 = 0x14;
-    if (iVar4 == 0) {
-      uVar6 = (uint)*(ushort *)(_p_lld_env + 0xd4);
-    }
-    iVar4 = 0x32;
-    if ((param_3 >> 6 & 1) == 0) {
-      iVar4 = 500;
-    }
-    iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
+    iVar6 = r_emi_get_mem_addr_by_offset(0x1000);
     param_2 = param_2 * 0x14;
-    uVar1 = *(ushort *)(iVar5 + param_2 + 10);
-    if ((uVar1 & 0xf000) != 0) {
+    uVar1 = *(ushort *)(param_2 + 10 + iVar6);
+    if (0xfff < uVar1) {
       r_assert_err(0,"lld.c",1000);
     }
-    iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
-    uVar2 = *(undefined2 *)(iVar5 + param_2 + 8);
-    iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
-    uVar3 = *(ushort *)(iVar5 + param_2 + 0xc);
-    iVar5 = 0x96;
-    if (uVar10 == 0) {
-      iVar5 = 0xf;
+    iVar6 = r_emi_get_mem_addr_by_offset(0x1000);
+    uVar2 = *(undefined2 *)(param_2 + 8 + iVar6);
+    iVar6 = r_emi_get_mem_addr_by_offset(0x1000);
+    uVar3 = *(ushort *)(param_2 + 0xc + iVar6);
+    iVar6 = DAT_00014062 + 0x1e;
+    if (uVar10 != 0) {
+      iVar6 = DAT_00014062 + 300;
     }
-    iVar4 = iVar7 + (uint)DAT_00014062 + (iVar9 * (uVar6 + iVar4)) / 1000000;
-    uVar10 = iVar4 * 2;
+    iVar6 = (iVar5 * (uVar4 + ((param_3 >> 6 & 1) - 1 & 0x1c2) + 0x32)) / 1000000 + iVar6;
+    uVar4 = iVar6 * 2;
     iVar7 = r_emi_get_mem_addr_by_offset(0x1000);
-    uVar6 = (0x270 - (uVar3 & 0x3ff) & 0xffff) + iVar4 * -2 + (iVar5 + iVar9) * 2 +
-            (uint)*(ushort *)
-                   (&lld_exp_sync_pos_tab + (uint)(*(ushort *)(param_2 + 6 + iVar7) >> 0xe) * 2) *
-            -2;
-    *(undefined *)((int)param_1 + 0xd) = (&lld_aux_phy_to_rate)[uVar8];
+    uVar10 = ((uVar10 - 1 & 0xffffff79) + 0x96 + iVar5) * 2 + (0x270 - (uVar3 & 0x3ff) & 0xffff) +
+             iVar6 * -2 +
+             (uint)*(ushort *)
+                    (&lld_exp_sync_pos_tab + (uint)(*(ushort *)(param_2 + 6 + iVar7) >> 0xe) * 2) *
+             -2;
+    *(undefined *)((int)param_1 + 0xd) = (&lld_aux_phy_to_rate)[uVar9];
     *(byte *)(param_1 + 3) = (byte)param_3 & 0x3f;
-    param_1[2] = uVar10;
-    *param_1 = CONCAT22(uVar1,uVar2) + (int)uVar6 / 0x271 & 0xfffffff;
-    param_1[1] = uVar6 % 0x271;
-    if (uVar8 == 2) {
-      param_1[2] = uVar10 + (uint)DAT_00014062 * 0xe;
+    param_1[2] = uVar4;
+    *param_1 = (int)uVar10 / 0x271 + CONCAT22(uVar1,uVar2) & 0xfffffff;
+    param_1[1] = uVar10 % 0x271;
+    if (uVar9 == 2) {
+      param_1[2] = (uint)DAT_00014062 * 0xe + uVar4;
     }
-    return 1;
+    uVar8 = 1;
   }
-  return 0;
+  return uVar8;
 }
 

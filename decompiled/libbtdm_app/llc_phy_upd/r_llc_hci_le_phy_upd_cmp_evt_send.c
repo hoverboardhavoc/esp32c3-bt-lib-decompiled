@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_phy_upd.o -> r_llc_hci_le_phy_upd_cmp_evt_send
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void r_llc_hci_le_phy_upd_cmp_evt_send
-               (undefined2 param_1,undefined1 param_2,int param_3,int param_4)
+               (undefined4 param_1,undefined1 param_2,int param_3,int param_4)
 
 {
   int iVar1;
@@ -35,10 +35,10 @@ void r_llc_hci_le_phy_upd_cmp_evt_send
   iVar1 = _r_ip_funcs_p;
   puVar2[4] = (char)param_3;
   puVar2[5] = (char)param_4;
-  *(undefined2 *)(puVar2 + 2) = param_1;
-                    /* WARNING: Could not recover jumptable at 0x00010a8a. Too many branches */
+  *(short *)(puVar2 + 2) = (short)param_1;
+                    /* WARNING: Could not recover jumptable at 0x00010a7a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(iVar1 + 0x8c))();
+  (**(code **)(iVar1 + 0x8c))(*(code **)(iVar1 + 0x8c));
   return;
 }
 

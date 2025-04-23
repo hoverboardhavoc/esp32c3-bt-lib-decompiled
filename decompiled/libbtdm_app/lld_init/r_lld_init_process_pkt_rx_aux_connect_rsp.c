@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_init.o -> r_lld_init_process_pkt_rx_aux_connect_rsp
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,26 +33,26 @@ void r_lld_init_process_pkt_rx_aux_connect_rsp(int param_1,undefined4 param_2)
   iVar11 = *(int *)(param_1 * 4 + _lld_init_env);
   iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   iVar8 = (uint)bVar1 * 0x14;
-  uVar2 = *(ushort *)(iVar9 + iVar8 + 0x10);
+  uVar2 = *(ushort *)(iVar8 + 0x10 + iVar9);
   iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   if ((*(ushort *)(iVar9 + iVar8 + 4) & 0xf) != 8) {
-                    /* WARNING: Could not recover jumptable at 0x00010bec. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010b8c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_init.c",0x322);
+    (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x322,*(code **)(_r_plf_funcs_p + 8));
     return;
   }
   if ((*(short *)(iVar11 + 0x38) == *(short *)(iVar11 + 0x3a)) && ((uVar2 & 0x300) == 0x300)) {
     iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-    if ((int)((uint)*(ushort *)(iVar9 + iVar8 + 2) << 0x13) < 0) {
+    if ((int)((uint)*(ushort *)(iVar8 + 2 + iVar9) << 0x13) < 0) {
       iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
       uVar3 = *(undefined2 *)(iVar9 + iVar8 + 6);
       iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-      uVar2 = *(ushort *)(iVar9 + iVar8 + 10);
-      if ((uVar2 & 0xf000) != 0) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_init.c",1000,*(code **)(_r_plf_funcs_p + 8));
+      uVar2 = *(ushort *)(iVar8 + 10 + iVar9);
+      if (0xfff < uVar2) {
+        (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,1000,*(code **)(_r_plf_funcs_p + 8));
       }
       iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-      uVar4 = *(undefined2 *)(iVar9 + iVar8 + 8);
+      uVar4 = *(undefined2 *)(iVar8 + 8 + iVar9);
       bVar1 = *(byte *)(_p_lld_env + 0xd8);
       iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
       uVar5 = *(ushort *)((uint)bVar1 * 0x14 + 0xc + iVar9);

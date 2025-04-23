@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_hw_cca_evt_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,9 +19,9 @@ void r_lld_hw_cca_evt_handler(void)
   byte bVar2;
   uint uVar3;
   uint uVar4;
-  int iVar5;
+  uint uVar5;
   byte *pbVar6;
-  uint uVar7;
+  int iVar7;
   uint uVar8;
   
   r_ke_event_clear(0xe);
@@ -33,14 +33,14 @@ void r_lld_hw_cca_evt_handler(void)
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   pbVar6 = (byte *)(*(int *)(_p_lld_env + 0x118) + (uint)(bVar1 >> 3));
   *pbVar6 = (byte)(1 << (uVar3 & 7)) | *pbVar6;
-  uVar7 = (uint)*(byte *)(*(int *)(_p_lld_env + 0x10c) + uVar3);
-  uVar4 = (uint)*(byte *)(*(int *)(_p_lld_env + 0x108) + uVar3);
-  iVar5 = uVar7 + uVar4 + uVar8;
+  uVar4 = (uint)*(byte *)(*(int *)(_p_lld_env + 0x10c) + uVar3);
+  uVar5 = (uint)*(byte *)(*(int *)(_p_lld_env + 0x108) + uVar3);
+  iVar7 = uVar4 + uVar5 + uVar8;
   *(char *)(*(int *)(_p_lld_env + 0x110) + uVar3) =
-       (char)((uVar7 * uVar7 + uVar8 * uVar8 + uVar4 * uVar4) - (uint)(iVar5 * iVar5) / 3 >> 1);
+       (char)((uVar8 * uVar8 + uVar4 * uVar4 + uVar5 * uVar5) - (uint)(iVar7 * iVar7) / 3 >> 1);
   *(undefined1 *)(*(int *)(_p_lld_env + 0x10c) + uVar3) =
        *(undefined1 *)(*(int *)(_p_lld_env + 0x108) + uVar3);
-  *(byte *)(uVar3 + *(int *)(_p_lld_env + 0x108)) = bVar2;
+  *(byte *)(*(int *)(_p_lld_env + 0x108) + uVar3) = bVar2;
   return;
 }
 

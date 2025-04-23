@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> nvds.o -> r_nvds_erase
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,9 +15,10 @@
 void r_nvds_erase(int param_1,undefined4 param_2)
 
 {
-                    /* WARNING: Could not recover jumptable at 0x0001022a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010236. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_plf_funcs_p + 0x60))(DAT_000106f4,DAT_000106ec + param_1,param_2,0);
+  (**(code **)(_r_plf_funcs_p + 0x60))
+            (DAT_00010700,DAT_000106f8 + param_1,param_2,0,*(code **)(_r_plf_funcs_p + 0x60));
   return;
 }
 

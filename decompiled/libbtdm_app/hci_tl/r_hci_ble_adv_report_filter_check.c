@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> hci_tl.o -> r_hci_ble_adv_report_filter_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,69 +16,68 @@ undefined4 r_hci_ble_adv_report_filter_check(int param_1)
 
 {
   byte bVar1;
-  bool bVar2;
-  char cVar3;
-  uint uVar4;
+  char cVar2;
+  bool bVar3;
   
   if (*(short *)(param_1 + 4) != 0x1104) {
     return 0;
   }
-  cVar3 = *(char *)(param_1 + 0xc);
-  if (cVar3 == '\r') {
-    uVar4 = (int)(uint)*(ushort *)(param_1 + 0xe) >> 5 & 3;
-    cVar3 = DAT_00012022;
+  cVar2 = *(char *)(param_1 + 0xc);
+  if (cVar2 == '\r') {
+    cVar2 = DAT_00012022;
     if (*(char *)(param_1 + 0x17) == '\x01') {
-      cVar3 = DAT_00012021;
+      cVar2 = DAT_00012021;
     }
-    if ((cVar3 == '\x02') || ((cVar3 == '\0' && (3 < g_bt_plf_log_level)))) {
-      if (uVar4 == 1) {
-        bVar2 = true;
-        cVar3 = '\x02';
-      }
-      else {
-        bVar2 = true;
-        cVar3 = '\0';
-      }
+    bVar3 = true;
+    if ((cVar2 != '\x02') && (bVar3 = false, cVar2 == '\0')) {
+      bVar3 = 3 < g_bt_plf_log_level;
     }
-    else {
-      cVar3 = uVar4 == 1;
-      bVar2 = false;
+    cVar2 = '\0';
+    if ((*(ushort *)(param_1 + 0xe) & 0x60) == 0x20) {
+      cVar2 = bVar3 + '\x01';
     }
     if (*(char *)(param_1 + 0x17) == '\x01') {
-      DAT_00012021 = cVar3;
-      cVar3 = DAT_00012022;
+      DAT_00012021 = cVar2;
+      cVar2 = DAT_00012022;
     }
+    DAT_00012022 = cVar2;
+    if (bVar3 == false) goto _L29;
+    goto _L24;
   }
-  else {
-    if (cVar3 == '\x0f') {
-      bVar1 = *(byte *)(param_1 + 0xe);
-      if (((&DAT_00012023)[bVar1] == '\x02') ||
-         (((&DAT_00012023)[bVar1] == '\0' && (3 < g_bt_plf_log_level)))) {
-        if (*(char *)(param_1 + 0x13) == '\x01') {
-          (&DAT_00012023)[bVar1] = 2;
-        }
-        else {
-          (&DAT_00012023)[bVar1] = 0;
-        }
-        goto _L24;
-      }
-      (&DAT_00012023)[bVar1] = *(char *)(param_1 + 0x13) == '\x01';
-      goto _L25;
-    }
-    if (cVar3 != '\x02') {
+  if (cVar2 != '\x0f') {
+    if (cVar2 != '\x02') {
       return 0;
     }
-    bVar2 = 3 < hci_tl_env;
-    cVar3 = DAT_00012022;
+    if (3 < hci_tl_env) goto _L24;
+    goto _L29;
   }
-  DAT_00012022 = cVar3;
-  if (bVar2) {
+  bVar1 = *(byte *)(param_1 + 0xe);
+  cVar2 = *(char *)(param_1 + 0x13);
+  if ((&DAT_00012023)[bVar1] != '\x02') {
+    if ((&DAT_00012023)[bVar1] == '\0') {
+      if (cVar2 != '\x01') {
+        if (3 < g_bt_plf_log_level) goto _L24;
+        goto _L29;
+      }
+      if (3 < g_bt_plf_log_level) goto _L28;
+    }
+    else if (cVar2 != '\x01') {
+      (&DAT_00012023)[bVar1] = 0;
+      goto _L29;
+    }
+    (&DAT_00012023)[bVar1] = 1;
+_L29:
+    g_bt_plf_log_level = g_bt_plf_log_level + 1;
+    return 0;
+  }
+  if (cVar2 != '\x01') {
+    (&DAT_00012023)[bVar1] = 0;
+    goto _L24;
+  }
+_L28:
+  (&DAT_00012023)[bVar1] = 2;
 _L24:
-    (**(code **)(_r_modules_funcs_p + 0xd8))(*(code **)(_r_modules_funcs_p + 0xd8));
-    return 1;
-  }
-_L25:
-  g_bt_plf_log_level = g_bt_plf_log_level + 1;
-  return 0;
+  (**(code **)(_r_modules_funcs_p + 0xd8))(*(code **)(_r_modules_funcs_p + 0xd8));
+  return 1;
 }
 

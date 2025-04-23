@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_test.o -> r_lld_test_frm_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,13 +16,13 @@ void r_lld_test_frm_isr(int param_1)
 
 {
   byte bVar1;
-  code *UNRECOVERED_JUMPTABLE;
   undefined1 *puVar2;
   int iVar3;
   int iVar4;
   undefined4 uVar5;
   char cVar6;
   undefined2 uVar7;
+  code *UNRECOVERED_JUMPTABLE;
   
   iVar3 = _lld_test_env;
   if (_lld_test_env == 0) {
@@ -44,9 +44,9 @@ void r_lld_test_frm_isr(int param_1)
       }
       *(undefined2 *)(puVar2 + 2) = uVar7;
       (**(code **)(_r_modules_funcs_p + 0xe0))(puVar2,*(code **)(_r_modules_funcs_p + 0xe0));
-                    /* WARNING: Could not recover jumptable at 0x00010532. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001053c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-      (**(code **)(_r_ip_funcs_p + 500))(1);
+      (**(code **)(_r_ip_funcs_p + 500))(1,*(code **)(_r_ip_funcs_p + 500));
       return;
     }
     cVar6 = DAT_00011024;
@@ -63,9 +63,9 @@ void r_lld_test_frm_isr(int param_1)
     uVar5 = 0x21e;
     UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 8);
   }
-                    /* WARNING: Could not recover jumptable at 0x000105a8. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000105ae. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (*UNRECOVERED_JUMPTABLE)(0,"lld_test.c",uVar5);
+  (*UNRECOVERED_JUMPTABLE)(0,"lld_test.c",uVar5,UNRECOVERED_JUMPTABLE);
   return;
 }
 

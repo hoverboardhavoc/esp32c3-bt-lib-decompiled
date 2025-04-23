@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> ecc_p256.o -> r_ecc_point_multiplication_win_256
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,24 +24,24 @@ void r_ecc_point_multiplication_win_256(int param_1)
   undefined *puVar7;
   void *__dest;
   void *__dest_00;
-  undefined1 auStack_128 [36];
-  undefined4 uStack_104;
-  undefined4 uStack_100;
-  undefined1 auStack_fc [36];
-  undefined4 uStack_d8;
-  undefined4 uStack_d4;
-  undefined1 auStack_d0 [36];
-  undefined4 uStack_ac;
-  undefined4 uStack_a8;
-  undefined1 auStack_a4 [36];
-  undefined4 uStack_80;
-  undefined4 uStack_7c;
-  undefined1 auStack_78 [36];
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined1 auStack_4c [36];
-  undefined4 uStack_28;
-  undefined4 uStack_24;
+  undefined1 auStack_138 [36];
+  undefined4 uStack_114;
+  undefined4 uStack_110;
+  undefined1 auStack_10c [36];
+  undefined4 uStack_e8;
+  undefined4 uStack_e4;
+  undefined1 auStack_e0 [36];
+  undefined4 uStack_bc;
+  undefined4 uStack_b8;
+  undefined1 auStack_b4 [36];
+  undefined4 uStack_90;
+  undefined4 uStack_8c;
+  undefined1 auStack_88 [36];
+  undefined4 uStack_64;
+  undefined4 uStack_60;
+  undefined1 auStack_5c [36];
+  undefined4 uStack_38;
+  undefined4 uStack_34;
   
   cVar1 = *(char *)(param_1 + 0x144);
   uVar3 = (uint)*(ushort *)(param_1 + 0x142);
@@ -63,60 +63,60 @@ void r_ecc_point_multiplication_win_256(int param_1)
                       uVar4 & 1U);
     if (iVar6 != 0) {
       puVar7 = puVar7 + iVar6 * 0x84 + -0x84;
-      memcpy(auStack_128,puVar7,0x22);
-      uStack_104 = *(undefined4 *)(puVar7 + 0x24);
-      uStack_100 = *(undefined4 *)(puVar7 + 0x28);
-      memcpy(auStack_fc,puVar7 + 0x2c,0x22);
-      uStack_d8 = *(undefined4 *)(puVar7 + 0x50);
-      uStack_d4 = *(undefined4 *)(puVar7 + 0x54);
-      memcpy(auStack_d0,puVar7 + 0x58,0x22);
-      uStack_ac = *(undefined4 *)(puVar7 + 0x7c);
-      uStack_a8 = *(undefined4 *)(puVar7 + 0x80);
+      memcpy(auStack_138,puVar7,0x22);
+      uStack_114 = *(undefined4 *)(puVar7 + 0x24);
+      uStack_110 = *(undefined4 *)(puVar7 + 0x28);
+      memcpy(auStack_10c,puVar7 + 0x2c,0x22);
+      uStack_e8 = *(undefined4 *)(puVar7 + 0x50);
+      uStack_e4 = *(undefined4 *)(puVar7 + 0x54);
+      memcpy(auStack_e0,puVar7 + 0x58,0x22);
+      uStack_bc = *(undefined4 *)(puVar7 + 0x7c);
+      uStack_b8 = *(undefined4 *)(puVar7 + 0x80);
       (**(code **)(_r_modules_funcs_p + 0x388))
-                (auStack_128,pvVar2,auStack_a4,*(code **)(_r_modules_funcs_p + 0x388));
-      memcpy(pvVar2,auStack_a4,0x22);
-      *(undefined4 *)(param_1 + 0x2c) = uStack_80;
-      *(undefined4 *)(param_1 + 0x30) = uStack_7c;
-      memcpy((void *)(param_1 + 0x34),auStack_78,0x22);
-      *(undefined4 *)(param_1 + 0x58) = uStack_54;
-      *(undefined4 *)(param_1 + 0x5c) = uStack_50;
-      memcpy((void *)(param_1 + 0x60),auStack_4c,0x22);
-      *(undefined4 *)(param_1 + 0x84) = uStack_28;
-      *(undefined4 *)(param_1 + 0x88) = uStack_24;
+                (auStack_138,pvVar2,auStack_b4,*(code **)(_r_modules_funcs_p + 0x388));
+      memcpy(pvVar2,auStack_b4,0x22);
+      *(undefined4 *)(param_1 + 0x2c) = uStack_90;
+      *(undefined4 *)(param_1 + 0x30) = uStack_8c;
+      memcpy((void *)(param_1 + 0x34),auStack_88,0x22);
+      *(undefined4 *)(param_1 + 0x58) = uStack_64;
+      *(undefined4 *)(param_1 + 0x5c) = uStack_60;
+      memcpy((void *)(param_1 + 0x60),auStack_5c,0x22);
+      *(undefined4 *)(param_1 + 0x84) = uStack_38;
+      *(undefined4 *)(param_1 + 0x88) = uStack_34;
     }
     if (*(short *)(param_1 + 0x142) == 0) {
       *(undefined4 *)(param_1 + 4) = 0;
       return;
     }
     (**(code **)(_r_modules_funcs_p + 0x38c))
-              (pvVar2,auStack_a4,*(code **)(_r_modules_funcs_p + 0x38c));
-    memcpy(pvVar2,auStack_a4,0x22);
-    *(undefined4 *)(param_1 + 0x2c) = uStack_80;
-    *(undefined4 *)(param_1 + 0x30) = uStack_7c;
-    memcpy((void *)(param_1 + 0x34),auStack_78,0x22);
-    *(undefined4 *)(param_1 + 0x58) = uStack_54;
-    *(undefined4 *)(param_1 + 0x5c) = uStack_50;
-    memcpy((void *)(param_1 + 0x60),auStack_4c,0x22);
-    *(undefined4 *)(param_1 + 0x84) = uStack_28;
-    *(undefined4 *)(param_1 + 0x88) = uStack_24;
+              (pvVar2,auStack_b4,*(code **)(_r_modules_funcs_p + 0x38c));
+    memcpy(pvVar2,auStack_b4,0x22);
+    *(undefined4 *)(param_1 + 0x2c) = uStack_90;
+    *(undefined4 *)(param_1 + 0x30) = uStack_8c;
+    memcpy((void *)(param_1 + 0x34),auStack_88,0x22);
+    *(undefined4 *)(param_1 + 0x58) = uStack_64;
+    *(undefined4 *)(param_1 + 0x5c) = uStack_60;
+    memcpy((void *)(param_1 + 0x60),auStack_5c,0x22);
+    *(undefined4 *)(param_1 + 0x84) = uStack_38;
+    *(undefined4 *)(param_1 + 0x88) = uStack_34;
     sVar5 = *(short *)(param_1 + 0x142) + -1;
   }
   else {
     if (cVar1 == '\x03') {
       pvVar2 = (void *)(param_1 + 0x8c);
-      __dest_00 = (void *)(param_1 + 0xb8);
       (**(code **)(_r_modules_funcs_p + 0x38c))
-                (pvVar2,auStack_128,*(code **)(_r_modules_funcs_p + 0x38c));
-      memcpy(pvVar2,auStack_128,0x22);
-      *(undefined4 *)(param_1 + 0xb0) = uStack_104;
+                (pvVar2,auStack_138,*(code **)(_r_modules_funcs_p + 0x38c));
+      memcpy(pvVar2,auStack_138,0x22);
+      __dest_00 = (void *)(param_1 + 0xb8);
+      *(undefined4 *)(param_1 + 0xb0) = uStack_114;
+      *(undefined4 *)(param_1 + 0xb4) = uStack_110;
+      memcpy(__dest_00,auStack_10c,0x22);
       __dest = (void *)(param_1 + 0xe4);
-      *(undefined4 *)(param_1 + 0xb4) = uStack_100;
-      memcpy(__dest_00,auStack_fc,0x22);
-      *(undefined4 *)(param_1 + 0xdc) = uStack_d8;
-      *(undefined4 *)(param_1 + 0xe0) = uStack_d4;
-      memcpy(__dest,auStack_d0,0x22);
-      *(undefined4 *)(param_1 + 0x108) = uStack_ac;
-      *(undefined4 *)(param_1 + 0x10c) = uStack_a8;
+      *(undefined4 *)(param_1 + 0xdc) = uStack_e8;
+      *(undefined4 *)(param_1 + 0xe0) = uStack_e4;
+      memcpy(__dest,auStack_e0,0x22);
+      *(undefined4 *)(param_1 + 0x108) = uStack_bc;
+      *(undefined4 *)(param_1 + 0x10c) = uStack_b8;
       sVar5 = *(short *)(param_1 + 0x142) + 1;
       *(short *)(param_1 + 0x142) = sVar5;
       if (sVar5 == 0x40) {
@@ -165,34 +165,40 @@ void r_ecc_point_multiplication_win_256(int param_1)
     if (cVar1 != '\x04') {
       return;
     }
-    if (uVar3 == 3) {
+    switch(uVar3 - 3 & 0xffff) {
+    case 0:
       (**(code **)(_r_modules_funcs_p + 0x388))
                 (*(int *)(param_1 + 0x148) + 0x84,*(int *)(param_1 + 0x148) + 0x108,
                  *(code **)(_r_modules_funcs_p + 0x388));
       sVar5 = 5;
-    }
-    else if (uVar3 == 5) {
+      break;
+    default:
+      goto _L243;
+    case 2:
       (**(code **)(_r_modules_funcs_p + 0x388))
                 (*(int *)(param_1 + 0x148) + 0x18c,*(int *)(param_1 + 0x148) + 0x210,
                  *(code **)(_r_modules_funcs_p + 0x388));
       sVar5 = 6;
-    }
-    else if (uVar3 == 6) {
+      break;
+    case 3:
       iVar6 = *(int *)(param_1 + 0x148);
       (**(code **)(_r_modules_funcs_p + 0x388))
                 (iVar6 + 0x84,iVar6 + 0x18c,iVar6 + 0x294,*(code **)(_r_modules_funcs_p + 0x388));
       sVar5 = 7;
-    }
-    else if (uVar3 == 7) {
+      break;
+    case 4:
       (**(code **)(_r_modules_funcs_p + 0x388))
                 (*(int *)(param_1 + 0x148) + 0x294,*(int *)(param_1 + 0x148) + 0x318,
                  *(code **)(_r_modules_funcs_p + 0x388));
       sVar5 = 9;
-    }
-    else {
-      if (6 < (uVar3 - 9 & 0xffff)) {
-        return;
-      }
+      break;
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 0xb:
+    case 0xc:
       iVar6 = *(int *)(param_1 + 0x148);
       (**(code **)(_r_modules_funcs_p + 0x388))
                 (iVar6 + 0x39c,uVar3 * 0x84 + -0x4a4 + iVar6,uVar3 * 0x84 + -0x84 + iVar6,
@@ -207,6 +213,7 @@ void r_ecc_point_multiplication_win_256(int param_1)
     }
   }
   *(short *)(param_1 + 0x142) = sVar5;
+_L243:
   return;
 }
 

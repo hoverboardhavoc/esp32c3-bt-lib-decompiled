@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * Upstream date: 2025-04-03 18:07:15 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_cleanup
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,85 +15,77 @@
 void r_lld_con_cleanup(int param_1,int param_2,undefined1 param_3)
 
 {
-  byte bVar1;
-  byte bVar2;
-  ushort uVar3;
-  undefined1 *puVar4;
+  ushort uVar1;
+  int iVar2;
+  undefined1 *puVar3;
+  int iVar4;
   int iVar5;
-  int iVar6;
-  ushort uVar7;
-  undefined4 uVar8;
+  undefined4 uVar6;
+  code *pcVar7;
+  uint uVar8;
   int iVar9;
-  code *pcVar10;
-  uint uVar11;
-  int iVar12;
   
-  iVar12 = *(int *)(&lld_con_env + param_1 * 4);
-  if (iVar12 == 0) {
+  iVar9 = *(int *)(&lld_con_env + param_1 * 4);
+  if (iVar9 == 0) {
     return;
   }
   if (param_2 != 0) {
-    uVar11 = param_1 << 8 | 1;
-    puVar4 = (undefined1 *)
+    uVar8 = param_1 << 8 | 1;
+    puVar3 = (undefined1 *)
              (**(code **)(_r_modules_funcs_p + 200))
-                       (0x212,uVar11,0xff,1,*(code **)(_r_modules_funcs_p + 200));
-    *puVar4 = param_3;
+                       (0x212,uVar8,0xff,1,*(code **)(_r_modules_funcs_p + 200));
+    *puVar3 = param_3;
     (**(code **)(_r_modules_funcs_p + 0xe0))(*(code **)(_r_modules_funcs_p + 0xe0));
-    iVar5 = (**(code **)(_r_modules_funcs_p + 0x40))
-                      (iVar12 + 0x28,*(code **)(_r_modules_funcs_p + 0x40));
-    while (*(char *)(iVar12 + 0x92) != '\0') {
-      bVar1 = *(byte *)(iVar12 + 0x8e);
-      bVar2 = *(byte *)(iVar12 + 0x90);
-      iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
-      iVar9 = ((uint)bVar1 * 9 + (uint)bVar2 & 0xff) * 0xe;
-      uVar3 = *(ushort *)(iVar6 + iVar9 + 2);
-      uVar7 = uVar3 & 3;
-      if ((uVar3 & 3) == 0) {
-_L297:
-        uVar8 = 0x7a8;
-        pcVar10 = *(code **)(_r_plf_funcs_p + 8);
-_L318:
-        (*pcVar10)(0,"lld_con.c",uVar8,pcVar10);
-      }
-      else if (2 < uVar7) {
-        if (uVar7 != 3) goto _L297;
-        iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
+    iVar4 = (**(code **)(_r_modules_funcs_p + 0x40))
+                      (iVar9 + 0x28,*(code **)(_r_modules_funcs_p + 0x40));
+    while (*(char *)(iVar9 + 0x92) != '\0') {
+      iVar2 = ((uint)*(byte *)(iVar9 + 0x8e) * 9 + (uint)*(byte *)(iVar9 + 0x90) & 0xff) * 0xe;
+      iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
+      uVar1 = *(ushort *)(iVar2 + 2 + iVar5);
+      if ((uVar1 & 3) == 3) {
+        iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
         (**(code **)(_r_ip_funcs_p + 0xf8))
-                  (*(undefined2 *)(iVar9 + 4 + iVar6),*(code **)(_r_ip_funcs_p + 0xf8));
-        if (*(int *)(iVar12 + 0x24) == 0) goto _L298;
-        uVar8 = 0x79f;
-        pcVar10 = *(code **)(_r_plf_funcs_p + 8);
-        goto _L318;
+                  (*(undefined2 *)(iVar2 + 4 + iVar5),*(code **)(_r_ip_funcs_p + 0xf8));
+        if (*(int *)(iVar9 + 0x24) != 0) {
+          uVar6 = 0x79f;
+          pcVar7 = *(code **)(_r_plf_funcs_p + 8);
+          goto _L315;
+        }
       }
-_L298:
-      *(char *)(iVar12 + 0x92) = *(char *)(iVar12 + 0x92) + -1;
-      *(byte *)(iVar12 + 0x90) = *(char *)(iVar12 + 0x90) + 1U & 1;
+      else if ((uVar1 & 3) == 0) {
+        uVar6 = 0x7a8;
+        pcVar7 = *(code **)(_r_plf_funcs_p + 8);
+_L315:
+        (*pcVar7)(0,"lld_con.c",uVar6,pcVar7);
+      }
+      *(char *)(iVar9 + 0x92) = *(char *)(iVar9 + 0x92) + -1;
+      *(byte *)(iVar9 + 0x90) = *(char *)(iVar9 + 0x90) + 1U & 1;
     }
-    if (*(int *)(iVar12 + 0x24) != 0) {
+    if (*(int *)(iVar9 + 0x24) != 0) {
       (**(code **)(_r_ip_funcs_p + 0xf8))
-                (*(undefined2 *)(*(int *)(iVar12 + 0x24) + 4),*(code **)(_r_ip_funcs_p + 0xf8));
+                (*(undefined2 *)(*(int *)(iVar9 + 0x24) + 4),*(code **)(_r_ip_funcs_p + 0xf8));
     }
-    while (iVar5 != 0) {
+    while (iVar4 != 0) {
       (**(code **)(_r_ip_funcs_p + 0xd0))
-                (*(undefined2 *)(iVar5 + 4),*(code **)(_r_ip_funcs_p + 0xd0));
+                (*(undefined2 *)(iVar4 + 4),*(code **)(_r_ip_funcs_p + 0xd0));
       if (DAT_0001604d != '\0') {
         (**(code **)(_r_modules_funcs_p + 0xe4))
-                  (0x20e,uVar11,0xff,*(code **)(_r_modules_funcs_p + 0xe4));
+                  (0x20e,uVar8,0xff,*(code **)(_r_modules_funcs_p + 0xe4));
       }
-      iVar5 = (**(code **)(_r_modules_funcs_p + 0x40))
-                        (iVar12 + 0x28,*(code **)(_r_modules_funcs_p + 0x40));
+      iVar4 = (**(code **)(_r_modules_funcs_p + 0x40))
+                        (iVar9 + 0x28,*(code **)(_r_modules_funcs_p + 0x40));
     }
   }
   (**(code **)(_r_ip_funcs_p + 0x730))(4,param_1,*(code **)(_r_ip_funcs_p + 0x730));
   (**(code **)(_r_modules_funcs_p + 0x110))
             (*(undefined4 *)(&lld_con_env + param_1 * 4),*(code **)(_r_modules_funcs_p + 0x110));
   (&g_event_empty)[param_1] = 0;
-  iVar12 = _r_modules_funcs_p;
+  iVar9 = _r_modules_funcs_p;
   *(undefined4 *)(&lld_con_env + param_1 * 4) = 0;
-  (**(code **)(iVar12 + 0x200))(param_1,*(code **)(iVar12 + 0x200));
-                    /* WARNING: Could not recover jumptable at 0x000116d0. Too many branches */
+  (**(code **)(iVar9 + 0x200))(param_1,*(code **)(iVar9 + 0x200));
+                    /* WARNING: Could not recover jumptable at 0x00011662. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_modules_funcs_p + 0x1d8))(param_1);
+  (**(code **)(_r_modules_funcs_p + 0x1d8))(param_1,*(code **)(_r_modules_funcs_p + 0x1d8));
   return;
 }
 

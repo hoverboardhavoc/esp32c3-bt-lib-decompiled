@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_chmap_upd.o -> r_llc_loc_ch_map_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,7 +38,7 @@ void r_llc_loc_ch_map_proc_continue(int param_1,int param_2)
         uVar9 = 0;
         do {
           if (((int)(uint)abStack_28[(int)uVar9 >> 3] >> (uVar9 & 7) & 1U) == 0) {
-            abStack_28[(int)uVar9 >> 3] = (byte)(1 << (uVar9 & 7)) | abStack_28[(int)uVar9 >> 3];
+            abStack_28[(int)uVar9 >> 3] = abStack_28[(int)uVar9 >> 3] | (byte)(1 << (uVar9 & 7));
             uVar8 = uVar8 + 1 & 0xff;
             if (bVar1 <= uVar8) break;
           }
@@ -50,7 +50,7 @@ void r_llc_loc_ch_map_proc_continue(int param_1,int param_2)
         pvVar7 = (void *)(iVar4 + 8);
         *(ushort *)(iVar2 + 0x42) = *(ushort *)(iVar2 + 0x42) | 0x10;
         sVar3 = r_lld_con_event_counter_get(param_1);
-        sVar3 = *(short *)(iVar2 + 0x10) + 9 + sVar3;
+        sVar3 = sVar3 + *(short *)(iVar2 + 0x10) + 9;
         *(short *)(iVar4 + 0xe) = sVar3;
         memcpy(pvVar7,abStack_28,5);
         iVar5 = r_lld_con_ch_map_update(param_1,pvVar7,sVar3);
@@ -64,7 +64,7 @@ void r_llc_loc_ch_map_proc_continue(int param_1,int param_2)
     else {
       if (iVar5 != 1) {
         uVar6 = r_llc_proc_state_get(iVar4);
-        r_assert_param(param_1,uVar6,"llc_chmap_upd.c",0xcc);
+        r_assert_param(param_1,uVar6,0x10000,0xcc);
         return;
       }
       memcpy((void *)(iVar2 + 8),(void *)(iVar4 + 8),5);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
- * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
- * Upstream date: 2025-01-03 16:50:09 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_hci.o -> hci_le_set_priv_mode_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ undefined4 hci_le_set_priv_mode_cmd_handler(byte *param_1,undefined4 param_2)
   if (*(char *)(_p_llm_env + 0xc6) != '\0') {
     iVar1 = (**(code **)(_r_ip_funcs_p + 0x504))(*(code **)(_r_ip_funcs_p + 0x504));
     uVar2 = 0xc;
-    if (iVar1 != 0) goto _L69;
+    if (iVar1 != 0) goto _L72;
   }
   uVar2 = 0x12;
   if (param_1[7] < 2) {
@@ -30,7 +30,7 @@ undefined4 hci_le_set_priv_mode_cmd_handler(byte *param_1,undefined4 param_2)
       uVar2 = (**(code **)(_r_ip_funcs_p + 0x28c))(param_1 + 1,*(code **)(_r_ip_funcs_p + 0x28c));
     }
   }
-_L69:
+_L72:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,uVar2,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> ecc_p256.o -> r_ecc_multiplication_event_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,8 +41,7 @@ void r_ecc_multiplication_event_handler(void)
     if (*(short *)(iVar3 + 0x13e) != 0xff) {
       puVar4 = (undefined1 *)
                (**(code **)(_r_modules_funcs_p + 200))
-                         (*(undefined2 *)(iVar3 + 0x13c),0xff,0x40,
-                          *(code **)(_r_modules_funcs_p + 200));
+                         (*(undefined2 *)(iVar3 + 0x13c),0x40,*(code **)(_r_modules_funcs_p + 200));
       memset(auStack_78,0,0x22);
       uStack_54 = 0;
       uStack_50 = 0;
@@ -60,9 +59,9 @@ void r_ecc_multiplication_event_handler(void)
       do {
         uVar2 = *puVar5;
         puVar5 = puVar5 + 1;
-        *puVar6 = (char)uVar2;
         puVar6[1] = (char)((ushort)uVar2 >> 8);
-        bVar1 = puVar4 != puVar6;
+        *puVar6 = (char)uVar2;
+        bVar1 = puVar6 != puVar4;
         puVar6 = puVar6 + -2;
       } while (bVar1);
       puVar8 = auStack_78;
@@ -74,7 +73,7 @@ void r_ecc_multiplication_event_handler(void)
         puVar6[1] = (char)((ushort)uVar2 >> 8);
         *puVar6 = (char)uVar2;
         puVar6 = puVar7;
-      } while (puVar7 != puVar4 + 0x1e);
+      } while (puVar4 + 0x1e != puVar7);
       (**(code **)(_r_modules_funcs_p + 0xe0))(puVar4,*(code **)(_r_modules_funcs_p + 0xe0));
     }
   }
@@ -83,7 +82,10 @@ void r_ecc_multiplication_event_handler(void)
     (**(code **)(_r_modules_funcs_p + 0x44))(&ecc_env,iVar3,*(code **)(_r_modules_funcs_p + 0x44));
   }
   if (_ecc_env != 0) {
+                    /* WARNING: Could not recover jumptable at 0x00011ce6. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_modules_funcs_p + 0x108))(1,*(code **)(_r_modules_funcs_p + 0x108));
+    return;
   }
   return;
 }

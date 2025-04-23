@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld.o -> lld_read_clock_us
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,8 +18,8 @@ uint lld_read_clock_us(void)
   uint uVar2;
   
   uVar1 = r_rwip_time_get();
-  uVar2 = uVar1 * 0x271 + extraout_a1;
-  return uVar2 >> 1 |
-         ((uint)(uVar2 < uVar1 * 0x271) + (int)((ulonglong)uVar1 * 0x271 >> 0x20)) * -0x80000000;
+  uVar2 = extraout_a1 + uVar1 * 0x271;
+  return ((uint)(uVar2 < uVar1 * 0x271) + (int)((ulonglong)uVar1 * 0x271 >> 0x20)) * -0x80000000 |
+         uVar2 >> 1;
 }
 

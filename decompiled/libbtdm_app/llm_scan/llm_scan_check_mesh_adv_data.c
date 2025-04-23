@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bfdfe8f851c99ced8316b133b0b15521917ea049
- * https://github.com/espressif/esp32c3-bt-lib/commit/bfdfe8f851c99ced8316b133b0b15521917ea049
- * Upstream date: 2024-07-18 14:51:28 +0800
- * Upstream subject: feat(bt): Support mesh duplicate with extend scan (aa16a46)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_scan.o -> llm_scan_check_mesh_adv_data
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,36 +10,39 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-undefined4 llm_scan_check_mesh_adv_data(char *param_1,int param_2)
+undefined4 llm_scan_check_mesh_adv_data(byte *param_1,int param_2)
 
 {
-  char cVar1;
-  char *pcVar2;
-  char *pcVar3;
+  byte bVar1;
+  byte *pbVar2;
+  byte *pbVar3;
   
-  cVar1 = *param_1;
-  pcVar2 = param_1 + 1;
-  while( true ) {
-    if ((cVar1 == '\0') || (param_2 < (int)pcVar2 - (int)param_1)) {
+  bVar1 = *param_1;
+  pbVar2 = param_1 + 1;
+  do {
+    if ((bVar1 == 0) || (param_2 < (int)pbVar2 - (int)param_1)) {
       return 0;
     }
-    cVar1 = *pcVar2;
-    if ((cVar1 == '$') || ((byte)(cVar1 - 0x29U) < 3)) break;
-    if (cVar1 == '\x03') {
-      pcVar3 = pcVar2 + 3;
-      if ((ushort)(*(short *)(pcVar2 + 1) + 0xe7d9U) < 2) {
-        return 1;
-      }
-      if (*(short *)(pcVar2 + 1) == 0x1859) {
+    bVar1 = *pbVar2;
+    if (bVar1 == 0x24) {
+      return 1;
+    }
+    if (bVar1 < 0x25) {
+      if (bVar1 != 3) goto _L461;
+      pbVar3 = pbVar2 + 3;
+      if (((ushort)(*(short *)(pbVar2 + 1) + 0xe7d9U) < 2) || (*(short *)(pbVar2 + 1) == 0x1859)) {
         return 1;
       }
     }
     else {
-      pcVar3 = pcVar2 + 1;
+      if ((byte)(bVar1 - 0x29) < 3) {
+        return 1;
+      }
+_L461:
+      pbVar3 = pbVar2 + 1;
     }
-    cVar1 = pcVar3[2];
-    pcVar2 = pcVar3 + 3;
-  }
-  return 1;
+    bVar1 = pbVar3[2];
+    pbVar2 = pbVar3 + 3;
+  } while( true );
 }
 

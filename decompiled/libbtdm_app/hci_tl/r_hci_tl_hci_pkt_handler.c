@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> hci_tl.o -> r_hci_tl_hci_pkt_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,20 +23,20 @@ void r_hci_tl_hci_pkt_handler(void)
   undefined2 uVar5;
   code *pcVar6;
   
-  pcVar1 = _hci_tl_env;
-  if (*_hci_tl_env == '\x01') {
+  pcVar1 = _DAT_00012030;
+  if (*_DAT_00012030 == '\x01') {
     uVar3 = 6;
-    if (_hci_tl_env[3] != '\0') {
+    if (_DAT_00012030[3] != '\0') {
       uVar3 = 7;
     }
-                    /* WARNING: Could not recover jumptable at 0x00010c96. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010cfa. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_r_modules_funcs_p + 0x108))(uVar3);
+    (**(code **)(_r_modules_funcs_p + 0x108))(uVar3,*(code **)(_r_modules_funcs_p + 0x108));
     return;
   }
-  if (*_hci_tl_env == '\x02') {
-    uVar2 = *(undefined2 *)(_hci_tl_env + 1);
-    if (*(short *)(_hci_tl_env + 3) == 0) {
+  if (*_DAT_00012030 == '\x02') {
+    uVar2 = *(undefined2 *)(_DAT_00012030 + 1);
+    if (*(short *)(_DAT_00012030 + 3) == 0) {
       pcVar6 = (code *)_r_ip_funcs_p[1];
       iVar4 = 0;
       uVar5 = 0;
@@ -49,7 +49,7 @@ void r_hci_tl_hci_pkt_handler(void)
         if (1 < _g_bt_plf_log_level) {
           ets_printf("HCITL: fail to alloc acl %0x, %0x\n",iVar4,0);
         }
-        goto _L165;
+        goto _L166;
       }
       memcpy(__dest,pcVar1 + 5,(uint)*(ushort *)(pcVar1 + 3));
       uVar5 = *(undefined2 *)(pcVar1 + 3);
@@ -58,10 +58,10 @@ void r_hci_tl_hci_pkt_handler(void)
     }
     (*pcVar6)(uVar2,uVar5,iVar4,pcVar6);
   }
-_L165:
-                    /* WARNING: Could not recover jumptable at 0x00010d22. Too many branches */
+_L166:
+                    /* WARNING: Could not recover jumptable at 0x00010d86. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_plf_funcs_p + 0xdc))();
+  (**(code **)(_r_plf_funcs_p + 0xdc))(*(code **)(_r_plf_funcs_p + 0xdc));
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> sch_slice.o -> r_sch_slice_compute
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void r_sch_slice_compute(void)
   uint uVar5;
   
   uVar5 = _r_plf_funcs_p;
-  _r_plf_funcs_p = CONCAT22(r_plf_funcs_p_2,_DAT_00011060);
+  _r_plf_funcs_p = CONCAT22(r_plf_funcs_p_2,_DAT_0001105c);
   _sch_slice_params = 0xffffffff;
   uVar1 = 0xffff;
   for (; uVar5 != 0; uVar5 = uVar5 & ~(1 << (uVar4 & 0x1f))) {
@@ -30,10 +30,10 @@ void r_sch_slice_compute(void)
     uVar4 = 0x1f - iVar2;
     iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
     if ((int)(uint)*(byte *)(iVar2 + 0xd) <= (int)uVar4) {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"sch_slice.c",0xb6,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0xb6,*(code **)(_r_plf_funcs_p + 8));
     }
-    if (*(int *)(memset + uVar4 * 8) != 0) {
-      uVar3 = *(int *)(memset + uVar4 * 8) - *(ushort *)(&rwip_param + uVar4 * 8) / 0x271 & 0xffff;
+    if (*(int *)(__clzsi2 + uVar4 * 8) != 0) {
+      uVar3 = *(int *)(__clzsi2 + uVar4 * 8) - *(ushort *)(memset + uVar4 * 8) / 0x271 & 0xffff;
       if (2 < uVar3) {
         uVar3 = uVar3 - 2 & 0xffff;
       }

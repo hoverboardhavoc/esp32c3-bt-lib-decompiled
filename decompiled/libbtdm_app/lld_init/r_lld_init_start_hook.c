@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * https://github.com/espressif/esp32c3-bt-lib/commit/eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * Upstream date: 2024-10-20 16:32:16 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(52ee788)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_init.o -> r_lld_init_start_hook
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ undefined4 r_lld_init_start_hook(int param_1,int param_2)
   ushort uVar2;
   int iVar3;
   int iVar4;
-  uint uVar5;
+  int iVar5;
   
   if (param_1 == 0) {
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
@@ -33,16 +33,15 @@ undefined4 r_lld_init_start_hook(int param_1,int param_2)
     }
     iVar3 = llm_csa_get();
     if (iVar3 != 0) {
-      uVar5 = (iVar3 - 1U & 0xff) << 5;
       bVar1 = *(byte *)(param_2 + 0x13);
-      if ((uVar5 & 0xffffffdf) != 0) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_init.c",0x162,*(code **)(_r_plf_funcs_p + 8));
+      if ((iVar3 - 1U & 0xfe) != 0) {
+        (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x162,*(code **)(_r_plf_funcs_p + 8));
       }
-      iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
-      iVar4 = (uint)bVar1 * 0x7e + 2;
-      uVar2 = *(ushort *)(iVar3 + iVar4);
-      iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
-      *(ushort *)(iVar3 + iVar4) = uVar2 & 0xffdf | (ushort)uVar5;
+      iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
+      iVar5 = (uint)bVar1 * 0x7e + 2;
+      uVar2 = *(ushort *)(iVar4 + iVar5);
+      iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
+      *(ushort *)(iVar4 + iVar5) = uVar2 & 0xffdf | (ushort)((iVar3 - 1U & 0xff) << 5);
     }
     lld_rpa_renew_start(*(undefined1 *)(param_2 + 0x14));
     return 0;

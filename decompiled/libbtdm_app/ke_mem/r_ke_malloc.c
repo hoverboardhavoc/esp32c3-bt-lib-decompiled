@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> ke_mem.o -> r_ke_malloc
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,59 +18,60 @@ short * r_ke_malloc(int param_1,int param_2)
   short *psVar1;
   uint uVar2;
   int iVar3;
-  uint uVar4;
-  short *psVar5;
-  int iVar6;
+  int iVar4;
+  uint uVar5;
+  short *psVar6;
+  uint uVar7;
   
   uVar2 = (param_1 + 3U & 0xfffffffc) + 4;
   if (uVar2 < 0xc) {
     uVar2 = 0xc;
   }
-  iVar6 = 0;
+  uVar7 = 0;
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   while( true ) {
-    psVar5 = *(short **)(&r_plf_funcs_p + ((param_2 + iVar6 & 3U) + 4) * 4);
-    if (psVar5 == (short *)0x0) {
+    psVar6 = *(short **)(&r_plf_funcs_p + ((param_2 + uVar7 & 3) + 4) * 4);
+    if (psVar6 == (short *)0x0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"ke_mem.c",0x10b,*(code **)(_r_plf_funcs_p + 8));
     }
     psVar1 = (short *)0x0;
-    for (; psVar5 != (short *)0x0; psVar5 = *(short **)(psVar5 + 2)) {
-      if (*psVar5 != -0x5aa6) {
+    for (; psVar6 != (short *)0x0; psVar6 = *(short **)(psVar6 + 2)) {
+      if (*psVar6 != -0x5aa6) {
         (**(code **)(_r_plf_funcs_p + 8))(0,"ke_mem.c",0x110,*(code **)(_r_plf_funcs_p + 8));
       }
-      uVar4 = (uint)(ushort)psVar5[1];
-      if (((uVar2 <= uVar4) && ((uVar2 + 0xc <= uVar4 || (*(int *)(psVar5 + 4) != 0)))) &&
-         ((psVar1 == (short *)0x0 || (uVar4 < (ushort)psVar1[1])))) {
-        psVar1 = psVar5;
+      uVar5 = (uint)(ushort)psVar6[1];
+      if (((uVar2 <= uVar5) && ((uVar2 + 0xc <= uVar5 || (*(int *)(psVar6 + 4) != 0)))) &&
+         ((psVar1 == (short *)0x0 || (uVar5 < (ushort)psVar1[1])))) {
+        psVar1 = psVar6;
       }
     }
     if ((psVar1 != (short *)0x0) && ((uint)(ushort)psVar1[1] < uVar2 + 0xc)) {
       uVar2 = (uint)(ushort)psVar1[1];
     }
-    if (iVar6 == 3) break;
-    iVar6 = iVar6 + 1;
+    uVar7 = uVar7 + 1 & 0xff;
+    if (uVar7 == 4) break;
     if (psVar1 != (short *)0x0) {
-_L40:
+_L41:
       if ((ushort)psVar1[1] == uVar2) {
         if (*(int *)(psVar1 + 4) == 0) {
           (**(code **)(_r_plf_funcs_p + 8))(0,"ke_mem.c",0x15c,*(code **)(_r_plf_funcs_p + 8));
         }
-        iVar6 = *(int *)(psVar1 + 4);
-        iVar3 = *(int *)(psVar1 + 2);
-        *(int *)(iVar6 + 4) = iVar3;
-        if (iVar3 != 0) {
-          *(int *)(iVar3 + 8) = iVar6;
+        iVar3 = *(int *)(psVar1 + 4);
+        iVar4 = *(int *)(psVar1 + 2);
+        *(int *)(iVar3 + 4) = iVar4;
+        if (iVar4 != 0) {
+          *(int *)(iVar4 + 8) = iVar3;
         }
       }
       else {
-        uVar4 = (uint)(ushort)psVar1[1] - (uVar2 & 0xffff);
-        psVar1[1] = (short)(uVar4 * 0x10000 >> 0x10);
-        psVar1 = (short *)((int)psVar1 + (uVar4 & 0xffff));
+        uVar7 = (uint)(ushort)psVar1[1] - (uVar2 & 0xffff);
+        psVar1[1] = (short)(uVar7 * 0x10000 >> 0x10);
+        psVar1 = (short *)((int)psVar1 + (uVar7 & 0xffff));
       }
       psVar1[1] = (short)uVar2;
       *psVar1 = -0x7cc8;
       psVar1 = psVar1 + 2;
-_L41:
+_L45:
       (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
       return psVar1;
     }
@@ -78,10 +79,10 @@ _L41:
   if (psVar1 == (short *)0x0) {
     (**(code **)(_r_plf_funcs_p + 0xc))
               (param_1,param_2,"ke_mem.c",0x150,*(code **)(_r_plf_funcs_p + 0xc));
-    psVar1 = (short *)0x0;
     (**(code **)(_r_plf_funcs_p + 4))(0xf2f2f2f2,*(code **)(_r_plf_funcs_p + 4));
-    goto _L41;
+    psVar1 = (short *)0x0;
+    goto _L45;
   }
-  goto _L40;
+  goto _L41;
 }
 

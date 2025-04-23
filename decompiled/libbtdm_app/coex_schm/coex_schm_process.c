@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> coex_schm.o -> coex_schm_process
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,20 +23,20 @@ void coex_schm_process(void)
   
   iVar5 = (**(code **)(_r_osi_funcs_p + 0xe8))(*(code **)(_r_osi_funcs_p + 0xe8));
   if (iVar5 != 0) {
-    coex_schm_btdm_env._0_1_ = 1;
-                    /* WARNING: Could not recover jumptable at 0x00010142. Too many branches */
+    coex_schm_btdm_env = 1;
+                    /* WARNING: Could not recover jumptable at 0x0001015a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_r_osi_funcs_p + 0xec))();
+    (**(code **)(_r_osi_funcs_p + 0xec))(*(code **)(_r_osi_funcs_p + 0xec));
     return;
   }
-  DAT_000101df = 0;
+  DAT_000101f7 = 0;
   pbVar2 = (byte *)(**(code **)(_r_osi_funcs_p + 200))(*(code **)(_r_osi_funcs_p + 200));
   if (pbVar2 != (byte *)0x0) {
     iVar5 = (**(code **)(_r_modules_funcs_p + 0x2c4))(*(code **)(_r_modules_funcs_p + 0x2c4));
     bVar1 = *pbVar2;
     iVar3 = (**(code **)(_r_osi_funcs_p + 0xc4))(*(code **)(_r_osi_funcs_p + 0xc4));
     iVar4 = (**(code **)(_r_osi_funcs_p + 0xc0))(*(code **)(_r_osi_funcs_p + 0xc0));
-    DAT_000101e0 = (((uint)bVar1 * iVar4 * iVar3) / 0x271) * 2 + iVar5 & 0xfffffff;
+    DAT_000101f8 = (((uint)bVar1 * iVar4 * iVar3) / 0x271) * 2 + iVar5 & 0xfffffff;
     if (3 < _g_bt_plf_log_level) {
       ets_printf("SCHM PROC %02x %02x, %p\n",pbVar2[3],pbVar2[2],pbVar2);
     }

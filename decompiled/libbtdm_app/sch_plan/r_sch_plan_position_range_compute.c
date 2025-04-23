@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> sch_plan.o -> r_sch_plan_position_range_compute
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,81 +14,80 @@
 
 undefined4
 r_sch_plan_position_range_compute
-          (ushort param_1,int param_2,uint param_3,int param_4,ushort *param_5,ushort *param_6)
+          (uint param_1,int param_2,uint param_3,int param_4,ushort *param_5,ushort *param_6)
 
 {
-  uint uVar1;
-  int *piVar2;
-  uint uVar3;
-  undefined4 uVar4;
-  ushort uVar5;
-  uint uVar6;
-  int iVar7;
+  int *piVar1;
+  uint uVar2;
+  undefined4 uVar3;
+  ushort uVar4;
+  uint uVar5;
+  int iVar6;
+  uint uVar7;
   uint uVar8;
   uint uVar9;
   uint uVar10;
   uint uVar11;
-  uint uVar12;
   
   if (param_3 == 0) {
     return 1;
   }
   if (param_4 != 0) {
-    uVar6 = (uint)*param_5;
-    uVar9 = (uint)*param_6;
-    if (uVar6 <= uVar9) {
-      uVar3 = param_3 - param_4 & 0xffff;
-      uVar1 = uVar3;
-      piVar2 = _sch_plan_env;
-      while (piVar2 != (int *)0x0) {
-        if (uVar9 < uVar6) goto _L153;
+    uVar5 = (uint)*param_5;
+    uVar10 = (uint)*param_6;
+    if (uVar5 <= uVar10) {
+      uVar2 = param_3 - param_4 & 0xffff;
+      piVar1 = _sch_plan_env;
+      uVar11 = uVar2;
+      while (piVar1 != (int *)0x0) {
+        if (uVar10 < uVar5) goto _L141;
         if (param_2 == 0xff) break;
-        uVar11 = piVar2[1];
-        if (((uVar11 == 0) || (iVar7 = piVar2[3], iVar7 == 0)) ||
-           ((*(ushort *)(piVar2 + 5) & 0x7f) == param_1)) goto _L137;
-        uVar10 = param_3;
-        if (uVar11 < param_3) {
-          uVar10 = uVar11;
+        uVar8 = piVar1[1];
+        if (((uVar8 == 0) || (iVar6 = piVar1[3], iVar6 == 0)) ||
+           (param_1 == (*(ushort *)(piVar1 + 5) & 0x7f))) goto _L125;
+        uVar7 = param_3;
+        if (uVar8 < param_3) {
+          uVar7 = uVar8;
         }
-        if (uVar10 < (uint)(param_4 + iVar7)) {
-          uVar4 = 3;
-          goto _L139;
+        if (uVar7 < (uint)(param_4 + iVar6)) {
+          uVar3 = 3;
+          goto _L127;
         }
-        if ((param_3 % (uVar10 & 0xffff) == 0) && (uVar11 % uVar10 == 0)) {
-          uVar8 = ((piVar2[2] + uVar10) - uVar6 % (uVar10 & 0xffff)) % uVar10;
-          uVar12 = uVar8 & 0xffff;
-          uVar11 = (iVar7 + -1 + uVar8) % uVar10 & 0xffff;
-          if (((param_4 - 1U & 0xffff) < uVar12) && (uVar12 <= uVar11)) {
-            if ((int)uVar8 < (int)(uVar1 + param_4)) {
-              uVar1 = uVar12 - param_4 & 0xffff;
+        if ((param_3 % (uVar7 & 0xffff) == 0) && (uVar8 % uVar7 == 0)) {
+          uVar9 = ((piVar1[2] + uVar7) - uVar5 % (uVar7 & 0xffff)) % uVar7;
+          uVar8 = uVar9 & 0xffff;
+          uVar7 = (iVar6 + -1 + uVar9) % uVar7 & 0xffff;
+          if (((param_4 - 1U & 0xffff) < uVar8) && (uVar8 <= uVar7)) {
+            if ((int)uVar9 < (int)(uVar11 + param_4)) {
+              uVar11 = uVar8 - param_4 & 0xffff;
             }
-            goto _L137;
+            goto _L125;
           }
-          uVar6 = uVar6 + 1 + uVar11 & 0xffff;
-          uVar1 = uVar3;
-          piVar2 = _sch_plan_env;
+          uVar5 = uVar5 + 1 + uVar7 & 0xffff;
+          piVar1 = _sch_plan_env;
+          uVar11 = uVar2;
         }
         else {
-_L137:
-          piVar2 = (int *)*piVar2;
+_L125:
+          piVar1 = (int *)*piVar1;
         }
       }
-      uVar4 = 0;
-_L139:
-      if (uVar6 < uVar9) {
-        uVar3 = uVar9 - uVar6;
-        if ((int)uVar1 < (int)(uVar9 - uVar6)) {
-          uVar3 = uVar1;
+      uVar3 = 0;
+_L127:
+      if (uVar5 < uVar10) {
+        uVar2 = uVar10 - uVar5;
+        if ((int)uVar11 < (int)(uVar10 - uVar5)) {
+          uVar2 = uVar11;
         }
-        uVar5 = (ushort)(uVar6 % param_3);
-        *param_5 = uVar5;
-        *param_6 = uVar5 + (short)uVar3;
+        uVar4 = (ushort)(uVar5 % param_3);
+        *param_5 = uVar4;
+        *param_6 = uVar4 + (short)uVar2;
       }
       else {
-_L153:
-        uVar4 = 3;
+_L141:
+        uVar3 = 3;
       }
-      return uVar4;
+      return uVar3;
     }
   }
   return 1;

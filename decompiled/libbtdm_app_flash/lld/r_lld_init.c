@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,12 +18,12 @@ void r_lld_init(int param_1)
   ushort uVar1;
   void *pvVar2;
   int iVar3;
-  undefined2 uVar4;
+  ushort uVar4;
   undefined1 uStack_29;
   undefined1 auStack_28 [24];
   
   if (param_1 != 1) {
-    if (param_1 != 2) goto _L567;
+    if (param_1 != 2) goto _L553;
     if (_lld_rpa_renew_env != 0) {
       r_ke_free();
     }
@@ -52,49 +52,23 @@ void r_lld_init(int param_1)
   _lld_rpa_renew_env = 0;
   uStack_29 = 2;
   iVar3 = (*_rwip_param)(7,&uStack_29,(int)pvVar2 + 0xd4,_rwip_param);
+  pvVar2 = _p_lld_env;
   if (iVar3 != 0) {
     *(undefined2 *)((int)_p_lld_env + 0xd4) = 500;
   }
-  pvVar2 = _p_lld_env;
-  uVar1 = *(ushort *)((int)_p_lld_env + 0xd4);
-  if (uVar1 < 0x15) {
-    uVar4 = 7;
-_L612:
-    *(undefined2 *)((int)_p_lld_env + 0xd6) = uVar4;
+  uVar1 = *(ushort *)((int)pvVar2 + 0xd4);
+  uVar4 = 7;
+  if ((((0x14 < uVar1) && (uVar4 = 6, 0x1e < uVar1)) && (uVar4 = 5, 0x32 < uVar1)) &&
+     (((uVar4 = 4, 0x4b < uVar1 && (uVar4 = 3, 100 < uVar1)) && (uVar4 = 2, 0x96 < uVar1)))) {
+    uVar4 = (ushort)(uVar1 < 0xfb);
   }
-  else {
-    if (uVar1 < 0x1f) {
-      uVar4 = 6;
-      goto _L612;
-    }
-    if (uVar1 < 0x33) {
-      uVar4 = 5;
-      goto _L612;
-    }
-    if (uVar1 < 0x4c) {
-      uVar4 = 4;
-      goto _L612;
-    }
-    if (uVar1 < 0x65) {
-      uVar4 = 3;
-      goto _L612;
-    }
-    if (uVar1 < 0x97) {
-      uVar4 = 2;
-      goto _L612;
-    }
-    if (uVar1 < 0xfb) {
-      uVar4 = 1;
-      goto _L612;
-    }
-    *(undefined2 *)((int)_p_lld_env + 0xd6) = 0;
-  }
+  *(ushort *)((int)pvVar2 + 0xd6) = uVar4;
   uStack_29 = 1;
   (*_rwip_param)(0x85,&uStack_29,(int)pvVar2 + 0xda,_rwip_param);
   aa_gen = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
   DAT_00014095 = 0;
   DAT_00014096 = 0;
-_L567:
+_L553:
   r_lld_core_init(param_1);
   r_lld_adv_init(param_1);
   iVar3 = r_sdk_config_get_opts_ext();
@@ -119,7 +93,7 @@ _L567:
   }
   r_lld_con_init(param_1);
   r_lld_reset_reg();
-  lld_rpa_res_list_init();
+  memset(&lld_rpa_res_list,0,0x82);
   return;
 }
 

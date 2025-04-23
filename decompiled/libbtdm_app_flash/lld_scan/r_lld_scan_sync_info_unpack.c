@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_sync_info_unpack
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,8 +20,8 @@ bool r_lld_scan_sync_info_unpack(ushort *param_1,int param_2)
   
   puVar3 = (ushort *)r_emi_get_mem_addr_by_offset(param_2);
   uVar1 = *puVar3;
-  *(byte *)(param_1 + 1) = (byte)((int)(uint)uVar1 >> 0xd) & 1;
-  *param_1 = uVar1 & 0x1fff;
+  *(byte *)(param_1 + 1) = (byte)(((uint)*(byte *)((int)puVar3 + 1) << 8) >> 0xd) & 1;
+  *param_1 = (ushort)(((uint)uVar1 << 0x13) >> 0x13);
   puVar3 = (ushort *)r_emi_get_mem_addr_by_offset(param_2 + 2U & 0xffff);
   param_1[2] = *puVar3;
   pvVar4 = (void *)r_emi_get_mem_addr_by_offset(param_2 + 4U & 0xffff);

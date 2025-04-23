@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc.o -> r_llc_start_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,7 +45,9 @@ undefined4 r_llc_start_eco(uint param_1,undefined4 *param_2,void *param_3)
   iVar4 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   if (param_1 < *(byte *)(iVar4 + 0xd)) {
     puVar5 = (ushort *)(**(code **)(_r_ip_funcs_p + 0x910))(*(code **)(_r_ip_funcs_p + 0x910));
-    *puVar5 = ~(ushort)(1 << (param_1 & 0x1f)) & *puVar5;
+    uVar6 = ~(ushort)(1 << (param_1 & 0x1f));
+    *puVar5 = *puVar5 & uVar6;
+    puVar5[1] = uVar6 & puVar5[1];
   }
   iVar4 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   uVar9 = 9;
@@ -80,11 +82,9 @@ undefined4 r_llc_start_eco(uint param_1,undefined4 *param_2,void *param_3)
         *(undefined2 *)(puVar3 + 5) = 0x1b;
         bVar1 = *(byte *)(param_2 + 9);
         cVar2 = (&co_rate_to_phy)[bVar1];
+        uVar7 = 0x148;
         if (cVar2 == '\x03') {
           uVar7 = 0xa90;
-        }
-        else {
-          uVar7 = 0x148;
         }
         *(undefined2 *)(puVar3 + 6) = uVar7;
         *(undefined2 *)((int)puVar3 + 0x1a) = uVar7;
@@ -102,10 +102,10 @@ undefined4 r_llc_start_eco(uint param_1,undefined4 *param_2,void *param_3)
         }
         cStack_34 = *(char *)((int)param_2 + 0x25);
         *puVar3 = 0;
-        puVar3[1] = 0;
         *(ushort *)((int)puVar3 + 0x42) =
              (ushort)(cStack_34 == '\0') | *(ushort *)((int)puVar3 + 0x42) & 0xfffe;
         uStack_58 = *param_2;
+        puVar3[1] = 0;
         uStack_54 = *(undefined2 *)(param_2 + 1);
         uStack_52 = *(undefined1 *)((int)param_2 + 6);
         uStack_51 = *(undefined1 *)((int)param_2 + 7);
@@ -138,7 +138,7 @@ undefined4 r_llc_start_eco(uint param_1,undefined4 *param_2,void *param_3)
       }
     }
     else {
-      (**(code **)(_r_plf_funcs_p + 0xc))(param_1,"llc.c",0x11e,*(code **)(_r_plf_funcs_p + 0xc));
+      (**(code **)(_r_plf_funcs_p + 0xc))(param_1,"llc.c",0x121,*(code **)(_r_plf_funcs_p + 0xc));
       uVar9 = 0xff;
     }
   }

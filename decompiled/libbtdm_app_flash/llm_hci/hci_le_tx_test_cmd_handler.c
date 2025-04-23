@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_hci.o -> hci_le_tx_test_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,34 +10,18 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-undefined4 hci_le_tx_test_cmd_handler(byte *param_1,undefined4 param_2)
+undefined4 hci_le_tx_test_cmd_handler(undefined4 param_1,undefined4 param_2)
 
 {
   int iVar1;
-  undefined4 uVar2;
-  undefined1 uStack_18;
-  byte bStack_17;
-  byte bStack_16;
-  byte bStack_15;
-  undefined1 uStack_14;
   
   iVar1 = r_sdk_config_get_opts_ext();
   if (*(char *)(iVar1 + 0x1f) == '\0') {
     r_llm_cmd_cmp_send(param_2,0xc);
-    return 0;
   }
-  iVar1 = r_llm_no_activity();
-  uVar2 = 0xc;
-  if (((iVar1 != 0) && (uVar2 = 0x12, *param_1 < 0x28)) && (param_1[2] < 8)) {
-    rw_rf_le_enter_test_mode(0x12);
-    bStack_17 = *param_1;
-    bStack_16 = param_1[1];
-    uStack_18 = 1;
-    uStack_14 = 1;
-    bStack_15 = param_1[2];
-    uVar2 = r_lld_test_start(&uStack_18);
+  else {
+    f_hci_le_tx_test_cmd_handler(param_1,param_2);
   }
-  r_llm_cmd_cmp_send(param_2,uVar2);
   return 0;
 }
 

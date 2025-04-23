@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> co_utils.o -> r_co_util_read_array_size
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,18 +17,19 @@ short r_co_util_read_array_size(undefined4 *param_1)
 {
   short sVar1;
   byte *pbVar2;
+  byte *pbVar3;
   
   if (param_1 == (undefined4 *)0x0) {
-    (**(code **)(_r_plf_funcs_p + 8))("co_utils.c",0x46,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0x10000,0x46,*(code **)(_r_plf_funcs_p + 8));
   }
   pbVar2 = (byte *)*param_1;
-  *param_1 = pbVar2 + 1;
+  pbVar3 = pbVar2 + 1;
+  *param_1 = pbVar3;
   sVar1 = *pbVar2 - 0x30;
-  while( true ) {
-    pbVar2 = (byte *)*param_1;
-    if (9 < (byte)(*pbVar2 - 0x30)) break;
-    *param_1 = pbVar2 + 1;
-    sVar1 = sVar1 * 10 + (*pbVar2 - 0x30);
+  while ((byte)(*pbVar3 - 0x30) < 10) {
+    *param_1 = pbVar3 + 1;
+    sVar1 = sVar1 * 10 + -0x30 + (ushort)*pbVar3;
+    pbVar3 = pbVar3 + 1;
   }
   return sVar1;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> sch_slice.o -> r_sch_slice_compute
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,37 +16,38 @@ void r_sch_slice_compute(void)
 
 {
   uint uVar1;
-  int iVar2;
-  uint uVar3;
+  uint uVar2;
+  int iVar3;
   uint uVar4;
   uint uVar5;
   
-  uVar5 = _r_sdk_config_get_opts;
-  _r_sdk_config_get_opts = CONCAT22(r_sdk_config_get_opts_2,_DAT_00011060);
+  uVar5 = ___clzsi2;
+  ___clzsi2 = CONCAT22(__clzsi2_2,_DAT_0001105c);
   _sch_slice_params = 0xffffffff;
   uVar1 = 0xffff;
-  for (; uVar5 != 0; uVar5 = uVar5 & ~(1 << (uVar4 & 0x1f))) {
-    iVar2 = __clzsi2(uVar5);
-    uVar4 = 0x1f - iVar2;
-    iVar2 = r_sdk_config_get_opts();
-    if ((int)(uint)*(byte *)(iVar2 + 0xd) <= (int)uVar4) {
-      r_assert_err(0,"sch_slice.c",0xb6);
+  for (; uVar5 != 0; uVar5 = uVar5 & ~(1 << (uVar2 & 0x1f))) {
+    iVar3 = __clzsi2(uVar5);
+    uVar2 = 0x1f - iVar3;
+    iVar3 = r_sdk_config_get_opts();
+    if ((int)(uint)*(byte *)(iVar3 + 0xd) <= (int)uVar2) {
+      r_assert_err(0,0x10000,0xb6);
     }
-    if (*(int *)(r_assert_err + uVar4 * 8) != 0) {
-      uVar3 = *(int *)(r_assert_err + uVar4 * 8) - *(ushort *)(memset + uVar4 * 8) / 0x271 & 0xffff;
-      if (2 < uVar3) {
-        uVar3 = uVar3 - 2 & 0xffff;
+    if (*(int *)(r_sdk_config_get_opts + uVar2 * 8) != 0) {
+      uVar4 = *(int *)(r_sdk_config_get_opts + uVar2 * 8) -
+              *(ushort *)(r_assert_err + uVar2 * 8) / 0x271 & 0xffff;
+      if (2 < uVar4) {
+        uVar4 = uVar4 - 2 & 0xffff;
       }
-      if (uVar3 < uVar1) {
-        uVar1 = uVar3;
+      if (uVar4 < uVar1) {
+        uVar1 = uVar4;
       }
     }
   }
-  uVar5 = _r_sdk_config_get_opts & 0xffff;
-  if (uVar1 * 0x271 < (_r_sdk_config_get_opts & 0xffff)) {
+  uVar5 = ___clzsi2 & 0xffff;
+  if (uVar1 * 0x271 < (___clzsi2 & 0xffff)) {
     uVar5 = uVar1 * 0x271;
   }
-  _r_sdk_config_get_opts = CONCAT22(r_sdk_config_get_opts_2,(short)uVar5);
+  ___clzsi2 = CONCAT22(__clzsi2_2,(short)uVar5);
   return;
 }
 

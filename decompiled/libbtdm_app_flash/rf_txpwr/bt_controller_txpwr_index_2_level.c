@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> rf_txpwr.o -> bt_controller_txpwr_index_2_level
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,7 +13,7 @@
 uint bt_controller_txpwr_index_2_level(uint param_1,uint param_2)
 
 {
-  if ((param_1 >> 0x10 & 0xff) == 1) {
+  if ((param_1 & 0xff0000) == 0x10000) {
     if (0xf < param_2) {
       r_assert_err(0,"rf_txpwr.c",0xa0);
     }
@@ -22,7 +22,7 @@ uint bt_controller_txpwr_index_2_level(uint param_1,uint param_2)
     if (7 < param_2) {
       r_assert_err(0,"rf_txpwr.c",0xa3);
     }
-    param_2 = (uint)(byte)(&_LANCHOR2)[param_2];
+    param_2 = (uint)*(byte *)((int)&cs_bt_pwr_tbl_idx2lvl_fpga + param_2);
   }
   return param_2;
 }

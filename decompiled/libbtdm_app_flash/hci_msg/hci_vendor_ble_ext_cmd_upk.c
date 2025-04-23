@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> hci_msg.o -> hci_vendor_ble_ext_cmd_upk
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ int hci_vendor_ble_ext_cmd_upk(int param_1,int param_2,ushort *param_3,uint para
   else {
     iStack_18 = param_2;
     aiStack_14[0] = param_1;
-    iVar1 = r_hci_pack_bytes(&iStack_18,aiStack_14,param_2 + param_4,(uint)*param_3 + param_1,
+    iVar1 = r_hci_pack_bytes(&iStack_18,aiStack_14,param_4 + param_2,(uint)*param_3 + param_1,
                              param_4 & 0xff);
     if (iVar1 == 0) {
       *param_3 = (short)aiStack_14[0] - (short)param_1;

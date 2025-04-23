@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_scan.o -> f_lld_sync_start_req_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,8 +21,8 @@ undefined4 f_lld_sync_start_req_handler(byte *param_1)
   int iVar3;
   int iVar4;
   byte bVar5;
-  int iVar6;
-  int *piVar7;
+  int *piVar6;
+  int iVar7;
   undefined1 auStack_38 [8];
   byte *pbStack_30;
   undefined4 uStack_2c;
@@ -32,8 +32,8 @@ undefined4 f_lld_sync_start_req_handler(byte *param_1)
   undefined2 uStack_24;
   undefined2 uStack_22;
   
-  iVar6 = (uint)*param_1 * 0x44;
-  cVar1 = *(char *)(*(int *)(_p_llm_env + 8) + iVar6 + 0x40);
+  iVar7 = (uint)*param_1 * 0x44;
+  cVar1 = *(char *)(*(int *)(_p_llm_env + 8) + iVar7 + 0x40);
   if (cVar1 == '\x0e') {
     uVar2 = (uint)*(ushort *)(param_1 + 0x20);
     if (uVar2 == 0) {
@@ -45,25 +45,25 @@ undefined4 f_lld_sync_start_req_handler(byte *param_1)
                                 (uVar2 + 0x18 & 0xffff,*(code **)(_r_plf_funcs_p + 0xbc));
       memcpy(auStack_38,__src,6);
       iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-      bVar5 = (byte)*(undefined2 *)(iVar3 + ((uVar2 - 0xc60) / 0x34 & 0xff) * 0x34) & 1;
+      bVar5 = (byte)*(undefined2 *)(((uVar2 - 0xc60) / 0x34 & 0xff) * 0x34 + iVar3) & 1;
       if ((param_1[0x22] == 1) && ((param_1[0x28] & 0xc0) == 0x40)) {
         bVar5 = bVar5 | 2;
       }
     }
     iVar3 = _p_llm_env;
-    iVar4 = *(int *)(_p_llm_env + 8) + iVar6;
+    iVar4 = *(int *)(_p_llm_env + 8) + iVar7;
     *(byte *)(iVar4 + 0x41) = bVar5;
     memcpy((void *)(iVar4 + 4),auStack_38,6);
     pbStack_30 = param_1 + 2;
     uStack_2c = *(undefined4 *)(param_1 + 0x18);
-    piVar7 = (int *)(iVar6 + *(int *)(iVar3 + 8));
     bStack_25 = param_1[0x1f];
     uStack_28 = *(undefined2 *)(param_1 + 0x1c);
-    *(byte *)(piVar7 + 10) = bStack_25;
+    piVar6 = (int *)(*(int *)(iVar3 + 8) + iVar7);
+    *(byte *)(piVar6 + 10) = bStack_25;
     bStack_26 = param_1[0x1e];
-    iVar6 = *piVar7;
-    uStack_24 = *(undefined2 *)(iVar6 + 10);
-    uStack_22 = *(undefined2 *)(iVar6 + 0xc);
+    iVar7 = *piVar6;
+    uStack_24 = *(undefined2 *)(iVar7 + 10);
+    uStack_22 = *(undefined2 *)(iVar7 + 0xc);
     (**(code **)(_r_ip_funcs_p + 0x170))(*param_1,&pbStack_30,*(code **)(_r_ip_funcs_p + 0x170));
   }
   else if (cVar1 != '\0') {

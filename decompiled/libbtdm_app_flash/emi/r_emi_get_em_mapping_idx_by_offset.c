@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> emi.o -> r_emi_get_em_mapping_idx_by_offset
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,7 +17,7 @@ undefined1 r_emi_get_em_mapping_idx_by_offset(uint param_1)
   
   uVar1 = param_1 >> 10 & 0xffff;
   if (0x32 < uVar1) {
-    r_assert_param(uVar1,"emi.c",0x159);
+    r_assert_param(uVar1,0x10000,0x159);
   }
   return (&em_base_reg_lut)[uVar1 * 4];
 }

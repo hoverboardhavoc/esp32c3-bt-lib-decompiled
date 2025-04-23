@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b223604efd557d0a5314afb3b751229df424d244
- * https://github.com/espressif/esp32c3-bt-lib/commit/b223604efd557d0a5314afb3b751229df424d244
- * Upstream date: 2021-06-24 21:26:02 +0800
- * Upstream subject: Update ESP32-C3 and ESP32-S3 bt lib (9c99115)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> rwble.o -> bb_hw_intr_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,7 @@
 void bb_hw_intr_set(uint param_1)
 
 {
-  _DAT_60011084 = param_1 | _DAT_60011084;
+  _DAT_60011084 = _DAT_60011084 | param_1;
   return;
 }
 

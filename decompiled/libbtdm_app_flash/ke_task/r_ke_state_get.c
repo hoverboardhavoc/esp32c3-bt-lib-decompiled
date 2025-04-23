@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> ke_task.o -> r_ke_state_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,29 +16,31 @@ undefined1 r_ke_state_get(uint param_1)
 
 {
   uint uVar1;
-  int *piVar2;
-  int unaff_s2;
+  undefined1 uVar2;
+  undefined2 uVar3;
+  int iVar4;
   
   uVar1 = param_1 & 0xff;
   param_1 = param_1 >> 8;
-  if (uVar1 < 0x1f) {
-    piVar2 = (int *)(&ke_task_env + uVar1 * 4);
-    unaff_s2 = *piVar2;
-    if (unaff_s2 == 0) goto _L104;
-    if (param_1 < *(ushort *)(unaff_s2 + 8)) goto _L103;
+  uVar3 = 0x1e;
+  if (0x1e < uVar1) goto _L99;
+  iVar4 = *(int *)(&ke_task_env + uVar1 * 4);
+  if (iVar4 == 0) {
+    do {
+      r_assert_param(uVar1,param_1,"ke_task.c",0x1e2);
+      ebreak();
+      uVar3 = _DAT_00000008;
+_L99:
+      r_assert_err(0,"ke_task.c",0x1db,uVar3);
+    } while( true );
+  }
+  if ((param_1 < *(ushort *)(iVar4 + 8)) ||
+     (r_assert_param(param_1,"ke_task.c",0x1e3), param_1 < *(ushort *)(iVar4 + 8))) {
+    uVar2 = *(undefined1 *)(*(int *)(iVar4 + 4) + param_1);
   }
   else {
-    r_assert_err(0,"ke_task.c",0x1db);
-_L104:
-    r_assert_param(uVar1,param_1,"ke_task.c",0x1e2);
-    piVar2 = (int *)(uint)_DAT_00000008;
-    ebreak();
+    uVar2 = 0xff;
   }
-  r_assert_param(param_1,"ke_task.c",0x1e3,piVar2);
-  if (*(ushort *)(unaff_s2 + 8) <= param_1) {
-    return 0xff;
-  }
-_L103:
-  return *(undefined1 *)(param_1 + *(int *)(unaff_s2 + 4));
+  return uVar2;
 }
 

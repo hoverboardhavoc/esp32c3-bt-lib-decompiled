@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> aes_k2.o -> r_aes_k2_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,58 +15,63 @@
 int r_aes_k2_continue(int param_1,void *param_2)
 
 {
-  char cVar1;
+  byte bVar1;
   undefined1 uVar2;
   int iVar3;
-  void *pvVar4;
+  ushort uVar4;
+  code *pcVar5;
+  void *pvVar6;
   
   iVar3 = (**(code **)(_r_modules_funcs_p + 0x340))(*(code **)(_r_modules_funcs_p + 0x340));
-  if (iVar3 == 0) {
-    return 0;
-  }
-  cVar1 = *(char *)(param_1 + 0x38);
-  if (cVar1 == '\x01') {
-    memcpy((void *)(param_1 + 0x5a),param_2,0x10);
-    memcpy((void *)(*(byte *)(param_1 + 0x39) + 0x5a + param_1),param_2,0x10);
-    uVar2 = 2;
-  }
-  else {
-    if (cVar1 == '\0') {
-      pvVar4 = (void *)(param_1 + 0x3a);
-      memcpy(pvVar4,param_2,0x10);
-      (**(code **)(_r_modules_funcs_p + 0x344))
-                (param_1,pvVar4,0,0,*(code **)(_r_modules_funcs_p + 0x344));
+  if (iVar3 != 0) {
+    bVar1 = *(byte *)(param_1 + 0x38);
+    if (bVar1 == 2) {
+      memcpy((void *)(param_1 + 0x4a),param_2,0x10);
+      memcpy((void *)(*(byte *)(param_1 + 0x39) + 0x5a + param_1),param_2,0x10);
       iVar3 = _r_modules_funcs_p;
+      uVar2 = 3;
+      *(undefined1 *)(param_1 + 0x6a) = 3;
+      pcVar5 = *(code **)(iVar3 + 0x344);
+      uVar4 = (ushort)*(byte *)(param_1 + 0x39);
+    }
+    else {
+      if (2 < bVar1) {
+        if (bVar1 != 3) {
+          (**(code **)(_r_plf_funcs_p + 0xc))(0,0x10000,0xbb,*(code **)(_r_plf_funcs_p + 0xc));
+          return iVar3;
+        }
+        pvVar6 = memcpy((void *)(param_1 + 0x3a),param_2,0x10);
+        *(byte *)(param_1 + 0x5a) = *(byte *)(param_1 + 0x5a) & 0x7f;
+        if (*(code **)(param_1 + 0x34) != (code *)0x0) {
+          (**(code **)(param_1 + 0x34))(0,pvVar6,*(undefined4 *)(param_1 + 0x14));
+          return iVar3;
+        }
+        return iVar3;
+      }
+      pvVar6 = (void *)(param_1 + 0x3a);
+      if (bVar1 != 0) {
+        memcpy((void *)(param_1 + 0x5a),param_2,0x10);
+        memcpy((void *)(*(byte *)(param_1 + 0x39) + 0x5a + param_1),param_2,0x10);
+        iVar3 = _r_modules_funcs_p;
+        *(undefined1 *)(param_1 + 0x6a) = 2;
+        (**(code **)(iVar3 + 0x344))
+                  (param_1,pvVar6,param_1 + 0x6a,*(undefined1 *)(param_1 + 0x39),
+                   *(code **)(iVar3 + 0x344));
+        *(undefined1 *)(param_1 + 0x38) = 2;
+        return 0;
+      }
+      memcpy(pvVar6,param_2,0x10);
+      (**(code **)(_r_modules_funcs_p + 0x344))
+                (param_1,pvVar6,0,0,*(code **)(_r_modules_funcs_p + 0x344));
+      iVar3 = _r_modules_funcs_p;
+      uVar2 = 1;
       *(undefined1 *)(param_1 + 0x6a) = 1;
-      (**(code **)(iVar3 + 0x344))
-                (param_1,pvVar4,param_1 + 0x6a,*(byte *)(param_1 + 0x39) - 0x10,
-                 *(code **)(iVar3 + 0x344));
-      *(undefined1 *)(param_1 + 0x38) = 1;
-      return 0;
+      uVar4 = *(byte *)(param_1 + 0x39) - 0x10;
+      pcVar5 = *(code **)(iVar3 + 0x344);
     }
-    if (cVar1 != '\x02') {
-      if (cVar1 != '\x03') {
-        (**(code **)(_r_plf_funcs_p + 0xc))(0,"aes_k2.c",0xbb,*(code **)(_r_plf_funcs_p + 0xc));
-        return iVar3;
-      }
-      pvVar4 = memcpy((void *)(param_1 + 0x3a),param_2,0x10);
-      *(byte *)(param_1 + 0x5a) = *(byte *)(param_1 + 0x5a) & 0x7f;
-      if (*(code **)(param_1 + 0x34) != (code *)0x0) {
-        (**(code **)(param_1 + 0x34))(0,pvVar4,*(undefined4 *)(param_1 + 0x14));
-        return iVar3;
-      }
-      return iVar3;
-    }
-    memcpy((void *)(param_1 + 0x4a),param_2,0x10);
-    memcpy((void *)(*(byte *)(param_1 + 0x39) + 0x5a + param_1),param_2,0x10);
-    uVar2 = 3;
+    (*pcVar5)(param_1,param_1 + 0x3a,param_1 + 0x6a,uVar4,pcVar5);
+    *(undefined1 *)(param_1 + 0x38) = uVar2;
   }
-  iVar3 = _r_modules_funcs_p;
-  *(undefined1 *)(param_1 + 0x6a) = uVar2;
-  (**(code **)(iVar3 + 0x344))
-            (param_1,param_1 + 0x3a,param_1 + 0x6a,*(undefined1 *)(param_1 + 0x39),
-             *(code **)(iVar3 + 0x344));
-  *(undefined1 *)(param_1 + 0x38) = uVar2;
   return 0;
 }
 

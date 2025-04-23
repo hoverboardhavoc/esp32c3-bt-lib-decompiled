@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld.o -> r_lld_channel_assess
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,23 +21,23 @@ void r_lld_channel_assess(uint param_1,int param_2,undefined4 param_3)
   
   iVar3 = _p_lld_env;
   if (0x24 < param_1) {
-                    /* WARNING: Could not recover jumptable at 0x00011b7a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011b18. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_r_plf_funcs_p + 8))(0,"lld.c",0x501);
+    (**(code **)(_r_plf_funcs_p + 8))(0,"lld.c",0x501,*(code **)(_r_plf_funcs_p + 8));
     return;
   }
   cVar1 = *(char *)(_p_lld_env + param_1 + 0x94);
   if (param_2 == 0) {
-    if (cVar1 <= DAT_0001402d) goto _L402;
+    if (cVar1 <= DAT_0001402d) goto _L391;
     cVar2 = -1;
   }
   else {
-    if (DAT_0001402a <= cVar1) goto _L402;
+    if (DAT_0001402a <= cVar1) goto _L391;
     cVar2 = '\x01';
   }
   *(char *)(_p_lld_env + param_1 + 0x94) = cVar1 + cVar2;
-_L402:
-  *(undefined4 *)(param_1 * 4 + iVar3) = param_3;
+_L391:
+  *(undefined4 *)(iVar3 + param_1 * 4) = param_3;
   return;
 }
 

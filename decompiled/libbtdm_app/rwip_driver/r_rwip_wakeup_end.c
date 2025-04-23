@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> rwip_driver.o -> r_rwip_wakeup_end
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,11 +42,11 @@ void r_rwip_wakeup_end(void)
       (**(code **)(_r_modules_funcs_p + 0x2d8))(*(code **)(_r_modules_funcs_p + 0x2d8));
     }
     else {
-      _DAT_6003100c = _DAT_6003100c & 0xfffff7ff | 0x800;
+      _DAT_6003100c = _DAT_6003100c | 0x800;
     }
   }
-  if (_r_plf_funcs_p != -1) {
-    if ((iVar2 - _r_plf_funcs_p & 0xfffffffU) < 0x7ffffff) {
+  if (_rwip_prog_delay != -1) {
+    if ((iVar2 - _rwip_prog_delay & 0xfffffffU) < 0x7ffffff) {
       (**(code **)(_r_modules_funcs_p + 0x2c8))(*(code **)(_r_modules_funcs_p + 0x2c8));
     }
     else {
@@ -59,16 +59,16 @@ void r_rwip_wakeup_end(void)
   }
   else {
     iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-    if (*(char *)(iVar2 + 0x17) != '\0') goto _L70;
+    if (*(char *)(iVar2 + 0x17) != '\0') goto _L71;
     pcVar3 = *(code **)(_r_modules_funcs_p + 0x8c);
   }
   (*pcVar3)(pcVar3);
-_L70:
+_L71:
   (**(code **)(_r_modules_funcs_p + 0x2b0))(1,*(code **)(_r_modules_funcs_p + 0x2b0));
   _btdm_pwr_state = 4;
-                    /* WARNING: Could not recover jumptable at 0x0001058c. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010586. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_plf_funcs_p + 0x2c))(3);
+  (**(code **)(_r_plf_funcs_p + 0x2c))(3,*(code **)(_r_plf_funcs_p + 0x2c));
   return;
 }
 

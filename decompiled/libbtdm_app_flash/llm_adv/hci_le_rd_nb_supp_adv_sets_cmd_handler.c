@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_adv.o -> hci_le_rd_nb_supp_adv_sets_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,39 +10,22 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
-undefined4 hci_le_rd_nb_supp_adv_sets_cmd_handler(undefined4 param_1)
+undefined4 hci_le_rd_nb_supp_adv_sets_cmd_handler(undefined4 param_1,undefined4 param_2)
 
 {
-  uint uVar1;
-  int iVar2;
-  undefined1 *puVar3;
+  int iVar1;
+  undefined1 *puVar2;
   
-  iVar2 = r_sdk_config_get_opts_ext();
-  if (*(char *)(iVar2 + 0x18) == '\0') {
-    puVar3 = (undefined1 *)r_ke_msg_alloc(0x1101,0,param_1,2);
-    puVar3[1] = 0;
-    *puVar3 = 0xc;
+  iVar1 = r_sdk_config_get_opts_ext();
+  if (*(char *)(iVar1 + 0x18) == '\0') {
+    puVar2 = (undefined1 *)r_ke_msg_alloc(0x1101,0,param_2,2);
+    puVar2[1] = 0;
+    *puVar2 = 0xc;
     r_hci_send_2_host();
-    return 0;
-  }
-  puVar3 = (undefined1 *)r_ke_msg_alloc(0x1101,0,param_1,2);
-  puVar3[1] = 0;
-  if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
-    *puVar3 = 0xc;
   }
   else {
-    *(undefined1 *)(_p_llm_env + 0xd7) = 2;
-    *puVar3 = 0;
-    for (uVar1 = 0; iVar2 = r_sdk_config_get_opts(), uVar1 < *(byte *)(iVar2 + 0xd);
-        uVar1 = uVar1 + 1 & 0xff) {
-      if (*(byte *)(*(int *)(_p_llm_env + 8) + uVar1 * 0x44 + 0x40) < 4) {
-        puVar3[1] = puVar3[1] + '\x01';
-      }
-    }
+    f_hci_le_rd_nb_supp_adv_sets_cmd_handler(param_1);
   }
-  r_hci_send_2_host(puVar3);
   return 0;
 }
 

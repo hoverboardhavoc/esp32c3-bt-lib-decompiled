@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_llcp.o -> r_llc_ll_reject_ind_pdu_send
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,8 +27,7 @@ void r_llc_ll_reject_ind_pdu_send(uint param_1,uint param_2,undefined1 param_3,u
     uStack_14 = 0x11;
     uStack_13 = (undefined1)param_2;
     uStack_12 = param_3;
-    (**(code **)(_r_ip_funcs_p + 0x5b4))
-              (param_1,&uStack_14,param_4,*(code **)(_r_ip_funcs_p + 0x5b4));
+    (**(code **)(_r_ip_funcs_p + 0x5b4))(param_1,&uStack_14,*(code **)(_r_ip_funcs_p + 0x5b4));
   }
   else {
     uStack_14 = 0xd;

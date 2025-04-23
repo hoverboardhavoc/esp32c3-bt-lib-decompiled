@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * https://github.com/espressif/esp32c3-bt-lib/commit/f23a340e82d6a4be40f83214385a98c5bd30ccdd
- * Upstream date: 2025-04-03 18:07:15 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(a684dd5)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_pkt_rx_connect_ind
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,9 +23,9 @@ undefined4 r_lld_adv_pkt_rx_connect_ind(int param_1)
   ushort uVar6;
   uint uVar7;
   undefined1 auStack_5c [8];
-  undefined4 uStack_54;
+  undefined4 local_54;
   undefined2 uStack_50;
-  undefined4 uStack_4c;
+  undefined4 local_4c;
   undefined2 uStack_48;
   undefined4 uStack_44;
   undefined2 uStack_40;
@@ -47,7 +47,7 @@ undefined4 r_lld_adv_pkt_rx_connect_ind(int param_1)
   }
   iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   pvVar4 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
-                             (*(undefined2 *)(iVar3 + iVar2 + 0x12),
+                             (*(undefined2 *)(iVar2 + 0x12 + iVar3),
                               *(code **)(_r_plf_funcs_p + 0xbc));
   memcpy(&uStack_44,pvVar4,0x22);
   if (0xc76 < (uStack_2a - 10 & 0xffff)) {
@@ -66,7 +66,7 @@ undefined4 r_lld_adv_pkt_rx_connect_ind(int param_1)
   if (uVar5 < 2) {
     return 0;
   }
-  if ((bStack_24 & 0xe0) != 0) {
+  if (0x1f < bStack_24) {
     return 0;
   }
   if (0xb < (byte)((bStack_23 & 0x1f) - 5)) {
@@ -87,14 +87,13 @@ undefined4 r_lld_adv_pkt_rx_connect_ind(int param_1)
     return 0;
   }
   iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-  uVar5 = (uint)*(ushort *)(iVar3 + iVar2 + 0xe);
+  uVar5 = (uint)*(ushort *)(iVar2 + 0xe + iVar3);
   if (uVar5 == 0) {
-    iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
+    iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000);
     uVar6 = *(ushort *)(iVar3 + iVar2 + 4) >> 6 & 1;
   }
   else {
-    pvVar4 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
-                               (uVar5 + 0x18 & 0xffff,*(code **)(_r_plf_funcs_p + 0xbc));
+    pvVar4 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))(uVar5 + 0x18 & 0xffff);
     memcpy(auStack_5c,pvVar4,6);
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
     iVar2 = ((uVar5 - 0xc60) / 0x34 & 0xff) * 0x34;
@@ -107,23 +106,23 @@ undefined4 r_lld_adv_pkt_rx_connect_ind(int param_1)
        (iVar3 = (*(code *)*_r_modules_funcs_p)(&uStack_44,auStack_5c,(code *)*_r_modules_funcs_p),
        iVar3 == 0)) {
       uVar6 = uVar6 | 2;
-      uStack_54 = uStack_44;
+      local_54 = uStack_44;
       uStack_50 = uStack_40;
-      goto _L686;
+      goto _L632;
     }
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
     if (((*(ushort *)(iVar3 + iVar2) >> 1 & 1) != 0) &&
        (iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc)),
-       -1 < (int)((uint)*(ushort *)(iVar3 + iVar2) << 0x14))) {
+       -1 < (int)((uint)*(ushort *)(iVar2 + iVar3) << 0x14))) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x7ed,*(code **)(_r_plf_funcs_p + 8));
     }
   }
-  uStack_54 = 0;
+  local_54 = 0;
   uStack_50 = 0;
-_L686:
+_L632:
   iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-  if ((*(ushort *)(iVar2 + param_1 * 0x5a + 0x14) >> 2 & 1) == 0) {
-    uStack_4c = 0;
+  if ((*(ushort *)(param_1 * 0x5a + 0x14 + iVar2) >> 2 & 1) == 0) {
+    local_4c = 0;
     uStack_48 = 0;
   }
   else {
@@ -139,15 +138,15 @@ _L686:
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x805,*(code **)(_r_plf_funcs_p + 8));
     }
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-    if ((*(ushort *)(iVar3 + iVar2) >> 7 & 1) == 0) {
+    if ((*(ushort *)(iVar2 + iVar3) >> 7 & 1) == 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x806,*(code **)(_r_plf_funcs_p + 8));
     }
     pvVar4 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
                                (uVar7 * 0x34 + 0xc8e,*(code **)(_r_plf_funcs_p + 0xbc));
-    memcpy(&uStack_4c,pvVar4,6);
+    memcpy(&local_4c,pvVar4,6);
   }
   (**(code **)(_r_ip_funcs_p + 0x778))
-            (param_1,&uStack_44,auStack_5c,&uStack_54,&uStack_4c,uVar6,
+            (param_1,&uStack_44,auStack_5c,&local_54,&local_4c,uVar6,
              *(code **)(_r_ip_funcs_p + 0x778));
   return 1;
 }

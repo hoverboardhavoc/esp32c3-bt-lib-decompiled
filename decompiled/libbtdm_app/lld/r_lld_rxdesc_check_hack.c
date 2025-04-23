@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ed99228396aaa18935b575d600bc19da38dc4746
- * https://github.com/espressif/esp32c3-bt-lib/commit/ed99228396aaa18935b575d600bc19da38dc4746
- * Upstream date: 2025-01-03 16:50:09 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(fd62b31)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld.o -> r_lld_rxdesc_check_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,7 +18,7 @@ int r_lld_rxdesc_check_hack(undefined4 param_1)
   int iVar1;
   
   iVar1 = r_lld_rxdesc_check();
-  if ((_LANCHOR2 != '\0') && (iVar1 != 0)) {
+  if ((lld_pkt_record_en != '\0') && (iVar1 != 0)) {
     lld_le_pkt_err_set(param_1,*(undefined1 *)(_p_lld_env + 0xd8));
   }
   return iVar1;

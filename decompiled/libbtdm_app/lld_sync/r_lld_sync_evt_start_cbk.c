@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_sync.o -> r_lld_sync_evt_start_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,13 +17,13 @@ void r_lld_sync_evt_start_cbk(int param_1)
 {
   byte bVar1;
   ushort uVar2;
-  code *pcVar3;
+  ushort uVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
-  uint uVar7;
+  code *pcVar6;
+  int iVar7;
   byte bStack_41;
-  uint uStack_40;
+  undefined4 uStack_40;
   undefined4 uStack_3c;
   undefined4 uStack_38;
   undefined4 uStack_34;
@@ -40,32 +40,32 @@ void r_lld_sync_evt_start_cbk(int param_1)
   iVar4 = (**(code **)(_r_ip_funcs_p + 0x854))(1,param_1,*(code **)(_r_ip_funcs_p + 0x854));
   if (iVar4 == 0) {
     if (param_1 == 0) {
-      (**(code **)(_r_plf_funcs_p + 8))("lld_sync.c",0x4c1,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0x10000,0x4c1,*(code **)(_r_plf_funcs_p + 8));
     }
     else {
       bVar1 = *(byte *)(param_1 + 0x55);
       (**(code **)(_r_ip_funcs_p + 0x168))(param_1,0,*(code **)(_r_ip_funcs_p + 0x168));
-      iVar6 = (uint)bVar1 * 0x5a;
-      pcVar3 = *(code **)(_r_modules_funcs_p + 0x1e0);
+      iVar7 = (uint)bVar1 * 0x5a;
+      pcVar6 = *(code **)(_r_modules_funcs_p + 0x1e0);
       iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-      (*pcVar3)(*(ushort *)(iVar4 + iVar6) & 0x1f,(uint)bVar1,&bStack_41,&uStack_40);
-      if (((uint)bStack_41 << 7 & 0xffffff7f) != 0) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_sync.c",0x82,*(code **)(_r_plf_funcs_p + 8));
+      (*pcVar6)(*(ushort *)(iVar4 + iVar7) & 0x1f,(uint)bVar1,&bStack_41,&uStack_40);
+      if ((bStack_41 & 0xfe) != 0) {
+        (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x82,*(code **)(_r_plf_funcs_p + 8));
       }
       iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-      uVar2 = *(ushort *)(iVar4 + iVar6);
+      uVar2 = *(ushort *)(iVar4 + iVar7);
       iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-      *(ushort *)(iVar4 + iVar6) = uVar2 & 0xff7f | (ushort)((uint)bStack_41 << 7);
-      uVar7 = (uStack_40 & 0xff) << 6;
-      if ((uVar7 & 0xffffffbf) != 0) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_sync.c",0x8e,*(code **)(_r_plf_funcs_p + 8));
+      *(ushort *)(iVar4 + iVar7) = uVar2 & 0xff7f | (ushort)bStack_41 << 7;
+      if (((byte)uStack_40 & 0xfe) != 0) {
+        (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x8e,*(code **)(_r_plf_funcs_p + 8));
       }
+      uVar3 = (ushort)(byte)uStack_40;
       iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-      uVar2 = *(ushort *)(iVar4 + iVar6);
+      uVar2 = *(ushort *)(iVar4 + iVar7);
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
       iVar4 = _r_ip_funcs_p;
-      uStack_40 = *(uint *)(_r_ip_funcs_p + 0x148);
-      *(ushort *)(iVar5 + iVar6) = uVar2 & 0xffbf | (ushort)uVar7;
+      uStack_40 = *(undefined4 *)(_r_ip_funcs_p + 0x148);
+      *(ushort *)(iVar5 + iVar7) = uVar2 & 0xffbf | uVar3 << 6;
       uStack_3c = *(undefined4 *)(param_1 + 4);
       uStack_2b = 0;
       uStack_38 = *(undefined4 *)(param_1 + 8);
@@ -82,7 +82,10 @@ void r_lld_sync_evt_start_cbk(int param_1)
       *(undefined1 *)(param_1 + 0x5b) = 1;
       *(undefined1 *)(param_1 + 100) = 0;
     }
+                    /* WARNING: Could not recover jumptable at 0x000115b8. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_ip_funcs_p + 0x854))(0,param_1,*(code **)(_r_ip_funcs_p + 0x854));
+    return;
   }
   return;
 }

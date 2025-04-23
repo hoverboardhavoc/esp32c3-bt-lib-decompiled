@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_con_upd.o -> r_llc_loc_con_upd_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,13 +17,13 @@ void r_llc_loc_con_upd_proc_continue(uint param_1,int param_2,int param_3)
 {
   char cVar1;
   short sVar2;
+  code *UNRECOVERED_JUMPTABLE_00;
   undefined2 uVar3;
   short sVar4;
   int iVar5;
   int iVar6;
   uint uVar7;
   undefined4 uVar8;
-  code *UNRECOVERED_JUMPTABLE_00;
   int iVar9;
   int iVar10;
   
@@ -38,15 +38,15 @@ void r_llc_loc_con_upd_proc_continue(uint param_1,int param_2,int param_3)
   iVar6 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar5,*(code **)(_r_ip_funcs_p + 0x680));
   if (iVar6 != param_2) {
     UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_plf_funcs_p + 0x10);
-    param_1 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar5,*(code **)(_r_ip_funcs_p + 0x680));
+    param_1 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar5);
     uVar8 = 0x127;
-_L94:
-                    /* WARNING: Could not recover jumptable at 0x0001069a. Too many branches */
+_L98:
+                    /* WARNING: Could not recover jumptable at 0x000106a2. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (*UNRECOVERED_JUMPTABLE_00)(param_1,param_2,"llc_con_upd.c",uVar8);
+    (*UNRECOVERED_JUMPTABLE_00)(param_1,param_2,"llc_con_upd.c",uVar8,UNRECOVERED_JUMPTABLE_00);
     return;
   }
-  uVar8 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar5,*(code **)(_r_ip_funcs_p + 0x680));
+  uVar8 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar5);
   switch(uVar8) {
   case 2:
     (**(code **)(_r_ip_funcs_p + 0x68c))(param_1,0,0,*(code **)(_r_ip_funcs_p + 0x68c));
@@ -65,7 +65,7 @@ _L94:
         *(undefined4 *)(iVar10 + 0x18) = 0;
         *(undefined1 *)(iVar10 + 0x16) = 0;
       }
-      goto _L70;
+      goto _L88;
     }
   case 1:
     if ((*(ushort *)(iVar9 + 0x42) & 1) == 0) {
@@ -99,7 +99,7 @@ _L94:
                   (param_1,&stack0xffffffe4,0,*(code **)(_r_ip_funcs_p + 0x5b4));
         return;
       }
-_L70:
+_L88:
       if (*(char *)(iVar5 + 0x2d) == '\0') {
         *(byte *)(iVar9 + 0x45) = *(byte *)(iVar9 + 0x45) & 0x7f;
       }
@@ -125,8 +125,8 @@ _L70:
       UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x684);
     }
     else {
-      uVar8 = 2;
       UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x684);
+      uVar8 = 2;
     }
     break;
   case 3:
@@ -136,22 +136,22 @@ _L70:
                             (param_1,*(undefined1 *)(iVar5 + 0x26),*(undefined2 *)(iVar5 + 0x22),
                              *(undefined2 *)(iVar5 + 0x28),*(undefined2 *)(iVar5 + 0xc),
                              *(undefined2 *)(iVar5 + 0xe),*(undefined2 *)(iVar5 + 0x24),
-                             *(code **)(_r_ip_funcs_p + 0x378)), param_3 != 0)) goto _L70;
+                             *(code **)(_r_ip_funcs_p + 0x378)), param_3 != 0)) goto _L88;
     uVar8 = 4;
     UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x684);
     break;
   case 4:
   case 6:
-    goto _L70;
+    goto _L88;
   default:
     UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_plf_funcs_p + 0xc);
     param_2 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar5,*(code **)(_r_ip_funcs_p + 0x680));
     uVar8 = 0x1c0;
-    goto _L94;
+    goto _L98;
   }
                     /* WARNING: Could not recover jumptable at 0x0001084a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (*UNRECOVERED_JUMPTABLE_00)(iVar5,param_1,uVar8);
+  (*UNRECOVERED_JUMPTABLE_00)(iVar5,param_1,uVar8,UNRECOVERED_JUMPTABLE_00);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> osi.o -> btdm_osi_funcs_register
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,33 +16,31 @@ undefined4 btdm_osi_funcs_register(int *param_1)
 
 {
   undefined4 uVar1;
-  char *pcVar2;
   
-  if (param_1 == (int *)0x0) {
-    return 0xffffffff;
-  }
-  if (3 < _g_bt_plf_log_level) {
-    ets_printf("MAGIC %08x VERSION %08x\n",0xfadebead,0x1000a);
-  }
-  if (*param_1 == -0x5214153) {
-    if (param_1[1] == 0x1000a) {
-      _r_osi_funcs_p = param_1;
-      return 0;
+  if (param_1 != (int *)0x0) {
+    if (3 < _g_bt_plf_log_level) {
+      ets_printf(0x10000,0xfadebead," VERSION %08x\n");
     }
-    uVar1 = 0xfffffffd;
-    if (_g_bt_plf_log_level < 1) {
-      return 0xfffffffd;
+    if (*param_1 == -0x5214153) {
+      if ((char *)param_1[1] == " VERSION %08x\n") {
+        uVar1 = 0;
+        _r_osi_funcs_p = param_1;
+      }
+      else {
+        if (0 < _g_bt_plf_log_level) {
+          ets_printf("OSI Version mismatch: %08x\n");
+        }
+        uVar1 = 0xfffffffd;
+      }
     }
-    pcVar2 = "OSI Version mismatch: %08x\n";
-  }
-  else {
-    uVar1 = 0xfffffffe;
-    if (_g_bt_plf_log_level < 1) {
-      return 0xfffffffe;
+    else {
+      if (0 < _g_bt_plf_log_level) {
+        ets_printf("OSI Magic mismatch: %08x\n");
+      }
+      uVar1 = 0xfffffffe;
     }
-    pcVar2 = "OSI Magic mismatch: %08x\n";
+    return uVar1;
   }
-  ets_printf(pcVar2);
-  return uVar1;
+  return 0xffffffff;
 }
 

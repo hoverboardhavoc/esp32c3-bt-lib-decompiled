@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_encrypt.o -> r_llc_loc_encrypt_proc_err_cb
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,9 +10,9 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x00010382) */
+/* WARNING: Removing unreachable block (ram,0x00010396) */
 
-void r_llc_loc_encrypt_proc_err_cb(uint param_1,int param_2,byte *param_3)
+void r_llc_loc_encrypt_proc_err_cb(uint param_1,uint param_2,byte *param_3)
 
 {
   int iVar1;
@@ -21,14 +21,16 @@ void r_llc_loc_encrypt_proc_err_cb(uint param_1,int param_2,byte *param_3)
   byte bVar4;
   int iVar5;
   
-  if (param_2 == 1) {
-    bVar3 = 0x1a;
-  }
-  else if (param_2 == 0) {
-    bVar3 = *param_3;
-  }
-  else if (param_2 == 2) {
+  if (param_2 == 2) {
     bVar3 = param_3[1];
+  }
+  else if (param_2 < 3) {
+    if (param_2 == 0) {
+      bVar3 = *param_3;
+    }
+    else {
+      bVar3 = 0x1a;
+    }
   }
   else {
     if (param_2 != 3) {
@@ -59,13 +61,13 @@ void r_llc_loc_encrypt_proc_err_cb(uint param_1,int param_2,byte *param_3)
       goto _L30;
     }
     bVar4 = 8;
-_L53:
+_L50:
     if (bVar3 == bVar4) goto _L27;
   }
   else {
     if (bVar3 != 0x1a) {
       bVar4 = 0x22;
-      goto _L53;
+      goto _L50;
     }
 _L30:
     if (iVar2 == 4) goto _L27;

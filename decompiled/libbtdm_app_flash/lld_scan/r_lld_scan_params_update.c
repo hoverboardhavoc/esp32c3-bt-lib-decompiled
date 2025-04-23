@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_params_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,19 +18,19 @@ undefined4 r_lld_scan_params_update(uint param_1,int param_2,void *param_3)
   int iVar1;
   int iVar2;
   undefined4 uVar3;
+  uint uVar4;
   
   iVar1 = _lld_scan_env;
   if (_lld_scan_env == 0) {
     uVar3 = 0xc;
   }
   else {
-    if (param_1 == 0) {
-      *(undefined4 *)(_lld_scan_env + 8) = 0xffffffff;
-    }
-    else {
+    uVar4 = 0xffffffff;
+    if (param_1 != 0) {
       iVar2 = r_lld_read_clock();
-      *(uint *)(iVar1 + 8) = iVar2 + param_1 * 0x20 & 0xfffffff;
+      uVar4 = param_1 * 0x20 + iVar2 & 0xfffffff;
     }
+    *(uint *)(iVar1 + 8) = uVar4;
     if (param_3 != (void *)0x0) {
       memcpy((void *)(iVar1 + 0xe),param_3,6);
     }

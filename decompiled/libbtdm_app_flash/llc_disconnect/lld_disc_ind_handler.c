@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_disconnect.o -> lld_disc_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,13 +14,11 @@ undefined4 lld_disc_ind_handler(char *param_1,uint param_2)
 
 {
   int iVar1;
-  uint uVar2;
-  int iVar3;
-  undefined4 uVar4;
+  int iVar2;
+  undefined4 uVar3;
   
   param_2 = param_2 >> 8;
   iVar1 = *(int *)(&llc_env + param_2 * 4);
-  uVar2 = param_2 & 0xff;
   if (iVar1 == 0) {
     r_assert_param(param_2,0,"llc_disconnect.c",0x15f);
   }
@@ -29,19 +27,19 @@ undefined4 lld_disc_ind_handler(char *param_1,uint param_2)
     *(undefined1 *)(iVar1 + 0x47) = 0;
   }
   *(undefined1 *)(iVar1 + 0x49) = 1;
-  r_llc_proc_err_ind(uVar2,0,0,iVar1 + 0x46);
-  iVar3 = r_llc_proc_id_get(uVar2,0);
-  if (iVar3 != 0) {
-    uVar4 = r_llc_proc_id_get(uVar2,0);
-    r_assert_param(param_2,uVar4,"llc_disconnect.c",0x16b);
+  r_llc_proc_err_ind(param_2,0,0,iVar1 + 0x46);
+  iVar2 = r_llc_proc_id_get(param_2,0);
+  if (iVar2 != 0) {
+    uVar3 = r_llc_proc_id_get(param_2,0);
+    r_assert_param(param_2,uVar3,"llc_disconnect.c",0x16b);
   }
-  r_llc_proc_err_ind(uVar2,1,0,iVar1 + 0x46);
-  iVar1 = r_llc_proc_id_get(uVar2,1);
+  r_llc_proc_err_ind(param_2,1,0,iVar1 + 0x46);
+  iVar1 = r_llc_proc_id_get(param_2,1);
   if (iVar1 != 0) {
-    uVar4 = r_llc_proc_id_get(uVar2,1);
-    r_assert_param(param_2,uVar4,"llc_disconnect.c",0x16e);
+    uVar3 = r_llc_proc_id_get(param_2,1);
+    r_assert_param(param_2,uVar3,"llc_disconnect.c",0x16e);
   }
-  r_llc_stop(uVar2);
+  r_llc_stop(param_2);
   return 0;
 }
 

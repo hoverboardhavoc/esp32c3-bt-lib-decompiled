@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit bfdfe8f851c99ced8316b133b0b15521917ea049
- * https://github.com/espressif/esp32c3-bt-lib/commit/bfdfe8f851c99ced8316b133b0b15521917ea049
- * Upstream date: 2024-07-18 14:51:28 +0800
- * Upstream subject: feat(bt): Support mesh duplicate with extend scan (aa16a46)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_scan.o -> r_llm_le_adv_report_ind_duplicate_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -50,7 +50,7 @@ uint r_llm_le_adv_report_ind_duplicate_check(int param_1,void *param_2)
     }
     uVar9 = (uint)*(byte *)(param_1 + 0x20);
     bVar2 = *(byte *)(param_1 + 0x17);
-    memset(abStack_10a,0,0xe7);
+    memset(abStack_110,0,0xed);
     uVar4 = uVar9;
     if (0xe5 < uVar9) {
       uVar4 = 0xe5;

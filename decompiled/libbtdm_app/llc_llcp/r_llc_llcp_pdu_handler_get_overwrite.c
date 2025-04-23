@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * https://github.com/espressif/esp32c3-bt-lib/commit/eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * Upstream date: 2024-10-20 16:32:16 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(52ee788)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_llcp.o -> r_llc_llcp_pdu_handler_get_overwrite
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,14 +22,14 @@ undefined * r_llc_llcp_pdu_handler_get_overwrite(int param_1)
   if (param_1 == 1) {
     puVar2 = &ll_channel_map_ind_handler_hack;
   }
-  else if (param_1 == 0) {
-    puVar2 = &ll_connection_update_ind_handler_hack;
-  }
   else if (param_1 == 0x18) {
     puVar2 = &ll_phy_update_ind_handler_hack;
   }
+  else if (param_1 == 0) {
+    puVar2 = &ll_connection_update_ind_handler_hack;
+  }
   else {
-    puVar2 = *(undefined **)(param_1 * 0xc + iVar1);
+    puVar2 = *(undefined **)(iVar1 + param_1 * 0xc);
   }
   return puVar2;
 }

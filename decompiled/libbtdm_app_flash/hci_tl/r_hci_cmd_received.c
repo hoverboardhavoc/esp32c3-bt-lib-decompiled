@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> hci_tl.o -> r_hci_cmd_received
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,105 +15,159 @@ void r_hci_cmd_received(int param_1,uint param_2,ushort *param_3)
 {
   ushort uVar1;
   uint uVar2;
-  int iVar3;
-  uint uVar4;
-  byte *pbVar5;
+  uint uVar3;
+  undefined1 *puVar4;
+  int iVar5;
   int iVar6;
-  undefined4 uVar7;
+  byte *pbVar7;
+  undefined1 uVar8;
+  undefined4 uVar9;
+  void *__s1;
   short asStack_22 [3];
   
-  iVar3 = r_hci_look_for_cmd_desc();
+  iVar5 = r_hci_look_for_cmd_desc();
   if (DAT_0001101d < '\0') {
     r_assert_err(0,"hci_tl.c",0x5fc);
   }
   if (param_1 != 0xc35) {
     DAT_0001101d = DAT_0001101d + -1;
   }
-  if (iVar3 == 0) {
+  if (iVar5 == 0) {
     param_3 = (ushort *)0x0;
-    uVar7 = 1;
-    iVar3 = 0;
-    goto _L202;
+    uVar8 = 1;
+    iVar5 = 0;
+    goto _L206;
   }
-  if (-1 < DAT_0001101d) {
-    switch(*(byte *)(iVar3 + 2) & 0xf) {
-    case 0:
-    case 2:
-      uVar2 = 0;
-      break;
-    case 1:
-    case 3:
-      if (1 < param_2) {
-        uVar2 = (uint)*param_3;
-        pbVar5 = (byte *)r_sdk_config_get_hl_derived_opts();
-        if ((uVar2 < *pbVar5) && ((&g_bt_plf_log_level)[uVar2] != '\0')) {
-          uVar2 = (uVar2 & 0xff) << 8 | 1;
-          break;
-        }
-      }
+  if (DAT_0001101d < '\0') {
+    param_3 = (ushort *)0x0;
+    uVar8 = 7;
+    goto _L206;
+  }
+  switch(*(byte *)(iVar5 + 2) & 0xf) {
+  case 0:
+  case 2:
+    uVar3 = 0;
+    break;
+  case 1:
+  case 3:
+    if (param_2 < 2) {
+_L173:
       if (param_1 == 0x406) {
         uVar1 = *param_3;
-        r_hci_cmd_reject(iVar3,0x406,0,param_3);
+        r_hci_cmd_reject(iVar5,0x406,0,param_3);
         r_llc_hci_disconnected_dis((char)uVar1,0,(char)param_3[1]);
         return;
       }
-      uVar7 = 2;
-      goto _L202;
-    default:
-      r_assert_param(param_1,"hci_tl.c",0x68e);
-      return;
-    case 8:
-      uVar2 = 2;
-      break;
-    case 9:
-      uVar2 = 3;
-    }
-    asStack_22[0] = 0;
-    if (param_2 == 0) {
-      uVar4 = 0;
-    }
-    else if (*(code **)(iVar3 + 4) == (code *)0x0) {
-      uVar4 = 4;
-    }
-    else {
-      if ((*(byte *)(iVar3 + 2) & 0x40) == 0) {
-        uVar4 = r_co_util_unpack();
+      uVar8 = 2;
+_L206:
+      if (iVar5 == 0) {
+        uVar9 = 0x1101;
       }
       else {
-        uVar4 = (**(code **)(iVar3 + 4))(0,param_3,asStack_22,param_2 & 0xffff);
-        uVar4 = uVar4 & 0xff;
-      }
-      if (uVar4 == 1) {
-        param_3 = (ushort *)0x0;
-        uVar7 = 0x12;
-        goto _L202;
-      }
-    }
-    iVar6 = r_ke_msg_alloc(0x1105,uVar2,param_1,asStack_22[0]);
-    if (uVar4 != 0) {
-      r_assert_param(uVar4,param_1,"hci_tl.c",0x6ba);
-    }
-    if (iVar6 != 0) {
-      if ((asStack_22[0] != 0) && (*(code **)(iVar3 + 4) != (code *)0x0)) {
-        if ((*(byte *)(iVar3 + 2) & 0x40) == 0) {
-          uVar4 = r_co_util_unpack();
+        if (*(code **)(iVar5 + 8) != (code *)0x0) {
+          if (*(char *)(iVar5 + 2) < '\0') {
+            uVar3 = (**(code **)(iVar5 + 8))(0,0,asStack_22,0);
+            uVar3 = uVar3 & 0xff;
+          }
+          else {
+            uVar3 = r_co_util_unpack(0,0,asStack_22,0xffff);
+          }
+          if (uVar3 == 0) {
+            __s1 = *(void **)(iVar5 + 8);
+            iVar5 = memcmp(__s1,&_LC1,2);
+            if (iVar5 == 0) {
+              puVar4 = (undefined1 *)r_ke_msg_alloc(0x1101,0,param_1);
+              *puVar4 = uVar8;
+              puVar4[2] = (char)*param_3;
+              puVar4[3] = *(undefined1 *)((int)param_3 + 1);
+            }
+            else {
+              iVar5 = memcmp(__s1,&_LC2,3);
+              if (iVar5 == 0) {
+                puVar4 = (undefined1 *)r_ke_msg_alloc(0x1101);
+                *puVar4 = uVar8;
+                memcpy(puVar4 + 1,param_3,6);
+              }
+              else {
+                puVar4 = (undefined1 *)r_ke_msg_alloc(0x1101,0,param_1,asStack_22[0]);
+                *puVar4 = uVar8;
+              }
+            }
+            r_hci_send_2_host(puVar4);
+          }
+          else {
+            r_assert_param(param_1,"hci_tl.c",0x1bf);
+          }
+          return;
         }
-        else {
-          uVar4 = (**(code **)(iVar3 + 4))(iVar6,param_3,asStack_22,param_2 & 0xffff);
-          uVar4 = uVar4 & 0xff;
-        }
+        uVar9 = 0x1102;
       }
-      if (uVar4 != 0) {
-        r_assert_param(uVar4,param_1,"hci_tl.c",0x6d2);
-      }
-      r_ke_msg_send(iVar6);
+      puVar4 = (undefined1 *)r_ke_msg_alloc(uVar9,0,param_1,1);
+      *puVar4 = uVar8;
+      r_hci_send_2_host();
       return;
     }
+    uVar3 = (uint)*param_3;
+    pbVar7 = (byte *)r_sdk_config_get_hl_derived_opts();
+    if ((*pbVar7 <= uVar3) || ((&g_bt_plf_log_level)[uVar3] == '\0')) goto _L173;
+    uVar3 = (uVar3 & 0xff) << 8 | 1;
+    goto _L174;
+  default:
+    r_assert_param(param_1,"hci_tl.c",0x68e);
+    return;
+  case 8:
+    uVar3 = 2;
+    break;
+  case 9:
+    uVar3 = 3;
   }
-  param_3 = (ushort *)0x0;
-  uVar7 = 7;
-_L202:
-  r_hci_cmd_reject(iVar3,param_1,uVar7,param_3);
+  asStack_22[0] = 0;
+  if (param_2 == 0) {
+    uVar2 = 0;
+  }
+  else {
+_L174:
+    asStack_22[0] = 0;
+    if (*(code **)(iVar5 + 4) == (code *)0x0) {
+      uVar2 = 4;
+    }
+    else {
+      if ((*(byte *)(iVar5 + 2) & 0x40) == 0) {
+        uVar2 = r_co_util_unpack();
+      }
+      else {
+        uVar2 = (**(code **)(iVar5 + 4))(0,param_3,asStack_22,param_2);
+        uVar2 = uVar2 & 0xff;
+      }
+      if (uVar2 == 1) {
+        uVar9 = 0x12;
+        goto _L205;
+      }
+    }
+  }
+  iVar6 = r_ke_msg_alloc(0x1105,uVar3,param_1,asStack_22[0]);
+  if (uVar2 != 0) {
+    r_assert_param(uVar2,param_1,"hci_tl.c",0x6ba);
+  }
+  if (iVar6 != 0) {
+    if ((asStack_22[0] != 0) && (*(code **)(iVar5 + 4) != (code *)0x0)) {
+      if ((*(byte *)(iVar5 + 2) & 0x40) == 0) {
+        uVar2 = r_co_util_unpack();
+      }
+      else {
+        uVar2 = (**(code **)(iVar5 + 4))(iVar6,param_3,asStack_22,param_2);
+        uVar2 = uVar2 & 0xff;
+      }
+    }
+    if (uVar2 != 0) {
+      r_assert_param(uVar2,param_1,"hci_tl.c",0x6d2);
+    }
+    r_ke_msg_send(iVar6);
+    return;
+  }
+  uVar9 = 7;
+_L205:
+  r_hci_cmd_reject(iVar5,param_1,uVar9,0);
   return;
 }
 

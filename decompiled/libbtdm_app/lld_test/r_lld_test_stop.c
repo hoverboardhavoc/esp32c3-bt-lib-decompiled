@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit e5c0f7256ecf5b5f8eb28c1793051a6b88f95124
- * https://github.com/espressif/esp32c3-bt-lib/commit/e5c0f7256ecf5b5f8eb28c1793051a6b88f95124
- * Upstream date: 2024-02-04 11:46:50 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(30b57c45)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_test.o -> r_lld_test_stop
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ undefined4 r_lld_test_stop(void)
   iVar3 = _lld_test_env;
   uVar1 = 0xc;
   if (_lld_test_env != 0) {
-    (*_rwip_rf)(1,_rwip_rf);
+    (*_r_ip_funcs_p)(1,_r_ip_funcs_p);
     _DAT_60031000 = _DAT_60031000 & 0xffffbfff;
     if (*(char *)(iVar3 + 0x2a) == '\0') {
       (**(code **)(_r_ip_funcs_p + 0x6b8))(iVar3,0,*(code **)(_r_ip_funcs_p + 0x6b8));

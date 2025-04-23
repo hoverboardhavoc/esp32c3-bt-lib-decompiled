@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * https://github.com/espressif/esp32c3-bt-lib/commit/040cd0eafd8c6ee52bc7f7d5d633c9dc1b99bba2
- * Upstream date: 2023-08-03 10:45:08 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(ff6efe7)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_cca.o -> r_lld_cca_idle_mode_handle
  *
  * (C) Espressif, Apache License 2.0.
@@ -40,7 +40,7 @@ void r_lld_cca_idle_mode_handle(int param_1)
                      0x10);
     }
     iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-    *(short *)(iVar4 + (uint)bVar1 * 0x5a + 0x20) = sVar3;
+    *(short *)((uint)bVar1 * 0x5a + 0x20 + iVar4) = sVar3;
     return;
   }
   return;

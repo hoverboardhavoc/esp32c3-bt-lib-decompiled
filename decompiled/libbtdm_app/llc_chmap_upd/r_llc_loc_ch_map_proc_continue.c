@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * https://github.com/espressif/esp32c3-bt-lib/commit/eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * Upstream date: 2024-10-20 16:32:16 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(52ee788)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_chmap_upd.o -> r_llc_loc_ch_map_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,65 +17,67 @@ void r_llc_loc_ch_map_proc_continue(int param_1,int param_2)
 {
   byte bVar1;
   int iVar2;
-  code *pcVar3;
-  short sVar4;
+  code *UNRECOVERED_JUMPTABLE;
+  short sVar3;
+  int iVar4;
   int iVar5;
-  int iVar6;
-  undefined4 uVar7;
-  void *pvVar8;
-  uint uVar9;
-  int iVar10;
-  uint uVar11;
+  undefined4 uVar6;
+  void *pvVar7;
+  uint uVar8;
+  int iVar9;
+  uint uVar10;
   byte abStack_28 [12];
   
   iVar2 = *(int *)(&llc_env + param_1 * 4);
-  iVar5 = (**(code **)(_r_ip_funcs_p + 0x674))(0,*(code **)(_r_ip_funcs_p + 0x674));
-  iVar6 = (**(code **)(_r_ip_funcs_p + 0x680))(*(code **)(_r_ip_funcs_p + 0x680));
-  if (iVar6 == param_2) {
-    iVar6 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar5,*(code **)(_r_ip_funcs_p + 0x680));
-    if (iVar6 == 0) {
-      pvVar8 = (void *)(**(code **)(_r_ip_funcs_p + 0x4ec))(*(code **)(_r_ip_funcs_p + 0x4ec));
-      memcpy(abStack_28,pvVar8,5);
-      uVar9 = (**(code **)(_r_modules_funcs_p + 0xc))
+  iVar4 = (**(code **)(_r_ip_funcs_p + 0x674))(0,*(code **)(_r_ip_funcs_p + 0x674));
+  iVar5 = (**(code **)(_r_ip_funcs_p + 0x680))(*(code **)(_r_ip_funcs_p + 0x680));
+  if (iVar5 == param_2) {
+    iVar5 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar4,*(code **)(_r_ip_funcs_p + 0x680));
+    if (iVar5 == 0) {
+      pvVar7 = (void *)(**(code **)(_r_ip_funcs_p + 0x4ec))(*(code **)(_r_ip_funcs_p + 0x4ec));
+      memcpy(abStack_28,pvVar7,5);
+      uVar8 = (**(code **)(_r_modules_funcs_p + 0xc))
                         (abStack_28,*(code **)(_r_modules_funcs_p + 0xc));
       bVar1 = *(byte *)(iVar2 + 0x1f);
-      if (uVar9 < bVar1) {
-        uVar11 = 0;
+      if (uVar8 < bVar1) {
+        uVar10 = 0;
         do {
-          if (((int)(uint)abStack_28[(int)uVar11 >> 3] >> (uVar11 & 7) & 1U) == 0) {
-            abStack_28[(int)uVar11 >> 3] = (byte)(1 << (uVar11 & 7)) | abStack_28[(int)uVar11 >> 3];
-            uVar9 = uVar9 + 1 & 0xff;
-            if (bVar1 <= uVar9) break;
+          if (((int)(uint)abStack_28[(int)uVar10 >> 3] >> (uVar10 & 7) & 1U) == 0) {
+            abStack_28[(int)uVar10 >> 3] = abStack_28[(int)uVar10 >> 3] | (byte)(1 << (uVar10 & 7));
+            uVar8 = uVar8 + 1 & 0xff;
+            if (bVar1 <= uVar8) break;
           }
-          uVar11 = uVar11 + 1;
-        } while (uVar11 != 0x25);
+          uVar10 = uVar10 + 1;
+        } while (uVar10 != 0x25);
       }
-      iVar10 = memcmp((void *)(iVar2 + 8),abStack_28,5);
-      iVar6 = _r_ip_funcs_p;
-      if (iVar10 != 0) {
+      iVar9 = memcmp((void *)(iVar2 + 8),abStack_28,5);
+      iVar5 = _r_ip_funcs_p;
+      if (iVar9 != 0) {
         *(ushort *)(iVar2 + 0x42) = *(ushort *)(iVar2 + 0x42) | 0x10;
-        pvVar8 = (void *)(iVar5 + 8);
-        sVar4 = (**(code **)(iVar6 + 0x338))(param_1,*(code **)(iVar6 + 0x338));
-        sVar4 = *(short *)(iVar2 + 0x10) + 9 + sVar4;
-        *(short *)(iVar5 + 0xe) = sVar4;
-        memcpy(pvVar8,abStack_28,5);
-        iVar6 = (**(code **)(_r_ip_funcs_p + 0x31c))
-                          (param_1,pvVar8,sVar4,*(code **)(_r_ip_funcs_p + 0x31c));
-        if (iVar6 == 0) {
-          llc_llcp_ch_map_update_ind_pdu_send(param_1,*(undefined2 *)(iVar5 + 0xe),pvVar8);
-          (**(code **)(_r_ip_funcs_p + 0x684))(iVar5,param_1,1,*(code **)(_r_ip_funcs_p + 0x684));
+        pvVar7 = (void *)(iVar4 + 8);
+        sVar3 = (**(code **)(iVar5 + 0x338))(param_1,*(code **)(iVar5 + 0x338));
+        sVar3 = sVar3 + *(short *)(iVar2 + 0x10) + 9;
+        *(short *)(iVar4 + 0xe) = sVar3;
+        memcpy(pvVar7,abStack_28,5);
+        iVar5 = (**(code **)(_r_ip_funcs_p + 0x31c))
+                          (param_1,pvVar7,sVar3,*(code **)(_r_ip_funcs_p + 0x31c));
+        if (iVar5 == 0) {
+          llc_llcp_ch_map_update_ind_pdu_send(param_1,*(undefined2 *)(iVar4 + 0xe),pvVar7);
+          (**(code **)(_r_ip_funcs_p + 0x684))(iVar4,param_1,1,*(code **)(_r_ip_funcs_p + 0x684));
           return;
         }
       }
     }
     else {
-      if (iVar6 != 1) {
-        pcVar3 = *(code **)(_r_plf_funcs_p + 0xc);
-        uVar7 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar5,*(code **)(_r_ip_funcs_p + 0x680));
-        (*pcVar3)(param_1,uVar7,"llc_chmap_upd.c",0xcc);
+      if (iVar5 != 1) {
+        UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 0xc);
+        uVar6 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar4,*(code **)(_r_ip_funcs_p + 0x680));
+                    /* WARNING: Could not recover jumptable at 0x000101ea. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+        (*UNRECOVERED_JUMPTABLE)(param_1,uVar6,0x10000,0xcc,UNRECOVERED_JUMPTABLE);
         return;
       }
-      memcpy((void *)(iVar2 + 8),(void *)(iVar5 + 8),5);
+      memcpy((void *)(iVar2 + 8),(void *)(iVar4 + 8),5);
     }
   }
   *(ushort *)(iVar2 + 0x42) = *(ushort *)(iVar2 + 0x42) & 0xffef;

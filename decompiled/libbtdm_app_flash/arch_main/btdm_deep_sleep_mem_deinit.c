@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_deep_sleep_mem_deinit
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,17 +15,17 @@
 void btdm_deep_sleep_mem_deinit(void)
 
 {
-  if (_LANCHOR2 != 0) {
+  if (lc_mem_addr != 0) {
     (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
-    _LANCHOR2 = 0;
+    lc_mem_addr = 0;
   }
-  if (_LANCHOR3 != 0) {
+  if (bb_mem_addr != 0) {
     (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
-    _LANCHOR3 = 0;
+    bb_mem_addr = 0;
   }
-  if (_LANCHOR4 != 0) {
+  if (bb_agc_mem_addr != 0) {
     (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
-    _LANCHOR4 = 0;
+    bb_agc_mem_addr = 0;
   }
   return;
 }

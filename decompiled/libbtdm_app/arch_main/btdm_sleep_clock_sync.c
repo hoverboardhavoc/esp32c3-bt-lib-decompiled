@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> arch_main.o -> btdm_sleep_clock_sync
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,17 +12,18 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 btdm_sleep_clock_sync(void)
+uint btdm_sleep_clock_sync(void)
 
 {
   uint uVar1;
-  undefined4 uVar2;
+  uint uVar2;
   
-  uVar1 = _LANCHOR5;
-  if ((_DAT_60042000 >> 7 & 1) != 0) {
-    _LANCHOR5 = _LANCHOR5 + 1;
-    if (uVar1 < 1000000) {
-      return 1;
+  uVar2 = counter_0;
+  uVar1 = _DAT_60042000 >> 7 & 1;
+  if (uVar1 != 0) {
+    counter_0 = counter_0 + 1;
+    if (uVar2 < 1000000) {
+      return uVar1;
     }
     _DAT_60031050 = 0x87828180;
     if ((_DAT_60042000 & 4) != 0 || _DAT_60031054 != 0) {
@@ -31,7 +32,7 @@ undefined4 btdm_sleep_clock_sync(void)
       return uVar2;
     }
   }
-  _LANCHOR5 = 0;
+  counter_0 = 0;
   return 0;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> ble_util_buf.o -> r_ble_util_buf_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_ble_util_buf_init(uint param_1)
+void r_ble_util_buf_init(int param_1)
 
 {
   void *pvVar1;
@@ -47,19 +47,19 @@ void r_ble_util_buf_init(uint param_1)
       psVar3 = psVar3 + -4;
     } while (sVar4 != -0x6800);
     *(undefined2 *)((int)pvVar1 + 0x1b4) = 0x6c00;
-    *(undefined2 *)((int)pvVar1 + 0x1a4) = 0x5c00;
     *(undefined2 *)((int)pvVar1 + 0x1ac) = 0x6400;
-    *(undefined2 *)((int)pvVar1 + 0x194) = 0x4c00;
+    *(undefined2 *)((int)pvVar1 + 0x1a4) = 0x5c00;
     *(undefined2 *)((int)pvVar1 + 0x19c) = 0x5400;
-    *(undefined2 *)((int)pvVar1 + 0x184) = 0x3c00;
+    *(undefined2 *)((int)pvVar1 + 0x194) = 0x4c00;
     *(undefined2 *)((int)pvVar1 + 0x18c) = 0x4400;
-    *(undefined2 *)((int)pvVar1 + 0x174) = 0x2c00;
+    *(undefined2 *)((int)pvVar1 + 0x184) = 0x3c00;
     *(undefined2 *)((int)pvVar1 + 0x17c) = 0x3400;
+    *(undefined2 *)((int)pvVar1 + 0x174) = 0x2c00;
     *(undefined2 *)((int)pvVar1 + 0x16c) = 0x2400;
   }
-  else if (param_1 < 3) {
+  else if ((param_1 - 1U & 0xff) < 2) {
     r_co_list_pool_init((int)_p_ble_util_buf_env + 0x20,8,0x14);
-    r_co_list_pool_init((int)_p_ble_util_buf_env + 8,(int)_p_ble_util_buf_env + 0xc0,8,
+    r_co_list_pool_init((int)_p_ble_util_buf_env + 8,(int)_p_ble_util_buf_env + 0xc0,
                         *(undefined1 *)((int)_p_ble_util_buf_env + 0x1ba));
     r_co_list_pool_init((int)_p_ble_util_buf_env + 0x10,(int)_p_ble_util_buf_env + 0x108,8,0xc);
     r_co_list_pool_init((int)_p_ble_util_buf_env + 0x18,(int)_p_ble_util_buf_env + 0x168,8,10);

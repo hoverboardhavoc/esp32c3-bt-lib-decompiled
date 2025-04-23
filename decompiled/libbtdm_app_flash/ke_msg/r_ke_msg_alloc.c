@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> ke_msg.o -> r_ke_msg_alloc
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,7 +18,7 @@ undefined4 * r_ke_msg_alloc(undefined2 param_1,undefined2 param_2,undefined2 par
   
   puVar1 = (undefined4 *)r_ke_malloc(param_4 + 0xc,2);
   if (puVar1 == (undefined4 *)0x0) {
-    r_assert_err("ke_msg.c",0x37);
+    r_assert_err(0x10000,0x37);
   }
   *(undefined2 *)(puVar1 + 2) = param_3;
   *puVar1 = 0xffffffff;

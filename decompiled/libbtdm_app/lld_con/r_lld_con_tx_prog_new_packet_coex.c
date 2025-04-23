@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_tx_prog_new_packet_coex
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,65 +17,68 @@ void r_lld_con_tx_prog_new_packet_coex(int param_1)
 {
   byte bVar1;
   byte bVar2;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
+  byte bVar3;
+  byte bVar4;
+  byte bVar5;
   int iVar6;
-  uint uVar7;
-  code *pcVar8;
-  ushort uVar9;
-  uint uVar10;
-  uint uVar11;
+  int iVar7;
+  int iVar8;
+  uint uVar9;
+  code *pcVar10;
+  ushort uVar11;
+  uint uVar12;
   byte bStack_42;
   byte abStack_41 [13];
   
-  uVar7 = (uint)*(byte *)(param_1 + 0x8e);
+  uVar9 = (uint)*(byte *)(param_1 + 0x8e);
   bVar1 = *(byte *)(param_1 + 0x91);
   if (*(char *)(param_1 + 0x92) == '\0') {
     bStack_42 = 0;
     abStack_41[0] = 0;
-    iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-    uVar9 = *(ushort *)(iVar5 + uVar7 * 0x5a) & 0x1f;
+    iVar7 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
+    uVar11 = *(ushort *)(iVar7 + uVar9 * 0x5a) & 0x1f;
     (**(code **)(_r_modules_funcs_p + 0x1e0))
-              (uVar9,uVar7,&bStack_42,abStack_41,*(code **)(_r_modules_funcs_p + 0x1e0));
-    uVar10 = (uint)rwip_coex_cfg;
-    uVar11 = (uint)abStack_41[0];
-    uVar3 = (uint)bStack_42;
-    if ((uVar3 << 7 & 0xffffff7f) != 0) {
+              (uVar11,uVar9,&bStack_42,abStack_41,*(code **)(_r_modules_funcs_p + 0x1e0));
+    bVar5 = abStack_41[0];
+    bVar4 = bStack_42;
+    uVar12 = (uint)rwip_coex_cfg;
+    bVar2 = rwip_coex_cfg >> 1;
+    bVar3 = rwip_coex_cfg >> 2;
+    if ((bStack_42 & 0xfe) != 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x42,*(code **)(_r_plf_funcs_p + 8));
     }
-    if ((uVar11 << 6 & 0xffffffbf) != 0) {
+    if ((bVar5 & 0xfe) != 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x43,*(code **)(_r_plf_funcs_p + 8));
     }
-    iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-    *(ushort *)(iVar5 + uVar7 * 0x5a) =
-         (ushort)(uVar3 << 7) | (ushort)(uVar11 << 6) | (ushort)((uVar10 & 1) << 10) |
-         (ushort)((uVar10 & 2) << 8) | (ushort)((uVar10 & 4) << 6) | uVar9;
+    iVar7 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
+    *(ushort *)(iVar7 + uVar9 * 0x5a) =
+         (ushort)bVar4 << 7 | (ushort)bVar5 << 6 | (ushort)((uVar12 & 1) << 10) |
+         (ushort)((bVar2 & 1) << 9) | (ushort)((bVar3 & 1) << 8) | uVar11;
   }
   bVar2 = *(byte *)(param_1 + 0x8e);
-  pcVar8 = *(code **)(_r_modules_funcs_p + 0x1a0);
-  iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-  iVar5 = (*pcVar8)((*(ushort *)((uint)bVar2 * 0x5a + iVar5) & 0x1f) != 2);
-  if (iVar5 != 0) {
+  pcVar10 = *(code **)(_r_modules_funcs_p + 0x1a0);
+  iVar7 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
+  iVar7 = (*pcVar10)((*(ushort *)((uint)bVar2 * 0x5a + iVar7) & 0x1f) != 2);
+  if (iVar7 != 0) {
     if (2 < _g_bt_plf_log_level) {
-      ets_printf("TX PTI [CON] [EN%d] [%d] \n",*(undefined1 *)(iVar5 + 4),*(undefined1 *)(iVar5 + 5)
+      ets_printf("TX PTI [CON] [EN%d] [%d] \n",*(undefined1 *)(iVar7 + 4),*(undefined1 *)(iVar7 + 5)
                 );
     }
-    uVar3 = (uint)*(byte *)(iVar5 + 5) << 8;
-    if ((uVar3 & 0xf000) != 0) {
+    bVar2 = *(byte *)(iVar7 + 5);
+    if ((bVar2 & 0xf0) != 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x33f,*(code **)(_r_plf_funcs_p + 8));
     }
-    iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
-    iVar4 = (uVar7 * 9 + (uint)bVar1 & 0xff) * 0xe + 10;
-    uVar9 = *(ushort *)(iVar6 + iVar4);
-    iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
-    pcVar8 = *(code **)(_r_plf_funcs_p + 0xbc);
-    *(ushort *)(iVar6 + iVar4) = uVar9 & 0xf0ff | (ushort)uVar3;
-    bVar1 = *(byte *)(iVar5 + 4);
-    iVar5 = (*pcVar8)(0x1400,pcVar8);
-    uVar9 = *(ushort *)(iVar5 + iVar4);
-    iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
-    *(ushort *)(iVar5 + iVar4) = uVar9 & 0xefff | (ushort)bVar1 << 0xc;
+    iVar8 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
+    iVar6 = ((uint)bVar1 + uVar9 * 9 & 0xff) * 0xe + 10;
+    uVar11 = *(ushort *)(iVar8 + iVar6);
+    iVar8 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
+    pcVar10 = *(code **)(_r_plf_funcs_p + 0xbc);
+    *(ushort *)(iVar8 + iVar6) = uVar11 & 0xf0ff | (ushort)bVar2 << 8;
+    bVar1 = *(byte *)(iVar7 + 4);
+    iVar7 = (*pcVar10)(0x1400,pcVar10);
+    uVar11 = *(ushort *)(iVar7 + iVar6);
+    iVar7 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
+    *(ushort *)(iVar7 + iVar6) = uVar11 & 0xefff | (ushort)bVar1 << 0xc;
   }
   return;
 }

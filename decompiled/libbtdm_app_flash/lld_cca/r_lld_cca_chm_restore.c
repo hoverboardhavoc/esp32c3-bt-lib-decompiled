@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_cca.o -> r_lld_cca_chm_restore
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,33 +15,34 @@ void r_lld_cca_chm_restore(void)
 {
   byte bVar1;
   int iVar2;
-  uint uVar3;
-  int iVar4;
+  int iVar3;
+  byte *pbVar4;
   uint uVar5;
   byte *pbVar6;
-  byte *pbVar7;
+  uint uVar7;
   uint uVar8;
   
-  iVar4 = r_lld_read_clock();
+  iVar3 = r_lld_read_clock();
   iVar2 = p_lld_cca;
-  uVar8 = 0;
+  uVar7 = 0;
+  pbVar6 = *(byte **)(p_lld_cca + 0x28);
   do {
-    pbVar7 = (byte *)(uVar8 * 0xc + *(int *)(iVar2 + 0x28));
-    bVar1 = *pbVar7;
+    bVar1 = *pbVar6;
     if ((bVar1 & 4) != 0) {
-      uVar3 = (uint)*(byte *)(iVar2 + 0x25) * 0x280;
+      uVar8 = (uint)*(byte *)(iVar2 + 0x25) * 0x280;
       uVar5 = (uint)*(ushort *)(iVar2 + 0x12) << 1;
-      if (uVar5 < uVar3) {
-        uVar5 = uVar3;
+      if (uVar5 < uVar8) {
+        uVar5 = uVar8;
       }
-      if (uVar5 <= (iVar4 - *(int *)(pbVar7 + 4) & 0xfffffffU)) {
-        pbVar6 = (byte *)(*(int *)(iVar2 + 0x1c) + ((uVar8 & 0xff) >> 3));
-        *pbVar6 = (byte)(1 << (uVar8 & 7)) | *pbVar6;
-        *pbVar7 = bVar1 & 0xf9 | 1;
+      if (uVar5 <= (iVar3 - *(int *)(pbVar6 + 4) & 0xfffffffU)) {
+        pbVar4 = (byte *)(*(int *)(iVar2 + 0x1c) + (uVar7 >> 3));
+        *pbVar4 = (byte)(1 << (uVar7 & 7)) | *pbVar4;
+        *pbVar6 = bVar1 & 0xf9 | 1;
       }
     }
-    uVar8 = uVar8 + 1;
-  } while (uVar8 != 0x28);
+    uVar7 = uVar7 + 1 & 0xff;
+    pbVar6 = pbVar6 + 0xc;
+  } while (uVar7 != 0x28);
   return;
 }
 

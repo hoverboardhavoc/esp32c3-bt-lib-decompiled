@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
+ * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
+ * Upstream date: 2025-04-23 17:25:53 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> co_utils.o -> r_co_util_pack
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,27 +20,27 @@ int r_co_util_pack(undefined1 *param_1,ushort *param_2,short *param_3,int param_
   bool bVar3;
   bool bVar4;
   undefined1 *__dest;
-  ushort *puVar5;
-  undefined1 uVar6;
-  byte *pbVar7;
-  undefined4 uVar8;
+  undefined1 uVar5;
+  bool bVar6;
+  undefined1 *puVar7;
   uint __n;
-  uint uVar9;
-  bool bVar10;
-  undefined1 *puVar11;
-  undefined1 uVar12;
-  ushort *puVar13;
-  undefined4 *puVar14;
-  undefined1 uVar15;
-  int iVar16;
+  uint uVar8;
+  undefined1 uVar9;
+  undefined1 uVar10;
+  undefined4 uVar11;
+  ushort *puVar12;
+  undefined4 *puVar13;
+  ushort *puVar14;
+  int iVar15;
+  byte *pbVar16;
   byte *apbStack_44 [4];
   
-  puVar5 = (ushort *)((int)param_2 + param_4);
+  puVar14 = (ushort *)((int)param_2 + param_4);
   bVar2 = param_1 != (undefined1 *)0x0;
   bVar3 = param_2 != (ushort *)0x0;
   apbStack_44[0] = param_5;
   if (param_5 == (byte *)0x0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"co_utils.c",0xab,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0xab,*(code **)(_r_plf_funcs_p + 8));
   }
   if (*apbStack_44[0] == 0x3c) {
     apbStack_44[0] = apbStack_44[0] + 1;
@@ -54,148 +54,149 @@ int r_co_util_pack(undefined1 *param_1,ushort *param_2,short *param_3,int param_
     }
   }
   __n = 1;
-  bVar10 = false;
-  iVar16 = 0;
+  bVar6 = false;
+  iVar15 = 0;
   __dest = param_1;
-_L41:
+  pbVar16 = apbStack_44[0];
   do {
     while( true ) {
-      if (*apbStack_44[0] == 0) {
-        if (iVar16 == 0) {
+      if (*pbVar16 == 0) {
+        if (iVar15 == 0) {
           *param_3 = (short)__dest - (short)param_1;
         }
-        return iVar16;
+        return iVar15;
       }
-      if (iVar16 != 0) {
-        return iVar16;
+      if (iVar15 != 0) {
+        return iVar15;
       }
-      if ((byte)(*apbStack_44[0] - 0x30) < 10) {
+      if ((byte)(*pbVar16 - 0x30) < 10) {
         __n = (**(code **)(_r_modules_funcs_p + 0x14))
                         (apbStack_44,*(code **)(_r_modules_funcs_p + 0x14));
       }
-      pbVar7 = apbStack_44[0] + 1;
+      pbVar16 = apbStack_44[0] + 1;
       bVar1 = *apbStack_44[0];
-      apbStack_44[0] = pbVar7;
-      if (bVar1 != 0x48) break;
+      apbStack_44[0] = pbVar16;
+      if (bVar1 < 0x4f) break;
+      if (bVar1 == 0x6e) goto _L27;
 _L49:
-      puVar13 = (ushort *)0x0;
-      for (uVar9 = 0; uVar9 < __n; uVar9 = uVar9 + 1 & 0xff) {
-        puVar13 = (ushort *)((int)param_2 + 1U & 0xfffffffe);
-        if (bVar3 && bVar2) {
-          if (puVar5 < puVar13 + 1) {
-            iVar16 = 1;
-            break;
-          }
-          uVar6 = (undefined1)(*puVar13 >> 8);
-          uVar12 = (undefined1)*puVar13;
+      iVar15 = 3;
+    }
+    if (bVar1 < 0x42) goto _L49;
+    switch(bVar1) {
+    default:
+      goto _L49;
+    case 0x44:
+      puVar13 = (undefined4 *)((int)param_2 + 3U & 0xfffffffc);
+      puVar12 = (ushort *)(puVar13 + 1);
+      if (bVar3 && bVar2) {
+        if (puVar12 <= puVar14) {
+          uVar11 = *puVar13;
+          uVar5 = (undefined1)((uint)uVar11 >> 0x10);
+          uVar9 = (undefined1)((uint)uVar11 >> 8);
           if (bVar4) {
-            *__dest = uVar12;
-            __dest[1] = uVar6;
+            *__dest = (char)uVar11;
+            __dest[1] = uVar9;
+            __dest[2] = uVar5;
           }
           else {
-            *__dest = uVar6;
-            __dest[1] = uVar12;
+            *__dest = uVar5;
+            __dest[1] = uVar9;
+            __dest[2] = (char)uVar11;
+          }
+          goto _L38;
+        }
+        goto _L57;
+      }
+_L38:
+      __dest = __dest + 3;
+      param_2 = puVar12;
+      break;
+    case 0x47:
+      bVar6 = true;
+    case 0x42:
+_L27:
+      puVar12 = (ushort *)((int)param_2 + __n);
+      if (bVar3 && bVar2) {
+        if (puVar14 < puVar12) {
+_L57:
+          iVar15 = 1;
+          break;
+        }
+        if ((!bVar6) || (puVar7 = __dest, uVar8 = __n, bVar4)) {
+          memmove(__dest,param_2,__n);
+        }
+        else {
+          while (uVar8 != 0) {
+            uVar8 = uVar8 - 1 & 0xffff;
+            *puVar7 = *(undefined1 *)((int)param_2 + uVar8);
+            puVar7 = puVar7 + 1;
           }
         }
+      }
+      __dest = __dest + __n;
+      if (bVar1 == 0x6e) {
+        __n = (uint)*(byte *)((int)puVar12 + -1);
+      }
+      else {
+        __n = 1;
+      }
+      bVar6 = false;
+      param_2 = puVar12;
+      break;
+    case 0x48:
+    case 0x4e:
+      puVar12 = (ushort *)0x0;
+      for (uVar8 = 0; uVar8 < __n; uVar8 = uVar8 + 1 & 0xff) {
+        puVar12 = (ushort *)((int)param_2 + 1U & 0xfffffffe);
+        if (bVar3 && bVar2) {
+          if (puVar14 < puVar12 + 1) {
+            iVar15 = 1;
+            break;
+          }
+          uVar5 = (undefined1)(*puVar12 >> 8);
+          uVar9 = (undefined1)*puVar12;
+          if (bVar4) {
+            *__dest = uVar9;
+            uVar9 = uVar5;
+          }
+          else {
+            *__dest = uVar5;
+          }
+          __dest[1] = uVar9;
+        }
         __dest = __dest + 2;
-        param_2 = puVar13 + 1;
+        param_2 = puVar12 + 1;
       }
       __n = 1;
       if (bVar1 == 0x4e) {
-        __n = (uint)*puVar13;
+        __n = (uint)*puVar12;
       }
-    }
-    if (0x48 < bVar1) {
-      if (bVar1 == 0x4e) goto _L49;
-      if (bVar1 == 0x6e) {
-_L23:
-        puVar13 = (ushort *)((int)param_2 + __n);
-        if (bVar3 && bVar2) {
-          if (puVar5 < puVar13) {
-_L56:
-            iVar16 = 1;
-            goto _L41;
-          }
-          if ((!bVar10) || (uVar9 = __n, puVar11 = __dest, bVar4)) {
-            memmove(__dest,param_2,__n);
-          }
-          else {
-            while (uVar9 != 0) {
-              uVar9 = uVar9 - 1 & 0xffff;
-              *puVar11 = *(undefined1 *)((int)param_2 + uVar9);
-              puVar11 = puVar11 + 1;
-            }
-          }
-        }
-        __dest = __dest + __n;
-        if (bVar1 == 0x6e) {
-          __n = (uint)*(byte *)((int)puVar13 + -1);
+      break;
+    case 0x4c:
+      puVar13 = (undefined4 *)((int)param_2 + 3U & 0xfffffffc);
+      puVar12 = (ushort *)(puVar13 + 1);
+      if (bVar3 && bVar2) {
+        if (puVar14 < puVar12) goto _L57;
+        uVar11 = *puVar13;
+        uVar5 = (undefined1)((uint)uVar11 >> 0x18);
+        uVar9 = (undefined1)((uint)uVar11 >> 8);
+        uVar10 = (undefined1)((uint)uVar11 >> 0x10);
+        if (bVar4) {
+          *__dest = (char)uVar11;
+          __dest[1] = uVar9;
+          __dest[2] = uVar10;
+          __dest[3] = uVar5;
         }
         else {
-          __n = 1;
+          *__dest = uVar5;
+          __dest[1] = uVar10;
+          __dest[2] = uVar9;
+          __dest[3] = (char)uVar11;
         }
-        bVar10 = false;
-        param_2 = puVar13;
-        goto _L41;
       }
-      if (bVar1 == 0x4c) {
-        puVar14 = (undefined4 *)((int)param_2 + 3U & 0xfffffffc);
-        puVar13 = (ushort *)(puVar14 + 1);
-        if (bVar3 && bVar2) {
-          if (puVar5 < puVar13) goto _L56;
-          uVar8 = *puVar14;
-          uVar15 = (undefined1)((uint)uVar8 >> 0x18);
-          uVar12 = (undefined1)((uint)uVar8 >> 0x10);
-          uVar6 = (undefined1)((uint)uVar8 >> 8);
-          if (bVar4) {
-            *__dest = (char)uVar8;
-            __dest[1] = uVar6;
-            __dest[2] = uVar12;
-            __dest[3] = uVar15;
-          }
-          else {
-            *__dest = uVar15;
-            __dest[1] = uVar12;
-            __dest[2] = uVar6;
-            __dest[3] = (char)uVar8;
-          }
-        }
-        __dest = __dest + 4;
-        param_2 = puVar13;
-      }
-      else {
-_L71:
-        iVar16 = 3;
-      }
-      goto _L41;
+      __dest = __dest + 4;
+      param_2 = puVar12;
     }
-    if (bVar1 != 0x44) {
-      if (bVar1 == 0x47) {
-        bVar10 = true;
-      }
-      else if (bVar1 != 0x42) goto _L71;
-      goto _L23;
-    }
-    puVar14 = (undefined4 *)((int)param_2 + 3U & 0xfffffffc);
-    puVar13 = (ushort *)(puVar14 + 1);
-    if (bVar3 && bVar2) {
-      if (puVar5 < puVar13) goto _L56;
-      uVar8 = *puVar14;
-      uVar6 = (undefined1)((uint)uVar8 >> 0x10);
-      uVar12 = (undefined1)((uint)uVar8 >> 8);
-      if (bVar4) {
-        *__dest = (char)uVar8;
-        __dest[1] = uVar12;
-        __dest[2] = uVar6;
-      }
-      else {
-        *__dest = uVar6;
-        __dest[1] = uVar12;
-        __dest[2] = (char)uVar8;
-      }
-    }
-    __dest = __dest + 3;
-    param_2 = puVar13;
   } while( true );
 }
 
