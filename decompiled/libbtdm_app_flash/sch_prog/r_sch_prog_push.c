@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> sch_prog.o -> r_sch_prog_push
  *
@@ -56,7 +56,7 @@ void r_sch_prog_push(undefined4 *param_1)
     r_assert_err(0,"sch_prog.c",0x2b4);
   }
   iVar7 = param_1[2];
-  if (0x3ff < (0x270U - iVar7 & 0xffff)) {
+  if ((0x270U - iVar7 & 0xfc00) != 0) {
     r_assert_err(0,"sch_prog.c",0x1f7);
   }
   iVar3 = r_emi_get_mem_addr_by_offset(0);
@@ -68,7 +68,7 @@ void r_sch_prog_push(undefined4 *param_1)
   }
   else {
     uVar2 = (uVar2 + 0x271) / 0x271;
-    if ((int)(uVar2 << 0x10) < 0) {
+    if ((uVar2 >> 0xf & 1) != 0) {
       r_assert_err(0,"sch_prog.c",0x249);
     }
     iVar7 = r_emi_get_mem_addr_by_offset(0);

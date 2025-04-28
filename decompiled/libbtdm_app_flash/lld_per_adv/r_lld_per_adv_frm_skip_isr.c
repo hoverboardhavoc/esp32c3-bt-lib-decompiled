@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_per_adv.o -> r_lld_per_adv_frm_skip_isr
  *
@@ -37,7 +37,7 @@ void r_lld_per_adv_frm_skip_isr(uint param_1)
   }
   r_sch_arb_remove(iVar3,1);
   if (*(char *)(iVar3 + 0x53) == '\x02') {
-    puVar8 = (undefined1 *)r_ke_msg_alloc(0x208,0,0xff);
+    puVar8 = (undefined1 *)r_ke_msg_alloc(0x208,0,0xff,2);
     uVar1 = *(undefined1 *)(iVar3 + 0x52);
     puVar8[1] = 0;
     *puVar8 = uVar1;

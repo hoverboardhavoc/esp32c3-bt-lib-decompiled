@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> sch_prog.o -> r_sch_prog_tx_isr
  *
@@ -30,7 +30,7 @@ void r_sch_prog_tx_isr(void)
     r_assert_err(0,"sch_prog.c",0x1a0);
   }
   if (*(code **)(r_emi_get_mem_addr_by_offset + iVar2) != (code *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x00010340. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010346. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(r_emi_get_mem_addr_by_offset + iVar2))
               (*(undefined4 *)(&sch_prog_env + iVar2),*(undefined4 *)(r_assert_err + iVar2),3);

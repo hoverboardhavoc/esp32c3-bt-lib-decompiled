@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_con_upd.o -> r_llc_pref_param_compute
  *
@@ -71,17 +71,17 @@ void r_llc_pref_param_compute(int param_1,int param_2)
     }
     uStack_48 = ((uint)uVar1 * 2 + uVar3) % uVar2;
     iVar4 = (**(code **)(_r_ip_funcs_p + 0x6d8))(&local_50,*(code **)(_r_ip_funcs_p + 0x6d8));
-    if (iVar4 != 0) goto _L46;
+    if (iVar4 != 0) goto _L42;
     *(undefined2 *)(param_2 + 0x2a) = *(undefined2 *)(param_2 + 0x16);
   }
   else {
-_L46:
+_L42:
     iVar4 = (**(code **)(_r_ip_funcs_p + 0x6f8))(&iStack_40,*(code **)(_r_ip_funcs_p + 0x6f8));
     uVar2 = uStack_2c;
     if (iVar4 != 0) {
       uVar5 = *(undefined2 *)(param_2 + 10);
       *(undefined2 *)(param_2 + 0x2a) = 0;
-      goto _L54;
+      goto _L50;
     }
     if ((*(ushort *)(iVar6 + 0x42) & 1) == 0) {
       if (uStack_2c == 0) {
@@ -96,7 +96,7 @@ _L46:
     local_50 = uStack_2c;
   }
   uVar5 = (undefined2)(local_50 >> 1);
-_L54:
+_L50:
   *(undefined2 *)(param_2 + 0x28) = uVar5;
   return;
 }

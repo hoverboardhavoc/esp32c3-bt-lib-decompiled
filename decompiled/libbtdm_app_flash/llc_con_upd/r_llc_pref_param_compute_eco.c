@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> r_llc_pref_param_compute_eco
  *
@@ -33,9 +33,9 @@ void r_llc_pref_param_compute_eco(int param_1,int param_2)
   uint uStack_2c;
   uint uStack_28;
   
-  if (((((uint)(*(int *)(param_2 + 0x2c) << 8) >> 0x10 != 0) &&
-       (uVar4 = r_lld_con_count_get(), uVar4 < 2)) && (*(short *)(param_2 + 0x16) != -1)) &&
-     (iVar5 = r_llc_proc_state_get(param_2), iVar5 == 2)) {
+  if (((((*(uint *)(param_2 + 0x2c) & 0xffff00) != 0) && (uVar4 = r_lld_con_count_get(), uVar4 < 2))
+      && (*(short *)(param_2 + 0x16) != -1)) && (iVar5 = r_llc_proc_state_get(param_2), iVar5 == 2))
+  {
     *(undefined2 *)(param_2 + 0x2a) = *(undefined2 *)(param_2 + 0x16);
     *(undefined2 *)(param_2 + 0x28) = *(undefined2 *)(param_2 + 8);
     return;
@@ -76,17 +76,17 @@ void r_llc_pref_param_compute_eco(int param_1,int param_2)
     }
     uStack_48 = ((uint)uVar1 * 2 + uVar2) % uVar4;
     iVar3 = r_sch_plan_chk(&uStack_50);
-    if (iVar3 != 0) goto _L46;
+    if (iVar3 != 0) goto _L42;
     *(undefined2 *)(param_2 + 0x2a) = *(undefined2 *)(param_2 + 0x16);
   }
   else {
-_L46:
+_L42:
     iVar3 = r_sch_plan_req(&iStack_40);
     uVar4 = uStack_2c;
     if (iVar3 != 0) {
       uVar6 = *(undefined2 *)(param_2 + 10);
       *(undefined2 *)(param_2 + 0x2a) = 0;
-      goto _L54;
+      goto _L50;
     }
     if ((*(ushort *)(iVar5 + 0x42) & 1) == 0) {
       if (uStack_2c == 0) {
@@ -101,7 +101,7 @@ _L46:
     uStack_50 = uStack_2c;
   }
   uVar6 = (undefined2)(uStack_50 >> 1);
-_L54:
+_L50:
   *(undefined2 *)(param_2 + 0x28) = uVar6;
   return;
 }

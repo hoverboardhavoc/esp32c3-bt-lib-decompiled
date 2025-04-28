@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc.o -> r_llc_start_eco
  *
@@ -77,9 +77,11 @@ undefined4 r_llc_start_eco(uint param_1,undefined4 *param_2,void *param_3)
         *(undefined2 *)(puVar3 + 5) = 0x1b;
         bVar1 = *(byte *)(param_2 + 9);
         cVar2 = (&co_rate_to_phy)[bVar1];
-        uVar7 = 0x148;
         if (cVar2 == '\x03') {
           uVar7 = 0xa90;
+        }
+        else {
+          uVar7 = 0x148;
         }
         *(undefined2 *)(puVar3 + 6) = uVar7;
         *(undefined2 *)((int)puVar3 + 0x1a) = uVar7;

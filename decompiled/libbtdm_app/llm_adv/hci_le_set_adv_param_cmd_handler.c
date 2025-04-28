@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_set_adv_param_cmd_handler
  *
@@ -59,14 +59,14 @@ _L7:
       iVar5 = _p_llm_env;
       piVar7 = (int *)(*(int *)(_p_llm_env + 8) + (uint)bStack_3d * 0x44);
       iVar4 = *piVar7;
-      bVar1 = (&adv_evt_type2prop)[(byte)param_1[2]];
-      *(undefined1 *)(iVar4 + 9) = 0;
-      *(ushort *)(iVar4 + 2) = (ushort)bVar1;
+      *(ushort *)(iVar4 + 2) = (ushort)(byte)(&adv_evt_type2prop)[(byte)param_1[2]];
       uVar2 = param_1[1];
-      *(undefined1 *)(iVar4 + 6) = 0;
+      *(undefined1 *)(iVar4 + 9) = 0;
       *(char *)(iVar4 + 8) = (char)(uVar2 >> 8);
       *(char *)(iVar4 + 7) = (char)uVar2;
-      *(ushort *)(iVar4 + 4) = *param_1;
+      uVar2 = *param_1;
+      *(undefined1 *)(iVar4 + 6) = 0;
+      *(ushort *)(iVar4 + 4) = uVar2;
       *(undefined1 *)(iVar4 + 10) = *(undefined1 *)((int)param_1 + 0xd);
       bVar1 = *(byte *)((int)param_1 + 5);
       *(byte *)(iVar4 + 0xb) = bVar1;

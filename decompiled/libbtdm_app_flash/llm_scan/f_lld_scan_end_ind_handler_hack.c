@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_scan.o -> f_lld_scan_end_ind_handler_hack
  *
@@ -28,14 +28,14 @@ undefined4 f_lld_scan_end_ind_handler_hack(int param_1)
   if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
     if (*(char *)(iVar6 + 0x40) != '\b') {
       r_assert_err(0,"llm_scan.c",0x81f);
-      goto _L889;
+      goto _L881;
     }
     uVar4 = 0x200c;
   }
   else {
     if (*(char *)(iVar6 + 0x40) != '\b') {
       if (*(ushort *)(iVar6 + 0x2a) == 0) {
-        puVar5 = (undefined1 *)r_ke_msg_alloc(0x1104,0,0x3e);
+        puVar5 = (undefined1 *)r_ke_msg_alloc(0x1104,0,0x3e,1);
         *puVar5 = 0x11;
         r_hci_send_2_host();
         *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar3 + 0x40) = 6;
@@ -48,13 +48,13 @@ undefined4 f_lld_scan_end_ind_handler_hack(int param_1)
          ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
         (*(code *)*_bt_rf_coex_hooks_p)((uint)bVar1,3,0);
       }
-      goto _L889;
+      goto _L881;
     }
     uVar4 = 0x2042;
   }
   r_llm_cmd_cmp_send(uVar4,0);
   *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar3 + 0x40) = 6;
-_L889:
+_L881:
   iVar6 = _p_llm_env;
   cVar2 = *(char *)(*(int *)(_p_llm_env + 8) + iVar3 + 0x40);
   if ((cVar2 == '\x06') || ((*(byte *)(_p_llm_env + 0xd4) & 2) != 0)) {

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_sync.o -> r_lld_sync_process_pkt_rx_aux_sync_ind
  *
@@ -21,7 +21,6 @@ void r_lld_sync_process_pkt_rx_aux_sync_ind(int param_1,int param_2)
   int iVar4;
   int iVar5;
   uint uVar6;
-  uint uVar7;
   
   iVar4 = *(int *)(&lld_sync_env + param_1 * 4);
   bVar1 = *(byte *)(_p_lld_env + 0xd8);
@@ -30,25 +29,22 @@ void r_lld_sync_process_pkt_rx_aux_sync_ind(int param_1,int param_2)
     bVar1 = *(byte *)(_p_lld_env + 0xd8);
     iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
     uVar2 = *(ushort *)((uint)bVar1 * 0x14 + 10 + iVar5);
-    if (0xfff < uVar2) {
+    if ((uVar2 & 0xf000) != 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,1000,*(code **)(_r_plf_funcs_p + 8));
     }
     bVar1 = *(byte *)(_p_lld_env + 0xd8);
     iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
-    uVar7 = CONCAT22(uVar2,*(undefined2 *)((uint)bVar1 * 0x14 + 8 + iVar5));
+    uVar6 = CONCAT22(uVar2,*(undefined2 *)((uint)bVar1 * 0x14 + 8 + iVar5));
     bVar1 = *(byte *)(_p_lld_env + 0xd8);
     iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
     uVar3 = ((uint)*(ushort *)(&lld_exp_sync_pos_tab + (uint)*(byte *)(iVar4 + 0x58) * 2) * -2 +
             0x270) - (*(ushort *)((uint)bVar1 * 0x14 + 0xc + iVar5) & 0x3ff);
-    uVar6 = uVar3 & 0xffff;
     iVar5 = (int)(uVar3 * 0x10000) >> 0x10;
     if (((DAT_00013058 & 4) != 0) && ((*(byte *)(iVar4 + 0x58) - 2 & 0xff) < 2)) {
-      uVar3 = uVar6 + (uint)_DAT_0001305a * -2;
-      uVar6 = uVar3 & 0xffff;
-      iVar5 = (int)(uVar3 * 0x10000) >> 0x10;
+      iVar5 = (int)(((uVar3 & 0xffff) + (uint)_DAT_0001305a * -2) * 0x10000) >> 0x10;
     }
-    uVar3 = uVar7;
-    if (0x751 < (uVar6 + 0x4e1 & 0xffff)) {
+    uVar3 = uVar6;
+    if (0x751 < (iVar5 + 0x4e1U & 0xffff)) {
       (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x19d,*(code **)(_r_plf_funcs_p + 8));
     }
     for (; iVar5 < 0; iVar5 = (iVar5 + 0x271) * 0x10000 >> 0x10) {
@@ -56,7 +52,7 @@ void r_lld_sync_process_pkt_rx_aux_sync_ind(int param_1,int param_2)
     }
     *(uint *)(iVar4 + 0x44) = uVar3;
     *(short *)(iVar4 + 0x48) = (short)iVar5;
-    *(uint *)(iVar4 + 0x38) = uVar7;
+    *(uint *)(iVar4 + 0x38) = uVar6;
     *(undefined2 *)(iVar4 + 0x52) = 0;
     *(undefined1 *)(iVar4 + 0x54) = 0;
   }

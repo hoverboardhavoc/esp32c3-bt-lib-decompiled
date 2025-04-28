@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_hci.o -> hci_le_add_dev_to_wlst_cmd_handler
  *
@@ -23,9 +23,9 @@ undefined4 hci_le_add_dev_to_wlst_cmd_handler(char *param_1,undefined4 param_2)
   
   iVar1 = r_llm_is_wl_accessible();
   uVar3 = 0xc;
-  if (iVar1 == 0) goto _L230;
+  if (iVar1 == 0) goto _L235;
   if ((byte)(*param_1 - 2U) < 0xfd) {
-_L227:
+_L232:
     uVar3 = 0x12;
   }
   else {
@@ -34,12 +34,12 @@ _L227:
     lld_peer_rpa_to_id(auStack_18,&local_19);
     uVar2 = r_llm_dev_list_search(auStack_18,local_19);
     if (uVar2 < 0xc) {
-      if ((*(byte *)(_p_llm_env + uVar2 * 10 + 0x2d) & 2) != 0) goto _L227;
+      if ((*(byte *)(_p_llm_env + uVar2 * 10 + 0x2d) & 2) != 0) goto _L232;
     }
     else {
       uVar2 = r_llm_dev_list_empty_entry();
       uVar3 = 7;
-      if (uVar2 == 0xc) goto _L230;
+      if (uVar2 == 0xc) goto _L235;
     }
     iVar1 = _p_llm_env + uVar2 * 10;
     memcpy((void *)(iVar1 + 0x24),auStack_18,6);
@@ -51,7 +51,7 @@ _L227:
     }
     uVar3 = 0;
   }
-_L230:
+_L235:
   r_llm_cmd_cmp_send(param_2,uVar3);
   return 0;
 }

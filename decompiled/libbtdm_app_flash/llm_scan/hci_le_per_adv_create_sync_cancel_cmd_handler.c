@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_scan.o -> hci_le_per_adv_create_sync_cancel_cmd_handler
  *
@@ -66,9 +66,10 @@ undefined4 hci_le_per_adv_create_sync_cancel_cmd_handler(undefined4 param_1,unde
   r_llm_cmd_cmp_send(param_2,iVar4);
   if (iVar4 == 0) {
     puVar3 = (undefined2 *)r_ke_msg_alloc(0x1104,0,0x3e,0x12);
-    puVar3[1] = (short)uVar1;
     *puVar3 = 0x440e;
-    iVar4 = *(int *)(_p_llm_env + 8) + uVar1 * 0x44;
+    iVar4 = _p_llm_env;
+    puVar3[1] = (short)uVar1;
+    iVar4 = *(int *)(iVar4 + 8) + uVar1 * 0x44;
     *(undefined1 *)(puVar3 + 2) = *(undefined1 *)(iVar4 + 0x28);
     *(undefined1 *)((int)puVar3 + 5) = *(undefined1 *)(iVar4 + 0x41);
     memcpy(puVar3 + 3,(void *)(iVar4 + 4),6);

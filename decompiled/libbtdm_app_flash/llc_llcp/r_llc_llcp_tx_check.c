@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_llcp.o -> r_llc_llcp_tx_check
  *
@@ -37,11 +37,11 @@ void r_llc_llcp_tx_check(uint param_1)
       else if (uVar6 == 1) {
         bVar7 = bVar7 >> 2;
       }
-      if (((int)(uint)DAT_00010a8a >> (param_1 & 0x1f) & 1U) == 0) {
+      if (((int)(uint)DAT_000108ee >> (param_1 & 0x1f) & 1U) == 0) {
         if ((bVar7 & 1) != 0) goto _L37;
       }
       else if ((*(byte *)((int)piVar2 + 9) == 6) && ((bVar7 & 1) != 0)) {
-        DAT_00010a8a = ~(ushort)(1 << (param_1 & 0x1f)) & DAT_00010a8a;
+        DAT_000108ee = DAT_000108ee & ~(ushort)(1 << (param_1 & 0x1f));
 _L37:
         iVar4 = r_ble_util_buf_llcp_tx_alloc();
         if (iVar4 == 0) {

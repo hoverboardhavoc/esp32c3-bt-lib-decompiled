@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> arch_main.o -> rw_pre_main
  *
@@ -34,7 +34,7 @@ void rw_pre_main(void)
     if (_r_h4tl_eif_p == 0) {
       iVar1 = _g_bt_plf_log_level;
       if (0 < _g_bt_plf_log_level) {
-        ets_printf(0x11948);
+        ets_printf("H4TL EIF not registered\n");
       }
       r_assert_err(0,"arch_main.c",0x398);
     }

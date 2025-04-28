@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> bt_rw_v9.o -> r_rf_rw_v9_le_init
  *
@@ -16,7 +16,7 @@ void r_rf_rw_v9_le_init(void)
 
 {
   int iVar1;
-  int iVar2;
+  uint uVar2;
   
   _DAT_60031080 = _DAT_60031080 & 0xff00ff00 | 0x640064;
   _DAT_60031084 = _DAT_60031084 & 0xff00ff00 | 0x640064;
@@ -37,12 +37,14 @@ void r_rf_rw_v9_le_init(void)
     _DAT_60011868 = _DAT_60011868 & 0xffffc7df;
   }
   else {
-    iVar2 = r_sdk_config_get_opts_ext();
-    iVar1 = -0x7e0;
-    if ((*(byte *)(iVar2 + 0x11) & 2) == 0) {
-      iVar1 = -0x800;
+    iVar1 = r_sdk_config_get_opts_ext();
+    if ((*(byte *)(iVar1 + 0x11) & 2) == 0) {
+      uVar2 = 0x3800;
     }
-    _DAT_60011868 = iVar1 + 0x4000U | _DAT_60011868;
+    else {
+      uVar2 = 0x3820;
+    }
+    _DAT_60011868 = uVar2 | _DAT_60011868;
   }
   iVar1 = r_sdk_config_get_opts_ext();
   if (*(char *)(iVar1 + 0x19) == '\x01') {

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc.o -> r_llc_llcp_state_set
  *
@@ -20,17 +20,17 @@ void r_llc_llcp_state_set(uint param_1,int param_2,uint param_3)
   
   iVar4 = *(int *)(&llc_env + param_1 * 4);
   if (param_3 == 3) {
-    if (param_2 == 2) goto _L78;
+    if (param_2 == 2) goto _L77;
     uVar3 = 0x1a7;
     uVar2 = 3;
   }
   else {
-    if ((param_3 != 0) || (param_2 == 2)) goto _L78;
+    if ((param_3 != 0) || (param_2 == 2)) goto _L77;
     uVar3 = 0x1a8;
     uVar2 = 0;
   }
   r_assert_param(param_2,uVar2,"llc.c",uVar3);
-_L78:
+_L77:
   if (iVar4 != 0) {
     iVar1 = r_sdk_config_get_opts_ext();
     if (((*(uint *)(iVar1 + 0x28) & 0x20) != 0) &&
@@ -39,12 +39,13 @@ _L78:
                 (0x40a30024,
                  (uint)*(byte *)(iVar4 + 0x44) << 0x18 | param_3 << 0x10 | param_2 << 8 | param_1);
     }
-    if (((*(byte *)(iVar4 + 0x44) & 3) != 3) && ((*(byte *)(iVar4 + 0x44) & 0xc) != 0xc)) {
+    if (((*(byte *)(iVar4 + 0x44) & 3) != 3) &&
+       (((int)(uint)*(byte *)(iVar4 + 0x44) >> 2 & 3U) != 3)) {
       if (param_2 != 1) {
         if (param_2 != 2) {
           if (param_2 == 0) {
-            if (3 < param_3) {
-              r_assert_param(param_3,"llc.c",0x1b6);
+            if ((param_3 & 0xfffffffc) != 0) {
+              r_assert_param(3,param_3,"llc.c",0x1b6);
             }
             *(byte *)(iVar4 + 0x44) = *(byte *)(iVar4 + 0x44) & 0xfc | (byte)param_3;
             return;
@@ -52,12 +53,12 @@ _L78:
           r_assert_param(param_1,param_2,"llc.c",0x1c7);
           return;
         }
-        if (3 < param_3) {
-          r_assert_param(param_3,"llc.c",0x1bb);
+        if ((param_3 & 0xfffffffc) != 0) {
+          r_assert_param(3,param_3,"llc.c",0x1bb);
         }
         *(byte *)(iVar4 + 0x44) = *(byte *)(iVar4 + 0x44) & 0xfc | (byte)param_3;
       }
-      if ((param_3 & 0xfc) != 0) {
+      if ((param_3 << 2 & 0xfffffff3) != 0) {
         r_assert_param(0xc,param_3,"llc.c",0x1bf);
       }
       *(byte *)(iVar4 + 0x44) = *(byte *)(iVar4 + 0x44) & 0xf3 | (byte)(param_3 << 2);

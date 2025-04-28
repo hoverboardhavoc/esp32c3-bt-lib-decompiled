@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_phy_upd.o -> r_llc_loc_phy_upd_proc_err_cb
  *
@@ -34,11 +34,11 @@ void r_llc_loc_phy_upd_proc_err_cb(uint param_1,uint param_2,byte *param_3)
   
   if (param_2 == 2) {
     uVar17 = (uint)param_3[1];
-_L123:
+_L121:
     if (uVar17 == 0) {
       return;
     }
-    if ((uVar17 - 0x19 & 0xff) < 2) goto _L124;
+    if ((uVar17 - 0x19 & 0xff) < 2) goto _L122;
   }
   else {
     if (2 < param_2) {
@@ -49,17 +49,17 @@ _L123:
         return;
       }
       uVar17 = (uint)param_3[2];
-      goto _L123;
+      goto _L121;
     }
     if (param_2 == 0) {
       uVar17 = (uint)*param_3;
-      goto _L123;
+      goto _L121;
     }
     if (param_3[1] != 0x16) {
       return;
     }
     uVar17 = 0x19;
-_L124:
+_L122:
     iVar15 = r_sdk_config_get_opts();
     if ((param_1 < *(byte *)(iVar15 + 0xd)) &&
        (iVar15 = *(int *)(&llc_env + param_1 * 4), iVar15 != 0)) {
@@ -98,9 +98,9 @@ _L124:
             bVar16 = ~*(byte *)(iVar11 + 10) & 1;
           }
           else {
-            bVar16 = 3;
-            if (*(short *)(iVar11 + 0x10) == 2) {
-              bVar16 = 2;
+            bVar16 = 2;
+            if (*(short *)(iVar11 + 0x10) != 2) {
+              bVar16 = 3;
             }
           }
           r_lld_con_tx_len_update_for_rate(param_1,bVar16);
@@ -109,7 +109,7 @@ _L124:
         else {
           uVar13 = 2;
         }
-        goto _L114;
+        goto _L112;
       }
       if (((*(byte *)(iVar15 + 0x1c) != 3) || (sVar8 == 0)) || (sVar8 == sVar10)) goto _L26;
       uVar18 = (&co_phy_to_rate)[*(byte *)(iVar15 + 0x1d)];
@@ -238,7 +238,7 @@ _L26:
       return;
     case 3:
       r_llc_proc_timer_set(param_1,0,0);
-      if (*(short *)(iVar11 + 0xc) == 0) goto _L113;
+      if (*(short *)(iVar11 + 0xc) == 0) goto _L111;
       if (*(byte *)(iVar11 + 0xd) == 0) {
         bVar16 = *(byte *)(iVar15 + 0x1c);
       }
@@ -287,12 +287,12 @@ _L26:
       return;
     }
     uVar13 = 4;
-_L114:
+_L112:
     r_llc_proc_state_set(iVar11,param_1,uVar13);
     return;
   }
   r_llc_proc_timer_set(param_1,0,0);
-_L113:
+_L111:
   r_lld_con_tx_len_update_for_rate(param_1,4);
   goto _L26;
 }

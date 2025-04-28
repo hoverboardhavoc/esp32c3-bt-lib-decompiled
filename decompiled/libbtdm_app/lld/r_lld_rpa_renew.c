@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld.o -> r_lld_rpa_renew
  *
@@ -21,7 +21,7 @@ void r_lld_rpa_renew(void)
   code *pcVar4;
   
   if (_lld_rpa_renew_env != 0) {
-                    /* WARNING: Could not recover jumptable at 0x00011ca8. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011d1e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_plf_funcs_p + 0x10))(0,0,"lld.c",0x55e,*(code **)(_r_plf_funcs_p + 0x10));
     return;
@@ -45,7 +45,7 @@ void r_lld_rpa_renew(void)
     *(undefined4 *)(iVar1 + 8) = 0;
     iVar2 = (**(code **)(iVar2 + 0x6b0))(iVar1,*(code **)(iVar2 + 0x6b0));
     if (iVar2 != 0) {
-                    /* WARNING: Could not recover jumptable at 0x00011c84. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011cfa. Too many branches */
                     /* WARNING: Treating indirect jump as call */
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld.c",0x558,*(code **)(_r_plf_funcs_p + 8));
       return;

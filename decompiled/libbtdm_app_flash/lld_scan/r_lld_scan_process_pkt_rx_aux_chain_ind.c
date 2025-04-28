@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_process_pkt_rx_aux_chain_ind
  *
@@ -16,87 +16,94 @@ void r_lld_scan_process_pkt_rx_aux_chain_ind(int param_1,int param_2,char *param
 
 {
   byte bVar1;
-  ushort uVar2;
-  int iVar3;
+  short sVar2;
+  ushort uVar3;
   int iVar4;
-  short *psVar5;
-  void *__src;
+  short sVar5;
   int iVar6;
-  undefined1 *puVar7;
-  undefined1 uVar8;
-  uint uVar9;
+  short *psVar7;
+  void *__src;
+  undefined1 *puVar8;
+  undefined1 uVar9;
   uint uVar10;
   undefined4 auStack_24 [2];
   
-  iVar3 = *(int *)(_lld_scan_env + param_1 * 4);
-  iVar4 = r_emi_get_mem_addr_by_offset(0x1000);
-  uVar10 = (uint)*(ushort *)(param_2 * 0x14 + 0x12 + iVar4);
+  iVar4 = *(int *)(_lld_scan_env + param_1 * 4);
+  iVar6 = r_emi_get_mem_addr_by_offset(0x1000);
+  sVar2 = *(short *)(param_2 * 0x14 + 0x12 + iVar6);
   bVar1 = param_3[5];
-  uVar9 = (uint)*(ushort *)(iVar3 + 0x36) + (uint)bVar1;
-  iVar4 = uVar9 * 0x10000;
-  *(char *)(iVar3 + 0x41) = *(char *)(iVar3 + 0x41) + '\x01';
-  *(short *)(iVar3 + 0x36) = (short)((uint)iVar4 >> 0x10);
-  if (0x672 < (uVar9 & 0xffff)) {
-    *(undefined1 *)(iVar3 + 0x6e) = 2;
-    param_3[5] = (bVar1 + 0x72) - (char)((uint)iVar4 >> 0x10);
-    goto _L319;
+  uVar10 = (uint)*(ushort *)(iVar4 + 0x36) + (uint)bVar1;
+  iVar6 = uVar10 * 0x10000;
+  *(char *)(iVar4 + 0x41) = *(char *)(iVar4 + 0x41) + '\x01';
+  *(short *)(iVar4 + 0x36) = (short)((uint)iVar6 >> 0x10);
+  if (0x672 < (uVar10 & 0xffff)) {
+    *(undefined1 *)(iVar4 + 0x6e) = 2;
+    param_3[5] = (bVar1 + 0x72) - (char)((uint)iVar6 >> 0x10);
+    goto _L325;
   }
   if (*param_3 == '\0') {
-    *(char *)(iVar3 + 0x6e) = (char)((*(byte *)(iVar3 + 0x6d) >> 3 & 1 ^ 1) << 1);
-    goto _L319;
+    *(char *)(iVar4 + 0x6e) = (char)(((*(byte *)(iVar4 + 0x6d) >> 3 ^ 1) & 1) << 1);
+    goto _L325;
   }
-  uVar2 = *(ushort *)(param_3 + 6);
-  uVar9 = (int)((uint)uVar2 << 0x17) >> 0x1f & 6;
-  if ((uVar2 & 0x200) != 0) {
-    uVar9 = uVar9 + 6;
+  uVar3 = *(ushort *)(param_3 + 6);
+  sVar5 = 0;
+  if ((uVar3 & 0x100) != 0) {
+    sVar5 = 6;
   }
-  iVar4 = uVar9 + ((uVar2 & 0x400) != 0);
-  if ((int)((uint)uVar2 << 0x14) < 0) {
-    psVar5 = (short *)r_emi_get_mem_addr_by_offset(uVar10 + iVar4 & 0xffff);
-    if (*(short *)(iVar3 + 0x34) == *psVar5) {
-      iVar4 = iVar4 + 2;
-_L293:
-      if (-1 < (int)((uint)*(ushort *)(param_3 + 6) << 0x13)) {
-        *(undefined1 *)(iVar3 + 0x6e) = 0;
-        *(undefined1 *)(iVar3 + 0x3d) = 0;
-        goto _L298;
+  if ((uVar3 & 0x200) != 0) {
+    sVar5 = sVar5 + 6;
+  }
+  if ((uVar3 & 0x400) != 0) {
+    sVar5 = sVar5 + 1;
+  }
+  if ((uVar3 >> 0xb & 1) == 0) {
+    if ((*(byte *)(iVar4 + 0x6d) & 8) != 0) goto _L299;
+  }
+  else {
+    psVar7 = (short *)r_emi_get_mem_addr_by_offset(sVar2 + sVar5);
+    if (*(short *)(iVar4 + 0x34) == *psVar7) {
+      sVar5 = sVar5 + 2;
+_L299:
+      if ((*(ushort *)(param_3 + 6) & 0x1000) == 0) {
+        *(undefined1 *)(iVar4 + 0x6e) = 0;
+        *(undefined1 *)(iVar4 + 0x3d) = 0;
+        goto _L304;
       }
-      __src = (void *)r_emi_get_mem_addr_by_offset(uVar10 + iVar4 & 0xffff);
+      __src = (void *)r_emi_get_mem_addr_by_offset(sVar2 + sVar5);
       memcpy(auStack_24,__src,3);
       iVar6 = r_emi_get_mem_addr_by_offset(0x1000);
       if ((*(ushort *)(param_2 * 0x14 + 2 + iVar6) >> 9 & 1) == 0) {
-        if (*(byte *)(iVar3 + 0x41) < 7) {
-          iVar6 = r_lld_calc_aux_rx(iVar3 + 0x48,param_2,auStack_24[0]);
-          uVar8 = 1;
-          if (iVar6 != 0) goto _L318;
+        if (*(byte *)(iVar4 + 0x41) < 7) {
+          iVar6 = r_lld_calc_aux_rx(iVar4 + 0x48,param_2,auStack_24[0]);
+          uVar9 = 1;
+          if (iVar6 != 0) goto _L324;
         }
-        *(undefined1 *)(iVar3 + 0x6e) = 2;
+        *(undefined1 *)(iVar4 + 0x6e) = 2;
       }
       else {
-        *(undefined4 *)(iVar3 + 0x2c) = auStack_24[0];
-        uVar8 = 2;
-_L318:
-        *(undefined1 *)(iVar3 + 0x3e) = uVar8;
+        *(undefined4 *)(iVar4 + 0x2c) = auStack_24[0];
+        uVar9 = 2;
+_L324:
+        *(undefined1 *)(iVar4 + 0x3e) = uVar9;
       }
-      *(undefined1 *)(iVar3 + 0x3d) = 3;
-      iVar4 = iVar4 + 3;
-_L298:
-      if ((int)((uint)*(ushort *)(param_3 + 6) << 0x12) < 0) {
-        iVar4 = iVar4 + 0x12;
+      *(undefined1 *)(iVar4 + 0x3d) = 3;
+      sVar5 = sVar5 + 3;
+_L304:
+      if ((*(ushort *)(param_3 + 6) & 0x2000) != 0) {
+        sVar5 = sVar5 + 0x12;
       }
-      if (-1 < (int)((uint)*(ushort *)(param_3 + 6) << 0x11)) {
+      if ((*(ushort *)(param_3 + 6) & 0x4000) == 0) {
         return;
       }
-      puVar7 = (undefined1 *)r_emi_get_mem_addr_by_offset(uVar10 + iVar4 & 0xffff);
-      *(undefined1 *)(iVar3 + 0x73) = *puVar7;
+      puVar8 = (undefined1 *)r_emi_get_mem_addr_by_offset(sVar2 + sVar5);
+      *(undefined1 *)(iVar4 + 0x73) = *puVar8;
       return;
     }
   }
-  else if ((*(byte *)(iVar3 + 0x6d) & 8) != 0) goto _L293;
-  *(undefined1 *)(iVar3 + 0x6e) = 2;
+  *(undefined1 *)(iVar4 + 0x6e) = 2;
   param_3[5] = '\0';
-_L319:
-  *(undefined1 *)(iVar3 + 0x3d) = 0;
+_L325:
+  *(undefined1 *)(iVar4 + 0x3d) = 0;
   return;
 }
 

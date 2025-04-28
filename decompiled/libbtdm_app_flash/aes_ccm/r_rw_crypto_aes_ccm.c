@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> aes_ccm.o -> r_rw_crypto_aes_ccm
  *
@@ -39,7 +39,7 @@ void r_rw_crypto_aes_ccm(undefined4 param_1,int param_2,undefined4 param_3,undef
     *puVar3 = *puVar2;
     puVar3 = puVar3 + 1;
   } while (iVar4 != -1);
-  *(byte *)(iVar1 + 0x51) = (param_7 | *(byte *)(iVar1 + 0x51) & 0xfe) & 0xf3 | 0x12;
+  *(byte *)(iVar1 + 0x51) = (*(byte *)(iVar1 + 0x51) & 0xfe | param_7) & 0xf3 | 0x12;
   r_aes_ccm_continue();
   return;
 }

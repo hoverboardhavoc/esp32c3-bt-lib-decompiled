@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> aes_ccm.o -> r_aes_ccm_process_e
  *
@@ -36,8 +36,8 @@ undefined4 r_aes_ccm_process_e(int param_1,void *param_2)
         pbVar8 = (byte *)((int)param_2 + 0xf);
         uVar7 = 0;
         do {
-          if ((uint)*(byte *)(param_1 + 0x50) <= (uVar7 & 0xff)) goto _L41;
-          iVar3 = uVar7 + uVar6;
+          if ((uint)*(byte *)(param_1 + 0x50) <= (uVar7 & 0xff)) goto _L38;
+          iVar3 = uVar6 + uVar7;
           bVar2 = *pbVar8;
           bVar1 = *pbVar5;
           uVar7 = uVar7 + 1;
@@ -52,12 +52,13 @@ undefined4 r_aes_ccm_process_e(int param_1,void *param_2)
           *(byte *)(iVar3 + uVar7 + uVar6) =
                *(byte *)((0xf - uVar7) + param_1 + 0x3f) ^ *(byte *)((int)param_2 + (0xf - uVar7));
         }
-_L41:
+_L38:
         uVar4 = 0;
       }
-      if (*(code **)(param_1 + 0x18) != (code *)0x0) {
-        (**(code **)(param_1 + 0x18))(uVar4,*(undefined4 *)(param_1 + 0x14));
+      if (*(code **)(param_1 + 0x18) == (code *)0x0) {
+        return 1;
       }
+      (**(code **)(param_1 + 0x18))(uVar4,*(undefined4 *)(param_1 + 0x14));
       return 1;
     }
     uVar7 = 0x10;
@@ -82,7 +83,7 @@ _L41:
     }
     *(byte *)(param_1 + 0x51) = *(byte *)(param_1 + 0x51) | 2;
     *(char *)(param_1 + 0x2e) = *(char *)(param_1 + 0x2e) + '\x01';
-    goto _L30;
+    goto _L27;
   }
   memcpy((void *)(param_1 + 0x3f),param_2,0x10);
   if ((bVar2 & 0x10) == 0) {
@@ -91,25 +92,25 @@ _L41:
       if ((uint)*(ushort *)(param_1 + 0x2c) <= (uint)*(byte *)(param_1 + 0x2e) << 4) {
         *(byte *)(param_1 + 0x51) = bVar2 & 0xf5 | 0x10;
       }
-      goto _L30;
+      goto _L27;
     }
     uVar7 = *(byte *)(param_1 + 0x2e) + 1;
     *(char *)(param_1 + 0x2e) = (char)uVar7;
-    if ((int)((uVar7 & 0xff) * 0x10 + -2) <= (int)(uint)*(byte *)(param_1 + 0x4f)) goto _L30;
+    if ((int)((uVar7 & 0xff) * 0x10 + -2) <= (int)(uint)*(byte *)(param_1 + 0x4f)) goto _L27;
     bVar1 = 0xf9;
-_L51:
+_L47:
     bVar2 = bVar2 & bVar1 | 8;
   }
   else {
     if (*(char *)(param_1 + 0x4f) == '\0') {
       bVar1 = 0xe9;
-      goto _L51;
+      goto _L47;
     }
     bVar2 = bVar2 & 0xef | 4;
   }
   *(byte *)(param_1 + 0x51) = bVar2;
   *(undefined1 *)(param_1 + 0x2e) = 0;
-_L30:
+_L27:
   (**(code **)(_r_modules_funcs_p + 0x300))(param_1,*(code **)(_r_modules_funcs_p + 0x300));
   return 0;
 }

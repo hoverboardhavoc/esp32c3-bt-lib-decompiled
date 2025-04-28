@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_phy_upd.o -> ll_phy_update_ind_handler_hack
  *
@@ -12,54 +12,57 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 ll_phy_update_ind_handler_hack(undefined4 param_1,int param_2,int param_3)
+byte ll_phy_update_ind_handler_hack(undefined4 param_1,int param_2,int param_3)
 
 {
-  int iVar1;
-  undefined4 uVar2;
-  code *pcVar3;
-  undefined4 uVar4;
+  byte bVar1;
+  int iVar2;
+  undefined4 uVar3;
+  code *pcVar4;
   
-  iVar1 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
-  if (*(char *)(iVar1 + 0x18) == '\0') {
+  iVar2 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+  if (*(char *)(iVar2 + 0x18) == '\0') {
     return 0x24;
   }
-  uVar4 = 0x20;
-  if ((*(byte *)(param_2 + 1) < 8) && (*(byte *)(param_2 + 2) < 8)) {
-    if ((*(byte *)(param_2 + 1) != 0 || *(byte *)(param_2 + 2) != 0) &&
-       ((param_3 - (uint)*(ushort *)(param_2 + 4) & 0xffff) < 0x7fff)) {
-      uVar4 = 0x28;
-      iVar1 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
-      if ((*(byte *)(iVar1 + 0x1d) & 4) != 0) goto _L215;
-      if (2 < _g_bt_plf_log_level) {
-        ets_printf("phy_upd: %u %u %u\n",param_1,param_3,*(undefined2 *)(param_2 + 4));
-      }
+  bVar1 = 0x20;
+  if (((*(byte *)(param_2 + 1) & 0xf8) != 0) || ((*(byte *)(param_2 + 2) & 0xf8) != 0)) goto _L209;
+  if ((*(byte *)(param_2 + 1) != 0 || *(byte *)(param_2 + 2) != 0) &&
+     ((param_3 - (uint)*(ushort *)(param_2 + 4) & 0xffff) < 0x7fff)) {
+    iVar2 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+    bVar1 = *(byte *)(iVar2 + 0x1d) & 4;
+    if ((*(byte *)(iVar2 + 0x1d) & 4) != 0) {
+      bVar1 = 0x28;
+      goto _L209;
     }
-    uVar4 = 0;
+    if (2 < _g_bt_plf_log_level) {
+      ets_printf("phy_upd: %u %u %u\n",param_1,param_3,*(undefined2 *)(param_2 + 4));
+      goto _L209;
+    }
   }
-_L215:
-  iVar1 = (**(code **)(_r_ip_funcs_p + 0x678))(param_1,0,*(code **)(_r_ip_funcs_p + 0x678));
-  if (iVar1 == 9) {
-    iVar1 = (**(code **)(_r_ip_funcs_p + 0x674))(param_1,0,*(code **)(_r_ip_funcs_p + 0x674));
-    uVar2 = 3;
-    *(undefined1 *)(iVar1 + 0xc) = *(undefined1 *)(param_2 + 1);
-    *(undefined1 *)(iVar1 + 0xd) = *(undefined1 *)(param_2 + 2);
-    *(undefined2 *)(iVar1 + 8) = *(undefined2 *)(param_2 + 4);
-    pcVar3 = *(code **)(_r_ip_funcs_p + 0x648);
+  bVar1 = 0;
+_L209:
+  iVar2 = (**(code **)(_r_ip_funcs_p + 0x678))(param_1,0,*(code **)(_r_ip_funcs_p + 0x678));
+  if (iVar2 == 9) {
+    iVar2 = (**(code **)(_r_ip_funcs_p + 0x674))(param_1,0,*(code **)(_r_ip_funcs_p + 0x674));
+    uVar3 = 3;
+    *(undefined1 *)(iVar2 + 0xc) = *(undefined1 *)(param_2 + 1);
+    *(undefined1 *)(iVar2 + 0xd) = *(undefined1 *)(param_2 + 2);
+    *(undefined2 *)(iVar2 + 8) = *(undefined2 *)(param_2 + 4);
+    pcVar4 = *(code **)(_r_ip_funcs_p + 0x648);
   }
   else {
-    iVar1 = (**(code **)(_r_ip_funcs_p + 0x678))(param_1,1,*(code **)(_r_ip_funcs_p + 0x678));
-    if (iVar1 != 9) {
+    iVar2 = (**(code **)(_r_ip_funcs_p + 0x678))(param_1,1,*(code **)(_r_ip_funcs_p + 0x678));
+    if (iVar2 != 9) {
       return 0x24;
     }
-    iVar1 = (**(code **)(_r_ip_funcs_p + 0x674))(param_1,1,*(code **)(_r_ip_funcs_p + 0x674));
-    uVar2 = 6;
-    *(undefined1 *)(iVar1 + 0xc) = *(undefined1 *)(param_2 + 1);
-    *(undefined1 *)(iVar1 + 0xd) = *(undefined1 *)(param_2 + 2);
-    *(undefined2 *)(iVar1 + 8) = *(undefined2 *)(param_2 + 4);
-    pcVar3 = *(code **)(_r_ip_funcs_p + 0x650);
+    iVar2 = (**(code **)(_r_ip_funcs_p + 0x674))(param_1,1,*(code **)(_r_ip_funcs_p + 0x674));
+    uVar3 = 6;
+    *(undefined1 *)(iVar2 + 0xc) = *(undefined1 *)(param_2 + 1);
+    *(undefined1 *)(iVar2 + 0xd) = *(undefined1 *)(param_2 + 2);
+    *(undefined2 *)(iVar2 + 8) = *(undefined2 *)(param_2 + 4);
+    pcVar4 = *(code **)(_r_ip_funcs_p + 0x650);
   }
-  (*pcVar3)(param_1,uVar2,uVar4,pcVar3);
-  return uVar4;
+  (*pcVar4)(param_1,uVar3,bVar1,pcVar4);
+  return bVar1;
 }
 

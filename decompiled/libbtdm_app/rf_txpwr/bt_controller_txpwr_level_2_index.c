@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> rf_txpwr.o -> bt_controller_txpwr_level_2_index
  *
@@ -21,7 +21,7 @@ uint bt_controller_txpwr_level_2_index(uint param_1,uint param_2)
     (**(code **)(_r_plf_funcs_p + 8))(0,"rf_txpwr.c",0x91,*(code **)(_r_plf_funcs_p + 8));
   }
   uVar1 = param_2 & 0xff;
-  if ((param_1 & 0xff0000) != 0x10000) {
+  if ((param_1 >> 0x10 & 0xff) != 1) {
     uVar1 = (uint)(byte)cs_bt_pwr_tbl_lvl2idx_fpga[param_2 & 0xff];
   }
   return uVar1;

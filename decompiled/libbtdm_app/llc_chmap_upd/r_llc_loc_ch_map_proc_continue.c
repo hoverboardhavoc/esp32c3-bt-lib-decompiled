@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_chmap_upd.o -> r_llc_loc_ch_map_proc_continue
  *
@@ -72,7 +72,7 @@ void r_llc_loc_ch_map_proc_continue(int param_1,int param_2)
       if (iVar5 != 1) {
         UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 0xc);
         uVar6 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar4,*(code **)(_r_ip_funcs_p + 0x680));
-                    /* WARNING: Could not recover jumptable at 0x000101ea. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000101ee. Too many branches */
                     /* WARNING: Treating indirect jump as call */
         (*UNRECOVERED_JUMPTABLE)(param_1,uVar6,0x10000,0xcc,UNRECOVERED_JUMPTABLE);
         return;

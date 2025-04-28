@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_scan.o -> hci_le_per_adv_create_sync_cmd_handler
  *
@@ -42,7 +42,7 @@ undefined1 hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 param
           iVar3 = (**(code **)(_r_ip_funcs_p + 0x4dc))
                             (param_1 + 3,param_1[2],param_1[1],*(code **)(_r_ip_funcs_p + 0x4dc));
           uVar7 = 0;
-          if (iVar3 != 0) goto _L146;
+          if (iVar3 != 0) goto _L161;
         }
         uVar7 = 0;
         iVar4 = (**(code **)(_r_ip_funcs_p + 0x4ac))(&bStack_21,*(code **)(_r_ip_funcs_p + 0x4ac));
@@ -55,17 +55,17 @@ undefined1 hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 param
           bVar1 = param_1[5];
           bVar2 = param_1[7];
           pcVar6 = *(code **)(_r_ip_funcs_p + 0x3dc);
+          uVar7 = 1;
           *(byte **)(*(int *)(_p_llm_env + 8) + (uint)bStack_21 * 0x44) = param_1;
-          iVar4 = (*pcVar6)(*param_1,param_1[1],param_1[2],
+          iVar4 = (*pcVar6)(bStack_21,*param_1,param_1[1],param_1[2],
                             CONCAT13(param_1[6],CONCAT12(bVar1,*(undefined2 *)(param_1 + 3))),
                             CONCAT11(param_1[8],bVar2),pcVar6);
           if ((_bt_rf_coex_hooks_p != (undefined4 *)0x0) &&
              ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
             (*(code *)*_bt_rf_coex_hooks_p)(bStack_21,6,1);
           }
-          uVar7 = 1;
         }
-        goto _L146;
+        goto _L161;
       }
     }
     uVar7 = 0;
@@ -75,7 +75,7 @@ undefined1 hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 param
     uVar7 = 0;
     iVar4 = 0x12;
   }
-_L146:
+_L161:
   (**(code **)(_r_ip_funcs_p + 0x4bc))(param_2,iVar4,*(code **)(_r_ip_funcs_p + 0x4bc));
   return uVar7;
 }

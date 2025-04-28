@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_dl_upd.o -> hci_le_set_data_len_cmd_handler
  *
@@ -54,7 +54,7 @@ undefined4 hci_le_set_data_len_cmd_handler(uint param_1,int param_2,undefined4 p
               }
               *(undefined2 *)(iVar5 + 0x20) = *(undefined2 *)(param_2 + 2);
               *(undefined2 *)(iVar5 + 0x22) = *(undefined2 *)(param_2 + 4);
-              goto _L143;
+              goto _L140;
             }
           }
           bVar1 = 0x12;
@@ -68,7 +68,7 @@ undefined4 hci_le_set_data_len_cmd_handler(uint param_1,int param_2,undefined4 p
       }
     }
   }
-_L143:
+_L140:
   (**(code **)(_r_ip_funcs_p + 0x630))(param_1,param_3,bVar1,*(code **)(_r_ip_funcs_p + 0x630));
   return 0;
 }

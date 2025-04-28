@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_init
  *
@@ -23,7 +23,7 @@ void r_lld_init(int param_1)
   undefined1 auStack_28 [24];
   
   if (param_1 != 1) {
-    if (param_1 != 2) goto _L553;
+    if (param_1 != 2) goto _L564;
     if (_lld_rpa_renew_env != 0) {
       r_ke_free();
     }
@@ -52,23 +52,23 @@ void r_lld_init(int param_1)
   _lld_rpa_renew_env = 0;
   uStack_29 = 2;
   iVar3 = (*_rwip_param)(7,&uStack_29,(int)pvVar2 + 0xd4,_rwip_param);
-  pvVar2 = _p_lld_env;
   if (iVar3 != 0) {
     *(undefined2 *)((int)_p_lld_env + 0xd4) = 500;
   }
-  uVar1 = *(ushort *)((int)pvVar2 + 0xd4);
+  pvVar2 = _p_lld_env;
   uVar4 = 7;
+  uVar1 = *(ushort *)((int)_p_lld_env + 0xd4);
   if ((((0x14 < uVar1) && (uVar4 = 6, 0x1e < uVar1)) && (uVar4 = 5, 0x32 < uVar1)) &&
      (((uVar4 = 4, 0x4b < uVar1 && (uVar4 = 3, 100 < uVar1)) && (uVar4 = 2, 0x96 < uVar1)))) {
     uVar4 = (ushort)(uVar1 < 0xfb);
   }
-  *(ushort *)((int)pvVar2 + 0xd6) = uVar4;
+  *(ushort *)((int)_p_lld_env + 0xd6) = uVar4;
   uStack_29 = 1;
   (*_rwip_param)(0x85,&uStack_29,(int)pvVar2 + 0xda,_rwip_param);
   aa_gen = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
   DAT_00014095 = 0;
   DAT_00014096 = 0;
-_L553:
+_L564:
   r_lld_core_init(param_1);
   r_lld_adv_init(param_1);
   iVar3 = r_sdk_config_get_opts_ext();

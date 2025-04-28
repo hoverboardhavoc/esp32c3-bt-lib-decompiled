@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> hci_tl.o -> r_hci_cmd_reject
  *
@@ -26,10 +26,10 @@ void r_hci_cmd_reject(int param_1,undefined4 param_2,undefined1 param_3,undefine
   if (param_1 == 0) {
     pcVar5 = *(code **)(_r_modules_funcs_p + 200);
     uVar4 = 0x1101;
-_L58:
+_L51:
     puVar3 = (undefined1 *)(*pcVar5)(uVar4,0,param_2,1,pcVar5);
     *puVar3 = param_3;
-                    /* WARNING: Could not recover jumptable at 0x00010406. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000103e6. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_ip_funcs_p + 0x8c))(*(code **)(_r_ip_funcs_p + 0x8c));
     return;
@@ -37,7 +37,7 @@ _L58:
   if (*(code **)(param_1 + 8) == (code *)0x0) {
     pcVar5 = *(code **)(_r_modules_funcs_p + 200);
     uVar4 = 0x1102;
-    goto _L58;
+    goto _L51;
   }
   if (*(char *)(param_1 + 2) < '\0') {
     uVar1 = (**(code **)(param_1 + 8))(0,0,auStack_22,0);
@@ -67,13 +67,13 @@ _L58:
       *puVar3 = param_3;
       memcpy(puVar3 + 1,param_4,6);
       pcVar5 = *(code **)(_r_ip_funcs_p + 0x8c);
-      goto _L56;
+      goto _L49;
     }
     puVar3 = (undefined1 *)(*pcVar5)(0x1101,0,param_2,auStack_22[0]);
     *puVar3 = param_3;
   }
   pcVar5 = *(code **)(_r_ip_funcs_p + 0x8c);
-_L56:
+_L49:
   (*pcVar5)(puVar3,pcVar5);
   return;
 }

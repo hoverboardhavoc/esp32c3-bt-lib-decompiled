@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_evt_time_update
  *
@@ -115,16 +115,16 @@ _L96:
           uVar8 = uVar7;
         }
         uVar3 = uVar8 & 0xffff;
-        uVar8 = *(uint *)(iVar4 + 0xc);
+        uVar6 = *(uint *)(iVar4 + 0xc);
         if (*(uint *)(iVar4 + 0xc) < uVar7) {
-          uVar8 = uVar7;
+          uVar6 = uVar7;
         }
-        if (uVar3 < uVar8) {
-          uVar8 = uVar3;
+        if ((uVar8 & 0xffff) < uVar6) {
+          uVar6 = uVar8 & 0xffff;
         }
-        uVar9 = (undefined2)uVar8;
-        *(uint *)(iVar2 + 0x5c) = uVar8 * 0x4e2;
-        *(uint *)(iVar2 + 0x10) = uVar8 * 0x4e2;
+        uVar9 = (undefined2)uVar6;
+        *(uint *)(iVar2 + 0x5c) = uVar6 * 0x4e2;
+        *(uint *)(iVar2 + 0x10) = uVar6 * 0x4e2;
       }
     }
     else {

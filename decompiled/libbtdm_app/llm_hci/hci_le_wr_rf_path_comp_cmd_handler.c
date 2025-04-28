@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_hci.o -> hci_le_wr_rf_path_comp_cmd_handler
  *
@@ -29,11 +29,13 @@ undefined4 hci_le_wr_rf_path_comp_cmd_handler(short *param_1)
   uVar5 = 0xc;
   if (*(char *)(iVar4 + 0x18) != '\0') {
     uVar5 = 0x12;
-    if (((ushort)(param_1[1] + 0x500U) < 0xa01) &&
-       (sVar1 = *param_1, (ushort)(sVar1 + 0x500U) < 0xa01)) {
-      uVar5 = 0;
-      *(short *)(_p_llm_env + 200) = param_1[1];
-      *(short *)(iVar2 + 0xca) = sVar1;
+    if ((ushort)(param_1[1] + 0x500U) < 0xa01) {
+      sVar1 = *param_1;
+      if ((ushort)(sVar1 + 0x500U) < 0xa01) {
+        *(short *)(_p_llm_env + 200) = param_1[1];
+        *(short *)(iVar2 + 0xca) = sVar1;
+        uVar5 = 0;
+      }
     }
   }
   *puVar3 = uVar5;

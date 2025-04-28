@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> rwip_driver.o -> r_rwip_sleep
  *
@@ -34,14 +34,18 @@ undefined4 r_rwip_sleep(void)
         iVar1 = 4;
         if (_DAT_0001202e == 0) {
           iStack_28 = r_rwip_time_get();
-          uVar3 = (uint)(0x270U - extraout_a1 < (uint)_r_sch_arb_sw_isr) + iStack_28 + 2 & 0xfffffff
-          ;
+          uVar3 = iStack_28 + 3;
+          if ((uint)_r_sch_arb_sw_isr <= 0x270U - extraout_a1) {
+            uVar3 = iStack_28 + 2;
+          }
           uStack_2c = _rwip_param;
+          uVar3 = uVar3 & 0xfffffff;
           if (_r_sch_alarm_timer_isr != -1) {
             uVar2 = _r_sch_alarm_timer_isr - uVar3 & 0xfffffff;
             if (0x8000000 < uVar2) {
               uVar2 = -(uVar3 - _r_sch_alarm_timer_isr & 0xfffffff);
             }
+            uStack_2c = _rwip_param;
             if ((int)uVar2 < (int)_rwip_param) {
               uStack_2c = uVar2;
             }
@@ -90,13 +94,14 @@ undefined4 r_rwip_sleep(void)
                   r_ble_log_internal_x2(0x400c0000,_btdm_pwr_state,uStack_2c);
                 }
                 (*_DAT_00012090)(_DAT_00012090);
-                if (*(code **)(_r_osi_funcs_p + 0x98) != (code *)0x0) {
-                  (**(code **)(_r_osi_funcs_p + 0x98))(uVar3);
+                if (*(code **)(_r_osi_funcs_p + 0x98) == (code *)0x0) {
+                  return 2;
                 }
+                (**(code **)(_r_osi_funcs_p + 0x98))(uVar3);
                 return 2;
               }
               iVar1 = 5;
-              goto _L106;
+              goto _L108;
             }
           }
           iVar1 = 6;
@@ -110,7 +115,7 @@ undefined4 r_rwip_sleep(void)
       iVar1 = 1;
     }
   }
-_L106:
+_L108:
   _btdm_slp_err = iVar1;
   iVar1 = r_sdk_config_get_opts_ext();
   if (((*(uint *)(iVar1 + 0x28) & 0x200) != 0) &&

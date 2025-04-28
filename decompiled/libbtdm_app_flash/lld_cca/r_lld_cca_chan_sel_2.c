@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_cca.o -> r_lld_cca_chan_sel_2
  *
@@ -27,20 +27,21 @@ void r_lld_cca_chan_sel_2(byte *param_1,int param_2)
   pbVar5 = param_1 + 5;
   cVar1 = '\0';
   do {
+    if (param_1 == pbVar5) {
+      return;
+    }
     uVar3 = (uint)*param_1;
     cVar4 = cVar1 + '\b';
-    do {
+    for (; cVar4 != cVar1; cVar1 = cVar1 + '\x01') {
       if ((uVar3 & 1) != 0) {
         if (uVar2 == 0) {
           return;
         }
         uVar2 = uVar2 - 1 & 0xff;
       }
-      cVar1 = cVar1 + '\x01';
       uVar3 = uVar3 >> 1;
-    } while (cVar4 != cVar1);
+    }
     param_1 = param_1 + 1;
-  } while (pbVar5 != param_1);
-  return;
+  } while( true );
 }
 

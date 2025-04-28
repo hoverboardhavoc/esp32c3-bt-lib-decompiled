@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_scan.o -> f_lld_per_adv_rx_end_ind_handler_hack
  *
@@ -30,9 +30,9 @@ undefined4 f_lld_per_adv_rx_end_ind_handler_hack(byte *param_1)
   bVar1 = *param_1;
   iVar3 = (uint)bVar1 * 0x44;
   iVar4 = *(int *)(_p_llm_env + 8) + iVar3;
+  uVar9 = *(undefined1 *)(iVar4 + 0x41);
   if (*(char *)(iVar4 + 0x40) != '\x0e') {
     if ((byte)(*(char *)(iVar4 + 0x40) - 0xfU) < 2) {
-      uVar9 = *(undefined1 *)(iVar4 + 0x41);
       r_sch_plan_rem(iVar4 + 0xc);
       uVar5 = r_llm_dev_list_search(iVar4 + 4,uVar9);
       if (uVar5 < 0xc) {
@@ -58,10 +58,10 @@ undefined4 f_lld_per_adv_rx_end_ind_handler_hack(byte *param_1)
         puVar6 = (ushort *)r_ke_msg_alloc(1,0,8);
         iVar4 = _p_llm_env;
         *puVar6 = (ushort)bVar1;
-        uVar9 = 8;
+        uVar9 = 0x16;
         iVar4 = *(int *)(iVar4 + 8) + iVar3;
-        if (*(char *)(iVar4 + 0x40) == '\x10') {
-          uVar9 = 0x16;
+        if (*(char *)(iVar4 + 0x40) != '\x10') {
+          uVar9 = 8;
         }
         *(undefined1 *)(puVar6 + 1) = uVar9;
         uVar9 = *(undefined1 *)(iVar4 + 0x29);
@@ -74,13 +74,13 @@ undefined4 f_lld_per_adv_rx_end_ind_handler_hack(byte *param_1)
     else {
       r_assert_err(0,"llm_scan.c",0xb7a);
     }
-    goto _L692;
+    goto _L683;
   }
   if (param_1[1] == 0) {
     r_llm_cmd_cmp_send(0x2045,0);
     puVar8 = (undefined2 *)r_ke_msg_alloc(0x1104,0,0x3e,0x12);
     uVar10 = 0x440e;
-_L705:
+_L696:
     *puVar8 = uVar10;
     iVar4 = _p_llm_env;
     puVar8[1] = (ushort)bVar1;
@@ -97,13 +97,13 @@ _L705:
     if (param_1[1] == 8) {
       puVar8 = (undefined2 *)r_ke_msg_alloc(0x1104,0,0x3e,0x12);
       uVar10 = 0x3e0e;
-      goto _L705;
+      goto _L696;
     }
     r_assert_param((uint)bVar1,"llm_scan.c",0xb6f);
   }
   r_ke_msg_free(*(int *)(*(int *)(_p_llm_env + 8) + iVar3) + -0xc);
   *(undefined4 *)(*(int *)(_p_llm_env + 8) + iVar3) = 0;
-_L692:
+_L683:
   *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar3 + 0x40) = 0;
   return 0;
 }

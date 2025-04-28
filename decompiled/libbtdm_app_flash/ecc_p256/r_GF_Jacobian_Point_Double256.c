@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> ecc_p256.o -> r_GF_Jacobian_Point_Double256
  *
@@ -30,12 +30,12 @@ undefined4 r_GF_Jacobian_Point_Double256(int param_1,void *param_2)
   undefined1 auStack_78 [44];
   undefined1 auStack_4c [44];
   
-  iVar3 = param_1 + 0x2c;
-  iVar2 = param_1 + 0x58;
+  iVar2 = param_1 + 0x2c;
+  iVar3 = param_1 + 0x58;
   if (((*(uint *)(param_1 + 0x50) < 2) && (*(short *)(param_1 + 0x4c) == 0)) ||
      ((iVar1 = r_notEqual256(param_1,&ecc_Jacobian_InfinityPoint256), iVar1 == 0 &&
-      ((iVar1 = r_notEqual256(iVar3,&ecc_Jacobian_InfinityPoint256), iVar1 == 0 &&
-       (iVar1 = r_notEqual256(iVar2,&ecc_Jacobian_InfinityPoint256), iVar1 == 0)))))) {
+      ((iVar1 = r_notEqual256(iVar2,&ecc_Jacobian_InfinityPoint256), iVar1 == 0 &&
+       (iVar1 = r_notEqual256(iVar3,&ecc_Jacobian_InfinityPoint256), iVar1 == 0)))))) {
     memcpy(param_2,&ecc_Jacobian_InfinityPoint256,0x22);
     *(undefined4 *)((int)param_2 + 0x24) = _r_ke_msg_send;
     *(undefined4 *)((int)param_2 + 0x28) = _r_assert_err;
@@ -47,19 +47,19 @@ undefined4 r_GF_Jacobian_Point_Double256(int param_1,void *param_2)
     *(undefined4 *)((int)param_2 + 0x80) = _DAT_00013094;
   }
   else {
-    r_AddBigHexModP256(param_1,iVar2,auStack_a4);
-    r_SubtractBigHexMod256(param_1,iVar2,auStack_78);
+    r_AddBigHexModP256(param_1,iVar3,auStack_a4);
+    r_SubtractBigHexMod256(param_1,iVar3,auStack_78);
     r_MultiplyBigHexModP256(auStack_a4,auStack_78,auStack_4c);
     r_MultiplyBigHexByUint32_256(auStack_4c,3,auStack_204);
-    r_MultiplyBigHexModP256(iVar3,iVar2,auStack_1d8);
-    r_MultiplyBigHexModP256(iVar3,auStack_1d8,auStack_4c);
+    r_MultiplyBigHexModP256(iVar2,iVar3,auStack_1d8);
+    r_MultiplyBigHexModP256(iVar2,auStack_1d8,auStack_4c);
     r_MultiplyBigHexModP256(param_1,auStack_4c,auStack_1ac);
     r_MultiplyBigHexModP256(auStack_204,auStack_78);
     r_MultiplyBigHexByUint32_256(auStack_1ac,8,auStack_4c);
     r_SubtractBigHexMod256(auStack_78,auStack_4c,auStack_180);
     r_MultiplyBigHexModP256(auStack_180,auStack_1d8,auStack_4c);
     r_MultiplyBigHexByUint32_256(auStack_4c,2,param_2);
-    r_MultiplyBigHexModP256(iVar3,iVar3,auStack_128);
+    r_MultiplyBigHexModP256(iVar2,iVar2,auStack_128);
     r_MultiplyBigHexModP256(auStack_1d8,auStack_154);
     r_MultiplyBigHexModP256(auStack_128,auStack_154,auStack_fc);
     r_MultiplyBigHexByUint32_256(auStack_fc,8,auStack_d0);

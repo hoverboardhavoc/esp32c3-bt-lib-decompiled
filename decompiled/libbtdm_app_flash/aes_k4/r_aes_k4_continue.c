@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> aes_k4.o -> r_aes_k4_continue
  *
@@ -20,12 +20,14 @@ int r_aes_k4_continue(int param_1,byte *param_2)
   if (iVar1 != 0) {
     if (*(char *)(param_1 + 0x34) == '\0') {
       *param_2 = *param_2 & 0x3f;
-      return iVar1;
     }
-    pvVar2 = memcpy((void *)(param_1 + 0x35),param_2,0x10);
-    *(undefined1 *)(param_1 + 0x34) = 0;
-    r_aes_cmac_start(param_1,pvVar2,&aes_k4_id6,4);
+    else {
+      pvVar2 = memcpy((void *)(param_1 + 0x35),param_2,0x10);
+      *(undefined1 *)(param_1 + 0x34) = 0;
+      r_aes_cmac_start(param_1,pvVar2,&aes_k4_id6,4);
+      iVar1 = 0;
+    }
   }
-  return 0;
+  return iVar1;
 }
 

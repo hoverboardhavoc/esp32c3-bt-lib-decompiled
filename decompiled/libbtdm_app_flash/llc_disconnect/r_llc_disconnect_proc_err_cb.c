@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_disconnect.o -> r_llc_disconnect_proc_err_cb
  *
@@ -22,8 +22,8 @@ void r_llc_disconnect_proc_err_cb(int param_1,int param_2,char *param_3)
   if (param_2 == 0) {
     cVar1 = *param_3;
     iVar2 = r_llc_proc_get(0);
+    iVar5 = *(int *)(&llc_env + param_1 * 4);
     if (cVar1 == '\0') {
-      iVar5 = *(int *)(&llc_env + param_1 * 4);
       iVar3 = r_llc_proc_state_get();
       if (iVar3 == 0) {
         r_llc_llcp_state_set(param_1,2,3);

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_phy_upd.o -> f_ll_phy_req_handler
  *
@@ -16,45 +16,46 @@ int f_ll_phy_req_handler(int param_1,int param_2)
 
 {
   byte bVar1;
-  int iVar2;
+  byte bVar2;
   int iVar3;
-  undefined4 *puVar4;
-  byte bVar5;
+  int iVar4;
+  undefined4 *puVar5;
+  bool bVar6;
   
-  iVar2 = *(int *)(&llc_env + param_1 * 4);
-  iVar3 = (**(code **)(_r_ip_funcs_p + 0x678))(1,*(code **)(_r_ip_funcs_p + 0x678));
-  if (iVar3 == 0) {
-    iVar3 = 0x1e;
+  iVar3 = *(int *)(&llc_env + param_1 * 4);
+  iVar4 = (**(code **)(_r_ip_funcs_p + 0x678))(1,*(code **)(_r_ip_funcs_p + 0x678));
+  if (iVar4 == 0) {
+    iVar4 = 0x1e;
     if (((*(char *)(param_2 + 2) != '\0') && (*(char *)(param_2 + 1) != '\0')) &&
-       (((*(ushort *)(iVar2 + 0x42) & 1) == 0 ||
-        (iVar3 = (**(code **)(_r_ip_funcs_p + 0x66c))(param_1,9,*(code **)(_r_ip_funcs_p + 0x66c)),
-        iVar3 == 0)))) {
-      puVar4 = (undefined4 *)
+       (((*(ushort *)(iVar3 + 0x42) & 1) == 0 ||
+        (iVar4 = (**(code **)(_r_ip_funcs_p + 0x66c))(param_1,9,*(code **)(_r_ip_funcs_p + 0x66c)),
+        iVar4 == 0)))) {
+      puVar5 = (undefined4 *)
                (**(code **)(_r_modules_funcs_p + 200))
                          (0x10e,param_1 << 8 | 1,0x14,*(code **)(_r_modules_funcs_p + 200));
-      *(undefined1 *)(puVar4 + 1) = 9;
+      *(undefined1 *)(puVar5 + 1) = 9;
       (**(code **)(_r_ip_funcs_p + 0x684))(param_1,5,*(code **)(_r_ip_funcs_p + 0x684));
-      iVar2 = _r_ip_funcs_p;
-      *puVar4 = *(undefined4 *)(_r_ip_funcs_p + 0x654);
-      bVar5 = *(byte *)(param_2 + 1);
-      *(byte *)((int)puVar4 + 0xb) = bVar5;
-      bVar1 = *(byte *)(param_2 + 2);
-      *(byte *)((int)puVar4 + 10) = bVar1;
-      if ((uint)bVar5 == (uint)bVar1) {
-        bVar5 = (&one_bits)[bVar5] & -((&one_bits)[bVar5] == 1);
+      iVar3 = _r_ip_funcs_p;
+      *puVar5 = *(undefined4 *)(_r_ip_funcs_p + 0x654);
+      bVar1 = *(byte *)(param_2 + 1);
+      *(byte *)((int)puVar5 + 0xb) = bVar1;
+      bVar2 = *(byte *)(param_2 + 2);
+      *(byte *)((int)puVar5 + 10) = bVar2;
+      if ((uint)bVar1 == (uint)bVar2) {
+        bVar6 = (&one_bits)[bVar1] == '\x01';
       }
       else {
-        bVar5 = 0;
+        bVar6 = false;
       }
-      *(byte *)((int)puVar4 + 0xf) = bVar5 & 1;
-      (**(code **)(iVar2 + 0x67c))(param_1,1,puVar4,*(code **)(iVar2 + 0x67c));
+      *(bool *)((int)puVar5 + 0xf) = bVar6;
+      (**(code **)(iVar3 + 0x67c))(param_1,1,puVar5,*(code **)(iVar3 + 0x67c));
       (**(code **)(_r_ip_funcs_p + 0x650))(param_1,5,0,*(code **)(_r_ip_funcs_p + 0x650));
-      iVar3 = 0;
+      iVar4 = 0;
     }
   }
   else {
-    iVar3 = 0x24;
+    iVar4 = 0x24;
   }
-  return iVar3;
+  return iVar4;
 }
 

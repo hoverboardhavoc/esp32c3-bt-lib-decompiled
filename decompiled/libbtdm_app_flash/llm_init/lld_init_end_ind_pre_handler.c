@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_init.o -> lld_init_end_ind_pre_handler
  *
@@ -29,9 +29,9 @@ void lld_init_end_ind_pre_handler(byte *param_1)
   if (((((char)piVar4[0x10] == '\x05') && (*piVar4 != 0)) &&
       (_bt_rf_coex_hooks_p != (undefined4 *)0x0)) && ((code *)*_bt_rf_coex_hooks_p != (code *)0x0))
   {
-    uVar3 = 1;
-    if (*(char *)(_p_llm_env + 0xd7) == '\x02') {
-      uVar3 = 3;
+    uVar3 = 3;
+    if (*(char *)(_p_llm_env + 0xd7) != '\x02') {
+      uVar3 = 1;
     }
     (*(code *)*_bt_rf_coex_hooks_p)(uVar1,uVar3,0);
   }

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_restart
  *
@@ -15,31 +15,31 @@
 int r_lld_scan_restart(void)
 
 {
-  bool bVar1;
+  int iVar1;
   int iVar2;
   int iVar3;
-  int iVar4;
+  uint uVar4;
   int iVar5;
   
-  iVar4 = 0xc;
+  iVar3 = 0xc;
   if (_lld_scan_env != 0) {
     iVar5 = 0;
-    do {
-      iVar3 = *(int *)(_lld_scan_env + iVar5 * 4);
-      if ((((iVar3 != 0) && (*(char *)(iVar3 + 0x3c) == '\0')) &&
-          (iVar4 = (**(code **)(_r_ip_funcs_p + 0x264))(iVar4,*(code **)(_r_ip_funcs_p + 0x264)),
-          *(char *)(iVar3 + 0x3e) != '\x01')) &&
-         ((*(int *)(iVar3 + 4) - iVar4 & 0xfffffffU) - 0x3d < 0x7ffffc4)) {
-        (**(code **)(_r_ip_funcs_p + 0x6b8))(iVar3,0,*(code **)(_r_ip_funcs_p + 0x6b8));
-        iVar2 = _r_ip_funcs_p;
-        *(int *)(iVar3 + 4) = iVar4;
-        iVar4 = (**(code **)(iVar2 + 0x6b0))(iVar3,*(code **)(iVar2 + 0x6b0));
+    while( true ) {
+      iVar2 = *(int *)(_lld_scan_env + iVar5 * 4);
+      if ((((iVar2 != 0) && (*(char *)(iVar2 + 0x3c) == '\0')) &&
+          (iVar3 = (**(code **)(_r_ip_funcs_p + 0x264))(iVar3,*(code **)(_r_ip_funcs_p + 0x264)),
+          *(char *)(iVar2 + 0x3e) != '\x01')) &&
+         ((uVar4 = *(int *)(iVar2 + 4) - iVar3 & 0xfffffff, uVar4 < 0x8000001 && (0x3c < uVar4)))) {
+        (**(code **)(_r_ip_funcs_p + 0x6b8))(iVar2,0,*(code **)(_r_ip_funcs_p + 0x6b8));
+        iVar1 = _r_ip_funcs_p;
+        *(int *)(iVar2 + 4) = iVar3;
+        iVar3 = (**(code **)(iVar1 + 0x6b0))(iVar2,*(code **)(iVar1 + 0x6b0));
       }
-      bVar1 = iVar5 != 1;
+      if (iVar5 == 1) break;
       iVar5 = 1;
-    } while (bVar1);
-    iVar4 = 0;
+    }
+    iVar3 = 0;
   }
-  return iVar4;
+  return iVar3;
 }
 

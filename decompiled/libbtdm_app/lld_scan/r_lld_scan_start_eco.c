@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_start_eco
  *
@@ -15,63 +15,61 @@
 char r_lld_scan_start_eco(undefined4 param_1,undefined4 param_2)
 
 {
-  bool bVar1;
-  ushort uVar2;
-  uint uVar3;
+  ushort uVar1;
+  int iVar2;
+  int iVar3;
   int iVar4;
-  int iVar5;
-  int iVar6;
-  undefined4 uVar7;
-  undefined4 *puVar8;
-  int iVar9;
+  undefined4 uVar5;
+  undefined4 *puVar6;
+  int iVar7;
   char acStack_41 [13];
   
   acStack_41[0] = '\f';
-  iVar5 = (**(code **)(_r_ip_funcs_p + 0x7f4))
+  iVar3 = (**(code **)(_r_ip_funcs_p + 0x7f4))
                     (1,acStack_41,param_1,param_2,*(code **)(_r_ip_funcs_p + 0x7f4));
-  if (iVar5 == 0) {
-    iVar5 = r_lld_scan_start(param_1,param_2);
-    acStack_41[0] = (char)iVar5;
-    if (iVar5 == 0) {
-      iVar5 = (**(code **)(_r_ip_funcs_p + 0x914))(*(code **)(_r_ip_funcs_p + 0x914));
-      uVar3 = (uint)*(ushort *)(iVar5 + 0x20);
-      if (uVar3 == 0) {
-        iVar5 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
-        if (*(short *)(iVar5 + 0x14) != 0) {
+  if (iVar3 == 0) {
+    iVar3 = r_lld_scan_start(param_1,param_2);
+    acStack_41[0] = (char)iVar3;
+    if (iVar3 == 0) {
+      iVar3 = (**(code **)(_r_ip_funcs_p + 0x914))(*(code **)(_r_ip_funcs_p + 0x914));
+      uVar1 = *(ushort *)(iVar3 + 0x20);
+      if (uVar1 == 0) {
+        iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+        if (*(short *)(iVar3 + 0x14) != 0) {
           _DAT_60031124 = 0x10001;
-          iVar5 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
-          uVar2 = *(ushort *)(iVar5 + 0x14);
-          if (0x1ff < uVar2) {
+          iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+          uVar1 = *(ushort *)(iVar3 + 0x14);
+          if ((uVar1 & 0xfe00) != 0) {
             (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x29ed,*(code **)(_r_plf_funcs_p + 8));
           }
-          _DAT_60031364 = _DAT_60031364 & 0xfffffe00 | (uint)uVar2;
+          _DAT_60031364 = _DAT_60031364 & 0xfffffe00 | (uint)uVar1;
         }
       }
       else {
         _DAT_60031124 = 0x10001;
-        if (0x1ff < uVar3) {
+        if ((uVar1 & 0xfe00) != 0) {
           (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x29ed,*(code **)(_r_plf_funcs_p + 8));
         }
-        _DAT_60031364 = _DAT_60031364 & 0xfffffe00 | uVar3;
+        _DAT_60031364 = _DAT_60031364 & 0xfffffe00 | (uint)uVar1;
       }
       if ((acStack_41[0] == '\0') && (_lld_scan_env != 0)) {
-        puVar8 = &scan_anchor_point;
-        iVar5 = 0;
-        do {
-          iVar9 = *(int *)(_lld_scan_env + iVar5 * 4);
-          if (iVar9 != 0) {
-            iVar4 = (uint)*(byte *)(iVar9 + 0x38) * 0x5a;
-            iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-            uVar2 = *(ushort *)(iVar6 + iVar4);
-            iVar6 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
-            uVar7 = *(undefined4 *)(iVar9 + 4);
-            *(ushort *)(iVar4 + iVar6) = uVar2 & 0xffdf;
-            *puVar8 = uVar7;
+        puVar6 = &scan_anchor_point;
+        iVar3 = 0;
+        while( true ) {
+          iVar7 = *(int *)(_lld_scan_env + iVar3 * 4);
+          if (iVar7 != 0) {
+            iVar2 = (uint)*(byte *)(iVar7 + 0x38) * 0x5a;
+            iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
+            uVar1 = *(ushort *)(iVar4 + iVar2);
+            iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
+            uVar5 = *(undefined4 *)(iVar7 + 4);
+            *(ushort *)(iVar2 + iVar4) = uVar1 & 0xffdf;
+            *puVar6 = uVar5;
           }
-          puVar8 = puVar8 + 1;
-          bVar1 = iVar5 != 1;
-          iVar5 = 1;
-        } while (bVar1);
+          puVar6 = puVar6 + 1;
+          if (iVar3 == 1) break;
+          iVar3 = 1;
+        }
       }
     }
     (**(code **)(_r_ip_funcs_p + 0x7f4))

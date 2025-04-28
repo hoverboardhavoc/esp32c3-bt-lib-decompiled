@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_init.o -> f_hci_le_create_con_cmd_handler
  *
@@ -78,11 +78,12 @@ undefined4 f_hci_le_create_con_cmd_handler(ushort *param_1,undefined4 param_2)
         uVar7 = (uint)param_1[8];
         if (((((((param_1[7] <= uVar7) && ((ushort)(param_1[1] - 4) < 0x3ffd)) &&
                ((ushort)(*param_1 - 4) < 0x3ffd)) &&
-              ((param_1[0xb] <= param_1[0xc] && ((param_1[10] - 10 & 0xffff) < 0xc77)))) &&
-             ((5 < param_1[7] && ((uVar7 < 0xc81 && (param_1[9] < 500)))))) && (bStack_99 < 4)) &&
-           ((((byte)param_1[6] < 4 && ((param_1[9] + 1) * uVar7 < (uint)param_1[10] << 2)) &&
-            ((((byte)param_1[6] & 1) == 0 ||
-             (iVar4 = r_co_bdaddr_compare(_p_llm_env + 0x12,&co_null_bdaddr), iVar4 == 0)))))) {
+              ((param_1[0xb] <= param_1[0xc] && (5 < param_1[7])))) &&
+             ((uVar7 < 0xc81 && (((param_1[10] - 10 & 0xffff) < 0xc77 && (param_1[9] < 500)))))) &&
+            (bStack_99 < 4)) &&
+           ((((byte)param_1[6] < 4 && ((ushort)(param_1[9] + 1) * uVar7 < (uint)param_1[10] << 2))
+            && ((((byte)param_1[6] & 1) == 0 ||
+                (iVar4 = r_co_bdaddr_compare(_p_llm_env + 0x12,&co_null_bdaddr), iVar4 == 0)))))) {
           iVar6 = r_llm_activity_free_get(&bStack_9a);
           if (iVar6 != 0) goto _L42;
           uStack_90 = (uint)param_1[7] << 1;
@@ -112,11 +113,11 @@ undefined4 f_hci_le_create_con_cmd_handler(ushort *param_1,undefined4 param_2)
             r_assert_err(0x10000,0xcb);
           }
           uVar8 = (uint)bStack_9a;
-          iVar6 = *(int *)(_p_llm_env + 8);
+          iVar4 = *(int *)(_p_llm_env + 8);
           uVar5 = r_ke_msg_alloc(0,0,0,0x3a);
+          *(undefined4 *)(iVar4 + uVar8 * 0x44) = uVar5;
           iVar4 = _p_llm_env;
-          *(undefined4 *)(iVar6 + uVar8 * 0x44) = uVar5;
-          iVar6 = *(int *)(iVar4 + 8);
+          iVar6 = *(int *)(_p_llm_env + 8);
           puVar3 = *(undefined1 **)((uint)bStack_9a * 0x44 + iVar6);
           if (puVar3 != (undefined1 *)0x0) {
             puVar3[9] = 1;
@@ -159,10 +160,10 @@ _L36:
           *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar6 + 0x40) = 5;
           memcpy(auStack_6a,auStack_98,6);
           memcpy(auStack_64,(void *)(iVar4 + 0x1d),5);
-          uStack_58 = *param_1;
           uStack_5e = 1;
-          uStack_56 = param_1[1];
+          uStack_58 = *param_1;
           bStack_5d = bVar1;
+          uStack_56 = param_1[1];
           uStack_54 = (undefined2)(uStack_7c >> 1);
           uStack_52 = uStack_78;
           uStack_50 = param_1[9];
@@ -177,7 +178,7 @@ _L36:
           uStack_34 = *(undefined1 *)(iVar4 + 0xc6);
           if ((_bt_rf_coex_hooks_p != (undefined4 *)0x0) &&
              ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
-            (*(code *)*_bt_rf_coex_hooks_p)(uVar7,1);
+            (*(code *)*_bt_rf_coex_hooks_p)(uVar7,1,1);
           }
           iVar6 = r_lld_init_start_hack(&uStack_70);
           if (iVar6 != 0) {

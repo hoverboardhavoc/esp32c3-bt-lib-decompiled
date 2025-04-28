@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld.o -> r_lld_per_adv_list_add
  *
@@ -12,44 +12,44 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_lld_per_adv_list_add(int param_1,void *param_2,uint param_3,uint param_4)
+void r_lld_per_adv_list_add(int param_1,void *param_2,int param_3,uint param_4)
 
 {
   ushort uVar1;
   int iVar2;
+  int iVar3;
   void *__dest;
-  uint uVar3;
-  code *pcVar4;
-  int iVar5;
+  uint uVar4;
+  code *pcVar5;
   
-  iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
-  iVar5 = param_1 * 8;
-  uVar1 = *(ushort *)(iVar2 + iVar5);
-  iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
-  *(ushort *)(iVar2 + iVar5) = uVar1 | 0x8000;
-  if ((param_3 & 0xfe) != 0) {
+  iVar2 = param_1 * 8;
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
+  uVar1 = *(ushort *)(iVar3 + iVar2);
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
+  *(ushort *)(iVar3 + iVar2) = (ushort)(((uint)uVar1 << 0x11) >> 0x11) | 0x8000;
+  if ((param_3 << 0xe & 0x3f8000U) != 0) {
     (**(code **)(_r_plf_funcs_p + 8))(0,"lld.c",0x60,*(code **)(_r_plf_funcs_p + 8));
   }
-  iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
-  uVar1 = *(ushort *)(iVar2 + iVar5);
-  iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
-  pcVar4 = *(code **)(_r_plf_funcs_p + 0xbc);
-  *(ushort *)(iVar2 + iVar5) = uVar1 & 0xbfff | (ushort)(param_3 << 0xe);
-  iVar2 = (*pcVar4)(0xc00,pcVar4);
-  uVar1 = *(ushort *)(iVar2 + iVar5);
-  iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
-  pcVar4 = *(code **)(_r_plf_funcs_p + 0xbc);
-  *(ushort *)(iVar2 + iVar5) = uVar1 | 1;
-  __dest = (void *)(*pcVar4)(iVar5 + 0xc02,pcVar4);
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
+  uVar1 = *(ushort *)(iVar3 + iVar2);
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
+  pcVar5 = *(code **)(_r_plf_funcs_p + 0xbc);
+  *(ushort *)(iVar3 + iVar2) = uVar1 & 0xbfff | (ushort)(param_3 << 0xe);
+  iVar3 = (*pcVar5)(0xc00,pcVar5);
+  uVar1 = *(ushort *)(iVar3 + iVar2);
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc00,*(code **)(_r_plf_funcs_p + 0xbc));
+  pcVar5 = *(code **)(_r_plf_funcs_p + 0xbc);
+  *(ushort *)(iVar3 + iVar2) = uVar1 & 0xfffe | 1;
+  __dest = (void *)(*pcVar5)(iVar2 + 0xc02U & 0xffff,pcVar5);
   memcpy(__dest,param_2,6);
   iVar2 = param_1 * 2 + _p_lld_env;
   *(ushort *)(iVar2 + 0xbc) = *(ushort *)(iVar2 + 0xbc) | (ushort)(1 << (param_4 & 0x1f));
-  uVar3 = (**(code **)(_r_ip_funcs_p + 0x260))(param_2,param_3,*(code **)(_r_ip_funcs_p + 0x260));
-  if (uVar3 < 10) {
+  uVar4 = (**(code **)(_r_ip_funcs_p + 0x260))(param_2,param_3,*(code **)(_r_ip_funcs_p + 0x260));
+  if (uVar4 < 10) {
     iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-    uVar1 = *(ushort *)(iVar2 + uVar3 * 0x34);
+    uVar1 = *(ushort *)(iVar2 + uVar4 * 0x34);
     iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-    *(ushort *)(uVar3 * 0x34 + iVar2) = uVar1 | 0x1000;
+    *(ushort *)(uVar4 * 0x34 + iVar2) = uVar1 & 0xefff | 0x1000;
   }
   return;
 }

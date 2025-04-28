@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> sch_slice.o -> r_sch_slice_compute
  *
@@ -22,7 +22,7 @@ void r_sch_slice_compute(void)
   uint uVar5;
   
   uVar5 = _r_plf_funcs_p;
-  _r_plf_funcs_p = CONCAT22(r_plf_funcs_p_2,_DAT_0001105c);
+  _r_plf_funcs_p = CONCAT22(r_plf_funcs_p_2,_DAT_00011060);
   _sch_slice_params = 0xffffffff;
   uVar1 = 0xffff;
   for (; uVar5 != 0; uVar5 = uVar5 & ~(1 << (uVar4 & 0x1f))) {
@@ -32,8 +32,8 @@ void r_sch_slice_compute(void)
     if ((int)(uint)*(byte *)(iVar2 + 0xd) <= (int)uVar4) {
       (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0xb6,*(code **)(_r_plf_funcs_p + 8));
     }
-    if (*(int *)(__clzsi2 + uVar4 * 8) != 0) {
-      uVar3 = *(int *)(__clzsi2 + uVar4 * 8) - *(ushort *)(memset + uVar4 * 8) / 0x271 & 0xffff;
+    if (*(int *)(memset + uVar4 * 8) != 0) {
+      uVar3 = *(int *)(memset + uVar4 * 8) - *(ushort *)(&rwip_param + uVar4 * 8) / 0x271 & 0xffff;
       if (2 < uVar3) {
         uVar3 = uVar3 - 2 & 0xffff;
       }

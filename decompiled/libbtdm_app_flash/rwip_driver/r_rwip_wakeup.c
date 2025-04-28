@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> rwip_driver.o -> r_rwip_wakeup
  *
@@ -28,11 +28,11 @@ void r_rwip_wakeup(void)
   _DAT_60042000 = _DAT_60042000 & 0x7fffffff;
   uVar2 = r_rwip_lpcycles_2_hus(uVar1,&rwip_env);
   _DAT_60031044 = uVar2 / 0x271 | 0x80000000;
-  uVar2 = ((uVar2 / 0x271) * 0x271 - uVar2) + 0x270 & 0xffff;
-  if (0x3ff < uVar2) {
+  uVar2 = ((uVar2 / 0x271) * 0x271 - uVar2) + 0x270;
+  if ((uVar2 & 0xfc00) != 0) {
     r_assert_err(0,"rwip_driver.c",0x45c);
   }
-  _DAT_60031040 = uVar2;
+  _DAT_60031040 = uVar2 & 0xffff;
   _DAT_60042000 = _DAT_60042000 | 8;
   _DAT_60031018 = 0xffffffff;
   if (sdk_cfg_priv_opts != '\0') {

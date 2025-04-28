@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> r_llc_loc_con_upd_proc_continue
  *
@@ -40,21 +40,22 @@ void r_llc_loc_con_upd_proc_continue(uint param_1,int param_2,int param_3)
   switch(uVar6) {
   case 2:
     r_llc_proc_timer_set(param_1,0,0);
-    if ((((param_3 != 0) && (iVar5 = r_sdk_config_get_opts(), param_1 < *(byte *)(iVar5 + 0xd))) &&
-        (*(int *)(&llc_env + iVar9) != 0)) &&
-       (((int)(uint)*(byte *)(*(int *)(&llc_env + iVar9) + 0x30) >> 1 & 1U) != 0)) {
-      if ((*(ushort *)(iVar8 + 0x42) & 1) == 0) {
-        iVar9 = r_llm_plan_elt_get(param_1);
-        if (iVar9 == 0) {
-          r_assert_err("llc_con_upd.c",0x13a);
+    if ((param_3 != 0) && (iVar5 = r_sdk_config_get_opts(), param_1 < *(byte *)(iVar5 + 0xd))) {
+      if ((*(int *)(&llc_env + iVar9) != 0) &&
+         (((int)(uint)*(byte *)(*(int *)(&llc_env + iVar9) + 0x30) >> 1 & 1U) != 0)) {
+        if ((*(ushort *)(iVar8 + 0x42) & 1) == 0) {
+          iVar9 = r_llm_plan_elt_get(param_1);
+          if (iVar9 == 0) {
+            r_assert_err("llc_con_upd.c",0x13a);
+          }
+          if (*(int *)(iVar9 + 4) == 0) {
+            r_assert_err(0,"llc_con_upd.c",0x13b);
+          }
+          *(undefined4 *)(iVar9 + 0x18) = 0;
+          *(undefined1 *)(iVar9 + 0x16) = 0;
         }
-        if (*(int *)(iVar9 + 4) == 0) {
-          r_assert_err(0,"llc_con_upd.c",0x13b);
-        }
-        *(undefined4 *)(iVar9 + 0x18) = 0;
-        *(undefined1 *)(iVar9 + 0x16) = 0;
+        goto _L117;
       }
-      goto _L136;
     }
   case 1:
     if ((*(ushort *)(iVar8 + 0x42) & 1) == 0) {
@@ -83,7 +84,7 @@ void r_llc_loc_con_upd_proc_continue(uint param_1,int param_2,int param_3)
         r_llc_llcp_send_eco(param_1,&stack0xffffffe4,0);
         return;
       }
-_L136:
+_L117:
       if (*(char *)(iVar4 + 0x2d) == '\0') {
         *(byte *)(iVar8 + 0x45) = *(byte *)(iVar8 + 0x45) & 0x7f;
       }
@@ -109,17 +110,17 @@ _L136:
     break;
   case 3:
     r_llc_proc_timer_set(param_1,0,0);
-    if (param_3 != 0) goto _L136;
+    if (param_3 != 0) goto _L117;
     param_3 = r_lld_con_param_update
                         (param_1,*(undefined1 *)(iVar4 + 0x26),*(undefined2 *)(iVar4 + 0x22),
                          *(undefined2 *)(iVar4 + 0x28),*(undefined2 *)(iVar4 + 0xc),
                          *(undefined2 *)(iVar4 + 0xe),*(undefined2 *)(iVar4 + 0x24));
     uVar6 = 4;
-    if (param_3 != 0) goto _L136;
+    if (param_3 != 0) goto _L117;
     break;
   case 4:
   case 6:
-    goto _L136;
+    goto _L117;
   default:
     uVar6 = r_llc_proc_state_get(iVar4);
     r_assert_param(param_1,uVar6,"llc_con_upd.c",0x1c0);

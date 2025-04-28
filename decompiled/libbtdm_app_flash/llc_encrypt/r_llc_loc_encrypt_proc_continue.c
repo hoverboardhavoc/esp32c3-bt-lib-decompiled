@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_encrypt.o -> r_llc_loc_encrypt_proc_continue
  *
@@ -73,14 +73,14 @@ _L51:
   switch(param_2) {
   case 0:
     r_lld_con_data_flow_set(param_1,0);
-    if (*(char *)(iVar1 + 0x3a) == '\0') goto _L56;
+    if (*(char *)(iVar1 + 0x3a) == '\0') goto _L55;
     llc_ll_pause_enc_req_pdu_send();
     r_llc_proc_state_set(iVar1,param_1,1);
     uVar4 = 1;
     break;
   case 1:
     r_llc_llcp_state_set(param_1,0,1);
-    r_llc_proc_timer_pause_set(param_1,1);
+    r_llc_proc_timer_pause_set(param_1,1,1);
     r_llc_proc_timer_set(param_1,0,0);
     r_lld_con_rx_enc(param_1,0);
     r_lld_con_tx_enc(param_1,0);
@@ -88,7 +88,7 @@ _L51:
     uVar4 = 2;
     goto _L53;
   case 2:
-_L56:
+_L55:
     r_llc_iv_skd_rand_gen(param_1);
     uVar4 = 3;
 _L53:
@@ -99,13 +99,16 @@ _L53:
               (param_1,*(undefined2 *)(iVar1 + 0x38),iVar1 + 8,iVar1 + 0x28,iVar1 + 0x20);
     r_llc_proc_state_set(iVar1,param_1,4);
     r_llc_proc_timer_set(param_1,0,1);
-    uVar3 = 1;
     uVar4 = 2;
-    if (*(char *)(iVar1 + 0x3a) == '\0') goto _L55;
+    if (*(char *)(iVar1 + 0x3a) != '\0') {
+      uVar3 = 2;
+      uVar4 = 2;
+      goto _L52;
+    }
     break;
   case 4:
     r_llc_llcp_state_set(param_1,0,2);
-    r_llc_proc_timer_pause_set(param_1,1);
+    r_llc_proc_timer_pause_set(param_1,1,1);
     r_llc_proc_state_set(iVar1,param_1,5);
     uVar4 = 1;
     goto _L54;
@@ -132,9 +135,9 @@ _L54:
     r_llc_proc_timer_set(param_1,0,0);
     goto _L27;
   }
-  uVar3 = uVar4;
-_L55:
-  r_llc_llcp_state_set(param_1,uVar3);
+  uVar3 = 1;
+_L52:
+  r_llc_llcp_state_set(param_1,uVar3,uVar4);
   return;
 }
 

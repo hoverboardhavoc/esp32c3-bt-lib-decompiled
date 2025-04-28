@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_phy_upd.o -> r_llc_hci_le_phy_upd_cmp_evt_send
  *
@@ -11,7 +11,7 @@
  */
 
 void r_llc_hci_le_phy_upd_cmp_evt_send
-               (undefined4 param_1,undefined1 param_2,int param_3,int param_4)
+               (undefined2 param_1,undefined1 param_2,int param_3,int param_4)
 
 {
   undefined1 *puVar1;
@@ -27,7 +27,7 @@ void r_llc_hci_le_phy_upd_cmp_evt_send
   puVar1[4] = (char)param_3;
   puVar1[5] = (char)param_4;
   puVar1[1] = param_2;
-  *(short *)(puVar1 + 2) = (short)param_1;
+  *(undefined2 *)(puVar1 + 2) = param_1;
   r_hci_send_2_host();
   return;
 }

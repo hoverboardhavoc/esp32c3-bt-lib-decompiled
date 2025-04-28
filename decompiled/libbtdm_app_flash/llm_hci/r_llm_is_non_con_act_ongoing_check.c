@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_hci.o -> r_llm_is_non_con_act_ongoing_check
  *
@@ -26,9 +26,13 @@ uint r_llm_is_non_con_act_ongoing_check(void)
       return 0;
     }
     uVar3 = (uint)*(byte *)(*(int *)(_p_llm_env + 8) + uVar1 * 0x44 + 0x40);
-    if ((uVar3 < 0xf) && (uVar3 = 0x40acU >> (uVar3 & 0x1f) & 1, uVar3 != 0)) break;
+    if ((uVar3 - 2 & 0xff) < 2) break;
+    uVar3 = uVar3 - 5;
+    if (((uVar3 & 0xff) < 10) && (uVar3 = 0x205U >> (uVar3 & 0x1f) & 1, uVar3 != 0)) {
+      return uVar3;
+    }
     uVar1 = uVar1 + 1 & 0xff;
   }
-  return uVar3;
+  return 1;
 }
 

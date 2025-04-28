@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> misc.o -> r_misc_free_em_buf_in_isr
  *
@@ -20,7 +20,7 @@ void r_misc_free_em_buf_in_isr(undefined1 param_1,undefined2 param_2)
   
   puVar2 = (undefined1 *)
            (**(code **)(_r_modules_funcs_p + 200))
-                     (0x901,4,0xff,*(code **)(_r_modules_funcs_p + 200));
+                     (0x901,4,0xff,4,*(code **)(_r_modules_funcs_p + 200));
   if (puVar2 != (undefined1 *)0x0) {
     *puVar2 = param_1;
     iVar1 = _r_modules_funcs_p;

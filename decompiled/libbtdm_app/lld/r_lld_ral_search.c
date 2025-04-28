@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld.o -> r_lld_ral_search
  *
@@ -18,19 +18,17 @@ uint r_lld_ral_search(undefined4 param_1,ushort param_2)
   uint uVar1;
   int iVar2;
   void *__src;
-  int iVar3;
-  undefined1 auStack_38 [20];
+  undefined1 auStack_38 [8];
   
   uVar1 = 0;
   do {
-    iVar3 = uVar1 * 0x34;
     iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-    if (*(short *)(iVar2 + iVar3) < 0) {
+    if (*(short *)(iVar2 + uVar1 * 0x34) < 0) {
       __src = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
-                                (iVar3 + 0xc78U & 0xffff,*(code **)(_r_plf_funcs_p + 0xbc));
+                                (uVar1 * 0x34 + 0xc78 & 0xffff,*(code **)(_r_plf_funcs_p + 0xbc));
       memcpy(auStack_38,__src,6);
       iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-      if ((((param_2 ^ *(ushort *)(iVar2 + iVar3)) & 1) == 0) &&
+      if ((((param_2 ^ *(ushort *)(uVar1 * 0x34 + iVar2)) & 1) == 0) &&
          (iVar2 = (*(code *)*_r_modules_funcs_p)(auStack_38,param_1,(code *)*_r_modules_funcs_p),
          iVar2 != 0)) {
         return uVar1 & 0xff;

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_llcp.o -> r_llc_llcp_send_eco
  *
@@ -35,13 +35,13 @@ void r_llc_llcp_send_eco(uint param_1,byte *param_2,code *param_3)
   }
   else if (bVar1 == 0x18) {
     iVar5 = r_sdk_config_get_opts_ext();
+    param_3 = llc_llcp_phy_update_ind_ack;
     if (*(char *)(iVar5 + 0x18) == '\0') {
       r_assert_err(0,"llc_llcp.c",0x1e9);
     }
-    param_3 = llc_llcp_phy_update_ind_ack;
   }
   else if (bVar1 == 6) {
-    DAT_00010a8a = (ushort)(1 << (param_1 & 0x1f)) | DAT_00010a8a;
+    DAT_000108ee = (ushort)(1 << (param_1 & 0x1f)) | DAT_000108ee;
   }
   iVar5 = *(int *)(&llc_env + param_1 * 4);
   if (param_2 == (byte *)0x0) {

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_init.o -> r_lld_init_process_pkt_tx_cal_con_timestamp
  *
@@ -35,7 +35,7 @@ uint r_lld_init_process_pkt_tx_cal_con_timestamp(int param_1)
     if (*(char *)(iVar4 + 0x59) != '\0') {
       iVar5 = (1 < *(byte *)(iVar4 + 0x4e)) + 2;
     }
-                    /* WARNING: Could not recover jumptable at 0x00010f7c. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010fca. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     uVar7 = (**(code **)(_r_ip_funcs_p + 0x46c))
                       (iVar6,uVar7,iVar5 << 2,*(code **)(_r_ip_funcs_p + 0x46c));

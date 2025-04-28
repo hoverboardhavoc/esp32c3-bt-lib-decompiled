@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> rwip_driver.o -> r_rwip_wakeup_end
  *
@@ -42,7 +42,7 @@ void r_rwip_wakeup_end(void)
       (**(code **)(_r_modules_funcs_p + 0x2d8))(*(code **)(_r_modules_funcs_p + 0x2d8));
     }
     else {
-      _DAT_6003100c = _DAT_6003100c | 0x800;
+      _DAT_6003100c = _DAT_6003100c & 0xfffff7ff | 0x800;
     }
   }
   if (_rwip_prog_delay != -1) {
@@ -59,14 +59,14 @@ void r_rwip_wakeup_end(void)
   }
   else {
     iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-    if (*(char *)(iVar2 + 0x17) != '\0') goto _L71;
+    if (*(char *)(iVar2 + 0x17) != '\0') goto _L73;
     pcVar3 = *(code **)(_r_modules_funcs_p + 0x8c);
   }
   (*pcVar3)(pcVar3);
-_L71:
+_L73:
   (**(code **)(_r_modules_funcs_p + 0x2b0))(1,*(code **)(_r_modules_funcs_p + 0x2b0));
   _btdm_pwr_state = 4;
-                    /* WARNING: Could not recover jumptable at 0x00010586. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001059c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_plf_funcs_p + 0x2c))(3,*(code **)(_r_plf_funcs_p + 0x2c));
   return;

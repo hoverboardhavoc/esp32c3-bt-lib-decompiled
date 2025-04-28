@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_process_pkt_rx_ext_adv
  *
@@ -70,13 +70,13 @@ void r_lld_scan_process_pkt_rx_ext_adv(int param_1,uint param_2,int param_3,char
   else {
     if (bVar1 != 3) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x84c,*(code **)(_r_plf_funcs_p + 8));
-      goto _L515;
+      goto _L531;
     }
     pcVar4 = *(code **)(_r_ip_funcs_p + 0x41c);
   }
   (*pcVar4)(param_1,param_2,param_3,param_4,pcVar4);
-_L515:
-                    /* WARNING: Could not recover jumptable at 0x00012484. Too many branches */
+_L531:
+                    /* WARNING: Could not recover jumptable at 0x00012494. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_ip_funcs_p + 0x7f8))
             (0,param_1,param_2,param_3,param_4,*(code **)(_r_ip_funcs_p + 0x7f8));

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_sched
  *
@@ -26,10 +26,11 @@ void r_lld_scan_sched(int param_1,undefined4 param_2,undefined4 param_3)
   byte bVar9;
   uint uVar10;
   ushort uVar11;
+  uint uVar12;
   
   iVar5 = *(int *)(_lld_scan_env + param_1 * 4);
+  bVar1 = *(byte *)(iVar5 + 0x38);
   if (*(char *)(iVar5 + 0x3e) == '\x01') {
-    bVar1 = *(byte *)(iVar5 + 0x38);
     r_sch_slice_bg_remove(0);
     *(undefined4 *)(iVar5 + 4) = *(undefined4 *)(iVar5 + 0x48);
     *(undefined4 *)(iVar5 + 8) = *(undefined4 *)(iVar5 + 0x4c);
@@ -47,19 +48,20 @@ void r_lld_scan_sched(int param_1,undefined4 param_2,undefined4 param_3)
     if (iVar7 == 0) {
       bVar2 = *(byte *)(iVar5 + 0x55);
       uVar10 = *(uint *)(iVar5 + 0x50);
-      if ((bVar2 & 0xfc) != 0) {
+      uVar12 = (uint)bVar2 << 4;
+      if ((uVar12 & 0xffffffcf) != 0) {
         r_assert_err("lld_scan.c",0x1bf);
       }
       iVar8 = r_emi_get_mem_addr_by_offset(0x400);
       iVar7 = (uint)bVar1 * 0x5a;
       uVar11 = *(ushort *)(iVar8 + iVar7 + 4);
       iVar8 = r_emi_get_mem_addr_by_offset(0x400);
-      *(ushort *)(iVar8 + iVar7 + 4) = uVar11 & 0xffcf | (ushort)bVar2 << 4;
+      *(ushort *)(iVar8 + iVar7 + 4) = uVar11 & 0xffcf | (ushort)uVar12;
       uVar11 = *(ushort *)(&lld_scan_max_aux_dur_tab + (uint)bVar2 * 2);
       iVar8 = r_emi_get_mem_addr_by_offset(0x400);
       *(ushort *)(iVar7 + 0x20 + iVar8) = (ushort)(((uint)uVar11 + uVar10 + 0x270) / 0x271) & 0xff;
       uVar11 = 0x672 - *(short *)(iVar5 + 0x36);
-      if (0x7ff < uVar11) {
+      if ((uVar11 & 0xf800) != 0) {
         r_assert_err(0,"lld_scan.c",0x6c0);
       }
       iVar8 = r_emi_get_mem_addr_by_offset(0x400);
@@ -68,20 +70,20 @@ void r_lld_scan_sched(int param_1,undefined4 param_2,undefined4 param_3)
       *(ushort *)(iVar8 + iVar7 + 0x28) = uVar11 | uVar3 & 0xf800;
       if (uVar10 < 0x4000) {
         iVar8 = r_emi_get_mem_addr_by_offset(0x400);
-        *(short *)(iVar8 + iVar7 + 0x1a) = (short)(uVar10 + 1 >> 1);
+        *(short *)(iVar7 + 0x1a + iVar8) = (short)(uVar10 + 1 >> 1);
       }
       else {
         iVar8 = r_emi_get_mem_addr_by_offset(0x400);
         *(ushort *)(iVar8 + iVar7 + 0x1a) = (ushort)((uVar10 + 0x270) / 0x271) & 0xff | 0x8000;
       }
-      bVar1 = *(byte *)(iVar5 + 0x54);
-      if ((bVar1 & 0xc0) != 0) {
+      uVar10 = (uint)*(byte *)(iVar5 + 0x54) << 10;
+      if ((uVar10 & 0x30000) != 0) {
         r_assert_err(0,"lld_scan.c",0x635);
       }
       iVar8 = r_emi_get_mem_addr_by_offset(0x400);
       uVar11 = *(ushort *)(iVar8 + iVar7 + 0x26);
       iVar8 = r_emi_get_mem_addr_by_offset(0x400);
-      *(ushort *)(iVar8 + iVar7 + 0x26) = uVar11 & 0x3ff | (ushort)bVar1 << 10;
+      *(ushort *)(iVar8 + iVar7 + 0x26) = uVar11 & 0x3ff | (ushort)uVar10;
       if (*(char *)(iVar5 + 0x6f) != -1) {
         iVar8 = r_emi_get_mem_addr_by_offset(0x400);
         *(undefined2 *)(iVar7 + 0x14 + iVar8) = 0;

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> co_utils.o -> r_co_util_unpack
  *
@@ -19,24 +19,23 @@ int r_co_util_unpack(uint *param_1,uint *param_2,ushort *param_3,int param_4,byt
   bool bVar2;
   bool bVar3;
   bool bVar4;
-  uint uVar5;
-  int iVar6;
+  int iVar5;
   uint *__dest;
+  byte *pbVar6;
   ushort *puVar7;
   uint *puVar8;
   uint uVar9;
   uint __n;
   uint uVar10;
-  ushort uVar11;
-  uint *puVar12;
-  bool bVar13;
-  byte *pbVar14;
+  bool bVar11;
+  ushort uVar12;
+  uint *puVar13;
+  uint *puVar14;
   uint *puVar15;
-  uint *puVar16;
   byte *apbStack_44 [4];
   
-  puVar16 = (uint *)((int)param_2 + param_4);
-  puVar15 = (uint *)((int)param_1 + (uint)*param_3);
+  puVar14 = (uint *)((int)param_2 + param_4);
+  puVar15 = (uint *)((uint)*param_3 + (int)param_1);
   bVar2 = param_2 == (uint *)0x0;
   bVar3 = param_1 == (uint *)0x0;
   if (*param_5 == 0x3c) {
@@ -52,77 +51,75 @@ int r_co_util_unpack(uint *param_1,uint *param_2,ushort *param_3,int param_4,byt
     }
   }
   __n = 1;
-  bVar13 = false;
-  iVar6 = 0;
+  bVar11 = false;
+  iVar5 = 0;
   __dest = param_1;
-  pbVar14 = apbStack_44[0];
 _L79:
   do {
     while( true ) {
-      if ((*pbVar14 == 0) || (iVar6 != 0)) {
-        if (puVar16 < param_2) {
-          iVar6 = 1;
+      if ((*apbStack_44[0] == 0) || (iVar5 != 0)) {
+        if (puVar14 < param_2) {
+          iVar5 = 1;
         }
         *param_3 = (short)__dest - (short)param_1;
-        return iVar6;
+        return iVar5;
       }
-      if ((byte)(*pbVar14 - 0x30) < 10) {
+      if ((byte)(*apbStack_44[0] - 0x30) < 10) {
         __n = (**(code **)(_r_modules_funcs_p + 0x14))
                         (apbStack_44,*(code **)(_r_modules_funcs_p + 0x14));
       }
-      pbVar14 = apbStack_44[0] + 1;
+      pbVar6 = apbStack_44[0] + 1;
       bVar1 = *apbStack_44[0];
-      apbStack_44[0] = pbVar14;
+      apbStack_44[0] = pbVar6;
       if (bVar1 < 0x4f) break;
       if (bVar1 == 0x6e) goto _L88;
-_L109:
-      iVar6 = 3;
+_L111:
+      iVar5 = 3;
     }
-    if (bVar1 < 0x42) goto _L109;
+    if (bVar1 < 0x42) goto _L111;
     switch(bVar1) {
     default:
-      goto _L109;
+      goto _L111;
     case 0x44:
       puVar8 = (uint *)((uint)((int)__dest + 3) & 0xfffffffc);
-      puVar12 = (uint *)((int)param_2 + 3);
+      puVar13 = (uint *)((int)param_2 + 3);
       if (!bVar3 && !bVar2) {
-        if (puVar12 <= puVar16) {
-          if (puVar15 < puVar8 + 1) goto _L121;
+        if (puVar13 <= puVar14) {
+          if (puVar15 < puVar8 + 1) goto _L122;
           uVar10 = (uint)(uint3)*param_2;
           if (!bVar4) {
             uVar9 = uVar10 & 0xff00 | (uint)(uint3)((uint3)*param_2 >> 0x10);
-            uVar10 = uVar10 << 0x10;
-            uVar5 = 0xff0000;
+            uVar10 = (uVar10 & 0xff) << 0x10;
 _L144:
-            uVar10 = uVar10 & uVar5 | uVar9;
+            uVar10 = uVar10 | uVar9;
           }
 _L142:
           *puVar8 = uVar10;
           goto _L101;
         }
-        goto _L120;
+        goto _L121;
       }
 _L101:
-      param_2 = puVar12;
+      param_2 = puVar13;
       __dest = puVar8 + 1;
       break;
     case 0x47:
-      bVar13 = true;
+      bVar11 = true;
     case 0x42:
 _L88:
-      puVar12 = (uint *)((int)param_2 + __n);
+      puVar13 = (uint *)((int)param_2 + __n);
       if (!bVar3 && !bVar2) {
-        if (puVar16 < puVar12) {
-_L120:
-          iVar6 = 1;
+        if (puVar14 < puVar13) {
+_L121:
+          iVar5 = 1;
           break;
         }
         if (puVar15 < (uint *)((int)__dest + __n)) {
-_L121:
-          iVar6 = 2;
+_L122:
+          iVar5 = 2;
           break;
         }
-        if ((!bVar13) || (puVar8 = __dest, uVar10 = __n, bVar4)) {
+        if ((!bVar11) || (uVar10 = __n, puVar8 = __dest, bVar4)) {
           memmove(__dest,param_2,__n);
         }
         else {
@@ -135,33 +132,32 @@ _L121:
       }
       __dest = (uint *)((int)__dest + __n);
       if (bVar1 == 0x6e) {
-        __n = (uint)*(byte *)((int)puVar12 + -1);
+        __n = (uint)*(byte *)((int)puVar13 + -1);
       }
       else {
         __n = 1;
       }
-      bVar13 = false;
-      param_2 = puVar12;
+      bVar11 = false;
+      param_2 = puVar13;
       break;
     case 0x48:
     case 0x4e:
       goto _L110;
     case 0x4c:
       puVar8 = (uint *)((uint)((int)__dest + 3) & 0xfffffffc);
-      puVar12 = param_2 + 1;
+      puVar13 = param_2 + 1;
       if (bVar3 || bVar2) goto _L101;
-      if (puVar16 < puVar12) goto _L120;
+      if (puVar14 < puVar13) goto _L121;
       if (puVar8 + 1 <= puVar15) {
         uVar10 = *param_2;
         if (!bVar4) {
           uVar9 = uVar10 << 0x18 | uVar10 >> 0x18 | (uVar10 & 0xff00) << 8;
-          uVar10 = uVar10 >> 8;
-          uVar5 = 0xff00;
+          uVar10 = uVar10 >> 8 & 0xff00;
           goto _L144;
         }
         goto _L142;
       }
-      goto _L121;
+      goto _L122;
     }
   } while( true );
 _L110:
@@ -169,19 +165,19 @@ _L110:
   for (uVar10 = 0; uVar10 < __n; uVar10 = uVar10 + 1 & 0xff) {
     puVar7 = (ushort *)((uint)((int)__dest + 1) & 0xfffffffe);
     if (!bVar3 && !bVar2) {
-      if (puVar16 < (uint *)((int)param_2 + 2)) {
-        iVar6 = 1;
+      if (puVar14 < (uint *)((int)param_2 + 2)) {
+        iVar5 = 1;
         break;
       }
       if (puVar15 < puVar7 + 1) {
-        iVar6 = 2;
+        iVar5 = 2;
         break;
       }
-      uVar11 = (ushort)*param_2;
+      uVar12 = (ushort)*param_2;
       if (!bVar4) {
-        uVar11 = uVar11 << 8 | uVar11 >> 8;
+        uVar12 = uVar12 >> 8 | uVar12 << 8;
       }
-      *puVar7 = uVar11;
+      *puVar7 = uVar12;
     }
     __dest = (uint *)(puVar7 + 1);
     param_2 = (uint *)((int)param_2 + 2);

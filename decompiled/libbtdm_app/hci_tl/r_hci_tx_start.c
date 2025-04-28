@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> hci_tl.o -> r_hci_tx_start
  *
@@ -64,21 +64,21 @@ void r_hci_tx_start(void)
     uVar5 = 0;
     uVar3 = 0;
     iVar1 = 0;
-    goto _L127;
+    goto _L120;
   case 5:
     uVar5 = 2;
     iVar1 = (**(code **)(_r_ip_funcs_p + 0x10))(iVar1,*(code **)(_r_ip_funcs_p + 0x10));
     uVar3 = *(ushort *)(iVar1 + 2) + 4 & 0xffff;
-    goto _L127;
+    goto _L120;
   }
   iVar1 = (*pcVar4)(iVar1,pcVar4);
   uVar5 = 4;
   uVar3 = *(byte *)(iVar1 + 1) + 2;
-_L127:
+_L120:
   memcpy = (code)0x0;
   iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   if (*(char *)(iVar2 + 0x17) != '\x01') {
-                    /* WARNING: Could not recover jumptable at 0x00010956. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010932. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_modules_funcs_p + 0x88))
               (uVar5,iVar1,*(undefined4 *)(_r_ip_funcs_p + 100),
@@ -87,7 +87,7 @@ _L127:
   }
   *(undefined1 *)(iVar1 + -1) = uVar5;
   (**(code **)(_r_plf_funcs_p + 0xe0))(iVar1 + -1,uVar3 + 1,*(code **)(_r_plf_funcs_p + 0xe0));
-                    /* WARNING: Could not recover jumptable at 0x000108a0. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001087c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0x108))(5,*(code **)(_r_modules_funcs_p + 0x108));
   return;

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_phy_upd.o -> r_llc_loc_phy_upd_proc_continue
  *
@@ -37,7 +37,7 @@ void r_llc_loc_phy_upd_proc_continue(int param_1,int param_2,int param_3)
   uVar2 = *(undefined1 *)(iVar10 + 0x1d);
   if (param_3 != 0) {
     r_llc_proc_timer_set(param_1,0,0);
-_L113:
+_L111:
     r_lld_con_tx_len_update_for_rate(param_1,4);
     goto _L26;
   }
@@ -68,9 +68,9 @@ _L113:
           bVar16 = ~*(byte *)(iVar12 + 10) & 1;
         }
         else {
-          bVar16 = 3;
-          if (*(short *)(iVar12 + 0x10) == 2) {
-            bVar16 = 2;
+          bVar16 = 2;
+          if (*(short *)(iVar12 + 0x10) != 2) {
+            bVar16 = 3;
           }
         }
         r_lld_con_tx_len_update_for_rate(param_1,bVar16);
@@ -79,7 +79,7 @@ _L113:
       else {
         uVar14 = 2;
       }
-      goto _L114;
+      goto _L112;
     }
     if ((*(byte *)(iVar10 + 0x1c) != 3) || ((sVar8 == 0 || (sVar8 == sVar11)))) goto _L26;
     uVar17 = (&co_phy_to_rate)[*(byte *)(iVar10 + 0x1d)];
@@ -208,7 +208,7 @@ _L26:
     return;
   case 3:
     r_llc_proc_timer_set(param_1,0,0);
-    if (*(short *)(iVar12 + 0xc) == 0) goto _L113;
+    if (*(short *)(iVar12 + 0xc) == 0) goto _L111;
     if (*(byte *)(iVar12 + 0xd) == 0) {
       bVar16 = *(byte *)(iVar10 + 0x1c);
     }
@@ -257,7 +257,7 @@ _L26:
     return;
   }
   uVar14 = 4;
-_L114:
+_L112:
   r_llc_proc_state_set(iVar12,param_1,uVar14);
   return;
 }

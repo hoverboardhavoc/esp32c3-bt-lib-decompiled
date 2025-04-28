@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> arch_main.o -> ble_try_turn_on_pll_track
  *
@@ -12,20 +12,23 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-bool ble_try_turn_on_pll_track(void)
+undefined4 ble_try_turn_on_pll_track(void)
 
 {
-  bool bVar1;
+  undefined4 uVar1;
   undefined4 extraout_a1;
+  uint uVar2;
   
   pll_track_state =
        (**(code **)(_r_modules_funcs_p + 0x2c4))(*(code **)(_r_modules_funcs_p + 0x2c4));
-  bVar1 = (pll_track_state - DAT_00012154 & 0xfffffffU) - 0xc81 < 0x7fff380;
-  DAT_00012150 = extraout_a1;
-  if (bVar1) {
-    DAT_00012154 = pll_track_state;
-    bt_track_pll_cap();
+  uVar2 = pll_track_state - DAT_0001217c & 0xfffffff;
+  uVar1 = 0;
+  DAT_00012178 = extraout_a1;
+  if ((uVar2 < 0x8000001) && (0xc80 < uVar2)) {
+    DAT_0001217c = pll_track_state;
+    bt_track_pll_cap(0);
+    uVar1 = 1;
   }
-  return bVar1;
+  return uVar1;
 }
 

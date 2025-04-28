@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> ecc_p256.o -> r_GF_Jacobian_Point_Addition256
  *
@@ -12,15 +12,16 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 r_GF_Jacobian_Point_Addition256(void *param_1,undefined *param_2,void *param_3)
+undefined4 r_GF_Jacobian_Point_Addition256(void *param_1,void *param_2,void *param_3)
 
 {
   int iVar1;
   undefined4 uVar2;
   void *__s;
-  undefined *__src;
+  void *__s_00;
+  void *__src;
   void *__src_00;
-  undefined *__src_01;
+  void *__src_01;
   void *__src_02;
   undefined1 auStack_2d4 [36];
   undefined4 uStack_2b0;
@@ -70,16 +71,17 @@ undefined4 r_GF_Jacobian_Point_Addition256(void *param_1,undefined *param_2,void
   
   __src_02 = (void *)((int)param_1 + 0x2c);
   __src_00 = (void *)((int)param_1 + 0x58);
-  __src_01 = param_2 + 0x2c;
-  __src = param_2 + 0x58;
-  __s = (void *)((int)param_3 + 0x2c);
+  __src_01 = (void *)((int)param_2 + 0x2c);
+  __src = (void *)((int)param_2 + 0x58);
+  __s_00 = (void *)((int)param_3 + 0x2c);
   memset(param_3,0,0x22);
   *(undefined4 *)((int)param_3 + 0x24) = 0;
   *(undefined4 *)((int)param_3 + 0x28) = 0;
-  memset(__s,0,0x22);
+  memset(__s_00,0,0x22);
+  __s = (void *)((int)param_3 + 0x58);
   *(undefined4 *)((int)param_3 + 0x50) = 0;
   *(undefined4 *)((int)param_3 + 0x54) = 0;
-  memset((void *)((int)param_3 + 0x58),0,0x22);
+  memset(__s,0,0x22);
   *(undefined4 *)((int)param_3 + 0x7c) = 0;
   *(undefined4 *)((int)param_3 + 0x80) = 0;
   memset(auStack_2d4,0,0x22);
@@ -130,33 +132,30 @@ undefined4 r_GF_Jacobian_Point_Addition256(void *param_1,undefined *param_2,void
     iVar1 = (**(code **)(_r_modules_funcs_p + 0x3a4))
                       (param_2,&ecc_Jacobian_InfinityPoint256,*(code **)(_r_modules_funcs_p + 0x3a4)
                       );
-    if (((iVar1 == 0) &&
+    if (((iVar1 != 0) ||
         (iVar1 = (**(code **)(_r_modules_funcs_p + 0x3a4))
                            (__src_01,&ecc_Jacobian_InfinityPoint256,
-                            *(code **)(_r_modules_funcs_p + 0x3a4)), iVar1 == 0)) &&
+                            *(code **)(_r_modules_funcs_p + 0x3a4)), iVar1 != 0)) ||
        (iVar1 = (**(code **)(_r_modules_funcs_p + 0x3a4))
                           (__src,&ecc_Jacobian_InfinityPoint256,
-                           *(code **)(_r_modules_funcs_p + 0x3a4)), iVar1 == 0)) {
-      memcpy(param_3,&ecc_Jacobian_InfinityPoint256,0x22);
-      param_2 = &ecc_Jacobian_InfinityPoint256;
-      *(undefined4 *)((int)param_3 + 0x24) = _DebugE256PublicKey_x;
-      *(undefined4 *)((int)param_3 + 0x28) = _DebugE256PublicKey_y;
-      memcpy(__s,&ecc_Jacobian_InfinityPoint256,0x22);
-      __src = &ecc_Jacobian_InfinityPoint256;
-      *(undefined4 *)((int)param_3 + 0x50) = _DAT_00013068;
-      *(undefined4 *)((int)param_3 + 0x54) = _DAT_0001306c;
-    }
-    else {
+                           *(code **)(_r_modules_funcs_p + 0x3a4)), iVar1 != 0)) {
       memcpy(param_3,param_2,0x22);
-      *(undefined4 *)((int)param_3 + 0x24) = *(undefined4 *)(param_2 + 0x24);
-      *(undefined4 *)((int)param_3 + 0x28) = *(undefined4 *)(param_2 + 0x28);
-      memcpy(__s,__src_01,0x22);
-      *(undefined4 *)((int)param_3 + 0x50) = *(undefined4 *)(param_2 + 0x50);
-      *(undefined4 *)((int)param_3 + 0x54) = *(undefined4 *)(param_2 + 0x54);
+      *(undefined4 *)((int)param_3 + 0x24) = *(undefined4 *)((int)param_2 + 0x24);
+      *(undefined4 *)((int)param_3 + 0x28) = *(undefined4 *)((int)param_2 + 0x28);
+      memcpy(__s_00,__src_01,0x22);
+      *(undefined4 *)((int)param_3 + 0x50) = *(undefined4 *)((int)param_2 + 0x50);
+      *(undefined4 *)((int)param_3 + 0x54) = *(undefined4 *)((int)param_2 + 0x54);
+      memcpy(__s,__src,0x22);
+      *(undefined4 *)((int)param_3 + 0x7c) = *(undefined4 *)((int)param_2 + 0x7c);
+      *(undefined4 *)((int)param_3 + 0x80) = *(undefined4 *)((int)param_2 + 0x80);
+      return 0;
     }
-    memcpy((void *)((int)param_3 + 0x58),__src,0x22);
-    *(undefined4 *)((int)param_3 + 0x7c) = *(undefined4 *)(param_2 + 0x7c);
-    uVar2 = *(undefined4 *)(param_2 + 0x80);
+    memcpy(param_3,&ecc_Jacobian_InfinityPoint256,0x22);
+    *(undefined4 *)((int)param_3 + 0x24) = _DebugE256PublicKey_x;
+    *(undefined4 *)((int)param_3 + 0x28) = _DebugE256PublicKey_y;
+    memcpy(__s_00,&ecc_Jacobian_InfinityPoint256,0x22);
+    *(undefined4 *)((int)param_3 + 0x50) = _DAT_00013068;
+    *(undefined4 *)((int)param_3 + 0x54) = _DAT_0001306c;
   }
   else {
     iVar1 = (**(code **)(_r_modules_funcs_p + 0x3a4))
@@ -172,105 +171,104 @@ undefined4 r_GF_Jacobian_Point_Addition256(void *param_1,undefined *param_2,void
       memcpy(param_3,param_1,0x22);
       *(undefined4 *)((int)param_3 + 0x24) = *(undefined4 *)((int)param_1 + 0x24);
       *(undefined4 *)((int)param_3 + 0x28) = *(undefined4 *)((int)param_1 + 0x28);
-      memcpy(__s,__src_02,0x22);
+      memcpy(__s_00,__src_02,0x22);
       *(undefined4 *)((int)param_3 + 0x50) = *(undefined4 *)((int)param_1 + 0x50);
       *(undefined4 *)((int)param_3 + 0x54) = *(undefined4 *)((int)param_1 + 0x54);
-      memcpy((void *)((int)param_3 + 0x58),__src_00,0x22);
+      memcpy(__s,__src_00,0x22);
       *(undefined4 *)((int)param_3 + 0x7c) = *(undefined4 *)((int)param_1 + 0x7c);
       uVar2 = *(undefined4 *)((int)param_1 + 0x80);
+      goto _L176;
     }
-    else {
+    iVar1 = (**(code **)(_r_modules_funcs_p + 0x3a4))
+                      (param_2,param_1,*(code **)(_r_modules_funcs_p + 0x3a4));
+    if ((iVar1 != 0) ||
+       ((iVar1 = (**(code **)(_r_modules_funcs_p + 0x3a4))
+                           (__src_01,__src_02,*(code **)(_r_modules_funcs_p + 0x3a4)), iVar1 == 0 &&
+        ((1 < *(uint *)((int)param_2 + 0x50) || (*(short *)((int)param_2 + 0x4c) != 0)))))) {
+      (**(code **)(_r_modules_funcs_p + 0x39c))
+                (__src_01,__src_00,auStack_2d4,*(code **)(_r_modules_funcs_p + 0x39c));
+      (**(code **)(_r_modules_funcs_p + 0x39c))
+                (__src_02,__src,auStack_2a8,*(code **)(_r_modules_funcs_p + 0x39c));
+      (**(code **)(_r_modules_funcs_p + 0x39c))
+                (param_2,__src_00,auStack_27c,*(code **)(_r_modules_funcs_p + 0x39c));
+      (**(code **)(_r_modules_funcs_p + 0x39c))
+                (param_1,__src,auStack_250,*(code **)(_r_modules_funcs_p + 0x39c));
       iVar1 = (**(code **)(_r_modules_funcs_p + 0x3a4))
-                        (param_2,param_1,*(code **)(_r_modules_funcs_p + 0x3a4));
-      if ((iVar1 != 0) ||
-         ((iVar1 = (**(code **)(_r_modules_funcs_p + 0x3a4))
-                             (__src_01,__src_02,*(code **)(_r_modules_funcs_p + 0x3a4)), iVar1 == 0
-          && ((1 < *(uint *)(param_2 + 0x50) || (*(short *)(param_2 + 0x4c) != 0)))))) {
+                        (auStack_27c,auStack_250,*(code **)(_r_modules_funcs_p + 0x3a4));
+      if (iVar1 != 0) {
+        (**(code **)(_r_modules_funcs_p + 0x3b0))
+                  (auStack_2d4,auStack_2a8,auStack_224,*(code **)(_r_modules_funcs_p + 0x3b0));
+        (**(code **)(_r_modules_funcs_p + 0x3b0))
+                  (auStack_27c,auStack_250,auStack_1f8,*(code **)(_r_modules_funcs_p + 0x3b0));
         (**(code **)(_r_modules_funcs_p + 0x39c))
-                  (__src_01,__src_00,auStack_2d4,*(code **)(_r_modules_funcs_p + 0x39c));
+                  (__src_00,__src,auStack_1a0,*(code **)(_r_modules_funcs_p + 0x39c));
+        memset(auStack_c4,0,0x22);
+        uStack_a0 = 0;
+        uStack_9c = 0;
+        memset(auStack_98,0,0x22);
+        uStack_74 = 0;
+        uStack_70 = 0;
+        memset(auStack_6c,0,0x22);
+        uStack_48 = 0;
+        uStack_44 = 0;
         (**(code **)(_r_modules_funcs_p + 0x39c))
-                  (__src_02,__src,auStack_2a8,*(code **)(_r_modules_funcs_p + 0x39c));
+                  (auStack_1f8,auStack_174,*(code **)(_r_modules_funcs_p + 0x39c));
         (**(code **)(_r_modules_funcs_p + 0x39c))
-                  (param_2,__src_00,auStack_27c,*(code **)(_r_modules_funcs_p + 0x39c));
+                  (auStack_174,auStack_1f8,auStack_148,*(code **)(_r_modules_funcs_p + 0x39c));
         (**(code **)(_r_modules_funcs_p + 0x39c))
-                  (param_1,__src,auStack_250,*(code **)(_r_modules_funcs_p + 0x39c));
-        iVar1 = (**(code **)(_r_modules_funcs_p + 0x3a4))
-                          (auStack_27c,auStack_250,*(code **)(_r_modules_funcs_p + 0x3a4));
-        if (iVar1 != 0) {
-          (**(code **)(_r_modules_funcs_p + 0x3b0))
-                    (auStack_2d4,auStack_2a8,auStack_224,*(code **)(_r_modules_funcs_p + 0x3b0));
-          (**(code **)(_r_modules_funcs_p + 0x3b0))
-                    (auStack_27c,auStack_250,auStack_1f8,*(code **)(_r_modules_funcs_p + 0x3b0));
-          (**(code **)(_r_modules_funcs_p + 0x39c))
-                    (__src_00,__src,auStack_1a0,*(code **)(_r_modules_funcs_p + 0x39c));
-          memset(auStack_c4,0,0x22);
-          uStack_a0 = 0;
-          uStack_9c = 0;
-          memset(auStack_98,0,0x22);
-          uStack_74 = 0;
-          uStack_70 = 0;
-          memset(auStack_6c,0,0x22);
-          uStack_48 = 0;
-          uStack_44 = 0;
-          (**(code **)(_r_modules_funcs_p + 0x39c))
-                    (auStack_1f8,auStack_174,*(code **)(_r_modules_funcs_p + 0x39c));
-          (**(code **)(_r_modules_funcs_p + 0x39c))
-                    (auStack_174,auStack_1f8,auStack_148,*(code **)(_r_modules_funcs_p + 0x39c));
-          (**(code **)(_r_modules_funcs_p + 0x39c))
-                    (auStack_224,auStack_11c,*(code **)(_r_modules_funcs_p + 0x39c));
-          (**(code **)(_r_modules_funcs_p + 0x39c))
-                    (auStack_174,auStack_250,auStack_f0,*(code **)(_r_modules_funcs_p + 0x39c));
-          (**(code **)(_r_modules_funcs_p + 0x398))
-                    (auStack_f0,2,auStack_6c,*(code **)(_r_modules_funcs_p + 0x398));
-          (**(code **)(_r_modules_funcs_p + 0x39c))
-                    (auStack_11c,auStack_1a0,auStack_c4,*(code **)(_r_modules_funcs_p + 0x39c));
-          (**(code **)(_r_modules_funcs_p + 0x3b0))
-                    (auStack_c4,auStack_148,auStack_98,*(code **)(_r_modules_funcs_p + 0x3b0));
-          (**(code **)(_r_modules_funcs_p + 0x3b0))
-                    (auStack_98,auStack_6c,auStack_1cc,*(code **)(_r_modules_funcs_p + 0x3b0));
-          (**(code **)(_r_modules_funcs_p + 0x39c))
-                    (auStack_1f8,auStack_1cc,param_3,*(code **)(_r_modules_funcs_p + 0x39c));
-          memset(auStack_c4,0,0x22);
-          uStack_a0 = 0;
-          uStack_9c = 0;
-          memset(auStack_98,0,0x22);
-          uStack_74 = 0;
-          uStack_70 = 0;
-          memset(auStack_6c,0,0x22);
-          uStack_48 = 0;
-          uStack_44 = 0;
-          (**(code **)(_r_modules_funcs_p + 0x3b0))
-                    (auStack_f0,auStack_1cc,auStack_c4,*(code **)(_r_modules_funcs_p + 0x3b0));
-          (**(code **)(_r_modules_funcs_p + 0x39c))
-                    (auStack_224,auStack_c4,auStack_98,*(code **)(_r_modules_funcs_p + 0x39c));
-          (**(code **)(_r_modules_funcs_p + 0x39c))
-                    (auStack_148,auStack_2a8,auStack_6c,*(code **)(_r_modules_funcs_p + 0x39c));
-          (**(code **)(_r_modules_funcs_p + 0x3b0))
-                    (auStack_98,auStack_6c,__s,*(code **)(_r_modules_funcs_p + 0x3b0));
-          (**(code **)(_r_modules_funcs_p + 0x39c))
-                    (auStack_148,auStack_1a0,(void *)((int)param_3 + 0x58),
-                     *(code **)(_r_modules_funcs_p + 0x39c));
-          return 1;
-        }
-        iVar1 = (**(code **)(_r_modules_funcs_p + 0x3a4))
-                          (auStack_2d4,auStack_2a8,*(code **)(_r_modules_funcs_p + 0x3a4));
-        if (iVar1 == 0) {
-          (**(code **)(_r_modules_funcs_p + 0x38c))
-                    (param_1,param_3,*(code **)(_r_modules_funcs_p + 0x38c));
-          return 0;
-        }
+                  (auStack_224,auStack_11c,*(code **)(_r_modules_funcs_p + 0x39c));
+        (**(code **)(_r_modules_funcs_p + 0x39c))
+                  (auStack_174,auStack_250,auStack_f0,*(code **)(_r_modules_funcs_p + 0x39c));
+        (**(code **)(_r_modules_funcs_p + 0x398))
+                  (auStack_f0,2,auStack_6c,*(code **)(_r_modules_funcs_p + 0x398));
+        (**(code **)(_r_modules_funcs_p + 0x39c))
+                  (auStack_11c,auStack_1a0,auStack_c4,*(code **)(_r_modules_funcs_p + 0x39c));
+        (**(code **)(_r_modules_funcs_p + 0x3b0))
+                  (auStack_c4,auStack_148,auStack_98,*(code **)(_r_modules_funcs_p + 0x3b0));
+        (**(code **)(_r_modules_funcs_p + 0x3b0))
+                  (auStack_98,auStack_6c,auStack_1cc,*(code **)(_r_modules_funcs_p + 0x3b0));
+        (**(code **)(_r_modules_funcs_p + 0x39c))
+                  (auStack_1f8,auStack_1cc,param_3,*(code **)(_r_modules_funcs_p + 0x39c));
+        memset(auStack_c4,0,0x22);
+        uStack_a0 = 0;
+        uStack_9c = 0;
+        memset(auStack_98,0,0x22);
+        uStack_74 = 0;
+        uStack_70 = 0;
+        memset(auStack_6c,0,0x22);
+        uStack_48 = 0;
+        uStack_44 = 0;
+        (**(code **)(_r_modules_funcs_p + 0x3b0))
+                  (auStack_f0,auStack_1cc,auStack_c4,*(code **)(_r_modules_funcs_p + 0x3b0));
+        (**(code **)(_r_modules_funcs_p + 0x39c))
+                  (auStack_224,auStack_c4,auStack_98,*(code **)(_r_modules_funcs_p + 0x39c));
+        (**(code **)(_r_modules_funcs_p + 0x39c))
+                  (auStack_148,auStack_2a8,auStack_6c,*(code **)(_r_modules_funcs_p + 0x39c));
+        (**(code **)(_r_modules_funcs_p + 0x3b0))
+                  (auStack_98,auStack_6c,__s_00,*(code **)(_r_modules_funcs_p + 0x3b0));
+        (**(code **)(_r_modules_funcs_p + 0x39c))
+                  (auStack_148,auStack_1a0,__s,*(code **)(_r_modules_funcs_p + 0x39c));
+        return 1;
       }
-      memcpy(param_3,&ecc_Jacobian_InfinityPoint256,0x22);
-      *(undefined4 *)((int)param_3 + 0x24) = _DebugE256PublicKey_x;
-      *(undefined4 *)((int)param_3 + 0x28) = _DebugE256PublicKey_y;
-      memcpy(__s,&ecc_Jacobian_InfinityPoint256,0x22);
-      *(undefined4 *)((int)param_3 + 0x50) = _DAT_00013068;
-      *(undefined4 *)((int)param_3 + 0x54) = _DAT_0001306c;
-      memcpy((void *)((int)param_3 + 0x58),&ecc_Jacobian_InfinityPoint256,0x22);
-      *(undefined4 *)((int)param_3 + 0x7c) = _DAT_00013094;
-      uVar2 = _DAT_00013098;
+      iVar1 = (**(code **)(_r_modules_funcs_p + 0x3a4))
+                        (auStack_2d4,auStack_2a8,*(code **)(_r_modules_funcs_p + 0x3a4));
+      if (iVar1 == 0) {
+        (**(code **)(_r_modules_funcs_p + 0x38c))
+                  (param_1,param_3,*(code **)(_r_modules_funcs_p + 0x38c));
+        return 0;
+      }
     }
+    memcpy(param_3,&ecc_Jacobian_InfinityPoint256,0x22);
+    *(undefined4 *)((int)param_3 + 0x24) = _DebugE256PublicKey_x;
+    *(undefined4 *)((int)param_3 + 0x28) = _DebugE256PublicKey_y;
+    memcpy(__s_00,&ecc_Jacobian_InfinityPoint256,0x22);
+    *(undefined4 *)((int)param_3 + 0x50) = _DAT_00013068;
+    *(undefined4 *)((int)param_3 + 0x54) = _DAT_0001306c;
   }
+  memcpy(__s,&ecc_Jacobian_InfinityPoint256,0x22);
+  *(undefined4 *)((int)param_3 + 0x7c) = _DAT_00013094;
+  uVar2 = _DAT_00013098;
+_L176:
   *(undefined4 *)((int)param_3 + 0x80) = uVar2;
   return 0;
 }

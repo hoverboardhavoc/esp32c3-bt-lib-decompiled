@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> hci_tl.o -> r_hci_tl_hci_pkt_handler
  *
@@ -29,7 +29,7 @@ void r_hci_tl_hci_pkt_handler(void)
     if (_DAT_00012030[3] != '\0') {
       uVar3 = 7;
     }
-                    /* WARNING: Could not recover jumptable at 0x00010cfa. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010cce. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_modules_funcs_p + 0x108))(uVar3,*(code **)(_r_modules_funcs_p + 0x108));
     return;
@@ -49,7 +49,7 @@ void r_hci_tl_hci_pkt_handler(void)
         if (1 < _g_bt_plf_log_level) {
           ets_printf("HCITL: fail to alloc acl %0x, %0x\n",iVar4,0);
         }
-        goto _L166;
+        goto _L159;
       }
       memcpy(__dest,pcVar1 + 5,(uint)*(ushort *)(pcVar1 + 3));
       uVar5 = *(undefined2 *)(pcVar1 + 3);
@@ -58,8 +58,8 @@ void r_hci_tl_hci_pkt_handler(void)
     }
     (*pcVar6)(uVar2,uVar5,iVar4,pcVar6);
   }
-_L166:
-                    /* WARNING: Could not recover jumptable at 0x00010d86. Too many branches */
+_L159:
+                    /* WARNING: Could not recover jumptable at 0x00010d5a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_plf_funcs_p + 0xdc))(*(code **)(_r_plf_funcs_p + 0xdc));
   return;

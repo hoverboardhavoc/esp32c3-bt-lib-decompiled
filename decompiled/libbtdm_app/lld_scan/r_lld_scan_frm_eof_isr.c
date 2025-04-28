@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_frm_eof_isr
  *
@@ -23,7 +23,7 @@ void r_lld_scan_frm_eof_isr(int param_1,undefined4 param_2,undefined4 param_3)
   int iVar6;
   
   if ((_lld_scan_env == 0) || (iVar4 = *(int *)(param_1 * 4 + _lld_scan_env), iVar4 == 0)) {
-                    /* WARNING: Could not recover jumptable at 0x00012e54. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00012e92. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_plf_funcs_p + 0xc))(param_1,"lld_scan.c",0x9a6,*(code **)(_r_plf_funcs_p + 0xc))
     ;
@@ -38,7 +38,7 @@ void r_lld_scan_frm_eof_isr(int param_1,undefined4 param_2,undefined4 param_3)
       if (iVar4 == 0) break;
       (**(code **)(_r_ip_funcs_p + 0x2a8))(*(code **)(_r_ip_funcs_p + 0x2a8));
     }
-                    /* WARNING: Could not recover jumptable at 0x00012cd8. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00012d14. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_ip_funcs_p + 0x3e4))(*(code **)(_r_ip_funcs_p + 0x3e4));
     return;
@@ -73,10 +73,10 @@ void r_lld_scan_frm_eof_isr(int param_1,undefined4 param_2,undefined4 param_3)
     }
     *(undefined1 *)(iVar4 + 0x3e) = 0;
   }
-  else if (*(char *)(iVar4 + 0x3d) != '\x02') goto _L601;
+  else if (*(char *)(iVar4 + 0x3d) != '\x02') goto _L623;
   *(undefined1 *)(iVar4 + 0x3d) = 0;
-_L601:
-                    /* WARNING: Could not recover jumptable at 0x00012e24. Too many branches */
+_L623:
+                    /* WARNING: Could not recover jumptable at 0x00012e62. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_ip_funcs_p + 0x430))(param_1,param_2,param_3,*(code **)(_r_ip_funcs_p + 0x430));
   return;

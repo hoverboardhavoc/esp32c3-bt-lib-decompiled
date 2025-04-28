@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> h4tl.o -> r_h4tl_out_of_sync_check
  *
@@ -31,7 +31,7 @@ undefined4 r_h4tl_out_of_sync_check(int param_1)
       memmove((void *)(param_1 + 10),(void *)(param_1 + 0xb),9);
       return 0;
     }
-    puVar2 = (undefined1 *)r_ke_msg_alloc(1,8,0x1e);
+    puVar2 = (undefined1 *)r_ke_msg_alloc(1,8,0x1e,1);
     *puVar2 = 1;
     r_ke_msg_send();
   }

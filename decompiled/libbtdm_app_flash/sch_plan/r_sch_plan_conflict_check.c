@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> sch_plan.o -> r_sch_plan_conflict_check
  *
@@ -16,7 +16,6 @@ void r_sch_plan_conflict_check(int param_1)
 
 {
   int iVar1;
-  code *UNRECOVERED_JUMPTABLE;
   undefined4 local_20;
   undefined4 uStack_1c;
   undefined4 uStack_18;
@@ -31,21 +30,22 @@ void r_sch_plan_conflict_check(int param_1)
   uStack_18 = *(undefined4 *)(param_1 + 8);
   iVar1 = r_sch_plan_offset_req(1,0,0,&local_20);
   if ((iVar1 == 3) && (_g_conflict_elt != 0)) {
-    UNRECOVERED_JUMPTABLE = *(code **)(_g_conflict_elt + 0x18);
-    iVar1 = _g_conflict_elt;
-    if (*(code **)(param_1 + 0x18) == (code *)0x0) {
-      if (UNRECOVERED_JUMPTABLE == (code *)0x0) {
+    if (*(int *)(param_1 + 0x18) == 0) {
+      iVar1 = _g_conflict_elt;
+      if (*(int *)(_g_conflict_elt + 0x18) == 0) {
         return;
       }
     }
-    else if ((UNRECOVERED_JUMPTABLE == (code *)0x0) ||
-            (*(byte *)(_g_conflict_elt + 0x16) <= *(byte *)(param_1 + 0x16))) {
-      UNRECOVERED_JUMPTABLE = *(code **)(param_1 + 0x18);
+    else {
       iVar1 = param_1;
+      if ((*(int *)(_g_conflict_elt + 0x18) != 0) &&
+         (iVar1 = param_1, *(byte *)(param_1 + 0x16) < *(byte *)(_g_conflict_elt + 0x16))) {
+        iVar1 = _g_conflict_elt;
+      }
     }
-                    /* WARNING: Could not recover jumptable at 0x00010360. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001037e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (*UNRECOVERED_JUMPTABLE)(*(undefined2 *)(iVar1 + 0x14),UNRECOVERED_JUMPTABLE);
+    (**(code **)(iVar1 + 0x18))(*(undefined2 *)(iVar1 + 0x14),*(code **)(iVar1 + 0x18));
     return;
   }
   return;

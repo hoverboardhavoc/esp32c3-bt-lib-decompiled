@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> arch_main.o -> rw_schedule
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void rw_schedule(void)
   }
   if (_btdm_pwr_state == 1) {
     do {
-    } while (-1 < _DAT_60042000 << 0x10);
+    } while ((_DAT_60042000 & 0x8000) == 0);
     if (*(code **)(_r_osi_funcs_p + 0x9c) != (code *)0x0) {
       (**(code **)(_r_osi_funcs_p + 0x9c))();
     }

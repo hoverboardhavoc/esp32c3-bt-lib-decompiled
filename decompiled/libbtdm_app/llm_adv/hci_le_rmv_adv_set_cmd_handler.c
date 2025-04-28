@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_rmv_adv_set_cmd_handler
  *
@@ -12,18 +12,42 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 hci_le_rmv_adv_set_cmd_handler(undefined4 param_1,undefined4 param_2)
+undefined4 hci_le_rmv_adv_set_cmd_handler(undefined1 *param_1,undefined4 param_2)
 
 {
-  int iVar1;
+  byte bVar1;
+  int iVar2;
+  int iVar3;
+  undefined4 uVar4;
+  undefined1 auStack_24 [4];
   
-  iVar1 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
-  if (*(char *)(iVar1 + 0x18) == '\0') {
+  iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+  iVar2 = _r_ip_funcs_p;
+  if (*(char *)(iVar3 + 0x18) == '\0') {
     (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,0xc,*(code **)(_r_ip_funcs_p + 0x4b8));
+    return 0;
   }
-  else {
-    f_hci_le_rmv_adv_set_cmd_handler(param_1,param_2);
+  if (*(char *)(_p_llm_env + 0xd7) != '\x01') {
+    *(undefined1 *)(_p_llm_env + 0xd7) = 2;
+    iVar2 = (**(code **)(iVar2 + 0x544))(*param_1,auStack_24,*(code **)(iVar2 + 0x544));
+    uVar4 = 0x42;
+    if (iVar2 == 0xff) goto _L613;
+    iVar3 = *(int *)(_p_llm_env + 8) + iVar2 * 0x44;
+    if ((*(char *)(iVar3 + 0x40) == '\x01') &&
+       ((bVar1 = *(byte *)(iVar3 + 0x3d),
+        iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(0x42,*(code **)(_r_plf_funcs_p + 0x38)),
+        *(byte *)(iVar3 + 0xd) <= bVar1 ||
+        (*(char *)(*(int *)(_p_llm_env + 8) +
+                   (uint)*(byte *)(iVar2 * 0x44 + *(int *)(_p_llm_env + 8) + 0x3d) * 0x44 + 0x40) ==
+         '\n')))) {
+      (**(code **)(_r_ip_funcs_p + 0x550))(iVar2,*(code **)(_r_ip_funcs_p + 0x550));
+      uVar4 = 0;
+      goto _L613;
+    }
   }
+  uVar4 = 0xc;
+_L613:
+  (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,uVar4,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }
 

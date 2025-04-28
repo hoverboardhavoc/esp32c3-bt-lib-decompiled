@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_chmap_upd.o -> r_llc_loc_ch_map_proc_continue
  *
@@ -47,9 +47,9 @@ void r_llc_loc_ch_map_proc_continue(int param_1,int param_2)
       }
       iVar5 = memcmp((void *)(iVar2 + 8),abStack_28,5);
       if (iVar5 != 0) {
-        pvVar7 = (void *)(iVar4 + 8);
         *(ushort *)(iVar2 + 0x42) = *(ushort *)(iVar2 + 0x42) | 0x10;
         sVar3 = r_lld_con_event_counter_get(param_1);
+        pvVar7 = (void *)(iVar4 + 8);
         sVar3 = sVar3 + *(short *)(iVar2 + 0x10) + 9;
         *(short *)(iVar4 + 0xe) = sVar3;
         memcpy(pvVar7,abStack_28,5);

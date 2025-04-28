@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_con_upd.o -> ll_connection_update_ind_handler_hack
  *
@@ -71,7 +71,7 @@ undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,int par
       if (iVar1 == 0) {
         puVar3 = (undefined4 *)
                  (**(code **)(_r_modules_funcs_p + 200))
-                           (0x10b,1,0x30,*(code **)(_r_modules_funcs_p + 200));
+                           (0x10b,1,1,0x30,*(code **)(_r_modules_funcs_p + 200));
         iVar1 = _r_ip_funcs_p;
         *(undefined1 *)(puVar3 + 1) = 5;
         uVar2 = *(undefined4 *)(iVar1 + 0x604);
@@ -84,7 +84,7 @@ undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,int par
         uVar2 = 7;
       }
       iVar1 = (**(code **)(_r_ip_funcs_p + 0x678))(param_1,1,*(code **)(_r_ip_funcs_p + 0x678));
-      if (iVar1 != 5) goto _L204;
+      if (iVar1 != 5) goto _L199;
       iVar1 = (**(code **)(_r_ip_funcs_p + 0x674))(param_1,1,*(code **)(_r_ip_funcs_p + 0x674));
       (**(code **)(_r_ip_funcs_p + 0x684))(param_1,uVar2,*(code **)(_r_ip_funcs_p + 0x684));
       *(undefined2 *)(iVar1 + 0x28) = *(undefined2 *)(param_2 + 4);
@@ -100,7 +100,7 @@ undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,int par
     uVar2 = 0;
   }
   else {
-_L204:
+_L199:
     uVar2 = 0x24;
   }
   return uVar2;

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> emi.o -> r_emi_alloc_em_mapping_by_offset
  *
@@ -42,7 +42,7 @@ undefined4 r_emi_alloc_em_mapping_by_offset(undefined4 param_1,undefined4 param_
     }
     uVar5 = 0x179;
     pcVar7 = *(code **)(_r_plf_funcs_p + 0xc);
-_L146:
+_L140:
     (*pcVar7)(param_1,0,0x10000,uVar5,pcVar7);
     return 0x1f;
   }
@@ -62,7 +62,7 @@ _L146:
     }
     uVar5 = 0x17f;
     pcVar7 = *(code **)(_r_plf_funcs_p + 0xc);
-    goto _L146;
+    goto _L140;
   }
   uVar4 = (**(code **)(_r_osi_funcs_p + 0x78))(param_2,*(code **)(_r_osi_funcs_p + 0x78));
   if (uVar4 == 0) {
@@ -72,29 +72,25 @@ _L146:
     (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x27c1,*(code **)(_r_plf_funcs_p + 8));
   }
   *puVar2 = *puVar2 & 0xfffc0000 | uVar4 >> 2 & 0x3ffff;
-  if (uVar3 < 0x38) {
-    if (0x1f < (int)uVar3) {
-      if ((int)uVar3 < 0x30) {
-        puVar2 = (uint *)&DAT_600312c8;
-        uVar4 = 1 << (uVar3 - 0x20 & 0x1f);
-        uVar4 = ~uVar4 & _DAT_600312c8 | uVar4;
-        goto _L144;
-      }
-      goto _L138;
-    }
-_L139:
+  if (0x37 < uVar3) {
+    (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x27fa,*(code **)(_r_plf_funcs_p + 8));
+  }
+  if ((int)uVar3 < 0x20) {
     puVar2 = (uint *)&DAT_600312c4;
   }
   else {
-    (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x27fa,*(code **)(_r_plf_funcs_p + 8));
-    if ((int)uVar3 < 0x20) goto _L139;
-_L138:
+    if ((int)uVar3 < 0x30) {
+      puVar2 = (uint *)&DAT_600312c8;
+      uVar4 = 1 << (uVar3 - 0x20 & 0x1f);
+      uVar4 = ~uVar4 & _DAT_600312c8 | uVar4;
+      goto _L141;
+    }
     uVar3 = uVar3 - 0x30;
     puVar2 = (uint *)&DAT_60031300;
   }
   uVar4 = 1 << (uVar3 & 0x1f);
   uVar4 = ~uVar4 & *puVar2 | uVar4;
-_L144:
+_L141:
   *puVar2 = uVar4;
   return 0;
 }

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> emi.o -> r_emi_em_base_init
  *
@@ -18,10 +18,13 @@ undefined4 r_emi_em_base_init(void)
   void *pvVar1;
   uint uVar2;
   uint uVar3;
-  int iVar4;
-  uint *puVar5;
-  uint uVar6;
-  undefined4 uVar7;
+  uint *puVar4;
+  uint uVar5;
+  int iVar6;
+  uint *puVar7;
+  int iVar8;
+  uint uVar9;
+  undefined4 uVar10;
   
   pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))(0x148,*(code **)(_r_osi_funcs_p + 0x78));
   if (pvVar1 != (void *)0x0) {
@@ -84,17 +87,16 @@ undefined4 r_emi_em_base_init(void)
                 }
                 _DAT_6003121c = (uint)((int)pvVar1 << 0xc) >> 0xe | 0x20000000;
                 _DAT_600312c4 = _DAT_600312c4 | 0x40;
-                iVar4 = 0;
+                iVar6 = 0;
                 do {
+                  iVar8 = iVar6 * 0x800 + 0x2400;
                   if (2 < _g_bt_plf_log_level) {
-                    ets_printf("EM ADV DATA TX BUFFER[%d] %04x, NULL, len %d\n",iVar4,
-                               iVar4 * 0x800 + 0x2400,0x2ee);
+                    ets_printf("EM ADV DATA TX BUFFER[%d] %04x, NULL, len %d\n",iVar6,iVar8,0x2ee);
                   }
-                  *(uint *)(&DAT_60031220 + iVar4 * 4) =
-                       (((uint)(iVar4 * 0x800) >> 2) + 0x900) * 0x40000;
-                  _DAT_600312c4 = ~(1 << (iVar4 + 7U & 0x1f)) & _DAT_600312c4;
-                  iVar4 = iVar4 + 1;
-                } while (iVar4 != 10);
+                  *(int *)(&DAT_60031220 + iVar6 * 4) = iVar8 * 0x10000;
+                  _DAT_600312c4 = ~(1 << (iVar6 + 7U & 0x1f)) & _DAT_600312c4;
+                  iVar6 = iVar6 + 1;
+                } while (iVar6 != 10);
                 pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
                                            (0x66,*(code **)(_r_osi_funcs_p + 0x78));
                 if (pvVar1 != (void *)0x0) {
@@ -104,67 +106,73 @@ undefined4 r_emi_em_base_init(void)
                     ;
                   }
                   _DAT_60031248 = (uint)pvVar1 >> 2 & 0x3ffff | 0x74000000;
-                  _DAT_600312c4 = _DAT_600312c4 | 0x20000;
-                  iVar4 = 0;
+                  _DAT_600312c4 = _DAT_600312c4 & 0xfffdffff | 0x20000;
+                  iVar6 = 0;
                   do {
                     pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
                                                (0x110,*(code **)(_r_osi_funcs_p + 0x78));
-                    if (pvVar1 == (void *)0x0) goto _L19;
+                    if (pvVar1 == (void *)0x0) goto _L20;
                     memset(pvVar1,0,0x110);
+                    iVar8 = iVar6 * 0x400 + 0x7800;
                     if (2 < _g_bt_plf_log_level) {
-                      ets_printf("EM DATA RX BUFFER[%d] %04x, %p, len %d\n",iVar4,
-                                 iVar4 * 0x400 + 0x7800,pvVar1,0x110);
+                      ets_printf("EM DATA RX BUFFER[%d] %04x, %p, len %d\n",iVar6,iVar8,pvVar1,0x110
+                                );
                     }
-                    *(uint *)(iVar4 * 4 + 0x6003124c) =
-                         (((uint)(iVar4 * 0x400) >> 2) + 0x1e00) * 0x40000 |
-                         (uint)pvVar1 >> 2 & 0x3ffff;
-                    uVar3 = 1 << (iVar4 + 0x12U & 0x1f);
-                    _DAT_600312c4 = ~uVar3 & _DAT_600312c4 | uVar3;
-                    iVar4 = iVar4 + 1;
-                  } while (iVar4 != 9);
-                  puVar5 = (uint *)&DAT_60031270;
-                  uVar3 = 0;
-                  uVar6 = 0x1b;
-                  uVar7 = 0x110;
+                    *(uint *)(iVar6 * 4 + 0x6003124c) =
+                         (uint)pvVar1 >> 2 & 0x3ffff | iVar8 * 0x10000;
+                    uVar5 = 1 << (iVar6 + 0x12U & 0x1f);
+                    _DAT_600312c4 = ~uVar5 & _DAT_600312c4 | uVar5;
+                    iVar6 = iVar6 + 1;
+                  } while (iVar6 != 9);
+                  puVar7 = (uint *)&DAT_60031270;
+                  uVar5 = 0x9c00;
+                  uVar9 = 0x1b;
+                  uVar10 = 0x110;
                   do {
-                    iVar4 = r_sdk_config_get_opts();
-                    if ((int)(uVar6 - 0x1b) < (int)(uint)*(byte *)(iVar4 + 0x10)) {
+                    iVar6 = r_sdk_config_get_opts();
+                    iVar8 = uVar9 - 0x1b;
+                    if (iVar8 < (int)(uint)*(byte *)(iVar6 + 0x10)) {
                       pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
                                                  (0x100,*(code **)(_r_osi_funcs_p + 0x78));
                       if (pvVar1 == (void *)0x0) break;
                       memset(pvVar1,0,0x100);
                       if (2 < _g_bt_plf_log_level) {
-                        ets_printf("EM ACL TX STATIC BUFFER[%d] %04x, %p, len %d\n",uVar6 - 0x1b,
-                                   uVar3 + 0x9c00,pvVar1,0x100);
+                        ets_printf("EM ACL TX STATIC BUFFER[%d] %04x, %p, len %d\n",iVar8,uVar5,
+                                   pvVar1,0x100);
                       }
-                      *puVar5 = ((uVar3 >> 2) + 0x2700) * 0x40000 | (uint)pvVar1 >> 2 & 0x3ffff;
-                      if (uVar6 < 0x20) {
-                        uVar2 = 1 << (uVar6 & 0x1f);
-                        _DAT_600312c4 = ~uVar2 & _DAT_600312c4 | uVar2;
+                      *puVar7 = (uint)pvVar1 >> 2 & 0x3ffff | (uVar5 >> 2) << 0x12;
+                      if (uVar9 < 0x20) {
+                        uVar3 = 1 << (uVar9 & 0x1f);
+                        _DAT_600312c4 = ~uVar3 & _DAT_600312c4 | uVar3;
                       }
                       else {
-                        uVar2 = 1 << (uVar6 - 0x20 & 0x1f);
-                        _DAT_600312c8 = ~uVar2 & _DAT_600312c8 | uVar2;
+                        uVar3 = 1 << (uVar9 - 0x20 & 0x1f);
+                        _DAT_600312c8 = ~uVar3 & _DAT_600312c8 | uVar3;
                       }
-                      uVar7 = 0x100;
+                      uVar10 = 0x100;
                     }
                     else {
                       if (2 < _g_bt_plf_log_level) {
-                        ets_printf("EM ACL TX DYNAMIC BUFFER[%d] %04x, NULL, len %d\n",uVar6 - 0x1b,
-                                   uVar3 + 0x9c00,uVar7);
+                        ets_printf("EM ACL TX DYNAMIC BUFFER[%d] %04x, NULL, len %d\n",iVar8,uVar5,
+                                   uVar10);
                       }
-                      *puVar5 = ((uVar3 >> 2) + 0x2700) * 0x40000;
-                      if (uVar6 < 0x20) {
-                        _DAT_600312c4 = ~(1 << (uVar6 & 0x1f)) & _DAT_600312c4;
+                      *puVar7 = (uVar5 >> 2) << 0x12;
+                      if (uVar9 < 0x20) {
+                        puVar4 = (uint *)&DAT_600312c4;
+                        uVar2 = _DAT_600312c4;
+                        uVar3 = uVar9;
                       }
                       else {
-                        _DAT_600312c8 = ~(1 << (uVar6 - 0x20 & 0x1f)) & _DAT_600312c8;
+                        puVar4 = (uint *)&DAT_600312c8;
+                        uVar3 = uVar9 - 0x20;
+                        uVar2 = _DAT_600312c8;
                       }
+                      *puVar4 = ~(1 << (uVar3 & 0x1f)) & uVar2;
                     }
-                    uVar3 = uVar3 + 0x400;
-                    uVar6 = uVar6 + 1;
-                    puVar5 = puVar5 + 1;
-                    if (uVar3 == 0x3000) {
+                    uVar9 = uVar9 + 1;
+                    uVar5 = uVar5 + 0x400;
+                    puVar7 = puVar7 + 1;
+                    if (uVar9 == 0x27) {
                       if (em_base_reg_lut != 0x26) {
                         r_assert_param(0x27,em_base_reg_lut + 1,0x10000,0xfd);
                       }
@@ -184,7 +192,7 @@ undefined4 r_emi_em_base_init(void)
       }
     }
   }
-_L19:
+_L20:
   r_emi_em_base_deinit();
   return 7;
 }

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_scan.o -> ble_ll_scan_channel_setting
  *
@@ -17,7 +17,7 @@ void ble_ll_scan_channel_setting(uint param_1)
   
   iVar1 = r_ble_ll_qa_config_get();
   if (param_1 != 0) {
-    param_1 = (uint)*(byte *)(param_1 + 0x1478f);
+    param_1 = (uint)*(byte *)(param_1 + 0x147bf);
   }
   *(short *)(iVar1 + 0x18) = (short)param_1;
   return;

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_ext_chain_construct
  *
@@ -33,7 +33,7 @@ void r_lld_adv_ext_chain_construct(int param_1)
   else if ((bVar1 & 1) == 0) {
     if ((bVar1 & 2) == 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x669,*(code **)(_r_plf_funcs_p + 8));
-      goto _L486;
+      goto _L538;
     }
     pcVar4 = *(code **)(_r_ip_funcs_p + 0x774);
   }
@@ -41,7 +41,7 @@ void r_lld_adv_ext_chain_construct(int param_1)
     pcVar4 = *(code **)(_r_ip_funcs_p + 0x770);
   }
   (*pcVar4)(param_1,pcVar4);
-_L486:
+_L538:
   *(uint *)(*(int *)(&lld_adv_env + param_1 * 4) + 0x10) =
        *(int *)(iVar2 + 0x6c) * 2 + (uint)_sdk_cfg_priv_opts;
   return;

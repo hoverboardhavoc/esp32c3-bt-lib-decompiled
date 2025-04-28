@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_adv.o -> r_llm_adv_con_len_check
  *
@@ -10,17 +10,31 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-byte r_llm_adv_con_len_check(int param_1,int param_2)
+undefined4 r_llm_adv_con_len_check(int param_1,int param_2)
 
 {
+  undefined4 uVar1;
+  int iVar2;
+  int iVar3;
+  
   if ((*(ushort *)(param_1 + 2) & 0x10) != 0) {
     r_assert_err(0,"llm_adv.c",0xc17);
   }
   if ((*(ushort *)(param_1 + 2) & 1) == 0) {
     r_assert_err(0,"llm_adv.c",0xc18);
   }
-  return -(0xfe < (int)((uint)((*(ushort *)(param_1 + 2) & 0x40) != 0) +
-                        ((int)((uint)*(ushort *)(param_1 + 2) << 0x1d) >> 0x1f & 6U) + 9 + param_2))
-         & 0x12;
+  iVar2 = 6;
+  if ((*(ushort *)(param_1 + 2) & 4) != 0) {
+    iVar2 = 0xc;
+  }
+  iVar3 = iVar2 + 3;
+  if ((*(ushort *)(param_1 + 2) & 0x40) == 0) {
+    iVar3 = iVar2 + 2;
+  }
+  uVar1 = 0;
+  if (0xfe < iVar3 + 1 + param_2) {
+    uVar1 = 0x12;
+  }
+  return uVar1;
 }
 

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> nvds.o -> r_nvds_purge
  *
@@ -17,30 +17,30 @@ void r_nvds_purge(uint param_1,void *param_2)
   void *__dest;
   uint uVar2;
   int iVar3;
-  undefined1 uStack_28;
-  byte bStack_27;
-  byte bStack_26;
-  int iStack_24;
+  undefined1 uStack_38;
+  byte bStack_37;
+  byte bStack_36;
+  int aiStack_34 [4];
   
-  iStack_24 = 4;
+  aiStack_34[0] = 4;
   uVar2 = 0;
   __dest = param_2;
   while( true ) {
-    iVar1 = iStack_24;
-    iVar3 = r_nvds_walk_tag(iStack_24,&uStack_28,&iStack_24);
+    iVar1 = aiStack_34[0];
+    iVar3 = r_nvds_walk_tag(aiStack_34[0],&uStack_38,aiStack_34);
     if (iVar3 != 0) break;
-    if ((bStack_27 & 5) == 4) {
-      uVar2 = uVar2 + bStack_26 + 3;
+    if ((bStack_37 & 5) == 4) {
+      uVar2 = uVar2 + bStack_36 + 3;
       if (param_1 < uVar2) {
         r_assert_err("nvds.c",0x20c);
       }
-      memcpy(__dest,&uStack_28,3);
-      (*nvds_env)(iVar1 + 3,bStack_26,(int)__dest + 3,nvds_env);
-      __dest = (void *)((int)__dest + 3 + (uint)bStack_26);
+      memcpy(__dest,&uStack_38,3);
+      (*nvds_env)(iVar1 + 3,bStack_36,(int)__dest + 3,nvds_env);
+      __dest = (void *)((int)__dest + 3 + (uint)bStack_36);
     }
   }
   r_nvds_init_memory();
-  (*DAT_0001069c)(4,uVar2,param_2,DAT_0001069c);
+  (*DAT_00010694)(4,uVar2,param_2,DAT_00010694);
   return;
 }
 

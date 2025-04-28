@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_init.o -> hci_le_create_con_cancel_cmd_handler
  *
@@ -43,9 +43,9 @@ undefined4 hci_le_create_con_cancel_cmd_handler(undefined4 param_1,undefined4 pa
     }
     if ((_bt_rf_coex_hooks_p != (undefined4 *)0x0) && ((code *)*_bt_rf_coex_hooks_p != (code *)0x0))
     {
-      uVar4 = 1;
-      if (*(char *)(_p_llm_env + 0xd7) == '\x02') {
-        uVar4 = 3;
+      uVar4 = 3;
+      if (*(char *)(_p_llm_env + 0xd7) != '\x02') {
+        uVar4 = 1;
       }
       (*(code *)*_bt_rf_coex_hooks_p)(uVar1,uVar4,0);
     }
@@ -53,8 +53,11 @@ undefined4 hci_le_create_con_cancel_cmd_handler(undefined4 param_1,undefined4 pa
     *(undefined4 *)(*(int *)(_p_llm_env + 8) + iVar3) = 0;
   }
   else {
-    r_llm_cmd_cmp_send(param_2,((int)((uint)_sdk_cfg_priv_opts << 0x1a) >> 0x1f & 0xfffffff4U) + 0xc
-                      );
+    uVar4 = 0xc;
+    if ((_sdk_cfg_priv_opts & 0x20) != 0) {
+      uVar4 = 0;
+    }
+    r_llm_cmd_cmp_send(param_2,uVar4);
   }
   return 0;
 }

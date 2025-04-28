@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> hci.o -> r_hci_send_2_host
  *
@@ -30,41 +30,41 @@ void r_hci_send_2_host(undefined1 *param_1)
   if (iVar3 == 0) {
     if (hci_ext_host != '\0') {
       UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0x5c);
-      goto _L56;
+      goto _L51;
     }
     uVar6 = *(ushort *)(param_1 + -8);
     if (uVar6 == 0x1104) {
       uVar1 = *param_1;
       UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0x9c);
-_L58:
+_L53:
       iVar3 = (*UNRECOVERED_JUMPTABLE)(uVar1,UNRECOVERED_JUMPTABLE);
       if (iVar3 == 0) {
-_L25:
+_L30:
         uVar2 = 4;
       }
       else {
         uVar7 = (uint)*(byte *)(iVar3 + 1);
-_L51:
+_L45:
         uVar7 = uVar7 & 3;
         if (uVar7 == 1) {
           uVar6 = *(ushort *)(param_1 + -6);
           iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
           uVar4 = *(undefined2 *)(param_1 + -6);
           if (uVar6 < *(byte *)(iVar3 + 0xd)) {
-            uVar7 = (**(code **)(_r_hli_funcs_p + 0x14))(uVar4,*(code **)(_r_hli_funcs_p + 0x14));
+            iVar3 = (**(code **)(_r_hli_funcs_p + 0x14))(uVar4,*(code **)(_r_hli_funcs_p + 0x14));
             uVar6 = 9;
-            if (uVar7 != 0xff) {
-              uVar6 = (ushort)((uVar7 & 0xff) << 8) | 9;
+            if (iVar3 != 0xff) {
+              uVar6 = (ushort)(iVar3 << 8) | 9;
             }
-            goto _L34;
+            goto _L27;
           }
           uVar5 = 0x3e6;
           UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 0xc);
-          goto _L53;
+          goto _L48;
         }
         if (uVar7 == 2) goto _L26;
         uVar2 = 3;
-        if (uVar7 == 0) goto _L27;
+        if (uVar7 == 0) goto _L35;
       }
       uVar4 = *(undefined2 *)(param_1 + -8);
       UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 0xc);
@@ -75,37 +75,37 @@ _L51:
         if (uVar6 == 0x1103) {
           uVar1 = param_1[-4];
           UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0x98);
-          goto _L58;
+          goto _L53;
         }
         if (0x1100 < uVar6) {
           if (*(short *)(param_1 + -4) != 0) {
             iVar3 = (**(code **)(_r_ip_funcs_p + 0x90))(*(code **)(_r_ip_funcs_p + 0x90));
-            if (iVar3 == 0) goto _L25;
+            if (iVar3 == 0) goto _L30;
             uVar7 = (int)(uint)*(byte *)(iVar3 + 2) >> 4;
-            goto _L51;
+            goto _L45;
           }
-_L27:
+_L35:
           uVar6 = 8;
-          goto _L34;
+          goto _L27;
         }
-        goto _L25;
+        goto _L30;
       }
-      if (uVar6 != 0x1106) goto _L25;
+      if (uVar6 != 0x1106) goto _L30;
 _L26:
       uVar6 = *(ushort *)(param_1 + -6);
       iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
       if (uVar6 < *(byte *)(iVar3 + 0xd)) {
         uVar6 = 5;
-_L34:
+_L27:
         *(ushort *)(param_1 + -6) = uVar6;
         UNRECOVERED_JUMPTABLE = *(code **)(_r_modules_funcs_p + 0xe0);
         puVar8 = param_1;
-        goto _L56;
+        goto _L51;
       }
       uVar4 = *(undefined2 *)(param_1 + -6);
       UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 0xc);
       uVar5 = 0x3f7;
-_L53:
+_L48:
       uVar2 = *(undefined2 *)(param_1 + -8);
     }
     (*UNRECOVERED_JUMPTABLE)(uVar2,uVar4,"hci.c",uVar5,UNRECOVERED_JUMPTABLE);
@@ -114,8 +114,8 @@ _L53:
                *(code **)(_r_plf_funcs_p + 0xc));
   }
   UNRECOVERED_JUMPTABLE = *(code **)(_r_modules_funcs_p + 0xd8);
-_L56:
-                    /* WARNING: Could not recover jumptable at 0x000102b4. Too many branches */
+_L51:
+                    /* WARNING: Could not recover jumptable at 0x000102b0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*UNRECOVERED_JUMPTABLE)(puVar8,UNRECOVERED_JUMPTABLE);
   return;

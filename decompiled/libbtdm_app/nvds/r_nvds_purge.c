@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> nvds.o -> r_nvds_purge
  *
@@ -22,7 +22,7 @@ void r_nvds_purge(uint param_1,void *param_2)
   undefined1 uStack_38;
   byte bStack_37;
   byte bStack_36;
-  int aiStack_34 [4];
+  int aiStack_34 [2];
   
   aiStack_34[0] = 4;
   uVar2 = 0;
@@ -43,7 +43,7 @@ void r_nvds_purge(uint param_1,void *param_2)
     }
   }
   (**(code **)(_r_modules_funcs_p + 0x244))(*(code **)(_r_modules_funcs_p + 0x244));
-  (*DAT_000106f0)(4,uVar2,param_2,DAT_000106f0);
+  (*DAT_000106f4)(4,uVar2,param_2,DAT_000106f4);
   return;
 }
 

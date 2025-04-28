@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_scan.o -> f_hci_le_per_adv_create_sync_cancel_cmd_handler
  *
@@ -56,26 +56,27 @@ undefined4 f_hci_le_per_adv_create_sync_cancel_cmd_handler(undefined4 param_1,un
          ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
         (*(code *)*_bt_rf_coex_hooks_p)(uVar1,6,0);
       }
-      goto _L182;
+      goto _L192;
     }
   }
   iVar2 = 0xc;
-_L182:
+_L192:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,iVar2,*(code **)(_r_ip_funcs_p + 0x4b8));
   if (iVar2 == 0) {
     puVar3 = (undefined2 *)
              (**(code **)(_r_modules_funcs_p + 200))
                        (0x1104,0,0x3e,0x12,*(code **)(_r_modules_funcs_p + 200));
-    puVar3[1] = (short)uVar1;
     *puVar3 = 0x440e;
-    iVar2 = *(int *)(_p_llm_env + 8) + uVar1 * 0x44;
+    iVar2 = _p_llm_env;
+    puVar3[1] = (short)uVar1;
+    iVar2 = *(int *)(iVar2 + 8) + uVar1 * 0x44;
     *(undefined1 *)(puVar3 + 2) = *(undefined1 *)(iVar2 + 0x28);
     *(undefined1 *)((int)puVar3 + 5) = *(undefined1 *)(iVar2 + 0x41);
     memcpy(puVar3 + 3,(void *)(iVar2 + 4),6);
     *(undefined1 *)(puVar3 + 6) = 1;
+    puVar3[7] = 6;
     iVar2 = _r_ip_funcs_p;
     *(undefined1 *)(puVar3 + 8) = 0;
-    puVar3[7] = 6;
     (**(code **)(iVar2 + 0x8c))(puVar3,*(code **)(iVar2 + 0x8c));
   }
   return 0;

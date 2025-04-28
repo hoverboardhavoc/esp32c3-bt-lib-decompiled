@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_hci.o -> hci_le_tx_test_cmd_handler
  *
@@ -12,18 +12,37 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 hci_le_tx_test_cmd_handler(undefined4 param_1,undefined4 param_2)
+undefined4 hci_le_tx_test_cmd_handler(byte *param_1,undefined4 param_2)
 
 {
-  int iVar1;
+  undefined4 uVar1;
+  int iVar2;
+  undefined4 uVar3;
+  undefined1 uStack_18;
+  byte bStack_17;
+  byte bStack_16;
+  byte bStack_15;
+  undefined4 uStack_14;
   
-  iVar1 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
-  if (*(char *)(iVar1 + 0x1f) == '\0') {
-    hci_le_tx_test_cmd_handler_part_0(param_2);
+  uStack_14 = param_2;
+  iVar2 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+  uVar1 = uStack_14;
+  if (*(char *)(iVar2 + 0x1f) != '\0') {
+    iVar2 = (**(code **)(_r_ip_funcs_p + 0x50c))(*(code **)(_r_ip_funcs_p + 0x50c));
+    uVar3 = 0xc;
+    if (((iVar2 != 0) && (uVar3 = 0x12, *param_1 < 0x28)) && (param_1[2] < 8)) {
+      rw_rf_le_enter_test_mode(0x12);
+      bStack_17 = *param_1;
+      uStack_18 = 1;
+      bStack_16 = param_1[1];
+      uStack_14 = CONCAT31(uStack_14._1_3_,1);
+      bStack_15 = param_1[2];
+      uVar3 = (**(code **)(_r_ip_funcs_p + 0x218))(&uStack_18,*(code **)(_r_ip_funcs_p + 0x218));
+    }
+    (**(code **)(_r_ip_funcs_p + 0x4b8))(uVar1,uVar3,*(code **)(_r_ip_funcs_p + 0x4b8));
+    return 0;
   }
-  else {
-    f_hci_le_tx_test_cmd_handler(param_1);
-  }
+  (**(code **)(_r_ip_funcs_p + 0x4b8))(uStack_14,0xc,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }
 

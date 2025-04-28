@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> hci_msg.o -> r_hci_look_for_cmd_desc
  *
@@ -28,7 +28,7 @@ ushort * r_hci_look_for_cmd_desc(uint param_1)
       sVar4 = 0;
       if (puVar1 != (ushort *)0x0) {
         for (; sVar4 != *(short *)(&DAT_00012012 + iVar3 * 8); sVar4 = sVar4 + 1) {
-          if ((param_1 & 0x3ff) == (*puVar1 & 0x3ff)) {
+          if ((*puVar1 & 0x3ff) == (param_1 & 0x3ff)) {
             return puVar1;
           }
           puVar1 = puVar1 + 6;
@@ -42,7 +42,7 @@ ushort * r_hci_look_for_cmd_desc(uint param_1)
   puVar1 = (ushort *)0x0;
   if ((0xfc80 < param_1) && (puVar1 = _esp_vendor_cmd, _esp_vendor_cmd != (ushort *)0x0)) {
     for (sVar4 = 0; _memcpy != sVar4; sVar4 = sVar4 + 1) {
-      if ((param_1 & 0x3ff) == (*puVar1 & 0x3ff)) {
+      if ((*puVar1 & 0x3ff) == (param_1 & 0x3ff)) {
         return puVar1;
       }
       puVar1 = puVar1 + 6;

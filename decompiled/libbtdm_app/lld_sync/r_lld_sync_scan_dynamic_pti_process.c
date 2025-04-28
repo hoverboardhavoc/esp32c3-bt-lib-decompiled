@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_sync.o -> r_lld_sync_scan_dynamic_pti_process
  *
@@ -67,7 +67,7 @@ void r_lld_sync_scan_dynamic_pti_process(int param_1,int param_2)
     if (0xb < uVar7) {
       (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x299b,*(code **)(_r_plf_funcs_p + 8));
     }
-    if ((uVar9 & 0xf0) != 0) {
+    if ((uVar9 << 8 & 0xf000) != 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x299d,*(code **)(_r_plf_funcs_p + 8));
     }
     puVar2 = (uint *)((uVar7 + 0x1800c4cb) * 4);
@@ -75,21 +75,21 @@ void r_lld_sync_scan_dynamic_pti_process(int param_1,int param_2)
     if (0xb < uVar7) {
       (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x294a,*(code **)(_r_plf_funcs_p + 8));
     }
-    if ((bVar1 & 2) != 0) {
+    if ((int)((uint)bVar1 << 0x1e) < 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x294c,*(code **)(_r_plf_funcs_p + 8));
     }
     *puVar2 = *puVar2 & 0xbfffffff | (uint)bVar1 << 0x1e;
     if (0xb < uVar7) {
       (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x29bb,*(code **)(_r_plf_funcs_p + 8));
     }
-    if (0xf < uVar8) {
+    if ((uVar8 & 0xfffffff0) != 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x29bd,*(code **)(_r_plf_funcs_p + 8));
     }
     *puVar2 = *puVar2 & 0xfffffff0 | uVar8;
     if (0xb < uVar7) {
       (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x295a,*(code **)(_r_plf_funcs_p + 8));
     }
-    if ((uVar3 & 6) != 0) {
+    if ((uVar3 << 0x1d & 0xc0000000) != 0) {
       (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x295c,*(code **)(_r_plf_funcs_p + 8));
     }
     *puVar2 = *puVar2 & 0xdfffffff | uVar3 << 0x1d;

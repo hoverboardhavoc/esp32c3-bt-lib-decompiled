@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> ble_util_buf.o -> r_ble_util_buf_init
  *
@@ -47,27 +47,27 @@ void r_ble_util_buf_init(int param_1)
       psVar3 = psVar3 + -4;
     } while (sVar4 != -0x6800);
     *(undefined2 *)((int)pvVar1 + 0x1b4) = 0x6c00;
-    *(undefined2 *)((int)pvVar1 + 0x1ac) = 0x6400;
     *(undefined2 *)((int)pvVar1 + 0x1a4) = 0x5c00;
-    *(undefined2 *)((int)pvVar1 + 0x19c) = 0x5400;
+    *(undefined2 *)((int)pvVar1 + 0x1ac) = 0x6400;
     *(undefined2 *)((int)pvVar1 + 0x194) = 0x4c00;
-    *(undefined2 *)((int)pvVar1 + 0x18c) = 0x4400;
+    *(undefined2 *)((int)pvVar1 + 0x19c) = 0x5400;
     *(undefined2 *)((int)pvVar1 + 0x184) = 0x3c00;
-    *(undefined2 *)((int)pvVar1 + 0x17c) = 0x3400;
+    *(undefined2 *)((int)pvVar1 + 0x18c) = 0x4400;
     *(undefined2 *)((int)pvVar1 + 0x174) = 0x2c00;
+    *(undefined2 *)((int)pvVar1 + 0x17c) = 0x3400;
     *(undefined2 *)((int)pvVar1 + 0x16c) = 0x2400;
   }
   else if ((param_1 - 1U & 0xff) < 2) {
     (**(code **)(_r_modules_funcs_p + 0x3c))
               ((int)_p_ble_util_buf_env + 0x20,8,0x14,*(code **)(_r_modules_funcs_p + 0x3c));
     (**(code **)(_r_modules_funcs_p + 0x3c))
-              ((int)_p_ble_util_buf_env + 8,(int)_p_ble_util_buf_env + 0xc0,
+              ((int)_p_ble_util_buf_env + 8,(int)_p_ble_util_buf_env + 0xc0,8,
                *(undefined1 *)((int)_p_ble_util_buf_env + 0x1ba),
                *(code **)(_r_modules_funcs_p + 0x3c));
     (**(code **)(_r_modules_funcs_p + 0x3c))
               ((int)_p_ble_util_buf_env + 0x10,(int)_p_ble_util_buf_env + 0x108,8,0xc,
                *(code **)(_r_modules_funcs_p + 0x3c));
-                    /* WARNING: Could not recover jumptable at 0x0001019e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010194. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_modules_funcs_p + 0x3c))
               ((int)_p_ble_util_buf_env + 0x18,(int)_p_ble_util_buf_env + 0x168,8,10,

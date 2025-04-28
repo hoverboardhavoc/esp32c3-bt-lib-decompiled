@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> ll_connection_update_ind_handler_hack
  *
@@ -64,7 +64,7 @@ undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,int par
       iVar1 = r_llc_proc_id_get(param_1,1);
       uVar2 = 9;
       if (iVar1 == 0) {
-        puVar3 = (undefined4 *)r_ke_msg_alloc(0x10b,1,0x30);
+        puVar3 = (undefined4 *)r_ke_msg_alloc(0x10b,1,1,0x30);
         *puVar3 = r_llc_rem_con_upd_proc_err_cb;
         *(undefined1 *)(puVar3 + 1) = 5;
         *(undefined1 *)((int)puVar3 + 0x2d) = 0;
@@ -74,7 +74,7 @@ undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,int par
         uVar2 = 7;
       }
       iVar1 = r_llc_proc_id_get(param_1,1);
-      if (iVar1 != 5) goto _L202;
+      if (iVar1 != 5) goto _L197;
       iVar1 = r_llc_proc_get(param_1,1);
       r_llc_proc_state_set(param_1,uVar2);
       *(undefined2 *)(iVar1 + 0x28) = *(undefined2 *)(param_2 + 4);
@@ -89,7 +89,7 @@ undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,int par
     uVar2 = 0;
   }
   else {
-_L202:
+_L197:
     uVar2 = 0x24;
   }
   return uVar2;

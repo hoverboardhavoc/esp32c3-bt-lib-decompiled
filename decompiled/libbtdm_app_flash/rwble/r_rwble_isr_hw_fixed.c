@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> rwble.o -> r_rwble_isr_hw_fixed
  *
@@ -16,7 +16,7 @@ undefined4 r_rwble_isr_hw_fixed(int param_1)
 
 {
   if (param_1 == 0x20000) {
-    DAT_0001083c = DAT_0001083c + 1;
+    DAT_000107a8 = DAT_000107a8 + 1;
   }
   else {
     if (param_1 != 0x400001) {
@@ -24,7 +24,7 @@ undefined4 r_rwble_isr_hw_fixed(int param_1)
       return 0xffffffff;
     }
     ble_isr_state = ble_isr_state + 1;
-    DAT_00010850 = DAT_00010850 + 1;
+    DAT_000107bc = DAT_000107bc + 1;
   }
   return 0;
 }

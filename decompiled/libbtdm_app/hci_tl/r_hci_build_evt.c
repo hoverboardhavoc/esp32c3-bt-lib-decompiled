@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> hci_tl.o -> r_hci_build_evt
  *
@@ -35,7 +35,7 @@ int r_hci_build_evt(int param_1)
   if (*(code **)(iVar3 + 4) == (code *)0x0) {
     if (*(short *)(param_1 + 10) != 0) {
       uVar4 = 4;
-      goto _L86;
+      goto _L79;
     }
   }
   else {
@@ -48,13 +48,13 @@ int r_hci_build_evt(int param_1)
       uVar4 = uVar4 & 0xff;
     }
     if (uVar4 != 0) {
-_L86:
+_L79:
       (**(code **)(_r_plf_funcs_p + 0xc))(uVar2,"hci_tl.c",0x26b,*(code **)(_r_plf_funcs_p + 0xc));
-      goto _L87;
+      goto _L80;
     }
   }
   uVar4 = 0;
-_L87:
+_L80:
   if (*(ushort *)(param_1 + 10) < uStack_12) {
     (**(code **)(_r_plf_funcs_p + 0xc))
               (uVar4,uVar2,"hci_tl.c",0x26e,*(code **)(_r_plf_funcs_p + 0xc));

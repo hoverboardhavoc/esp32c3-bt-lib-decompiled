@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> sch_alarm.o -> r_sch_alarm_timer_isr
  *
@@ -16,10 +16,11 @@ void r_sch_alarm_timer_isr(void)
 
 {
   int iVar1;
-  uint uVar2;
+  undefined4 uVar2;
   int iVar3;
   int extraout_a1;
-  uint uVar4;
+  int iVar4;
+  uint uVar5;
   
   while( true ) {
     iVar3 = r_rwip_time_get();
@@ -39,12 +40,15 @@ void r_sch_alarm_timer_isr(void)
   uVar2 = 0xffffffff;
   if (_sch_alarm_env != 0) {
     iVar3 = r_rwip_time_get(0xffffffff);
-    uVar4 = (0x270U - extraout_a1 < 0x191) + 1 + iVar3 & 0xfffffff;
-    uVar2 = *(uint *)(iVar1 + 4);
-    if (0x7fffffe < (*(uint *)(iVar1 + 4) - uVar4 & 0xfffffff)) {
-      *(uint *)(iVar1 + 4) = uVar4;
-      uVar2 = uVar4;
+    iVar4 = 2;
+    if (400 < 0x270U - extraout_a1) {
+      iVar4 = 1;
     }
+    uVar5 = iVar4 + iVar3 & 0xfffffff;
+    if (0x7fffffe < (*(int *)(iVar1 + 4) - uVar5 & 0xfffffff)) {
+      *(uint *)(iVar1 + 4) = uVar5;
+    }
+    uVar2 = *(undefined4 *)(iVar1 + 4);
   }
   r_rwip_timer_hs_set(uVar2);
   return;

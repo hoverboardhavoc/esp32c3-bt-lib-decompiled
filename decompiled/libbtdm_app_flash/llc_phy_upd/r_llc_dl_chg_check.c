@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_phy_upd.o -> r_llc_dl_chg_check
  *
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void r_llc_dl_chg_check(int param_1,int param_2,int param_3)
+void r_llc_dl_chg_check(uint param_1,int param_2,int param_3)
 
 {
   undefined2 uVar1;
@@ -25,7 +25,7 @@ void r_llc_dl_chg_check(int param_1,int param_2,int param_3)
   if (((*(byte *)(iVar3 + 0x1c) == 3) == (param_2 == 3)) ||
      (uVar5 = r_co_ble_pkt_dur_in_us
                         (*(short *)(iVar3 + 0x14) + 4U & 0xff,
-                         (uint)(1 < *(byte *)(iVar3 + 0x1c) - 1) << 1),
+                         (*(byte *)(iVar3 + 0x1c) - 1 < 2 ^ 1) << 1),
      *(ushort *)(iVar3 + 0x18) == uVar5)) {
     bVar2 = false;
     if ((uVar4 == 3) == (param_3 == 3)) {
@@ -37,7 +37,7 @@ void r_llc_dl_chg_check(int param_1,int param_2,int param_3)
     bVar2 = true;
     if ((uVar4 == 3) == (param_3 == 3)) goto _L16;
   }
-  uVar4 = r_co_ble_pkt_dur_in_us(*(short *)(iVar3 + 0x16) + 4U & 0xff,(uint)(1 < uVar4 - 1) << 1);
+  uVar4 = r_co_ble_pkt_dur_in_us(*(short *)(iVar3 + 0x16) + 4U & 0xff,(uVar4 - 1 < 2 ^ 1) << 1);
   if (*(ushort *)(iVar3 + 0x1a) == uVar4) {
     if (!bVar2) {
       return;
@@ -47,7 +47,7 @@ void r_llc_dl_chg_check(int param_1,int param_2,int param_3)
     *(short *)(iVar3 + 0x1a) = (short)uVar4;
   }
 _L16:
-  puVar6 = (undefined1 *)r_ke_msg_alloc(0x1104,param_1,0x3e,0xc);
+  puVar6 = (undefined1 *)r_ke_msg_alloc(0x1104,param_1 & 0xffff,0x3e,0xc);
   *puVar6 = 7;
   *(undefined2 *)(puVar6 + 8) = *(undefined2 *)(iVar3 + 0x16);
   *(undefined2 *)(puVar6 + 10) = *(undefined2 *)(iVar3 + 0x1a);

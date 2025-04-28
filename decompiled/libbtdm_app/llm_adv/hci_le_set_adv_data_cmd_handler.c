@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_set_adv_data_cmd_handler
  *
@@ -24,14 +24,15 @@ undefined4 hci_le_set_adv_data_cmd_handler(byte *param_1,undefined4 param_2)
   code *pcVar6;
   byte abStack_21 [5];
   
+  iVar3 = _r_ip_funcs_p;
   iVar4 = 0xc;
   if (*(char *)(_p_llm_env + 0xd7) != '\x02') {
     *(undefined1 *)(_p_llm_env + 0xd7) = 1;
     iVar4 = 0x12;
     if (*param_1 < 0x20) {
-      iVar4 = (**(code **)(_r_ip_funcs_p + 0x544))(0xff,0,*(code **)(_r_ip_funcs_p + 0x544));
-      abStack_21[0] = (byte)iVar4;
-      if (iVar4 == 0xff) {
+      iVar3 = (**(code **)(iVar3 + 0x544))(0xff,0,*(code **)(iVar3 + 0x544));
+      abStack_21[0] = (byte)iVar3;
+      if (iVar3 == 0xff) {
         iVar4 = (**(code **)(_r_ip_funcs_p + 0x4ac))(abStack_21,*(code **)(_r_ip_funcs_p + 0x4ac));
         if (iVar4 != 0) goto _L43;
         (**(code **)(_r_ip_funcs_p + 0x54c))(abStack_21[0],0,*(code **)(_r_ip_funcs_p + 0x54c));

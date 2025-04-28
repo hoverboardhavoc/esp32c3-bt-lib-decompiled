@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_start_eco
  *
@@ -18,8 +18,8 @@ int r_lld_con_start_eco(uint param_1,int param_2)
   int iVar1;
   int iVar2;
   
-  _DAT_000150b8 = r_lld_read_clock();
-  *(undefined2 *)(&DAT_00015070 + (param_1 + 0x10) * 2) = 0;
+  _DAT_00015080 = r_lld_read_clock();
+  *(undefined2 *)(&DAT_00015038 + (param_1 + 0x10) * 2) = 0;
   r_lld_con_update_terminte_info_init(param_1);
   r_lld_con_llcp_ind_info_clear(param_1);
   iVar1 = r_sdk_config_get_opts_ext();

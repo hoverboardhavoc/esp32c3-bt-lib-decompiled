@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_dl_upd.o -> r_dl_upd_proc_start
  *
@@ -35,7 +35,7 @@ void r_dl_upd_proc_start(int param_1)
   *(undefined1 *)(puVar3 + 4) = 0;
   *(undefined2 *)((int)puVar3 + 10) = uVar1;
   puVar3[3] = 0x429000fb;
-                    /* WARNING: Could not recover jumptable at 0x00010b38. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010b50. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0xe0))(puVar3,*(code **)(_r_modules_funcs_p + 0xe0));
   return;

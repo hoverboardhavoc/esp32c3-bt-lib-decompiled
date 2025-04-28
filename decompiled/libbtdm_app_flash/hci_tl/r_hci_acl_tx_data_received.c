@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> hci_tl.o -> r_hci_acl_tx_data_received
  *
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void r_hci_acl_tx_data_received(uint param_1,int param_2,int param_3)
+void r_hci_acl_tx_data_received(uint param_1,int param_2,undefined2 param_3)
 
 {
   byte *pbVar1;
@@ -25,10 +25,10 @@ void r_hci_acl_tx_data_received(uint param_1,int param_2,int param_3)
     puVar2 = (undefined2 *)r_ke_msg_alloc(0x1106,(param_1 & 0xff) << 8 | 1,0,0xc);
     *puVar2 = (short)param_1;
     puVar2[1] = (short)param_2;
-    if (param_2 != 0) {
-      param_2 = param_3;
+    if (param_2 == 0) {
+      param_3 = 0;
     }
-    puVar2[2] = (short)param_2;
+    puVar2[2] = param_3;
     r_ke_msg_send();
     return;
   }

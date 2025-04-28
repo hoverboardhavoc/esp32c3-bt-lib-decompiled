@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> emi.o -> r_emi_em_base_init
  *
@@ -15,169 +15,168 @@
 undefined4 r_emi_em_base_init(void)
 
 {
-  void *pvVar1;
-  uint uVar2;
-  uint uVar3;
-  uint *puVar4;
+  int iVar1;
+  undefined4 uVar2;
+  void *pvVar3;
+  uint uVar4;
   uint uVar5;
-  int iVar6;
-  uint *puVar7;
-  undefined4 uVar8;
-  uint uVar9;
-  int iVar10;
+  uint *puVar6;
+  uint uVar7;
+  int iVar8;
+  uint *puVar9;
+  uint uVar10;
   
-  pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))(0x148,*(code **)(_r_osi_funcs_p + 0x78));
-  if (pvVar1 != (void *)0x0) {
-    memset(pvVar1,0,0x148);
+  pvVar3 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))(0x148,*(code **)(_r_osi_funcs_p + 0x78));
+  if (pvVar3 != (void *)0x0) {
+    memset(pvVar3,0,0x148);
     if (2 < _g_bt_plf_log_level) {
-      ets_printf("EM ET %04x, %p, len %d\n",0,pvVar1,0x148);
+      ets_printf("EM ET %04x, %p, len %d\n",0,pvVar3,0x148);
     }
-    _DAT_60031204 = (uint)((int)pvVar1 << 0xc) >> 0xe;
+    _DAT_60031204 = (uint)((int)pvVar3 << 0xc) >> 0xe;
     _DAT_600312c4 = _DAT_600312c4 | 1;
-    pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))(0x438,*(code **)(_r_osi_funcs_p + 0x78));
-    if (pvVar1 != (void *)0x0) {
-      memset(pvVar1,0,0x438);
+    pvVar3 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))(0x438,*(code **)(_r_osi_funcs_p + 0x78));
+    if (pvVar3 != (void *)0x0) {
+      memset(pvVar3,0,0x438);
       if (2 < _g_bt_plf_log_level) {
-        ets_printf("EM CS %04x, %p, len %d\n",0x400,pvVar1,0x438);
+        ets_printf("EM CS %04x, %p, len %d\n",0x400,pvVar3,0x438);
       }
-      _DAT_60031208 = (uint)((int)pvVar1 << 0xc) >> 0xe | 0x4000000;
+      _DAT_60031208 = (uint)((int)pvVar3 << 0xc) >> 0xe | 0x4000000;
       _DAT_600312c4 = _DAT_600312c4 | 2;
-      pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))(0x268,*(code **)(_r_osi_funcs_p + 0x78))
+      pvVar3 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))(0x268,*(code **)(_r_osi_funcs_p + 0x78))
       ;
-      if (pvVar1 != (void *)0x0) {
-        memset(pvVar1,0,0x268);
+      if (pvVar3 != (void *)0x0) {
+        memset(pvVar3,0,0x268);
         if (2 < _g_bt_plf_log_level) {
-          ets_printf("EM WL/RAL %04x, %p, len %d\n",0xc00,pvVar1,0x268);
+          ets_printf("EM WL/RAL %04x, %p, len %d\n",0xc00,pvVar3,0x268);
         }
-        _DAT_6003120c = (uint)((int)pvVar1 << 0xc) >> 0xe | 0xc000000;
+        _DAT_6003120c = (uint)((int)pvVar3 << 0xc) >> 0xe | 0xc000000;
         _DAT_600312c4 = _DAT_600312c4 | 4;
-        pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))(200,*(code **)(_r_osi_funcs_p + 0x78))
+        pvVar3 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))(200,*(code **)(_r_osi_funcs_p + 0x78))
         ;
-        if (pvVar1 != (void *)0x0) {
-          memset(pvVar1,0,200);
+        if (pvVar3 != (void *)0x0) {
+          memset(pvVar3,0,200);
           if (2 < _g_bt_plf_log_level) {
-            ets_printf("EM RXDESC %04x, %p, len %d\n",0x1000,pvVar1,200);
+            ets_printf("EM RXDESC %04x, %p, len %d\n",0x1000,pvVar3,200);
           }
-          _DAT_60031210 = (uint)((int)pvVar1 << 0xc) >> 0xe | 0x10000000;
+          _DAT_60031210 = (uint)((int)pvVar3 << 0xc) >> 0xe | 0x10000000;
           _DAT_600312c4 = _DAT_600312c4 | 8;
-          pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
+          pvVar3 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
                                      (0x4ec,*(code **)(_r_osi_funcs_p + 0x78));
-          if (pvVar1 != (void *)0x0) {
-            memset(pvVar1,0,0x4ec);
+          if (pvVar3 != (void *)0x0) {
+            memset(pvVar3,0,0x4ec);
             if (2 < _g_bt_plf_log_level) {
-              ets_printf("EM TXDESC %04x, %p, len %d\n",0x1400,pvVar1,0x4ec);
+              ets_printf("EM TXDESC %04x, %p, len %d\n",0x1400,pvVar3,0x4ec);
             }
-            _DAT_60031214 = (uint)((int)pvVar1 << 0xc) >> 0xe | 0x14000000;
+            _DAT_60031214 = (uint)((int)pvVar3 << 0xc) >> 0xe | 0x14000000;
             _DAT_600312c4 = _DAT_600312c4 | 0x10;
-            pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
+            pvVar3 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
                                        (0x21c,*(code **)(_r_osi_funcs_p + 0x78));
-            if (pvVar1 != (void *)0x0) {
-              memset(pvVar1,0,0x21c);
+            if (pvVar3 != (void *)0x0) {
+              memset(pvVar3,0,0x21c);
               if (2 < _g_bt_plf_log_level) {
-                ets_printf("EM LLCP TX BUFFER %04x, %p, len %d\n",0x1c00,pvVar1,0x21c);
+                ets_printf("EM LLCP TX BUFFER %04x, %p, len %d\n",0x1c00,pvVar3,0x21c);
               }
-              _DAT_60031218 = (uint)((int)pvVar1 << 0xc) >> 0xe | 0x1c000000;
+              _DAT_60031218 = (uint)((int)pvVar3 << 0xc) >> 0xe | 0x1c000000;
               _DAT_600312c4 = _DAT_600312c4 | 0x20;
-              pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
+              pvVar3 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
                                          (0x2ee,*(code **)(_r_osi_funcs_p + 0x78));
-              if (pvVar1 != (void *)0x0) {
-                memset(pvVar1,0,0x2ee);
+              if (pvVar3 != (void *)0x0) {
+                memset(pvVar3,0,0x2ee);
                 if (2 < _g_bt_plf_log_level) {
-                  ets_printf("EM ADV EXT HDR TX BUFFER %04x, %p, len %d\n",0x2000,pvVar1,0x2ee);
+                  ets_printf("EM ADV EXT HDR TX BUFFER %04x, %p, len %d\n",0x2000,pvVar3,0x2ee);
                 }
-                _DAT_6003121c = (uint)((int)pvVar1 << 0xc) >> 0xe | 0x20000000;
+                _DAT_6003121c = (uint)((int)pvVar3 << 0xc) >> 0xe | 0x20000000;
                 _DAT_600312c4 = _DAT_600312c4 | 0x40;
-                iVar6 = 0;
+                iVar1 = 0;
                 do {
+                  iVar8 = iVar1 * 0x800 + 0x2400;
                   if (2 < _g_bt_plf_log_level) {
-                    ets_printf("EM ADV DATA TX BUFFER[%d] %04x, NULL, len %d\n",iVar6,
-                               iVar6 * 0x800 + 0x2400,0x2ee);
+                    ets_printf("EM ADV DATA TX BUFFER[%d] %04x, NULL, len %d\n",iVar1,iVar8,0x2ee);
                   }
-                  *(uint *)(&DAT_60031220 + iVar6 * 4) =
-                       (((uint)(iVar6 * 0x800) >> 2) + 0x900) * 0x40000;
-                  _DAT_600312c4 = ~(1 << (iVar6 + 7U & 0x1f)) & _DAT_600312c4;
-                  iVar6 = iVar6 + 1;
-                } while (iVar6 != 10);
-                pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
+                  *(int *)(&DAT_60031220 + iVar1 * 4) = iVar8 * 0x10000;
+                  _DAT_600312c4 = ~(1 << (iVar1 + 7U & 0x1f)) & _DAT_600312c4;
+                  iVar1 = iVar1 + 1;
+                } while (iVar1 != 10);
+                pvVar3 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
                                            (0x66,*(code **)(_r_osi_funcs_p + 0x78));
-                if (pvVar1 != (void *)0x0) {
-                  memset(pvVar1,0,0x66);
+                if (pvVar3 != (void *)0x0) {
+                  memset(pvVar3,0,0x66);
                   if (2 < _g_bt_plf_log_level) {
-                    ets_printf("EM AUX CONNECT REQ TX BUFFER %04x, %p, len %d\n",0x7400,pvVar1,0x66)
+                    ets_printf("EM AUX CONNECT REQ TX BUFFER %04x, %p, len %d\n",0x7400,pvVar3,0x66)
                     ;
                   }
-                  _DAT_60031248 = (uint)pvVar1 >> 2 & 0x3ffff | 0x74000000;
-                  _DAT_600312c4 = _DAT_600312c4 | 0x20000;
-                  iVar6 = 0;
+                  _DAT_60031248 = (uint)pvVar3 >> 2 & 0x3ffff | 0x74000000;
+                  _DAT_600312c4 = _DAT_600312c4 & 0xfffdffff | 0x20000;
+                  iVar1 = 0;
                   do {
-                    pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
+                    pvVar3 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
                                                (0x110,*(code **)(_r_osi_funcs_p + 0x78));
-                    if (pvVar1 == (void *)0x0) goto _L19;
-                    memset(pvVar1,0,0x110);
+                    if (pvVar3 == (void *)0x0) goto _L20;
+                    memset(pvVar3,0,0x110);
+                    iVar8 = iVar1 * 0x400 + 0x7800;
                     if (2 < _g_bt_plf_log_level) {
-                      ets_printf("EM DATA RX BUFFER[%d] %04x, %p, len %d\n",iVar6,
-                                 iVar6 * 0x400 + 0x7800,pvVar1,0x110);
+                      ets_printf("EM DATA RX BUFFER[%d] %04x, %p, len %d\n",iVar1,iVar8,pvVar3,0x110
+                                );
                     }
-                    *(uint *)(iVar6 * 4 + 0x6003124c) =
-                         (((uint)(iVar6 * 0x400) >> 2) + 0x1e00) * 0x40000 |
-                         (uint)pvVar1 >> 2 & 0x3ffff;
-                    uVar3 = 1 << (iVar6 + 0x12U & 0x1f);
-                    _DAT_600312c4 = ~uVar3 & _DAT_600312c4 | uVar3;
-                    iVar6 = iVar6 + 1;
-                  } while (iVar6 != 9);
-                  puVar7 = (uint *)&DAT_60031270;
-                  uVar3 = 0;
-                  uVar9 = 0x1b;
-                  uVar8 = 0x110;
+                    *(uint *)(iVar1 * 4 + 0x6003124c) =
+                         (uint)pvVar3 >> 2 & 0x3ffff | iVar8 * 0x10000;
+                    uVar7 = 1 << (iVar1 + 0x12U & 0x1f);
+                    _DAT_600312c4 = ~uVar7 & _DAT_600312c4 | uVar7;
+                    iVar1 = iVar1 + 1;
+                  } while (iVar1 != 9);
+                  puVar9 = (uint *)&DAT_60031270;
+                  uVar7 = 0x9c00;
+                  uVar10 = 0x1b;
+                  uVar2 = 0x110;
                   do {
-                    iVar10 = uVar9 - 0x1b;
-                    iVar6 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-                    if (iVar10 < (int)(uint)*(byte *)(iVar6 + 0x10)) {
-                      pvVar1 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
+                    iVar8 = uVar10 - 0x1b;
+                    iVar1 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
+                    if (iVar8 < (int)(uint)*(byte *)(iVar1 + 0x10)) {
+                      pvVar3 = (void *)(**(code **)(_r_osi_funcs_p + 0x78))
                                                  (0x100,*(code **)(_r_osi_funcs_p + 0x78));
-                      if (pvVar1 == (void *)0x0) break;
-                      memset(pvVar1,0,0x100);
+                      if (pvVar3 == (void *)0x0) break;
+                      memset(pvVar3,0,0x100);
                       if (2 < _g_bt_plf_log_level) {
-                        ets_printf("EM ACL TX STATIC BUFFER[%d] %04x, %p, len %d\n",iVar10,
-                                   uVar3 + 0x9c00,pvVar1,0x100);
+                        ets_printf("EM ACL TX STATIC BUFFER[%d] %04x, %p, len %d\n",iVar8,uVar7,
+                                   pvVar3,0x100);
                       }
-                      *puVar7 = ((uVar3 >> 2) + 0x2700) * 0x40000 | (uint)pvVar1 >> 2 & 0x3ffff;
-                      if (uVar9 < 0x20) {
-                        puVar4 = (uint *)&DAT_600312c4;
-                        uVar2 = _DAT_600312c4;
-                        uVar5 = uVar9;
+                      *puVar9 = (uint)pvVar3 >> 2 & 0x3ffff | (uVar7 >> 2) << 0x12;
+                      if (uVar10 < 0x20) {
+                        puVar6 = (uint *)&DAT_600312c4;
+                        uVar4 = _DAT_600312c4;
+                        uVar5 = uVar10;
                       }
                       else {
-                        uVar5 = uVar9 - 0x20;
-                        puVar4 = (uint *)&DAT_600312c8;
-                        uVar2 = _DAT_600312c8;
+                        uVar5 = uVar10 - 0x20;
+                        puVar6 = (uint *)&DAT_600312c8;
+                        uVar4 = _DAT_600312c8;
                       }
                       uVar5 = 1 << (uVar5 & 0x1f);
-                      *puVar4 = uVar5 | ~uVar5 & uVar2;
-                      uVar8 = 0x100;
+                      *puVar6 = ~uVar5 & uVar4 | uVar5;
+                      uVar2 = 0x100;
                     }
                     else {
                       if (2 < _g_bt_plf_log_level) {
-                        ets_printf("EM ACL TX DYNAMIC BUFFER[%d] %04x, NULL, len %d\n",iVar10,
-                                   uVar3 + 0x9c00,uVar8);
+                        ets_printf("EM ACL TX DYNAMIC BUFFER[%d] %04x, NULL, len %d\n",iVar8,uVar7,
+                                   uVar2);
                       }
-                      *puVar7 = ((uVar3 >> 2) + 0x2700) * 0x40000;
-                      if (uVar9 < 0x20) {
-                        puVar4 = (uint *)&DAT_600312c4;
-                        uVar2 = _DAT_600312c4;
-                        uVar5 = uVar9;
+                      *puVar9 = (uVar7 >> 2) << 0x12;
+                      if (uVar10 < 0x20) {
+                        puVar6 = (uint *)&DAT_600312c4;
+                        uVar4 = _DAT_600312c4;
+                        uVar5 = uVar10;
                       }
                       else {
-                        puVar4 = (uint *)&DAT_600312c8;
-                        uVar5 = uVar9 - 0x20;
-                        uVar2 = _DAT_600312c8;
+                        puVar6 = (uint *)&DAT_600312c8;
+                        uVar5 = uVar10 - 0x20;
+                        uVar4 = _DAT_600312c8;
                       }
-                      *puVar4 = ~(1 << (uVar5 & 0x1f)) & uVar2;
+                      *puVar6 = ~(1 << (uVar5 & 0x1f)) & uVar4;
                     }
-                    uVar3 = uVar3 + 0x400;
-                    uVar9 = uVar9 + 1;
-                    puVar7 = puVar7 + 1;
-                    if (uVar3 == 0x3000) {
+                    uVar10 = uVar10 + 1;
+                    uVar7 = uVar7 + 0x400;
+                    puVar9 = puVar9 + 1;
+                    if (uVar10 == 0x27) {
                       if (em_base_reg_lut != 0x26) {
                         (**(code **)(_r_plf_funcs_p + 0xc))
                                   (0x27,em_base_reg_lut + 1,0x10000,0xfd,
@@ -199,7 +198,7 @@ undefined4 r_emi_em_base_init(void)
       }
     }
   }
-_L19:
+_L20:
   (**(code **)(_r_plf_funcs_p + 0xa4))(*(code **)(_r_plf_funcs_p + 0xa4));
   return 7;
 }

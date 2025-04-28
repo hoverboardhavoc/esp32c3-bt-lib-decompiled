@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> rf_txpwr.o -> ble_txpwr_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,11 +33,11 @@ undefined4 ble_txpwr_set(uint param_1,int param_2,uint param_3)
   }
   if (param_1 == 1) {
     iVar2 = adv_itf_version_is_legacy(0xfffffffe);
-    if ((iVar2 != 0) || (iVar3 = 0, param_2 == 0xffff)) goto _L43;
+    if ((iVar2 != 0) || (iVar3 = 0, param_2 == 0xffff)) goto _L40;
   }
   else {
     iVar2 = -2;
-    if ((param_2 == 0xffff) || (iVar3 = 3, iVar2 = iVar3, param_1 != 4)) goto _L43;
+    if ((param_2 == 0xffff) || (iVar3 = 3, iVar2 = iVar3, param_1 != 4)) goto _L40;
   }
   uVar1 = llm_hdl_to_id(iVar3);
   iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
@@ -45,7 +45,7 @@ undefined4 ble_txpwr_set(uint param_1,int param_2,uint param_3)
   if (*(byte *)(iVar3 + 0xd) <= uVar1) {
     return 0xfffffffc;
   }
-_L43:
+_L40:
   if ((_r_plf_funcs_p == 0) ||
      (iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(iVar2,*(code **)(_r_plf_funcs_p + 0x38)),
      (*(byte *)(iVar2 + 0xc) & 1) == 0)) {

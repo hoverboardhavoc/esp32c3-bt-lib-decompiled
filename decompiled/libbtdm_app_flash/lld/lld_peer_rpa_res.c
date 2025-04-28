@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld.o -> lld_peer_rpa_res
  *
@@ -21,10 +21,10 @@ bool lld_peer_rpa_res(void *param_1,int param_2)
   undefined1 uStack_12;
   
   iVar1 = r_emi_get_mem_addr_by_offset(0xc60);
-  if ((*(ushort *)(iVar1 + param_2 * 0x34) >> 1 & 1) == 0) {
+  if ((*(ushort *)(param_2 * 0x34 + iVar1) >> 1 & 1) == 0) {
     return false;
   }
-  r_emi_get_mem_addr_by_offset(param_2 * 0x34 + 0xc62);
+  r_emi_get_mem_addr_by_offset(param_2 * 0x34 + 0xc62U & 0xffff);
   uStack_18 = *(undefined1 *)((int)param_1 + 3);
   uStack_17 = *(undefined1 *)((int)param_1 + 4);
   uStack_14 = 0;

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc.o -> r_llc_proc_timer_set
  *
@@ -46,19 +46,19 @@ void r_llc_proc_timer_set(int param_1,uint param_2,int param_3)
           UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0x668);
           if (param_3 == 0) {
             *(undefined1 *)(iVar3 + 6) = 0;
-                    /* WARNING: Could not recover jumptable at 0x00010b52. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010b72. Too many branches */
                     /* WARNING: Treating indirect jump as call */
             (*UNRECOVERED_JUMPTABLE)(param_1,param_2,0,UNRECOVERED_JUMPTABLE);
             return;
           }
         }
-                    /* WARNING: Could not recover jumptable at 0x00010af6. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010b16. Too many branches */
                     /* WARNING: Treating indirect jump as call */
         (**(code **)(_r_ip_funcs_p + 0x668))(param_1,param_2,1,*(code **)(_r_ip_funcs_p + 0x668));
         return;
       }
       if (bVar1 != 3) {
-                    /* WARNING: Could not recover jumptable at 0x00010b28. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010b48. Too many branches */
                     /* WARNING: Treating indirect jump as call */
         (**(code **)(_r_plf_funcs_p + 0xc))
                   (*(undefined1 *)(iVar3 + 4),"llc.c",0x26c,*(code **)(_r_plf_funcs_p + 0xc));

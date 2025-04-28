@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_ver_exch.o -> llc_op_ver_exch_ind_handler
  *
@@ -29,12 +29,12 @@ undefined4 llc_op_ver_exch_ind_handler(int param_1,uint param_2)
     }
   }
   else {
+    uVar2 = 0;
     if (*(char *)(param_1 + 8) != '\0') {
       r_llc_hci_version_info_send
                 (param_2,*(undefined1 *)(*(int *)(&llc_env + param_2 * 4) + 0x46),
                  *(int *)(&llc_env + param_2 * 4) + 0x38);
     }
-    uVar2 = 0;
   }
   return uVar2;
 }

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> h4tl.o -> r_h4tl_tx_evt_handler
  *
@@ -15,36 +15,27 @@
 void r_h4tl_tx_evt_handler(void)
 
 {
-  bool bVar1;
-  bool bVar2;
-  int iVar3;
+  int iVar1;
   
   r_ke_event_clear(8);
-  bVar1 = false;
-  bVar2 = false;
-  while ((!bVar1 && ((byte)r_ke_malloc != 0xff))) {
-    iVar3 = (uint)(byte)r_ke_malloc * 0xc;
-    if (*(int *)(r_hci_send_2_host + iVar3) != 0) {
+  if ((byte)r_hci_cmd_get_max_param_size != 0xff) {
+    iVar1 = (uint)(byte)r_hci_cmd_get_max_param_size * 0xc;
+    if (*(int *)(r_ke_msg_alloc + iVar1) != 0) {
       return;
     }
-    if (*(code **)(memset + iVar3) != (code *)0x0) {
-      (**(code **)(memset + iVar3))();
+    if (*(code **)(r_hci_send_2_host + iVar1) != (code *)0x0) {
+      (**(code **)(r_hci_send_2_host + iVar1))();
     }
-    r_ke_malloc = (code)0xff;
-    if ((!bVar1) && (_r_hci_send_2_host != 0)) {
-      r_ke_malloc = (code)-(DAT_0001102e == '\0');
+    r_hci_cmd_get_max_param_size = (code)0xff;
+    if (_r_ke_msg_alloc != 0) {
+      r_hci_cmd_get_max_param_size = (code)-(DAT_0001102a == '\0');
     }
-    bVar1 = true;
-    if (r_ke_malloc != (code)0xff) {
-      (**(code **)(_h4tl_env + 4))
-                (_r_hci_cmd_get_max_param_size + 1,r_h4tl_tx_done,&h4tl_env,
-                 *(code **)(_h4tl_env + 4));
-      bVar1 = true;
-      bVar2 = true;
+    if (r_hci_cmd_get_max_param_size != (code)0xff) {
+                    /* WARNING: Could not recover jumptable at 0x000100c6. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      (**(code **)(_h4tl_env + 4))(_memset + 1,r_h4tl_tx_done,&h4tl_env,*(code **)(_h4tl_env + 4));
+      return;
     }
-  }
-  if (bVar2) {
-    return;
   }
   r_rwip_prevent_sleep_clear(2);
   return;

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_pkt_rx_connect_ind_hack
  *
@@ -72,14 +72,14 @@ undefined4 r_lld_adv_pkt_rx_connect_ind_hack(int param_1)
   if (499 < uStack_2c) {
     return 0;
   }
-  if ((uint)uStack_2a << 2 <= (uStack_2c + 1) * (uint)uStack_2e) {
+  if ((uint)uStack_2a << 2 <= (uint)(ushort)(uStack_2c + 1) * (uint)uStack_2e) {
     return 0;
   }
   uVar3 = (*(code *)_r_modules_funcs_p[3])(&uStack_28,(code *)_r_modules_funcs_p[3]);
   if (uVar3 < 2) {
     return 0;
   }
-  if (0x1f < bStack_24) {
+  if ((bStack_24 & 0xe0) != 0) {
     return 0;
   }
   if (0xb < (byte)((bStack_23 & 0x1f) - 5)) {
@@ -102,11 +102,12 @@ undefined4 r_lld_adv_pkt_rx_connect_ind_hack(int param_1)
   iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   uVar3 = (uint)*(ushort *)(iVar4 + 0xe + iVar2);
   if (uVar3 == 0) {
-    iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000);
+    iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
     uVar6 = *(ushort *)(iVar2 + iVar4 + 4) >> 6 & 1;
   }
   else {
-    pvVar5 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))(uVar3 + 0x18 & 0xffff);
+    pvVar5 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
+                               (uVar3 + 0x18 & 0xffff,*(code **)(_r_plf_funcs_p + 0xbc));
     memcpy(auStack_5c,pvVar5,6);
     iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
     iVar4 = ((uVar3 - 0xc60) / 0x34 & 0xff) * 0x34;
@@ -121,18 +122,18 @@ undefined4 r_lld_adv_pkt_rx_connect_ind_hack(int param_1)
       uVar6 = uVar6 | 2;
       uStack_54 = uStack_44;
       uStack_50 = uStack_40;
-      goto _L632;
+      goto _L687;
     }
     iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
     if (((*(ushort *)(iVar2 + iVar4) >> 1 & 1) != 0) &&
        (iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc)),
-       -1 < (int)((uint)*(ushort *)(iVar4 + iVar2) << 0x14))) {
+       (*(ushort *)(iVar4 + iVar2) >> 0xb & 1) == 0)) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x7ed,*(code **)(_r_plf_funcs_p + 8));
     }
   }
   uStack_54 = 0;
   uStack_50 = 0;
-_L632:
+_L687:
   iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
   if ((*(ushort *)(param_1 * 0x5a + 0x14 + iVar4) >> 2 & 1) == 0) {
     uStack_4c = 0;

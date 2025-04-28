@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> emi.o -> r_emi_overwrite_em_mapping_by_offset
  *
@@ -16,49 +16,46 @@ undefined4 r_emi_overwrite_em_mapping_by_offset(undefined4 param_1,undefined4 pa
 
 {
   int iVar1;
-  int iVar2;
-  uint uVar3;
+  uint uVar2;
+  int iVar3;
   uint *puVar4;
   
-  iVar2 = (**(code **)(_r_osi_funcs_p + 0x78))(param_2,*(code **)(_r_osi_funcs_p + 0x78));
-  if (iVar2 == 0) {
+  iVar1 = (**(code **)(_r_osi_funcs_p + 0x78))(param_2,*(code **)(_r_osi_funcs_p + 0x78));
+  if (iVar1 == 0) {
     return 7;
   }
-  uVar3 = r_emi_get_em_mapping_idx_by_offset(param_1);
-  if ((int)uVar3 < 0x38) {
-    if (0x2f < (int)uVar3) goto _L110;
-    iVar1 = 0x481;
-  }
-  else {
+  uVar2 = r_emi_get_em_mapping_idx_by_offset(param_1);
+  if (0x37 < uVar2) {
     r_assert_err(0,0x10000,0x27c1);
-_L110:
-    iVar1 = 0x488;
   }
-  puVar4 = (uint *)((iVar1 + 0x1800c000 + uVar3) * 4);
-  *puVar4 = *puVar4 & 0xfffc0000 | (uint)(iVar2 << 0xc) >> 0xe;
-  if ((int)uVar3 < 0x38) {
-    if (0x1f < (int)uVar3) {
-      if ((int)uVar3 < 0x30) {
-        puVar4 = (uint *)&DAT_600312c8;
-        uVar3 = 1 << (uVar3 - 0x20 & 0x1f);
-        uVar3 = ~uVar3 & _DAT_600312c8 | uVar3;
-        goto _L119;
-      }
-      goto _L113;
-    }
-    iVar2 = 0x2c4;
+  if ((int)uVar2 < 0x30) {
+    iVar3 = 0x1800c481;
   }
   else {
-    r_assert_err(0,0x10000,0x27fa);
-_L113:
-    uVar3 = uVar3 - 0x30;
-    iVar2 = 0x300;
+    iVar3 = 0x1800c488;
   }
-  puVar4 = (uint *)(iVar2 + 0x60031000);
-  uVar3 = 1 << (uVar3 & 0x1f);
-  uVar3 = ~uVar3 & *puVar4 | uVar3;
+  puVar4 = (uint *)((iVar3 + uVar2) * 4);
+  *puVar4 = *puVar4 & 0xfffc0000 | (uint)(iVar1 << 0xc) >> 0xe;
+  if (0x37 < uVar2) {
+    r_assert_err(0,0x10000,0x27fa);
+  }
+  if ((int)uVar2 < 0x20) {
+    puVar4 = (uint *)&DAT_600312c4;
+  }
+  else {
+    if ((int)uVar2 < 0x30) {
+      puVar4 = (uint *)&DAT_600312c8;
+      uVar2 = 1 << (uVar2 - 0x20 & 0x1f);
+      uVar2 = ~uVar2 & _DAT_600312c8 | uVar2;
+      goto _L119;
+    }
+    uVar2 = uVar2 - 0x30;
+    puVar4 = (uint *)&DAT_60031300;
+  }
+  uVar2 = 1 << (uVar2 & 0x1f);
+  uVar2 = ~uVar2 & *puVar4 | uVar2;
 _L119:
-  *puVar4 = uVar3;
+  *puVar4 = uVar2;
   return 0;
 }
 

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> ecc_p256.o -> r_ecc_point_multiplication_win_256
  *
@@ -103,44 +103,44 @@ void r_ecc_point_multiplication_win_256(int param_1)
   }
   else {
     if (cVar1 == '\x03') {
-      pvVar2 = (void *)(param_1 + 0x8c);
+      __dest_00 = (void *)(param_1 + 0x8c);
       (**(code **)(_r_modules_funcs_p + 0x38c))
-                (pvVar2,auStack_138,*(code **)(_r_modules_funcs_p + 0x38c));
-      memcpy(pvVar2,auStack_138,0x22);
-      __dest_00 = (void *)(param_1 + 0xb8);
+                (__dest_00,auStack_138,*(code **)(_r_modules_funcs_p + 0x38c));
+      memcpy(__dest_00,auStack_138,0x22);
+      __dest = (void *)(param_1 + 0xb8);
       *(undefined4 *)(param_1 + 0xb0) = uStack_114;
       *(undefined4 *)(param_1 + 0xb4) = uStack_110;
-      memcpy(__dest_00,auStack_10c,0x22);
-      __dest = (void *)(param_1 + 0xe4);
+      memcpy(__dest,auStack_10c,0x22);
+      pvVar2 = (void *)(param_1 + 0xe4);
       *(undefined4 *)(param_1 + 0xdc) = uStack_e8;
       *(undefined4 *)(param_1 + 0xe0) = uStack_e4;
-      memcpy(__dest,auStack_e0,0x22);
+      memcpy(pvVar2,auStack_e0,0x22);
       *(undefined4 *)(param_1 + 0x108) = uStack_bc;
       *(undefined4 *)(param_1 + 0x10c) = uStack_b8;
       sVar5 = *(short *)(param_1 + 0x142) + 1;
       *(short *)(param_1 + 0x142) = sVar5;
       if (sVar5 == 0x40) {
         iVar6 = *(int *)(param_1 + 0x148);
-        memcpy((void *)(iVar6 + 0x84),pvVar2,0x22);
+        memcpy((void *)(iVar6 + 0x84),__dest_00,0x22);
         *(undefined4 *)(iVar6 + 0xa8) = *(undefined4 *)(param_1 + 0xb0);
         *(undefined4 *)(iVar6 + 0xac) = *(undefined4 *)(param_1 + 0xb4);
-        memcpy((void *)(iVar6 + 0xb0),__dest_00,0x22);
+        memcpy((void *)(iVar6 + 0xb0),__dest,0x22);
         *(undefined4 *)(iVar6 + 0xd4) = *(undefined4 *)(param_1 + 0xdc);
         *(undefined4 *)(iVar6 + 0xd8) = *(undefined4 *)(param_1 + 0xe0);
-        memcpy((void *)(iVar6 + 0xdc),__dest,0x22);
+        memcpy((void *)(iVar6 + 0xdc),pvVar2,0x22);
         *(undefined4 *)(iVar6 + 0x100) = *(undefined4 *)(param_1 + 0x108);
         *(undefined4 *)(iVar6 + 0x104) = *(undefined4 *)(param_1 + 0x10c);
         return;
       }
       if (sVar5 == 0x80) {
         iVar6 = *(int *)(param_1 + 0x148);
-        memcpy((void *)(iVar6 + 0x18c),pvVar2,0x22);
+        memcpy((void *)(iVar6 + 0x18c),__dest_00,0x22);
         *(undefined4 *)(iVar6 + 0x1b0) = *(undefined4 *)(param_1 + 0xb0);
         *(undefined4 *)(iVar6 + 0x1b4) = *(undefined4 *)(param_1 + 0xb4);
-        memcpy((void *)(iVar6 + 0x1b8),__dest_00,0x22);
+        memcpy((void *)(iVar6 + 0x1b8),__dest,0x22);
         *(undefined4 *)(iVar6 + 0x1dc) = *(undefined4 *)(param_1 + 0xdc);
         *(undefined4 *)(iVar6 + 0x1e0) = *(undefined4 *)(param_1 + 0xe0);
-        memcpy((void *)(iVar6 + 0x1e4),__dest,0x22);
+        memcpy((void *)(iVar6 + 0x1e4),pvVar2,0x22);
         *(undefined4 *)(iVar6 + 0x208) = *(undefined4 *)(param_1 + 0x108);
         *(undefined4 *)(iVar6 + 0x20c) = *(undefined4 *)(param_1 + 0x10c);
         return;
@@ -149,13 +149,13 @@ void r_ecc_point_multiplication_win_256(int param_1)
         return;
       }
       iVar6 = *(int *)(param_1 + 0x148);
-      memcpy((void *)(iVar6 + 0x39c),pvVar2,0x22);
+      memcpy((void *)(iVar6 + 0x39c),__dest_00,0x22);
       *(undefined4 *)(iVar6 + 0x3c0) = *(undefined4 *)(param_1 + 0xb0);
       *(undefined4 *)(iVar6 + 0x3c4) = *(undefined4 *)(param_1 + 0xb4);
-      memcpy((void *)(iVar6 + 0x3c8),__dest_00,0x22);
+      memcpy((void *)(iVar6 + 0x3c8),__dest,0x22);
       *(undefined4 *)(iVar6 + 0x3ec) = *(undefined4 *)(param_1 + 0xdc);
       *(undefined4 *)(iVar6 + 0x3f0) = *(undefined4 *)(param_1 + 0xe0);
-      memcpy((void *)(iVar6 + 0x3f4),__dest,0x22);
+      memcpy((void *)(iVar6 + 0x3f4),pvVar2,0x22);
       *(undefined4 *)(iVar6 + 0x418) = *(undefined4 *)(param_1 + 0x108);
       *(undefined4 *)(iVar6 + 0x41c) = *(undefined4 *)(param_1 + 0x10c);
       *(undefined1 *)(param_1 + 0x144) = 4;
@@ -173,7 +173,7 @@ void r_ecc_point_multiplication_win_256(int param_1)
       sVar5 = 5;
       break;
     default:
-      goto _L243;
+      goto _L236;
     case 2:
       (**(code **)(_r_modules_funcs_p + 0x388))
                 (*(int *)(param_1 + 0x148) + 0x18c,*(int *)(param_1 + 0x148) + 0x210,
@@ -213,7 +213,7 @@ void r_ecc_point_multiplication_win_256(int param_1)
     }
   }
   *(short *)(param_1 + 0x142) = sVar5;
-_L243:
+_L236:
   return;
 }
 

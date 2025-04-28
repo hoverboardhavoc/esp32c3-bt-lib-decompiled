@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_frm_skip_isr
  *
@@ -25,7 +25,7 @@ void r_lld_adv_frm_skip_isr(uint param_1,int param_2)
   iVar2 = *(int *)(&lld_adv_env + param_1 * 4);
   if (iVar2 == 0) {
     uVar6 = 0xb50;
-_L989:
+_L1055:
     r_assert_err(0,0x10000,uVar6);
     return;
   }
@@ -53,13 +53,13 @@ _L989:
         *(char *)(iVar2 + 0x16) = *(char *)(iVar2 + 0x16) + rwip_priority;
       }
       iVar4 = r_sch_arb_insert(iVar2);
-      if (iVar4 == 0) goto _L982;
+      if (iVar4 == 0) goto _L1048;
       if (*(char *)(iVar2 + 0x95) != '\0') {
         return;
       }
       if (*(int *)(iVar2 + 0x58) == -1) {
         uVar6 = 0xb44;
-        goto _L989;
+        goto _L1055;
       }
     }
     else {
@@ -71,13 +71,13 @@ _L989:
       }
       iVar4 = r_sch_arb_insert(iVar2 + 0x34);
       if (iVar4 == 0) {
-_L982:
+_L1048:
         *(undefined1 *)(iVar2 + 0x89) = 0;
         return;
       }
       if (*(int *)(iVar2 + 0x58) == -1) {
         uVar6 = 0xb22;
-        goto _L989;
+        goto _L1055;
       }
     }
     param_1 = (uint)*(byte *)(iVar2 + 0x87);

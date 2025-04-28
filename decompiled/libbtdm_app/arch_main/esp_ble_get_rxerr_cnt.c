@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> arch_main.o -> esp_ble_get_rxerr_cnt
  *
@@ -23,21 +23,25 @@ undefined4 esp_ble_get_rxerr_cnt(uint param_1,int *param_2,undefined4 param_3)
   iStack_14 = 0;
   uVar1 = llm_hdl_to_id(param_1 & 0xff);
   iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-  if (*(byte *)(iVar2 + 0xd) <= uVar1) {
-    return 1;
-  }
-  lld_le_pkt_err_get(uVar1,param_2,param_3);
-  if (param_1 == 1) {
-    uVar3 = 0xb;
+  if (uVar1 < *(byte *)(iVar2 + 0xd)) {
+    lld_le_pkt_err_get(uVar1,param_2,param_3);
+    if (param_1 == 1) {
+      lld_le_pkt_err_get(0xb,&iStack_14,0);
+      *param_2 = *param_2 + iStack_14;
+      uVar3 = 0;
+    }
+    else {
+      uVar3 = 0;
+      if (param_1 == 2) {
+        lld_le_pkt_err_get(10,&iStack_14,0);
+        *param_2 = *param_2 + iStack_14;
+        uVar3 = 0;
+      }
+    }
   }
   else {
-    if (param_1 != 2) {
-      return 0;
-    }
-    uVar3 = 10;
+    uVar3 = 1;
   }
-  lld_le_pkt_err_get(uVar3,&iStack_14,0);
-  *param_2 = *param_2 + iStack_14;
-  return 0;
+  return uVar3;
 }
 

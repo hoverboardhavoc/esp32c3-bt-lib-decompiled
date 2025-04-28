@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> vhci.o -> r_vhci_init
  *
@@ -15,14 +15,12 @@
 void r_vhci_init(void)
 
 {
-  int iVar1;
-  undefined1 *puVar2;
-  undefined4 uVar3;
+  undefined1 *puVar1;
+  undefined4 uVar2;
   
-  iVar1 = _r_osi_funcs_p;
-  puVar2 = *(undefined1 **)(_btdm_env_p + 0x24);
-  _vhci_env_p = puVar2;
-  if (puVar2 == (undefined1 *)0x0) {
+  puVar1 = *(undefined1 **)(_btdm_env_p + 0x24);
+  _vhci_env_p = puVar1;
+  if (puVar1 == (undefined1 *)0x0) {
     if (0 < _g_bt_plf_log_level) {
       ets_printf("%s %d\n",0x10000,0x35);
     }
@@ -30,9 +28,9 @@ void r_vhci_init(void)
                     /* WARNING: Do nothing block with infinite loop */
     } while( true );
   }
-  *puVar2 = 1;
-  uVar3 = (**(code **)(iVar1 + 0x24))(1,*(code **)(iVar1 + 0x24));
-  *(undefined4 *)(puVar2 + 4) = uVar3;
+  *puVar1 = 1;
+  uVar2 = (**(code **)(_r_osi_funcs_p + 0x24))(1,1,*(code **)(_r_osi_funcs_p + 0x24));
+  *(undefined4 *)(puVar1 + 4) = uVar2;
   return;
 }
 

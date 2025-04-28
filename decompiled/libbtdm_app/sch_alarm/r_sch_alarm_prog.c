@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> sch_alarm.o -> r_sch_alarm_prog
  *
@@ -17,9 +17,10 @@ void r_sch_alarm_prog(void)
 {
   int iVar1;
   int iVar2;
-  uint uVar3;
+  undefined4 uVar3;
   int extraout_a1;
-  uint uVar4;
+  int iVar4;
+  uint uVar5;
   code *UNRECOVERED_JUMPTABLE;
   
   iVar1 = _sch_alarm_env;
@@ -29,15 +30,18 @@ void r_sch_alarm_prog(void)
   }
   else {
     iVar2 = (**(code **)(_r_modules_funcs_p + 0x2c4))(*(code **)(_r_modules_funcs_p + 0x2c4));
-    uVar3 = *(uint *)(iVar1 + 4);
-    uVar4 = (0x270U - extraout_a1 < 0x191) + 1 + iVar2 & 0xfffffff;
-    if (0x7fffffe < (uVar3 - uVar4 & 0xfffffff)) {
-      *(uint *)(iVar1 + 4) = uVar4;
-      uVar3 = uVar4;
+    iVar4 = 2;
+    if (400 < 0x270U - extraout_a1) {
+      iVar4 = 1;
     }
+    uVar5 = iVar4 + iVar2 & 0xfffffff;
+    if (0x7fffffe < (*(int *)(iVar1 + 4) - uVar5 & 0xfffffff)) {
+      *(uint *)(iVar1 + 4) = uVar5;
+    }
+    uVar3 = *(undefined4 *)(iVar1 + 4);
     UNRECOVERED_JUMPTABLE = *(code **)(_r_modules_funcs_p + 0x2d4);
   }
-                    /* WARNING: Could not recover jumptable at 0x00010060. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010066. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*UNRECOVERED_JUMPTABLE)(uVar3,UNRECOVERED_JUMPTABLE);
   return;

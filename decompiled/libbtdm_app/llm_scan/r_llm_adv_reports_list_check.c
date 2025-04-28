@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llm_scan.o -> r_llm_adv_reports_list_check
  *
@@ -33,12 +33,18 @@ uint r_llm_adv_reports_list_check
            (iVar4 = *(int *)(_p_llm_env + 0xcc) + iVar5 * 0xe, *(byte *)(iVar4 + 0xb) == param_2))
           && (*(byte *)(iVar4 + 10) == param_3)) && (*(byte *)(iVar4 + 0xc) == param_4)) {
         if ((param_4 == 0xff) || (*(ushort *)(iVar4 + 6) == param_5)) {
+          if (param_6 < 6) {
+            return uVar2;
+          }
           uVar2 = 0;
         }
         else {
           *(short *)(iVar4 + 6) = (short)param_5;
+          if (param_6 < 6) {
+            return 0;
+          }
         }
-        if ((5 < param_6) && (*(ushort *)(iVar4 + 8) != param_6)) {
+        if (*(ushort *)(iVar4 + 8) != param_6) {
           *(short *)(iVar4 + 8) = (short)param_6;
           return 0;
         }

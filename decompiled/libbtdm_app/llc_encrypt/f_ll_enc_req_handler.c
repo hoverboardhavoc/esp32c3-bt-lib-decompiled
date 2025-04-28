@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_encrypt.o -> f_ll_enc_req_handler
  *
@@ -27,7 +27,7 @@ undefined4 f_ll_enc_req_handler(int param_1,int param_2)
     if (iVar1 == 0) {
       puVar2 = (undefined4 *)
                (**(code **)(_r_modules_funcs_p + 200))
-                         (0x109,1,0x3c,*(code **)(_r_modules_funcs_p + 200));
+                         (0x109,1,1,0x3c,*(code **)(_r_modules_funcs_p + 200));
       *(undefined1 *)(puVar2 + 1) = 3;
       uVar3 = *(undefined4 *)(_r_ip_funcs_p + 0x5a0);
       pcVar5 = *(code **)(_r_ip_funcs_p + 0x67c);
@@ -46,7 +46,7 @@ undefined4 f_ll_enc_req_handler(int param_1,int param_2)
       memcpy((void *)(iVar1 + 8),(void *)(param_2 + 1),8);
       uVar4 = 0;
       pcVar5 = *(code **)(_r_ip_funcs_p + 0x59c);
-      goto _L176;
+      goto _L173;
     }
   }
   else {
@@ -55,7 +55,7 @@ undefined4 f_ll_enc_req_handler(int param_1,int param_2)
       uVar4 = 0x3d;
       uVar3 = 9;
       pcVar5 = *(code **)(_r_ip_funcs_p + 0x594);
-_L176:
+_L173:
       (*pcVar5)(param_1,uVar3,uVar4,pcVar5);
       return 0;
     }

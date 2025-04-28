@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_deinit
  *
@@ -17,7 +17,6 @@ void btdm_controller_deinit(void)
 {
   code *pcVar1;
   int iVar2;
-  int *piVar3;
   
   iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   if (*(char *)(iVar2 + 0xc) != '\0') {
@@ -73,14 +72,14 @@ void btdm_controller_deinit(void)
     if (_btdm_env_p[6] != 0) {
       (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
     }
-    piVar3 = _btdm_env_p;
     if (_btdm_env_p[9] != 0) {
       (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
-      piVar3 = _btdm_env_p;
       _btdm_env_p[9] = 0;
     }
-    (**(code **)(_r_osi_funcs_p + 0x7c))(piVar3,*(code **)(_r_osi_funcs_p + 0x7c));
-    _btdm_env_p = (int *)0x0;
+    if (_btdm_env_p != (int *)0x0) {
+      (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
+      _btdm_env_p = (int *)0x0;
+    }
   }
   if (_r_plf_funcs_p != 0) {
     (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));

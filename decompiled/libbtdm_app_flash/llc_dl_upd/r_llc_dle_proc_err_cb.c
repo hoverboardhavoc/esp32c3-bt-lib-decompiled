@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_dl_upd.o -> r_llc_dle_proc_err_cb
  *
@@ -28,11 +28,11 @@ void r_llc_dle_proc_err_cb(uint param_1,uint param_2,char *param_3)
   
   if (param_2 == 2) {
     cVar8 = param_3[1];
-_L71:
+_L69:
     if (cVar8 == '\0') {
       return;
     }
-    if ((byte)(cVar8 - 0x19U) < 2) goto _L72;
+    if ((byte)(cVar8 - 0x19U) < 2) goto _L70;
   }
   else {
     if (2 < param_2) {
@@ -43,17 +43,17 @@ _L71:
         return;
       }
       cVar8 = param_3[2];
-      goto _L71;
+      goto _L69;
     }
     if (param_2 == 0) {
       cVar8 = *param_3;
-      goto _L71;
+      goto _L69;
     }
     if (param_3[1] != '\x14') {
       return;
     }
     cVar8 = '\x19';
-_L72:
+_L70:
     iVar7 = r_sdk_config_get_opts();
     if ((param_1 < *(byte *)(iVar7 + 0xd)) && (iVar7 = *(int *)(&llc_env + param_1 * 4), iVar7 != 0)
        ) {
@@ -117,8 +117,10 @@ _L72:
     iVar5 = r_bt_rf_coex_conn_phy_coded_data_time_limit_en_get();
     if (iVar5 != 0) {
       iVar5 = r_bt_rf_coex_conn_phy_coded_data_time_limit_en_get();
-      uVar9 = 0xa90;
-      if (iVar5 != 0) {
+      if (iVar5 == 0) {
+        uVar9 = 0xa90;
+      }
+      else {
         uVar9 = *(ushort *)(*(int *)(_bt_rf_coex_cfg_p + 0x44) + 2);
       }
       if (uVar9 < 0xa90) {
@@ -158,8 +160,10 @@ _L72:
   iVar7 = r_bt_rf_coex_conn_phy_coded_data_time_limit_en_get();
   if (iVar7 != 0) {
     iVar7 = r_bt_rf_coex_conn_phy_coded_data_time_limit_en_get();
-    uVar9 = 0xa90;
-    if (iVar7 != 0) {
+    if (iVar7 == 0) {
+      uVar9 = 0xa90;
+    }
+    else {
       uVar9 = **(ushort **)(_bt_rf_coex_cfg_p + 0x44);
     }
     if (uVar9 < 0xa90) {

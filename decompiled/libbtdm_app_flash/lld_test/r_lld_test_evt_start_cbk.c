@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_test.o -> r_lld_test_evt_start_cbk
  *
@@ -18,6 +18,7 @@ void r_lld_test_evt_start_cbk(int param_1)
   ushort uVar1;
   ushort *puVar2;
   int iVar3;
+  uint uVar4;
   byte bStack_31;
   code *pcStack_30;
   undefined4 uStack_2c;
@@ -46,20 +47,21 @@ void r_lld_test_evt_start_cbk(int param_1)
       }
     }
     r_bt_rma_get_ant_by_act(uVar1 & 0x1f,0,&bStack_31,&pcStack_30);
-    if ((bStack_31 & 0xfe) != 0) {
+    if (((uint)bStack_31 << 7 & 0xffffff7f) != 0) {
       r_assert_err(0,0x10000,0x82);
     }
     puVar2 = (ushort *)r_emi_get_mem_addr_by_offset(0x400);
     uVar1 = *puVar2;
     puVar2 = (ushort *)r_emi_get_mem_addr_by_offset(0x400);
-    *puVar2 = uVar1 & 0xff7f | (ushort)bStack_31 << 7;
-    if (((uint)pcStack_30 & 0xfe) != 0) {
+    *puVar2 = uVar1 & 0xff7f | (ushort)((uint)bStack_31 << 7);
+    uVar4 = ((uint)pcStack_30 & 0xff) << 6;
+    if ((uVar4 & 0xffffffbf) != 0) {
       r_assert_err(0,0x10000,0x8e);
     }
     puVar2 = (ushort *)r_emi_get_mem_addr_by_offset(0x400);
     uVar1 = *puVar2;
     puVar2 = (ushort *)r_emi_get_mem_addr_by_offset(0x400);
-    *puVar2 = uVar1 & 0xffbf | (ushort)(byte)pcStack_30 << 6;
+    *puVar2 = uVar1 & 0xffbf | (ushort)uVar4;
     pcStack_30 = r_lld_test_frm_cbk;
     uStack_2c = *(undefined4 *)(param_1 + 4);
     uStack_28 = 0;

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_ch_map_update
  *
@@ -36,12 +36,12 @@ undefined4 r_lld_con_ch_map_update(uint param_1,void *param_2,undefined2 param_3
       *(undefined2 *)(iVar1 + 0x44) = param_3;
       memcpy((void *)(iVar1 + 0x34),param_2,5);
       uVar2 = 0;
-      goto _L804;
+      goto _L827;
     }
     r_assert_param(*(char *)(iVar1 + 0x46),0,"lld_con.c",0xf45);
   }
   uVar2 = 0xc;
-_L804:
+_L827:
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   return uVar2;
 }

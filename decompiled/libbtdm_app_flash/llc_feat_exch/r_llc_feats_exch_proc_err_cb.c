@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llc_feat_exch.o -> r_llc_feats_exch_proc_err_cb
  *
@@ -21,11 +21,11 @@ void r_llc_feats_exch_proc_err_cb(uint param_1,uint param_2,char *param_3)
   
   if (param_2 == 2) {
     cVar4 = param_3[1];
-_L29:
+_L28:
     if (cVar4 == '\0') {
       return;
     }
-    if (cVar4 != '\x1a') goto _L31;
+    if (cVar4 != '\x1a') goto _L30;
   }
   else {
     if (2 < param_2) {
@@ -36,23 +36,23 @@ _L29:
         return;
       }
       cVar4 = param_3[2];
-      goto _L29;
+      goto _L28;
     }
     if (param_2 == 0) {
       cVar4 = *param_3;
-      goto _L29;
+      goto _L28;
     }
     if (param_3[1] != '\x0e') {
       return;
     }
   }
   iVar3 = r_sdk_config_get_opts();
-  if ((param_1 < *(byte *)(iVar3 + 0xd)) && (iVar3 = *(int *)(&llc_env + param_1 * 4), iVar3 != 0))
-  {
+  cVar4 = '\x1a';
+  if ((param_1 < *(byte *)(iVar3 + 0xd)) &&
+     (iVar3 = *(int *)(&llc_env + param_1 * 4), cVar4 = '\x1a', iVar3 != 0)) {
     *(byte *)(iVar3 + 0x30) = *(byte *)(iVar3 + 0x30) & 0xf7;
   }
-  cVar4 = '\x1a';
-_L31:
+_L30:
   iVar5 = *(int *)(&llc_env + param_1 * 4);
   iVar3 = r_llc_proc_get(0);
   iVar1 = r_llc_proc_state_get();

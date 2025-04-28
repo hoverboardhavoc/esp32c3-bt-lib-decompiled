@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> sch_arb.o -> r_sch_arb_insert
  *
@@ -51,13 +51,13 @@ char r_sch_arb_insert(uint *param_1)
   iStack_44 = extraout_a1;
   if (((param_1[1] - uVar4 & 0xfffffff) < 0x7ffffff) &&
      ((param_1[1] != uVar4 || (uVar5 <= param_1[2])))) {
-_L86:
+_L84:
     if (1 < (ushort)((ushort)param_1[5] >> 0xe)) {
       uVar4 = param_1[3] - param_1[1] & 0xfffffff;
       if (0x8000000 < uVar4) {
         uVar4 = -(param_1[1] - param_1[3] & 0xfffffff);
       }
-      if ((int)uVar4 < (int)(param_1[4] / 0x271)) goto _L92;
+      if ((int)uVar4 < (int)(param_1[4] / 0x271)) goto _L91;
     }
     puVar1 = _rwip_prog_delay;
     if (_rwip_prog_delay == (uint *)0x0) {
@@ -82,35 +82,38 @@ _L86:
           }
           cVar6 = cVar6 + '\x01';
           puVar9 = puVar2;
-          if ((uVar4 & 0xfd) != 1) goto _L96;
+          if ((uVar4 & 0xfd) != 1) goto _L95;
         }
         else {
           if ((ushort)((ushort)param_1[5] >> 0xe) != 0) {
+            uVar4 = (puVar2[2] + puVar2[4]) / 0x271 + puVar2[1];
+            if (param_1[2] < (puVar2[2] + puVar2[4]) % 0x271) {
+              uVar4 = uVar4 + 1;
+            }
+            param_1[1] = uVar4 & 0xfffffff;
             cVar6 = '\0';
             puVar9 = (uint *)0x0;
             puVar7 = (uint *)0x0;
-            param_1[1] = (puVar2[2] + puVar2[4]) / 0x271 + puVar2[1] +
-                         (uint)(param_1[2] < (puVar2[2] + puVar2[4]) % 0x271) & 0xfffffff;
-            goto _L96;
+            goto _L95;
           }
           if (((*(byte *)((int)puVar2 + 0x16) < *(byte *)((int)param_1 + 0x16)) &&
               (_rwip_prog_delay == puVar2)) && ((uVar4 - 3 & 0xff) < 2)) {
-            if (uVar4 != 3) goto _L96;
+            if (uVar4 != 3) goto _L95;
           }
           else {
-_L128:
+_L125:
             cStack_49 = '\x01';
           }
         }
         break;
       }
-_L96:
+_L95:
       if (1 < (ushort)((ushort)param_1[5] >> 0xe)) {
         uVar4 = param_1[3] - param_1[1] & 0xfffffff;
         if (0x8000000 < uVar4) {
           uVar4 = -(param_1[1] - param_1[3] & 0xfffffff);
         }
-        if ((int)uVar4 < (int)(param_1[4] / 0x271)) goto _L128;
+        if ((int)uVar4 < (int)(param_1[4] / 0x271)) goto _L125;
       }
       puVar1 = _sch_arb_env;
       if (_rwip_prog_delay != puVar2) {
@@ -127,9 +130,9 @@ _L96:
       if (param_1[2] < uVar5) {
         param_1[1] = uVar4 + 1 & 0xfffffff;
       }
-      goto _L86;
+      goto _L84;
     }
-_L92:
+_L91:
     cStack_49 = '\x01';
     puVar7 = (uint *)0x0;
     puVar8 = (uint *)0x0;

@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_init.o -> r_lld_init_process_pkt_rx_adv_ind_or_direct_ind
  *
@@ -37,7 +37,7 @@ void r_lld_init_process_pkt_rx_adv_ind_or_direct_ind(int param_1,undefined4 para
   iVar8 = (uint)bVar1 * 0x14;
   iVar11 = iVar8 + 4;
   if ((*(ushort *)(iVar9 + iVar11) & 0xe) != 0) {
-                    /* WARNING: Could not recover jumptable at 0x00010766. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000107aa. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x28d,*(code **)(_r_plf_funcs_p + 8));
     return;
@@ -49,7 +49,7 @@ void r_lld_init_process_pkt_rx_adv_ind_or_direct_ind(int param_1,undefined4 para
   uVar13 = (uint)(uVar3 >> 0xe);
   iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   uVar4 = *(ushort *)(iVar8 + 10 + iVar9);
-  if (0xfff < uVar4) {
+  if ((uVar4 & 0xf000) != 0) {
     (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,1000,*(code **)(_r_plf_funcs_p + 8));
   }
   iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));

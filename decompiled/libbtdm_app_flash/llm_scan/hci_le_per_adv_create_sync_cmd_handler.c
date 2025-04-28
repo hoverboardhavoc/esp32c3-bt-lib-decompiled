@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> llm_scan.o -> hci_le_per_adv_create_sync_cmd_handler
  *
@@ -40,7 +40,7 @@ undefined1 hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 param
           iVar4 = 0xb;
           iVar3 = r_llm_is_dev_synced(param_1 + 3,param_1[2],param_1[1]);
           uVar6 = 0;
-          if (iVar3 != 0) goto _L243;
+          if (iVar3 != 0) goto _L249;
         }
         iVar4 = r_llm_activity_free_get(abStack_21);
         uVar6 = 0;
@@ -52,18 +52,18 @@ undefined1 hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 param
           }
           bVar1 = param_1[5];
           bVar2 = param_1[7];
+          uVar6 = 1;
           *(byte **)(*(int *)(_p_llm_env + 8) + (uint)abStack_21[0] * 0x44) = param_1;
           iVar4 = r_lld_scan_create_sync
-                            (*param_1,param_1[1],param_1[2],
+                            (abStack_21[0],*param_1,param_1[1],param_1[2],
                              CONCAT13(param_1[6],CONCAT12(bVar1,*(undefined2 *)(param_1 + 3))),
                              CONCAT11(param_1[8],bVar2));
           if ((_bt_rf_coex_hooks_p != (undefined4 *)0x0) &&
              ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
             (*(code *)*_bt_rf_coex_hooks_p)(abStack_21[0],6,1);
           }
-          uVar6 = 1;
         }
-        goto _L243;
+        goto _L249;
       }
     }
     uVar6 = 0;
@@ -73,7 +73,7 @@ undefined1 hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 param
     uVar6 = 0;
     iVar4 = 0x12;
   }
-_L243:
+_L249:
   r_llm_cmd_stat_send(param_2,iVar4);
   return uVar6;
 }

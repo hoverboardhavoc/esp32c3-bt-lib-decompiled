@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_phy_upd.o -> r_llc_loc_phy_upd_proc_continue
  *
@@ -25,6 +25,7 @@ void r_llc_loc_phy_upd_proc_continue(int param_1,int param_2,int param_3)
   short sVar8;
   bool bVar9;
   int iVar10;
+  code *UNRECOVERED_JUMPTABLE_00;
   short sVar11;
   int iVar12;
   int iVar13;
@@ -32,7 +33,6 @@ void r_llc_loc_phy_upd_proc_continue(int param_1,int param_2,int param_3)
   byte bVar15;
   undefined4 uVar16;
   undefined1 uVar17;
-  code *UNRECOVERED_JUMPTABLE_00;
   
   iVar10 = *(int *)(&llc_env + param_1 * 4);
   iVar12 = (**(code **)(_r_ip_funcs_p + 0x674))(0,*(code **)(_r_ip_funcs_p + 0x674));
@@ -42,15 +42,15 @@ void r_llc_loc_phy_upd_proc_continue(int param_1,int param_2,int param_3)
     iVar13 = (**(code **)(_r_ip_funcs_p + 0x680))(*(code **)(_r_ip_funcs_p + 0x680));
     if (iVar13 != param_2) {
       UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_plf_funcs_p + 0x10);
-      param_1 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar12);
+      param_1 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar12,*(code **)(_r_ip_funcs_p + 0x680));
       uVar16 = 0x9c;
-_L140:
-                    /* WARNING: Could not recover jumptable at 0x00010524. Too many branches */
+_L133:
+                    /* WARNING: Could not recover jumptable at 0x0001052c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
       (*UNRECOVERED_JUMPTABLE_00)(param_1,param_2,"llc_phy_upd.c",uVar16,UNRECOVERED_JUMPTABLE_00);
       return;
     }
-    uVar16 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar12);
+    uVar16 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar12,*(code **)(_r_ip_funcs_p + 0x680));
     switch(uVar16) {
     case 0:
       sVar11 = *(short *)(iVar10 + 0x24);
@@ -71,9 +71,9 @@ _L140:
             bVar15 = ~*(byte *)(iVar12 + 10) & 1;
           }
           else {
-            bVar15 = 3;
-            if (*(short *)(iVar12 + 0x10) == 2) {
-              bVar15 = 2;
+            bVar15 = 2;
+            if (*(short *)(iVar12 + 0x10) != 2) {
+              bVar15 = 3;
             }
           }
           (**(code **)(_r_ip_funcs_p + 0x3cc))(param_1,bVar15,*(code **)(_r_ip_funcs_p + 0x3cc));
@@ -81,12 +81,12 @@ _L140:
           UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x684);
         }
         else {
-          UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x684);
           uVar16 = 2;
+          UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x684);
         }
-        goto _L141;
+        goto _L134;
       }
-      if ((*(byte *)(iVar10 + 0x1c) != 3) || ((sVar8 == 0 || (sVar8 == sVar11)))) goto _L52;
+      if ((*(byte *)(iVar10 + 0x1c) != 3) || ((sVar8 == 0 || (sVar8 == sVar11)))) goto _L47;
       uVar17 = (&co_phy_to_rate)[*(byte *)(iVar10 + 0x1d)];
       uVar16 = 3;
       if (sVar8 == 2) {
@@ -99,7 +99,7 @@ _L140:
       if (param_3 != 0) {
         *(undefined2 *)(iVar12 + 8) = 0;
         *(undefined2 *)(iVar12 + 0xc) = 0;
-        goto _L52;
+        goto _L47;
       }
       break;
     case 2:
@@ -201,27 +201,25 @@ _L140:
       if (!bVar9) {
         return;
       }
-_L52:
+_L47:
+      iVar13 = _r_ip_funcs_p;
       *(ushort *)(iVar10 + 0x42) = *(ushort *)(iVar10 + 0x42) & 0xffef;
       if ((*(uint *)(iVar12 + 0xc) & 0xffffff) != 0) {
-        (**(code **)(_r_ip_funcs_p + 0x644))
+        (**(code **)(iVar13 + 0x644))
                   (param_1,param_3,*(undefined1 *)(iVar10 + 0x1c),*(undefined1 *)(iVar10 + 0x1d),
-                   *(code **)(_r_ip_funcs_p + 0x644));
+                   *(code **)(iVar13 + 0x644));
         (**(code **)(_r_ip_funcs_p + 0x640))(param_1,uVar1,uVar2,*(code **)(_r_ip_funcs_p + 0x640));
         if (*(char *)(iVar12 + 0xe) != '\0') {
           *(byte *)(iVar10 + 0x45) = *(byte *)(iVar10 + 0x45) & 0xbf;
         }
       }
-                    /* WARNING: Could not recover jumptable at 0x00010654. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010664. Too many branches */
                     /* WARNING: Treating indirect jump as call */
       (**(code **)(_r_ip_funcs_p + 0x690))(param_1,0,*(code **)(_r_ip_funcs_p + 0x690));
       return;
     case 3:
       (**(code **)(_r_ip_funcs_p + 0x68c))(param_1,0,0,*(code **)(_r_ip_funcs_p + 0x68c));
-      if (*(short *)(iVar12 + 0xc) == 0) {
-        UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x3cc);
-        goto _L139;
-      }
+      if (*(short *)(iVar12 + 0xc) == 0) goto _L132;
       if (*(byte *)(iVar12 + 0xd) == 0) {
         bVar15 = *(byte *)(iVar10 + 0x1c);
       }
@@ -245,7 +243,7 @@ _L52:
         (**(code **)(_r_plf_funcs_p + 0xc))
                   (*(undefined1 *)(iVar12 + 0xd),*(undefined1 *)(iVar12 + 0xc),"llc_phy_upd.c",0x1a2
                    ,*(code **)(_r_plf_funcs_p + 0xc));
-        goto _L52;
+        goto _L47;
       }
       break;
     case 4:
@@ -265,25 +263,24 @@ _L52:
           *(undefined *)(iVar10 + 0x1d) = (&co_phy_mask_to_value)[*(byte *)(iVar12 + 0xd)];
         }
       }
-      goto _L52;
+      goto _L47;
     default:
       UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_plf_funcs_p + 0xc);
       param_2 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar12,*(code **)(_r_ip_funcs_p + 0x680));
       uVar16 = 0x1ca;
-      goto _L140;
+      goto _L133;
     }
     uVar16 = 4;
     UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x684);
-_L141:
-                    /* WARNING: Could not recover jumptable at 0x0001069a. Too many branches */
+_L134:
+                    /* WARNING: Could not recover jumptable at 0x000106aa. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (*UNRECOVERED_JUMPTABLE_00)(iVar12,param_1,uVar16,UNRECOVERED_JUMPTABLE_00);
     return;
   }
   (**(code **)(_r_ip_funcs_p + 0x68c))(param_1,0,0,*(code **)(_r_ip_funcs_p + 0x68c));
-  UNRECOVERED_JUMPTABLE_00 = *(code **)(_r_ip_funcs_p + 0x3cc);
-_L139:
-  (*UNRECOVERED_JUMPTABLE_00)(param_1,4,UNRECOVERED_JUMPTABLE_00);
-  goto _L52;
+_L132:
+  (**(code **)(_r_ip_funcs_p + 0x3cc))(param_1,4,*(code **)(_r_ip_funcs_p + 0x3cc));
+  goto _L47;
 }
 

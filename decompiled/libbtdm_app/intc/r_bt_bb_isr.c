@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> intc.o -> r_bt_bb_isr
  *
@@ -22,14 +22,14 @@ void r_bt_bb_isr(void)
   uint uVar5;
   
   uVar1 = _DAT_6001108c;
-  if ((int)(_DAT_6001108c << 0xd) < 0) {
+  if ((_DAT_6001108c & 0x40000) != 0) {
     _DAT_60011090 = _DAT_60011090 | 0x40000;
     (**(code **)(_r_ip_funcs_p + 0x248))(*(code **)(_r_ip_funcs_p + 0x248));
     (**(code **)(_r_plf_funcs_p + 0x2c))(5,*(code **)(_r_plf_funcs_p + 0x2c));
   }
-  if ((int)(uVar1 << 0xc) < 0) {
+  if ((uVar1 & 0x80000) != 0) {
     _DAT_60011090 = _DAT_60011090 | 0x80000;
-    while (-1 < _DAT_600110d4 << 2) {
+    while ((_DAT_600110d4 & 0x20000000) == 0) {
       uVar4 = _DAT_600110d8 >> 0xf;
       uVar5 = _DAT_600110d8 >> 0x1e;
       uVar2 = _DAT_600110d8 >> 0x18 & 0x3f;
@@ -50,21 +50,21 @@ void r_bt_bb_isr(void)
       (**(code **)(_r_plf_funcs_p + 0x100))(*(code **)(_r_plf_funcs_p + 0x100));
     }
   }
-  if ((int)(uVar1 << 0xf) < 0) {
+  if ((uVar1 & 0x10000) != 0) {
     _DAT_60011090 = _DAT_60011090 | 0x10000;
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
     if (*(char *)(iVar3 + 0x11) != '\0') {
       (**(code **)(_r_plf_funcs_p + 0x100))(*(code **)(_r_plf_funcs_p + 0x100));
     }
   }
-  if ((int)(uVar1 << 0x10) < 0) {
+  if ((uVar1 & 0x8000) != 0) {
     _DAT_60011090 = _DAT_60011090 | 0x8000;
   }
   if ((uVar1 & 2) != 0) {
     _DAT_60011090 = _DAT_60011090 | 2;
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
     if (*(char *)(iVar3 + 0x19) == '\x02') {
-                    /* WARNING: Could not recover jumptable at 0x000101e4. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000101da. Too many branches */
                     /* WARNING: Treating indirect jump as call */
       (**(code **)(_r_ip_funcs_p + 0x9c0))(*(code **)(_r_ip_funcs_p + 0x9c0));
       return;

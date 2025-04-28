@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_pkt_rx_connect_ind
  *
@@ -23,9 +23,9 @@ undefined4 r_lld_adv_pkt_rx_connect_ind(int param_1)
   ushort uVar6;
   uint uVar7;
   undefined1 auStack_5c [8];
-  undefined4 local_54;
+  undefined4 uStack_54;
   undefined2 uStack_50;
-  undefined4 local_4c;
+  undefined4 uStack_4c;
   undefined2 uStack_48;
   undefined4 uStack_44;
   undefined2 uStack_40;
@@ -59,14 +59,14 @@ undefined4 r_lld_adv_pkt_rx_connect_ind(int param_1)
   if (499 < uStack_2c) {
     return 0;
   }
-  if ((uint)uStack_2a << 2 <= (uStack_2c + 1) * (uint)uStack_2e) {
+  if ((uint)uStack_2a << 2 <= (uint)(ushort)(uStack_2c + 1) * (uint)uStack_2e) {
     return 0;
   }
   uVar5 = (*(code *)_r_modules_funcs_p[3])(auStack_28,(code *)_r_modules_funcs_p[3]);
   if (uVar5 < 2) {
     return 0;
   }
-  if (0x1f < bStack_24) {
+  if ((bStack_24 & 0xe0) != 0) {
     return 0;
   }
   if (0xb < (byte)((bStack_23 & 0x1f) - 5)) {
@@ -89,11 +89,12 @@ undefined4 r_lld_adv_pkt_rx_connect_ind(int param_1)
   iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   uVar5 = (uint)*(ushort *)(iVar2 + 0xe + iVar3);
   if (uVar5 == 0) {
-    iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000);
+    iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
     uVar6 = *(ushort *)(iVar3 + iVar2 + 4) >> 6 & 1;
   }
   else {
-    pvVar4 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))(uVar5 + 0x18 & 0xffff);
+    pvVar4 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
+                               (uVar5 + 0x18 & 0xffff,*(code **)(_r_plf_funcs_p + 0xbc));
     memcpy(auStack_5c,pvVar4,6);
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
     iVar2 = ((uVar5 - 0xc60) / 0x34 & 0xff) * 0x34;
@@ -106,23 +107,23 @@ undefined4 r_lld_adv_pkt_rx_connect_ind(int param_1)
        (iVar3 = (*(code *)*_r_modules_funcs_p)(&uStack_44,auStack_5c,(code *)*_r_modules_funcs_p),
        iVar3 == 0)) {
       uVar6 = uVar6 | 2;
-      local_54 = uStack_44;
+      uStack_54 = uStack_44;
       uStack_50 = uStack_40;
-      goto _L632;
+      goto _L687;
     }
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
     if (((*(ushort *)(iVar3 + iVar2) >> 1 & 1) != 0) &&
        (iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc)),
-       -1 < (int)((uint)*(ushort *)(iVar2 + iVar3) << 0x14))) {
+       (*(ushort *)(iVar2 + iVar3) >> 0xb & 1) == 0)) {
       (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0x7ed,*(code **)(_r_plf_funcs_p + 8));
     }
   }
-  local_54 = 0;
+  uStack_54 = 0;
   uStack_50 = 0;
-_L632:
+_L687:
   iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
   if ((*(ushort *)(param_1 * 0x5a + 0x14 + iVar2) >> 2 & 1) == 0) {
-    local_4c = 0;
+    uStack_4c = 0;
     uStack_48 = 0;
   }
   else {
@@ -143,10 +144,10 @@ _L632:
     }
     pvVar4 = (void *)(**(code **)(_r_plf_funcs_p + 0xbc))
                                (uVar7 * 0x34 + 0xc8e,*(code **)(_r_plf_funcs_p + 0xbc));
-    memcpy(&local_4c,pvVar4,6);
+    memcpy(&uStack_4c,pvVar4,6);
   }
   (**(code **)(_r_ip_funcs_p + 0x778))
-            (param_1,&uStack_44,auStack_5c,&local_54,&local_4c,uVar6,
+            (param_1,&uStack_44,auStack_5c,&uStack_54,&uStack_4c,uVar6,
              *(code **)(_r_ip_funcs_p + 0x778));
   return 1;
 }

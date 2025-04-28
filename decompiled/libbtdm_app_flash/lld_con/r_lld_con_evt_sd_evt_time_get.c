@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_evt_sd_evt_time_get
  *
@@ -27,10 +27,10 @@ undefined4 r_lld_con_evt_sd_evt_time_get(int param_1,short *param_2,undefined2 *
       if (param_2 != (short *)0x0) {
         *param_2 = *(short *)(iVar2 + 0x78);
       }
+      uVar1 = 0;
       if (param_3 != (undefined2 *)0x0) {
         *param_3 = *(undefined2 *)(iVar2 + 0x76);
       }
-      uVar1 = 0;
     }
   }
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));

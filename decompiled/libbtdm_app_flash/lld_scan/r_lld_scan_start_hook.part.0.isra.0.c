@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_start_hook.part.0.isra.0
  *
@@ -44,14 +44,14 @@ void r_lld_scan_start_hook_part_0_isra_0(int param_1,int param_2)
         }
         uVar3 = *(ushort *)(iVar7 + 0x18);
         if (uVar3 != 0) {
-          if (0x3f < (uVar3 & 0xff)) {
+          if ((uVar3 & 0xc0) != 0) {
             r_assert_err(0,"lld_scan.c",0x3cf);
           }
           iVar9 = r_emi_get_mem_addr_by_offset(0x400);
           iVar8 = uVar5 * 0x5a + 0x16;
           uVar4 = *(ushort *)(iVar9 + iVar8);
           iVar9 = r_emi_get_mem_addr_by_offset(0x400);
-          *(ushort *)(iVar8 + iVar9) = uVar4 & 0xffc0 | uVar3 & 0xff;
+          *(ushort *)(iVar8 + iVar9) = uVar3 & 0xff | uVar4 & 0xffc0;
         }
       }
       piVar6 = piVar6 + 1;

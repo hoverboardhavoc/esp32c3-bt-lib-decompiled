@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> emi.o -> r_emi_init
  *
@@ -24,9 +24,9 @@ void r_emi_init(void)
   iVar2 = 0;
   do {
     if (2 < _g_bt_plf_log_level) {
-      puVar3 = puVar1;
-      if (0x2f < iVar2) {
-        puVar3 = puVar1 + 7;
+      puVar3 = puVar1 + 7;
+      if (iVar2 < 0x30) {
+        puVar3 = puVar1;
       }
       ets_printf("EM_BASE_REG[%d], %04x, %08x\n",iVar2,(*puVar3 >> 0x12) << 2,
                  (*puVar3 & 0x3ffff) << 2 | 0x3fc00000);

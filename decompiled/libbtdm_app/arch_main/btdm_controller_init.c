@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> arch_main.o -> btdm_controller_init
  *
@@ -15,27 +15,26 @@
 undefined4 btdm_controller_init(int *param_1)
 
 {
-  undefined1 uVar1;
-  ushort uVar2;
-  undefined2 uVar3;
-  void *pvVar4;
-  int *piVar5;
-  char cVar6;
-  byte bVar7;
-  byte bVar8;
-  byte bVar9;
+  byte bVar1;
+  byte bVar2;
+  undefined1 uVar3;
+  ushort uVar4;
+  undefined2 uVar5;
+  void *pvVar6;
+  int *piVar7;
+  int *piVar8;
+  char cVar9;
   char *pcVar10;
   int iVar11;
-  int iVar12;
-  code *pcVar13;
-  int *piVar14;
-  undefined4 uVar15;
-  uint uVar16;
+  uint uVar12;
+  undefined4 uVar13;
+  int iVar14;
+  code *pcVar15;
   undefined1 uStack_34;
   byte bStack_33;
   
-  uVar15 = 0xffffffff;
-  if (_g_rw_init_sem != 0) goto _L336;
+  uVar13 = 0xffffffff;
+  if (_g_rw_init_sem != 0) goto _L335;
   _r_plf_funcs_p =
        (void *)(**(code **)(_r_osi_funcs_p + 0x78))(0x118,*(code **)(_r_osi_funcs_p + 0x78));
   if (((_r_plf_funcs_p == (void *)0x0) ||
@@ -49,8 +48,8 @@ undefined4 btdm_controller_init(int *param_1)
       ets_printf("Funcs table create fails\n");
     }
     btdm_funcs_table_destroy();
-    uVar15 = 0xfffffffe;
-    goto _L336;
+    uVar13 = 0xfffffffe;
+    goto _L335;
   }
   memcpy(_r_plf_funcs_p,&r_plf_funcs_ro,0x118);
   memcpy(_r_modules_funcs_p,&r_modules_funcs_ro,0x3d0);
@@ -72,16 +71,17 @@ undefined4 btdm_controller_init(int *param_1)
           iVar11 = (**(code **)((int)_r_plf_funcs_p + 0xf0))(*(code **)((int)_r_plf_funcs_p + 0xf0))
           ;
           if (*(char *)(iVar11 + 0x1e) != '\0') {
+            uVar13 = 0xfffffff5;
             if (0 < _g_bt_plf_log_level) {
               ets_printf("Controller lib error, need flash lib\n");
+              uVar13 = 0xfffffff5;
             }
-            uVar15 = 0xfffffff5;
-            goto _L336;
+            goto _L335;
           }
           if ((*(char *)((int)param_1 + 0x17) == '\0') &&
              (iVar11 = (**(code **)((int)_r_plf_funcs_p + 0xe8))
                                  (param_1[6],*(code **)((int)_r_plf_funcs_p + 0xe8)), iVar11 != 0))
-          goto _L343;
+          goto _L449;
           iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))(*(code **)((int)_r_plf_funcs_p + 0x38))
           ;
           uStack_34 = *(undefined1 *)(iVar11 + 0xd);
@@ -99,96 +99,102 @@ undefined4 btdm_controller_init(int *param_1)
                                          (0x28,*(code **)(_r_osi_funcs_p + 0x74));
           if (_btdm_env_p != (int *)0x0) {
             memset(_btdm_env_p,0,0x28);
-            bVar7 = (**(code **)((int)_r_ip_funcs_p + 0x244))
-                              (*(code **)((int)_r_ip_funcs_p + 0x244));
-            bVar8 = (**(code **)((int)_r_ip_funcs_p + 0x4d0))
-                              (*(code **)((int)_r_ip_funcs_p + 0x4d0));
-            bVar9 = (**(code **)((int)_r_ip_funcs_p + 0xe4))(*(code **)((int)_r_ip_funcs_p + 0xe4));
-            bVar9 = bVar7 & bVar8 & bVar9;
-            if (DAT_0001302d != '\0') {
-              bVar7 = (**(code **)((int)_r_plf_funcs_p + 0x4c))
-                                (*(code **)((int)_r_plf_funcs_p + 0x4c));
-              bVar9 = bVar7 & bVar9;
+            uVar12 = (**(code **)((int)_r_ip_funcs_p + 0x244))
+                               (*(code **)((int)_r_ip_funcs_p + 0x244));
+            iVar11 = (**(code **)((int)_r_ip_funcs_p + 0x4d0))
+                               (*(code **)((int)_r_ip_funcs_p + 0x4d0));
+            if (iVar11 == 0) {
+              uVar12 = 0;
+            }
+            iVar11 = (**(code **)((int)_r_ip_funcs_p + 0xe4))(*(code **)((int)_r_ip_funcs_p + 0xe4))
+            ;
+            if (iVar11 == 0) {
+              uVar12 = 0;
+            }
+            if ((DAT_0001302d != '\0') &&
+               (iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x4c))
+                                   (*(code **)((int)_r_plf_funcs_p + 0x4c)), iVar11 == 0)) {
+              uVar12 = 0;
             }
             iVar11 = (**(code **)((int)_r_ip_funcs_p + 0x44))(*(code **)((int)_r_ip_funcs_p + 0x44))
             ;
-            if ((iVar11 != 0) && (bVar9 != 0)) {
+            if ((iVar11 != 0) && ((uVar12 & 1) != 0)) {
               iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                  (*(code **)((int)_r_plf_funcs_p + 0x38));
-              bVar7 = *(byte *)(iVar11 + 0xd);
+              bVar1 = *(byte *)(iVar11 + 0xd);
               iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                  (*(code **)((int)_r_plf_funcs_p + 0x38));
-              bVar8 = *(byte *)(iVar11 + 0xd);
-              uVar16 = (uint)DAT_0001302f;
+              bVar2 = *(byte *)(iVar11 + 0xd);
+              uVar12 = (uint)DAT_0001302f;
               iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                  (*(code **)((int)_r_plf_funcs_p + 0x38));
-              piVar14 = _btdm_env_p;
-              iVar12 = 0;
+              piVar7 = _btdm_env_p;
+              iVar14 = 0;
               if (DAT_0001302e != '\0') {
-                iVar12 = (uint)*(byte *)(iVar11 + 0xd) * 0x88 + uVar16 * 0xe0;
+                iVar14 = uVar12 * 0xe0 + (uint)*(byte *)(iVar11 + 0xd) * 0x88;
               }
-              pcVar13 = *(code **)(_r_osi_funcs_p + 0x78);
+              pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
               _btdm_env_p[1] =
-                   ((bVar8 + 2) * 0xc + (uint)bVar7 * 0xe6 + 0x25b + iVar12 & 0xfffffffc) + 0xc;
-              iVar11 = (*pcVar13)(pcVar13);
-              pvVar4 = _r_plf_funcs_p;
-              *piVar14 = iVar11;
-              iVar11 = (**(code **)((int)pvVar4 + 0x38))(*(code **)((int)pvVar4 + 0x38));
-              piVar14 = _btdm_env_p;
-              uVar16 = 0;
+                   ((bVar2 + 2) * 0xc + (uint)bVar1 * 0xe6 + 0x25b + iVar14 & 0xfffffffc) + 0xc;
+              iVar11 = (*pcVar15)(pcVar15);
+              pvVar6 = _r_plf_funcs_p;
+              *piVar7 = iVar11;
+              iVar11 = (**(code **)((int)pvVar6 + 0x38))(*(code **)((int)pvVar6 + 0x38));
+              piVar7 = _btdm_env_p;
+              uVar12 = 0;
               if (DAT_0001302e != '\0') {
-                uVar16 = (uint)DAT_0001302f * 400;
+                uVar12 = (uint)DAT_0001302f * 400;
                 if ((uint)DAT_0001302f * 400 < 0x1800) {
-                  uVar16 = 0x1800;
+                  uVar12 = 0x1800;
                 }
               }
-              pcVar13 = *(code **)(_r_osi_funcs_p + 0x78);
+              pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
               _btdm_env_p[3] =
-                   (((uint)*(byte *)(iVar11 + 0xd) * 0x104 + 0x8ef) * 2 + 0x675 + uVar16 &
+                   (((uint)*(byte *)(iVar11 + 0xd) * 0x104 + 0x8ef) * 2 + 0x675 + uVar12 &
                    0xfffffffc) + 0xc;
-              iVar11 = (*pcVar13)(pcVar13);
-              pvVar4 = _r_plf_funcs_p;
-              piVar14[2] = iVar11;
-              iVar11 = (**(code **)((int)pvVar4 + 0xf0))(*(code **)((int)pvVar4 + 0xf0));
-              uVar2 = *(ushort *)(iVar11 + 8);
+              iVar11 = (*pcVar15)(pcVar15);
+              pvVar6 = _r_plf_funcs_p;
+              piVar7[2] = iVar11;
+              iVar11 = (**(code **)((int)pvVar6 + 0xf0))(*(code **)((int)pvVar6 + 0xf0));
+              uVar4 = *(ushort *)(iVar11 + 8);
               iVar11 = (**(code **)((int)_r_plf_funcs_p + 0xf0))
                                  (*(code **)((int)_r_plf_funcs_p + 0xf0));
-              piVar14 = _btdm_env_p;
-              pcVar13 = *(code **)(_r_osi_funcs_p + 0x78);
+              piVar7 = _btdm_env_p;
+              pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
               _btdm_env_p[5] =
-                   (((uint)*(ushort *)(iVar11 + 6) * 0xc + (uint)uVar2 * 0x10 + 0x293 >> 2) + 3) * 4
+                   (((uint)*(ushort *)(iVar11 + 6) * 0xc + (uint)uVar4 * 0x10 + 0x293 >> 2) + 3) * 4
               ;
-              iVar11 = (*pcVar13)(pcVar13);
-              cVar6 = DAT_0001302e;
-              piVar14[4] = iVar11;
-              piVar14 = _btdm_env_p;
-              iVar11 = 0xc00;
-              if (cVar6 == '\0') {
-                iVar11 = 1;
+              iVar11 = (*pcVar15)(pcVar15);
+              cVar9 = DAT_0001302e;
+              piVar7[4] = iVar11;
+              piVar7 = _btdm_env_p;
+              iVar11 = 1;
+              if (cVar9 != '\0') {
+                iVar11 = 0xc00;
               }
-              pcVar13 = *(code **)(_r_osi_funcs_p + 0x78);
+              pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
               _btdm_env_p[7] = (iVar11 + 3U & 0xfffffffc) + 0xc;
-              iVar11 = (*pcVar13)(pcVar13);
-              piVar5 = _btdm_env_p;
-              piVar14[6] = iVar11;
-              if ((((*piVar5 != 0) && (piVar5[2] != 0)) && (piVar5[4] != 0)) &&
-                 ((piVar5[7] == 0 || (piVar5[6] != 0)))) {
+              iVar11 = (*pcVar15)(pcVar15);
+              piVar8 = _btdm_env_p;
+              piVar7[6] = iVar11;
+              if ((((*piVar8 != 0) && (piVar8[2] != 0)) && (piVar8[4] != 0)) &&
+                 ((piVar8[7] == 0 || (piVar8[6] != 0)))) {
                 if (2 < _g_bt_plf_log_level) {
                   ets_printf("RWIP Heap alloc: ENV [%p %d], MSG [%p %d], NORET [%p %d], DB [%p %d]\n"
-                             ,piVar5[1],piVar5[3],piVar5[5],piVar5[6]);
+                             ,piVar8[1],piVar8[3],piVar8[5],piVar8[6]);
                 }
                 iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                    (*(code **)((int)_r_plf_funcs_p + 0x38));
                 if ((*(char *)(iVar11 + 0x17) != '\0') &&
                    (iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                        (*(code **)((int)_r_plf_funcs_p + 0x38)),
-                   piVar14 = _btdm_env_p, *(char *)(iVar11 + 0x17) == '\x01')) {
+                   piVar7 = _btdm_env_p, *(char *)(iVar11 + 0x17) == '\x01')) {
                   iVar11 = (**(code **)(_r_osi_funcs_p + 0x78))
                                      (0xc,*(code **)(_r_osi_funcs_p + 0x78));
-                  piVar5 = _btdm_env_p;
-                  piVar14[9] = iVar11;
-                  if ((void *)piVar5[9] == (void *)0x0) goto _L357;
-                  memset((void *)piVar5[9],0,0xc);
+                  piVar8 = _btdm_env_p;
+                  piVar7[9] = iVar11;
+                  if ((void *)piVar8[9] == (void *)0x0) goto _L354;
+                  memset((void *)piVar8[9],0,0xc);
                 }
                 if (2 < _g_bt_plf_log_level) {
                   ets_printf("Uart ENV [%p], VHCI ENV [%p]\n",_btdm_env_p[8],_btdm_env_p[9]);
@@ -196,42 +202,42 @@ undefined4 btdm_controller_init(int *param_1)
                 _g_rw_init_sem =
                      (**(code **)(_r_osi_funcs_p + 0x24))(1,0,*(code **)(_r_osi_funcs_p + 0x24));
                 if (_g_rw_init_sem == 0) {
-                  uVar15 = 0xfffffffb;
+                  uVar13 = 0xfffffffb;
                 }
                 else {
                   _g_rw_schd_queue =
                        (**(code **)(_r_osi_funcs_p + 0x4c))(5,8,*(code **)(_r_osi_funcs_p + 0x4c));
                   if (_g_rw_schd_queue == 0) {
-                    uVar15 = 0xfffffffa;
+                    uVar13 = 0xfffffffa;
                   }
                   else {
-                    pcVar13 = *(code **)(_r_osi_funcs_p + 0x24);
+                    pcVar15 = *(code **)(_r_osi_funcs_p + 0x24);
                     iVar11 = (**(code **)((int)_r_plf_funcs_p + 0xf8))
                                        (*(code **)((int)_r_plf_funcs_p + 0xf8));
-                    uVar15 = (*pcVar13)(1,0);
-                    pvVar4 = _r_plf_funcs_p;
-                    *(undefined4 *)(iVar11 + 8) = uVar15;
-                    iVar11 = (**(code **)((int)pvVar4 + 0xf8))(*(code **)((int)pvVar4 + 0xf8));
+                    uVar13 = (*pcVar15)(1,0);
+                    pvVar6 = _r_plf_funcs_p;
+                    *(undefined4 *)(iVar11 + 8) = uVar13;
+                    iVar11 = (**(code **)((int)pvVar6 + 0xf8))(*(code **)((int)pvVar6 + 0xf8));
                     if (*(int *)(iVar11 + 8) == 0) {
-                      uVar15 = 0xfffffff9;
+                      uVar13 = 0xfffffff9;
                     }
                     else {
                       _g_waking_sleeping_sem =
-                           (**(code **)(_r_osi_funcs_p + 0x24))(1,*(code **)(_r_osi_funcs_p + 0x24))
-                      ;
+                           (**(code **)(_r_osi_funcs_p + 0x24))
+                                     (1,1,*(code **)(_r_osi_funcs_p + 0x24));
                       if (_g_waking_sleeping_sem == 0) {
                         return 0xfffffff8;
                       }
-                      pcVar13 = *(code **)(_r_osi_funcs_p + 100);
+                      pcVar15 = *(code **)(_r_osi_funcs_p + 100);
                       iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                          (*(code **)((int)_r_plf_funcs_p + 0x38));
-                      uVar3 = *(undefined2 *)(iVar11 + 8);
+                      uVar5 = *(undefined2 *)(iVar11 + 8);
                       iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                          (*(code **)((int)_r_plf_funcs_p + 0x38));
-                      uVar1 = *(undefined1 *)(iVar11 + 10);
+                      uVar3 = *(undefined1 *)(iVar11 + 10);
                       iVar11 = (**(code **)((int)_r_plf_funcs_p + 0x38))
                                          (*(code **)((int)_r_plf_funcs_p + 0x38));
-                      iVar11 = (*pcVar13)(btdm_controller_task,"btController",uVar3,0,uVar1,
+                      iVar11 = (*pcVar15)(btdm_controller_task,"btController",uVar5,0,uVar3,
                                           &g_rw_controller_task_handle,*(undefined1 *)(iVar11 + 0xb)
                                          );
                       if (iVar11 == 1) {
@@ -241,15 +247,15 @@ undefined4 btdm_controller_init(int *param_1)
                                   (_g_rw_init_sem,10000,*(code **)(_r_osi_funcs_p + 0x34));
                         return 0;
                       }
-                      uVar15 = 0xfffffff7;
+                      uVar13 = 0xfffffff7;
                     }
                   }
                 }
-                goto _L336;
+                goto _L335;
               }
             }
           }
-_L357:
+_L354:
           (**(code **)((int)_r_ip_funcs_p + 0x240))(*(code **)((int)_r_ip_funcs_p + 0x240));
           (**(code **)((int)_r_ip_funcs_p + 0x4cc))(*(code **)((int)_r_ip_funcs_p + 0x4cc));
           (**(code **)((int)_r_ip_funcs_p + 0xe0))(*(code **)((int)_r_ip_funcs_p + 0xe0));
@@ -269,40 +275,40 @@ _L357:
           if (_btdm_env_p[6] != 0) {
             (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
           }
-          piVar14 = _btdm_env_p;
           if (_btdm_env_p[9] != 0) {
             (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
-            piVar14 = _btdm_env_p;
             _btdm_env_p[9] = 0;
           }
-          uVar15 = 0xfffffffc;
-          (**(code **)(_r_osi_funcs_p + 0x7c))(piVar14,*(code **)(_r_osi_funcs_p + 0x7c));
-          _btdm_env_p = (int *)0x0;
-          goto _L336;
+          uVar13 = 0xfffffffc;
+          if (_btdm_env_p != (int *)0x0) {
+            (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
+            _btdm_env_p = (int *)0x0;
+          }
+          goto _L335;
         }
         if (0 < _g_bt_plf_log_level) {
           pcVar10 = "Default Tx Power Invalid: 0x%x\n";
-          goto _L448;
+          goto _L450;
         }
       }
       else if (0 < _g_bt_plf_log_level) {
         pcVar10 = "Invalid scan backoff upperlimitmax: 0x%x\n";
-        goto _L448;
+        goto _L450;
       }
     }
     else if (0 < _g_bt_plf_log_level) {
       pcVar10 = "Hardware Target Code Invalid: 0x%x\n";
-_L448:
+_L450:
       ets_printf(pcVar10);
     }
   }
   else if (0 < _g_bt_plf_log_level) {
     ets_printf("Config struct mismatch: magic=%08x, ver=%08x\n",0x5a5aa5a5,0x2502230);
   }
-_L343:
-  uVar15 = 0xfffffffd;
-_L336:
+_L449:
+  uVar13 = 0xfffffffd;
+_L335:
   btdm_controller_deinit_internal();
-  return uVar15;
+  return uVar13;
 }
 

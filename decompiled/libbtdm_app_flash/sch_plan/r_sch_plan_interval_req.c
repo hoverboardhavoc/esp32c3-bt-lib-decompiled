@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> sch_plan.o -> r_sch_plan_interval_req
  *
@@ -23,7 +23,6 @@ void r_sch_plan_interval_req(uint *param_1)
   uint uVar6;
   char cVar7;
   uint uVar8;
-  uint uVar9;
   
   uVar6 = param_1[1];
   uVar2 = *param_1;
@@ -45,32 +44,31 @@ void r_sch_plan_interval_req(uint *param_1)
     uVar8 = (uint)*(byte *)((int)param_1 + 0x12);
     if (uVar8 == 0) {
       uVar8 = 0xffffffff;
-      goto _L99;
+      goto _L112;
     }
     uVar5 = uVar6 / uVar8;
-_L108:
+_L121:
     uVar8 = uVar5 * uVar8;
   }
   else {
     if (uVar5 <= uVar6) {
       uVar8 = uVar6 / uVar5;
-      goto _L108;
+      goto _L121;
     }
+    uVar8 = 0xffffffff;
     uVar4 = uVar6;
-    uVar9 = 0xffffffff;
     do {
       bVar1 = uVar5 % uVar4 != 0;
-      uVar8 = uVar4;
-      if (bVar1) {
-        uVar8 = uVar9;
+      if (!bVar1) {
+        uVar8 = uVar4;
       }
       uVar4 = uVar4 - 2;
-    } while ((uVar2 <= uVar4) && (uVar9 = uVar8, bVar1));
+    } while ((uVar2 <= uVar4) && (bVar1));
   }
   if (uVar8 < uVar2) {
     return;
   }
-_L99:
+_L112:
   if (uVar8 <= uVar6) {
     param_1[5] = uVar8;
   }

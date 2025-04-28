@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> ble_log_async_output.o -> r_ble_log_async_output
  *
@@ -19,8 +19,8 @@ void r_ble_log_async_output(int param_1,int param_2,int param_3,int param_4,int 
   char cVar2;
   uint uVar3;
   undefined4 uVar4;
-  uint uVar5;
-  int iVar6;
+  int iVar5;
+  uint uVar6;
   uint uVar7;
   int iVar8;
   uint *puVar9;
@@ -38,12 +38,12 @@ void r_ble_log_async_output(int param_1,int param_2,int param_3,int param_4,int 
     }
   }
   iVar8 = uVar7 * 4;
-  iVar6 = *(int *)(*(int *)(_ble_log_async_env + 0xc) + iVar8);
-  if ((*(byte *)(iVar6 + 0x18) & 2) == 0) {
+  iVar5 = *(int *)(*(int *)(_ble_log_async_env + 0xc) + iVar8);
+  if ((*(byte *)(iVar5 + 0x18) & 2) == 0) {
     return;
   }
-  if (*(char *)(iVar6 + 0x10) != '\0') {
-    r_assert_param(*(undefined4 *)(iVar6 + 0xc),*(undefined4 *)(param_2 + 4),
+  if (*(char *)(iVar5 + 0x10) != '\0') {
+    r_assert_param(*(undefined4 *)(iVar5 + 0xc),*(undefined4 *)(param_2 + 4),
                    "ble_log_async_output.c",0x11c);
   }
   pcVar1 = _ble_log_async_env;
@@ -59,23 +59,23 @@ void r_ble_log_async_output(int param_1,int param_2,int param_3,int param_4,int 
   }
   uVar3 = auStack_44[0] & 0xffff;
   if (*pcVar1 == '\0') {
-    uVar5 = uVar7 - uVar10;
+    uVar6 = uVar7 - uVar10;
     if (uVar7 <= uVar10) {
-      uVar5 = (uVar7 + uVar11) - uVar10;
+      uVar6 = (uVar7 + uVar11) - uVar10;
     }
-    if (uVar5 <= uVar3) {
-      uVar5 = puVar9[5];
+    if (uVar6 <= uVar3) {
+      uVar6 = puVar9[5];
       do {
-        iVar6 = ble_log_async_length_get(uVar5,uVar7,uVar11);
-        uVar7 = uVar7 + iVar6;
+        iVar5 = ble_log_async_length_get(uVar6,uVar7,uVar11);
+        uVar7 = uVar7 + iVar5;
         if (uVar11 <= uVar7) {
           uVar7 = uVar7 - uVar11;
         }
-        iVar6 = uVar11 - uVar10;
+        iVar5 = uVar11 - uVar10;
         if (uVar10 < uVar7) {
-          iVar6 = -uVar10;
+          iVar5 = -uVar10;
         }
-      } while (iVar6 + uVar7 <= uVar3);
+      } while (iVar5 + uVar7 <= uVar3);
       puVar9[1] = uVar7;
     }
   }
@@ -83,7 +83,7 @@ void r_ble_log_async_output(int param_1,int param_2,int param_3,int param_4,int 
     if (uVar7 <= uVar10) {
       uVar7 = uVar7 + uVar11;
     }
-    if (uVar7 - uVar10 <= uVar3) goto _L67;
+    if (uVar7 - uVar10 <= uVar3) goto _L62;
   }
   uVar4 = ble_log_async_addr_copy(uVar11,puVar9[5],uVar10,auStack_44,2);
   uVar7 = ble_log_async_addr_copy(uVar11,puVar9[5],uVar4,param_2,param_1);
@@ -96,7 +96,7 @@ void r_ble_log_async_output(int param_1,int param_2,int param_3,int param_4,int 
     }
   }
   *puVar9 = uVar7;
-_L67:
+_L62:
   *(undefined1 *)(*(int *)(*(int *)(_ble_log_async_env + 0xc) + iVar8) + 0x10) = 0;
   return;
 }

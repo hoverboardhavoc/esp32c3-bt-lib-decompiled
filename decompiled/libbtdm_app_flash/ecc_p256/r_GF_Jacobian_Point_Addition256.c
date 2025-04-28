@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> ecc_p256.o -> r_GF_Jacobian_Point_Addition256
  *
@@ -12,16 +12,16 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-int r_GF_Jacobian_Point_Addition256(void *param_1,undefined *param_2,void *param_3)
+undefined4 r_GF_Jacobian_Point_Addition256(void *param_1,void *param_2,void *param_3)
 
 {
   int iVar1;
-  int iVar2;
-  undefined4 uVar3;
+  undefined4 uVar2;
   void *__s;
-  undefined *__src;
+  void *__s_00;
+  void *__src;
   void *__src_00;
-  undefined *__src_01;
+  void *__src_01;
   void *__src_02;
   undefined1 auStack_2d4 [36];
   undefined4 uStack_2b0;
@@ -71,16 +71,17 @@ int r_GF_Jacobian_Point_Addition256(void *param_1,undefined *param_2,void *param
   
   __src_02 = (void *)((int)param_1 + 0x2c);
   __src_00 = (void *)((int)param_1 + 0x58);
-  __src_01 = param_2 + 0x2c;
-  __src = param_2 + 0x58;
-  __s = (void *)((int)param_3 + 0x2c);
+  __src_01 = (void *)((int)param_2 + 0x2c);
+  __src = (void *)((int)param_2 + 0x58);
+  __s_00 = (void *)((int)param_3 + 0x2c);
   memset(param_3,0,0x22);
   *(undefined4 *)((int)param_3 + 0x24) = 0;
   *(undefined4 *)((int)param_3 + 0x28) = 0;
-  memset(__s,0,0x22);
+  memset(__s_00,0,0x22);
+  __s = (void *)((int)param_3 + 0x58);
   *(undefined4 *)((int)param_3 + 0x50) = 0;
   *(undefined4 *)((int)param_3 + 0x54) = 0;
-  memset((void *)((int)param_3 + 0x58),0,0x22);
+  memset(__s,0,0x22);
   *(undefined4 *)((int)param_3 + 0x7c) = 0;
   *(undefined4 *)((int)param_3 + 0x80) = 0;
   memset(auStack_2d4,0,0x22);
@@ -120,49 +121,50 @@ int r_GF_Jacobian_Point_Addition256(void *param_1,undefined *param_2,void *param
   uStack_cc = 0;
   uStack_c8 = 0;
   iVar1 = r_notEqual256(param_1,&ecc_Jacobian_InfinityPoint256);
-  iVar2 = r_notEqual256(param_2,&ecc_Jacobian_InfinityPoint256);
   if (((iVar1 == 0) && (iVar1 = r_notEqual256(__src_02,&ecc_Jacobian_InfinityPoint256), iVar1 == 0))
      && (iVar1 = r_notEqual256(__src_00,&ecc_Jacobian_InfinityPoint256), iVar1 == 0)) {
-    if (((iVar2 == 0) &&
-        (iVar1 = r_notEqual256(__src_01,&ecc_Jacobian_InfinityPoint256), iVar1 == 0)) &&
-       (iVar1 = r_notEqual256(__src,&ecc_Jacobian_InfinityPoint256), iVar1 == 0)) {
-      memcpy(param_3,&ecc_Jacobian_InfinityPoint256,0x22);
-      param_2 = &ecc_Jacobian_InfinityPoint256;
-      *(undefined4 *)((int)param_3 + 0x24) = _r_ke_msg_send;
-      *(undefined4 *)((int)param_3 + 0x28) = _r_assert_err;
-      memcpy(__s,&ecc_Jacobian_InfinityPoint256,0x22);
-      __src = &ecc_Jacobian_InfinityPoint256;
-      *(undefined4 *)((int)param_3 + 0x50) = _DebugE256PublicKey_x;
-      *(undefined4 *)((int)param_3 + 0x54) = _DebugE256PublicKey_y;
-    }
-    else {
+    iVar1 = r_notEqual256(param_2,&ecc_Jacobian_InfinityPoint256);
+    if (((iVar1 != 0) ||
+        (iVar1 = r_notEqual256(__src_01,&ecc_Jacobian_InfinityPoint256), iVar1 != 0)) ||
+       (iVar1 = r_notEqual256(__src,&ecc_Jacobian_InfinityPoint256), iVar1 != 0)) {
       memcpy(param_3,param_2,0x22);
-      *(undefined4 *)((int)param_3 + 0x24) = *(undefined4 *)(param_2 + 0x24);
-      *(undefined4 *)((int)param_3 + 0x28) = *(undefined4 *)(param_2 + 0x28);
-      memcpy(__s,__src_01,0x22);
-      *(undefined4 *)((int)param_3 + 0x50) = *(undefined4 *)(param_2 + 0x50);
-      *(undefined4 *)((int)param_3 + 0x54) = *(undefined4 *)(param_2 + 0x54);
+      *(undefined4 *)((int)param_3 + 0x24) = *(undefined4 *)((int)param_2 + 0x24);
+      *(undefined4 *)((int)param_3 + 0x28) = *(undefined4 *)((int)param_2 + 0x28);
+      memcpy(__s_00,__src_01,0x22);
+      *(undefined4 *)((int)param_3 + 0x50) = *(undefined4 *)((int)param_2 + 0x50);
+      *(undefined4 *)((int)param_3 + 0x54) = *(undefined4 *)((int)param_2 + 0x54);
+      memcpy(__s,__src,0x22);
+      *(undefined4 *)((int)param_3 + 0x7c) = *(undefined4 *)((int)param_2 + 0x7c);
+      *(undefined4 *)((int)param_3 + 0x80) = *(undefined4 *)((int)param_2 + 0x80);
+      return 0;
     }
+    memcpy(param_3,&ecc_Jacobian_InfinityPoint256,0x22);
+    *(undefined4 *)((int)param_3 + 0x24) = _r_ke_msg_send;
+    *(undefined4 *)((int)param_3 + 0x28) = _r_assert_err;
+    memcpy(__s_00,&ecc_Jacobian_InfinityPoint256,0x22);
+    *(undefined4 *)((int)param_3 + 0x50) = _DebugE256PublicKey_x;
+    *(undefined4 *)((int)param_3 + 0x54) = _DebugE256PublicKey_y;
   }
   else {
-    if (((iVar2 == 0) &&
+    iVar1 = r_notEqual256(param_2,&ecc_Jacobian_InfinityPoint256);
+    if (((iVar1 == 0) &&
         (iVar1 = r_notEqual256(__src_01,&ecc_Jacobian_InfinityPoint256), iVar1 == 0)) &&
        (iVar1 = r_notEqual256(__src,&ecc_Jacobian_InfinityPoint256), iVar1 == 0)) {
       memcpy(param_3,param_1,0x22);
       *(undefined4 *)((int)param_3 + 0x24) = *(undefined4 *)((int)param_1 + 0x24);
       *(undefined4 *)((int)param_3 + 0x28) = *(undefined4 *)((int)param_1 + 0x28);
-      memcpy(__s,__src_02,0x22);
+      memcpy(__s_00,__src_02,0x22);
       *(undefined4 *)((int)param_3 + 0x50) = *(undefined4 *)((int)param_1 + 0x50);
       *(undefined4 *)((int)param_3 + 0x54) = *(undefined4 *)((int)param_1 + 0x54);
-      memcpy((void *)((int)param_3 + 0x58),__src_00,0x22);
+      memcpy(__s,__src_00,0x22);
       *(undefined4 *)((int)param_3 + 0x7c) = *(undefined4 *)((int)param_1 + 0x7c);
-      uVar3 = *(undefined4 *)((int)param_1 + 0x80);
-      goto _L189;
+      uVar2 = *(undefined4 *)((int)param_1 + 0x80);
+      goto _L185;
     }
     iVar1 = r_notEqual256(param_2,param_1);
     if ((iVar1 != 0) ||
        ((iVar1 = r_notEqual256(__src_01,__src_02), iVar1 == 0 &&
-        ((1 < *(uint *)(param_2 + 0x50) || (*(short *)(param_2 + 0x4c) != 0)))))) {
+        ((1 < *(uint *)((int)param_2 + 0x50) || (*(short *)((int)param_2 + 0x4c) != 0)))))) {
       r_MultiplyBigHexModP256(__src_01,__src_00,auStack_2d4);
       r_MultiplyBigHexModP256(__src_02,__src,auStack_2a8);
       r_MultiplyBigHexModP256(param_2,__src_00,auStack_27c);
@@ -202,9 +204,9 @@ int r_GF_Jacobian_Point_Addition256(void *param_1,undefined *param_2,void *param
         r_SubtractBigHexMod256(auStack_f0,auStack_1cc,auStack_c4);
         r_MultiplyBigHexModP256(auStack_224,auStack_c4,auStack_98);
         r_MultiplyBigHexModP256(auStack_148,auStack_2a8,auStack_6c);
-        r_SubtractBigHexMod256(auStack_98,auStack_6c,__s);
-        r_MultiplyBigHexModP256(auStack_148,auStack_1a0,(void *)((int)param_3 + 0x58));
-        return iVar1;
+        r_SubtractBigHexMod256(auStack_98,auStack_6c,__s_00);
+        r_MultiplyBigHexModP256(auStack_148,auStack_1a0,__s);
+        return 1;
       }
       iVar1 = r_notEqual256(auStack_2d4,auStack_2a8);
       if (iVar1 == 0) {
@@ -213,19 +215,17 @@ int r_GF_Jacobian_Point_Addition256(void *param_1,undefined *param_2,void *param
       }
     }
     memcpy(param_3,&ecc_Jacobian_InfinityPoint256,0x22);
-    param_2 = &ecc_Jacobian_InfinityPoint256;
     *(undefined4 *)((int)param_3 + 0x24) = _r_ke_msg_send;
     *(undefined4 *)((int)param_3 + 0x28) = _r_assert_err;
-    memcpy(__s,&ecc_Jacobian_InfinityPoint256,0x22);
+    memcpy(__s_00,&ecc_Jacobian_InfinityPoint256,0x22);
     *(undefined4 *)((int)param_3 + 0x50) = _DebugE256PublicKey_x;
-    __src = &ecc_Jacobian_InfinityPoint256;
     *(undefined4 *)((int)param_3 + 0x54) = _DebugE256PublicKey_y;
   }
-  memcpy((void *)((int)param_3 + 0x58),__src,0x22);
-  *(undefined4 *)((int)param_3 + 0x7c) = *(undefined4 *)(param_2 + 0x7c);
-  uVar3 = *(undefined4 *)(param_2 + 0x80);
-_L189:
-  *(undefined4 *)((int)param_3 + 0x80) = uVar3;
+  memcpy(__s,&ecc_Jacobian_InfinityPoint256,0x22);
+  *(undefined4 *)((int)param_3 + 0x7c) = _DAT_00013090;
+  uVar2 = _DAT_00013094;
+_L185:
+  *(undefined4 *)((int)param_3 + 0x80) = uVar2;
   return 0;
 }
 

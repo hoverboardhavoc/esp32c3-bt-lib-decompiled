@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app -> llc_dl_upd.o -> r_llc_loc_dl_upd_proc_continue
  *
@@ -73,7 +73,7 @@ void r_llc_loc_dl_upd_proc_continue(uint param_1,int param_2)
     if (*(char *)(iVar5 + 0x10) != '\0') {
       *(byte *)(iVar4 + 0x45) = *(byte *)(iVar4 + 0x45) & 0xdf;
     }
-                    /* WARNING: Could not recover jumptable at 0x000103fe. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010406. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_ip_funcs_p + 0x690))(param_1,0,*(code **)(_r_ip_funcs_p + 0x690));
     return;
@@ -89,8 +89,10 @@ void r_llc_loc_dl_upd_proc_continue(uint param_1,int param_2)
     iVar6 = (**(code **)(iVar6 + 0x188))(*(code **)(iVar6 + 0x188));
     if (iVar6 != 0) {
       iVar6 = (**(code **)(_r_modules_funcs_p + 0x188))(*(code **)(_r_modules_funcs_p + 0x188));
-      uVar8 = 0xa90;
-      if (iVar6 != 0) {
+      if (iVar6 == 0) {
+        uVar8 = 0xa90;
+      }
+      else {
         uVar8 = *(ushort *)(*(int *)(_bt_rf_coex_cfg_p + 0x44) + 2);
       }
       if (uVar8 < 0xa90) {
@@ -132,8 +134,10 @@ void r_llc_loc_dl_upd_proc_continue(uint param_1,int param_2)
   iVar4 = (**(code **)(iVar4 + 0x188))(*(code **)(iVar4 + 0x188));
   if (iVar4 != 0) {
     iVar4 = (**(code **)(_r_modules_funcs_p + 0x188))(*(code **)(_r_modules_funcs_p + 0x188));
-    uVar8 = 0xa90;
-    if (iVar4 != 0) {
+    if (iVar4 == 0) {
+      uVar8 = 0xa90;
+    }
+    else {
       uVar8 = **(ushort **)(_bt_rf_coex_cfg_p + 0x44);
     }
     if (uVar8 < 0xa90) {
@@ -149,7 +153,7 @@ _L25:
   llc_ll_length_req_pdu_send
             (param_1,*(undefined2 *)(iVar5 + 10),*(undefined2 *)(iVar5 + 8),
              *(undefined2 *)(iVar5 + 0xe),*(undefined2 *)(iVar5 + 0xc));
-                    /* WARNING: Could not recover jumptable at 0x0001022a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001022e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_ip_funcs_p + 0x68c))(param_1,0,1,*(code **)(_r_ip_funcs_p + 0x68c));
   return;

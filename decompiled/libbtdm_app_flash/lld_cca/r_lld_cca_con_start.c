@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> lld_cca.o -> r_lld_cca_con_start
  *
@@ -10,13 +10,13 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x000103dc) */
-/* WARNING: Removing unreachable block (ram,0x000103f0) */
-/* WARNING: Removing unreachable block (ram,0x0001043c) */
-/* WARNING: Removing unreachable block (ram,0x00010442) */
-/* WARNING: Removing unreachable block (ram,0x00010404) */
-/* WARNING: Removing unreachable block (ram,0x00010414) */
-/* WARNING: Removing unreachable block (ram,0x00010432) */
+/* WARNING: Removing unreachable block (ram,0x000103da) */
+/* WARNING: Removing unreachable block (ram,0x000103ee) */
+/* WARNING: Removing unreachable block (ram,0x0001043a) */
+/* WARNING: Removing unreachable block (ram,0x00010440) */
+/* WARNING: Removing unreachable block (ram,0x00010402) */
+/* WARNING: Removing unreachable block (ram,0x00010412) */
+/* WARNING: Removing unreachable block (ram,0x00010430) */
 
 void r_lld_cca_con_start(int param_1)
 
@@ -35,7 +35,7 @@ void r_lld_cca_con_start(int param_1)
   if ((*(ushort *)(p_lld_cca + 4) & 0x10) != 0) {
     uVar2 = *(ushort *)(p_lld_cca + 4);
     pbVar5 = (byte *)(*(int *)(p_lld_cca + 0x28) + (uint)*(byte *)(p_lld_cca + 8) * 0xc);
-    if ((uVar2 & 0xf00) == 0x200) {
+    if (((int)(uint)uVar2 >> 8 & 0xfU) == 2) {
       r_lld_cca_set_thresh(0);
       *pbVar5 = *pbVar5 & 0x7f;
     }
@@ -57,34 +57,32 @@ void r_lld_cca_con_start(int param_1)
     r_lld_cca_chm_update_check();
   }
   bVar1 = *pbVar5;
-  if ((bVar1 & 4) != 0) {
-    r_lld_cca_busy_mode_handle();
-    return;
-  }
-  if ((bVar1 & 2) == 0) {
-_L174:
-    if ((bVar1 & 1) == 0) {
+  if ((bVar1 & 4) == 0) {
+    if ((bVar1 & 2) != 0) {
+      uVar7 = (uint)*(byte *)(p_lld_cca + 0x25) * 0x280;
+      uVar8 = (uint)*(ushort *)(p_lld_cca + 0x12) << 1;
+      if (uVar8 < uVar7) {
+        uVar8 = uVar7;
+      }
+      if (uVar8 <= (param_1 - *(int *)(pbVar5 + 4) & 0xfffffffU)) {
+        *pbVar5 = bVar1 & 0xfd | 1;
+      }
+    }
+    if ((*pbVar5 & 1) == 0) {
       r_lld_cca_chan_handle(1);
-      goto _L178;
     }
-  }
-  else {
-    uVar7 = (uint)*(byte *)(p_lld_cca + 0x25) * 0x280;
-    uVar8 = (uint)*(ushort *)(p_lld_cca + 0x12) << 1;
-    if (uVar8 < uVar7) {
-      uVar8 = uVar7;
+    else {
+      r_lld_cca_chan_handle(0);
+      *(uint *)(pbVar5 + 4) = (rwip_prog_delay - 1) + param_1;
+      *pbVar5 = *pbVar5 & 0xf7;
     }
-    if ((param_1 - *(int *)(pbVar5 + 4) & 0xfffffffU) < uVar8) goto _L174;
-    *pbVar5 = bVar1 & 0xfd | 1;
-  }
-  r_lld_cca_chan_handle(0);
-  *(uint *)(pbVar5 + 4) = (rwip_prog_delay - 1) + param_1;
-  *pbVar5 = *pbVar5 & 0xf7;
-_L178:
-  if ((*(ushort *)(p_lld_cca + 4) & 2) != 0) {
-    r_btdm_config_cca_sw(1,0xf,ble_2_rf_chan_tab[*(byte *)(p_lld_cca + 8)]);
+    if ((*(ushort *)(p_lld_cca + 4) & 2) != 0) {
+      r_btdm_config_cca_sw(1,0xf,ble_2_rf_chan_tab[*(byte *)(p_lld_cca + 8)]);
+      return;
+    }
     return;
   }
+  r_lld_cca_busy_mode_handle();
   return;
 }
 

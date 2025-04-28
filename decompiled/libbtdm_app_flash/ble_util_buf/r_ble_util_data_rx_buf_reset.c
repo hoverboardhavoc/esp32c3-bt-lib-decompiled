@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> ble_util_buf.o -> r_ble_util_data_rx_buf_reset
  *
@@ -32,7 +32,7 @@ void r_ble_util_data_rx_buf_reset(void)
       r_assert_err(0,"ble_util_buf.c",0xfc);
     }
   }
-  r_co_list_pool_init(_p_ble_util_buf_env + 8,_p_ble_util_buf_env + 0xc0,
+  r_co_list_pool_init(_p_ble_util_buf_env + 8,_p_ble_util_buf_env + 0xc0,8,
                       *(undefined1 *)(_p_ble_util_buf_env + 0x1ba));
   return;
 }

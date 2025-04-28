@@ -1,7 +1,7 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
+ * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
+ * Upstream date: 2025-04-28 11:55:39 +0800
  * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
  * Source: libbtdm_app_flash -> rf_txpwr.o -> ble_txpwr_set_inter
  *
@@ -36,8 +36,8 @@ undefined4 ble_txpwr_set_inter(uint param_1,uint param_2,uint param_3)
   else if (param_1 == 4) {
     iVar1 = r_sdk_config_get_opts();
     if (param_2 < *(byte *)(iVar1 + 0xd)) {
-_L80:
-      r_bt_rtp_register_rule_cs_idx(param_2,uVar2);
+_L76:
+      r_bt_rtp_register_rule_cs_idx(param_2);
       return 0;
     }
     r_bt_rtp_register_rule_cs_fmt(2,uVar2);
@@ -45,7 +45,7 @@ _L80:
   }
   else if (param_1 == 1) {
     iVar1 = r_sdk_config_get_opts();
-    if (param_2 < *(byte *)(iVar1 + 0xd)) goto _L80;
+    if (param_2 < *(byte *)(iVar1 + 0xd)) goto _L76;
     r_bt_rtp_register_rule_cs_fmt(4,uVar2);
     r_bt_rtp_register_rule_cs_fmt(5,uVar2);
     uVar3 = 6;
