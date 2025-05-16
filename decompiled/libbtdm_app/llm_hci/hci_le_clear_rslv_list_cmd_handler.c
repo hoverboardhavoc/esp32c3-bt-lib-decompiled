@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * Upstream date: 2025-05-16 11:55:10 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713205)
  * Source: libbtdm_app -> llm_hci.o -> hci_le_clear_rslv_list_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ undefined4 hci_le_clear_rslv_list_cmd_handler(undefined4 param_1)
   if (*(char *)(_p_llm_env + 0xc6) != '\0') {
     uVar1 = 0xc;
     iVar2 = (**(code **)(_r_ip_funcs_p + 0x504))(*(code **)(_r_ip_funcs_p + 0x504));
-    if (iVar2 != 0) goto _L148;
+    if (iVar2 != 0) goto _L143;
   }
   (**(code **)(_r_ip_funcs_p + 0x278))(*(code **)(_r_ip_funcs_p + 0x278));
   iVar2 = lld_ral_valid_count();
@@ -32,7 +32,7 @@ undefined4 hci_le_clear_rslv_list_cmd_handler(undefined4 param_1)
   else {
     uVar1 = 0;
   }
-_L148:
+_L143:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_1,uVar1,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }

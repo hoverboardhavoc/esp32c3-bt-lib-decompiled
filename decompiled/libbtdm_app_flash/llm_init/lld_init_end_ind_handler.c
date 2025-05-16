@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * Upstream date: 2025-05-16 11:55:10 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713205)
  * Source: libbtdm_app_flash -> llm_init.o -> lld_init_end_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -177,7 +177,7 @@ undefined4 lld_init_end_ind_handler(byte *param_1)
         *(undefined1 *)(iVar6 + 0x28) = 0;
         *(byte *)(iVar6 + 0x41) = bVar1 & 1;
         *(undefined1 *)(iVar6 + 0x40) = 9;
-        r_lld_res_list_peer_update(pbVar4,1);
+        r_lld_res_list_peer_update_hack(pbVar4,1);
         uVar12 = r_llm_dev_list_search(pbVar4,param_1[0x20]);
         if (uVar12 < 0xc) {
           if ((*(byte *)(uVar12 * 10 + _p_llm_env + 0x2d) & 2) != 0) {

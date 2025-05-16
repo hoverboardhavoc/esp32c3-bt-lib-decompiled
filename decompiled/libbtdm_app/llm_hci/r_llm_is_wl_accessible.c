@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * Upstream date: 2025-05-16 11:55:10 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713205)
  * Source: libbtdm_app -> llm_hci.o -> r_llm_is_wl_accessible
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,7 +30,7 @@ undefined4 r_llm_is_wl_accessible(void)
     cVar3 = (char)piVar4[0x10];
     if ((byte)(cVar3 - 2U) < 2) {
       cVar3 = *(char *)(*piVar4 + 0x13);
-_L340:
+_L335:
       if (cVar3 != '\0') {
         return 0;
       }
@@ -38,11 +38,11 @@ _L340:
     else {
       if (cVar3 == '\a') {
         cVar3 = *(char *)(*piVar4 + 1);
-        goto _L340;
+        goto _L335;
       }
       if (cVar3 == '\x05') {
         cVar3 = *(char *)*piVar4;
-        goto _L340;
+        goto _L335;
       }
     }
     uVar1 = uVar1 + 1 & 0xff;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * Upstream date: 2025-05-16 11:55:10 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713205)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_update_rxbuf
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,7 +34,7 @@ undefined4 r_lld_update_rxbuf(uint param_1,uint param_2)
     iVar6 = r_emi_get_mem_addr_by_offset(0x1000);
     iVar5 = uVar7 * 0x14;
     if (-1 < *(short *)(iVar6 + iVar5)) {
-      r_assert_err(0,"lld.c",0x6f6);
+      r_assert_err(0,"lld.c",0x6ef);
     }
     r_ble_util_buf_set_rx_buf_nb(param_2 & 0xff);
     r_ble_util_buf_set_rx_buf_size(param_1 & 0xffff);

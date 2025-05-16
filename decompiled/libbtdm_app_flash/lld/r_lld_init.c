@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * Upstream date: 2025-05-16 11:55:10 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713205)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,7 +23,7 @@ void r_lld_init(int param_1)
   undefined1 auStack_28 [24];
   
   if (param_1 != 1) {
-    if (param_1 != 2) goto _L564;
+    if (param_1 != 2) goto _L561;
     if (_lld_rpa_renew_env != 0) {
       r_ke_free();
     }
@@ -68,7 +68,7 @@ void r_lld_init(int param_1)
   aa_gen = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
   DAT_00014095 = 0;
   DAT_00014096 = 0;
-_L564:
+_L561:
   r_lld_core_init(param_1);
   r_lld_adv_init(param_1);
   iVar3 = r_sdk_config_get_opts_ext();

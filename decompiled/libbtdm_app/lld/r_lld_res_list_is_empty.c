@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * Upstream date: 2025-05-16 11:55:10 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713205)
  * Source: libbtdm_app -> lld.o -> r_lld_res_list_is_empty
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,11 +23,11 @@ bool r_lld_res_list_is_empty(void)
   do {
     uVar2 = uVar1 & 0xff;
     iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc));
-    if (*(short *)(uVar1 * 0x34 + iVar3) < 0) goto _L501;
+    if (*(short *)(uVar1 * 0x34 + iVar3) < 0) goto _L498;
     uVar1 = uVar1 + 1;
   } while (uVar1 != 10);
   uVar2 = 10;
-_L501:
+_L498:
   return uVar2 == 10;
 }
 

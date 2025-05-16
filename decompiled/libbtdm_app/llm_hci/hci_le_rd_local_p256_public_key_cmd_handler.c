@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * https://github.com/espressif/esp32c3-bt-lib/commit/b0ccea3c26a049649d2fdbaca78318af90a6dd5b
+ * Upstream date: 2025-05-16 11:55:10 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713205)
  * Source: libbtdm_app -> llm_hci.o -> hci_le_rd_local_p256_public_key_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,14 +36,14 @@ undefined4 hci_le_rd_local_p256_public_key_cmd_handler(undefined4 param_1)
   if (acStack_12[0] != '\0') {
     iVar1 = (*_rwip_param)(0x80,acStack_12 + 1,iVar2,_rwip_param);
     if (iVar1 == 0) {
-      if (acStack_12[0] != '\0') goto _L231;
+      if (acStack_12[0] != '\0') goto _L226;
     }
     else {
       acStack_12[0] = '\0';
     }
   }
   (**(code **)(_r_modules_funcs_p + 0x370))(iVar2,0,*(code **)(_r_modules_funcs_p + 0x370));
-_L231:
+_L226:
   (**(code **)(_r_modules_funcs_p + 0x36c))(iVar2,8,0,*(code **)(_r_modules_funcs_p + 0x36c));
   return 0;
 }
