@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> llc_hci.o -> lld_acl_rx_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,7 +45,7 @@ undefined4 lld_acl_rx_ind_handler_hack(ushort *param_1,uint param_2)
       r_hci_send_2_host(puVar4);
       iVar5 = r_sdk_config_get_opts_ext();
       if (*(char *)(iVar5 + 0x20) != '\0') {
-        r_llc_le_ping_restart(uVar2);
+        r_llc_le_ping_restart_hack(uVar2);
       }
       if (ble_acl_data_rx_cb == (code *)0x0) {
         return 0;

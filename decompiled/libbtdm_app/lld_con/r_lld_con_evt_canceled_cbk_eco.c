@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 5c6ab5248a124cffc731a9e4764473fdeef38054
- * https://github.com/espressif/esp32c3-bt-lib/commit/5c6ab5248a124cffc731a9e4764473fdeef38054
- * Upstream date: 2023-03-09 14:58:19 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(85a1090)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_evt_canceled_cbk_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void r_lld_con_evt_canceled_cbk_eco(int param_1)
   int iVar2;
   uint uVar3;
   
-  r_lld_con_evt_canceled_cbk();
+  r_lld_con_evt_canceled_cbk_hack();
   iVar1 = (**(code **)(_r_ip_funcs_p + 0x264))(*(code **)(_r_ip_funcs_p + 0x264));
   iVar2 = (**(code **)(_r_ip_funcs_p + 0x91c))(*(code **)(_r_ip_funcs_p + 0x91c));
   uVar3 = (**(code **)(_r_ip_funcs_p + 0x7c8))(*(code **)(_r_ip_funcs_p + 0x7c8));

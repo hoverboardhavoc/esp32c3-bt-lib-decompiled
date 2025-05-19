@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> llm_adv.o -> hci_le_set_adv_en_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -47,7 +47,8 @@ undefined4 hci_le_set_adv_en_cmd_handler(char *param_1,undefined4 param_2)
   undefined1 uStack_22;
   undefined1 uStack_21;
   
-  if (*(char *)(_p_llm_env + 0xd7) != '\x02') {
+  if ((*(char *)(_p_llm_env + 0xd7) != '\x02') &&
+     (iVar3 = r_sdk_config_get_opts_ext(), *(char *)(iVar3 + 0x2d) != '\0')) {
     *(undefined1 *)(_p_llm_env + 0xd7) = 1;
     bStack_4a = r_llm_adv_hdl_to_id(0xff,0);
     if (*param_1 != '\0') {
@@ -55,11 +56,11 @@ undefined4 hci_le_set_adv_en_cmd_handler(char *param_1,undefined4 param_2)
         iVar3 = r_sdk_config_get_opts();
         if ((uint)bStack_4a < (uint)*(byte *)(iVar3 + 0xd)) {
           if (*(char *)((uint)bStack_4a * 0x44 + *(int *)(_p_llm_env + 8) + 0x40) != '\x01')
-          goto _L333;
+          goto _L323;
         }
         else {
           iVar3 = r_llm_activity_free_get(&bStack_4a);
-          if (iVar3 != 0) goto _L308;
+          if (iVar3 != 0) goto _L313;
           r_llm_adv_set_dft_params(bStack_4a);
         }
         bStack_49 = 0;
@@ -68,12 +69,12 @@ undefined4 hci_le_set_adv_en_cmd_handler(char *param_1,undefined4 param_2)
            (iVar3 = r_co_bdaddr_compare(_p_llm_env + 0x12,&co_null_bdaddr), iVar3 == 0)) {
           if ((*(ushort *)(iVar2 + 2) & 1) != 0) {
             iVar3 = r_llm_activity_free_get(&bStack_49);
-            if (iVar3 != 0) goto _L308;
+            if (iVar3 != 0) goto _L313;
             if (((*(ushort *)(iVar2 + 2) & 0xc) != 0) &&
                (iVar3 = r_llm_is_dev_connected(iVar2 + 0xd,*(undefined1 *)(iVar2 + 0xc)), iVar3 != 0
                )) {
               iVar3 = 0xb;
-              goto _L308;
+              goto _L313;
             }
           }
           uStack_30 = *(undefined2 *)(iVar2 + 2);
@@ -108,7 +109,7 @@ undefined4 hci_le_set_adv_en_cmd_handler(char *param_1,undefined4 param_2)
           uStack_32 = *(undefined2 *)(iVar6 + 0x34);
           uStack_21 = *(undefined1 *)(iVar3 + 0xc6);
           iVar3 = r_lld_adv_start_eco(&uStack_48);
-          if (iVar3 != 0) goto _L308;
+          if (iVar3 != 0) goto _L313;
           iVar6 = *(int *)(_p_llm_env + 8);
           iVar3 = (uint)bStack_4a * 0x44 + iVar6;
           *(undefined1 *)(iVar3 + 0x40) = 2;
@@ -119,40 +120,40 @@ undefined4 hci_le_set_adv_en_cmd_handler(char *param_1,undefined4 param_2)
           if ((_bt_rf_coex_hooks_p != (int *)0x0) &&
              (pcVar7 = (code *)*_bt_rf_coex_hooks_p, pcVar7 != (code *)0x0)) {
             uVar4 = 1;
-_L357:
+_L365:
             (*pcVar7)(0,uVar4);
           }
-          goto _L315;
+          goto _L321;
         }
       }
       iVar3 = 0x12;
-      goto _L308;
+      goto _L313;
     }
     iVar3 = r_sdk_config_get_opts();
     uVar5 = (uint)bStack_4a;
     if ((uVar5 < *(byte *)(iVar3 + 0xd)) &&
        (*(char *)(*(int *)(_p_llm_env + 8) + uVar5 * 0x44 + 0x40) == '\x02')) {
       iVar3 = r_lld_adv_stop(uVar5);
-      if (iVar3 != 0) goto _L308;
+      if (iVar3 != 0) goto _L313;
       *(undefined1 *)(*(int *)(_p_llm_env + 8) + (uint)bStack_4a * 0x44 + 0x40) = 3;
       if (_bt_rf_coex_hooks_p != (int *)0x0) {
         pcVar7 = (code *)*_bt_rf_coex_hooks_p;
         uVar4 = 0;
-        if (pcVar7 != (code *)0x0) goto _L357;
+        if (pcVar7 != (code *)0x0) goto _L365;
       }
-_L315:
-      iVar3 = 0;
+_L321:
       if (*param_1 == '\0') {
         return 0;
       }
-      goto _L308;
+      iVar3 = 0;
+      goto _L313;
     }
     iVar3 = 0xfe;
-    if ((_sdk_cfg_priv_opts & 1) != 0) goto _L308;
+    if ((_sdk_cfg_priv_opts & 1) != 0) goto _L313;
   }
-_L333:
+_L323:
   iVar3 = 0xc;
-_L308:
+_L313:
   r_llm_cmd_cmp_send(param_2,iVar3);
   return 0;
 }

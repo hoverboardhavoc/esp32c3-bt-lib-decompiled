@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> lld_con_param_upd_cfm_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,12 +31,12 @@ undefined4 lld_con_param_upd_cfm_handler(uint param_1)
     }
     iVar1 = r_llc_proc_id_get(param_1,0);
     if (iVar1 == 5) {
-      r_llc_loc_con_upd_proc_continue(param_1,4,0);
+      r_llc_loc_con_upd_proc_continue_hack(param_1,4,0);
     }
     else {
       iVar1 = r_llc_proc_id_get(param_1,1);
       if (iVar1 == 5) {
-        r_llc_rem_con_upd_proc_continue(param_1,10,0);
+        r_llc_rem_con_upd_proc_continue_hack(param_1,10,0);
       }
     }
     if (iVar4 != 0) {

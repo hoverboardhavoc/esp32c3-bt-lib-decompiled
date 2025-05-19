@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app -> llm_adv.o -> f_hci_le_set_per_adv_en_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,10 +42,10 @@ undefined4 f_hci_le_set_per_adv_en_cmd_handler(byte *param_1,undefined4 param_2)
   undefined4 uStack_38;
   
   iVar5 = _r_ip_funcs_p;
-  if (*(char *)(_p_llm_env + 0xd7) == '\x01') goto _L542;
+  if (*(char *)(_p_llm_env + 0xd7) == '\x01') goto _L569;
   *(undefined1 *)(_p_llm_env + 0xd7) = 2;
   iVar3 = 0x12;
-  if ((1 < *param_1) || (0xef < param_1[1])) goto _L543;
+  if ((1 < *param_1) || (0xef < param_1[1])) goto _L570;
   iVar5 = (**(code **)(iVar5 + 0x544))(0,*(code **)(iVar5 + 0x544));
   if (iVar5 != 0xff) {
     piVar7 = (int *)(*(int *)(_p_llm_env + 8) + iVar5 * 0x44);
@@ -62,8 +62,8 @@ undefined4 f_hci_le_set_per_adv_en_cmd_handler(byte *param_1,undefined4 param_2)
           }
           if ((char)piVar8[0x10] != '\f') {
             iVar3 = 0xfe;
-            if ((_sdk_cfg_priv_opts & 0x10) != 0) goto _L543;
-            goto _L542;
+            if ((_sdk_cfg_priv_opts & 0x10) != 0) goto _L570;
+            goto _L569;
           }
           iVar3 = (**(code **)(_r_ip_funcs_p + 0x30c))(uVar9,*(code **)(_r_ip_funcs_p + 0x30c));
           if (iVar3 == 0) {
@@ -79,8 +79,8 @@ undefined4 f_hci_le_set_per_adv_en_cmd_handler(byte *param_1,undefined4 param_2)
           }
           (**(code **)(_r_ip_funcs_p + 0x6f4))
                     (*(int *)(_p_llm_env + 8) + iVar10 + 0xc,*(code **)(_r_ip_funcs_p + 0x6f4));
-          if (iVar3 != 0) goto _L543;
-_L569:
+          if (iVar3 != 0) goto _L570;
+_L596:
           if (*param_1 == 0) {
             return 0;
           }
@@ -88,7 +88,7 @@ _L569:
         else {
           iVar3 = *piVar7;
           uVar2 = *(ushort *)(iVar3 + 2);
-          if (((uVar2 & 0x33) != 0) || ((char)piVar8[0x10] == '\r')) goto _L542;
+          if (((uVar2 & 0x33) != 0) || ((char)piVar8[0x10] == '\r')) goto _L569;
           if ((char)piVar8[0x10] == '\n') {
             *(undefined1 *)(piVar8 + 0x10) = 0xb;
           }
@@ -107,7 +107,7 @@ _L569:
                               (&iStack_50,*(code **)(_r_ip_funcs_p + 0x6f8));
             if (iVar6 != 0) {
               iVar3 = 0xd;
-              goto _L543;
+              goto _L570;
             }
             uStack_5e = *(undefined2 *)(iVar4 + 6);
             local_60 = (undefined2)(uStack_3c >> 1);
@@ -118,7 +118,7 @@ _L569:
             uStack_54 = *(undefined1 *)(iVar3 + 0x17);
             iVar3 = (**(code **)(_r_ip_funcs_p + 0x308))
                               (uVar9,&local_60,*(code **)(_r_ip_funcs_p + 0x308));
-            if (iVar3 != 0) goto _L543;
+            if (iVar3 != 0) goto _L570;
             iVar10 = *(int *)(_p_llm_env + 8) + iVar10;
             *(undefined1 *)(iVar10 + 0x40) = 0xc;
             (**(code **)(_r_ip_funcs_p + 0x1f0))
@@ -135,20 +135,20 @@ _L569:
                ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
               (*(code *)*_bt_rf_coex_hooks_p)(uVar9,4,1);
             }
-            goto _L569;
+            goto _L596;
           }
         }
         iVar3 = 0;
       }
       else {
-_L542:
+_L569:
         iVar3 = 0xc;
       }
-      goto _L543;
+      goto _L570;
     }
   }
   iVar3 = 0x42;
-_L543:
+_L570:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,iVar3,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b0ccea3c26a049649d2fdbaca78318af90a6dd5b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b0ccea3c26a049649d2fdbaca78318af90a6dd5b
- * Upstream date: 2025-05-16 11:55:10 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713205)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> llm.o -> r_llm_link_disc
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void r_llm_link_disc(int param_1)
   if (uVar3 < 0xc) {
     if ((*(byte *)(uVar3 * 10 + _p_llm_env + 0x2d) & 2) != 0) {
       iVar2 = *(int *)(_p_llm_env + 8) + iVar1;
-      r_lld_white_list_add(iVar2 + 4,*(undefined1 *)(iVar2 + 0x41));
+      r_lld_white_list_add_hack(iVar2 + 4,*(undefined1 *)(iVar2 + 0x41));
     }
   }
   iVar1 = *(int *)(_p_llm_env + 8) + iVar1;
@@ -44,7 +44,7 @@ void r_llm_link_disc(int param_1)
   iVar1 = r_sdk_config_get_opts();
   if (((*(byte *)(iVar1 + 0xd) <= uVar3) && (_bt_rf_coex_hooks_p != (undefined4 *)0x0)) &&
      ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
-                    /* WARNING: Could not recover jumptable at 0x00010f3c. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010f80. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (*(code *)*_bt_rf_coex_hooks_p)(param_1,7,0);
     return;

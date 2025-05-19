@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> lld_per_adv.o -> r_lld_per_adv_frm_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -110,7 +110,7 @@ void r_lld_per_adv_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
       *(char *)(iVar7 + 0x16) = cVar10;
       bVar2 = *(byte *)(iVar7 + 0x52);
       *(ushort *)(iVar7 + 0x14) = bVar4 & 0xf | 0x2000;
-r_lld_per_adv_sched:
+r_lld_per_adv_sched_hack:
       iVar7 = *(int *)(&lld_per_adv_env + (uint)bVar2 * 4);
       *(uint *)(iVar7 + 4) = *(int *)(iVar7 + 4) + *(int *)(iVar7 + 0x40) & 0xfffffff;
       *(short *)(iVar7 + 0x4c) = *(short *)(iVar7 + 0x4c) + 1;
@@ -176,7 +176,7 @@ _L4:
     if (*(char *)(iVar7 + 0x53) != '\x02') {
       bVar2 = *(byte *)(iVar7 + 0x52);
       *(char *)(iVar7 + 0x16) = *(char *)(iVar7 + 0x16) + rwip_priority;
-      goto r_lld_per_adv_sched;
+      goto r_lld_per_adv_sched_hack;
     }
     puVar8 = (undefined1 *)r_ke_msg_alloc(0x208,0,0xff,2);
     uVar1 = *(undefined1 *)(iVar7 + 0x52);

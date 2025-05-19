@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> llm.o -> llm_duplicate_list_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,34 +13,38 @@
 void llm_duplicate_list_init(void)
 
 {
-  uint uVar1;
+  undefined2 uVar1;
   int iVar2;
+  uint uVar3;
+  int iVar4;
   
-  uVar1 = sdk_config_get_mask();
-  if ((uVar1 & 1) != 0) {
-    iVar2 = r_co_list_size(0x1135c);
-    if (iVar2 != 0) {
-      llm_util_flush_list_part_0(0x1135c);
+  iVar2 = p_le_scan_duplicate_option;
+  uVar3 = sdk_config_get_mask();
+  if ((uVar3 & 1) != 0) {
+    iVar4 = r_co_list_size(iVar2 + 0x10);
+    if (iVar4 != 0) {
+      llm_util_flush_list(iVar2 + 0x10);
     }
-    iVar2 = r_co_list_size(le_scan_duplicate_option);
-    if (iVar2 != 0) {
-      llm_util_flush_list_part_0(le_scan_duplicate_option);
+    iVar4 = r_co_list_size(iVar2);
+    if (iVar4 != 0) {
+      llm_util_flush_list(iVar2);
     }
-    iVar2 = r_sdk_config_get_opts_ext();
-    le_scan_duplicate_option[8] = *(char *)(iVar2 + 4) == '\x01';
-    iVar2 = r_sdk_config_get_opts_ext();
-    le_scan_duplicate_option[9] = *(undefined1 *)(iVar2 + 5);
-    iVar2 = r_sdk_config_get_opts_ext();
-    le_scan_duplicate_option._10_2_ = *(undefined2 *)(iVar2 + 6);
-    iVar2 = r_sdk_config_get_opts_ext();
-    le_scan_duplicate_option._12_2_ = *(undefined2 *)(iVar2 + 8);
-    le_scan_duplicate_option._24_4_ = 0;
-    le_scan_duplicate_option._28_4_ = 0;
+    iVar4 = r_sdk_config_get_opts_ext();
+    *(bool *)(iVar2 + 8) = *(char *)(iVar4 + 4) == '\x01';
+    iVar4 = r_sdk_config_get_opts_ext();
+    *(undefined1 *)(iVar2 + 9) = *(undefined1 *)(iVar4 + 5);
+    iVar4 = r_sdk_config_get_opts_ext();
+    *(undefined2 *)(iVar2 + 10) = *(undefined2 *)(iVar4 + 6);
+    iVar4 = r_sdk_config_get_opts_ext();
+    uVar1 = *(undefined2 *)(iVar4 + 8);
+    *(undefined4 *)(iVar2 + 0x18) = 0;
+    *(undefined4 *)(iVar2 + 0x1c) = 0;
+    *(undefined2 *)(iVar2 + 0xc) = uVar1;
   }
-  if (le_scan_duplicate_option[8] != '\0') {
-    r_co_list_init(0x1135c);
+  if (*(char *)(iVar2 + 8) != '\0') {
+    r_co_list_init(iVar2 + 0x10);
   }
-  r_co_list_init(le_scan_duplicate_option);
+  r_co_list_init(iVar2);
   return;
 }
 

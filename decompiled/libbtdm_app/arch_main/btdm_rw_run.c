@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app -> arch_main.o -> btdm_rw_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,11 +39,11 @@ char * btdm_rw_run(char *param_1)
       if ((*pcVar1 != '\0') && (_btdm_pwr_state == 0)) {
         pll_track_state =
              (**(code **)(_r_modules_funcs_p + 0x2c4))(*(code **)(_r_modules_funcs_p + 0x2c4));
-        uVar2 = pll_track_state - DAT_0001217c & 0xfffffff;
+        uVar2 = pll_track_state - DAT_00012634 & 0xfffffff;
         pcVar1 = (char *)0x0;
-        DAT_00012178 = extraout_a1;
+        DAT_00012630 = extraout_a1;
         if ((uVar2 < 0x8000001) && (0xc80 < uVar2)) {
-          DAT_0001217c = pll_track_state;
+          DAT_00012634 = pll_track_state;
           bt_track_pll_cap(0);
           pcVar1 = (char *)0x1;
         }
@@ -52,10 +52,10 @@ char * btdm_rw_run(char *param_1)
     }
   }
   else if ((char *)0x1 < param_1) {
-                    /* WARNING: Could not recover jumptable at 0x000113da. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011872. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     pcVar1 = (char *)(**(code **)(_r_plf_funcs_p + 8))
-                               (0,"arch_main.c",0x44a,*(code **)(_r_plf_funcs_p + 8));
+                               (0,"arch_main.c",0x55d,*(code **)(_r_plf_funcs_p + 8));
     return pcVar1;
   }
   return pcVar1;

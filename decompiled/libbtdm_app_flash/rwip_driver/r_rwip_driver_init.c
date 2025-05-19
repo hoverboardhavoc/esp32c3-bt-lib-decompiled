@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> rwip_driver.o -> r_rwip_driver_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -70,7 +70,7 @@ void r_rwip_driver_init(int param_1)
         _r_sch_arb_sw_isr = 400;
       }
       uStack_28 = 2;
-      _r_sch_arb_event_start_isr = 0;
+      _r_sch_arb_event_start_isr_hack = 0;
       iVar2 = (*_rwip_param)(0xf,&uStack_28,auStack_22,_rwip_param);
       if (iVar2 != 0) {
         auStack_22[0] = _r_lld_hw_cca_evt_handler;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> arch_main.o -> ble_try_turn_on_pll_track
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,11 +18,11 @@ undefined4 ble_try_turn_on_pll_track(void)
   uint uVar2;
   
   pll_track_state = r_rwip_time_get();
-  uVar2 = pll_track_state - DAT_00011fc0 & 0xfffffff;
+  uVar2 = pll_track_state - DAT_00011fd8 & 0xfffffff;
   uVar1 = 0;
-  DAT_00011fbc = extraout_a1;
+  DAT_00011fd4 = extraout_a1;
   if ((uVar2 < 0x8000001) && (0xc80 < uVar2)) {
-    DAT_00011fc0 = pll_track_state;
+    DAT_00011fd8 = pll_track_state;
     bt_track_pll_cap(0);
     uVar1 = 1;
   }

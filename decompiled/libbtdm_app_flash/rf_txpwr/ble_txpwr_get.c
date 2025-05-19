@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> rf_txpwr.o -> ble_txpwr_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -62,7 +62,7 @@ _L117:
   }
   uVar2 = 0xff;
 _L115:
-  uVar2 = r_bt_rtp_get_txpwr_idx_by_act(uVar2,uVar3);
+  uVar2 = r_bt_rtp_get_txpwr_idx_by_act_hack(uVar2,uVar3);
   iVar1 = r_sdk_config_get_opts_ext();
   uVar2 = bt_controller_txpwr_index_2_level(*(undefined4 *)(iVar1 + 0xc),uVar2);
   return uVar2;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> sch_prog.o -> r_sch_prog_push
  *
  * (C) Espressif, Apache License 2.0.
@@ -85,7 +85,7 @@ void r_sch_prog_push(undefined4 *param_1)
   }
   iVar7 = r_emi_get_mem_addr_by_offset(0);
   *(ushort *)(iVar6 + 0xc + iVar7) = (ushort)(uVar2 << 8) | uVar1;
-  r_sch_prog_ble_push(param_1,0xd < uVar8);
+  r_sch_prog_ble_push_hack(param_1,0xd < uVar8);
   DAT_00011101 = DAT_00011101 + 1 & 0xf;
   DAT_00011102 = DAT_00011102 + '\x01';
   r_rwip_prevent_sleep_set(0x200);

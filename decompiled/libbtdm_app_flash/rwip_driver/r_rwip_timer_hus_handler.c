@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> rwip_driver.o -> r_rwip_timer_hus_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,7 +20,7 @@ void r_rwip_timer_hus_handler(void)
   if (sdk_cfg_priv_opts != '\0') {
     _DAT_6003138c = 0x800;
   }
-  r_sch_arb_event_start_isr();
+  r_sch_arb_event_start_isr_hack();
   return;
 }
 

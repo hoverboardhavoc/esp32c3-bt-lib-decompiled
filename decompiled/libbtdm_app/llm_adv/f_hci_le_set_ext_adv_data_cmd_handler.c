@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app -> llm_adv.o -> f_hci_le_set_ext_adv_data_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,38 +39,38 @@ undefined4 f_hci_le_set_ext_adv_data_cmd_handler(undefined1 *param_1,undefined4 
   iVar8 = _r_ip_funcs_p;
   if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
     uVar10 = 0xc;
-    goto _L221;
+    goto _L245;
   }
   *(undefined1 *)(_p_llm_env + 0xd7) = 2;
   iVar8 = (**(code **)(iVar8 + 0x544))(*param_1,&iStack_30,*(code **)(iVar8 + 0x544));
   uVar10 = 0x42;
-  if (iVar8 == 0xff) goto _L221;
+  if (iVar8 == 0xff) goto _L245;
   bVar1 = param_1[1];
   if (((bVar1 < 5) && ((byte)param_1[2] < 2)) && (bVar2 = param_1[3], bVar2 < 0xfc)) {
     uVar6 = *(ushort *)(iStack_30 + 2);
     if ((uVar6 & 0x10) == 0) {
       if ((bVar1 != 4) ||
          (((iVar5 = *(int *)(_p_llm_env + 8) + iVar8 * 0x44, *(char *)(iVar5 + 0x40) != '\x01' &&
-           (*(short *)(iVar5 + 0x28) != 0)) && (bVar2 == 0)))) goto _L191;
+           (*(short *)(iVar5 + 0x28) != 0)) && (bVar2 == 0)))) goto _L215;
     }
     else if ((bVar1 == 3) && (bVar2 < 0x20)) {
-_L191:
+_L215:
       if ((((byte)(bVar1 - 3) < 2) || (bVar2 != 0)) && ((uVar6 & 0x12) != 2)) {
         iVar5 = iVar8 * 0x44;
         if (*(char *)(*(int *)(_p_llm_env + 8) + iVar5 + 0x40) != '\x01') {
           uVar10 = 0xc;
-          if (1 < (byte)(bVar1 - 3)) goto _L221;
+          if (1 < (byte)(bVar1 - 3)) goto _L245;
           if ((((uVar6 & 0x11) == 1) &&
               (iVar9 = (**(code **)(_r_ip_funcs_p + 0x540))(*(code **)(_r_ip_funcs_p + 0x540)),
               iVar9 != 0)) ||
              (((*(ushort *)(iStack_30 + 2) & 0x1c) == 0x10 && (0x1f < (byte)param_1[3]))))
-          goto _L189;
+          goto _L213;
         }
         if ((*(ushort *)(iStack_30 + 2) & 0x11) == 1) {
           iVar9 = (**(code **)(_r_ip_funcs_p + 0x540))(param_1[3],*(code **)(_r_ip_funcs_p + 0x540))
           ;
           uVar10 = 0x45;
-          if (iVar9 != 0) goto _L221;
+          if (iVar9 != 0) goto _L245;
         }
         iVar9 = *(int *)(_p_llm_env + 8) + iVar5;
         if ((uint)*(ushort *)(iVar9 + 0x30) <
@@ -79,7 +79,7 @@ _L191:
             (**(code **)(_r_ip_funcs_p + 0xd8))(*(code **)(_r_ip_funcs_p + 0xd8));
             *(undefined4 *)(*(int *)(_p_llm_env + 8) + iVar5 + 0x2c) = 0;
           }
-_L251:
+_L275:
           uVar10 = 7;
         }
         else {
@@ -93,7 +93,7 @@ _L251:
               uVar6 = (ushort)(byte)param_1[3];
               if (uVar6 != 0) {
                 pcVar11 = *(code **)(_r_ip_funcs_p + 0xd4);
-                goto _L250;
+                goto _L274;
               }
               uVar7 = 0;
               bVar3 = true;
@@ -101,13 +101,13 @@ _L251:
             else {
               uVar6 = *(ushort *)(iVar9 + 0x30);
               pcVar11 = *(code **)(_r_ip_funcs_p + 0xd4);
-_L250:
+_L274:
               uVar7 = (*pcVar11)(uVar6,pcVar11);
               bVar3 = false;
             }
             iVar4 = _p_llm_env;
             *(undefined2 *)(iVar9 + 0x2c) = uVar7;
-            if ((*(short *)(*(int *)(iVar4 + 8) + iVar5 + 0x2c) == 0) && (!bVar3)) goto _L251;
+            if ((*(short *)(*(int *)(iVar4 + 8) + iVar5 + 0x2c) == 0) && (!bVar3)) goto _L275;
           }
           bVar1 = param_1[3];
           if (bVar1 != 0) {
@@ -163,13 +163,13 @@ _L250:
           }
           uVar10 = 0;
         }
-        goto _L221;
+        goto _L245;
       }
     }
   }
-_L189:
+_L213:
   uVar10 = 0x12;
-_L221:
+_L245:
   (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,uVar10,*(code **)(_r_ip_funcs_p + 0x4b8));
   return 0;
 }

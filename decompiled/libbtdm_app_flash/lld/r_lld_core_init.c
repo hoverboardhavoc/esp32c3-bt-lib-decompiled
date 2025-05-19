@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_core_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,7 +35,7 @@ void r_lld_core_init(int param_1)
       *(undefined2 *)(iVar5 + iVar3) = 0;
       iVar3 = iVar3 + 8;
     } while (iVar3 != 0x60);
-    r_lld_res_list_clear();
+    r_lld_res_list_clear_hack();
     _DAT_600310d0 = _DAT_600310d0 & 0xffffefff;
     _DAT_60031050 = 0;
   }

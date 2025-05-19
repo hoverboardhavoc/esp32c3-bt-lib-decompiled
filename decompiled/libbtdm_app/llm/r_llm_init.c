@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app -> llm.o -> r_llm_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,7 +30,7 @@ void r_llm_init(int param_1)
       if (param_1 != 0) {
         return;
       }
-                    /* WARNING: Could not recover jumptable at 0x00010692. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010702. Too many branches */
                     /* WARNING: Treating indirect jump as call */
       (**(code **)(_r_modules_funcs_p + 0x164))
                 (&TASK_DESC_LLM,*(code **)(_r_modules_funcs_p + 0x164));

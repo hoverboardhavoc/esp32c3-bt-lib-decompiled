@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b0ccea3c26a049649d2fdbaca78318af90a6dd5b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b0ccea3c26a049649d2fdbaca78318af90a6dd5b
- * Upstream date: 2025-05-16 11:55:10 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713205)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> llm.o -> r_llm_ch_map_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,21 +45,21 @@ void r_llm_ch_map_update(void)
     iVar8 = ((int)uVar7 >> 3) + iVar5;
     uVar11 = uVar7 & 7;
     if (((int)(uint)*(byte *)(iVar8 + 0x18) >> uVar11 & 1U) == 0) {
-_L398:
+_L417:
       bVar10 = ~(byte)(1 << uVar11) & *(byte *)(iVar8 + 0x1d);
-_L397:
+_L416:
       *(byte *)(iVar8 + 0x1d) = bVar10;
     }
     else if (*(char *)(iVar12 + 0xd9) != '\0') {
       uVar9 = iVar3 - *(int *)(uVar7 * 4 + iVar4) & 0xfffffff;
       if (uVar9 < uVar14) {
-        if (*pcVar6 <= (char)cVar2) goto _L398;
+        if (*pcVar6 <= (char)cVar2) goto _L417;
       }
       else {
         *pcVar6 = '\0';
         if (uVar15 < uVar9) {
           bVar10 = (byte)(1 << uVar11) | *(byte *)(iVar8 + 0x1d);
-          goto _L397;
+          goto _L416;
         }
       }
     }
@@ -94,13 +94,13 @@ _L397:
     if (*(char *)(*(int *)(_p_llm_env + 8) + uVar7 * 0x44 + 0x40) == '\f') {
       iVar5 = r_sdk_config_get_opts_ext();
       if (*(char *)(iVar5 + 0x18) == '\0') {
-        r_assert_err(0,"llm.c",0x502);
+        r_assert_err(0,"llm.c",0x50d);
       }
       r_lld_per_adv_ch_map_update(uVar7 & 0xff,iVar13);
     }
   }
   if (bVar1) {
-    r_ke_timer_set(4,0,(uint)_r_lld_white_list_add * 100);
+    r_ke_timer_set(4,0,(uint)_r_lld_white_list_add_hack * 100);
     return;
   }
   *(undefined1 *)(_p_llm_env + 0x22) = 0;

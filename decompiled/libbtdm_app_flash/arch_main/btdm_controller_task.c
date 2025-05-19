@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_controller_task
  *
  * (C) Espressif, Apache License 2.0.
@@ -71,20 +71,20 @@ void btdm_controller_task(void)
               if (bStack_38 == 8) {
                 rw_stop();
                 s_btdm_state = 0;
-                goto _L421;
+                goto _L430;
               }
               rw_pre_main();
             }
             s_btdm_state = 1;
           }
-_L421:
+_L430:
           (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
         }
       }
       else if (bStack_38 == 0xd) {
         r_btdm_vnd_offload_process(uStack_37,puStack_34);
       }
-      r_btdm_task_recycle(&bStack_38);
+      r_btdm_task_recycle_hack(&bStack_38);
       bVar1 = true;
       btdm_rw_run(s_btdm_state);
     }

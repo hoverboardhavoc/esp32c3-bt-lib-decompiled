@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> llm_hci.o -> hci_le_set_priv_mode_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ undefined4 hci_le_set_priv_mode_cmd_handler(byte *param_1,undefined4 param_2)
   if (param_1[7] < 2) {
     uVar2 = 0x12;
     if (*param_1 < 2) {
-      uVar2 = r_lld_res_list_priv_mode_update(param_1 + 1);
+      uVar2 = r_lld_res_list_priv_mode_update_hack(param_1 + 1);
     }
   }
 _L264:

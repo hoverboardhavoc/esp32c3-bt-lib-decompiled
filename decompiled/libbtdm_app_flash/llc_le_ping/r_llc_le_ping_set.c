@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> llc_le_ping.o -> r_llc_le_ping_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,7 +43,7 @@ undefined4 r_llc_le_ping_set(int param_1,uint param_2)
       if (uVar6 != param_2) {
         *(short *)(iVar3 + 0x3e) = (short)param_2;
         *(short *)(iVar3 + 0x40) = (short)param_2 - (short)uVar6;
-        r_llc_le_ping_restart(param_1);
+        r_llc_le_ping_restart_hack(param_1);
         uVar1 = 0;
       }
     }

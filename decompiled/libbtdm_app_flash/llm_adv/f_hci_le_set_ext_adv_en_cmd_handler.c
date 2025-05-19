@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
+ * Upstream date: 2025-05-19 16:27:45 +0800
+ * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
  * Source: libbtdm_app_flash -> llm_adv.o -> f_hci_le_set_ext_adv_en_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -69,9 +69,9 @@ undefined4 f_hci_le_set_ext_adv_en_cmd_handler(short *param_1,undefined4 param_2
   
   iVar13 = _p_llm_env;
   if (*(char *)(_p_llm_env + 0xd7) == '\x01') {
-_L576:
+_L600:
     iVar13 = 0xc;
-    goto _L568;
+    goto _L592;
   }
   *(undefined1 *)(_p_llm_env + 0xd7) = 2;
   if ((char)*param_1 == '\0') {
@@ -79,7 +79,7 @@ _L576:
     if (*(char *)(iVar13 + 0xd6) != '\0') {
       return 2;
     }
-_L571:
+_L595:
     if (*param_1 != 1) {
       if (*(char *)((int)param_1 + 1) == '\0') {
         for (uVar8 = 0; psVar2 = (short *)r_sdk_config_get_opts(psVar2),
@@ -100,37 +100,37 @@ _L571:
         uVar8 = 0;
         bVar7 = 0;
         do {
-          if (0xef < *(byte *)((int)param_1 + uVar8 + 2)) goto _L572;
+          if (0xef < *(byte *)((int)param_1 + uVar8 + 2)) goto _L596;
           iVar13 = r_llm_adv_hdl_to_id(0);
           if (iVar13 == 0xff) {
             iVar13 = 0x42;
-            goto _L568;
+            goto _L592;
           }
           piVar5 = (int *)(*(int *)(_p_llm_env + 8) + iVar13 * 0x44);
-          if (((short)piVar5[0xb] != 0) || (*(short *)((int)piVar5 + 0x36) != 0)) goto _L572;
+          if (((short)piVar5[0xb] != 0) || (*(short *)((int)piVar5 + 0x36) != 0)) goto _L596;
           if ((char)*param_1 == '\x01') {
             iVar11 = *piVar5;
             uVar1 = *(ushort *)(iVar11 + 2);
-            if (((uVar1 & 2) != 0) && ((uVar1 & 0x10) == 0 && (short)piVar5[0xd] == 0)) goto _L576;
+            if (((uVar1 & 2) != 0) && ((uVar1 & 0x10) == 0 && (short)piVar5[0xd] == 0)) goto _L600;
             if (((uVar1 & 0x11) == 1) &&
                (iVar3 = r_llm_adv_con_len_check(iVar11,*(undefined2 *)((int)piVar5 + 0x2a)),
-               iVar3 != 0)) goto _L572;
+               iVar3 != 0)) goto _L596;
             if ((*(ushort *)(iVar11 + 2) & 1) != 0) {
               if (((*(ushort *)(iVar11 + 2) & 0xc) != 0) &&
                  (iVar3 = r_llm_is_dev_connected(iVar11 + 0xd,*(undefined1 *)(iVar11 + 0xc)),
                  iVar3 != 0)) {
                 iVar13 = 0xb;
-                goto _L568;
+                goto _L592;
               }
               if (((*(ushort *)(iVar11 + 2) & 8) != 0) && (0x7f < (ushort)(param_1[uVar8 + 6] - 1U))
-                 ) goto _L572;
+                 ) goto _L596;
               bVar7 = bVar7 + 1;
             }
             if (((*(byte *)(iVar11 + 0xb) & 1) != 0) &&
                (iVar11 = r_co_bdaddr_compare(*(int *)(_p_llm_env + 8) + iVar13 * 0x44 + 4,
-                                             &co_null_bdaddr), iVar11 != 0)) goto _L572;
+                                             &co_null_bdaddr), iVar11 != 0)) goto _L596;
           }
-          else if (((_DAT_0001405e & 2) == 0) && ((char)piVar5[0x10] != '\x02')) goto _L576;
+          else if (((_DAT_0001405e & 2) == 0) && ((char)piVar5[0x10] != '\x02')) goto _L600;
           *(char *)((int)param_1 + uVar8 + 2) = (char)iVar13;
           uVar8 = uVar8 + 1 & 0xff;
         } while (uVar8 < *(byte *)((int)param_1 + 1));
@@ -139,12 +139,12 @@ _L571:
           for (uVar8 = 0; iVar13 = r_sdk_config_get_opts(), uVar8 < *(byte *)(iVar13 + 0xd);
               uVar8 = uVar8 + 1 & 0xff) {
             bVar9 = bVar9 + (*(char *)(*(int *)(_p_llm_env + 8) + uVar8 * 0x44 + 0x40) == '\0');
-            if (bVar7 <= bVar9) goto _L591;
+            if (bVar7 <= bVar9) goto _L615;
           }
           iVar13 = 7;
-          if (bVar9 < bVar7) goto _L568;
+          if (bVar9 < bVar7) goto _L592;
         }
-_L591:
+_L615:
         for (uVar8 = 0; iVar13 = _p_llm_env, uVar8 < *(byte *)((int)param_1 + 1);
             uVar8 = uVar8 + 1 & 0xff) {
           uVar10 = (uint)*(byte *)((int)param_1 + uVar8 + 2);
@@ -152,7 +152,7 @@ _L591:
           piVar5 = (int *)(*(int *)(_p_llm_env + 8) + iVar11);
           if ((char)piVar5[0x10] == '\x02') {
             if ((char)*param_1 == '\0') {
-_L593:
+_L617:
               if ((((_DAT_0001405e & 2) == 0) || ((char)piVar5[0x10] == '\x02')) &&
                  (iVar3 = r_lld_adv_stop(uVar10), iVar13 = _p_llm_env, iVar3 == 0)) {
                 *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar11 + 0x40) = 3;
@@ -166,7 +166,7 @@ _L593:
                 if (((*(byte *)(iVar13 + 0xd) <= uVar14) && (_bt_rf_coex_hooks_p != (int *)0x0)) &&
                    (pcVar6 = (code *)*_bt_rf_coex_hooks_p, pcVar6 != (code *)0x0)) {
                   uVar4 = 0;
-                  goto _L687;
+                  goto _L711;
                 }
               }
             }
@@ -186,14 +186,14 @@ _L593:
                     *(undefined1 *)(iVar13 + (uStack_68 & 0xff) * 0x44 + 0x40) = 4;
                   }
                   else {
-                    r_assert_param(0,"llm_adv.c",0x613);
+                    r_assert_param(0,"llm_adv.c",0x61f);
                   }
                 }
               }
             }
           }
           else {
-            if ((char)*param_1 == '\0') goto _L593;
+            if ((char)*param_1 == '\0') goto _L617;
             iVar3 = *piVar5;
             uVar1 = *(ushort *)(iVar3 + 2);
             uStack_5c = (uint)*(byte *)(iVar3 + 9) << 0x10 | (uint)*(byte *)(iVar3 + 8) << 8 |
@@ -230,8 +230,8 @@ _L593:
             uStack_41 = *(undefined1 *)(iVar13 + 0xc6);
             iVar13 = r_lld_adv_start_eco(uVar10,&uStack_68);
             if (iVar13 != 0) {
-              r_assert_param(uVar10,0,"llm_adv.c",0x69c);
-              goto _L568;
+              r_assert_param(uVar10,0,"llm_adv.c",0x6a8);
+              goto _L592;
             }
             iVar13 = *(int *)(_p_llm_env + 8) + iVar11;
             *(undefined1 *)(iVar13 + 0x40) = 2;
@@ -241,7 +241,7 @@ _L593:
                (iVar13 = r_sdk_config_get_opts(), uVar14 < *(byte *)(iVar13 + 0xd))) {
               iVar13 = uVar14 * 0x44;
               piVar5 = (int *)(*(int *)(_p_llm_env + 8) + iVar13);
-              if ((char)piVar5[0x10] != '\v') goto _L604;
+              if ((char)piVar5[0x10] != '\v') goto _L628;
               iVar3 = *piVar5;
               iVar12 = *(int *)(*(int *)(_p_llm_env + 8) + iVar11);
               iStack_84 = (uint)*(ushort *)(iVar3 + 4) << 1;
@@ -273,7 +273,7 @@ _L593:
                 *(undefined4 *)(iVar13 + 0x24) = 0;
                 *(undefined4 *)(iVar13 + 0x1c) = uStack_7c;
                 *(undefined1 *)(iVar13 + 0x22) = 0;
-                r_sch_plan_set(iVar13 + 0xc);
+                r_sch_plan_set_hack(iVar13 + 0xc);
                 if ((_bt_rf_coex_hooks_p != (int *)0x0) &&
                    ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
                   (*(code *)*_bt_rf_coex_hooks_p)(uVar14,4,1);
@@ -281,7 +281,7 @@ _L593:
               }
             }
             else {
-_L604:
+_L628:
               if ((*(ushort *)(iVar3 + 2) & 1) != 0) {
                 iVar13 = r_llm_activity_free_get(&uStack_88);
                 if (iVar13 == 0) {
@@ -290,7 +290,7 @@ _L604:
                   *(undefined1 *)(iVar13 + (uStack_88 & 0xff) * 0x44 + 0x40) = 4;
                 }
                 else {
-                  r_assert_err(0,"llm_adv.c",0x690);
+                  r_assert_err(0,"llm_adv.c",0x69c);
                 }
               }
             }
@@ -298,7 +298,7 @@ _L604:
               pcVar6 = (code *)*_bt_rf_coex_hooks_p;
               uVar4 = 1;
               if (pcVar6 != (code *)0x0) {
-_L687:
+_L711:
                 (*pcVar6)(uVar10,2,uVar4);
               }
             }
@@ -314,16 +314,16 @@ _L687:
       else {
         iVar13 = 0;
       }
-      goto _L568;
+      goto _L592;
     }
   }
   else {
     psVar2 = param_1;
-    if ((char)*param_1 == '\x01') goto _L571;
+    if ((char)*param_1 == '\x01') goto _L595;
   }
-_L572:
+_L596:
   iVar13 = 0x12;
-_L568:
+_L592:
   r_llm_cmd_cmp_send(param_2,iVar13);
   return 0;
 }
