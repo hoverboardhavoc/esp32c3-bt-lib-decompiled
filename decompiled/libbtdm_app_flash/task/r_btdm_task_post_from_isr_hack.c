@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 3ff529142f6e2707d57b10eb87ac8d86e9098b88
+ * https://github.com/espressif/esp32c3-bt-lib/commit/3ff529142f6e2707d57b10eb87ac8d86e9098b88
+ * Upstream date: 2025-06-05 11:04:06 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713a69)
  * Source: libbtdm_app_flash -> task.o -> r_btdm_task_post_from_isr_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ undefined4 r_btdm_task_post_from_isr_hack(uint param_1)
       iVar1 = (**(code **)(_r_osi_funcs_p + 0x58))
                         (_g_rw_schd_queue,auStack_28,0,*(code **)(_r_osi_funcs_p + 0x58));
       if (iVar1 != 1) {
-        r_assert_param(param_1 & 0xff,0,"task.c",0x5f);
+        r_assert_param(param_1 & 0xff,0,"task.c",0x61);
       }
     }
     auStack_28[0] = 0;

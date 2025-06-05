@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 3ff529142f6e2707d57b10eb87ac8d86e9098b88
+ * https://github.com/espressif/esp32c3-bt-lib/commit/3ff529142f6e2707d57b10eb87ac8d86e9098b88
+ * Upstream date: 2025-06-05 11:04:06 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713a69)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_controller_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -65,7 +65,7 @@ undefined4 btdm_controller_init(int *param_1)
              (iVar10 = r_h4tl_eif_register(param_1[6]), iVar10 != 0)) goto _L359;
           iVar10 = r_sdk_config_get_opts();
           uStack_24 = *(undefined1 *)(iVar10 + 0xd);
-          uStack_23 = DAT_00012037;
+          uStack_23 = DAT_00013037;
           r_sdk_config_set_hl_derived_opts(&uStack_24);
           if (((uint)_btdm_env_p >> 0x10 & 0xff) == 0) {
             btdm_hli_get_null_funcs();
@@ -140,7 +140,7 @@ undefined4 btdm_controller_init(int *param_1)
               pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
               _btdm_env_p[5] = iVar12 + 0xc;
               iVar10 = (*pcVar15)(pcVar15);
-              cVar8 = DAT_00012036;
+              cVar8 = DAT_00013036;
               piVar6[4] = iVar10;
               piVar6 = _btdm_env_p;
               if (cVar8 != '\0') {
@@ -229,15 +229,19 @@ _L268:
           r_hci_tl_env_deinit();
           if (*_btdm_env_p != 0) {
             (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
+            *_btdm_env_p = 0;
           }
           if (_btdm_env_p[2] != 0) {
             (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
+            _btdm_env_p[2] = 0;
           }
           if (_btdm_env_p[4] != 0) {
             (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
+            _btdm_env_p[4] = 0;
           }
           if (_btdm_env_p[6] != 0) {
             (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
+            _btdm_env_p[6] = 0;
           }
           if (_btdm_env_p[9] != 0) {
             (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));

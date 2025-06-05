@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 3ff529142f6e2707d57b10eb87ac8d86e9098b88
+ * https://github.com/espressif/esp32c3-bt-lib/commit/3ff529142f6e2707d57b10eb87ac8d86e9098b88
+ * Upstream date: 2025-06-05 11:04:06 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713a69)
  * Source: libbtdm_app_flash -> lld_cca.o -> r_lld_cca_sw_free
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,6 +18,7 @@ void r_lld_cca_sw_free(void)
   if (p_lld_cca != 0) {
     if (*(int *)(p_lld_cca + 0x28) != 0) {
       (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
+      *(undefined4 *)(p_lld_cca + 0x28) = 0;
     }
     (**(code **)(_r_osi_funcs_p + 0x7c))(p_lld_cca,*(code **)(_r_osi_funcs_p + 0x7c));
     p_lld_cca = 0;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 3ff529142f6e2707d57b10eb87ac8d86e9098b88
+ * https://github.com/espressif/esp32c3-bt-lib/commit/3ff529142f6e2707d57b10eb87ac8d86e9098b88
+ * Upstream date: 2025-06-05 11:04:06 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713a69)
  * Source: libbtdm_app_flash -> task.o -> r_btdm_task_post_from_isr_impl
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ r_btdm_task_post_from_isr_impl(uint param_1,undefined4 param_2,undefined4 param_
     iVar1 = (**(code **)(_r_osi_funcs_p + 0x58))
                       (_g_rw_schd_queue,&uStack_28,0,*(code **)(_r_osi_funcs_p + 0x58));
     if (iVar1 != 1) {
-      r_assert_param(param_1,param_2,"task.c",0x5f);
+      r_assert_param(param_1,param_2,"task.c",0x61);
     }
   }
   uStack_28 = 0;
