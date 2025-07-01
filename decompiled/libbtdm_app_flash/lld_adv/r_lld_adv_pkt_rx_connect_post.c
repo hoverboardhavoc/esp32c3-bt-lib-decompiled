@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_pkt_rx_connect_post
  *
  * (C) Espressif, Apache License 2.0.
@@ -48,7 +48,7 @@ void r_lld_adv_pkt_rx_connect_post
     uVar3 = (int)(((uVar2 & 0xffff) + (uint)_DAT_000170d6 * -2) * 0x10000) >> 0x10;
   }
   if (0x751 < (uVar3 + 0x4e1 & 0xffff)) {
-    r_assert_err(0,0x10000,0x722);
+    r_assert_err(0,0x10000,0x727);
   }
   for (; (int)uVar3 < 0; uVar3 = (int)(((uVar3 & 0xffff) + 0x271) * 0x10000) >> 0x10) {
     uVar10 = uVar10 - 1 & 0xfffffff;

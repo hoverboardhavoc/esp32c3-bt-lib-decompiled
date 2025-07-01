@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_legacy_adv_dynamic_pti_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,21 +24,21 @@ void r_lld_legacy_adv_dynamic_pti_get(int param_1,undefined1 *param_2)
   puVar4 = *(undefined1 **)(_bt_rf_coex_cfg_p + 0x2c);
   if (*(ushort *)(puVar4 + 10) < uVar2) {
     if (*(ushort *)(puVar4 + 0xc) < uVar2) {
-_L109:
+_L110:
       bVar1 = puVar4[9];
     }
     else {
       bVar1 = puVar4[8];
     }
     if ((uint)*(byte *)(param_1 + 0x86) % (uint)bVar1 != 0) {
-_L110:
+_L111:
       uVar3 = puVar4[6];
-      goto _L111;
+      goto _L112;
     }
   }
   else if ((uint)*(byte *)(param_1 + 0x86) % (uint)(byte)puVar4[7] != 0) {
-    if (*(ushort *)(puVar4 + 0xc) < uVar2) goto _L109;
-    goto _L110;
+    if (*(ushort *)(puVar4 + 0xc) < uVar2) goto _L110;
+    goto _L111;
   }
   *param_2 = *puVar4;
   param_2[1] = puVar4[1];
@@ -46,7 +46,7 @@ _L110:
   param_2[3] = puVar4[3];
   param_2[4] = puVar4[4];
   uVar3 = puVar4[5];
-_L111:
+_L112:
   param_2[5] = uVar3;
   return;
 }

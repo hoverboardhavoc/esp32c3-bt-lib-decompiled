@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_adv_data_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -47,7 +47,7 @@ void r_lld_adv_adv_data_set(uint param_1,int param_2,undefined4 param_3,int para
     *(short *)(iVar9 + 0x82) = (short)param_2;
     *(short *)(iVar9 + 0x7e) = (short)param_3;
     r_lld_adv_ext_chain_construct(*(undefined1 *)(iVar9 + 0x87));
-    goto _L650;
+    goto _L651;
   }
   iVar6 = uVar4 * 0xe;
   uVar10 = 0;
@@ -63,22 +63,22 @@ void r_lld_adv_adv_data_set(uint param_1,int param_2,undefined4 param_3,int para
   *(short *)(iVar7 + iVar6 + 4) = (short)param_3;
   if ((*(ushort *)(iVar9 + 0x74) & 4) == 0) {
     iVar9 = r_bt_rf_coex_st_param_get(2);
-    if (iVar9 == 0) goto _L650;
+    if (iVar9 == 0) goto _L651;
     if (2 < _g_bt_plf_log_level) {
       uVar1 = *(undefined1 *)(iVar9 + 5);
       uVar2 = *(undefined1 *)(iVar9 + 4);
       pcVar8 = "TX PTI [LDC ADV] [EN%d] [%d] \n";
-      goto _L684;
+      goto _L685;
     }
   }
   else {
     iVar9 = r_bt_rf_coex_st_param_get(3);
-    if (iVar9 == 0) goto _L650;
+    if (iVar9 == 0) goto _L651;
     if (2 < _g_bt_plf_log_level) {
       uVar1 = *(undefined1 *)(iVar9 + 5);
       uVar2 = *(undefined1 *)(iVar9 + 4);
       pcVar8 = "TX PTI [HDC ADV] [EN%d] [%d] \n";
-_L684:
+_L685:
       ets_printf(pcVar8,uVar2,uVar1);
     }
   }
@@ -96,7 +96,7 @@ _L684:
   uVar5 = *(ushort *)(iVar9 + iVar6);
   iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
   *(ushort *)(iVar9 + iVar6) = uVar5 & 0xefff | (ushort)bVar3 << 0xc;
-_L650:
+_L651:
   if ((param_4 != 0) && (uVar10 != 0)) {
     if (param_5 != 0) {
       r_ble_util_buf_adv_tx_free_in_isr();

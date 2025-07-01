@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> h4tl.o -> r_h4tl_rx_done
  *
  * (C) Espressif, Apache License 2.0.
@@ -78,7 +78,7 @@ _L67:
             memset((void *)((int)param_1 + 10),0,8);
             *(undefined1 *)((int)param_1 + 0x12) = *(undefined1 *)((int)param_1 + 0x13);
             r_h4tl_read_next_out_of_sync(param_1);
-            r_rwip_prevent_sleep_clear(4);
+            r_rwip_prevent_sleep_clear_hack(4);
             return;
           }
         }
@@ -86,7 +86,7 @@ _L67:
 _L85:
         *(undefined1 *)(param_1 + 5) = 1;
         (**(code **)*param_1)((int)param_1 + 10,uVar5,r_h4tl_rx_done,param_1,*(code **)*param_1);
-        r_rwip_prevent_sleep_set(4);
+        r_rwip_prevent_sleep_set_hack(4);
         return;
       }
       cVar2 = *(char *)((int)param_1 + 0x15);
@@ -131,7 +131,7 @@ _L87:
 _L84:
   *(undefined1 *)(param_1 + 5) = 0;
   (**(code **)*param_1)((int)param_1 + 0x13,1,r_h4tl_rx_done,param_1,*(code **)*param_1);
-  r_rwip_prevent_sleep_clear(4);
+  r_rwip_prevent_sleep_clear_hack(4);
   return;
 }
 

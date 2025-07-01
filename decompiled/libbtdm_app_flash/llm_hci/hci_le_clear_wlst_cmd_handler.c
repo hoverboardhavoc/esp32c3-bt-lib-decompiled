@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> llm_hci.o -> hci_le_clear_wlst_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,8 +38,7 @@ undefined4 hci_le_clear_wlst_cmd_handler(undefined4 param_1)
           bVar2 = 0xfd;
         }
         *(byte *)(iVar6 + 0x2d) = bVar1 & bVar2;
-        r_lld_white_list_rem_hack
-                  (iVar4 + uVar3 * 10 + 0x24,*(undefined1 *)(iVar4 + uVar3 * 10 + 0x2c));
+        r_lld_white_list_rem(iVar4 + uVar3 * 10 + 0x24,*(undefined1 *)(iVar4 + uVar3 * 10 + 0x2c));
         lld_wl_res_rem(uVar3 & 0xff);
       }
       uVar3 = uVar3 + 1;

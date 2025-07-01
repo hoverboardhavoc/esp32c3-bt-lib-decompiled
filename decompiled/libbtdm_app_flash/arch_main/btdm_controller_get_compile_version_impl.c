@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3ff529142f6e2707d57b10eb87ac8d86e9098b88
- * https://github.com/espressif/esp32c3-bt-lib/commit/3ff529142f6e2707d57b10eb87ac8d86e9098b88
- * Upstream date: 2025-06-05 11:04:06 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713a69)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_controller_get_compile_version_impl
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,6 +13,6 @@
 char * btdm_controller_get_compile_version_impl(void)
 
 {
-  return "4713a69";
+  return "2edb0b0";
 }
 

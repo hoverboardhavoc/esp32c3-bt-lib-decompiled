@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_frm_isr_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,7 +36,7 @@ void r_lld_adv_frm_isr_eco(uint param_1,undefined4 param_2,int param_3)
                 (0x40400009,(uint)*(byte *)(iVar4 + 0x89) << 0x10 | param_3 << 8 | param_1);
     }
     if ((param_3 == 0) && (g_ble_ext_config != '\0')) {
-      DAT_00016568 = DAT_00016568 + 1;
+      DAT_00016580 = DAT_00016580 + 1;
     }
     if (bVar1 && bVar2) {
       g_adv_delay_dis = '\x01';

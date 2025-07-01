@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_scan_rsp_data_update_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,7 +23,7 @@ void r_lld_adv_scan_rsp_data_update_hack(uint param_1,int param_2,undefined4 par
   if (*(int *)(&lld_adv_env + iVar2) == 0) {
     iVar2 = ke_msg_is_in_queue(0x207);
     if (iVar2 == 0) {
-      r_assert_param(param_1,0,0x10000,0xdce);
+      r_assert_param(param_1,0,0x10000,0xdd3);
     }
   }
   else {
@@ -52,7 +52,7 @@ void r_lld_adv_scan_rsp_data_update_hack(uint param_1,int param_2,undefined4 par
       }
     }
   }
-                    /* WARNING: Could not recover jumptable at 0x00015b2a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00015b42. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   return;

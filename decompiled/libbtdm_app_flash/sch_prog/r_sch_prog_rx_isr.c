@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> sch_prog.o -> r_sch_prog_rx_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,13 +21,13 @@ void r_sch_prog_rx_isr(void)
   iVar3 = r_emi_get_mem_addr_by_offset(0);
   iVar2 = uVar1 * 0x10;
   if ((*(ushort *)(iVar3 + iVar2) >> 3 & 6) == 0) {
-    r_assert_err(0,"sch_prog.c",0x17a);
+    r_assert_err(0,"sch_prog.c",0x17c);
   }
   if (DAT_00011102 == '\0') {
-    r_assert_err(0,"sch_prog.c",0x17e);
+    r_assert_err(0,"sch_prog.c",0x180);
   }
   if (r_assert_param[iVar2] == (code)0x0) {
-    r_assert_err(0,"sch_prog.c",0x181);
+    r_assert_err(0,"sch_prog.c",0x183);
   }
   if (*(code **)(r_emi_get_mem_addr_by_offset + iVar2) != (code *)0x0) {
                     /* WARNING: Could not recover jumptable at 0x000102a4. Too many branches */

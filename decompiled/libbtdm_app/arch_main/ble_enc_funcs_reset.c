@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app -> arch_main.o -> ble_enc_funcs_reset
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,8 +22,6 @@ void ble_enc_funcs_reset(void)
   *(undefined **)(iVar1 + 0x28c) = &r_lld_res_list_priv_mode_update_hack;
   *(undefined **)(iVar1 + 0x290) = &r_lld_res_list_rem_hack;
   *(undefined **)(iVar1 + 0x610) = &r_llc_le_ping_restart_hack;
-  *(undefined **)(iVar1 + 700) = &r_lld_white_list_add_hack;
-  *(undefined **)(iVar1 + 0x2c0) = &r_lld_white_list_rem_hack;
   *(undefined **)(iVar1 + 0x59c) = &r_llc_rem_encrypt_proc_continue_eco;
   *(undefined **)(iVar1 + 0x870) = &r_llc_rem_encrypt_proc_continue_eco;
   *(undefined **)(iVar1 + 0x5b8) = &r_llc_llcp_tx_check_hack;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> llc_llcp.o -> r_llc_llcp_tx_check_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,15 +37,15 @@ void r_llc_llcp_tx_check_hack(uint param_1)
       else if (uVar6 == 1) {
         bVar7 = bVar7 >> 2;
       }
-      if (((int)(uint)DAT_000108ee >> (param_1 & 0x1f) & 1U) == 0) {
+      if (((int)(uint)DAT_00010916 >> (param_1 & 0x1f) & 1U) == 0) {
         if ((bVar7 & 1) != 0) goto _L37;
       }
       else if ((*(byte *)((int)piVar2 + 9) == 6) && ((bVar7 & 1) != 0)) {
-        DAT_000108ee = DAT_000108ee & ~(ushort)(1 << (param_1 & 0x1f));
+        DAT_00010916 = DAT_00010916 & ~(ushort)(1 << (param_1 & 0x1f));
 _L37:
         iVar4 = r_ble_util_buf_llcp_tx_alloc();
         if (iVar4 == 0) {
-          r_assert_err("llc_llcp.c",0x392);
+          r_assert_err("llc_llcp.c",0x398);
         }
         bVar7 = *(byte *)(piVar2 + 2);
         __dest = (void *)r_emi_get_mem_addr_by_offset(*(undefined2 *)(iVar4 + 4));

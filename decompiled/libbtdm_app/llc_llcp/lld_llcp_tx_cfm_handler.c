@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app -> llc_llcp.o -> lld_llcp_tx_cfm_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ undefined4 lld_llcp_tx_cfm_handler(uint param_1)
   param_1 = param_1 >> 8;
   iVar2 = *(int *)(&llc_env + param_1 * 4);
   if (iVar2 == 0) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(0,"llc_llcp.c",0x3ec,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(0,"llc_llcp.c",0x3f2,*(code **)(_r_plf_funcs_p + 0xc));
   }
   else {
     iVar1 = (**(code **)(_r_modules_funcs_p + 0x40))

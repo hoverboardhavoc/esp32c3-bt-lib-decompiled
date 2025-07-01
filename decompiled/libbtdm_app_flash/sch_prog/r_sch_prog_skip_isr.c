@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> sch_prog.o -> r_sch_prog_skip_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,12 +18,12 @@ void r_sch_prog_skip_isr(void)
   int iVar3;
   
   if (DAT_00011102 == '\0') {
-    r_assert_err(0,"sch_prog.c",0x1f2);
+    r_assert_err(0,"sch_prog.c",500);
   }
   uVar1 = (uint)DAT_00011100;
   while( true ) {
     if (DAT_00011102 == '\0') {
-      r_rwip_prevent_sleep_clear(0x200);
+      r_rwip_prevent_sleep_clear_hack(0x200);
       return;
     }
     if (DAT_00011101 == uVar1) break;
@@ -31,7 +31,7 @@ void r_sch_prog_skip_isr(void)
     if ((r_assert_param[iVar3] != (code)0x0) &&
        (iVar2 = r_emi_get_mem_addr_by_offset(0), (*(ushort *)(iVar2 + iVar3) >> 3 & 7) == 6)) {
       if (*(code **)(r_emi_get_mem_addr_by_offset + iVar3) == (code *)0x0) {
-        r_assert_err(0,"sch_prog.c",0x207);
+        r_assert_err(0,"sch_prog.c",0x209);
       }
       else {
         (**(code **)(r_emi_get_mem_addr_by_offset + iVar3))

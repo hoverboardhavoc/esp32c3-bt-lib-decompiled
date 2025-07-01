@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app -> lld.o -> r_lld_core_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -57,7 +57,7 @@ void r_lld_core_init(int param_1)
     _DAT_60031050 = uStack_44 | 0x80808080;
   }
   uVar3 = (uint)_rwip_prog_delay;
-  _DAT_60031000 = (int)(DAT_0001402e + 1) >> 1 | 0x100200;
+  _DAT_60031000 = (int)(DAT_0001402e + 1) >> 1 | 0x100600;
   uVar7 = ((uint)_DAT_00014042 << 0x11) >> 0x10;
   if ((uVar3 << 0x11 & 0xfc000000) != 0) {
     (**(code **)(_r_plf_funcs_p + 8))(0,"lld.c",0x1902,*(code **)(_r_plf_funcs_p + 8));

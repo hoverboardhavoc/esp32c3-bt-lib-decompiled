@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app -> sch_prog.o -> r_sch_prog_et_state_reset
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,32 +35,30 @@ void r_sch_prog_et_state_reset(void)
       }
       if (uVar4 < 6) {
         if (uVar4 < 3) {
-          if (uVar4 == 1) {
+          if (uVar4 != 2) {
             iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0,*(code **)(_r_plf_funcs_p + 0xbc));
             uVar4 = *(ushort *)(iVar3 + iVar1);
             iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0,*(code **)(_r_plf_funcs_p + 0xbc));
             *(ushort *)(iVar3 + iVar1) = uVar4 & 0xffc7 | 0x30;
-            goto _L31;
+            goto _L30;
           }
-          if (uVar4 != 2) goto _L30;
           iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0,*(code **)(_r_plf_funcs_p + 0xbc));
           uVar4 = *(ushort *)(iVar3 + iVar1);
           iVar3 = (**(code **)(_r_plf_funcs_p + 0xbc))(0,*(code **)(_r_plf_funcs_p + 0xbc));
           *(ushort *)(iVar1 + iVar3) = uVar4 & 0xffc7 | 0x20;
         }
         pcVar5 = *(code **)(_r_ip_funcs_p + 0x904);
-_L36:
+_L38:
         (*pcVar5)(0xff,pcVar5);
       }
       else {
         if (uVar4 == 6) {
-_L31:
-          pcVar5 = *(code **)(_r_ip_funcs_p + 0x6d0);
-          goto _L36;
-        }
 _L30:
+          pcVar5 = *(code **)(_r_ip_funcs_p + 0x6d0);
+          goto _L38;
+        }
         (**(code **)(_r_plf_funcs_p + 0xc))
-                  (uVar6,uVar4,"sch_prog.c",0x130,*(code **)(_r_plf_funcs_p + 0xc));
+                  (uVar6,7,"sch_prog.c",0x132,*(code **)(_r_plf_funcs_p + 0xc));
       }
     }
     *pcVar2 = '\0';

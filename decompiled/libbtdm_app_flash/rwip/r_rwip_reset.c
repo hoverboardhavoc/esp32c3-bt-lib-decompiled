@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> rwip.o -> r_rwip_reset
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,6 +19,7 @@ void r_rwip_reset(void)
   
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   r_vshci_init(rwip_rst_state);
+  esp_vshci_init(rwip_rst_state);
   r_ke_flush();
   iVar1 = r_sdk_config_get_opts_ext();
   if (*(char *)(iVar1 + 0x20) != '\0') {
@@ -45,7 +46,7 @@ void r_rwip_reset(void)
   rwip_rst_state = 2;
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   _btdm_pwr_state = 0;
-                    /* WARNING: Could not recover jumptable at 0x00010320. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010340. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x38))(g_waking_sleeping_sem,*(code **)(_r_osi_funcs_p + 0x38));
   return;

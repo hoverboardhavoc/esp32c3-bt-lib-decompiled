@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_frm_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -47,7 +47,7 @@ void r_lld_adv_frm_cbk(int param_1,uint param_2,uint param_3)
                   (0x40400009,(uint)*(byte *)(iVar5 + 0x89) << 0x10 | param_3 << 8 | param_2);
       }
       if ((param_3 == 0) && (g_ble_ext_config != '\0')) {
-        DAT_00016568 = DAT_00016568 + 1;
+        DAT_00016580 = DAT_00016580 + 1;
       }
       if (bVar1 && bVar2) {
         g_adv_delay_dis = '\x01';
@@ -90,14 +90,14 @@ void r_lld_adv_frm_cbk(int param_1,uint param_2,uint param_3)
     return;
   }
   if (param_3 != 4) {
-    r_assert_param(param_3,0x10000,0xb71);
+    r_assert_param(param_3,0x10000,0xb76);
     return;
   }
   param_2 = param_2 & 0xff;
   iVar5 = *(int *)(&lld_adv_env + param_2 * 4);
   if (iVar5 == 0) {
-    uVar9 = 0xb50;
-_L1055:
+    uVar9 = 0xb55;
+_L1056:
     r_assert_err(0,0x10000,uVar9);
     return;
   }
@@ -107,7 +107,7 @@ _L1055:
     r_ble_log_internal_x2(0x4040000a,(uint)*(byte *)(iVar5 + 0x89) << 8 | param_2,param_1);
   }
   if (1 < (byte)(*(char *)(iVar5 + 0x89) - 1U)) {
-    r_assert_err(0,0x10000,0xb05);
+    r_assert_err(0,0x10000,0xb0a);
   }
   if (*(char *)(iVar5 + 0x89) == '\x02') {
     uVar8 = 0;
@@ -125,13 +125,13 @@ _L1055:
         *(char *)(iVar5 + 0x16) = *(char *)(iVar5 + 0x16) + rwip_priority;
       }
       iVar7 = r_sch_arb_insert(iVar5);
-      if (iVar7 == 0) goto _L1048;
+      if (iVar7 == 0) goto _L1049;
       if (*(char *)(iVar5 + 0x95) != '\0') {
         return;
       }
       if (*(int *)(iVar5 + 0x58) == -1) {
-        uVar9 = 0xb44;
-        goto _L1055;
+        uVar9 = 0xb49;
+        goto _L1056;
       }
     }
     else {
@@ -143,13 +143,13 @@ _L1055:
       }
       iVar7 = r_sch_arb_insert(iVar5 + 0x34);
       if (iVar7 == 0) {
-_L1048:
+_L1049:
         *(undefined1 *)(iVar5 + 0x89) = 0;
         return;
       }
       if (*(int *)(iVar5 + 0x58) == -1) {
-        uVar9 = 0xb22;
-        goto _L1055;
+        uVar9 = 0xb27;
+        goto _L1056;
       }
     }
     param_2 = (uint)*(byte *)(iVar5 + 0x87);

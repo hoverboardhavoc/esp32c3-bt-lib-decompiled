@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app -> llc_llcp.o -> r_lld_llcp_rx_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,7 +32,7 @@ undefined4 r_lld_llcp_rx_ind_handler_hack(undefined2 *param_1,uint param_2)
   uVar9 = param_2 >> 8;
   iVar8 = *(int *)(&llc_env + uVar9 * 4);
   if (iVar8 == 0) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(uVar9,0,"llc_llcp.c",0xfd,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(uVar9,0,"llc_llcp.c",0xfe,*(code **)(_r_plf_funcs_p + 0xc));
   }
   iVar1 = (**(code **)(_r_ip_funcs_p + 0x5c4))(*(code **)(_r_ip_funcs_p + 0x5c4));
   if ((iVar8 == 0) || ((*(ushort *)(iVar8 + 0x42) & 0x40) != 0)) goto _L26;
@@ -58,7 +58,7 @@ undefined4 r_lld_llcp_rx_ind_handler_hack(undefined2 *param_1,uint param_2)
         else {
           if (bVar4 == 1) {
             bVar4 = *(byte *)(uVar7 * 0xc + iVar1 + 10) & 4;
-            goto joined_r0x000103f2;
+            goto joined_r0x00010412;
           }
           bVar4 = *(byte *)(uVar7 * 0xc + iVar1 + 10) & 1;
         }
@@ -69,10 +69,14 @@ undefined4 r_lld_llcp_rx_ind_handler_hack(undefined2 *param_1,uint param_2)
       cStack_7f = '\x19';
     }
 _L30:
+    iVar1 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
+    if ((*(char *)(iVar1 + 0x18) == '\0') && (0x15 < local_60[0])) {
+      cStack_7f = '\x19';
+    }
     if (cStack_7f == '\0') {
       if (0x22 < local_60[0]) {
         (**(code **)(_r_plf_funcs_p + 0xc))
-                  (param_2,"llc_llcp.c",0x18b,*(code **)(_r_plf_funcs_p + 0xc));
+                  (param_2,"llc_llcp.c",0x191,*(code **)(_r_plf_funcs_p + 0xc));
       }
       cStack_7f = (**(code **)(_r_ip_funcs_p + 0x8ec))
                             (uVar9,local_60,*param_1,*(code **)(_r_ip_funcs_p + 0x8ec));
@@ -106,7 +110,7 @@ _L30:
     cStack_7f = '\x19';
     bVar4 = *(byte *)(iVar8 + 0x44) & 3;
     if ((*(byte *)(iVar8 + 0x44) & 3) == 3) goto _L26;
-joined_r0x000103f2:
+joined_r0x00010412:
     if (bVar4 != 0) goto _L30;
     pcVar5 = *(code **)(_r_ip_funcs_p + 0x55c);
     cVar3 = '=';

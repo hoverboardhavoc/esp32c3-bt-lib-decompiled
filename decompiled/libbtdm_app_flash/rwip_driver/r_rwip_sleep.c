@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> rwip_driver.o -> r_rwip_sleep
  *
  * (C) Espressif, Apache License 2.0.
@@ -87,7 +87,7 @@ undefined4 r_rwip_sleep(void)
                   _DAT_60042000 = _DAT_60042000 | 0x80000000;
                 }
                 _DAT_60042004 = uVar3;
-                r_rwip_prevent_sleep_set(0x10);
+                r_rwip_prevent_sleep_set_hack(0x10);
                 iVar1 = r_sdk_config_get_opts_ext();
                 if (((*(uint *)(iVar1 + 0x28) & 0x200) != 0) &&
                    (iVar1 = r_sdk_config_get_opts_ext(), *(byte *)(iVar1 + 0x2c) < 3)) {
@@ -101,7 +101,7 @@ undefined4 r_rwip_sleep(void)
                 return 2;
               }
               iVar1 = 5;
-              goto _L108;
+              goto _L109;
             }
           }
           iVar1 = 6;
@@ -115,7 +115,7 @@ undefined4 r_rwip_sleep(void)
       iVar1 = 1;
     }
   }
-_L108:
+_L109:
   _btdm_slp_err = iVar1;
   iVar1 = r_sdk_config_get_opts_ext();
   if (((*(uint *)(iVar1 + 0x28) & 0x200) != 0) &&

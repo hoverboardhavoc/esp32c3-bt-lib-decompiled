@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_start_init_evt_param
  *
  * (C) Espressif, Apache License 2.0.
@@ -73,7 +73,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
   uVar3 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
   *(ushort *)(iVar2 + 0x76) = *(ushort *)(iVar2 + 0x76) & 0xf000 | uVar3 & 0xfff;
   if ((*(byte *)(param_2 + 0x25) & 0xf0) != 0) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(0xf000,"lld_adv.c",0xbcc,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(0xf000,"lld_adv.c",0xbd1,*(code **)(_r_plf_funcs_p + 0xc));
   }
   iVar4 = _r_plf_funcs_p;
   *(ushort *)(iVar2 + 0x76) =
@@ -88,7 +88,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
     pcVar11 = *(code **)(iVar4 + 0xf0);
     iVar4 = (*pcVar11)(pcVar11);
     if (*(char *)(iVar4 + 0x18) == '\0') {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0xbda,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0xbdf,*(code **)(_r_plf_funcs_p + 8));
     }
     *(bool *)(iVar2 + 0x95) = *(char *)(iVar2 + 0x8f) != '\0';
     (**(code **)(_r_ip_funcs_p + 0x1ac))
@@ -105,7 +105,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
       *(undefined4 *)(iVar2 + 0x44) = *(undefined4 *)(iVar2 + 0x10);
       *(ushort *)(iVar2 + 0x48) = DAT_00017059 & 0xf | 0x6000;
     }
-    goto _L1053;
+    goto _L1054;
   }
   uVar13 = (uint)*(byte *)(iVar2 + 0x87) * 9 & 0xff;
   uVar8 = uVar13 + 1 & 0xff;
@@ -118,7 +118,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
     break;
   default:
     pcVar11 = *(code **)(iVar4 + 8);
-    (*pcVar11)(0,"lld_adv.c",0xc13,pcVar11);
+    (*pcVar11)(0,"lld_adv.c",0xc18,pcVar11);
     break;
   case 2:
     uVar3 = 6;
@@ -135,10 +135,10 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
     *(uint *)(iVar2 + 0x10) =
          (uint)*(byte *)(iVar2 + 0x93) * 0x72e + -300 + (uint)_sdk_cfg_priv_opts;
     uVar12 = *(byte *)(param_2 + 0x1f) & 1;
-    goto _L1060;
+    goto _L1061;
   }
   uVar12 = 0;
-_L1060:
+_L1061:
   bVar9 = *(byte *)(param_2 + 0x1e);
   iVar16 = uVar13 * 0xe;
   iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
@@ -149,7 +149,7 @@ _L1060:
       sVar6 = *(short *)(param_2 + 0x10);
       pcVar11 = *(code **)(_r_ip_funcs_p + 0x17c);
       uVar3 = *(ushort *)(param_2 + 0x14) & 0xff;
-      goto _L1096;
+      goto _L1097;
     }
     iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
     *(undefined2 *)(iVar16 + 4 + iVar4) = 0;
@@ -182,7 +182,7 @@ _L1060:
     memcpy(__dest,(void *)(param_2 + 6),6);
     pcVar11 = *(code **)(_r_ip_funcs_p + 0x17c);
     uVar3 = 6;
-_L1096:
+_L1097:
     (*pcVar11)(param_1,uVar3,sVar6,0,0,pcVar11);
   }
   bVar9 = *(byte *)(param_2 + 0x1e);
@@ -254,8 +254,8 @@ _L1096:
   uVar3 = *(ushort *)(iVar2 + iVar16);
   iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
   *(ushort *)(iVar16 + iVar2) = (ushort)(((uint)uVar3 << 0x11) >> 0x11);
-_L1053:
-                    /* WARNING: Could not recover jumptable at 0x00015184. Too many branches */
+_L1054:
+                    /* WARNING: Could not recover jumptable at 0x0001519c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_ip_funcs_p + 0x810))(0,param_1,param_2,*(code **)(_r_ip_funcs_p + 0x810));
   return;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app -> arch_main.o -> ble_base_funcs_reset
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,6 +39,8 @@ void ble_base_funcs_reset(void)
   *(undefined **)(iVar1 + 0x90) = &r_rwbtdm_isr_wrapper_hack;
   *(undefined **)(iVar2 + 0x278) = &r_rwip_assert_hack;
   *(undefined **)(iVar2 + 0x2e4) = &r_rwip_wakeup_end_hack;
+  *(undefined **)(iVar2 + 0x2b4) = &r_rwip_prevent_sleep_set_hack;
+  *(undefined **)(iVar2 + 0x2b0) = &r_rwip_prevent_sleep_clear_hack;
   *(undefined **)(iVar3 + 0x6a8) = &r_sch_arb_event_start_isr_hack;
   *(undefined **)(iVar3 + 0x6fc) = &r_sch_plan_set_hack;
   *(undefined **)(iVar3 + 0x6c0) = &r_sch_prog_end_isr_hack;

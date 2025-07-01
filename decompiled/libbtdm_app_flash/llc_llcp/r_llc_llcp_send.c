@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
+ * Upstream date: 2025-07-01 15:07:54 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
  * Source: libbtdm_app_flash -> llc_llcp.o -> r_llc_llcp_send
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,7 +35,7 @@ void r_llc_llcp_send(int param_1,byte *param_2,undefined4 param_3)
       iVar3 = r_co_util_pack(iVar2 + 9,param_2,&uStack_22,0x30,
                              *(undefined4 *)(llcp_pdu_handler + (uint)bVar1 * 0xc + 4));
       if (iVar3 != 0) {
-        r_assert_param(*param_2,"llc_llcp.c",0x32f);
+        r_assert_param(*param_2,"llc_llcp.c",0x335);
       }
       iVar4 = r_sdk_config_get_opts_ext();
       if ((*(uint *)(iVar4 + 0x28) & 0x20) != 0) {
@@ -52,7 +52,7 @@ void r_llc_llcp_send(int param_1,byte *param_2,undefined4 param_3)
       return;
     }
   }
-  r_assert_param(param_1,uVar5,"llc_llcp.c",0x33e);
+  r_assert_param(param_1,uVar5,"llc_llcp.c",0x344);
   return;
 }
 
