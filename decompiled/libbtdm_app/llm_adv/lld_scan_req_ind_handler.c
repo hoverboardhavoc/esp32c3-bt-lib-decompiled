@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> llm_adv.o -> lld_scan_req_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ undefined4 lld_scan_req_ind_handler(byte *param_1)
   puVar2 = (undefined4 *)(*(int *)(_p_llm_env + 8) + (uint)*param_1 * 0x44);
   puVar3 = (undefined1 *)*puVar2;
   if (1 < (byte)(*(char *)(puVar2 + 0x10) - 2U)) {
-    (**(code **)(_r_plf_funcs_p + 0xc))("llm_adv.c",0xcba,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))("llm_adv.c",0xd46,*(code **)(_r_plf_funcs_p + 0xc));
   }
   if (puVar3[0x19] != '\0') {
     puVar1 = (undefined1 *)

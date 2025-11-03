@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> llm_scan.o -> f_hci_le_per_adv_create_sync_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,7 +45,7 @@ undefined1 f_hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 par
           piVar5 = (int *)(*(int *)(_p_llm_env + 8) + (uint)bStack_21 * 0x44);
           *(undefined1 *)(piVar5 + 0x10) = 0xe;
           if (*piVar5 != 0) {
-            (**(code **)(_r_plf_funcs_p + 8))("llm_scan.c",0x334,*(code **)(_r_plf_funcs_p + 8));
+            (**(code **)(_r_plf_funcs_p + 8))("llm_scan.c",0x379,*(code **)(_r_plf_funcs_p + 8));
           }
           bVar1 = param_1[5];
           bVar2 = param_1[7];

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_per_adv.o -> r_lld_per_adv_ext_pkt_prepare
  *
  * (C) Espressif, Apache License 2.0.
@@ -50,17 +50,17 @@ int r_lld_per_adv_ext_pkt_prepare
   if (param_5 == 0) {
     iVar13 = 0;
     iVar7 = 0;
-    if (param_2 != iVar15) goto _L128;
+    if (param_2 != iVar15) goto _L118;
     iVar7 = 1;
   }
   else {
     iVar13 = 2;
     iVar7 = 2;
-    if (param_2 != iVar15) goto _L128;
+    if (param_2 != iVar15) goto _L118;
     iVar7 = 2;
   }
   iVar7 = iVar7 + 9;
-_L128:
+_L118:
   if ((uint)*in_stack_00000000 + iVar7 < 0xff) {
     iStack_5c = 0;
     sVar5 = 0;

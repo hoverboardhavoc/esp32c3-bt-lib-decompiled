@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llm_hci.o -> hci_le_rd_tx_pwr_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ undefined4 hci_le_rd_tx_pwr_cmd_handler(void)
     uVar1 = 0;
   }
   *puVar2 = uVar1;
-  uVar1 = (*_r_lld_res_list_peer_rpa_get)(r_co_bdaddr_compare,1,_r_lld_res_list_peer_rpa_get);
+  uVar1 = (*_r_lld_res_list_peer_rpa_get)(co_null_bdaddr,1,_r_lld_res_list_peer_rpa_get);
   puVar2[1] = uVar1;
   uVar1 = (*_r_lld_res_list_peer_rpa_get)(DAT_00012049,1,_r_lld_res_list_peer_rpa_get);
   puVar2[2] = uVar1;

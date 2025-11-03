@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> llc_con_upd.o -> r_llc_rem_con_upd_proc_continue_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,7 +36,7 @@ void r_llc_rem_con_upd_proc_continue_hack(int param_1,int param_2,int param_3)
   if (iVar3 != param_2) {
     UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 0x10);
     param_1 = (**(code **)(_r_ip_funcs_p + 0x680))(__src,*(code **)(_r_ip_funcs_p + 0x680));
-    uVar5 = 0x1eb;
+    uVar5 = 0x1ef;
     goto _L113;
   }
   uVar4 = (**(code **)(_r_ip_funcs_p + 0x680))(__src,*(code **)(_r_ip_funcs_p + 0x680));
@@ -114,7 +114,7 @@ _L102:
 _L103:
       UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 0xc);
       param_2 = (**(code **)(_r_ip_funcs_p + 0x680))(__src,*(code **)(_r_ip_funcs_p + 0x680));
-      uVar5 = 0x268;
+      uVar5 = 0x26c;
 _L113:
                     /* WARNING: Could not recover jumptable at 0x00010aaa. Too many branches */
                     /* WARNING: Treating indirect jump as call */

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llm_adv.o -> lld_per_adv_end_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,9 +15,13 @@
 undefined4 lld_per_adv_end_ind_handler(byte *param_1)
 
 {
+  byte bVar1;
+  
   if (*(char *)(*(int *)(_p_llm_env + 8) + (uint)*param_1 * 0x44 + 0x40) == '\r') {
     r_llm_cmd_cmp_send(0x2040,0);
-    *(undefined1 *)(*(int *)(_p_llm_env + 8) + (uint)*param_1 * 0x44 + 0x40) = 10;
+    bVar1 = *param_1;
+    *(undefined1 *)(*(int *)(_p_llm_env + 8) + (uint)bVar1 * 0x44 + 0x40) = 10;
+    r_ble_log_internal_x1(0x404e013c,bVar1 | 0xa00);
   }
   return 0;
 }

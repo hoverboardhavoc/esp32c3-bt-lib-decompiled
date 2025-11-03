@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_utils_verify_aa
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,7 +35,7 @@ bool r_lld_adv_utils_verify_aa(uint param_1)
           bVar5 = 0;
           uVar4 = 1;
           cVar6 = '\x01';
-          goto _L762;
+          goto _L749;
         }
         bVar1 = true;
       }
@@ -44,14 +44,14 @@ bool r_lld_adv_utils_verify_aa(uint param_1)
     } while (iVar2 != 0);
   }
   return false;
-_L762:
+_L749:
   uVar8 = param_1 & uVar4;
   uVar4 = uVar4 << 1;
   cVar7 = '\x01';
   if ((param_1 & uVar4) == 0) {
     if (uVar8 != 0) {
       bVar5 = bVar5 + 1;
-      goto _L767;
+      goto _L754;
     }
     cVar7 = cVar6 + '\x01';
   }
@@ -60,7 +60,7 @@ _L762:
   }
   else {
     cVar7 = cVar6 + '\x01';
-_L767:
+_L754:
     bVar3 = bVar3 + 1;
   }
   if (uVar4 == 0x100) {
@@ -79,6 +79,6 @@ _L767:
   if (iVar2 == 0) {
     return uVar4 == 0x80000000 && bVar5 < 0x19;
   }
-  goto _L762;
+  goto _L749;
 }
 

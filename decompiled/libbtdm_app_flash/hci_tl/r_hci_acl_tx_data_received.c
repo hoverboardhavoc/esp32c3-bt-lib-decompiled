@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> hci_tl.o -> r_hci_acl_tx_data_received
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,8 +16,9 @@ void r_hci_acl_tx_data_received(uint param_1,int param_2,undefined2 param_3)
   byte *pbVar1;
   undefined2 *puVar2;
   
-  if (DAT_0001101f != '\0') {
-    DAT_0001101f = 0;
+  r_ble_log_internal_x1(0x2027019a,param_2 << 0x10 | param_1);
+  if (DAT_0001201f != '\0') {
+    DAT_0001201f = 0;
     return;
   }
   pbVar1 = (byte *)r_sdk_config_get_hl_derived_opts();
@@ -32,7 +33,7 @@ void r_hci_acl_tx_data_received(uint param_1,int param_2,undefined2 param_3)
     r_ke_msg_send();
     return;
   }
-  r_assert_param(param_2,param_1,"hci_tl.c",0x773);
+  r_assert_param(param_2,param_1,"hci_tl.c",0x777);
   return;
 }
 

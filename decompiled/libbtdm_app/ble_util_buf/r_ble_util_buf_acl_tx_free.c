@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> ble_util_buf.o -> r_ble_util_buf_acl_tx_free
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ void r_ble_util_buf_acl_tx_free(int param_1)
   uVar1 = uVar1 & 0xff;
   if (0xb < uVar3) {
     (**(code **)(_r_plf_funcs_p + 0xc))
-              (uVar1,param_1,"ble_util_buf.c",0x18d,*(code **)(_r_plf_funcs_p + 0xc));
+              (uVar1,param_1,"ble_util_buf.c",0x196,*(code **)(_r_plf_funcs_p + 0xc));
   }
   if (uVar3 < *(byte *)(_p_ble_util_buf_env + 0x1bb)) {
     (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));

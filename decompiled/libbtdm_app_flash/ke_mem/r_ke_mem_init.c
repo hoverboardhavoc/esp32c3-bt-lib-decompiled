@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit daab5dbba958a13041bd496e4a6ed506c9284a06
- * https://github.com/espressif/esp32c3-bt-lib/commit/daab5dbba958a13041bd496e4a6ed506c9284a06
- * Upstream date: 2025-03-20 20:43:40 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(86a4da5c)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> ke_mem.o -> r_ke_mem_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,27 +10,19 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void r_ke_mem_init(uint param_1,int param_2,ushort param_3)
+void r_ke_mem_init(int param_1,int param_2,uint param_3)
 
 {
-  int iVar1;
-  undefined2 *puVar2;
+  undefined2 *puVar1;
   
-  puVar2 = (undefined2 *)(param_2 + 3U & 0xfffffffc);
-  *(undefined2 **)(r_ble_log_internal_x2 + (param_1 + 4) * 4) = puVar2;
-  puVar2[1] = ((short)param_2 + param_3 & 0xfffc) - (short)puVar2;
-  *puVar2 = 0xa55a;
-  *(undefined4 *)(puVar2 + 2) = 0;
-  *(undefined4 *)(puVar2 + 4) = 0;
-  *(ushort *)(r_ble_log_internal_x2 + (param_1 + 0x10) * 2) = param_3;
-  iVar1 = r_sdk_config_get_opts_ext();
-  if ((*(uint *)(iVar1 + 0x28) & 2) != 0) {
-    iVar1 = r_sdk_config_get_opts_ext();
-    if (*(byte *)(iVar1 + 0x2c) < 3) {
-      r_ble_log_internal_x2(0x40250003,(uint)param_3 << 0x10 | param_1,param_2);
-      return;
-    }
-  }
+  puVar1 = (undefined2 *)(param_2 + 3U & 0xfffffffc);
+  *(undefined2 **)(&r_osi_funcs_p + (param_1 + 4) * 4) = puVar1;
+  puVar1[1] = ((short)param_2 + (short)param_3 & 0xfffcU) - (short)puVar1;
+  *puVar1 = 0xa55a;
+  *(undefined4 *)(puVar1 + 2) = 0;
+  *(undefined4 *)(puVar1 + 4) = 0;
+  *(short *)(&r_osi_funcs_p + (param_1 + 0x10) * 2) = (short)param_3;
+  r_ble_log_internal_x2(0x402a01aa,param_3 | param_1 << 0x10);
   return;
 }
 

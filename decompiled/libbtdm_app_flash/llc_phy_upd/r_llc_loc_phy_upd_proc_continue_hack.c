@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llc_phy_upd.o -> r_llc_loc_phy_upd_proc_continue_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,16 +35,19 @@ void r_llc_loc_phy_upd_proc_continue_hack(int param_1,int param_2,int param_3)
   iVar12 = r_llc_proc_get(0);
   uVar1 = *(undefined1 *)(iVar10 + 0x1c);
   uVar2 = *(undefined1 *)(iVar10 + 0x1d);
+  r_ble_log_internal_x2
+            (0x404f0040,(uint)*(ushort *)(iVar10 + 0x42) | param_1 << 0x10 | param_2 << 0x18,param_3
+            );
   if (param_3 != 0) {
     r_llc_proc_timer_set(param_1,0,0);
 _L111:
     r_lld_con_tx_len_update_for_rate(param_1,4);
     goto _L26;
   }
-  iVar13 = r_llc_proc_state_get();
+  iVar13 = r_llc_proc_state_get(iVar12);
   if (iVar13 != param_2) {
     r_llc_proc_state_get(iVar12);
-    r_assert_warn(param_2,"llc_phy_upd.c",0x9c);
+    r_assert_warn(param_2,"llc_phy_upd.c",0x9f);
     return;
   }
   uVar14 = r_llc_proc_state_get(iVar12);
@@ -229,7 +232,7 @@ _L26:
                         (param_1,uVar17,(&co_phy_to_rate)[bVar16],*(undefined2 *)(iVar12 + 8));
     if (param_3 != 0) {
       r_assert_param(*(undefined1 *)(iVar12 + 0xd),*(undefined1 *)(iVar12 + 0xc),"llc_phy_upd.c",
-                     0x1a2);
+                     0x1a5);
       goto _L26;
     }
     break;
@@ -253,7 +256,7 @@ _L26:
     goto _L26;
   default:
     uVar14 = r_llc_proc_state_get(iVar12);
-    r_assert_param(param_1,uVar14,"llc_phy_upd.c",0x1ca);
+    r_assert_param(param_1,uVar14,"llc_phy_upd.c",0x1cd);
     return;
   }
   uVar14 = 4;

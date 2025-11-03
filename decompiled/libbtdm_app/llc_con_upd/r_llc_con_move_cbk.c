@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> llc_con_upd.o -> r_llc_con_move_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ void r_llc_con_move_cbk(uint param_1)
   param_1 = param_1 & 0xff;
   iVar7 = param_1 * 4;
   if (*(int *)(&llc_env + iVar7) == 0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"llc_con_upd.c",0x6ee,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"llc_con_upd.c",0x706,*(code **)(_r_plf_funcs_p + 8));
   }
   iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   if (param_1 < *(byte *)(iVar2 + 0xd)) {
@@ -39,20 +39,20 @@ void r_llc_con_move_cbk(uint param_1)
                            (0x10b,param_1 << 8 | 1,0x30,*(code **)(_r_modules_funcs_p + 200));
         iVar2 = (**(code **)(_r_ip_funcs_p + 0x4f0))(param_1,*(code **)(_r_ip_funcs_p + 0x4f0));
         if (*(int *)(&llc_env + iVar7) == 0) {
-          (**(code **)(_r_plf_funcs_p + 8))(0,"llc_con_upd.c",0x6f8,*(code **)(_r_plf_funcs_p + 8));
+          (**(code **)(_r_plf_funcs_p + 8))(0,"llc_con_upd.c",0x710,*(code **)(_r_plf_funcs_p + 8));
         }
         if (iVar2 == 0) {
-          (**(code **)(_r_plf_funcs_p + 8))(0,"llc_con_upd.c",0x6f9,*(code **)(_r_plf_funcs_p + 8));
+          (**(code **)(_r_plf_funcs_p + 8))(0,"llc_con_upd.c",0x711,*(code **)(_r_plf_funcs_p + 8));
         }
         if (*(int *)(iVar2 + 4) == 0) {
-          (**(code **)(_r_plf_funcs_p + 8))(0,"llc_con_upd.c",0x6fa,*(code **)(_r_plf_funcs_p + 8));
+          (**(code **)(_r_plf_funcs_p + 8))(0,"llc_con_upd.c",0x712,*(code **)(_r_plf_funcs_p + 8));
         }
         uVar8 = *(uint *)(iVar2 + 0xc);
         uVar6 = *(uint *)(iVar2 + 0x10);
         if ((*(ushort *)(*(int *)(&llc_env + iVar7) + 0x42) & 1) == 0) {
           if ((uVar8 < 4) || (uVar6 < uVar8)) {
             (**(code **)(_r_plf_funcs_p + 8))
-                      (0,"llc_con_upd.c",0x701,*(code **)(_r_plf_funcs_p + 8));
+                      (0,"llc_con_upd.c",0x719,*(code **)(_r_plf_funcs_p + 8));
           }
           uVar8 = uVar8 - 3;
           uVar6 = uVar6 - 3;

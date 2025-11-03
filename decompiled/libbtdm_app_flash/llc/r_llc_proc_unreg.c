@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llc.o -> r_llc_proc_unreg
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,19 +22,13 @@ void r_llc_proc_unreg(uint param_1,uint param_2)
   uVar1 = r_ke_state_get(uVar4);
   iVar2 = *(int *)(&llc_env + param_1 * 4);
   if (1 < param_2) {
-    r_assert_param(param_1,param_2,"llc.c",0x1e5);
+    r_assert_param(param_1,param_2,"llc.c",0x1eb);
   }
   piVar3 = (int *)(iVar2 + param_2 * 4);
   if (*piVar3 == 0) {
-    r_assert_param(param_1,param_2,"llc.c",0x1e6);
+    r_assert_param(param_1,param_2,"llc.c",0x1ec);
   }
-  iVar2 = r_sdk_config_get_opts_ext();
-  if ((*(uint *)(iVar2 + 0x28) & 0x20) != 0) {
-    iVar2 = r_sdk_config_get_opts_ext();
-    if (*(byte *)(iVar2 + 0x2c) < 3) {
-      r_ble_log_internal_x1(0x40a30026,param_2 << 8 | param_1);
-    }
-  }
+  r_ble_log_internal_x1(0x400f0016,param_2 << 8 | param_1);
   r_llc_proc_timer_set(param_1,param_2,0);
   r_ke_msg_free(*piVar3 + -0xc);
   *piVar3 = 0;

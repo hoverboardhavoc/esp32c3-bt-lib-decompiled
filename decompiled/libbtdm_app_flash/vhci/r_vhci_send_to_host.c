@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> vhci.o -> r_vhci_send_to_host
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void r_vhci_send_to_host(int param_1,uint param_2)
   
   if (param_1 == 0) {
     if (0 < _g_bt_plf_log_level) {
-      ets_printf("%s %d\n",0x10000,0xf2);
+      ets_printf("%s %d\n",0x10000,0xfa);
     }
     do {
                     /* WARNING: Do nothing block with infinite loop */
@@ -27,7 +27,7 @@ void r_vhci_send_to_host(int param_1,uint param_2)
   }
   if (param_2 == 0) {
     if (0 < _g_bt_plf_log_level) {
-      ets_printf("%s %d\n",0x10000,0xf3);
+      ets_printf("%s %d\n",0x10000,0xfb);
     }
     do {
                     /* WARNING: Do nothing block with infinite loop */
@@ -36,7 +36,7 @@ void r_vhci_send_to_host(int param_1,uint param_2)
   if ((*(int *)(_vhci_env_p + 8) != 0) &&
      (UNRECOVERED_JUMPTABLE = *(code **)(*(int *)(_vhci_env_p + 8) + 4),
      UNRECOVERED_JUMPTABLE != (code *)0x0)) {
-                    /* WARNING: Could not recover jumptable at 0x000103ac. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010422. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (*UNRECOVERED_JUMPTABLE)(param_2 & 0xffff);
     return;

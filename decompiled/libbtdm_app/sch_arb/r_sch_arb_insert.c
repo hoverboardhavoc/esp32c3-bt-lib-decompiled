@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> sch_arb.o -> r_sch_arb_insert
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,10 +31,10 @@ char r_sch_arb_insert(uint *param_1)
   
   cStack_49 = '\0';
   if (0x6180f < param_1[4] - 0x271) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(0,"sch_arb.c",0x295,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(0,"sch_arb.c",0x296,*(code **)(_r_plf_funcs_p + 0xc));
   }
   if (0x270 < param_1[2]) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"sch_arb.c",0x296,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"sch_arb.c",0x297,*(code **)(_r_plf_funcs_p + 8));
   }
   iVar3 = (**(code **)(_r_ip_funcs_p + 0x860))
                     (1,&cStack_49,param_1,*(code **)(_r_ip_funcs_p + 0x860));
@@ -69,7 +69,7 @@ _L84:
     puVar8 = (uint *)0x0;
     while (puVar2 = puVar1, puVar2 != (uint *)0x0) {
       if (puVar2 == param_1) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"sch_arb.c",0x2ed,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,"sch_arb.c",0x2ee,*(code **)(_r_plf_funcs_p + 8));
       }
       uVar4 = (**(code **)(_r_ip_funcs_p + 0x6a0))(param_1,puVar2,*(code **)(_r_ip_funcs_p + 0x6a0))
       ;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_evt_canceled_cbk_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,36 +15,29 @@ void r_lld_con_evt_canceled_cbk_hack(int param_1)
 {
   byte bVar1;
   char cVar2;
-  char cVar3;
+  uint uVar3;
   undefined4 uVar4;
-  int iVar5;
   
   if (param_1 != 0) {
     uVar4 = r_lld_read_clock();
-    bVar1 = *(byte *)(param_1 + 0x8e);
-    cVar2 = *(char *)(param_1 + 0x8f);
-    iVar5 = r_sdk_config_get_opts_ext();
-    if (((*(uint *)(iVar5 + 0x28) & 0x20) != 0) &&
-       (iVar5 = r_sdk_config_get_opts_ext(), *(byte *)(iVar5 + 0x2c) < 3)) {
-      r_ble_log_internal_x1
-                (0x4043000c,
-                 (uint)*(byte *)(param_1 + 0x8e) |
-                 (uint)*(byte *)(param_1 + 0x16) << 0x10 | (uint)*(byte *)(param_1 + 0x8f) << 8);
-    }
+    bVar1 = *(byte *)(param_1 + 0x8f);
+    uVar3 = (uint)*(byte *)(param_1 + 0x8e);
+    r_ble_log_internal_x1
+              (0x40430089,(uint)*(byte *)(param_1 + 0x16) << 0x10 | (uint)bVar1 << 8 | uVar3);
     if ((*(byte *)(param_1 + 0x8f) & 0xfd) != 0) {
-      r_assert_param((uint)bVar1,"lld_con.c",0xbb0);
+      r_assert_param(uVar3,"lld_con.c",0xbf1);
     }
     *(uint *)(param_1 + 0x48) = *(int *)(param_1 + 0x48) + *(int *)(param_1 + 100) & 0xfffffff;
-    cVar3 = rwip_priority;
+    cVar2 = rwip_priority;
     *(short *)(param_1 + 0x7e) = *(short *)(param_1 + 0x7e) + 1;
-    *(char *)(param_1 + 0x16) = *(char *)(param_1 + 0x16) + cVar3;
+    *(char *)(param_1 + 0x16) = *(char *)(param_1 + 0x16) + cVar2;
     r_lld_con_sched_hack(*(undefined1 *)(param_1 + 0x8e),uVar4,0);
-    if ((*(int *)(&lld_con_env + (uint)bVar1 * 4) != 0) && (cVar2 == '\x02')) {
-      *(undefined1 *)(param_1 + 0x8f) = 2;
+    if ((*(int *)(&lld_con_env + uVar3 * 4) != 0) && (bVar1 == 2)) {
+      *(byte *)(param_1 + 0x8f) = bVar1;
     }
     return;
   }
-  r_assert_err("lld_con.c",0xbc4);
+  r_assert_err("lld_con.c",0xc05);
   return;
 }
 

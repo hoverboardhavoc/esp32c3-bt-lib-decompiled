@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> llc_hci.o -> hci_acl_data_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,7 +38,7 @@ undefined4 hci_acl_data_handler(ushort *param_1,uint param_2)
       *(undefined2 *)(iVar2 + 6) = 0;
       if ((uVar4 & 0xfc00) != 0) {
         (**(code **)(_r_plf_funcs_p + 0xc))
-                  (0x3ff,"llc_hci.c",0x21f,*(code **)(_r_plf_funcs_p + 0xc));
+                  (0x3ff,"llc_hci.c",0x221,*(code **)(_r_plf_funcs_p + 0xc));
       }
       uVar4 = (*(ushort *)(iVar2 + 6) & 0xfc00 | param_1[1]) & 0xfff | *param_1 & 0xc000;
       if (*(char *)(iVar5 + 0x48) == '\0') {

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_set_ext_adv_en_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -70,7 +70,7 @@ undefined4 hci_le_set_ext_adv_en_cmd_handler(short *param_1,undefined4 param_2)
   iVar4 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
   if ((*(char *)(iVar4 + 0x18) == '\0') ||
      (iVar5 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0)),
-     iVar4 = _p_llm_env, *(char *)(iVar5 + 0x2d) == '\0')) {
+     iVar4 = _p_llm_env, *(char *)(iVar5 + 0x25) == '\0')) {
     (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,0xc,*(code **)(_r_ip_funcs_p + 0x4b8));
     return 0;
   }
@@ -207,7 +207,7 @@ _L379:
                   }
                   else {
                     (**(code **)(_r_plf_funcs_p + 0xc))
-                              (0,"llm_adv.c",0x61f,*(code **)(_r_plf_funcs_p + 0xc));
+                              (0,"llm_adv.c",0x663,*(code **)(_r_plf_funcs_p + 0xc));
                   }
                 }
               }
@@ -253,7 +253,7 @@ _L379:
                               (uVar12,&uStack_68,*(code **)(_r_ip_funcs_p + 0x1e4));
             if (iVar4 != 0) {
               (**(code **)(_r_plf_funcs_p + 0xc))
-                        (uVar12,0,"llm_adv.c",0x6a8,*(code **)(_r_plf_funcs_p + 0xc));
+                        (uVar12,0,"llm_adv.c",0x6ef,*(code **)(_r_plf_funcs_p + 0xc));
               goto _L354;
             }
             iVar4 = *(int *)(_p_llm_env + 8) + iVar5;
@@ -321,7 +321,7 @@ _L390:
                 }
                 else {
                   (**(code **)(_r_plf_funcs_p + 8))
-                            (0,"llm_adv.c",0x69c,*(code **)(_r_plf_funcs_p + 8));
+                            (0,"llm_adv.c",0x6e3,*(code **)(_r_plf_funcs_p + 8));
                 }
               }
             }

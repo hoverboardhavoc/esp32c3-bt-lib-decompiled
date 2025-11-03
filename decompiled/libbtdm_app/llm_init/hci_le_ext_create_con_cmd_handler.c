@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> llm_init.o -> hci_le_ext_create_con_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -164,7 +164,7 @@ _L109:
 _L89:
     if (pcVar16 == pcVar14) {
       if (*(int *)(*(int *)(_p_llm_env + 8) + (uint)bStack_ea * 0x44) != 0) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x1d2,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x1ec,*(code **)(_r_plf_funcs_p + 8));
       }
       bVar1 = param_1[1];
       if (bVar1 == 2) {
@@ -179,7 +179,7 @@ _L97:
           if (bVar1 == 0) goto _L97;
         }
         else if (bVar1 != 3) {
-          (**(code **)(_r_plf_funcs_p + 0xc))(0,0x10000,0x1e7,*(code **)(_r_plf_funcs_p + 0xc));
+          (**(code **)(_r_plf_funcs_p + 0xc))(0,0x10000,0x201,*(code **)(_r_plf_funcs_p + 0xc));
           goto _L101;
         }
         memcpy((void *)(*(int *)(_p_llm_env + 8) + (uint)bStack_ea * 0x44 + 4),

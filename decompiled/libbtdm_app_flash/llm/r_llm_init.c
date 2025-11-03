@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llm.o -> r_llm_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_llm_init(int param_1)
+void r_llm_init(uint param_1)
 
 {
   undefined1 uVar1;
@@ -23,22 +23,24 @@ void r_llm_init(int param_1)
   undefined4 uVar6;
   undefined1 uStack_23;
   byte bStack_22;
-  byte abStack_21 [13];
+  byte abStack_21 [9];
   
   if (param_1 != 1) {
     if (param_1 != 2) {
-      if (param_1 != 0) {
-        return;
+      if (param_1 == 0) {
+        r_ke_task_create(&TASK_DESC_LLM_FLASH);
       }
-      r_ke_task_create(&TASK_DESC_LLM_FLASH);
-      return;
+      goto _L189;
     }
-    for (uVar3 = 0; iVar5 = r_sdk_config_get_opts(), uVar3 < *(byte *)(iVar5 + 0xd);
-        uVar3 = uVar3 + 1 & 0xff) {
+    uVar3 = 0;
+    while( true ) {
+      iVar5 = r_sdk_config_get_opts();
+      if (*(byte *)(iVar5 + 0xd) <= uVar3) break;
       iVar5 = *(int *)(*(int *)((int)_p_llm_env + 8) + uVar3 * 0x44);
       if (iVar5 != 0) {
         r_ke_msg_free(iVar5 + -0xc);
       }
+      uVar3 = uVar3 + 1 & 0xff;
     }
     r_ke_timer_clear(4,0);
     r_ke_timer_clear(6,0);
@@ -46,9 +48,11 @@ void r_llm_init(int param_1)
   pvVar4 = *(void **)((int)_p_llm_env + 8);
   iVar5 = r_sdk_config_get_opts();
   memset(pvVar4,0,(uint)*(byte *)(iVar5 + 0xd) * 0x44);
-  if (((*(int *)((int)_p_llm_env + 0xcc) != 0) && (*(char *)((int)_p_llm_env + 0xd7) == '\x02')) &&
-     (iVar5 = r_sdk_config_get_opts_ext(), *(char *)(iVar5 + 0x23) != '\0')) {
-    r_llm_env_adv_dup_filt_deinit_eco();
+  if ((*(int *)((int)_p_llm_env + 0xcc) != 0) && (*(char *)((int)_p_llm_env + 0xd7) == '\x02')) {
+    iVar5 = r_sdk_config_get_opts_ext();
+    if (*(char *)(iVar5 + 0x23) != '\0') {
+      r_llm_env_adv_dup_filt_deinit_eco();
+    }
   }
   uVar1 = *(undefined1 *)((int)_p_llm_env + 0xd0);
   uVar6 = *(undefined4 *)((int)_p_llm_env + 0xcc);
@@ -110,6 +114,8 @@ void r_llm_init(int param_1)
   if (iVar5 != 0) {
     *(undefined1 *)((int)_p_llm_env + 0xd5) = 1;
   }
+_L189:
+  r_ble_log_internal_x1(0x400e00e6,(uint)*(byte *)((int)_p_llm_env + 0xd9) << 8 | param_1);
   return;
 }
 

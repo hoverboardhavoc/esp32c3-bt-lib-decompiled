@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_ext_pkt_prepare_set_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -47,11 +47,11 @@ uint r_lld_adv_ext_pkt_prepare_set_hack
   }
   uVar5 = 0;
   if (param_6 != 0) {
-    if (DAT_00016590 == 0) {
+    if (DAT_000165b4 == 0) {
       iVar6 = 300;
     }
     else {
-      iVar6 = DAT_00016590 + -0x96;
+      iVar6 = DAT_000165b4 + -0x96;
     }
     uVar4 = uVar4 + iVar6;
     if (uVar4 < 0x257ed5) {

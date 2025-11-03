@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> sch_arb.o -> r_sch_arb_remove
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,8 +16,7 @@ int r_sch_arb_remove(int param_1,int param_2)
 
 {
   int iVar1;
-  int iVar2;
-  uint uVar3;
+  uint uVar2;
   
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   if (param_1 != 0) {
@@ -29,26 +28,20 @@ int r_sch_arb_remove(int param_1,int param_2)
         r_co_list_pop_front(&sch_arb_env);
         r_sch_arb_prog_timer();
         iVar1 = 0;
-        goto _L130;
+        goto _L121;
       }
       iVar1 = r_co_list_extract(&sch_arb_env,param_1);
       if (iVar1 == 0) {
-        uVar3 = r_co_list_extract(&sch_arb_env,param_1);
-        iVar1 = ((uVar3 ^ 1) & 0x7f) << 1;
-        goto _L130;
+        uVar2 = r_co_list_extract(&sch_arb_env,param_1);
+        iVar1 = ((uVar2 ^ 1) & 0x7f) << 1;
+        goto _L121;
       }
     }
   }
   iVar1 = 0;
-_L130:
+_L121:
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
-  iVar2 = r_sdk_config_get_opts_ext();
-  if ((*(uint *)(iVar2 + 0x28) & 1) != 0) {
-    iVar2 = r_sdk_config_get_opts_ext();
-    if (*(byte *)(iVar2 + 0x2c) < 2) {
-      r_ble_log_internal_x2(0x20040005,param_1,iVar1);
-    }
-  }
+  r_ble_log_internal_x2(0x200901a0,param_1,iVar1);
   return iVar1;
 }
 

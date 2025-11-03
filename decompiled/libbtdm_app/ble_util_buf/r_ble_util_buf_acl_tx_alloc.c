@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> ble_util_buf.o -> r_ble_util_buf_acl_tx_alloc
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,7 +30,7 @@ undefined2 r_ble_util_buf_acl_tx_alloc(int param_1)
     uVar3 = *(ushort *)(iVar1 + 4) - 0x9c00 >> 10 & 0xff;
     if (0xb < uVar3) {
       (**(code **)(_r_plf_funcs_p + 0xc))
-                (uVar3,"ble_util_buf.c",0x169,*(code **)(_r_plf_funcs_p + 0xc));
+                (uVar3,"ble_util_buf.c",0x171,*(code **)(_r_plf_funcs_p + 0xc));
     }
     if ((uVar3 < *(byte *)(_p_ble_util_buf_env + 0x1bb)) ||
        (iVar2 = (**(code **)(_r_plf_funcs_p + 0x9c))

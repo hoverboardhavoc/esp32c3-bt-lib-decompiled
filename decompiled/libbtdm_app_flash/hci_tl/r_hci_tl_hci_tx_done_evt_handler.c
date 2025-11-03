@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> hci_tl.o -> r_hci_tl_hci_tx_done_evt_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,11 +27,12 @@ void r_hci_tl_hci_tx_done_evt_handler(void)
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   r_hci_ble_adv_report_tx_check(iVar3);
   r_assert_err = (code)0x1;
+  r_ble_log_internal_x1(0x20070198,*(ushort *)(iVar3 + 4) | 0x10000);
   uVar1 = *(ushort *)(iVar3 + 4);
   if (uVar1 < 0x1106) {
     if (uVar1 < 0x1101) {
 _L127:
-      r_assert_param(0,"hci_tl.c",0x51f);
+      r_assert_param(0,"hci_tl.c",0x520);
     }
   }
   else {
@@ -54,13 +55,13 @@ _L127:
   if (_hci_tl_env == 0) {
     iVar3 = r_hci_fc_check_host_available_nb_acl_packets();
     if (iVar3 == 0) {
-      DAT_0001101e = 1;
+      DAT_0001201e = 1;
       return;
     }
-    DAT_0001101e = 0;
+    DAT_0001201e = 0;
     iVar3 = _r_co_list_init;
     if (_r_co_list_init == 0) {
-      DAT_0001101e = 0;
+      DAT_0001201e = 0;
       return;
     }
   }
@@ -68,15 +69,15 @@ _L127:
   switch(*(short *)(iVar3 + 4) + -0x1101) {
   case 0:
     if (((*(short *)(iVar3 + 8) != 0xc03) && (*(short *)(iVar3 + 8) != 0xc35)) &&
-       (iVar2 = (DAT_0001101d + 1) * 0x1000000, DAT_0001101d = (byte)((uint)iVar2 >> 0x18),
+       (iVar2 = (DAT_0001201d + 1) * 0x1000000, DAT_0001201d = (byte)((uint)iVar2 >> 0x18),
        5 < iVar2 >> 0x18)) {
       r_assert_err(0,"hci_tl.c",0x428);
     }
     iVar3 = r_hci_build_cc_evt(iVar3);
     break;
   case 1:
-    iVar2 = (DAT_0001101d + 1) * 0x1000000;
-    DAT_0001101d = (byte)((uint)iVar2 >> 0x18);
+    iVar2 = (DAT_0001201d + 1) * 0x1000000;
+    DAT_0001201d = (byte)((uint)iVar2 >> 0x18);
     if (5 < iVar2 >> 0x18) {
       r_assert_err(0,"hci_tl.c",0x437);
     }

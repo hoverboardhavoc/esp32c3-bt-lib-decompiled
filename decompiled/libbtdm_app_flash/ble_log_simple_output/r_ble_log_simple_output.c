@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> ble_log_simple_output.o -> r_ble_log_simple_output
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,24 +12,23 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_ble_log_simple_output(size_t param_1,void *param_2,size_t param_3,void *param_4)
+void r_ble_log_simple_output(size_t param_1,void *param_2,undefined4 param_3,undefined4 param_4)
 
 {
-  int iVar1;
+  undefined4 uVar1;
+  undefined4 uStack_2c;
+  undefined1 auStack_28 [24];
   
-  iVar1 = param_3 + param_1 + 2;
-  (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
-  **(undefined1 **)(_ble_log_async_env + 8) = (char)iVar1;
-  *(char *)(*(int *)(_ble_log_async_env + 8) + 1) = (char)((uint)iVar1 >> 8);
-  if (iVar1 < 0x12d) {
-    memcpy((void *)(*(int *)(_ble_log_async_env + 8) + 2),param_2,param_1);
-    memcpy((void *)(*(int *)(_ble_log_async_env + 8) + param_1 + 2),param_4,param_3);
+  uStack_2c = 0;
+  memset(auStack_28,0,0x16);
+  uStack_2c = CONCAT22(uStack_2c._2_2_,(short)param_3 + 2 + (short)param_1);
+  memcpy((void *)((int)&uStack_2c + 2),param_2,param_1);
+  uVar1 = 10;
+  if (((*_ble_log_env & 2) == 0) && (uVar1 = 0x12, (*_ble_log_env & 1) == 0)) {
+    uVar1 = 6;
   }
   (**(code **)(_ble_log_env + 4))
-            (iVar1,*(undefined4 *)(_ble_log_async_env + 8),1,*(code **)(_ble_log_env + 4));
-                    /* WARNING: Could not recover jumptable at 0x000100a8. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
+            (param_1 + 2,&uStack_2c,param_3,param_4,uVar1,*(code **)(_ble_log_env + 4));
   return;
 }
 

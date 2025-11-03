@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llc_phy_upd.o -> r_llc_rem_phy_upd_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -32,7 +32,7 @@ void r_llc_rem_phy_upd_proc_continue(int param_1,int param_2,int param_3)
     iVar6 = r_llc_proc_state_get();
     if (iVar6 != param_2) {
       r_llc_proc_state_get(iVar5);
-      r_assert_warn(param_2,"llc_phy_upd.c",0x26e);
+      r_assert_warn(param_2,"llc_phy_upd.c",0x273);
       return;
     }
     iVar6 = r_llc_proc_state_get(iVar5);
@@ -51,7 +51,7 @@ void r_llc_rem_phy_upd_proc_continue(int param_1,int param_2,int param_3)
       else {
         if (iVar6 != 5) {
           uVar8 = r_llc_proc_state_get(iVar5);
-          r_assert_param(param_1,uVar8,"llc_phy_upd.c",0x2f3);
+          r_assert_param(param_1,uVar8,"llc_phy_upd.c",0x2f8);
           return;
         }
         uVar3 = *(ushort *)(iVar4 + 0x42);
@@ -86,7 +86,7 @@ void r_llc_rem_phy_upd_proc_continue(int param_1,int param_2,int param_3)
         *(undefined1 *)((int)puVar7 + 0xf) = uVar10;
         r_ke_msg_send(puVar7);
       }
-      goto _L135;
+      goto _L137;
     }
     r_llc_proc_timer_set(param_1,1,0);
     if (*(short *)(iVar5 + 0xc) != 0) {
@@ -112,13 +112,13 @@ void r_llc_rem_phy_upd_proc_continue(int param_1,int param_2,int param_3)
         r_llc_proc_state_set(iVar5,param_1,7);
         return;
       }
-      r_assert_param(*(undefined1 *)(iVar5 + 0xd),*(undefined1 *)(iVar5 + 0xc),"llc_phy_upd.c",0x2da
+      r_assert_param(*(undefined1 *)(iVar5 + 0xd),*(undefined1 *)(iVar5 + 0xc),"llc_phy_upd.c",0x2df
                     );
-      goto _L135;
+      goto _L137;
     }
   }
   r_lld_con_tx_len_update_for_rate(param_1,4);
-_L135:
+_L137:
   if ((*(ushort *)(iVar4 + 0x42) & 1) == 0) {
     *(ushort *)(iVar4 + 0x42) = *(ushort *)(iVar4 + 0x42) & 0xffef;
     if (*(short *)(iVar5 + 0xc) != 0) {

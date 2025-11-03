@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3ff529142f6e2707d57b10eb87ac8d86e9098b88
- * https://github.com/espressif/esp32c3-bt-lib/commit/3ff529142f6e2707d57b10eb87ac8d86e9098b88
- * Upstream date: 2025-06-05 11:04:06 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713a69)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_rw_run
  *
  * (C) Espressif, Apache License 2.0.
@@ -30,11 +30,8 @@ char * btdm_rw_run(char *param_1)
     if (iVar2 != 0) {
       coex_schm_process_in_active();
     }
-    pcVar1 = (char *)r_sdk_config_get_opts_ext();
-    if (((*(uint *)(pcVar1 + 0x28) & 0x200) != 0) &&
-       (pcVar1 = (char *)r_sdk_config_get_opts_ext(), (byte)pcVar1[0x2c] < 3)) {
-      pcVar1 = (char *)r_ble_log_internal_x1(0x400c0005,_btdm_pwr_state << 8 | (uint)param_1);
-    }
+    pcVar1 = (char *)r_ble_log_internal_x2
+                               (0x200b01be,_DAT_60042000,_btdm_pwr_state << 8 | (uint)param_1);
   }
   if (param_1 == (char *)0x2) {
     if (_btdm_pwr_state != 2) {
@@ -42,11 +39,11 @@ char * btdm_rw_run(char *param_1)
       pcVar1 = (char *)r_sdk_cfg_priv_opts_ext_get();
       if ((*pcVar1 != '\0') && (_btdm_pwr_state == 0)) {
         pll_track_state = r_rwip_time_get();
-        uVar3 = pll_track_state - DAT_0001200c & 0xfffffff;
+        uVar3 = pll_track_state - DAT_000120dc & 0xfffffff;
         pcVar1 = (char *)0x0;
-        DAT_00012008 = extraout_a1;
+        DAT_000120d8 = extraout_a1;
         if ((uVar3 < 0x8000001) && (0xc80 < uVar3)) {
-          DAT_0001200c = pll_track_state;
+          DAT_000120dc = pll_track_state;
           bt_track_pll_cap(0);
           pcVar1 = (char *)0x1;
         }
@@ -55,7 +52,7 @@ char * btdm_rw_run(char *param_1)
     }
   }
   else if ((char *)0x1 < param_1) {
-    pcVar1 = (char *)r_assert_err(0,"arch_main.c",0x55d);
+    pcVar1 = (char *)r_assert_err(0,"arch_main.c",0x563);
   }
   return pcVar1;
 }

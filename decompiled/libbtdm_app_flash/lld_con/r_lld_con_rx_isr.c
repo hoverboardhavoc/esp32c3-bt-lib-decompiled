@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_rx_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,65 +15,57 @@
 void r_lld_con_rx_isr(uint param_1)
 
 {
-  byte bVar1;
-  ushort uVar2;
+  ushort uVar1;
+  int iVar2;
   int iVar3;
   int iVar4;
-  int iVar5;
-  ushort uVar6;
-  int iVar7;
+  ushort uVar5;
+  int iVar6;
+  uint uVar7;
   
   if (*(int *)(&lld_con_env + param_1 * 4) == 0) {
-    r_assert_param(0,"lld_con.c",0xc2c);
+    r_assert_param(0,"lld_con.c",0xc6d);
     return;
   }
-  iVar3 = *(int *)(&lld_con_env + param_1 * 4);
-  iVar4 = r_sdk_config_get_opts_ext();
-  if (((*(uint *)(iVar4 + 0x28) & 0x20) != 0) &&
-     (iVar4 = r_sdk_config_get_opts_ext(), *(byte *)(iVar4 + 0x2c) < 3)) {
-    r_ble_log_internal_x1(0x40c3001b,param_1);
-  }
-  *(ushort *)(iVar3 + 0x84) = *(ushort *)(iVar3 + 0x84) & 0xfffb;
-  while (iVar4 = r_lld_rxdesc_check_hack(param_1), iVar4 != 0) {
-    bVar1 = *(byte *)(_p_lld_env + 0xd8);
-    iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
-    iVar7 = (uint)bVar1 * 0x14;
-    uVar6 = *(ushort *)(iVar7 + 2 + iVar5);
-    iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
-    uVar2 = *(ushort *)(iVar7 + 4 + iVar5);
-    if (((uVar6 & 1) == 0) && (r_lld_con_rx_sync_time_update(param_1,iVar3), (uVar6 & 8) == 0)) {
-      *(undefined4 *)(iVar3 + 0x58) = *(undefined4 *)(iVar3 + 0x50);
-      if ((uVar6 & 0x66) == 0) {
-        if ((uVar6 & 0x10) == 0) {
-          iVar5 = r_emi_get_mem_addr_by_offset(0x400);
-          uVar6 = uVar2 >> 8;
-          *(undefined2 *)(iVar3 + 0x98) = *(undefined2 *)(iVar5 + param_1 * 0x5a + 0x50);
-          if ((uVar6 != 0) && ((uVar2 & 3) != 0)) {
-            if ((4 < uVar6) && ((*(ushort *)(iVar3 + 0x84) & 0x20) != 0)) {
-              uVar6 = uVar6 - 4;
+  iVar2 = *(int *)(&lld_con_env + param_1 * 4);
+  *(ushort *)(iVar2 + 0x84) = *(ushort *)(iVar2 + 0x84) & 0xfffb;
+  while (iVar3 = r_lld_rxdesc_check_hack(param_1), iVar3 != 0) {
+    uVar7 = (uint)*(byte *)(_p_lld_env + 0xd8);
+    iVar4 = r_emi_get_mem_addr_by_offset(0x1000);
+    iVar6 = uVar7 * 0x14;
+    uVar5 = *(ushort *)(iVar6 + 2 + iVar4);
+    iVar4 = r_emi_get_mem_addr_by_offset(0x1000);
+    uVar1 = *(ushort *)(iVar6 + 4 + iVar4);
+    r_ble_log_internal_x2(0x20c30086,CONCAT22(uVar1,uVar5),uVar7 << 8 | param_1);
+    if (((uVar5 & 1) == 0) && (r_lld_con_rx_sync_time_update(param_1,iVar2), (uVar5 & 8) == 0)) {
+      *(undefined4 *)(iVar2 + 0x58) = *(undefined4 *)(iVar2 + 0x50);
+      if ((uVar5 & 0x66) == 0) {
+        if ((uVar5 & 0x10) == 0) {
+          iVar4 = r_emi_get_mem_addr_by_offset(0x400);
+          uVar5 = uVar1 >> 8;
+          *(undefined2 *)(iVar2 + 0x98) = *(undefined2 *)(iVar4 + param_1 * 0x5a + 0x50);
+          if ((uVar5 != 0) && ((uVar1 & 3) != 0)) {
+            if ((4 < uVar5) && ((*(ushort *)(iVar2 + 0x84) & 0x20) != 0)) {
+              uVar5 = uVar5 - 4;
             }
-            iVar5 = r_lld_con_rx_llcp_check(param_1,iVar3,uVar6);
-            if (iVar5 == 0) {
-              iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
-              *(undefined2 *)(iVar7 + 0x12 + iVar5) = 0;
+            iVar4 = r_lld_con_rx_llcp_check(param_1,iVar2,uVar5);
+            if (iVar4 == 0) {
+              iVar4 = r_emi_get_mem_addr_by_offset(0x1000);
+              *(undefined2 *)(iVar6 + 0x12 + iVar4) = 0;
             }
           }
         }
         else {
-          iVar5 = r_sdk_config_get_opts_ext();
-          if (((*(uint *)(iVar5 + 0x28) & 0x20) != 0) &&
-             (iVar5 = r_sdk_config_get_opts_ext(), *(byte *)(iVar5 + 0x2c) < 3)) {
-            r_ble_log_internal_x1(0x40c30023,(uint)bVar1 << 8 | param_1 | (uint)uVar6 << 0x10);
-          }
-          *(undefined1 *)(iVar3 + 0x8f) = 2;
-          *(ushort *)(iVar3 + 0x84) = *(ushort *)(iVar3 + 0x84) | 0x80;
+          r_ble_log_internal_x1(0x80c30087,uVar7 << 0x18 | param_1 << 0x10 | (uint)uVar5);
+          *(undefined1 *)(iVar2 + 0x8f) = 2;
+          *(ushort *)(iVar2 + 0x84) = *(ushort *)(iVar2 + 0x84) | 0x80;
         }
       }
     }
     else {
-      iVar4 = 0;
+      iVar3 = 0;
     }
-    r_lld_con_rx_channel_assess_hack(iVar3,iVar4);
+    r_lld_con_rx_channel_assess_hack(iVar2,iVar3);
     r_lld_rxdesc_free();
   }
   return;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3ff529142f6e2707d57b10eb87ac8d86e9098b88
- * https://github.com/espressif/esp32c3-bt-lib/commit/3ff529142f6e2707d57b10eb87ac8d86e9098b88
- * Upstream date: 2025-06-05 11:04:06 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713a69)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_controller_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,24 +22,29 @@ undefined4 btdm_controller_init(int *param_1)
   undefined2 uVar5;
   int *piVar6;
   int *piVar7;
-  char cVar8;
-  char *pcVar9;
-  int iVar10;
+  char *pcVar8;
+  int iVar9;
+  undefined4 uVar10;
   uint uVar11;
   int iVar12;
-  undefined4 uVar13;
+  code *pcVar13;
   uint uVar14;
-  code *pcVar15;
-  undefined1 uStack_24;
-  undefined1 uStack_23;
+  undefined4 uStack_40;
+  int iStack_3c;
+  int iStack_38;
+  int iStack_34;
+  int iStack_30;
+  int iStack_2c;
+  int iStack_28;
+  int iStack_24;
   
-  uVar13 = 0xffffffff;
-  if (_g_rw_init_sem != 0) goto _L251;
+  uVar10 = 0xffffffff;
+  if (_g_rw_init_sem != 0) goto _L243;
   if (2 < _g_bt_plf_log_level) {
     ets_printf("Rom table is disabled\n");
   }
   (**(code **)(_r_osi_funcs_p + 0xe4))(*(code **)(_r_osi_funcs_p + 0xe4));
-  if ((*param_1 == 0x5a5aa5a5) && (param_1[1] == 0x2505080)) {
+  if ((*param_1 == 0x5a5aa5a5) && (param_1[1] == 0x2509280)) {
     if (((((uint)param_1[0xb] >> 0x10) - 1 & 0xff) < 2) &&
        ((((uint)param_1[0xb] >> 0x18) - 1 & 0xff) < 2)) {
       if (*(byte *)(param_1 + 0xc) < 2) {
@@ -52,22 +57,21 @@ undefined4 btdm_controller_init(int *param_1)
           sdk_config_set_opts_ext(param_1 + 8);
           sdk_config_overwrite_priv_opts();
           sdk_config_set_derived_opts();
-          iVar10 = r_sdk_config_get_opts_ext();
-          if (*(char *)(iVar10 + 0x1e) == '\0') {
-            uVar13 = 0xfffffff6;
+          iVar9 = r_sdk_config_get_opts_ext();
+          if (*(char *)(iVar9 + 0x1e) == '\0') {
+            uVar10 = 0xfffffff6;
             if (0 < _g_bt_plf_log_level) {
               ets_printf("Controller lib error, need rom lib\n");
-              uVar13 = 0xfffffff6;
+              uVar10 = 0xfffffff6;
             }
-            goto _L251;
+            goto _L243;
           }
           if ((*(char *)((int)param_1 + 0x17) == '\0') &&
-             (iVar10 = r_h4tl_eif_register(param_1[6]), iVar10 != 0)) goto _L359;
-          iVar10 = r_sdk_config_get_opts();
-          uStack_24 = *(undefined1 *)(iVar10 + 0xd);
-          uStack_23 = DAT_00013037;
-          r_sdk_config_set_hl_derived_opts(&uStack_24);
-          if (((uint)_btdm_env_p >> 0x10 & 0xff) == 0) {
+             (iVar9 = r_h4tl_eif_register(param_1[6]), iVar9 != 0)) goto _L351;
+          iVar9 = r_sdk_config_get_opts();
+          uStack_40._0_2_ = CONCAT11(DAT_00013047,*(undefined1 *)(iVar9 + 0xd));
+          r_sdk_config_set_hl_derived_opts(&uStack_40);
+          if (DAT_00013046 == 0) {
             btdm_hli_get_null_funcs();
           }
           else {
@@ -76,78 +80,83 @@ undefined4 btdm_controller_init(int *param_1)
           btdm_hli_funcs_register();
           _btdm_env_p = (int *)(**(code **)(_r_osi_funcs_p + 0x74))
                                          (0x28,*(code **)(_r_osi_funcs_p + 0x74));
-          if (_btdm_env_p != (int *)0x0) {
+          if (_btdm_env_p == (int *)0x0) {
+            uVar10 = 0x80a801bf;
+          }
+          else {
             memset(_btdm_env_p,0,0x28);
             uVar11 = r_lld_env_init();
-            iVar10 = r_llm_env_init();
-            if (iVar10 == 0) {
+            iVar9 = r_llm_env_init();
+            if (iVar9 == 0) {
               uVar11 = 0;
             }
-            iVar10 = r_ble_util_buf_env_init();
-            if (iVar10 == 0) {
+            iVar9 = r_ble_util_buf_env_init();
+            if (iVar9 == 0) {
               uVar11 = 0;
             }
-            if ((((uint)_btdm_env_p >> 8 & 0xff) != 0) && (iVar10 = r_flash_env_init(), iVar10 == 0)
-               ) {
+            if ((DAT_00013045 != '\0') && (iVar9 = r_flash_env_init(), iVar9 == 0)) {
               uVar11 = 0;
             }
-            iVar10 = r_hci_tl_env_init();
-            if ((iVar10 != 0) && ((uVar11 & 1) != 0)) {
-              iVar10 = r_sdk_config_get_opts();
-              bVar1 = *(byte *)(iVar10 + 0xd);
-              iVar10 = r_sdk_config_get_opts();
-              bVar2 = *(byte *)(iVar10 + 0xd);
-              uVar11 = (uint)_btdm_env_p >> 0x18;
-              iVar10 = r_sdk_config_get_opts();
+            iVar9 = r_hci_tl_env_init();
+            if ((iVar9 == 0) || ((uVar11 & 1) == 0)) {
+              uVar10 = 0x80a801c0;
+            }
+            else {
+              iVar9 = r_sdk_config_get_opts();
+              bVar1 = *(byte *)(iVar9 + 0xd);
+              iVar9 = r_sdk_config_get_opts();
+              bVar2 = *(byte *)(iVar9 + 0xd);
+              uVar14 = (uint)DAT_00013047;
+              iVar9 = r_sdk_config_get_opts();
               piVar6 = _btdm_env_p;
-              uVar14 = (uint)_btdm_env_p >> 0x10 & 0xff;
-              if (uVar14 != 0) {
-                uVar14 = uVar11 * 0xe0 + (uint)*(byte *)(iVar10 + 0xd) * 0x88;
+              uVar11 = (uint)DAT_00013046;
+              if (uVar11 != 0) {
+                uVar11 = uVar14 * 0xe0 + (uint)*(byte *)(iVar9 + 0xd) * 0x88;
               }
-              pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
+              pcVar13 = *(code **)(_r_osi_funcs_p + 0x78);
               _btdm_env_p[1] =
-                   ((bVar2 + 2) * 0xc + (uint)bVar1 * 0xe6 + 0x25b + uVar14 & 0xfffffffc) + 0xc;
-              iVar10 = (*pcVar15)(pcVar15);
-              *piVar6 = iVar10;
-              iVar10 = r_sdk_config_get_opts();
-              bVar1 = *(byte *)(iVar10 + 0xd);
+                   ((bVar2 + 2) * 0xc + (uint)bVar1 * 0xe6 + 0x25b + uVar11 & 0xfffffffc) + 0xc;
+              iVar9 = (*pcVar13)(pcVar13);
+              *piVar6 = iVar9;
+              iVar9 = r_sdk_config_get_opts();
+              bVar1 = *(byte *)(iVar9 + 0xd);
               iVar12 = r_sdk_config_get_opts_ext();
               piVar6 = _btdm_env_p;
-              iVar10 = ((uint)bVar1 * 0x104 + 0x8ef) * 2;
+              iVar9 = ((uint)bVar1 * 0x104 + 0x8ef) * 2;
               if (*(char *)(iVar12 + 0x18) != '\0') {
-                iVar10 = iVar10 + 0x672;
+                iVar9 = iVar9 + 0x672;
               }
               uVar11 = 0;
-              if (((uint)_btdm_env_p >> 0x10 & 0xff) != 0) {
-                uVar11 = ((uint)_btdm_env_p >> 0x18) * 400;
-                if (uVar11 < 0x1800) {
+              if (DAT_00013046 != 0) {
+                uVar11 = (uint)DAT_00013047 * 400;
+                if ((uint)DAT_00013047 * 400 < 0x1800) {
                   uVar11 = 0x1800;
                 }
               }
-              pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
-              _btdm_env_p[3] = (iVar10 + 3 + uVar11 & 0xfffffffc) + 0xc;
-              iVar10 = (*pcVar15)(pcVar15);
-              piVar6[2] = iVar10;
-              iVar10 = r_sdk_config_get_opts_ext();
+              pcVar13 = *(code **)(_r_osi_funcs_p + 0x78);
+              _btdm_env_p[3] = (iVar9 + 3 + uVar11 & 0xfffffffc) + 0xc;
+              iVar9 = (*pcVar13)(pcVar13);
+              piVar6[2] = iVar9;
+              iVar9 = r_sdk_config_get_opts_ext();
               iVar12 = 0x290;
-              if (*(char *)(iVar10 + 0x23) != '\0') {
-                iVar10 = r_sdk_config_get_opts_ext();
-                uVar4 = *(ushort *)(iVar10 + 8);
-                iVar10 = r_sdk_config_get_opts_ext();
-                iVar12 = (uint)*(ushort *)(iVar10 + 6) * 0xc + (uint)uVar4 * 0x10 + 0x290;
+              if (*(char *)(iVar9 + 0x23) != '\0') {
+                iVar9 = r_sdk_config_get_opts_ext();
+                uVar4 = *(ushort *)(iVar9 + 8);
+                iVar9 = r_sdk_config_get_opts_ext();
+                iVar12 = (uint)*(ushort *)(iVar9 + 6) * 0xc + (uint)uVar4 * 0x10 + 0x290;
               }
               piVar6 = _btdm_env_p;
-              pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
+              pcVar13 = *(code **)(_r_osi_funcs_p + 0x78);
               _btdm_env_p[5] = iVar12 + 0xc;
-              iVar10 = (*pcVar15)(pcVar15);
-              cVar8 = DAT_00013036;
-              piVar6[4] = iVar10;
+              iVar9 = (*pcVar13)(pcVar13);
+              bVar1 = DAT_00013046;
+              piVar6[4] = iVar9;
               piVar6 = _btdm_env_p;
-              if (cVar8 != '\0') {
-                pcVar15 = *(code **)(_r_osi_funcs_p + 0x78);
+              if (bVar1 != 0) {
+                pcVar13 = *(code **)(_r_osi_funcs_p + 0x78);
                 _btdm_env_p[7] = 0xc0c;
-                iVar10 = (*pcVar15)(pcVar15);
-                piVar6[6] = iVar10;
+                iVar9 = (*pcVar13)(pcVar13);
+                piVar6[6] = iVar9;
               }
               if ((((*_btdm_env_p != 0) && (_btdm_env_p[2] != 0)) && (_btdm_env_p[4] != 0)) &&
                  ((_btdm_env_p[7] == 0 || (_btdm_env_p[6] != 0)))) {
@@ -155,39 +164,51 @@ undefined4 btdm_controller_init(int *param_1)
                   ets_printf("RWIP Heap alloc: ENV [%p %d], MSG [%p %d], NORET [%p %d], DB [%p %d]\n"
                              ,_btdm_env_p[1],_btdm_env_p[3],_btdm_env_p[5],_btdm_env_p[6]);
                 }
-                iVar10 = r_sdk_config_get_opts();
-                if ((*(char *)(iVar10 + 0x17) != '\0') &&
-                   (iVar10 = r_sdk_config_get_opts(), piVar6 = _btdm_env_p,
-                   *(char *)(iVar10 + 0x17) == '\x01')) {
-                  iVar10 = (**(code **)(_r_osi_funcs_p + 0x78))
-                                     (0xc,*(code **)(_r_osi_funcs_p + 0x78));
+                iVar9 = r_sdk_config_get_opts();
+                if ((*(char *)(iVar9 + 0x17) != '\0') &&
+                   (iVar9 = r_sdk_config_get_opts(), piVar6 = _btdm_env_p,
+                   *(char *)(iVar9 + 0x17) == '\x01')) {
+                  iVar9 = (**(code **)(_r_osi_funcs_p + 0x78))
+                                    (0xc,*(code **)(_r_osi_funcs_p + 0x78));
                   piVar7 = _btdm_env_p;
-                  piVar6[9] = iVar10;
-                  if ((void *)piVar7[9] == (void *)0x0) goto _L268;
+                  piVar6[9] = iVar9;
+                  if ((void *)piVar7[9] == (void *)0x0) {
+                    uVar10 = 0x80a801c2;
+                    goto _L350;
+                  }
                   memset((void *)piVar7[9],0,0xc);
                 }
                 if (2 < _g_bt_plf_log_level) {
                   ets_printf("Uart ENV [%p], VHCI ENV [%p]\n",_btdm_env_p[8],_btdm_env_p[9]);
                 }
+                uStack_40 = *_btdm_env_p;
+                iStack_3c = _btdm_env_p[1];
+                iStack_38 = _btdm_env_p[2];
+                iStack_34 = _btdm_env_p[3];
+                iStack_30 = _btdm_env_p[4];
+                iStack_2c = _btdm_env_p[5];
+                iStack_28 = _btdm_env_p[6];
+                iStack_24 = _btdm_env_p[7];
+                r_ble_log_internal_hex(0x40a801c3,0x20,&uStack_40);
                 _g_rw_init_sem =
                      (**(code **)(_r_osi_funcs_p + 0x24))(1,0,*(code **)(_r_osi_funcs_p + 0x24));
                 if (_g_rw_init_sem == 0) {
-                  uVar13 = 0xfffffffb;
+                  uVar10 = 0xfffffffb;
                 }
                 else {
                   _g_rw_schd_queue =
                        (**(code **)(_r_osi_funcs_p + 0x4c))(5,8,*(code **)(_r_osi_funcs_p + 0x4c));
                   if (_g_rw_schd_queue == 0) {
-                    uVar13 = 0xfffffffa;
+                    uVar10 = 0xfffffffa;
                   }
                   else {
-                    pcVar15 = *(code **)(_r_osi_funcs_p + 0x24);
-                    iVar10 = r_btdm_vnd_ol_task_env_get();
-                    uVar13 = (*pcVar15)(1,0);
-                    *(undefined4 *)(iVar10 + 8) = uVar13;
-                    iVar10 = r_btdm_vnd_ol_task_env_get();
-                    if (*(int *)(iVar10 + 8) == 0) {
-                      uVar13 = 0xfffffff9;
+                    pcVar13 = *(code **)(_r_osi_funcs_p + 0x24);
+                    iVar9 = r_btdm_vnd_ol_task_env_get();
+                    uVar10 = (*pcVar13)(1,0);
+                    *(undefined4 *)(iVar9 + 8) = uVar10;
+                    iVar9 = r_btdm_vnd_ol_task_env_get();
+                    if (*(int *)(iVar9 + 8) == 0) {
+                      uVar10 = 0xfffffff9;
                     }
                     else {
                       _g_waking_sleeping_sem =
@@ -196,34 +217,37 @@ undefined4 btdm_controller_init(int *param_1)
                       if (_g_waking_sleeping_sem == 0) {
                         return 0xfffffff8;
                       }
-                      pcVar15 = *(code **)(_r_osi_funcs_p + 100);
-                      iVar10 = r_sdk_config_get_opts();
-                      uVar5 = *(undefined2 *)(iVar10 + 8);
-                      iVar10 = r_sdk_config_get_opts();
-                      uVar3 = *(undefined1 *)(iVar10 + 10);
-                      iVar10 = r_sdk_config_get_opts();
-                      iVar10 = (*pcVar15)(btdm_controller_task,"btController",uVar5,0,uVar3,
-                                          &g_rw_controller_task_handle,*(undefined1 *)(iVar10 + 0xb)
-                                         );
-                      uVar13 = 0xfffffff7;
-                      if (iVar10 == 1) {
+                      pcVar13 = *(code **)(_r_osi_funcs_p + 100);
+                      iVar9 = r_sdk_config_get_opts();
+                      uVar5 = *(undefined2 *)(iVar9 + 8);
+                      iVar9 = r_sdk_config_get_opts();
+                      uVar3 = *(undefined1 *)(iVar9 + 10);
+                      iVar9 = r_sdk_config_get_opts();
+                      iVar9 = (*pcVar13)(btdm_controller_task,"btController",uVar5,0,uVar3,
+                                         &g_rw_controller_task_handle,*(undefined1 *)(iVar9 + 0xb));
+                      uVar10 = 0xfffffff7;
+                      if (iVar9 == 1) {
                         r_btdm_task_post_hack(7,0,0,1);
                         (**(code **)(_r_osi_funcs_p + 0x34))
                                   (_g_rw_init_sem,10000,*(code **)(_r_osi_funcs_p + 0x34));
+                        iVar9 = r_sdk_config_get_opts();
+                        r_ble_log_internal_x2(0x40a801c5,0,*(undefined1 *)(iVar9 + 0xb));
                         return 0;
                       }
                     }
                   }
                 }
-                goto _L251;
+                goto _L243;
               }
+              uVar10 = 0x80a801c1;
             }
           }
-_L268:
+_L350:
+          r_ble_log_internal_x0(uVar10);
           r_lld_env_deinit();
           r_llm_env_deinit();
           r_ble_util_buf_env_deinit();
-          if (((uint)_btdm_env_p >> 8 & 0xff) != 0) {
+          if (DAT_00013045 != '\0') {
             r_flash_env_deinit();
           }
           r_hci_tl_env_deinit();
@@ -247,36 +271,37 @@ _L268:
             (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
             _btdm_env_p[9] = 0;
           }
-          uVar13 = 0xfffffffc;
+          uVar10 = 0xfffffffc;
           if (_btdm_env_p != (int *)0x0) {
             (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
             _btdm_env_p = (int *)0x0;
           }
-          goto _L251;
+          goto _L243;
         }
         if (0 < _g_bt_plf_log_level) {
-          pcVar9 = "Default Tx Power Invalid: 0x%x\n";
-          goto _L360;
+          pcVar8 = "Default Tx Power Invalid: 0x%x\n";
+          goto _L352;
         }
       }
       else if (0 < _g_bt_plf_log_level) {
-        pcVar9 = "Invalid scan backoff upperlimitmax: 0x%x\n";
-        goto _L360;
+        pcVar8 = "Invalid scan backoff upperlimitmax: 0x%x\n";
+        goto _L352;
       }
     }
     else if (0 < _g_bt_plf_log_level) {
-      pcVar9 = "Hardware Target Code Invalid: 0x%x\n";
-_L360:
-      ets_printf(pcVar9);
+      pcVar8 = "Hardware Target Code Invalid: 0x%x\n";
+_L352:
+      ets_printf(pcVar8);
     }
   }
   else if (0 < _g_bt_plf_log_level) {
-    ets_printf("Config struct mismatch: magic=%08x, ver=%08x\n",0x5a5aa5a5,0x2505080);
+    ets_printf("Config struct mismatch: magic=%08x, ver=%08x\n",0x5a5aa5a5,0x2509280);
   }
-_L359:
-  uVar13 = 0xfffffffd;
-_L251:
+_L351:
+  uVar10 = 0xfffffffd;
+_L243:
   btdm_controller_deinit_internal();
-  return uVar13;
+  r_ble_log_internal_x1(0x80a801c6,uVar10);
+  return uVar10;
 }
 

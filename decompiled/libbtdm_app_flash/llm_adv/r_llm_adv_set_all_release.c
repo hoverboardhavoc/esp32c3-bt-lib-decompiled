@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llm_adv.o -> r_llm_adv_set_all_release
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,11 +28,11 @@ void r_llm_adv_set_all_release(void)
     bVar1 = *(byte *)(*(int *)(_p_llm_env + 8) + uVar2 * 0x44 + 0x40);
     if (bVar1 < 4) {
       if (bVar1 != 0) {
-_L885:
+_L931:
         r_llm_adv_set_release_hack(uVar2 & 0xff);
       }
     }
-    else if ((byte)(bVar1 - 10) < 4) goto _L885;
+    else if ((byte)(bVar1 - 10) < 4) goto _L931;
     uVar2 = uVar2 + 1;
   } while( true );
 }

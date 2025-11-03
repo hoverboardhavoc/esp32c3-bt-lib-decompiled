@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llc_chmap_upd.o -> r_llc_rem_ch_map_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void r_llc_rem_ch_map_proc_continue(int param_1,int param_2)
+void r_llc_rem_ch_map_proc_continue(int param_1,int param_2,undefined4 param_3)
 
 {
   undefined2 uVar1;
@@ -21,7 +21,10 @@ void r_llc_rem_ch_map_proc_continue(int param_1,int param_2)
   
   iVar5 = *(int *)(&llc_env + param_1 * 4);
   iVar2 = r_llc_proc_get(1);
-  iVar3 = r_llc_proc_state_get();
+  r_ble_log_internal_x2
+            (0x404f001a,(uint)*(ushort *)(iVar5 + 0x42) | param_1 << 0x10 | param_2 << 0x18,param_3)
+  ;
+  iVar3 = r_llc_proc_state_get(iVar2);
   if (iVar3 == param_2) {
     iVar3 = r_llc_proc_state_get(iVar2);
     if (iVar3 == 3) {
@@ -36,7 +39,7 @@ void r_llc_rem_ch_map_proc_continue(int param_1,int param_2)
     else {
       if (iVar3 != 4) {
         uVar4 = r_llc_proc_state_get(iVar2);
-        r_assert_param(param_1,uVar4,0x10000,0x11d);
+        r_assert_param(param_1,uVar4,0x10000,0x122);
         return;
       }
       memcpy((void *)(iVar5 + 8),(void *)(iVar2 + 8),5);

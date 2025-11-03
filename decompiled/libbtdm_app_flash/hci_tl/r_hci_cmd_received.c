@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> hci_tl.o -> r_hci_cmd_received
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void r_hci_cmd_received(int param_1,uint param_2,ushort *param_3)
+void r_hci_cmd_received(uint param_1,uint param_2,ushort *param_3)
 
 {
   ushort uVar1;
@@ -26,19 +26,20 @@ void r_hci_cmd_received(int param_1,uint param_2,ushort *param_3)
   short asStack_22 [3];
   
   iVar4 = r_hci_look_for_cmd_desc();
-  if (DAT_0001101d < '\0') {
-    r_assert_err(0,"hci_tl.c",0x5fc);
+  if (DAT_0001201d < '\0') {
+    r_assert_err(0,"hci_tl.c",0x5fd);
   }
   if (param_1 != 0xc35) {
-    DAT_0001101d = DAT_0001101d + -1;
+    DAT_0001201d = DAT_0001201d + -1;
   }
+  r_ble_log_internal_x1(0x20270199,param_2 << 0x10 | param_1 | (int)DAT_0001201d << 0x18);
   if (iVar4 == 0) {
     param_3 = (ushort *)0x0;
     uVar8 = 1;
     iVar4 = 0;
     goto _L198;
   }
-  if (DAT_0001101d < '\0') {
+  if (DAT_0001201d < '\0') {
     param_3 = (ushort *)0x0;
     uVar8 = 7;
     goto _L198;
@@ -113,7 +114,7 @@ _L198:
     r_hci_send_2_host();
     return;
   default:
-    r_assert_param(param_1,"hci_tl.c",0x68e);
+    r_assert_param(param_1,"hci_tl.c",0x691);
     return;
   case 8:
     uVar2 = 2;
@@ -143,7 +144,7 @@ _L198:
   }
   iVar7 = r_ke_msg_alloc(0x1105,uVar2,param_1,asStack_22[0]);
   if (uVar5 != 0) {
-    r_assert_param(uVar5,param_1,"hci_tl.c",0x6ba);
+    r_assert_param(uVar5,param_1,"hci_tl.c",0x6bd);
   }
   if (iVar7 != 0) {
     if ((asStack_22[0] != 0) && (*(code **)(iVar4 + 4) != (code *)0x0)) {
@@ -156,7 +157,7 @@ _L198:
       }
     }
     if (uVar5 != 0) {
-      r_assert_param(uVar5,param_1,"hci_tl.c",0x6d2);
+      r_assert_param(uVar5,param_1,"hci_tl.c",0x6d5);
     }
     r_ke_msg_send(iVar7);
     return;

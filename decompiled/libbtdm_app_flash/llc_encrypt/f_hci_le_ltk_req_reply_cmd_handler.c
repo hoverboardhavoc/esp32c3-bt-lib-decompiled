@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llc_encrypt.o -> f_hci_le_ltk_req_reply_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,27 +14,43 @@ undefined4 f_hci_le_ltk_req_reply_cmd_handler(uint param_1,int param_2,undefined
 
 {
   int iVar1;
-  int iVar2;
-  undefined4 uVar3;
+  undefined4 uVar2;
+  int iVar3;
+  uint uVar4;
   
   iVar1 = r_sdk_config_get_opts();
   if (param_1 < *(byte *)(iVar1 + 0xd)) {
-    if (((*(int *)(&llc_env + param_1 * 4) != 0) &&
-        ((*(byte *)(*(int *)(&llc_env + param_1 * 4) + 0x44) & 3) != 3)) &&
-       (iVar1 = r_llc_proc_id_get(param_1,1), iVar1 == 3)) {
-      iVar1 = r_llc_proc_get(param_1,1);
-      iVar2 = r_llc_proc_state_get();
-      if (iVar2 == 0xe) {
+    if ((*(int *)(&llc_env + param_1 * 4) == 0) ||
+       ((*(byte *)(*(int *)(&llc_env + param_1 * 4) + 0x44) & 3) == 3)) goto _L227;
+    iVar1 = r_llc_proc_id_get(param_1,1);
+    if (iVar1 == 3) {
+      iVar1 = r_llc_proc_get(param_1);
+      iVar3 = r_llc_proc_state_get();
+      if (iVar3 == 0xe) {
         memcpy((void *)(iVar1 + 0x10),(void *)(param_2 + 2),0x10);
         r_llc_rem_encrypt_proc_continue_eco(param_1,0xe,0);
-        uVar3 = 0;
-        goto _L227;
+        uVar2 = 0;
+        goto _L229;
       }
+      iVar1 = r_llc_proc_state_get(iVar1);
+      uVar4 = param_1 << 8 | iVar1 << 0x10 | 0xc;
+      uVar2 = 0x80030030;
+    }
+    else {
+      iVar1 = r_llc_proc_id_get(param_1,1);
+      uVar4 = param_1 << 8 | iVar1 << 0x10 | 0xc;
+      uVar2 = 0x80030031;
     }
   }
-  uVar3 = 0xc;
+  else {
 _L227:
-  r_llc_cmd_cmp_send(param_1,param_3,uVar3);
+    uVar4 = param_1 << 8 | 0xc;
+    uVar2 = 0x8003002f;
+  }
+  r_ble_log_internal_x1(uVar2,uVar4);
+  uVar2 = 0xc;
+_L229:
+  r_llc_cmd_cmp_send(param_1,param_3,uVar2);
   return 0;
 }
 

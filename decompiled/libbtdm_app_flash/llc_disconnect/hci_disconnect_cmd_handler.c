@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llc_disconnect.o -> hci_disconnect_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,14 +19,16 @@ undefined4 hci_disconnect_cmd_handler(uint param_1,int param_2,undefined4 param_
   int iVar2;
   undefined4 *puVar3;
   char cVar4;
-  int iVar5;
+  uint uVar5;
+  int iVar6;
   
-  iVar5 = *(int *)(&llc_env + param_1 * 4);
+  iVar6 = *(int *)(&llc_env + param_1 * 4);
   iVar2 = r_sdk_config_get_opts();
   if (((param_1 < *(byte *)(iVar2 + 0xd)) && (iVar2 = *(int *)(&llc_env + param_1 * 4), iVar2 != 0))
      && ((*(byte *)(iVar2 + 0x44) & 3) != 3)) {
-    bVar1 = *(byte *)(iVar5 + 0x45) & 1;
-    if ((*(byte *)(iVar5 + 0x45) & 1) == 0) {
+    bVar1 = *(byte *)(iVar6 + 0x45);
+    uVar5 = bVar1 & 1;
+    if ((bVar1 & 1) == 0) {
       puVar3 = (undefined4 *)r_ke_msg_alloc(0x108,param_1 << 8 | 1,0xc);
       *(undefined1 *)(puVar3 + 1) = 1;
       r_llc_proc_state_set(param_1,0);
@@ -38,19 +40,21 @@ undefined4 hci_disconnect_cmd_handler(uint param_1,int param_2,undefined4 param_
       }
       *(char *)((int)puVar3 + 9) = cVar4;
       r_ke_msg_send(puVar3);
-      *(byte *)(iVar5 + 0x45) = *(byte *)(iVar5 + 0x45) | 1;
+      *(byte *)(iVar6 + 0x45) = *(byte *)(iVar6 + 0x45) | 1;
     }
     else {
-      bVar1 = 0x3a;
+      r_ble_log_internal_x1(0x802f0027,(uint)bVar1 << 0x10 | param_1 << 8 | 0x3a);
+      uVar5 = 0x3a;
     }
   }
   else {
-    bVar1 = 0;
+    uVar5 = 0;
     if ((_sdk_cfg_priv_opts & 0x40) == 0) {
-      bVar1 = 0xc;
+      r_ble_log_internal_x1(0x802f0026,param_1 << 8 | 0xc);
+      uVar5 = 0xc;
     }
   }
-  r_llc_cmd_stat_send(param_1,param_3,bVar1);
+  r_llc_cmd_stat_send(param_1,param_3,uVar5);
   return 0;
 }
 

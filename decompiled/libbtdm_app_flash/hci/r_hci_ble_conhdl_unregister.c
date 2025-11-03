@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> hci.o -> r_hci_ble_conhdl_unregister
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,12 +18,12 @@ void r_hci_ble_conhdl_unregister(uint param_1)
   iVar1 = r_sdk_config_get_opts();
   if (*(byte *)(iVar1 + 0xd) <= param_1) {
     iVar1 = r_sdk_config_get_opts();
-    r_assert_param(param_1,*(undefined1 *)(iVar1 + 0xd),"hci.c",0x4ec);
+    r_assert_param(param_1,*(undefined1 *)(iVar1 + 0xd),"hci.c",0x4f5);
   }
-  if (r_hci_look_for_le_evt_desc[param_1] == (code)0x0) {
-    r_assert_err(0,"hci.c",0x4ed);
+  if (r_hci_look_for_evt_desc[param_1] == (code)0x0) {
+    r_assert_err(0,"hci.c",0x4f6);
   }
-  r_hci_look_for_le_evt_desc[param_1] = (code)0x0;
+  r_hci_look_for_evt_desc[param_1] = (code)0x0;
   return;
 }
 

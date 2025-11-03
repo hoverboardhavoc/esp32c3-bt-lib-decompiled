@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_per_adv.o -> r_lld_per_adv_frm_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -13,198 +13,204 @@
 void r_lld_per_adv_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
 
 {
-  undefined1 uVar1;
-  byte bVar2;
+  byte bVar1;
+  undefined1 uVar2;
   ushort uVar3;
-  byte bVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  undefined1 *puVar8;
-  uint uVar9;
-  char cVar10;
-  int iVar11;
+  ushort uVar4;
+  ushort uVar5;
+  undefined2 uVar6;
+  byte bVar7;
+  int *piVar8;
+  int iVar9;
+  int iVar10;
+  undefined1 *puVar11;
+  uint uVar12;
+  uint uVar13;
+  char cVar14;
+  uint uVar15;
+  int iVar16;
   
   if (param_3 == 2) {
     return;
   }
   if (param_3 < 3) {
-    uVar9 = param_2 & 0xff;
+    uVar12 = param_2 & 0xff;
     if (param_3 != 0) {
       param_3 = 1;
     }
-    iVar11 = *(int *)(&lld_per_adv_env + uVar9 * 4);
-    iVar7 = r_sdk_config_get_opts_ext(param_1);
-    if (((*(uint *)(iVar7 + 0x28) & 0x40) != 0) &&
-       (iVar7 = r_sdk_config_get_opts_ext(), *(byte *)(iVar7 + 0x2c) < 3)) {
-      r_ble_log_internal_x2(0x40480008,param_3 << 8 | uVar9,*(undefined2 *)(iVar11 + 0x4c));
+    iVar16 = *(int *)(&lld_per_adv_env + uVar12 * 4);
+    if (iVar16 != 0) {
+      bVar1 = *(byte *)(iVar16 + 0x52);
+      iVar10 = r_emi_get_mem_addr_by_offset(0x400,param_1);
+      iVar9 = (uint)bVar1 * 0x5a;
+      uVar3 = *(ushort *)(iVar9 + 0x16 + iVar10);
+      iVar10 = r_emi_get_mem_addr_by_offset(0x400);
+      uVar4 = *(ushort *)(iVar10 + iVar9 + 4);
+      iVar10 = r_emi_get_mem_addr_by_offset(0x400);
+      uVar5 = *(ushort *)(iVar10 + iVar9 + 4);
+      iVar10 = r_emi_get_mem_addr_by_offset(0x400);
+      uVar6 = *(undefined2 *)(iVar9 + 0xe + iVar10);
+      iVar10 = r_emi_get_mem_addr_by_offset(0x400);
+      uVar15 = *(uint *)(iVar16 + 4) * 0x271;
+      uVar13 = *(int *)(iVar16 + 8) + uVar15;
+      r_ble_log_internal_x4
+                (0x404400a3,CONCAT22(uVar6,*(undefined2 *)(iVar9 + 0xc + iVar10)),
+                 uVar13 >> 1 |
+                 ((uint)(uVar13 < uVar15) + (int)((ulonglong)*(uint *)(iVar16 + 4) * 0x271 >> 0x20))
+                 * -0x80000000,
+                 (uint)*(ushort *)(iVar16 + 0x4c) | param_3 << 0x18 |
+                 (uint)*(byte *)(iVar16 + 0x52) << 0x10,
+                 uVar3 & 0x3f | ((uVar4 & 0xc) << 2 | uVar5 & 3) << 8);
     }
-    if (periodic_adv_data_need_to_set[uVar9] != '\0') {
-      *(undefined4 *)(iVar11 + 0x24) = 0;
-      r_lld_per_adv_data_set(uVar9,0,0,1,1);
-      periodic_adv_data_need_to_set[uVar9] = '\0';
+    if (periodic_adv_data_need_to_set[uVar12] != '\0') {
+      *(undefined4 *)(iVar16 + 0x24) = 0;
+      r_lld_per_adv_data_set(uVar12,0,0,1,1);
+      periodic_adv_data_need_to_set[uVar12] = '\0';
     }
-    iVar7 = *(int *)(&lld_per_adv_env + uVar9 * 4);
-    if (iVar7 == 0) {
-      r_assert_err(0,0x10000,0x43e);
+    iVar16 = *(int *)(&lld_per_adv_env + uVar12 * 4);
+    if (iVar16 == 0) {
+      r_assert_err(0,0x10000,0x453);
       return;
     }
-    r_sch_arb_remove(iVar7,1);
-    if (*(char *)(iVar7 + 0x53) != '\x02') {
-      bVar2 = *(byte *)(iVar7 + 0x52);
-      if (*(short *)(iVar7 + 0x24) != 0) {
-        r_lld_per_adv_data_set(uVar9,*(undefined1 *)(iVar7 + 0x26),1,1);
-        *(undefined2 *)(iVar7 + 0x24) = 0;
+    r_sch_arb_remove(iVar16,1);
+    if (*(char *)(iVar16 + 0x53) != '\x02') {
+      bVar1 = *(byte *)(iVar16 + 0x52);
+      if (*(short *)(iVar16 + 0x24) != 0) {
+        r_lld_per_adv_data_set(uVar12,*(undefined1 *)(iVar16 + 0x26),1,1);
+        *(undefined2 *)(iVar16 + 0x24) = 0;
       }
-      iVar6 = r_emi_get_mem_addr_by_offset(0x1400);
-      iVar11 = ((uint)bVar2 * 9 & 0xff) * 0xe;
-      uVar3 = *(ushort *)(iVar6 + iVar11);
-      iVar6 = r_emi_get_mem_addr_by_offset(0x1400);
-      *(ushort *)(iVar6 + iVar11) = (ushort)(((uint)uVar3 << 0x11) >> 0x11);
-      iVar6 = r_emi_get_mem_addr_by_offset(0x1400);
-      if ((*(ushort *)(iVar11 + 6 + iVar6) >> 0xc & 1) != 0) {
-        bVar2 = *(byte *)(iVar7 + 0x52);
-        uVar9 = r_lld_ch_idx_get_hack();
-        *(char *)(iVar7 + 0x57) = (char)uVar9;
-        if ((uVar9 & 0xffffffc0) != 0) {
+      iVar10 = r_emi_get_mem_addr_by_offset(0x1400);
+      iVar9 = ((uint)bVar1 * 9 & 0xff) * 0xe;
+      uVar3 = *(ushort *)(iVar10 + iVar9);
+      iVar10 = r_emi_get_mem_addr_by_offset(0x1400);
+      *(ushort *)(iVar10 + iVar9) = (ushort)(((uint)uVar3 << 0x11) >> 0x11);
+      iVar10 = r_emi_get_mem_addr_by_offset(0x1400);
+      if ((*(ushort *)(iVar9 + 6 + iVar10) >> 0xc & 1) != 0) {
+        bVar1 = *(byte *)(iVar16 + 0x52);
+        uVar12 = r_lld_ch_idx_get_hack();
+        *(char *)(iVar16 + 0x57) = (char)uVar12;
+        if ((uVar12 & 0xffffffc0) != 0) {
           r_assert_err(0,0x10000,0x2ea);
         }
-        iVar6 = r_emi_get_mem_addr_by_offset(0x1400);
-        uVar3 = *(ushort *)(iVar6 + iVar11 + 8);
-        iVar6 = r_emi_get_mem_addr_by_offset(0x1400);
-        *(ushort *)(iVar6 + iVar11 + 8) = uVar3 & 0xffc0 | (ushort)uVar9;
-        uVar9 = (uint)*(byte *)(iVar7 + 0x57) << 10;
-        if ((uVar9 & 0x30000) != 0) {
+        iVar10 = r_emi_get_mem_addr_by_offset(0x1400);
+        uVar3 = *(ushort *)(iVar10 + iVar9 + 8);
+        iVar10 = r_emi_get_mem_addr_by_offset(0x1400);
+        *(ushort *)(iVar10 + iVar9 + 8) = uVar3 & 0xffc0 | (ushort)uVar12;
+        uVar12 = (uint)*(byte *)(iVar16 + 0x57) << 10;
+        if ((uVar12 & 0x30000) != 0) {
           r_assert_err(0,0x10000,0x635);
         }
-        iVar11 = r_emi_get_mem_addr_by_offset(0x400);
-        iVar6 = (uint)bVar2 * 0x5a + 0x26;
-        uVar3 = *(ushort *)(iVar11 + iVar6);
-        iVar11 = r_emi_get_mem_addr_by_offset(0x400);
-        *(ushort *)(iVar11 + iVar6) = uVar3 & 0x3ff | (ushort)uVar9;
-        uVar9 = 0;
+        iVar9 = r_emi_get_mem_addr_by_offset(0x400);
+        iVar10 = (uint)bVar1 * 0x5a + 0x26;
+        uVar3 = *(ushort *)(iVar9 + iVar10);
+        iVar9 = r_emi_get_mem_addr_by_offset(0x400);
+        *(ushort *)(iVar9 + iVar10) = uVar3 & 0x3ff | (ushort)uVar12;
+        uVar12 = 0;
         while( true ) {
-          bVar2 = *(byte *)(iVar7 + 0x52);
-          uVar9 = uVar9 + 1 & 0xff;
-          iVar6 = r_emi_get_mem_addr_by_offset(0x1400);
-          iVar11 = ((uint)bVar2 * 9 + uVar9 & 0xff) * 0xe;
-          uVar3 = *(ushort *)(iVar6 + iVar11);
-          iVar6 = r_emi_get_mem_addr_by_offset(0x1400);
-          *(ushort *)(iVar6 + iVar11) = uVar3 & 0x7fff;
-          if (uVar9 == *(byte *)(iVar7 + 0x58) - 1) break;
-          bVar2 = *(byte *)(iVar7 + 0x57);
-          if ((bVar2 & 0xc0) != 0) {
+          bVar1 = *(byte *)(iVar16 + 0x52);
+          uVar12 = uVar12 + 1 & 0xff;
+          iVar10 = r_emi_get_mem_addr_by_offset(0x1400);
+          iVar9 = ((uint)bVar1 * 9 + uVar12 & 0xff) * 0xe;
+          uVar3 = *(ushort *)(iVar10 + iVar9);
+          iVar10 = r_emi_get_mem_addr_by_offset(0x1400);
+          *(ushort *)(iVar10 + iVar9) = uVar3 & 0x7fff;
+          if (uVar12 == *(byte *)(iVar16 + 0x58) - 1) break;
+          bVar1 = *(byte *)(iVar16 + 0x57);
+          if ((bVar1 & 0xc0) != 0) {
             r_assert_err(0,0x10000,0x2ea);
           }
-          iVar6 = r_emi_get_mem_addr_by_offset(0x1400);
-          uVar3 = *(ushort *)(iVar6 + iVar11 + 8);
-          iVar6 = r_emi_get_mem_addr_by_offset(0x1400);
-          *(ushort *)(iVar6 + iVar11 + 8) = uVar3 & 0xffc0 | (ushort)bVar2;
+          iVar10 = r_emi_get_mem_addr_by_offset(0x1400);
+          uVar3 = *(ushort *)(iVar10 + iVar9 + 8);
+          iVar10 = r_emi_get_mem_addr_by_offset(0x1400);
+          *(ushort *)(iVar10 + iVar9 + 8) = uVar3 & 0xffc0 | (ushort)bVar1;
         }
       }
-      bVar4 = DAT_0001301b;
-      cVar10 = DAT_0001301a;
+      bVar7 = DAT_0001301b;
+      cVar14 = DAT_0001301a;
       if (param_3 != 0) {
-        cVar10 = *(char *)(iVar7 + 0x16) + DAT_0001301b;
+        cVar14 = *(char *)(iVar16 + 0x16) + DAT_0001301b;
       }
-      *(char *)(iVar7 + 0x16) = cVar10;
-      bVar2 = *(byte *)(iVar7 + 0x52);
-      *(ushort *)(iVar7 + 0x14) = bVar4 & 0xf | 0x2000;
+      *(char *)(iVar16 + 0x16) = cVar14;
+      bVar1 = *(byte *)(iVar16 + 0x52);
+      *(ushort *)(iVar16 + 0x14) = bVar7 & 0xf | 0x2000;
 r_lld_per_adv_sched_hack:
-      iVar7 = *(int *)(&lld_per_adv_env + (uint)bVar2 * 4);
-      *(uint *)(iVar7 + 4) = *(int *)(iVar7 + 4) + *(int *)(iVar7 + 0x40) & 0xfffffff;
-      *(short *)(iVar7 + 0x4c) = *(short *)(iVar7 + 0x4c) + 1;
-      iVar11 = r_lld_read_clock();
-      while ((iVar11 - *(int *)(iVar7 + 4) & 0xfffffffU) < 0x7ffffff) {
-        *(uint *)(iVar7 + 4) = *(int *)(iVar7 + 4) + *(int *)(iVar7 + 0x40) & 0xfffffff;
-        *(short *)(iVar7 + 0x4c) = *(short *)(iVar7 + 0x4c) + 1;
+      iVar16 = *(int *)(&lld_per_adv_env + (uint)bVar1 * 4);
+      *(uint *)(iVar16 + 4) = *(int *)(iVar16 + 4) + *(int *)(iVar16 + 0x40) & 0xfffffff;
+      *(short *)(iVar16 + 0x4c) = *(short *)(iVar16 + 0x4c) + 1;
+      iVar9 = r_lld_read_clock();
+      while ((iVar9 - *(int *)(iVar16 + 4) & 0xfffffffU) < 0x7ffffff) {
+        *(uint *)(iVar16 + 4) = *(int *)(iVar16 + 4) + *(int *)(iVar16 + 0x40) & 0xfffffff;
+        *(short *)(iVar16 + 0x4c) = *(short *)(iVar16 + 0x4c) + 1;
       }
-      uVar9 = 0;
+      uVar12 = 0;
       do {
-        iVar6 = r_sch_arb_insert(iVar7);
-        if (iVar6 == 0) {
-          iVar6 = 1;
+        iVar10 = r_sch_arb_insert(iVar16);
+        if (iVar10 == 0) {
+          iVar10 = 1;
           goto _L4;
         }
-        uVar9 = uVar9 + 1 & 0xff;
-        *(byte *)(iVar7 + 0x16) = *(char *)(iVar7 + 0x16) + DAT_0001301b;
-        *(uint *)(iVar7 + 4) = *(int *)(iVar7 + 4) + *(int *)(iVar7 + 0x40) & 0xfffffff;
-        *(short *)(iVar7 + 0x4c) = *(short *)(iVar7 + 0x4c) + 1;
-      } while (uVar9 != 0xf);
-      iVar6 = 0;
+        uVar12 = uVar12 + 1 & 0xff;
+        *(byte *)(iVar16 + 0x16) = *(char *)(iVar16 + 0x16) + DAT_0001301b;
+        *(uint *)(iVar16 + 4) = *(int *)(iVar16 + 4) + *(int *)(iVar16 + 0x40) & 0xfffffff;
+        *(short *)(iVar16 + 0x4c) = *(short *)(iVar16 + 0x4c) + 1;
+      } while (uVar12 != 0xf);
+      iVar10 = 0;
 _L4:
-      iVar5 = r_sdk_config_get_opts_ext();
-      if (((*(uint *)(iVar5 + 0x28) & 0x40) != 0) &&
-         (iVar5 = r_sdk_config_get_opts_ext(), *(byte *)(iVar5 + 0x2c) < 3)) {
-        r_ble_log_internal_x1
-                  (0x4048000b,
-                   iVar6 << 8 | uVar9 << 0x10 | (uint)*(byte *)(iVar7 + 0x53) << 0x18 | (uint)bVar2)
-        ;
-      }
-      if (iVar6 == 0) {
-        r_assert_param(*(undefined4 *)(iVar7 + 4),iVar11,0x10000,0x13f);
+      r_ble_log_internal_x1
+                (0x404400a2,
+                 (uint)*(byte *)(iVar16 + 0x53) << 0x18 | (uint)bVar1 | iVar10 << 8 | uVar12 << 0x10
+                );
+      if (iVar10 == 0) {
+        r_assert_param(*(undefined4 *)(iVar16 + 4),iVar9,0x10000,0x13f);
         return;
       }
-      *(undefined1 *)(iVar7 + 0x53) = 0;
+      *(undefined1 *)(iVar16 + 0x53) = 0;
       return;
     }
-    puVar8 = (undefined1 *)r_ke_msg_alloc(0x208,0,0xff,2);
-    uVar1 = *(undefined1 *)(iVar7 + 0x52);
-    puVar8[1] = 0;
-    *puVar8 = uVar1;
+    puVar11 = (undefined1 *)r_ke_msg_alloc(0x208,0,0xff,2);
+    uVar2 = *(undefined1 *)(iVar16 + 0x52);
+    puVar11[1] = 0;
+    *puVar11 = uVar2;
     r_ke_msg_send();
   }
   else {
     if (param_3 != 4) {
-      r_assert_param(0x10000,0x493);
+      r_assert_param(param_3,0x10000,0x4a9);
       return;
     }
-    iVar7 = *(int *)(&lld_per_adv_env + (param_2 & 0xff) * 4);
-    if (iVar7 == 0) {
-      r_assert_err(0,0x10000,0x472);
+    iVar16 = *(int *)(&lld_per_adv_env + (param_2 & 0xff) * 4);
+    if (iVar16 == 0) {
+      r_assert_err(0,0x10000,0x488);
       return;
     }
-    iVar11 = r_sdk_config_get_opts_ext(4);
-    if (((*(uint *)(iVar11 + 0x28) & 0x40) != 0) &&
-       (iVar11 = r_sdk_config_get_opts_ext(), *(byte *)(iVar11 + 0x2c) < 3)) {
-      r_ble_log_internal_x1(0x40480009,(uint)*(byte *)(iVar7 + 0x53) << 8 | param_2 & 0xff);
+    r_ble_log_internal_x1
+              (0x404400aa,
+               (uint)*(byte *)(iVar16 + 0x53) << 8 | (uint)*(byte *)(iVar16 + 0x16) << 0x10 |
+               param_2 & 0xff);
+    if (1 < (byte)(*(char *)(iVar16 + 0x53) - 1U)) {
+      r_assert_err(0,0x10000,0x46c);
     }
-    if (1 < (byte)(*(char *)(iVar7 + 0x53) - 1U)) {
-      r_assert_err(0,0x10000,0x456);
-    }
-    r_sch_arb_remove(iVar7,1);
-    if (*(char *)(iVar7 + 0x53) != '\x02') {
-      bVar2 = *(byte *)(iVar7 + 0x52);
-      *(char *)(iVar7 + 0x16) = *(char *)(iVar7 + 0x16) + rwip_priority;
+    r_sch_arb_remove(iVar16,1);
+    if (*(char *)(iVar16 + 0x53) != '\x02') {
+      bVar1 = *(byte *)(iVar16 + 0x52);
+      *(char *)(iVar16 + 0x16) = *(char *)(iVar16 + 0x16) + rwip_priority;
       goto r_lld_per_adv_sched_hack;
     }
-    puVar8 = (undefined1 *)r_ke_msg_alloc(0x208,0,0xff,2);
-    uVar1 = *(undefined1 *)(iVar7 + 0x52);
-    puVar8[1] = 0;
-    *puVar8 = uVar1;
+    puVar11 = (undefined1 *)r_ke_msg_alloc(0x208,0,0xff,2);
+    uVar2 = *(undefined1 *)(iVar16 + 0x52);
+    puVar11[1] = 0;
+    *puVar11 = uVar2;
     r_ke_msg_send();
   }
   param_2 = param_2 & 0xff;
-  if (*(int *)(&lld_per_adv_env + param_2 * 4) == 0) {
-    iVar7 = r_sdk_config_get_opts_ext();
-    if (((*(uint *)(iVar7 + 0x28) & 0x40) != 0) &&
-       (iVar7 = r_sdk_config_get_opts_ext(), *(byte *)(iVar7 + 0x2c) < 3)) {
-      r_ble_log_internal_x1(0x40080004,param_2);
-      return;
-    }
+  piVar8 = (int *)(&lld_per_adv_env + param_2 * 4);
+  if (*piVar8 == 0) {
+    r_ble_log_internal_x1(0x800400a6,param_2);
+    return;
   }
-  else {
-    iVar7 = r_sdk_config_get_opts_ext();
-    if (((*(uint *)(iVar7 + 0x28) & 0x40) != 0) &&
-       (iVar7 = r_sdk_config_get_opts_ext(), *(byte *)(iVar7 + 0x2c) < 3)) {
-      r_ble_log_internal_x1
-                (0x40080002,
-                 (uint)*(ushort *)(*(int *)(&lld_per_adv_env + param_2 * 4) + 0x4c) << 0x10 |
-                 param_2);
-    }
-    r_ke_free(*(undefined4 *)(&lld_per_adv_env + param_2 * 4));
-    *(undefined4 *)(&lld_per_adv_env + param_2 * 4) = 0;
-  }
+  r_ble_log_internal_x1(0x400400a5,param_2 << 0x10 | (uint)*(ushort *)(*piVar8 + 0x4c));
+  r_ke_free(*piVar8);
+  *piVar8 = 0;
   return;
 }
 

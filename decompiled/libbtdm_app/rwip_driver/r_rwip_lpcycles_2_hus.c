@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> rwip_driver.o -> r_rwip_lpcycles_2_hus
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ int r_rwip_lpcycles_2_hus(uint param_1,uint *param_2)
     return iVar1;
   }
   if (1999999 < param_1) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x1fa,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x1fd,*(code **)(_r_plf_funcs_p + 8));
   }
   uVar2 = 0;
   if (param_2 != (uint *)0x0) {

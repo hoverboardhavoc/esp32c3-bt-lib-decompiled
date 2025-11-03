@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> vhci.o -> API_vhci_host_send_packet
  *
  * (C) Espressif, Apache License 2.0.
@@ -17,36 +17,47 @@ undefined4 API_vhci_host_send_packet(char *param_1,int param_2)
 {
   int iVar1;
   undefined4 uVar2;
+  char cVar3;
   
   iVar1 = r_sdk_config_get_opts();
   if (*(char *)(iVar1 + 0xc) == '\0') {
-    uVar2 = 0xffffffff;
+    r_ble_log_internal_x1(0x800701c8,0);
+    return 0xffffffff;
+  }
+  iVar1 = r_sdk_config_get_opts();
+  if (*(char *)(iVar1 + 0x17) == '\x01') {
+    if ((param_1 != (char *)0x0) && (param_2 != 0)) {
+      if (_vhci_env_p == (undefined1 *)0x0) {
+        cVar3 = '\0';
+        uVar2 = 0x800701cb;
+      }
+      else {
+        iVar1 = r_vhci_check_packet_allow(param_1,param_2);
+        if (iVar1 == 0) {
+          r_ble_log_internal_x1(0x800701cc,param_2);
+          return 0xfffffffd;
+        }
+        (**(code **)(_r_osi_funcs_p + 0x34))
+                  (*(undefined4 *)(_vhci_env_p + 4),0xffffffff,*(code **)(_r_osi_funcs_p + 0x34));
+        *_vhci_env_p = 1;
+        cVar3 = *param_1;
+        if ((byte)(cVar3 - 1U) < 2) {
+          r_hci_tl_save_pkt(param_1,param_2);
+          r_btdm_task_post_hack(2,0,0,1);
+          return 0;
+        }
+        r_btdm_task_post_hack(2,0,0,1);
+        uVar2 = 0x800701cd;
+      }
+      r_ble_log_internal_x1(uVar2,cVar3);
+      return 0xfffffffb;
+    }
+    r_ble_log_internal_x2(0x800701ca,param_1,param_2);
   }
   else {
     iVar1 = r_sdk_config_get_opts();
-    uVar2 = 0xfffffffe;
-    if (((*(char *)(iVar1 + 0x17) == '\x01') && (param_1 != (char *)0x0)) && (param_2 != 0)) {
-      uVar2 = 0xfffffffb;
-      if (_vhci_env_p != (undefined1 *)0x0) {
-        iVar1 = r_vhci_check_packet_allow(param_1,param_2);
-        uVar2 = 0xfffffffd;
-        if (iVar1 != 0) {
-          (**(code **)(_r_osi_funcs_p + 0x34))
-                    (*(undefined4 *)(_vhci_env_p + 4),0xffffffff,*(code **)(_r_osi_funcs_p + 0x34));
-          *_vhci_env_p = 1;
-          if ((byte)(*param_1 - 1U) < 2) {
-            r_hci_tl_save_pkt(param_1,param_2);
-            r_btdm_task_post_hack(2,0,0,1);
-            uVar2 = 0;
-          }
-          else {
-            r_btdm_task_post_hack(2,0,0,1);
-            uVar2 = 0xfffffffb;
-          }
-        }
-      }
-    }
+    r_ble_log_internal_x1(0x800701c9,*(undefined1 *)(iVar1 + 0x17));
   }
-  return uVar2;
+  return 0xfffffffe;
 }
 

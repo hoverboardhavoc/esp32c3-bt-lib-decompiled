@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> sch_prog.o -> r_sch_prog_push
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,19 +26,19 @@ void r_sch_prog_push(undefined4 *param_1)
   iVar7 = (uVar2 - 1 & 0xf) * 0x10;
   uVar8 = uVar2 - DAT_00011100 & 0xf;
   if (param_1[1] == *(int *)(&sch_prog_env + iVar7)) {
-    r_assert_err(0,"sch_prog.c",0x2a3);
+    r_assert_err(0,"sch_prog.c",0x2ad);
   }
   iVar3 = r_emi_get_mem_addr_by_offset(0);
   iVar6 = uVar2 * 0x10;
   if (((*(ushort *)(iVar3 + iVar6) >> 3 & 7) == 1) ||
      (iVar3 = r_emi_get_mem_addr_by_offset(0), (*(ushort *)(iVar3 + iVar6) >> 3 & 7) == 2)) {
-    r_assert_param(DAT_00011100,uVar2,"sch_prog.c",0x2a6);
+    r_assert_param(DAT_00011100,uVar2,"sch_prog.c",0x2b0);
   }
   if (0xd < uVar8) {
     iVar3 = r_emi_get_mem_addr_by_offset(0);
     uVar1 = *(ushort *)((uVar2 - 2 & 0xf) * 0x10 + iVar3);
     iVar3 = r_emi_get_mem_addr_by_offset(0);
-    r_assert_warn((int)(uint)uVar1 >> 3 & 7,*(ushort *)(iVar7 + iVar3) >> 3 & 7,"sch_prog.c",0x2ab);
+    r_assert_warn((int)(uint)uVar1 >> 3 & 7,*(ushort *)(iVar7 + iVar3) >> 3 & 7,"sch_prog.c",0x2b5);
   }
   uVar5 = param_1[1];
   *(undefined4 *)(r_assert_err + iVar6) = param_1[4];
@@ -53,7 +53,7 @@ void r_sch_prog_push(undefined4 *param_1)
   uVar2 = param_1[2];
   *(ushort *)(iVar6 + 4 + iVar7) = (ushort)(((uint)uVar1 << 0x14) >> 0x14);
   if (0x270 < uVar2) {
-    r_assert_err(0,"sch_prog.c",0x2b6);
+    r_assert_err(0,"sch_prog.c",0x2c0);
   }
   iVar7 = param_1[2];
   if ((0x270U - iVar7 & 0xfc00) != 0) {

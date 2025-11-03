@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_per_adv.o -> r_lld_per_adv_evt_canceled_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,60 +14,54 @@ void r_lld_per_adv_evt_canceled_cbk(int param_1)
 
 {
   byte bVar1;
-  uint uVar2;
-  int iVar3;
+  int iVar2;
+  uint uVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
   
   if (param_1 == 0) {
-    r_assert_err(0x10000,0x3cc);
+    r_assert_err(0x10000,0x3e1);
     return;
   }
-  iVar6 = r_sdk_config_get_opts_ext();
-  if (((*(uint *)(iVar6 + 0x28) & 0x40) != 0) &&
-     (iVar6 = r_sdk_config_get_opts_ext(), *(byte *)(iVar6 + 0x2c) < 3)) {
-    r_ble_log_internal_x1(0x4048000a,*(undefined2 *)(param_1 + 0x52));
-  }
+  r_ble_log_internal_x1
+            (0x404400a9,
+             (uint)*(byte *)(param_1 + 0x52) |
+             (uint)*(byte *)(param_1 + 0x53) << 8 | (uint)*(byte *)(param_1 + 0x16) << 0x10);
   if (*(char *)(param_1 + 0x53) != '\0') {
-    r_assert_err(0,0x10000,0x3c2);
+    r_assert_err(0,0x10000,0x3d7);
   }
   bVar1 = *(byte *)(param_1 + 0x52);
   *(char *)(param_1 + 0x16) = *(char *)(param_1 + 0x16) + rwip_priority;
-  iVar6 = *(int *)(&lld_per_adv_env + (uint)bVar1 * 4);
-  *(uint *)(iVar6 + 4) = *(int *)(iVar6 + 4) + *(int *)(iVar6 + 0x40) & 0xfffffff;
-  *(short *)(iVar6 + 0x4c) = *(short *)(iVar6 + 0x4c) + 1;
-  iVar3 = r_lld_read_clock();
-  while ((iVar3 - *(int *)(iVar6 + 4) & 0xfffffffU) < 0x7ffffff) {
-    *(uint *)(iVar6 + 4) = *(int *)(iVar6 + 4) + *(int *)(iVar6 + 0x40) & 0xfffffff;
-    *(short *)(iVar6 + 0x4c) = *(short *)(iVar6 + 0x4c) + 1;
+  iVar2 = *(int *)(&lld_per_adv_env + (uint)bVar1 * 4);
+  *(uint *)(iVar2 + 4) = *(int *)(iVar2 + 4) + *(int *)(iVar2 + 0x40) & 0xfffffff;
+  *(short *)(iVar2 + 0x4c) = *(short *)(iVar2 + 0x4c) + 1;
+  iVar4 = r_lld_read_clock();
+  while ((iVar4 - *(int *)(iVar2 + 4) & 0xfffffffU) < 0x7ffffff) {
+    *(uint *)(iVar2 + 4) = *(int *)(iVar2 + 4) + *(int *)(iVar2 + 0x40) & 0xfffffff;
+    *(short *)(iVar2 + 0x4c) = *(short *)(iVar2 + 0x4c) + 1;
   }
-  uVar2 = 0;
+  uVar3 = 0;
   do {
-    iVar4 = r_sch_arb_insert(iVar6);
-    if (iVar4 == 0) {
-      iVar4 = 1;
+    iVar5 = r_sch_arb_insert(iVar2);
+    if (iVar5 == 0) {
+      iVar5 = 1;
       goto _L4;
     }
-    uVar2 = uVar2 + 1 & 0xff;
-    *(char *)(iVar6 + 0x16) = *(char *)(iVar6 + 0x16) + DAT_0001301b;
-    *(uint *)(iVar6 + 4) = *(int *)(iVar6 + 4) + *(int *)(iVar6 + 0x40) & 0xfffffff;
-    *(short *)(iVar6 + 0x4c) = *(short *)(iVar6 + 0x4c) + 1;
-  } while (uVar2 != 0xf);
-  iVar4 = 0;
+    uVar3 = uVar3 + 1 & 0xff;
+    *(char *)(iVar2 + 0x16) = *(char *)(iVar2 + 0x16) + DAT_0001301b;
+    *(uint *)(iVar2 + 4) = *(int *)(iVar2 + 4) + *(int *)(iVar2 + 0x40) & 0xfffffff;
+    *(short *)(iVar2 + 0x4c) = *(short *)(iVar2 + 0x4c) + 1;
+  } while (uVar3 != 0xf);
+  iVar5 = 0;
 _L4:
-  iVar5 = r_sdk_config_get_opts_ext();
-  if (((*(uint *)(iVar5 + 0x28) & 0x40) != 0) &&
-     (iVar5 = r_sdk_config_get_opts_ext(), *(byte *)(iVar5 + 0x2c) < 3)) {
-    r_ble_log_internal_x1
-              (0x4048000b,
-               iVar4 << 8 | uVar2 << 0x10 | (uint)*(byte *)(iVar6 + 0x53) << 0x18 | (uint)bVar1);
-  }
-  if (iVar4 == 0) {
-    r_assert_param(*(undefined4 *)(iVar6 + 4),iVar3,0x10000,0x13f);
+  r_ble_log_internal_x1
+            (0x404400a2,
+             (uint)*(byte *)(iVar2 + 0x53) << 0x18 | (uint)bVar1 | iVar5 << 8 | uVar3 << 0x10);
+  if (iVar5 == 0) {
+    r_assert_param(*(undefined4 *)(iVar2 + 4),iVar4,0x10000,0x13f);
     return;
   }
-  *(undefined1 *)(iVar6 + 0x53) = 0;
+  *(undefined1 *)(iVar2 + 0x53) = 0;
   return;
 }
 

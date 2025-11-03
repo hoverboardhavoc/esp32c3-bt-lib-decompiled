@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> llc_chmap_upd.o -> ll_channel_map_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,7 +15,7 @@
 undefined4 ll_channel_map_ind_handler(void)
 
 {
-  (**(code **)(_r_plf_funcs_p + 0xc))(0,0,0x10000,0x1bd,*(code **)(_r_plf_funcs_p + 0xc));
+  (**(code **)(_r_plf_funcs_p + 0xc))(0,0,0x10000,0x1c6,*(code **)(_r_plf_funcs_p + 0xc));
   return 0;
 }
 

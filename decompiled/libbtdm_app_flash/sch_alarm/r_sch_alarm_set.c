@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> sch_alarm.o -> r_sch_alarm_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,15 +45,8 @@ void r_sch_alarm_set(int param_1)
   else {
     r_co_list_insert_after(&sch_alarm_env,param_1);
   }
-  iVar1 = r_sdk_config_get_opts_ext();
-  if ((*(uint *)(iVar1 + 0x28) & 1) != 0) {
-    iVar1 = r_sdk_config_get_opts_ext();
-    if (*(byte *)(iVar1 + 0x2c) < 3) {
-      r_ble_log_internal_x3
-                (0x40240000,param_1,*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 8));
-    }
-  }
-                    /* WARNING: Could not recover jumptable at 0x000101d6. Too many branches */
+  r_ble_log_internal_x2(0x4029019b,param_1,*(undefined4 *)(param_1 + 4));
+                    /* WARNING: Could not recover jumptable at 0x000101b8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   return;

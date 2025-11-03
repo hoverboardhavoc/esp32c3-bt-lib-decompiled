@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llm_scan.o -> lld_adv_rep_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -70,20 +70,20 @@ undefined4 lld_adv_rep_ind_handler_hack(char *param_1)
     if (uStack_62 == 0) {
       if (uVar6 != 0) {
         uVar16 = 0;
-        goto _L547;
+        goto _L542;
       }
-_L502:
+_L497:
       memcpy(&uStack_60,param_1 + 4,6);
     }
     else {
       uVar16 = (uStack_62 - 0xc60) / 0x34 & 0xff;
       if (uVar6 != 0) {
-_L547:
+_L542:
         iVar10 = r_emi_get_mem_addr_by_offset(0xc60);
         uVar5 = *(ushort *)(uVar16 * 0x34 + iVar10);
         memcpy(&uStack_50,param_1 + 4,6);
         uVar5 = uVar5 & 1 | 2;
-        if (uStack_62 == 0) goto _L502;
+        if (uStack_62 == 0) goto _L497;
       }
       iVar10 = r_emi_get_mem_addr_by_offset(0xc60);
       iVar17 = uVar16 * 0x34;
@@ -115,13 +115,13 @@ _L547:
       }
     }
     if ((param_1[0x15] & 4U) == 0) {
-_L515:
+_L510:
       bVar15 = 0;
     }
     else if (param_1[1] == '\0') {
       memcpy(&uStack_48,param_1 + 10,6);
       bVar15 = param_1[0x18];
-      if (bVar15 == 0) goto _L515;
+      if (bVar15 == 0) goto _L510;
       if ((param_1[0xf] & 0xc0U) != 0xc0) {
         bVar15 = 0xfe;
       }
@@ -135,12 +135,12 @@ _L515:
     }
   }
   iVar10 = r_llm_adv_rep_flow_control_check_eco(param_1,&uStack_60);
-  if (iVar10 != 0) goto _L521;
+  if (iVar10 != 0) goto _L516;
   if ((bVar11 & 0xfd) != 1) {
-    r_assert_err("llm_scan.c",0x730);
+    r_assert_err("llm_scan.c",0x77d);
   }
   if (((((param_1[0x15] & 4U) != 0) && ((uStack_44._1_1_ & 0xc0) == 0x40)) && (bVar15 == 0xfe)) &&
-     (pbVar18[1] < 2)) goto _L521;
+     (pbVar18[1] < 2)) goto _L516;
   bVar14 = *(byte *)(_p_llm_env + 0xd4);
   if ((bVar14 & 1) != 0) {
     if (bVar11 == 1) {
@@ -161,7 +161,7 @@ _L515:
             ))) {
           *(byte *)(iVar10 + 0xd4) = bVar14 | 0x40;
           uVar6 = 0;
-          goto _L528;
+          goto _L523;
         }
       }
       *(byte *)(iVar10 + 0xd4) = *(byte *)(iVar10 + 0xd4) & 0xbf;
@@ -180,7 +180,7 @@ _L515:
     else {
       uVar6 = (uint)((uVar6 & 3) == 2);
     }
-_L528:
+_L523:
     if (param_1[0x16] == '\x01') {
       uVar16 = uVar6 + 1 & 0xff;
     }
@@ -209,7 +209,7 @@ _L528:
       bVar11 = (byte)(uVar16 << 4);
     }
     *(byte *)(_p_llm_env + 0xd4) = bVar14 | bVar11;
-    if (uVar6 != 0) goto _L521;
+    if (uVar6 != 0) goto _L516;
   }
   iVar10 = r_llm_adv_rep_flow_control_update_eco(param_1,&uStack_60);
   if (iVar10 == 0) {
@@ -256,7 +256,7 @@ _L528:
         *puVar9 = 0x10d;
         puVar9[1] = (ushort)(byte)param_1[0x15];
         if ((uVar16 < 0xe6) && ((param_1[0x16] & 0xfcU) != 0)) {
-          r_assert_param(0x60,"llm_scan.c",0x7e2);
+          r_assert_param(0x60,"llm_scan.c",0x82f);
         }
         uVar5 = 0x20;
         if (uVar16 < 0xe6) {
@@ -288,7 +288,7 @@ _L528:
       } while (uVar16 != 0);
     }
   }
-_L521:
+_L516:
   if (param_1[0x20] != '\0') {
     r_ble_util_buf_rx_free(*(undefined2 *)(param_1 + 0x22),*(undefined4 *)(param_1 + 0x24));
   }

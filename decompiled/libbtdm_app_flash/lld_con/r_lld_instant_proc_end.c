@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_instant_proc_end
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,20 +15,13 @@ void r_lld_instant_proc_end(uint param_1)
 {
   char cVar1;
   int iVar2;
-  int iVar3;
-  undefined4 uVar4;
+  undefined4 uVar3;
   
   iVar2 = *(int *)(&lld_con_env + param_1 * 4);
-  iVar3 = r_sdk_config_get_opts_ext();
-  if ((*(uint *)(iVar3 + 0x28) & 0x20) != 0) {
-    iVar3 = r_sdk_config_get_opts_ext();
-    if (*(byte *)(iVar3 + 0x2c) < 3) {
-      r_ble_log_internal_x1(0x40a30010,(uint)*(byte *)(iVar2 + 0x46) << 8 | param_1);
-    }
-  }
+  r_ble_log_internal_x1(0x40a30085,(uint)*(byte *)(iVar2 + 0x46) << 8 | param_1);
   cVar1 = *(char *)(iVar2 + 0x46);
   if (cVar1 == '\x02') {
-    uVar4 = 0x210;
+    uVar3 = 0x210;
   }
   else {
     if (cVar1 != '\x03') {
@@ -38,18 +31,18 @@ void r_lld_instant_proc_end(uint param_1)
         r_lld_con_tx_len_update(param_1,*(undefined1 *)(iVar2 + 0x94),*(undefined4 *)(iVar2 + 100));
       }
       else {
-        r_assert_warn(0,0,"lld_con.c",0x81a);
+        r_assert_warn(0,0,"lld_con.c",0x85a);
       }
-      goto _L282;
+      goto _L261;
     }
     *(undefined1 *)(iVar2 + 0x93) = *(undefined1 *)(iVar2 + 0x35);
     *(undefined1 *)(iVar2 + 0x94) = *(undefined1 *)(iVar2 + 0x34);
     r_lld_con_evt_time_update_eco(param_1);
     r_lld_con_tx_len_update(param_1,*(undefined1 *)(iVar2 + 0x94),*(undefined4 *)(iVar2 + 100));
-    uVar4 = 0x211;
+    uVar3 = 0x211;
   }
-  r_ke_msg_send_basic(uVar4,param_1 << 8 | 1,0xff);
-_L282:
+  r_ke_msg_send_basic(uVar3,param_1 << 8 | 1,0xff);
+_L261:
   *(undefined1 *)(iVar2 + 0x46) = 0;
   return;
 }

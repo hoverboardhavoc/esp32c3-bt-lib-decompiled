@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> r_llc_con_move_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ void r_llc_con_move_cbk(uint param_1)
   param_1 = param_1 & 0xff;
   iVar6 = param_1 * 4;
   if (*(int *)(&llc_env + iVar6) == 0) {
-    r_assert_err(0,"llc_con_upd.c",0x6ee);
+    r_assert_err(0,"llc_con_upd.c",0x706);
   }
   iVar2 = r_sdk_config_get_opts();
   if (param_1 < *(byte *)(iVar2 + 0xd)) {
@@ -34,19 +34,19 @@ void r_llc_con_move_cbk(uint param_1)
         puVar3 = (undefined4 *)r_ke_msg_alloc(0x10b,param_1 << 8 | 1,0x30);
         iVar2 = r_llm_plan_elt_get(param_1);
         if (*(int *)(&llc_env + iVar6) == 0) {
-          r_assert_err(0,"llc_con_upd.c",0x6f8);
+          r_assert_err(0,"llc_con_upd.c",0x710);
         }
         if (iVar2 == 0) {
-          r_assert_err(0,"llc_con_upd.c",0x6f9);
+          r_assert_err(0,"llc_con_upd.c",0x711);
         }
         if (*(int *)(iVar2 + 4) == 0) {
-          r_assert_err(0,"llc_con_upd.c",0x6fa);
+          r_assert_err(0,"llc_con_upd.c",0x712);
         }
         uVar7 = *(uint *)(iVar2 + 0xc);
         uVar5 = *(uint *)(iVar2 + 0x10);
         if ((*(ushort *)(*(int *)(&llc_env + iVar6) + 0x42) & 1) == 0) {
           if ((uVar7 < 4) || (uVar5 < uVar7)) {
-            r_assert_err(0,"llc_con_upd.c",0x701);
+            r_assert_err(0,"llc_con_upd.c",0x719);
           }
           uVar7 = uVar7 - 3;
           uVar5 = uVar5 - 3;

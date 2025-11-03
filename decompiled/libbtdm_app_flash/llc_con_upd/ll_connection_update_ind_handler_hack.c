@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> ll_connection_update_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,int param_3)
+undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,uint param_3)
 
 {
   int iVar1;
@@ -40,7 +40,7 @@ undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,int par
     return 0x20;
   }
   if ((*(ushort *)(*(int *)(&llc_env + param_1 * 4) + 0x42) & 1) == 0) {
-    if ((param_3 - (uint)*(ushort *)(param_2 + 10) & 0xffff) < 0x7fff) {
+    if ((param_3 - *(ushort *)(param_2 + 10) & 0xffff) < 0x7fff) {
       iVar1 = r_sdk_config_get_opts_ext(0x20);
       if ((*(byte *)(iVar1 + 0x1d) & 1) != 0) {
         return 0x28;
@@ -48,6 +48,7 @@ undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,int par
       if (2 < _g_bt_plf_log_level) {
         ets_printf("con_upd: %u %u %u\n",param_1,param_3,*(undefined2 *)(param_2 + 10));
       }
+      r_ble_log_internal_x2(0x804f0021,(uint)*(ushort *)(param_2 + 10) << 0x10 | param_3,param_1);
     }
     iVar1 = r_llc_proc_id_get(param_1,0);
     if (iVar1 == 5) {
@@ -74,7 +75,7 @@ undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,int par
         uVar2 = 7;
       }
       iVar1 = r_llc_proc_id_get(param_1,1);
-      if (iVar1 != 5) goto _L197;
+      if (iVar1 != 5) goto _L200;
       iVar1 = r_llc_proc_get(param_1,1);
       r_llc_proc_state_set(param_1,uVar2);
       *(undefined2 *)(iVar1 + 0x28) = *(undefined2 *)(param_2 + 4);
@@ -89,7 +90,7 @@ undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,int par
     uVar2 = 0;
   }
   else {
-_L197:
+_L200:
     uVar2 = 0x24;
   }
   return uVar2;

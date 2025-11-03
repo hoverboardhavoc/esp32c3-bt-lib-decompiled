@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llm_hci.o -> hci_le_clear_wlst_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,8 +23,11 @@ undefined4 hci_le_clear_wlst_cmd_handler(undefined4 param_1)
   int iVar6;
   
   iVar4 = r_llm_is_wl_accessible();
-  uVar5 = 0xc;
-  if (iVar4 != 0) {
+  if (iVar4 == 0) {
+    r_ble_log_internal_x1(0x802e0140,0xc);
+    uVar5 = 0xc;
+  }
+  else {
     uVar3 = 0;
     do {
       iVar4 = _p_llm_env;

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_init.o -> r_lld_init_process_pkt_rx_adv_ext_ind
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,7 +34,7 @@ void r_lld_init_process_pkt_rx_adv_ext_ind(int param_1,int param_2)
   uVar2 = *(ushort *)(iVar9 + 0x10 + iVar3);
   iVar3 = r_emi_get_mem_addr_by_offset(0x1000);
   if ((*(ushort *)(iVar9 + 4 + iVar3) & 0xf) != 7) {
-    r_assert_err(0,0x10000,0x2bf);
+    r_assert_err(0,0x10000,0x2c6);
     return;
   }
   *(undefined1 *)(iVar10 + 0x3d) = 0;
@@ -56,27 +56,28 @@ void r_lld_init_process_pkt_rx_adv_ext_ind(int param_1,int param_2)
       iVar3 = iVar3 + 2;
       *(undefined2 *)(iVar10 + 0x3a) = *puVar5;
     }
-    goto _L122;
+    goto _L113;
   }
   puVar5 = (undefined2 *)r_emi_get_mem_addr_by_offset(param_2 + iVar3 & 0xffff);
   *(undefined2 *)(iVar10 + 0x38) = *puVar5;
   pvVar4 = (void *)r_emi_get_mem_addr_by_offset(iVar3 + 2 + param_2 & 0xffff);
   memcpy(auStack_24,pvVar4,3);
+  init_rx_aux_data = auStack_24[0];
   iVar6 = r_emi_get_mem_addr_by_offset(0x1000);
   if ((*(ushort *)(iVar9 + 2 + iVar6) >> 9 & 1) == 0) {
     if ((auStack_24[0] >> 0x15 & 7) < 3) {
       iVar9 = r_lld_calc_aux_rx(iVar10 + 0x40,(uint)bVar1);
       uVar8 = 1;
-      if (iVar9 != 0) goto _L146;
+      if (iVar9 != 0) goto _L137;
     }
   }
   else {
     uVar8 = 2;
-_L146:
+_L137:
     *(undefined1 *)(iVar10 + 0x3d) = uVar8;
   }
   iVar3 = iVar3 + 5;
-_L122:
+_L113:
   if ((uVar2 & 0x2000) != 0) {
     iVar3 = iVar3 + 0x12;
   }

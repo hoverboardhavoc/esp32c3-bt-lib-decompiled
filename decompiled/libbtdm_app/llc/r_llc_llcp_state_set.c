@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> llc.o -> r_llc_llcp_state_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,13 +23,13 @@ void r_llc_llcp_state_set(int param_1,int param_2,uint param_3)
   iVar4 = *(int *)(&llc_env + param_1 * 4);
   if (param_3 == 3) {
     if (param_2 == 2) goto _L83;
-    uVar2 = 0x1a7;
+    uVar2 = 0x1ab;
     pcVar3 = *(code **)(_r_plf_funcs_p + 0xc);
     uVar1 = 3;
   }
   else {
     if ((param_3 != 0) || (param_2 == 2)) goto _L83;
-    uVar2 = 0x1a8;
+    uVar2 = 0x1ac;
     pcVar3 = *(code **)(_r_plf_funcs_p + 0xc);
     uVar1 = 0;
   }
@@ -42,7 +42,7 @@ _L83:
         if (param_2 == 0) {
           if ((param_3 & 0xfffffffc) != 0) {
             (**(code **)(_r_plf_funcs_p + 0xc))
-                      (3,param_3,"llc.c",0x1b6,*(code **)(_r_plf_funcs_p + 0xc));
+                      (3,param_3,"llc.c",0x1bb,*(code **)(_r_plf_funcs_p + 0xc));
           }
           *(byte *)(iVar4 + 0x44) = *(byte *)(iVar4 + 0x44) & 0xfc | (byte)param_3;
           return;
@@ -50,18 +50,18 @@ _L83:
                     /* WARNING: Could not recover jumptable at 0x00010778. Too many branches */
                     /* WARNING: Treating indirect jump as call */
         (**(code **)(_r_plf_funcs_p + 0xc))
-                  (param_1,param_2,"llc.c",0x1c7,*(code **)(_r_plf_funcs_p + 0xc));
+                  (param_1,param_2,"llc.c",0x1cc,*(code **)(_r_plf_funcs_p + 0xc));
         return;
       }
       if ((param_3 & 0xfffffffc) != 0) {
         (**(code **)(_r_plf_funcs_p + 0xc))
-                  (3,param_3,"llc.c",0x1bb,*(code **)(_r_plf_funcs_p + 0xc));
+                  (3,param_3,"llc.c",0x1c0,*(code **)(_r_plf_funcs_p + 0xc));
       }
       *(byte *)(iVar4 + 0x44) = *(byte *)(iVar4 + 0x44) & 0xfc | (byte)param_3;
     }
     if ((param_3 << 2 & 0xfffffff3) != 0) {
       (**(code **)(_r_plf_funcs_p + 0xc))
-                (0xc,param_3,"llc.c",0x1bf,*(code **)(_r_plf_funcs_p + 0xc));
+                (0xc,param_3,"llc.c",0x1c4,*(code **)(_r_plf_funcs_p + 0xc));
     }
     *(byte *)(iVar4 + 0x44) = *(byte *)(iVar4 + 0x44) & 0xf3 | (byte)(param_3 << 2);
                     /* WARNING: Could not recover jumptable at 0x00010750. Too many branches */

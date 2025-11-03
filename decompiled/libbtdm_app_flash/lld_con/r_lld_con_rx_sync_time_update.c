@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_rx_sync_time_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -50,12 +50,11 @@ void r_lld_con_rx_sync_time_update(int param_1,int param_2)
     uVar4 = ((uint)*(ushort *)(&lld_exp_sync_pos_tab + (uint)*(byte *)(param_2 + 0x93) * 2) * -2 +
             0x270) - (*(ushort *)((uint)bVar1 * 0x14 + 0xc + iVar6) & 0x3ff);
     iVar6 = (int)(uVar4 * 0x10000) >> 0x10;
-    if ((((byte)r_ble_util_buf_acl_tx_free_in_isr & 1) != 0) &&
-       ((*(byte *)(param_2 + 0x93) - 2 & 0xff) < 2)) {
-      iVar6 = (int)(((uVar4 & 0xffff) + (uint)_DAT_0001608a * -2) * 0x10000) >> 0x10;
+    if ((((byte)r_ke_msg_send_basic & 1) != 0) && ((*(byte *)(param_2 + 0x93) - 2 & 0xff) < 2)) {
+      iVar6 = (int)(((uVar4 & 0xffff) + (uint)_DAT_0001608e * -2) * 0x10000) >> 0x10;
     }
     if (0x751 < (iVar6 + 0x4e1U & 0xffff)) {
-      r_assert_err(0,"lld_con.c",0x8d0);
+      r_assert_err(0,"lld_con.c",0x90e);
     }
     for (; iVar6 < 0; iVar6 = (iVar6 + 0x271) * 0x10000 >> 0x10) {
       uVar7 = uVar7 - 1 & 0xfffffff;

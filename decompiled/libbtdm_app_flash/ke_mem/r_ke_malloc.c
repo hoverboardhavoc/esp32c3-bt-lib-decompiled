@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> ke_mem.o -> r_ke_malloc
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,7 +29,7 @@ short * r_ke_malloc(int param_1,int param_2)
   iVar6 = 0;
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   while( true ) {
-    psVar5 = *(short **)(r_ble_log_internal_x2 + ((param_2 + iVar6 & 3U) + 4) * 4);
+    psVar5 = *(short **)(&r_osi_funcs_p + ((param_2 + iVar6 & 3U) + 4) * 4);
     if (psVar5 == (short *)0x0) {
       r_assert_err(0,"ke_mem.c",0x10b);
     }
@@ -50,7 +50,7 @@ short * r_ke_malloc(int param_1,int param_2)
     if (iVar6 == 3) break;
     iVar6 = iVar6 + 1;
     if (psVar1 != (short *)0x0) {
-_L44:
+_L40:
       if ((ushort)psVar1[1] == uVar2) {
         if (*(int *)(psVar1 + 4) == 0) {
           r_assert_err(0,"ke_mem.c",0x15c);
@@ -70,15 +70,9 @@ _L44:
       psVar1[1] = (short)uVar2;
       *psVar1 = -0x7cc8;
       psVar1 = psVar1 + 2;
-_L48:
+_L44:
       (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
-      iVar6 = r_sdk_config_get_opts_ext();
-      if ((*(uint *)(iVar6 + 0x28) & 2) != 0) {
-        iVar6 = r_sdk_config_get_opts_ext();
-        if (*(byte *)(iVar6 + 0x2c) < 3) {
-          r_ble_log_internal_x3(0x40250006,param_2,param_1,psVar1);
-        }
-      }
+      r_ble_log_internal_x3(0x202a01ab,param_1,psVar1,param_2);
       return psVar1;
     }
   }
@@ -86,8 +80,8 @@ _L48:
     r_assert_param(param_1,param_2,"ke_mem.c",0x150);
     r_platform_reset(0xf2f2f2f2);
     psVar1 = (short *)0x0;
-    goto _L48;
+    goto _L44;
   }
-  goto _L44;
+  goto _L40;
 }
 

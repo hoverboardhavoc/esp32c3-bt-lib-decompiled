@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_phys_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -35,7 +35,7 @@ undefined4 r_lld_con_phys_update(int param_1,int param_2,undefined1 param_3,unde
       goto _L788;
     }
     (**(code **)(_r_plf_funcs_p + 0xc))
-              (*(char *)(iVar2 + 0x46),0,"lld_con.c",0xf90,*(code **)(_r_plf_funcs_p + 0xc));
+              (*(char *)(iVar2 + 0x46),0,"lld_con.c",0xfda,*(code **)(_r_plf_funcs_p + 0xc));
   }
   uVar1 = 0xc;
 _L788:

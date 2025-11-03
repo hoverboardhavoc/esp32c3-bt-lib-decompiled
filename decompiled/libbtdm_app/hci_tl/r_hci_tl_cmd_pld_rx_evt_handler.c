@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> hci_tl.o -> r_hci_tl_cmd_pld_rx_evt_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void r_hci_tl_cmd_pld_rx_evt_handler(void)
   
   iVar1 = (**(code **)(_r_ip_funcs_p + 0x48))(*(code **)(_r_ip_funcs_p + 0x48));
   if (_DAT_00012030 == 0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"hci_tl.c",0x5b0,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"hci_tl.c",0x5b1,*(code **)(_r_plf_funcs_p + 8));
   }
   (**(code **)(_r_modules_funcs_p + 0xec))(7,*(code **)(_r_modules_funcs_p + 0xec));
   (**(code **)(_r_ip_funcs_p + 0x2c))

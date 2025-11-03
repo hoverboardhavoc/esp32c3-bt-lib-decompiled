@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llc_encrypt.o -> f_hci_le_ltk_req_neg_reply_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -14,17 +14,19 @@ undefined4 f_hci_le_ltk_req_neg_reply_cmd_handler(uint param_1,undefined4 param_
 
 {
   int iVar1;
-  int iVar2;
-  undefined4 uVar3;
+  undefined4 uVar2;
+  int iVar3;
+  uint uVar4;
   
   iVar1 = r_sdk_config_get_opts();
   if (param_1 < *(byte *)(iVar1 + 0xd)) {
     iVar1 = *(int *)(&llc_env + param_1 * 4);
-    if (((iVar1 != 0) && ((*(byte *)(iVar1 + 0x44) & 3) != 3)) &&
-       (iVar1 = r_llc_proc_id_get(param_1,1), iVar1 == 3)) {
-      iVar1 = r_llc_proc_get(param_1,1);
-      iVar2 = r_llc_proc_state_get();
-      if (iVar2 == 0xe) {
+    if ((iVar1 == 0) || ((*(byte *)(iVar1 + 0x44) & 3) == 3)) goto _L244;
+    iVar1 = r_llc_proc_id_get(param_1,1);
+    if (iVar1 == 3) {
+      iVar1 = r_llc_proc_get(param_1);
+      iVar3 = r_llc_proc_state_get();
+      if (iVar3 == 0xe) {
         if (*(char *)(iVar1 + 0x3a) == '\0') {
           r_llc_rem_encrypt_proc_continue_eco(param_1,0xe,6);
         }
@@ -34,14 +36,28 @@ undefined4 f_hci_le_ltk_req_neg_reply_cmd_handler(uint param_1,undefined4 param_
           *(ushort *)(iVar1 + 0x42) = *(ushort *)(iVar1 + 0x42) & 0xfdff;
           r_llc_init_term_proc(param_1,6);
         }
-        uVar3 = 0;
-        goto _L241;
+        uVar2 = 0;
+        goto _L246;
       }
+      iVar1 = r_llc_proc_state_get(iVar1);
+      uVar4 = param_1 << 8 | iVar1 << 0x10 | 0xc;
+      uVar2 = 0x80030033;
+    }
+    else {
+      iVar1 = r_llc_proc_id_get(param_1,1);
+      uVar4 = param_1 << 8 | iVar1 << 0x10 | 0xc;
+      uVar2 = 0x80030034;
     }
   }
-  uVar3 = 0xc;
-_L241:
-  r_llc_cmd_cmp_send(param_1,param_2,uVar3);
+  else {
+_L244:
+    uVar4 = param_1 << 8 | 0xc;
+    uVar2 = 0x80030032;
+  }
+  r_ble_log_internal_x1(uVar2,uVar4);
+  uVar2 = 0xc;
+_L246:
+  r_llc_cmd_cmp_send(param_1,param_2,uVar2);
   return 0;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llc.o -> r_llc_proc_id_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -18,7 +18,7 @@ undefined1 r_llc_proc_id_get(int param_1,uint param_2)
   
   iVar1 = *(int *)(&llc_env + param_1 * 4);
   if (1 < param_2) {
-    r_assert_param("llc.c",0x1fb);
+    r_assert_param("llc.c",0x201);
   }
   iVar1 = *(int *)(iVar1 + param_2 * 4);
   uVar2 = 0;

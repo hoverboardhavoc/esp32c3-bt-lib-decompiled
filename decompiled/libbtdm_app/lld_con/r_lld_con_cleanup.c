@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_cleanup
  *
  * (C) Espressif, Apache License 2.0.
@@ -51,13 +51,13 @@ void r_lld_con_cleanup(int param_1,int param_2,undefined1 param_3)
         (**(code **)(_r_ip_funcs_p + 0xf8))
                   (*(undefined2 *)(iVar8 + 4 + iVar6),*(code **)(_r_ip_funcs_p + 0xf8));
         if (*(int *)(iVar11 + 0x24) != 0) {
-          uVar7 = 0x79f;
+          uVar7 = 0x7df;
           pcVar9 = *(code **)(_r_plf_funcs_p + 8);
           goto _L315;
         }
       }
       else if ((uVar3 & 3) == 0) {
-        uVar7 = 0x7a8;
+        uVar7 = 0x7e8;
         pcVar9 = *(code **)(_r_plf_funcs_p + 8);
 _L315:
         (*pcVar9)(0,"lld_con.c",uVar7,pcVar9);

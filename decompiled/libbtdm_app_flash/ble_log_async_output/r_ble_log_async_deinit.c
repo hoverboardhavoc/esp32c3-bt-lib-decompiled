@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> ble_log_async_output.o -> r_ble_log_async_deinit
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,11 @@ void r_ble_log_async_deinit(void)
   int iVar2;
   
   if (_ble_log_env != 0) {
-    (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
+    if (*(int *)(_ble_log_env + 0x1c) != 0) {
+      (**(code **)(_r_osi_funcs_p + 0x7c))(*(code **)(_r_osi_funcs_p + 0x7c));
+      *(undefined4 *)(_ble_log_env + 0x1c) = 0;
+    }
+    (**(code **)(_r_osi_funcs_p + 0x7c))(_ble_log_env,*(code **)(_r_osi_funcs_p + 0x7c));
     _ble_log_env = 0;
   }
   if (_ble_log_async_env != (undefined1 *)0x0) {

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> hci_tl.o -> r_hci_tl_hci_pkt_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -44,7 +44,7 @@ void r_hci_tl_hci_pkt_handler(void)
         if (1 < _g_bt_plf_log_level) {
           ets_printf("HCITL: fail to alloc acl %0x, %0x\n",iVar4,0);
         }
-        goto _L222;
+        goto _L221;
       }
       memcpy(__dest,pcVar1 + 5,(uint)*(ushort *)(pcVar1 + 3));
       uVar5 = *(undefined2 *)(pcVar1 + 3);
@@ -52,7 +52,7 @@ void r_hci_tl_hci_pkt_handler(void)
     }
     r_hci_acl_tx_data_received(uVar2,uVar5,iVar4);
   }
-_L222:
+_L221:
   r_vhci_notify_host_send_available();
   return;
 }

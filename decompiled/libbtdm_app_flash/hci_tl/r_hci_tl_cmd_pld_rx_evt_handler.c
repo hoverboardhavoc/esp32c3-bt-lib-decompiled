@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> hci_tl.o -> r_hci_tl_cmd_pld_rx_evt_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ void r_hci_tl_cmd_pld_rx_evt_handler(void)
   
   iVar1 = _memcpy;
   if (_memcpy == 0) {
-    r_assert_err(0,"hci_tl.c",0x5b0);
+    r_assert_err(0,"hci_tl.c",0x5b1);
   }
   r_ke_event_clear(7);
   r_hci_cmd_received(*(undefined2 *)(iVar1 + 1),*(undefined1 *)(iVar1 + 3),iVar1 + 4);

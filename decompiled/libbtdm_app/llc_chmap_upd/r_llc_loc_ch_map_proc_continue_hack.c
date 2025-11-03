@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> llc_chmap_upd.o -> r_llc_loc_ch_map_proc_continue_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -74,7 +74,7 @@ void r_llc_loc_ch_map_proc_continue_hack(int param_1,int param_2)
         uVar6 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar4,*(code **)(_r_ip_funcs_p + 0x680));
                     /* WARNING: Could not recover jumptable at 0x000101ee. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-        (*UNRECOVERED_JUMPTABLE)(param_1,uVar6,0x10000,0xcc,UNRECOVERED_JUMPTABLE);
+        (*UNRECOVERED_JUMPTABLE)(param_1,uVar6,0x10000,0xcf,UNRECOVERED_JUMPTABLE);
         return;
       }
       memcpy((void *)(iVar2 + 8),(void *)(iVar4 + 8),5);

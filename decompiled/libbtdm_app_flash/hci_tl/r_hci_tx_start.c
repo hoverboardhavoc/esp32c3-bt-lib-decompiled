@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> hci_tl.o -> r_hci_tx_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,13 +24,13 @@ void r_hci_tx_start(void)
   if (_hci_tl_env == 0) {
     iVar1 = r_hci_fc_check_host_available_nb_acl_packets();
     if (iVar1 == 0) {
-      DAT_0001101e = 1;
+      DAT_0001201e = 1;
       return;
     }
-    DAT_0001101e = 0;
+    DAT_0001201e = 0;
     iVar1 = _r_co_list_init;
     if (_r_co_list_init == 0) {
-      DAT_0001101e = 0;
+      DAT_0001201e = 0;
       return;
     }
   }
@@ -38,15 +38,15 @@ void r_hci_tx_start(void)
   switch(*(short *)(iVar1 + 4) + -0x1101) {
   case 0:
     if (((*(short *)(iVar1 + 8) != 0xc03) && (*(short *)(iVar1 + 8) != 0xc35)) &&
-       (iVar2 = (DAT_0001101d + 1) * 0x1000000, DAT_0001101d = (byte)((uint)iVar2 >> 0x18),
+       (iVar2 = (DAT_0001201d + 1) * 0x1000000, DAT_0001201d = (byte)((uint)iVar2 >> 0x18),
        5 < iVar2 >> 0x18)) {
       r_assert_err(0,"hci_tl.c",0x428);
     }
     iVar1 = r_hci_build_cc_evt(iVar1);
     break;
   case 1:
-    iVar2 = (DAT_0001101d + 1) * 0x1000000;
-    DAT_0001101d = (byte)((uint)iVar2 >> 0x18);
+    iVar2 = (DAT_0001201d + 1) * 0x1000000;
+    DAT_0001201d = (byte)((uint)iVar2 >> 0x18);
     if (5 < iVar2 >> 0x18) {
       r_assert_err(0,"hci_tl.c",0x437);
     }

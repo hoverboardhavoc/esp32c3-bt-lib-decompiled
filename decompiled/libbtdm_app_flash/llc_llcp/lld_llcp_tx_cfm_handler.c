@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llc_llcp.o -> lld_llcp_tx_cfm_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,7 +19,7 @@ undefined4 lld_llcp_tx_cfm_handler(uint param_1)
   param_1 = param_1 >> 8;
   iVar2 = *(int *)(&llc_env + param_1 * 4);
   if (iVar2 == 0) {
-    r_assert_param(0,"llc_llcp.c",0x3f2);
+    r_assert_param(0,"llc_llcp.c",0x3ff);
   }
   else {
     iVar1 = r_co_list_pop_front(iVar2 + 0x28);

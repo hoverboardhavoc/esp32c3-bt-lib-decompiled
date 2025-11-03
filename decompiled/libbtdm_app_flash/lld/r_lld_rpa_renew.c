@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 2fd7ad255fceabdfba56882ce4523efdba2fc255
- * https://github.com/espressif/esp32c3-bt-lib/commit/2fd7ad255fceabdfba56882ce4523efdba2fc255
- * Upstream date: 2025-03-31 11:18:40 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(566c8e3)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_rpa_renew
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,37 +19,31 @@ void r_lld_rpa_renew(void)
   int iVar2;
   undefined4 uVar3;
   
-  iVar2 = r_sdk_config_get_opts_ext();
-  if ((*(uint *)(iVar2 + 0x28) & 0x100) != 0) {
-    iVar2 = r_sdk_config_get_opts_ext();
-    if (*(byte *)(iVar2 + 0x2c) < 3) {
-      r_ble_log_internal_x1(0x400d0000,_lld_rpa_renew_env);
-    }
-  }
-  if (_lld_rpa_renew_env == 0) {
-    iVar2 = r_ke_malloc(0x30,0);
-    _lld_rpa_renew_env = iVar2;
-    if (iVar2 != 0) {
-      *(code **)(iVar2 + 0x20) = r_lld_rpa_renew_evt_canceled_cbk;
-      *(code **)(iVar2 + 0x18) = r_lld_rpa_renew_evt_start_cbk;
-      uVar1 = rwip_priority;
-      *(undefined4 *)(iVar2 + 0x1c) = 0;
-      *(undefined1 *)(iVar2 + 0x17) = 0;
-      *(undefined1 *)(iVar2 + 0x16) = uVar1;
-      *(undefined4 *)(iVar2 + 0x10) = 5000;
-      *(undefined2 *)(iVar2 + 0x14) = 0x60a1;
-      uVar3 = r_lld_read_clock();
-      *(undefined4 *)(iVar2 + 4) = uVar3;
-      *(undefined4 *)(iVar2 + 8) = 0;
-      iVar2 = r_sch_arb_insert(iVar2);
-      if (iVar2 != 0) {
-        r_assert_err(0,"lld.c",0x558);
-        return;
-      }
-    }
+  r_ble_log_internal_x1(0x20280051,_lld_rpa_renew_env);
+  if (_lld_rpa_renew_env != 0) {
+    r_assert_warn(0,0,"lld.c",0x560);
     return;
   }
-  r_assert_warn(0,0,"lld.c",0x55e);
+  iVar2 = r_ke_malloc(0x30,0);
+  _lld_rpa_renew_env = iVar2;
+  if (iVar2 != 0) {
+    *(code **)(iVar2 + 0x20) = r_lld_rpa_renew_evt_canceled_cbk;
+    *(code **)(iVar2 + 0x18) = r_lld_rpa_renew_evt_start_cbk;
+    uVar1 = rwip_priority;
+    *(undefined4 *)(iVar2 + 0x1c) = 0;
+    *(undefined1 *)(iVar2 + 0x17) = 0;
+    *(undefined1 *)(iVar2 + 0x16) = uVar1;
+    *(undefined4 *)(iVar2 + 0x10) = 5000;
+    *(undefined2 *)(iVar2 + 0x14) = 0x60a1;
+    uVar3 = r_lld_read_clock();
+    *(undefined4 *)(iVar2 + 4) = uVar3;
+    *(undefined4 *)(iVar2 + 8) = 0;
+    iVar2 = r_sch_arb_insert(iVar2);
+    if (iVar2 != 0) {
+      r_assert_err(0,"lld.c",0x55a);
+      return;
+    }
+  }
   return;
 }
 

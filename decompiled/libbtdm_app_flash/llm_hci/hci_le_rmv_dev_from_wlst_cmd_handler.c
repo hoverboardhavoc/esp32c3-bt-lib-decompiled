@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llm_hci.o -> hci_le_rmv_dev_from_wlst_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,49 +12,58 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 hci_le_rmv_dev_from_wlst_cmd_handler(char *param_1,undefined4 param_2)
+undefined4 hci_le_rmv_dev_from_wlst_cmd_handler(byte *param_1,undefined4 param_2)
 
 {
   int iVar1;
-  uint uVar2;
-  undefined4 uVar3;
-  byte bVar4;
-  char local_19;
+  undefined4 uVar2;
+  byte bVar3;
+  uint uVar4;
+  byte local_19;
   undefined1 auStack_18 [12];
   
   iVar1 = r_llm_is_wl_accessible();
-  uVar3 = 0xc;
-  if (iVar1 != 0) {
-    if (0xfc < (byte)(*param_1 - 2U)) {
+  if (iVar1 == 0) {
+    r_ble_log_internal_x1(0x802e0144,0xc);
+    uVar2 = 0xc;
+  }
+  else {
+    uVar4 = (uint)*param_1;
+    if ((uVar4 - 2 & 0xff) < 0xfd) {
+      uVar2 = 0x802e0145;
+    }
+    else {
       local_19 = *param_1;
       memcpy(auStack_18,param_1 + 1,6);
       iVar1 = lld_peer_rpa_to_id(auStack_18,&local_19);
       if (iVar1 == 0) {
         lld_wl_rpa_res(auStack_18,&local_19);
       }
-      uVar2 = r_llm_dev_list_search(auStack_18,local_19);
-      if (uVar2 < 0xc) {
-        iVar1 = _p_llm_env + uVar2 * 10;
-        bVar4 = *(byte *)(iVar1 + 0x2d);
-        if ((bVar4 & 2) != 0) {
-          if ((bVar4 & 4) == 0) {
-            bVar4 = bVar4 & 0xfc;
+      uVar4 = r_llm_dev_list_search(auStack_18,local_19);
+      if (uVar4 < 0xc) {
+        iVar1 = _p_llm_env + uVar4 * 10;
+        bVar3 = *(byte *)(iVar1 + 0x2d);
+        if ((bVar3 & 2) != 0) {
+          if ((bVar3 & 4) == 0) {
+            bVar3 = bVar3 & 0xfc;
           }
           else {
-            bVar4 = bVar4 & 0xfd;
+            bVar3 = bVar3 & 0xfd;
           }
-          *(byte *)(iVar1 + 0x2d) = bVar4;
+          *(byte *)(iVar1 + 0x2d) = bVar3;
           r_lld_white_list_rem(auStack_18,local_19);
-          lld_wl_res_rem(uVar2);
-          uVar3 = 0;
-          goto _L221;
+          lld_wl_res_rem(uVar4);
+          uVar2 = 0;
+          goto _L222;
         }
       }
+      uVar2 = 0x802e0146;
     }
-    uVar3 = 0x12;
+    r_ble_log_internal_x1(uVar2,uVar4 << 8 | 0x12);
+    uVar2 = 0x12;
   }
-_L221:
-  r_llm_cmd_cmp_send(param_2,uVar3);
+_L222:
+  r_llm_cmd_cmp_send(param_2,uVar2);
   return 0;
 }
 

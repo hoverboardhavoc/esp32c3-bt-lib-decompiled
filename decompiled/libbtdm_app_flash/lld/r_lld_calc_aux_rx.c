@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_calc_aux_rx
  *
  * (C) Espressif, Apache License 2.0.
@@ -62,7 +62,7 @@ undefined4 r_lld_calc_aux_rx(uint *param_1,int param_2,uint param_3)
     if (uVar7 == 0) {
       iVar5 = 0xf;
     }
-    iVar4 = (uint)DAT_00014062 + iVar11 + (iVar10 * (uVar9 + iVar4)) / 1000000;
+    iVar4 = (uint)DAT_0001405a + iVar11 + (iVar10 * (uVar9 + iVar4)) / 1000000;
     uVar7 = iVar4 * 2;
     iVar11 = r_emi_get_mem_addr_by_offset(0x1000);
     uVar9 = (iVar5 + iVar10) * 2 + (0x270 - (uVar3 & 0x3ff) & 0xffff) + iVar4 * -2 +
@@ -76,7 +76,7 @@ undefined4 r_lld_calc_aux_rx(uint *param_1,int param_2,uint param_3)
     *param_1 = (int)uVar9 / 0x271 + CONCAT22(uVar1,uVar2) & 0xfffffff;
     param_1[1] = uVar9 % 0x271;
     if (uVar8 == 2) {
-      param_1[2] = (uint)DAT_00014062 * 0xe + uVar7;
+      param_1[2] = (uint)DAT_0001405a * 0xe + uVar7;
     }
   }
   return uVar6;

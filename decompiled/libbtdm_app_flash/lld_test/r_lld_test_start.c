@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_test.o -> r_lld_test_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,7 +45,7 @@ undefined4 r_lld_test_start(char *param_1)
   memset(__s,0,0x2c);
   *(code **)((int)__s + 0x20) = r_lld_test_evt_canceled_cbk;
   *(code **)((int)__s + 0x18) = r_lld_test_evt_start_cbk;
-  bVar2 = DAT_0001101d;
+  bVar2 = DAT_00011019;
   *(code *)((int)__s + 0x16) = r_emi_get_mem_addr_by_offset;
   *(undefined4 *)((int)__s + 0x10) = 0x9c4;
   *(ushort *)((int)__s + 0x14) = bVar2 & 0xf | 0x6000;
@@ -112,16 +112,16 @@ undefined4 r_lld_test_start(char *param_1)
     *(undefined2 *)(iVar6 + 0x48) = 0;
     uVar11 = (uint)(byte)param_1[3];
     if (uVar11 == 3) {
-_L106:
+_L91:
       _DAT_600310d0 = (uVar11 & 1) << 0xd | _DAT_600310d0 & 0xffffcfff | 0x1000;
     }
     else {
       if (uVar11 < 4) {
-        if (uVar11 == 0) goto _L106;
+        if (uVar11 == 0) goto _L91;
       }
       else if (3 < (uVar11 - 4 & 0xff)) {
         r_assert_err(0,0x10000,0x2c3);
-        goto _L110;
+        goto _L95;
       }
       bVar2 = param_1[2];
       switch(uVar11 - 1 & 0xff) {
@@ -148,7 +148,7 @@ _L106:
       memcpy(__dest,abStack_120,(uint)bVar2);
       _DAT_600310d0 = _DAT_600310d0 & 0xffffefff;
     }
-_L110:
+_L95:
     bVar2 = param_1[3];
     uVar3 = *(undefined2 *)(param_1 + 2);
     if ((bVar2 & 0xf0) != 0) {
@@ -211,12 +211,12 @@ _L110:
     if (*param_1 == '\0') {
       uVar11 = (byte)param_1[4] - 1 & 0xff;
       uVar10 = 0;
-      goto _L123;
+      goto _L108;
     }
     uVar10 = 0;
   }
   uVar11 = 0;
-_L123:
+_L108:
   if ((uVar11 << 2 & 0xfffffff3) != 0) {
     r_assert_err(0,0x10000,399);
   }

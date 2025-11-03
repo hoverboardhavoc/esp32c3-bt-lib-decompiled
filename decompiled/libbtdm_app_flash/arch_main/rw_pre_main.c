@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3ff529142f6e2707d57b10eb87ac8d86e9098b88
- * https://github.com/espressif/esp32c3-bt-lib/commit/3ff529142f6e2707d57b10eb87ac8d86e9098b88
- * Upstream date: 2025-06-05 11:04:06 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713a69)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> arch_main.o -> rw_pre_main
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,10 +22,10 @@ void rw_pre_main(void)
   r_emi_base_reg_lut_show();
   r_emi_init();
   r_intc_init();
-  if (DAT_00013035 != '\0') {
+  if (DAT_00013045 != '\0') {
     r_flash_init();
   }
-  if (btdm_env_p != '\0') {
+  if (btdm_get_power_state_impl != (code)0x0) {
     r_nvds_init(4,0x800);
   }
   iVar1 = r_sdk_config_get_opts();
@@ -36,7 +36,7 @@ void rw_pre_main(void)
       if (0 < _g_bt_plf_log_level) {
         ets_printf("H4TL EIF not registered\n");
       }
-      r_assert_err(0,"arch_main.c",0x4ab);
+      r_assert_err(0,"arch_main.c",0x4ac);
     }
     (**(code **)(iVar1 + 0xc))(*(code **)(iVar1 + 0xc));
   }

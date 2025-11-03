@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_phys_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,40 +12,36 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-undefined4 r_lld_con_phys_update(uint param_1,int param_2,int param_3,undefined2 param_4)
+undefined4 r_lld_con_phys_update(uint param_1,int param_2,int param_3,uint param_4)
 
 {
   int iVar1;
-  int iVar2;
-  undefined4 uVar3;
+  undefined4 uVar2;
   
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   iVar1 = *(int *)(&lld_con_env + param_1 * 4);
+  uVar2 = 0xc;
   if (iVar1 != 0) {
-    iVar2 = r_sdk_config_get_opts_ext();
-    if (((*(uint *)(iVar2 + 0x28) & 0x20) != 0) &&
-       (iVar2 = r_sdk_config_get_opts_ext(), *(byte *)(iVar2 + 0x2c) < 3)) {
-      r_ble_log_internal_x2
-                (0x40a30006,param_2 << 8 | param_3 << 0x10 | param_1,
-                 CONCAT22(param_4,*(undefined2 *)(iVar1 + 0x7c)));
-    }
     if (*(char *)(iVar1 + 0x46) == '\0') {
       *(undefined1 *)(iVar1 + 0x46) = 3;
-      *(undefined2 *)(iVar1 + 0x44) = param_4;
+      *(short *)(iVar1 + 0x44) = (short)param_4;
       *(char *)(iVar1 + 0x34) = (char)param_2;
       *(char *)(iVar1 + 0x35) = (char)param_3;
-      uVar3 = 0;
+      uVar2 = 0;
       if (*(ushort *)(&byte_tx_time + (uint)*(byte *)(iVar1 + 0x94) * 2) <
           *(ushort *)(&byte_tx_time + param_2 * 2)) {
         r_lld_con_tx_len_update(param_1,param_2,*(undefined4 *)(iVar1 + 100));
       }
-      goto _L842;
     }
-    r_assert_param(*(char *)(iVar1 + 0x46),0,"lld_con.c",0xf90);
+    else {
+      r_assert_param(*(char *)(iVar1 + 0x46),0,"lld_con.c",0xfda);
+      uVar2 = 0xc;
+    }
+    r_ble_log_internal_x2
+              (0x40a30093,(uint)*(ushort *)(iVar1 + 0x7c) << 0x10 | param_4,
+               param_2 << 8 | param_3 << 0x10 | param_1);
   }
-  uVar3 = 0xc;
-_L842:
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
-  return uVar3;
+  return uVar2;
 }
 

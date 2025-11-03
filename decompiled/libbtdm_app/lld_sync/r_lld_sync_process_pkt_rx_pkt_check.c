@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> lld_sync.o -> r_lld_sync_process_pkt_rx_pkt_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -55,7 +55,7 @@ void r_lld_sync_process_pkt_rx_pkt_check(int param_1,int param_2)
   iVar20 = iVar6 + 4;
   iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   if ((*(ushort *)(iVar9 + iVar20) & 0xf) != 7) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x1cf,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x1d5,*(code **)(_r_plf_funcs_p + 8));
   }
   *(undefined4 *)(iVar21 + 0x3c) = *(undefined4 *)(iVar21 + 0x44);
   *(char *)(iVar21 + 100) = *(char *)(iVar21 + 100) + '\x01';
@@ -67,7 +67,7 @@ void r_lld_sync_process_pkt_rx_pkt_check(int param_1,int param_2)
   uVar5 = uVar14 & 0x3f;
   iVar9 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   if (*(ushort *)(iVar9 + iVar20) >> 8 <= uVar5) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x1de,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x1e4,*(code **)(_r_plf_funcs_p + 8));
   }
   cVar16 = '\0';
   if ((uVar14 & 0x3f) != 0) {

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> ble_log.o -> r_ble_log_internal_x0
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,18 +16,19 @@ void r_ble_log_internal_x0(uint param_1)
 
 {
   int iVar1;
-  undefined4 uStack_24;
-  uint uStack_20;
+  undefined4 uStack_28;
+  uint uStack_24;
   
-  if (ble_log_env != (byte *)0x0) {
-    uStack_24 = (**(code **)(_r_osi_funcs_p + 0xf0))(*(code **)(_r_osi_funcs_p + 0xf0));
-    uStack_20 = param_1 & 0xe7ffffff;
+  if ((ble_log_env != (byte *)0x0) &&
+     (iVar1 = (**(code **)(ble_log_env + 0x10))(*(code **)(ble_log_env + 0x10)), iVar1 != 0)) {
+    uStack_28 = lld_read_clock_us();
+    uStack_24 = param_1 & 0xe7ffffff;
     iVar1 = (**(code **)(_r_osi_funcs_p + 0x6c))(*(code **)(_r_osi_funcs_p + 0x6c));
     if (iVar1 != 0) {
       *ble_log_env = *ble_log_env | 2;
-      uStack_20 = uStack_20 | 0x8000000;
+      uStack_24 = uStack_24 | 0x8000000;
     }
-    (**(code **)(ble_log_env + 8))(8,&uStack_24,0,0,0,*(code **)(ble_log_env + 8));
+    (**(code **)(ble_log_env + 8))(8,&uStack_28,0,0,0,*(code **)(ble_log_env + 8));
     *ble_log_env = 0;
   }
   return;

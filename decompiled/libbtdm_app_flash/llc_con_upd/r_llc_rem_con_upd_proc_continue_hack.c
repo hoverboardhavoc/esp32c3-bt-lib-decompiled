@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> r_llc_rem_con_upd_proc_continue_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,14 +24,17 @@ void r_llc_rem_con_upd_proc_continue_hack(int param_1,int param_2,int param_3)
   
   iVar3 = r_llc_proc_get(1);
   iVar8 = *(int *)(&llc_env + param_1 * 4);
+  r_ble_log_internal_x2
+            (0x404f001e,(uint)*(ushort *)(iVar8 + 0x42) | param_1 << 0x10 | param_2 << 0x18,param_3)
+  ;
   if (param_2 == 0xb) {
-    r_llc_proc_state_set(param_1,0xb);
+    r_llc_proc_state_set(iVar3,param_1,0xb);
     r_lld_con_tx_len_update_for_intv(param_1,*(undefined2 *)(iVar8 + 0xe));
   }
   iVar4 = r_llc_proc_state_get(iVar3);
   if (iVar4 != param_2) {
     r_llc_proc_state_get(iVar3);
-    r_assert_warn(param_2,"llc_con_upd.c",0x1eb);
+    r_assert_warn(param_2,"llc_con_upd.c",0x1ef);
     return;
   }
   uVar5 = r_llc_proc_state_get(iVar3);
@@ -39,7 +42,7 @@ void r_llc_rem_con_upd_proc_continue_hack(int param_1,int param_2,int param_3)
     if (param_3 == 0) {
       r_llc_proc_timer_set(param_1,1,0);
       *(undefined1 *)(iVar3 + 0x2c) = 1;
-_L166:
+_L168:
       *(ushort *)(iVar8 + 0x42) = *(ushort *)(iVar8 + 0x42) | 0x10;
       if (*(char *)(iVar3 + 0x2c) == '\0') {
         uVar1 = *(ushort *)(iVar8 + 0xe);
@@ -53,7 +56,7 @@ _L166:
         }
         *(ushort *)(iVar3 + 8) = uVar1;
         *(ushort *)(iVar3 + 10) = uVar1;
-        goto _L167;
+        goto _L169;
       }
       param_3 = r_lld_con_param_update
                           (param_1,*(undefined1 *)(iVar3 + 0x26),*(undefined2 *)(iVar3 + 0x22),
@@ -67,9 +70,9 @@ _L166:
   }
   else {
     if (uVar5 < 10) {
-      if (uVar5 == 7) goto _L166;
-      if (uVar5 != 8) goto _L168;
-_L167:
+      if (uVar5 == 7) goto _L168;
+      if (uVar5 != 8) goto _L170;
+_L169:
       if (param_3 == 0) {
         if ((*(ushort *)(iVar8 + 0x42) & 1) == 0) {
           uVar2 = r_lld_con_event_counter_get(param_1);
@@ -91,18 +94,18 @@ _L167:
       else {
         r_llc_ll_reject_ind_pdu_send(param_1,0xf,param_3,0);
       }
-      goto _L175;
+      goto _L177;
     }
     if (1 < (uVar5 - 10 & 0xff)) {
-_L168:
+_L170:
       uVar6 = r_llc_proc_state_get(iVar3);
-      r_assert_param(param_1,uVar6,"llc_con_upd.c",0x268);
+      r_assert_param(param_1,uVar6,"llc_con_upd.c",0x26c);
       return;
     }
   }
   r_llc_hci_con_upd_info_send_eco(param_1,param_3,iVar3);
   *(ushort *)(iVar8 + 0x42) = *(ushort *)(iVar8 + 0x42) & 0xffef;
-_L175:
+_L177:
   r_llc_proc_unreg(param_1,1);
   return;
 }

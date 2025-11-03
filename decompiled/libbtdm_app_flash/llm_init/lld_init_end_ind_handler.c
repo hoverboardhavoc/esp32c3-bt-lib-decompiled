@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> llm_init.o -> lld_init_end_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -69,7 +69,7 @@ undefined4 lld_init_end_ind_handler(byte *param_1)
   uVar18 = (uint)param_1[1];
   iVar5 = r_sdk_config_get_opts();
   if (*(byte *)(iVar5 + 0xd) <= uVar15) {
-    r_assert_param(uVar15,0,0x10000,0x288);
+    r_assert_param(uVar15,0,0x10000,0x2a4);
   }
   iVar5 = uVar15 * 0x44;
   piVar10 = (int *)(*(int *)(_p_llm_env + 8) + iVar5);
@@ -80,6 +80,7 @@ undefined4 lld_init_end_ind_handler(byte *param_1)
       r_llm_cmd_cmp_send(0x200e,0);
       uVar18 = 0;
       *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar5 + 0x40) = 0;
+      r_ble_log_internal_x1(0x404e0166,uVar15);
     }
     else {
       if ((_bt_rf_coex_hooks_p != (undefined4 *)0x0) &&
@@ -93,6 +94,7 @@ undefined4 lld_init_end_ind_handler(byte *param_1)
       iVar6 = _p_llm_env;
       if (uVar18 == 0) {
         *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar5 + 0x40) = 0;
+        r_ble_log_internal_x1(0x404e0165,uVar15);
       }
       else {
         memcpy(auStack_68,param_1 + 0x14,4);
@@ -173,11 +175,11 @@ undefined4 lld_init_end_ind_handler(byte *param_1)
         pbVar4 = param_1 + 0xe;
         iVar6 = *(int *)(_p_llm_env + 8) + iVar5;
         memcpy((void *)(iVar6 + 4),pbVar4,6);
-        bVar1 = param_1[0x20];
-        *(undefined1 *)(iVar6 + 0x28) = 0;
-        *(byte *)(iVar6 + 0x41) = bVar1 & 1;
+        *(byte *)(iVar6 + 0x41) = param_1[0x20] & 1;
         *(undefined1 *)(iVar6 + 0x40) = 9;
-        r_lld_res_list_peer_update_hack(pbVar4,1);
+        *(undefined1 *)(iVar6 + 0x28) = 0;
+        r_ble_log_internal_x1(0x404e0164,uVar15 | 0x900);
+        r_lld_res_list_peer_update_hack(pbVar4,param_1[0x20],1);
         uVar12 = r_llm_dev_list_search(pbVar4,param_1[0x20]);
         if (uVar12 < 0xc) {
           if ((*(byte *)(uVar12 * 10 + _p_llm_env + 0x2d) & 2) != 0) {
@@ -274,7 +276,7 @@ undefined4 lld_init_end_ind_handler(byte *param_1)
   }
   else {
     r_assert_param(uVar15,*(undefined1 *)(*(int *)(_p_llm_env + 8) + (uint)*param_1 * 0x44 + 0x40),
-                   0x10000,0x379);
+                   0x10000,0x399);
   }
   return 0;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_rx_channel_assess_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ void r_lld_con_rx_channel_assess_hack(int param_1,int param_2)
   bVar1 = *(byte *)(_p_lld_env + 0xd8);
   iVar3 = r_emi_get_mem_addr_by_offset(0x1000);
   uVar4 = (uint)*(ushort *)((uint)bVar1 * 0x14 + 6 + iVar3);
-  iVar3 = (*_r_ble_log_internal_x2)(uVar4 & 0xff,_r_ble_log_internal_x2);
+  iVar3 = (*_r_llm_plan_elt_get)(uVar4 & 0xff,_r_llm_plan_elt_get);
   if ((*(ushort *)(param_1 + 0x84) & 0x100) != 0) {
     *(char *)(param_1 + 0x95) = (char)iVar3;
   }

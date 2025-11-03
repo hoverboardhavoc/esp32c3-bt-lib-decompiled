@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app -> lld_init.o -> r_lld_init_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -81,7 +81,7 @@ undefined1 r_lld_init_start(undefined2 *param_1)
                                 (0x5c,0,*(code **)(_r_modules_funcs_p + 0x120));
   _lld_init_env = piStack_f8;
   if (piStack_f8 == (int *)0x0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0x10000,0x819,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0x10000,0x842,*(code **)(_r_plf_funcs_p + 8));
     goto _L297;
   }
   memset(piStack_f8,0,0x5c);
@@ -129,7 +129,7 @@ undefined1 r_lld_init_start(undefined2 *param_1)
     *piStack_f8 = (int)pvVar16;
     if (pvVar16 == (void *)0x0) {
       uVar14 = 0;
-      (**(code **)(_r_plf_funcs_p + 8))(0x10000,0x6d3,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0x10000,0x6fa,*(code **)(_r_plf_funcs_p + 8));
     }
     else {
       memset(pvVar16,0,0x54);
@@ -187,7 +187,7 @@ undefined1 r_lld_init_start(undefined2 *param_1)
                                 (0x54,0,*(code **)(_r_modules_funcs_p + 0x120));
     piStack_f8[1] = (int)pvVar16;
     if (pvVar16 == (void *)0x0) {
-      (**(code **)(_r_plf_funcs_p + 8))(0x10000,0x734,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0x10000,0x75b,*(code **)(_r_plf_funcs_p + 8));
     }
     else {
       memset(pvVar16,0,0x54);
@@ -508,7 +508,7 @@ _L412:
         uStack_fc = (uint)*(ushort *)(iVar15 + 0x2e) * 2 + uStack_fc & 0xfffffff;
       }
       else {
-        (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x811,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,0x10000,0x838,*(code **)(_r_plf_funcs_p + 8));
       }
       uStack_b3 = 0;
     }

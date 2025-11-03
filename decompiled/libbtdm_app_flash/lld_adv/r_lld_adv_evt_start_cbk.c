@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_evt_start_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -50,24 +50,17 @@ void r_lld_adv_evt_start_cbk(int param_1)
     uVar12 = (uint)bVar1;
     iVar5 = uVar12 * 0x5a;
     iVar6 = r_emi_get_mem_addr_by_offset(0x400);
-    uVar14 = *(ushort *)(iVar6 + iVar5);
-    iVar6 = r_sdk_config_get_opts_ext();
-    uVar14 = uVar14 & 0x1f;
-    if ((*(uint *)(iVar6 + 0x28) & 4) != 0) {
-      iVar6 = r_sdk_config_get_opts_ext();
-      if (*(byte *)(iVar6 + 0x2c) < 3) {
-        r_ble_log_internal_x2
-                  (0x40400008,*(undefined1 *)(param_1 + 0x87),*(undefined4 *)(param_1 + 4));
-      }
-    }
     uVar13 = 0;
+    uVar14 = *(ushort *)(iVar6 + iVar5);
+    r_ble_log_internal_x2(0x4040006b,*(undefined4 *)(param_1 + 4),*(undefined1 *)(param_1 + 0x87));
+    uVar14 = uVar14 & 0x1f;
     if (((*(ushort *)(param_1 + 0x74) & 0x13) == 0) && (*(int *)(param_1 + 0x68) != 0)) {
       if (*(char *)(param_1 + 0x94) == '\0') {
         uVar13 = 0;
         if (*(char *)(param_1 + 0x95) == '\0') {
           iVar6 = r_sdk_config_get_opts_ext();
           if (*(char *)(iVar6 + 0x18) == '\0') {
-            r_assert_err(0,0x10000,0x8c5);
+            r_assert_err(0,0x10000,0x8fe);
           }
           uVar13 = 1;
           r_lld_adv_sync_info_set(*(undefined1 *)(param_1 + 0x87));
@@ -157,7 +150,7 @@ void r_lld_adv_evt_start_cbk(int param_1)
     *(undefined1 *)(param_1 + 0x89) = 1;
     return;
   }
-  r_assert_err(0x10000,0x90c);
+  r_assert_err(0x10000,0x945);
   return;
 }
 

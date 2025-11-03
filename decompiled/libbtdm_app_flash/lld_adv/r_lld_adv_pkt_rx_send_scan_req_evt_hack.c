@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_pkt_rx_send_scan_req_evt_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,25 +33,13 @@ void r_lld_adv_pkt_rx_send_scan_req_evt_hack(uint param_1)
   iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
   iVar9 = iVar4 + 4;
   uVar1 = *(ushort *)(iVar5 + iVar9);
-  iVar5 = r_sdk_config_get_opts_ext();
-  if ((*(uint *)(iVar5 + 0x28) & 4) != 0) {
-    iVar5 = r_sdk_config_get_opts_ext();
-    if (*(byte *)(iVar5 + 0x2c) < 2) {
-      r_ble_log_internal_x1(0x20a00016,(uint)bVar3 << 8 | param_1);
-    }
-  }
+  r_ble_log_internal_x1(0x20a00068,(uint)bVar3 << 8 | param_1);
   if ((uVar1 & 0xf) == 3) {
     if (*(char *)(*(int *)(&lld_adv_env + param_1 * 4) + 0x8a) != '\0') {
       iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
       pvVar6 = (void *)r_emi_get_mem_addr_by_offset(*(undefined2 *)(iVar4 + 0x12 + iVar5));
       memcpy(auStack_2c,pvVar6,0xc);
-      iVar5 = r_sdk_config_get_opts_ext();
-      if ((*(uint *)(iVar5 + 0x28) & 4) != 0) {
-        iVar5 = r_sdk_config_get_opts_ext();
-        if (*(byte *)(iVar5 + 0x2c) < 2) {
-          r_ble_log_internal_hex(0x20a00017,0xc,auStack_2c);
-        }
-      }
+      r_ble_log_internal_hex(0x20a00069,0xc,auStack_2c);
       iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
       uVar8 = (uint)*(ushort *)(iVar4 + 0xe + iVar5);
       if (uVar8 == 0) {
@@ -77,7 +65,7 @@ void r_lld_adv_pkt_rx_send_scan_req_evt_hack(uint param_1)
       return;
     }
   }
-  r_assert_err(0,0x10000,0x84e);
+  r_assert_err(0,0x10000,0x885);
   return;
 }
 

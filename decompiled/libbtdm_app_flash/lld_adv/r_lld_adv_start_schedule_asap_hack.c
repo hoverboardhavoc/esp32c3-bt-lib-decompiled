@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
+ * Upstream date: 2025-11-03 14:51:49 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_start_schedule_asap_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,18 +15,10 @@
 void r_lld_adv_start_schedule_asap_hack(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 
 {
-  int iVar1;
-  
-  iVar1 = r_sdk_config_get_opts_ext();
-  if ((*(uint *)(iVar1 + 0x28) & 4) != 0) {
-    iVar1 = r_sdk_config_get_opts_ext();
-    if (*(byte *)(iVar1 + 0x2c) < 3) {
-      r_ble_log_internal_x2(0x40400007,param_1,param_3);
-    }
-  }
+  r_ble_log_internal_x2(0x4040005c,param_3,param_1);
   (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
   r_lld_adv_start_schedule_asap(param_1,param_2,param_3);
-                    /* WARNING: Could not recover jumptable at 0x00015d9e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00015e52. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   return;
