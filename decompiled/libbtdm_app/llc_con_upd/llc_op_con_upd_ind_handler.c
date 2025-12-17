@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
+ * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
+ * Upstream date: 2025-12-17 10:51:37 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
  * Source: libbtdm_app -> llc_con_upd.o -> llc_op_con_upd_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,7 +37,7 @@ undefined4 llc_op_con_upd_ind_handler(int param_1,uint param_2)
          iVar1 != 1)) {
         pcVar4 = *(code **)(_r_plf_funcs_p + 0xc);
         uVar2 = (**(code **)(_r_ip_funcs_p + 0x680))(param_1,*(code **)(_r_ip_funcs_p + 0x680));
-        (*pcVar4)(param_2,uVar2,"llc_con_upd.c",0x690);
+        (*pcVar4)(param_2,uVar2,"llc_con_upd.c",0x691);
       }
       (**(code **)(_r_ip_funcs_p + 0x67c))(param_2,0,param_1,*(code **)(_r_ip_funcs_p + 0x67c));
       pcVar4 = *(code **)(_r_ip_funcs_p + 0x5f4);

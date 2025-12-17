@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
+ * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
+ * Upstream date: 2025-12-17 10:51:37 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_start_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,15 +10,13 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
-
 int r_lld_con_start_eco(uint param_1,int param_2)
 
 {
   int iVar1;
   
-  _DAT_000150f8 = r_lld_read_clock();
-  *(undefined2 *)(&DAT_000150b0 + (param_1 + 0x10) * 2) = 0;
+  DAT_000150c8 = r_lld_read_clock();
+  *(undefined2 *)(&DAT_00015080 + (param_1 + 0x10) * 2) = 0;
   r_lld_con_update_terminte_info_init(param_1);
   r_lld_con_llcp_ind_info_clear(param_1);
   iVar1 = r_sdk_config_get_opts_ext();

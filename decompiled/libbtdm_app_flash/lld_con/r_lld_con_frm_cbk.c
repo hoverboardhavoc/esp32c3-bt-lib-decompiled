@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
+ * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
+ * Upstream date: 2025-12-17 10:51:37 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_frm_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,7 +38,7 @@ void r_lld_con_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
   undefined2 uStack_36;
   
   if (4 < param_3) {
-    r_assert_param(param_3,"lld_con.c",0xd64);
+    r_assert_param(param_3,"lld_con.c",0xd60);
     return;
   }
   param_2 = param_2 & 0xff;
@@ -51,7 +51,7 @@ void r_lld_con_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
     break;
   case 2:
     if (*(int *)(&lld_con_env + param_2 * 4) == 0) {
-      r_assert_param(0,"lld_con.c",0xc6d);
+      r_assert_param(0,"lld_con.c",0xc69);
       return;
     }
     iVar14 = *(int *)(&lld_con_env + param_2 * 4);
@@ -99,7 +99,7 @@ void r_lld_con_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
     return;
   case 3:
     if (*(int *)(&lld_con_env + param_2 * 4) == 0) {
-      r_assert_param(0,"lld_con.c",0xc87);
+      r_assert_param(0,"lld_con.c",0xc83);
       return;
     }
     r_lld_con_tx_eco(param_1);

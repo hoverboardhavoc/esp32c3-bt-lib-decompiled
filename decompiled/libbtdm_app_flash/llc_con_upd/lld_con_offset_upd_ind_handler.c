@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
+ * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
+ * Upstream date: 2025-12-17 10:51:37 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> lld_con_offset_upd_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,16 +20,16 @@ undefined4 lld_con_offset_upd_ind_handler(ushort *param_1,uint param_2)
   
   iVar2 = r_llm_plan_elt_get(param_2 >> 8);
   if (*(int *)(&llc_env + (param_2 >> 8) * 4) == 0) {
-    r_assert_err(0,"llc_con_upd.c",0x6e7);
-  }
-  if (iVar2 == 0) {
     r_assert_err(0,"llc_con_upd.c",0x6e8);
   }
-  if (*(int *)(iVar2 + 4) == 0) {
+  if (iVar2 == 0) {
     r_assert_err(0,"llc_con_upd.c",0x6e9);
   }
+  if (*(int *)(iVar2 + 4) == 0) {
+    r_assert_err(0,"llc_con_upd.c",0x6ea);
+  }
   if (*(uint *)(iVar2 + 4) <= (uint)*param_1) {
-    r_assert_param("llc_con_upd.c",0x6ea);
+    r_assert_param("llc_con_upd.c",0x6eb);
   }
   iVar3 = *(int *)(iVar2 + 8);
   uVar4 = *(uint *)(iVar2 + 4);

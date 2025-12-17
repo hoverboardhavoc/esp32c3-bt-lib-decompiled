@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
+ * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
+ * Upstream date: 2025-12-17 10:51:37 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_stop_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,10 +23,6 @@ undefined1 r_lld_con_stop_hack(uint param_1,int param_2)
   if (iVar2 == 0) {
     r_ble_log_internal_x1(0x80030082);
     uVar1 = 0xc;
-    if (*(byte *)((int)&lld_con_cntl_pkt_info + param_1 * 4 + 3) < 6) {
-      r_assert_param(param_1,param_2,"lld_con.c",0x604);
-      uVar1 = 0xc;
-    }
     goto _L250;
   }
   r_ble_log_internal_x1(0x40030081,param_2 << 8 | param_1 | (uint)*(byte *)(iVar2 + 0x8f) << 0x10);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
+ * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
+ * Upstream date: 2025-12-17 10:51:37 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_tx_prog_new_packet_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -62,7 +62,7 @@ void r_lld_con_tx_prog_new_packet_hack(uint param_1,uint param_2)
       if (uStack_6c == 0) {
         return;
       }
-_L400:
+_L399:
       if ((*(short *)(iVar25 + 0x82) == 0) && (piVar17 = (int *)*piVar18, piVar17 != (int *)0x0)) {
         uVar3 = *(ushort *)((int)piVar17 + 6);
         *(int **)(iVar25 + 0x30) = piVar17;
@@ -86,7 +86,7 @@ _L400:
     }
     else {
       if (((param_2 == 2) && (uStack_6c != 0)) && ((bVar22 != 1 && (DAT_00016092 != '\0'))))
-      goto _L400;
+      goto _L399;
       uVar19 = 3;
       uVar16 = (uint)*(byte *)(local_70 + 6);
       uVar7 = (uint)*(ushort *)(local_70 + 4);
@@ -153,13 +153,13 @@ _L400:
           }
         }
         else {
-          if (param_2 != 0x18) goto _L413;
+          if (param_2 != 0x18) goto _L412;
           uVar14 = 3;
           iVar8 = 3;
         }
         uVar16 = uVar7 + iVar8 & 0xffff;
-        (&DAT_000150b5)[iVar15] = uVar14;
-        (&DAT_000150b4)[iVar15] = bVar20;
+        (&DAT_00015085)[iVar15] = uVar14;
+        (&DAT_00015084)[iVar15] = bVar20;
         puVar9 = (ushort *)r_emi_get_mem_addr_by_offset(uVar16);
         uVar3 = *puVar9;
         uVar13 = (uint)*(ushort *)(iVar25 + 0x44);
@@ -195,7 +195,7 @@ _L400:
         }
       }
     }
-_L413:
+_L412:
     iVar8 = r_emi_get_mem_addr_by_offset(0x1400);
     uVar3 = *(ushort *)(iVar8 + iVar23);
     iVar8 = r_emi_get_mem_addr_by_offset(0x1400);

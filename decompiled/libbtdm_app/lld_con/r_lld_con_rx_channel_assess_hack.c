@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
+ * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
+ * Upstream date: 2025-12-17 10:51:37 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_rx_channel_assess_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,7 +41,7 @@ void r_lld_con_rx_channel_assess_hack(int param_1,int param_2)
     uVar5 = 1;
     UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0x228);
   }
-                    /* WARNING: Could not recover jumptable at 0x0001197e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011940. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (*UNRECOVERED_JUMPTABLE)((int)uVar4 >> 8 & 0x3f,uVar5,uVar2,UNRECOVERED_JUMPTABLE);
   return;
