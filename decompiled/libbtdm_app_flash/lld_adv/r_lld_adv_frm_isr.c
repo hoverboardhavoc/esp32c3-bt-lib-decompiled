@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_frm_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,7 +29,7 @@ void r_lld_adv_frm_isr(uint param_1,int param_2,int param_3)
   
   iVar1 = *(int *)(&lld_adv_env + param_1 * 4);
   if (iVar1 == 0) {
-    uVar8 = 0xb26;
+    uVar8 = 0xb27;
     goto _L952;
   }
   if ((*(char *)(iVar1 + 0x95) == '\0') || (iVar5 = iVar1 + 0x34, *(int *)(iVar1 + 0x38) != param_2)
@@ -84,7 +84,7 @@ void r_lld_adv_frm_isr(uint param_1,int param_2,int param_3)
          ((*(char *)(iVar1 + 0x95) == '\0' || (*(int *)(iVar1 + 0x38) == param_2)))) {
         iVar5 = r_sdk_config_get_opts_ext();
         if (*(char *)(iVar5 + 0x18) == '\0') {
-          r_assert_err(0,0x10000,0xa9e);
+          r_assert_err(0,0x10000,0xa9f);
         }
         r_lld_adv_aux_ch_idx_set(param_1);
       }
@@ -178,7 +178,7 @@ _L889:
         if (cVar9 != '\0') {
           return;
         }
-        uVar8 = 0xb1d;
+        uVar8 = 0xb1e;
 _L952:
         r_assert_err(0,0x10000,uVar8);
         return;
@@ -209,7 +209,7 @@ _L951:
   iVar5 = *(int *)(&lld_adv_env + param_1 * 4);
   if (iVar5 != 0) {
     r_ble_log_internal_x1
-              (0x4000005d,
+              (0x400000c0,
                (uint)*(byte *)(iVar5 + 0x89) << 0x18 | iVar1 << 8 | uVar7 << 0x10 | param_1);
     if ((((*(short *)(iVar5 + 0x24) != 0) && (*(short *)(iVar5 + 0x7e) != 0)) &&
         (*(short *)(iVar5 + 0x24) != *(short *)(iVar5 + 0x7e))) &&

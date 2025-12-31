@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> llm.o -> r_llm_link_disc
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,7 +22,7 @@ void r_llm_link_disc(int param_1)
   iVar1 = param_1 * 0x44;
   iVar3 = *(int *)(_p_llm_env + 8) + iVar1;
   *(undefined1 *)(iVar3 + 0x40) = 0;
-  r_ble_log_internal_x1(0x404e00ea,param_1);
+  r_ble_log_internal_x1(0x404e0148,param_1);
   r_sch_plan_rem(iVar3 + 0xc);
   iVar3 = *(int *)(_p_llm_env + 8) + iVar1;
   uVar2 = r_llm_dev_list_search(iVar3 + 4,*(undefined1 *)(iVar3 + 0x41));

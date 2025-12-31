@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_ext_chain_construct
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,7 +31,7 @@ void r_lld_adv_ext_chain_construct(uint param_1)
   }
   else if ((bVar1 & 1) == 0) {
     if ((bVar1 & 2) == 0) {
-      r_assert_err(0,0x10000,0x69c);
+      r_assert_err(0,0x10000,0x69d);
     }
     else {
       r_lld_adv_ext_chain_scannable_construct_hack(param_1);
@@ -43,7 +43,7 @@ void r_lld_adv_ext_chain_construct(uint param_1)
   *(uint *)(*(int *)(&lld_adv_env + param_1 * 4) + 0x10) =
        *(int *)(iVar2 + 0x6c) * 2 + (uint)_sdk_cfg_priv_opts;
   r_ble_log_internal_x2
-            (0x40c0005e,
+            (0x40c000c1,
              (uint)*(byte *)(iVar2 + 0x91) << 8 | (uint)*(byte *)(iVar2 + 0x92) << 0x10 | param_1);
   return;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_init.o -> r_lld_init_frm_eof_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,13 +31,13 @@ void r_lld_init_frm_eof_isr(int param_1,int param_2,int param_3)
   g_initor_evt_end_abort = (undefined1)param_3;
   if (_lld_init_env == 0) {
 _L220:
-    r_assert_param(param_1,0x10000,0x4f2);
+    r_assert_param(param_1,0x10000,0x4f3);
     return;
   }
   iVar11 = *(int *)(_lld_init_env + param_1 * 4);
   if (iVar11 == 0) goto _L220;
   uVar4 = (uint)*(byte *)(iVar11 + 0x52);
-  r_ble_log_internal_x1(0x4042009d,param_3 << 8 | uVar4 | (uint)*(byte *)(iVar11 + 0x31) << 0x10);
+  r_ble_log_internal_x1(0x404200fe,param_3 << 8 | uVar4 | (uint)*(byte *)(iVar11 + 0x31) << 0x10);
   cVar3 = *(char *)(iVar11 + 0x31);
   *(undefined1 *)(iVar11 + 0x31) = 0;
   if (cVar3 == '\x02') {
@@ -50,7 +50,7 @@ _L220:
       iVar11 = *(int *)(_lld_init_env + iVar5);
       if (iVar11 != 0) {
         r_ble_log_internal_x2
-                  (0x40020098,*(undefined4 *)(iVar11 + 0x24),
+                  (0x400200fa,*(undefined4 *)(iVar11 + 0x24),
                    (uint)*(byte *)(iVar11 + 0x31) << 0x18 |
                    (uint)*(byte *)(iVar11 + 0x52) << 8 | (uint)*(byte *)(iVar11 + 0x50) << 0x10 |
                    uVar4);

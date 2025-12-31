@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_init.o -> r_lld_init_frm_skip_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,19 +31,19 @@ void r_lld_init_frm_skip_isr(int param_1)
   uint uVar13;
   
   if (_lld_init_env == 0) {
-    uVar9 = 0x539;
+    uVar9 = 0x53a;
 _L261:
     r_assert_err(0,0x10000,uVar9);
     return;
   }
   iVar4 = *(int *)(_lld_init_env + param_1 * 4);
   if (iVar4 == 0) {
-    uVar9 = 0x539;
+    uVar9 = 0x53a;
     goto _L261;
   }
   iVar8 = r_lld_read_clock();
   r_ble_log_internal_x2
-            (0x4042009e,iVar8,CONCAT11(*(undefined1 *)(iVar4 + 0x31),*(undefined1 *)(iVar4 + 0x52)))
+            (0x404200ff,iVar8,CONCAT11(*(undefined1 *)(iVar4 + 0x31),*(undefined1 *)(iVar4 + 0x52)))
   ;
   cVar3 = *(char *)(iVar4 + 0x31);
   *(undefined1 *)(iVar4 + 0x31) = 0;
@@ -54,7 +54,7 @@ _L261:
       iVar4 = *(int *)(_lld_init_env + iVar8);
       if (iVar4 != 0) {
         r_ble_log_internal_x2
-                  (0x40020098,*(undefined4 *)(iVar4 + 0x24),
+                  (0x400200fa,*(undefined4 *)(iVar4 + 0x24),
                    (uint)*(byte *)(iVar4 + 0x31) << 0x18 |
                    (uint)*(byte *)(iVar4 + 0x52) << 8 | (uint)*(byte *)(iVar4 + 0x50) << 0x10 |
                    uVar13);
@@ -94,14 +94,14 @@ _L261:
   bVar2 = rwip_priority;
   if ((uint)*(ushort *)(iVar4 + 0x2c) << 1 <= (iVar8 - *(int *)(iVar4 + 0x28) & 0xfffffffU)) {
     if (0xff < (uint)*(byte *)(iVar4 + 0x16) + (uint)rwip_priority) {
-      r_assert_err(0,0x10000,0x51f);
+      r_assert_err(0,0x10000,0x520);
     }
     *(int *)(iVar4 + 0x28) = iVar8;
     *(byte *)(iVar4 + 0x16) = bVar2 + *(char *)(iVar4 + 0x16);
   }
   if (*(char *)(iVar4 + 0x3d) != '\x01') {
     iVar4 = r_sch_arb_insert(iVar4);
-    uVar9 = 0x52b;
+    uVar9 = 0x52c;
     if (iVar4 == 0) {
       return;
     }

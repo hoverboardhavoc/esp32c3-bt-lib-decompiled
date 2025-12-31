@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> rwble.o -> r_rwble_isr_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,7 +23,7 @@ void r_rwble_isr_hack(void)
   uVar2 = _DAT_60031010;
   if (DAT_00011045 != '\0') {
     if ((_DAT_60031010 & 0x400000) != 0) {
-      r_ble_log_internal_x1(0x602d000b,_DAT_60031010);
+      r_ble_log_internal_x1(0x602d006f,_DAT_60031010);
       _DAT_600312d8 = _DAT_600312d8 | 0x80000000;
       _DAT_60031018 = 0x7fffff;
       if ((uVar2 & 0x1fffff) == 1) {
@@ -38,7 +38,7 @@ void r_rwble_isr_hack(void)
     if ((uVar2 & 0x200000) != 0) {
       uVar3 = _DAT_600312d8 >> 1 & 0xf;
       uVar1 = _DAT_600312d8 >> 5 & 0x1f;
-      r_ble_log_internal_x2(0x602d000c,uVar2,uVar3 << 8 | uVar1);
+      r_ble_log_internal_x2(0x602d0070,uVar2,uVar3 << 8 | uVar1);
       _DAT_60031018 = _DAT_60031018 & 0xffdfffff | 0x200000;
       if (1 < _g_bt_plf_log_level) {
         ets_printf("IRQ FIFO ALMOST FULL,cnt:%u,rem:%u\n",uVar1,uVar3);
@@ -57,7 +57,7 @@ _L82:
       }
       if ((uVar2 & 0x100) != 0) {
         _DAT_60031018 = 0x100;
-        r_ble_log_internal_x2(0x802d000f,uVar2,_DAT_60031060);
+        r_ble_log_internal_x2(0x802d0073,uVar2,_DAT_60031060);
         iVar4 = r_rwble_isr_hw_fixed(_DAT_60031060);
         if (iVar4 != 0) {
           _DAT_60031050 = 0x838295a8;
@@ -99,16 +99,16 @@ _L82:
         _DAT_60031018 = 0x20;
         r_sch_prog_end_isr_hack(0xff);
       }
-      r_ble_log_internal_x1(0x204d0010,uVar2);
+      r_ble_log_internal_x1(0x204d0074,uVar2);
     }
     uVar2 = (_DAT_600312d8 << 1) >> 0xb;
     if ((_DAT_600312d8 >> 5 & 0x1f) == 0) {
-      r_ble_log_internal_x3(0x204d000d,_DAT_600312d8,_DAT_60031010,0);
+      r_ble_log_internal_x3(0x204d0071,_DAT_600312d8,_DAT_60031010,0);
       return;
     }
     _DAT_600312d8 = _DAT_600312d8 | 1;
     if (uVar2 != 0) goto _L82;
-    r_ble_log_internal_x3(0x204d000e,_DAT_600312d8,_DAT_60031010,0);
+    r_ble_log_internal_x3(0x204d0072,_DAT_600312d8,_DAT_60031010,0);
   } while( true );
 }
 

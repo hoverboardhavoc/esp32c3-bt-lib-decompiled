@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_sync.o -> r_lld_sync_frm_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,12 +36,12 @@ void r_lld_sync_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
   
   iVar12 = r_sdk_config_get_opts();
   if (*(byte *)(iVar12 + 0xd) <= param_2) {
-    r_assert_param(param_2,param_3,0x10000,0x496);
+    r_assert_param(param_2,param_3,0x10000,0x497);
   }
   if (param_3 == 2) {
     param_2 = param_2 & 0xff;
     if (*(int *)(&lld_sync_env + param_2 * 4) == 0) {
-      r_assert_err(0,0x10000,0x45d);
+      r_assert_err(0,0x10000,0x45e);
       return;
     }
     iVar12 = *(int *)(&lld_sync_env + param_2 * 4);
@@ -59,7 +59,7 @@ void r_lld_sync_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
     param_2 = param_2 & 0xff;
     iVar12 = *(int *)(&lld_sync_env + param_2 * 4);
     if (iVar12 == 0) {
-      r_assert_err(0,0x10000,0x445);
+      r_assert_err(0,0x10000,0x446);
       return;
     }
     bVar2 = *(byte *)(iVar12 + 0x55);
@@ -92,10 +92,10 @@ void r_lld_sync_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
                ((int)*(short *)(iVar12 + 0x48) >> 0x1f);
     }
     r_ble_log_internal_x4
-              (0x404500d6,uStack_34,((uint)bVar7 + iVar11) * -0x80000000 | uVar13 >> 1,
-               (uint)*(ushort *)(iVar12 + 0x4a) | (uint)(param_3 != 0) << 0x18 |
-               (uint)*(byte *)(iVar12 + 0x55) << 0x10,
-               ((uVar4 & 0xc) << 2 | uVar5 & 3) << 8 | uVar3 & 0x3f);
+              (0x40450003,uStack_34,((uint)bVar7 + iVar11) * -0x80000000 | uVar13 >> 1,
+               *(undefined2 *)(iVar12 + 0x4a),
+               (uint)CONCAT11(param_3 != 0,*(undefined1 *)(iVar12 + 0x55)) | (uVar3 & 0x3f) << 0x10
+               | ((uVar4 & 0xc) << 2 | uVar5 & 3) << 0x18);
     r_sch_arb_remove(iVar12,1);
     iVar11 = r_emi_get_mem_addr_by_offset(0x400);
     iVar9 = iVar9 + 0x18;
@@ -180,7 +180,7 @@ r_lld_sync_sched:
           }
           if (uVar13 < (*(int *)(iVar12 + 0x44) - *(int *)(iVar12 + 0x3c) & 0xfffffffU)) {
             r_ble_log_internal_x4
-                      (0x600500d4,*(undefined4 *)(iVar12 + 0x40),
+                      (0x60050133,*(undefined4 *)(iVar12 + 0x40),
                        (uint)*(ushort *)(iVar12 + 0x4a) | param_2 << 0x10 |
                        (uint)*(byte *)(iVar12 + 0x57) << 0x18);
 _L224:
@@ -210,7 +210,7 @@ _L224:
             }
             uVar13 = uVar13 + iVar11;
             if (((uint)(*(int *)(iVar12 + 0x40) * 0x271) >> 1) - 0x96 < uVar13 >> 1) {
-              r_ble_log_internal_x3(0x400500d5,(uint)*(ushort *)(iVar12 + 0x4a) | param_2 << 0x10);
+              r_ble_log_internal_x3(0x40050134,(uint)*(ushort *)(iVar12 + 0x4a) | param_2 << 0x10);
               goto _L224;
             }
           }
@@ -235,17 +235,17 @@ _L224:
   }
   else {
     if (param_3 != 4) {
-      r_assert_param(param_2,param_3,0x10000,0x4ac);
+      r_assert_param(param_2,param_3,0x10000,0x4ad);
       return;
     }
     param_2 = param_2 & 0xff;
     iVar12 = *(int *)(&lld_sync_env + param_2 * 4);
     if (iVar12 == 0) {
-      r_assert_err(0,0x10000,0x489);
+      r_assert_err(0,0x10000,0x48a);
       return;
     }
     r_ble_log_internal_x2
-              (0x404500d7,
+              (0x40450135,
                (uint)*(ushort *)(iVar12 + 0x4a) | param_2 << 0x10 |
                (uint)*(byte *)(iVar12 + 99) << 0x18,*(undefined1 *)(iVar12 + 0x5b));
     r_sch_arb_remove(iVar12,1);
@@ -261,7 +261,7 @@ _L224:
   }
   piVar8 = (int *)(&lld_sync_env + param_2 * 4);
   if (*piVar8 != 0) {
-    r_ble_log_internal_x1(0x400500cb,(uint)*(ushort *)(*piVar8 + 0x4a) | param_2 << 0x10);
+    r_ble_log_internal_x1(0x4005012a,(uint)*(ushort *)(*piVar8 + 0x4a) | param_2 << 0x10);
     puVar10 = (undefined1 *)r_ke_msg_alloc(0x205,0,0xff,2);
     *puVar10 = (char)param_2;
     puVar10[1] = 0;

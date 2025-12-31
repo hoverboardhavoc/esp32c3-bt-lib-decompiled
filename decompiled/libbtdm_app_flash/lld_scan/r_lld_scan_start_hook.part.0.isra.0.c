@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_start_hook.part.0.isra.0
  *
  * (C) Espressif, Apache License 2.0.
@@ -61,7 +61,7 @@ void r_lld_scan_start_hook_part_0_isra_0(int param_1,int param_2)
         uVar6 = *(undefined2 *)(iVar10 + iVar7 + 0xc);
         iVar10 = r_emi_get_mem_addr_by_offset(0x400);
         r_ble_log_internal_x2
-                  (0x400100af,CONCAT22(uVar6,uVar3),
+                  (0x4001010f,CONCAT22(uVar6,uVar3),
                    (uint)CONCAT12(bVar1,*(undefined2 *)(iVar10 + iVar7 + 0xe)));
       }
       piVar8 = piVar8 + 1;

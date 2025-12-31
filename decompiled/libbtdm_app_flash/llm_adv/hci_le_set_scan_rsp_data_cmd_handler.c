@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> llm_adv.o -> hci_le_set_scan_rsp_data_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ undefined4 hci_le_set_scan_rsp_data_cmd_handler(byte *param_1,undefined4 param_2
   byte abStack_21 [9];
   
   if (*(char *)(_p_llm_env + 0xd7) == '\x02') {
-    r_ble_log_internal_x1(0x802e00f6,0x212);
+    r_ble_log_internal_x1(0x802e0154,0x212);
     uVar3 = 0xc;
   }
   else {
@@ -35,7 +35,7 @@ undefined4 hci_le_set_scan_rsp_data_cmd_handler(byte *param_1,undefined4 param_2
       if (iVar4 == 0xff) {
         uVar3 = r_llm_activity_free_get(abStack_21);
         if (uVar3 != 0) {
-          r_ble_log_internal_x1(0x802e00f8,(uint)abStack_21[0] << 8 | uVar3);
+          r_ble_log_internal_x1(0x802e0156,(uint)abStack_21[0] << 8 | uVar3);
           goto _L301;
         }
         r_llm_adv_set_dft_params();
@@ -46,7 +46,7 @@ undefined4 hci_le_set_scan_rsp_data_cmd_handler(byte *param_1,undefined4 param_2
         iVar4 = r_ble_util_buf_adv_tx_alloc();
         bVar1 = *param_1;
         if (iVar4 == 0) {
-          r_ble_log_internal_x1(0x802e00f9,(uint)bVar1 << 8 | 7);
+          r_ble_log_internal_x1(0x802e0157,(uint)bVar1 << 8 | 7);
           uVar3 = 7;
           goto _L301;
         }
@@ -65,7 +65,7 @@ undefined4 hci_le_set_scan_rsp_data_cmd_handler(byte *param_1,undefined4 param_2
       uVar3 = 0;
     }
     else {
-      r_ble_log_internal_x2(0x802e00f7,0x12);
+      r_ble_log_internal_x2(0x802e0155,0x12);
       uVar3 = 0x12;
     }
   }

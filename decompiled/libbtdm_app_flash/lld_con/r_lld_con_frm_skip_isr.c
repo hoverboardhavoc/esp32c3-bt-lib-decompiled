@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
- * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
- * Upstream date: 2025-12-17 10:51:37 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_frm_skip_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,12 +45,12 @@ void r_lld_con_frm_skip_isr(uint param_1)
   
   iVar6 = *(int *)(&lld_con_env + param_1 * 4);
   if (iVar6 == 0) {
-    r_assert_err(0,"lld_con.c",0xcb3);
+    r_assert_err(0,"lld_con.c",0xcb4);
     return;
   }
   iVar10 = r_lld_read_clock();
   if (1 < (byte)(*(char *)(iVar6 + 0x8f) - 1U)) {
-    r_assert_err(0,"lld_con.c",0xc9a);
+    r_assert_err(0,"lld_con.c",0xc9b);
   }
   r_sch_arb_remove(iVar6,1);
   if (*(char *)(iVar6 + 0x8f) == '\x02') {
@@ -130,14 +130,14 @@ _L235:
         else {
           bVar4 = false;
           if (*(ushort *)(iVar9 + 0x7c) < 7) {
-            uVar15 = uVar15 + ((int)((uint)*(ushort *)(&DAT_00015080 + iVar6) *
+            uVar15 = uVar15 + ((int)((uint)*(ushort *)(&DAT_00015078 + iVar6) *
                                      (uint)*(ushort *)(iVar9 + 0x70) * 0x271) >> 1) +
                               (uint)*(ushort *)(iVar9 + 0x70) * 0x271;
             uVar18 = *(int *)(iVar9 + 100) * 0x271;
             if (uVar18 < uVar15) {
               uVar15 = uVar18;
             }
-            *(ushort *)(&DAT_00015080 + iVar6) = *(ushort *)(&DAT_00015080 + iVar6) + 1;
+            *(ushort *)(&DAT_00015078 + iVar6) = *(ushort *)(&DAT_00015078 + iVar6) + 1;
             goto _L235;
           }
         }
@@ -146,7 +146,7 @@ _L235:
           uVar15 = uVar15 + (uint)*(ushort *)(iVar9 + 0x40) * 0x271;
         }
         else if ((!bVar4) && (((uint)(*(int *)(iVar9 + 100) * 0x271) >> 1) - 300 <= uVar12)) {
-          r_ble_log_internal_x3(0x40430075,(uint)CONCAT12(bVar2,*(undefined2 *)(iVar9 + 0x7c)));
+          r_ble_log_internal_x3(0x404300d8,(uint)CONCAT12(bVar2,*(undefined2 *)(iVar9 + 0x7c)));
         }
         uVar18 = (uVar15 >> 1) / 0x271;
         uVar12 = uVar7 - uVar18 & 0xfffffff;
@@ -198,7 +198,7 @@ _L235:
     }
     iVar6 = 0;
 _L185:
-    r_ble_log_internal_x2(0x40430076,*(undefined4 *)(iVar9 + 0x7c),iVar6 << 8 | param_1);
+    r_ble_log_internal_x2(0x404300d9,*(undefined4 *)(iVar9 + 0x7c),iVar6 << 8 | param_1);
     if (iVar6 != 0) {
       *(undefined1 *)(iVar9 + 0x8f) = 0;
       *(uint *)(iVar9 + 0x48) = uVar7;
@@ -218,7 +218,7 @@ _L185:
   if (iVar10 == 0) {
     return;
   }
-  r_ble_log_internal_x1(0x40030084,iVar6 << 0x10 | 0x100U | param_1);
+  r_ble_log_internal_x1(0x400300e6,iVar6 << 0x10 | 0x100U | param_1);
   uVar15 = param_1 << 8 | 1;
   puVar8 = (undefined1 *)r_ke_msg_alloc(0x212,uVar15,0xff,1);
   *puVar8 = (char)iVar6;
@@ -252,11 +252,11 @@ _L185:
     if ((uVar3 & 3) == 3) {
       iVar9 = r_emi_get_mem_addr_by_offset(0x1400);
       r_ble_util_buf_llcp_tx_free(*(undefined2 *)(iVar14 + 4 + iVar9));
-      uVar11 = 0x7db;
+      uVar11 = 0x7dc;
       if (*(int *)(iVar10 + 0x24) != 0) goto _L159;
     }
     else {
-      uVar11 = 0x7e4;
+      uVar11 = 0x7e5;
       if ((uVar3 & 3) == 0) {
 _L159:
         r_assert_err(0,"lld_con.c",uVar11);

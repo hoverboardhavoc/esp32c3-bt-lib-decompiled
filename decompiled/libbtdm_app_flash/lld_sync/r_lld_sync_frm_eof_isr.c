@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_sync.o -> r_lld_sync_frm_eof_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,7 +12,7 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void r_lld_sync_frm_eof_isr(int param_1,byte param_2)
+void r_lld_sync_frm_eof_isr(int param_1,int param_2)
 
 {
   byte bVar1;
@@ -21,7 +21,7 @@ void r_lld_sync_frm_eof_isr(int param_1,byte param_2)
   ushort uVar4;
   undefined2 uVar5;
   bool bVar6;
-  byte bVar7;
+  char cVar7;
   int *piVar8;
   int iVar9;
   undefined1 *puVar10;
@@ -31,12 +31,12 @@ void r_lld_sync_frm_eof_isr(int param_1,byte param_2)
   uint uVar14;
   int iVar15;
   char cVar16;
-  byte abStack_41 [13];
+  char acStack_41 [13];
   undefined4 uStack_34;
   
   iVar15 = *(int *)(&lld_sync_env + param_1 * 4);
   if (iVar15 == 0) {
-    r_assert_err(0,0x10000,0x445);
+    r_assert_err(0,0x10000,0x446);
     return;
   }
   bVar1 = *(byte *)(iVar15 + 0x55);
@@ -69,10 +69,10 @@ void r_lld_sync_frm_eof_isr(int param_1,byte param_2)
              ((int)*(short *)(iVar15 + 0x48) >> 0x1f);
   }
   r_ble_log_internal_x4
-            (0x404500d6,uStack_34,((uint)bVar6 + iVar11) * -0x80000000 | uVar12 >> 1,
-             (uint)*(ushort *)(iVar15 + 0x4a) | (uint)param_2 << 0x18 |
-             (uint)*(byte *)(iVar15 + 0x55) << 0x10,
-             ((uVar3 & 0xc) << 2 | uVar4 & 3) << 8 | uVar2 & 0x3f);
+            (0x40450003,uStack_34,((uint)bVar6 + iVar11) * -0x80000000 | uVar12 >> 1,
+             *(undefined2 *)(iVar15 + 0x4a),
+             (uint)*(byte *)(iVar15 + 0x55) | param_2 << 8 | (uVar2 & 0x3f) << 0x10 |
+             ((uVar3 & 0xc) << 2 | uVar4 & 3) << 0x18);
   r_sch_arb_remove(iVar15,1);
   iVar11 = r_emi_get_mem_addr_by_offset(0x400);
   iVar9 = iVar9 + 0x18;
@@ -96,7 +96,7 @@ void r_lld_sync_frm_eof_isr(int param_1,byte param_2)
   if (*(char *)(iVar15 + 0x5b) == '\x02') {
     piVar8 = (int *)(&lld_sync_env + param_1 * 4);
     if (*piVar8 != 0) {
-      r_ble_log_internal_x1(0x400500cb,(uint)*(ushort *)(*piVar8 + 0x4a) | param_1 << 0x10);
+      r_ble_log_internal_x1(0x4005012a,(uint)*(ushort *)(*piVar8 + 0x4a) | param_1 << 0x10);
       puVar10 = (undefined1 *)r_ke_msg_alloc(0x205,0,0xff,2);
       *puVar10 = (char)param_1;
       puVar10[1] = 0;
@@ -107,13 +107,13 @@ void r_lld_sync_frm_eof_isr(int param_1,byte param_2)
     return;
   }
   iVar15 = *(int *)(&lld_sync_env + param_1 * 4);
+  acStack_41[0] = (char)param_2;
   uStack_34 = uStack_34 & 0xffffff;
-  abStack_41[0] = param_2;
   do {
-    bVar7 = abStack_41[0];
+    cVar7 = acStack_41[0];
     bVar1 = DAT_00013065;
     cVar16 = co_sca2ppm;
-    if (abStack_41[0] != 0) {
+    if (acStack_41[0] != '\0') {
       if (0xff < (uint)*(byte *)(iVar15 + 0x16) + (uint)DAT_00013065) {
         r_assert_err(0,0x10000,0x342);
       }
@@ -129,7 +129,7 @@ void r_lld_sync_frm_eof_isr(int param_1,byte param_2)
     else {
       iVar9 = 1;
       if ((((*(char *)(iVar15 + 100) != '\0') && (*(char *)(iVar15 + 0x62) == '\0')) &&
-          (*(ushort *)(iVar15 + 0x4c) != 0)) && (iVar9 = -1, bVar7 == 0)) {
+          (*(ushort *)(iVar15 + 0x4c) != 0)) && (iVar9 = -1, cVar7 == '\0')) {
         iVar11 = *(ushort *)(iVar15 + 0x4c) + 1;
         iVar9 = iVar11 * 0x10000 >> 0x10;
         *(short *)(iVar15 + 0x4e) = (short)iVar11 + *(short *)(iVar15 + 0x4a);
@@ -166,7 +166,7 @@ void r_lld_sync_frm_eof_isr(int param_1,byte param_2)
       }
       if (uVar12 < (*(int *)(iVar15 + 0x44) - *(int *)(iVar15 + 0x3c) & 0xfffffffU)) {
         r_ble_log_internal_x4
-                  (0x600500d4,*(undefined4 *)(iVar15 + 0x40),
+                  (0x60050133,*(undefined4 *)(iVar15 + 0x40),
                    (uint)*(ushort *)(iVar15 + 0x4a) | param_1 << 0x10 |
                    (uint)*(byte *)(iVar15 + 0x57) << 0x18);
 _L224:
@@ -196,7 +196,7 @@ _L224:
         }
         uVar12 = uVar12 + iVar11;
         if (((uint)(*(int *)(iVar15 + 0x40) * 0x271) >> 1) - 0x96 < uVar12 >> 1) {
-          r_ble_log_internal_x3(0x400500d5,(uint)*(ushort *)(iVar15 + 0x4a) | param_1 << 0x10);
+          r_ble_log_internal_x3(0x40050134,(uint)*(ushort *)(iVar15 + 0x4a) | param_1 << 0x10);
           goto _L224;
         }
       }
@@ -212,7 +212,7 @@ _L224:
       uVar14 = 400000;
     }
     *(uint *)(iVar15 + 0x10) = uVar14;
-    r_lld_sync_insert_eco(param_1,abStack_41,uVar12,(int)&uStack_34 + 3);
+    r_lld_sync_insert_eco(param_1,acStack_41,uVar12,(int)&uStack_34 + 3);
     if (uStack_34._3_1_ != '\0') {
       return;
     }

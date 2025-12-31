@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
- * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
- * Upstream date: 2025-12-17 10:51:37 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_sched_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -49,7 +49,7 @@ void r_lld_con_sched_hack(uint param_1,int param_2,int param_3)
       iVar12 = uVar11 + *(ushort *)(iVar5 + 0x7e);
       *(short *)(iVar5 + 0x7e) = (short)((uint)(iVar12 * 0x10000) >> 0x10);
       *(undefined1 *)(iVar5 + 0x96) = 1;
-      r_ble_log_internal_x2(0x40430074,(uint)*(ushort *)(iVar5 + 0x7c) | iVar12 * 0x10000,param_1);
+      r_ble_log_internal_x2(0x404300d7,(uint)*(ushort *)(iVar5 + 0x7c) | iVar12 * 0x10000,param_1);
     }
   }
   for (; (param_2 - uVar6 & 0xfffffff) < 0x7ffffff;
@@ -102,7 +102,7 @@ void r_lld_con_sched_hack(uint param_1,int param_2,int param_3)
       uVar9 = ((*(ushort *)(iVar5 + 0x7a) + uVar13) * (uVar6 - iVar14 & 0xfffffff)) / 0x640 + 0x40;
       uVar13 = uVar9 * 2;
       if (param_3 != 0) {
-        *(undefined2 *)(&DAT_00015080 + iVar12) = 0;
+        *(undefined2 *)(&DAT_00015078 + iVar12) = 0;
       }
       if ((*(ushort *)(iVar5 + 0x84) & 2) == 0) {
         uVar13 = uVar13 + (uint)*(ushort *)(iVar5 + 0x70) * 0x271;
@@ -115,14 +115,14 @@ _L235:
            ((param_3 == 0 ||
             ((bVar4 = false, *(ushort *)(iVar5 + 0x7c) == 0 && (*(short *)(iVar5 + 0x98) == -1))))))
         {
-          uVar13 = uVar13 + ((int)((uint)*(ushort *)(&DAT_00015080 + iVar12) *
+          uVar13 = uVar13 + ((int)((uint)*(ushort *)(&DAT_00015078 + iVar12) *
                                    (uint)*(ushort *)(iVar5 + 0x70) * 0x271) >> 1) +
                             (uint)*(ushort *)(iVar5 + 0x70) * 0x271;
           uVar18 = *(int *)(iVar5 + 100) * 0x271;
           if (uVar18 < uVar13) {
             uVar13 = uVar18;
           }
-          *(ushort *)(&DAT_00015080 + iVar12) = *(ushort *)(&DAT_00015080 + iVar12) + 1;
+          *(ushort *)(&DAT_00015078 + iVar12) = *(ushort *)(&DAT_00015078 + iVar12) + 1;
           goto _L235;
         }
       }
@@ -131,7 +131,7 @@ _L235:
         uVar13 = uVar13 + (uint)*(ushort *)(iVar5 + 0x40) * 0x271;
       }
       else if ((!bVar4) && (((uint)(*(int *)(iVar5 + 100) * 0x271) >> 1) - 300 <= uVar9)) {
-        r_ble_log_internal_x3(0x40430075,(uint)*(ushort *)(iVar5 + 0x7c) | param_1 << 0x10);
+        r_ble_log_internal_x3(0x404300d8,(uint)*(ushort *)(iVar5 + 0x7c) | param_1 << 0x10);
       }
       uVar18 = (uVar13 >> 1) / 0x271;
       uVar9 = uVar6 - uVar18 & 0xfffffff;
@@ -182,7 +182,7 @@ _L235:
   }
   iVar12 = 0;
 _L185:
-  r_ble_log_internal_x2(0x40430076,*(undefined4 *)(iVar5 + 0x7c),iVar12 << 8 | param_1);
+  r_ble_log_internal_x2(0x404300d9,*(undefined4 *)(iVar5 + 0x7c),iVar12 << 8 | param_1);
   if (iVar12 != 0) {
     *(undefined1 *)(iVar5 + 0x8f) = 0;
     *(uint *)(iVar5 + 0x48) = uVar6;
@@ -201,7 +201,7 @@ _L185:
   if (iVar5 == 0) {
     return;
   }
-  r_ble_log_internal_x1(0x40030084,iVar12 << 0x10 | 0x100U | param_1);
+  r_ble_log_internal_x1(0x400300e6,iVar12 << 0x10 | 0x100U | param_1);
   uVar13 = param_1 << 8 | 1;
   puVar7 = (undefined1 *)r_ke_msg_alloc(0x212,uVar13,0xff,1);
   *puVar7 = (char)iVar12;
@@ -235,11 +235,11 @@ _L185:
     if ((uVar3 & 3) == 3) {
       iVar17 = r_emi_get_mem_addr_by_offset(0x1400);
       r_ble_util_buf_llcp_tx_free(*(undefined2 *)(iVar14 + 4 + iVar17));
-      uVar8 = 0x7db;
+      uVar8 = 0x7dc;
       if (*(int *)(iVar5 + 0x24) != 0) goto _L159;
     }
     else {
-      uVar8 = 0x7e4;
+      uVar8 = 0x7e5;
       if ((uVar3 & 3) == 0) {
 _L159:
         r_assert_err(0,"lld_con.c",uVar8);

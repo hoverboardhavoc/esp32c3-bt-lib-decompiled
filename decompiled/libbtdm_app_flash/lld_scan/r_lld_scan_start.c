@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -53,7 +53,7 @@ undefined4 r_lld_scan_start(char param_1,undefined2 *param_2)
         pvVar11 = (void *)r_ke_malloc(0x84,0);
         *piVar9 = (int)pvVar11;
         if (pvVar11 == (void *)0x0) {
-          r_assert_err("lld_scan.c",0xbb5);
+          r_assert_err("lld_scan.c",0xbb6);
         }
         else {
           memset(pvVar11,0,0x84);
@@ -82,7 +82,7 @@ undefined4 r_lld_scan_start(char param_1,undefined2 *param_2)
         pvVar11 = (void *)r_ke_malloc(0x84,0);
         piVar9[1] = (int)pvVar11;
         if (pvVar11 == (void *)0x0) {
-          r_assert_err("lld_scan.c",0xbe1);
+          r_assert_err("lld_scan.c",0xbe2);
         }
         else {
           memset(pvVar11,0,0x84);
@@ -274,7 +274,7 @@ _L924:
             uVar13 = 8;
             if (bVar2 == 0xb) goto _L924;
 _L826:
-            r_assert_err(0,"lld_scan.c",0xc8f);
+            r_assert_err(0,"lld_scan.c",0xc90);
           }
           if (unaff_s0 != (byte *)0x0) {
             bVar2 = unaff_s0[1];
@@ -412,7 +412,7 @@ _L826:
                 uVar10 = (uint)*(ushort *)(iVar19 + 0x32) * 2 + uVar10 & 0xfffffff;
               }
               else {
-                r_assert_err(0,"lld_scan.c",0xce1);
+                r_assert_err(0,"lld_scan.c",0xce2);
               }
             }
             piVar22 = piVar22 + 1;
@@ -425,7 +425,7 @@ _L826:
         }
       } while( true );
     }
-    r_assert_err("lld_scan.c",0xced);
+    r_assert_err("lld_scan.c",0xcee);
   }
   return 0xc;
 }

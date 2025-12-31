@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_init.o -> r_lld_init_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -110,7 +110,7 @@ undefined4 r_lld_init_start(undefined2 *param_1)
         pvVar14 = (void *)r_ke_malloc(0x54,0);
         *__s = (int)pvVar14;
         if (pvVar14 == (void *)0x0) {
-          r_assert_err(0x10000,0x6fa);
+          r_assert_err(0x10000,0x6fb);
           uVar13 = 0;
         }
         else {
@@ -167,7 +167,7 @@ undefined4 r_lld_init_start(undefined2 *param_1)
         pvVar14 = (void *)r_ke_malloc(0x54,0);
         __s[1] = (int)pvVar14;
         if (pvVar14 == (void *)0x0) {
-          r_assert_err(0x10000,0x75b);
+          r_assert_err(0x10000,0x75c);
         }
         else {
           memset(pvVar14,0,0x54);
@@ -472,7 +472,7 @@ _L415:
             uVar12 = (uint)*(ushort *)(iVar32 + 0x2e) * 2 + uVar12 & 0xfffffff;
           }
           else {
-            r_assert_err(0,0x10000,0x838);
+            r_assert_err(0,0x10000,0x839);
           }
           bVar1 = *(byte *)(iVar32 + 0x52);
           iVar24 = r_emi_get_mem_addr_by_offset(0x400);
@@ -481,14 +481,14 @@ _L415:
           iVar24 = r_emi_get_mem_addr_by_offset(0x400);
           uVar25 = 0;
           r_ble_log_internal_x2
-                    (0x400100a1,CONCAT22(*(undefined2 *)((uint)bVar1 * 0x5a + 0x2c + iVar24),uVar8),
+                    (0x40010102,CONCAT22(*(undefined2 *)((uint)bVar1 * 0x5a + 0x2c + iVar24),uVar8),
                      *(undefined1 *)(iVar32 + 0x52));
         }
         __s = __s + 1;
       } while (__s != piVar20);
       goto _L300;
     }
-    r_assert_err(0x10000,0x842);
+    r_assert_err(0x10000,0x843);
   }
   uVar25 = 0xc;
 _L300:

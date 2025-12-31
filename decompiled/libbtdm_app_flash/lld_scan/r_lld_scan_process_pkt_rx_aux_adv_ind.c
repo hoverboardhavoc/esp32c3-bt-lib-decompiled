@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_process_pkt_rx_aux_adv_ind
  *
  * (C) Espressif, Apache License 2.0.
@@ -155,7 +155,7 @@ _L477:
           *(undefined2 *)(iVar7 + 0x76) = *(undefined2 *)(pbVar12 + 6);
         }
         r_ke_msg_free(pbVar12 + -0xc);
-        r_ble_log_internal_x0(0x80a100be);
+        r_ble_log_internal_x0(0x80a1011d);
       }
       else {
         *pbVar12 = *_lld_scan_sync_env;
@@ -176,7 +176,7 @@ _L477:
           uVar19 = (int)(((uVar18 & 0xffff) + (uint)_DAT_000150ce * -2) * 0x10000) >> 0x10;
         }
         if (0x751 < (uVar19 + 0x4e1 & 0xffff)) {
-          r_assert_err(0,"lld_scan.c",0x700);
+          r_assert_err(0,"lld_scan.c",0x701);
         }
         for (; (int)uVar19 < 0; uVar19 = (int)(((uVar19 & 0xffff) + 0x271) * 0x10000) >> 0x10) {
           *(uint *)(pbVar12 + 0x18) = *(int *)(pbVar12 + 0x18) - 1U & 0xfffffff;
@@ -193,7 +193,7 @@ _L477:
         r_ke_free(_lld_scan_sync_env);
         _lld_scan_sync_env = (byte *)0x0;
         r_ble_log_internal_x2
-                  (0x40a100bd,*(undefined4 *)(pbVar12 + 0x18),
+                  (0x40a1011c,*(undefined4 *)(pbVar12 + 0x18),
                    (uint)*(ushort *)(pbVar12 + 0x1c) |
                    (uint)*pbVar12 << 0x10 | (uint)pbVar12[0x1f] << 0x18);
       }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_wakeup_request
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ void btdm_wakeup_request(void)
     uVar3 = (**(code **)(_r_osi_funcs_p + 0x8c))(iVar1,0,*(code **)(_r_osi_funcs_p + 0x8c));
     if (200 < uVar3) {
       _DAT_60042000 = _DAT_60042000 | 0x10;
-      r_ble_log_internal_x3(0x400b01b8,iVar1,_DAT_60042000,iVar2);
+      r_ble_log_internal_x3(0x400b0216,iVar1,_DAT_60042000,iVar2);
     }
   }
                     /* WARNING: Could not recover jumptable at 0x00010292. Too many branches */

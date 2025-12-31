@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_init.o -> r_lld_init_end
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void r_lld_init_end(void)
     iVar3 = *(int *)(_lld_init_env + iVar5);
     if (iVar3 != 0) {
       r_ble_log_internal_x2
-                (0x40020098,*(undefined4 *)(iVar3 + 0x24),
+                (0x400200fa,*(undefined4 *)(iVar3 + 0x24),
                  (uint)*(byte *)(iVar3 + 0x31) << 0x18 |
                  (uint)*(byte *)(iVar3 + 0x52) << 8 | (uint)*(byte *)(iVar3 + 0x50) << 0x10 | uVar6)
       ;

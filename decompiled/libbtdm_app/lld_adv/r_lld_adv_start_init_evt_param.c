@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_start_init_evt_param
  *
  * (C) Espressif, Apache License 2.0.
@@ -73,7 +73,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
   uVar3 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
   *(ushort *)(iVar2 + 0x76) = *(ushort *)(iVar2 + 0x76) & 0xf000 | uVar3 & 0xfff;
   if ((*(byte *)(param_2 + 0x25) & 0xf0) != 0) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(0xf000,"lld_adv.c",0xc0a,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(0xf000,"lld_adv.c",0xc0b,*(code **)(_r_plf_funcs_p + 0xc));
   }
   iVar4 = _r_plf_funcs_p;
   *(ushort *)(iVar2 + 0x76) =
@@ -88,7 +88,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
     pcVar11 = *(code **)(iVar4 + 0xf0);
     iVar4 = (*pcVar11)(pcVar11);
     if (*(char *)(iVar4 + 0x18) == '\0') {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0xc18,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0xc19,*(code **)(_r_plf_funcs_p + 8));
     }
     *(bool *)(iVar2 + 0x95) = *(char *)(iVar2 + 0x8f) != '\0';
     (**(code **)(_r_ip_funcs_p + 0x1ac))
@@ -118,7 +118,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
     break;
   default:
     pcVar11 = *(code **)(iVar4 + 8);
-    (*pcVar11)(0,"lld_adv.c",0xc51,pcVar11);
+    (*pcVar11)(0,"lld_adv.c",0xc52,pcVar11);
     break;
   case 2:
     uVar3 = 6;

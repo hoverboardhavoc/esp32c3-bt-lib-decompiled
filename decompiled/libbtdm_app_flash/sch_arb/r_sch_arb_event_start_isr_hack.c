@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> sch_arb.o -> r_sch_arb_event_start_isr_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,7 +33,7 @@ void r_sch_arb_event_start_isr_hack(void)
     iVar9 = *(int *)(iVar5 + 4) - (uint)rwip_prog_delay;
     if ((((1 - uVar3) + iVar9 & 0xfffffff) < 0x7ffffff) &&
        (((iVar9 + 1U & 0xfffffff) != uVar3 || (extraout_a1_00 <= *(uint *)(iVar5 + 8))))) goto _L64;
-    r_ble_log_internal_x3(0x4009019d,iVar5,*(undefined4 *)(iVar5 + 8));
+    r_ble_log_internal_x3(0x400901fb,iVar5,*(undefined4 *)(iVar5 + 8));
     uVar4 = r_co_list_pop_front(&sch_arb_env);
     r_co_list_push_back(&sch_arb_env,uVar4);
     iVar5 = _sch_arb_env;
@@ -81,7 +81,7 @@ _L57:
     }
     r_rwip_timer_hus_set(uVar3,uVar7);
   }
-  r_ble_log_internal_x2(0x2009019e,uVar3,uVar7);
+  r_ble_log_internal_x2(0x200901fc,uVar3,uVar7);
   return;
 }
 

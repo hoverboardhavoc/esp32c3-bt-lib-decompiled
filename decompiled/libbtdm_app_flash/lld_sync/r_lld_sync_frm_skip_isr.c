@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_sync.o -> r_lld_sync_frm_skip_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,11 +34,11 @@ void r_lld_sync_frm_skip_isr(int param_1)
   
   iVar6 = *(int *)(&lld_sync_env + param_1 * 4);
   if (iVar6 == 0) {
-    r_assert_err(0,0x10000,0x489);
+    r_assert_err(0,0x10000,0x48a);
     return;
   }
   r_ble_log_internal_x2
-            (0x404500d7,
+            (0x40450135,
              (uint)*(ushort *)(iVar6 + 0x4a) | param_1 << 0x10 | (uint)*(byte *)(iVar6 + 99) << 0x18
              ,*(undefined1 *)(iVar6 + 0x5b));
   r_sch_arb_remove(iVar6,1);
@@ -51,7 +51,7 @@ void r_lld_sync_frm_skip_isr(int param_1)
   if (*(char *)(iVar6 + 0x5b) == '\x02') {
     piVar5 = (int *)(&lld_sync_env + uVar8 * 4);
     if (*piVar5 != 0) {
-      r_ble_log_internal_x1(0x400500cb,(uint)CONCAT12(bVar2,*(undefined2 *)(*piVar5 + 0x4a)));
+      r_ble_log_internal_x1(0x4005012a,(uint)CONCAT12(bVar2,*(undefined2 *)(*piVar5 + 0x4a)));
       pbVar7 = (byte *)r_ke_msg_alloc(0x205,0,0xff,2);
       *pbVar7 = bVar2;
       pbVar7[1] = 0;
@@ -121,7 +121,7 @@ void r_lld_sync_frm_skip_isr(int param_1)
       }
       if (uVar9 < (*(int *)(iVar6 + 0x44) - *(int *)(iVar6 + 0x3c) & 0xfffffffU)) {
         r_ble_log_internal_x4
-                  (0x600500d4,*(undefined4 *)(iVar6 + 0x40),
+                  (0x60050133,*(undefined4 *)(iVar6 + 0x40),
                    CONCAT13(*(char *)(iVar6 + 0x57),CONCAT12(bVar2,*(undefined2 *)(iVar6 + 0x4a))));
 _L224:
         r_lld_sync_cleanup(uVar8,8);
@@ -149,7 +149,7 @@ _L224:
         }
         uVar9 = uVar9 + iVar12;
         if (((uint)(*(int *)(iVar6 + 0x40) * 0x271) >> 1) - 0x96 < uVar9 >> 1) {
-          r_ble_log_internal_x3(0x400500d5,(uint)CONCAT12(bVar2,*(undefined2 *)(iVar6 + 0x4a)));
+          r_ble_log_internal_x3(0x40050134,(uint)CONCAT12(bVar2,*(undefined2 *)(iVar6 + 0x4a)));
           goto _L224;
         }
       }

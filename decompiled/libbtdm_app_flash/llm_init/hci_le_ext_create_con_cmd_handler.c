@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> llm_init.o -> hci_le_ext_create_con_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -77,11 +77,11 @@ _L128:
     }
     iVar8 = r_sdk_config_get_opts();
     if ((uint)bStack_da < (uint)*(byte *)(iVar8 + 0xd)) {
-      r_ble_log_internal_x1(0x802e0158,(uint)bStack_da << 8 | 0xc);
+      r_ble_log_internal_x1(0x802e01b6,(uint)bStack_da << 8 | 0xc);
       goto _L128;
     }
     if ((*param_1 == 0) && (iVar8 = r_llm_is_dev_connected(param_1 + 3,param_1[2]), iVar8 != 0)) {
-      r_ble_log_internal_x1(0x802e0159,(uint)*param_1 << 8 | 0xb);
+      r_ble_log_internal_x1(0x802e01b7,(uint)*param_1 << 8 | 0xb);
       uVar9 = 0xb;
       uVar7 = 0;
       goto _L123;
@@ -102,7 +102,7 @@ _L128:
           uVar4 = puVar12[1];
           uVar5 = *puVar12;
           if ((uVar5 < uVar4) || ((uVar4 < 4 || (uVar5 < 4)))) {
-            r_ble_log_internal_x2(0x802e015b,CONCAT22(uVar5,uVar4),uVar10 << 8 | 0x12);
+            r_ble_log_internal_x2(0x802e01b9,CONCAT22(uVar5,uVar4),uVar10 << 8 | 0x12);
             goto _L163;
           }
         }
@@ -119,19 +119,19 @@ _L128:
             (puVar12 = puVar12 + 8,
             (int)((uint)*puVar2 * 10) < (int)((ushort)(*puVar3 + 1) * uVar10 * 5 + 1) >> 1)))) {
           uVar9 = uVar9 << 8 | 0x12;
-          uVar7 = 0x802e015c;
+          uVar7 = 0x802e01ba;
           goto _L162;
         }
       }
       bVar1 = param_1[1];
       if ((1 < bStack_d9) || (3 < bVar1)) {
         uVar9 = (uint)bStack_d9 << 8 | (uint)bVar1 << 0x10 | 0x12;
-        uVar7 = 0x802e015d;
+        uVar7 = 0x802e01bb;
         goto _L162;
       }
       if (((bVar1 & 1) != 0) &&
          (iVar8 = r_co_bdaddr_compare(_p_llm_env + 0x12,&co_null_bdaddr), iVar8 != 0)) {
-        uVar7 = 0x802e015e;
+        uVar7 = 0x802e01bc;
         uVar9 = (uint)param_1[1] << 8 | 0x12;
         goto _L162;
       }
@@ -166,7 +166,7 @@ _L128:
           puVar19 = puVar19 + 8;
           puVar18 = puVar18 + 8;
           if (iVar8 != 0) {
-            r_ble_log_internal_x1(0x802e0160,uVar20 << 8 | 0xd);
+            r_ble_log_internal_x1(0x802e01be,uVar20 << 8 | 0xd);
             uVar9 = 0x3b;
             uVar7 = 0;
             goto _L123;
@@ -198,7 +198,7 @@ _L115:
         iVar8 = *(int *)(_p_llm_env + 8);
         *(byte **)((uint)bStack_da * 0x44 + iVar8) = param_1;
         *(undefined1 *)(iVar8 + (uint)bStack_da * 0x44 + 0x40) = 5;
-        r_ble_log_internal_x1(0x404e0161,bStack_da | 0x500);
+        r_ble_log_internal_x1(0x404e01bf,bStack_da | 0x500);
         memcpy(auStack_ca,auStack_d8,6);
         iVar8 = _p_llm_env;
         memcpy(auStack_c4,(void *)(_p_llm_env + 0x1d),5);
@@ -241,16 +241,16 @@ _L115:
         uVar9 = r_lld_init_start_hack(&uStack_d0);
         uVar7 = 1;
         if (uVar9 != 0) {
-          r_ble_log_internal_x1(0x802e0162,(uint)bStack_da << 8 | uVar9);
+          r_ble_log_internal_x1(0x802e01c0,(uint)bStack_da << 8 | uVar9);
           uVar9 = 3;
         }
         goto _L123;
       }
-      r_ble_log_internal_x1(0x802e015f,(uint)bStack_da << 8 | uVar9);
+      r_ble_log_internal_x1(0x802e01bd,(uint)bStack_da << 8 | uVar9);
     }
     else {
       uVar9 = uVar9 << 8 | 0x12;
-      uVar7 = 0x802e015a;
+      uVar7 = 0x802e01b8;
 _L162:
       r_ble_log_internal_x1(uVar7,uVar9);
 _L163:

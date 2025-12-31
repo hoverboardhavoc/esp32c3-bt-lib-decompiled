@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
- * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
- * Upstream date: 2025-12-17 10:51:37 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_evt_start_cbk_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,13 +33,13 @@ void r_lld_con_evt_start_cbk_eco(int param_1)
   
   if (param_1 == 0) goto _L521;
   r_ble_log_internal_x2
-            (0x4043007e,*(undefined4 *)(param_1 + 4),
+            (0x404300e0,*(undefined4 *)(param_1 + 4),
              CONCAT11(*(undefined1 *)(param_1 + 0x16),*(undefined1 *)(param_1 + 0x8e)));
   iVar12 = (*(byte *)(param_1 + 0x8e) + 0x18) * 2;
-  if (((&DAT_00015085)[iVar12] == '\0') || (*(char *)(param_1 + 0x46) != (&DAT_00015085)[iVar12]))
+  if (((&DAT_0001507d)[iVar12] == '\0') || (*(char *)(param_1 + 0x46) != (&DAT_0001507d)[iVar12]))
   goto _L521;
   uVar14 = (uint)*(ushort *)(param_1 + 0x7c) + (uint)*(ushort *)(param_1 + 0x7e) & 0xffff;
-  bVar1 = (&DAT_00015084)[iVar12];
+  bVar1 = (&DAT_0001507c)[iVar12];
   if (0x7ffe < (uVar14 - *(ushort *)(param_1 + 0x44) & 0xffff)) goto _L521;
   iVar4 = (uint)bVar1 * 0xe;
   iVar7 = r_emi_get_mem_addr_by_offset(0x1400);
@@ -47,7 +47,7 @@ void r_lld_con_evt_start_cbk_eco(int param_1)
   iVar7 = r_emi_get_mem_addr_by_offset(0x1400);
   sVar3 = *(short *)(iVar4 + 4 + iVar7);
   iVar7 = r_emi_get_mem_addr_by_offset(0x1400);
-  uVar13 = (ushort)(byte)(&DAT_00015085)[iVar12];
+  uVar13 = (ushort)(byte)(&DAT_0001507d)[iVar12];
   uVar5 = *(ushort *)(iVar4 + 2 + iVar7) & 3;
   if (uVar13 == 1) {
     uVar13 = 10;
@@ -61,7 +61,7 @@ _L537:
   else {
     uVar15 = 0x18;
     if (uVar13 != 3) {
-      r_assert_param(*(undefined1 *)(param_1 + 0x8e),0,"lld_con.c",0x5a5);
+      r_assert_param(*(undefined1 *)(param_1 + 0x8e),0,"lld_con.c",0x5a6);
       uVar13 = 0;
       goto _L537;
     }
@@ -79,7 +79,7 @@ _L537:
     r_lld_con_llcp_ind_info_clear((uint)bVar1);
     uVar6 = (uint)*(ushort *)(param_1 + 0x44);
     uVar5 = (uint)*(byte *)(param_1 + 0x46) << 0x18 | (uint)bVar1 | uVar5 << 8;
-    uVar10 = 0x80a30080;
+    uVar10 = 0x80a300e2;
   }
   else {
     uVar6 = *(ushort *)(param_1 + 0x72) + 9 + uVar14;
@@ -90,7 +90,7 @@ _L537:
     puVar9[1] = (char)(uVar6 >> 8);
     uVar5 = (uint)CONCAT11(bVar1,*(undefined1 *)(param_1 + 0x8e));
     *(short *)(param_1 + 0x44) = (short)((uint)iVar12 >> 0x10);
-    uVar10 = 0x40a3007f;
+    uVar10 = 0x40a300e1;
   }
   r_ble_log_internal_x2(uVar10,uVar6 << 0x10 | uVar14,uVar5 | uVar15 << 0x10);
 _L521:

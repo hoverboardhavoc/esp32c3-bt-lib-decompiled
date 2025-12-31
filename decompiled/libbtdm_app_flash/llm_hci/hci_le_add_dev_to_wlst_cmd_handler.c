@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> llm_hci.o -> hci_le_add_dev_to_wlst_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ undefined4 hci_le_add_dev_to_wlst_cmd_handler(byte *param_1,undefined4 param_2)
   if (iVar1 == 0) goto _L232;
   uVar3 = (uint)*param_1;
   if ((uVar3 - 2 & 0xff) < 0xfd) {
-    uVar2 = 0x802e0141;
+    uVar2 = 0x802e019f;
 _L238:
     r_ble_log_internal_x1(uVar2,uVar3 << 8 | 0x12);
     uVar2 = 0x12;
@@ -38,14 +38,14 @@ _L238:
     uVar3 = r_llm_dev_list_search(auStack_18,local_19);
     if (uVar3 < 0xc) {
       if ((*(byte *)(_p_llm_env + uVar3 * 10 + 0x2d) & 2) != 0) {
-        uVar2 = 0x802e0142;
+        uVar2 = 0x802e01a0;
         goto _L238;
       }
     }
     else {
       uVar3 = r_llm_dev_list_empty_entry();
       if (uVar3 == 0xc) {
-        r_ble_log_internal_x1(0x802e0143,0xc07);
+        r_ble_log_internal_x1(0x802e01a1,0xc07);
         uVar2 = 7;
         goto _L232;
       }

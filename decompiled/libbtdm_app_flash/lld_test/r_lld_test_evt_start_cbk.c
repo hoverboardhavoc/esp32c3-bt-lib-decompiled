@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_test.o -> r_lld_test_evt_start_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,7 +38,7 @@ void r_lld_test_evt_start_cbk(int param_1)
     puVar2 = (ushort *)r_emi_get_mem_addr_by_offset(0x400);
     uVar1 = *puVar2;
     r_lld_test_set_tx_power(0,uVar1 & 0x1f);
-    r_ble_log_internal_x1(0x402600de,*(undefined1 *)(param_1 + 0x26));
+    r_ble_log_internal_x1(0x4026013c,*(undefined1 *)(param_1 + 0x26));
     r_bt_rma_get_ant_by_act(uVar1 & 0x1f,0,&bStack_31,&pcStack_30);
     if (((uint)bStack_31 << 7 & 0xffffff7f) != 0) {
       r_assert_err(0,0x10000,0x82);

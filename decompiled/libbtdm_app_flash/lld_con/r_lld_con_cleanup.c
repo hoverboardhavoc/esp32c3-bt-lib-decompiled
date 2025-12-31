@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
- * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
- * Upstream date: 2025-12-17 10:51:37 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_cleanup
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void r_lld_con_cleanup(uint param_1,int param_2,int param_3)
   if (iVar4 == 0) {
     return;
   }
-  r_ble_log_internal_x1(0x40030084,param_2 << 8 | param_3 << 0x10 | param_1);
+  r_ble_log_internal_x1(0x400300e6,param_2 << 8 | param_3 << 0x10 | param_1);
   if (param_2 != 0) {
     uVar10 = param_1 << 8 | 1;
     puVar5 = (undefined1 *)r_ke_msg_alloc(0x212,uVar10,0xff,1);
@@ -44,11 +44,11 @@ void r_lld_con_cleanup(uint param_1,int param_2,int param_3)
       if ((uVar3 & 3) == 3) {
         iVar7 = r_emi_get_mem_addr_by_offset(0x1400);
         r_ble_util_buf_llcp_tx_free(*(undefined2 *)(iVar9 + 4 + iVar7));
-        uVar8 = 0x7db;
+        uVar8 = 0x7dc;
         if (*(int *)(iVar4 + 0x24) != 0) goto _L159;
       }
       else {
-        uVar8 = 0x7e4;
+        uVar8 = 0x7e5;
         if ((uVar3 & 3) == 0) {
 _L159:
           r_assert_err(0,"lld_con.c",uVar8);

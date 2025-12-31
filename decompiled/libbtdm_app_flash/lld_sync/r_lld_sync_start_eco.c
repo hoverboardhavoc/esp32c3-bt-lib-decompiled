@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_sync.o -> r_lld_sync_start_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ int r_lld_sync_start_eco(uint param_1,int param_2)
     }
   }
   r_ble_log_internal_x2
-            (0x400500ca,iVar2 << 0x18 | (uint)*(ushort *)(param_2 + 0xe) | param_1 << 0x10,
+            (0x40050129,iVar2 << 0x18 | (uint)*(ushort *)(param_2 + 0xe) | param_1 << 0x10,
              *(undefined1 *)(param_2 + 0xb));
   return iVar2;
 }

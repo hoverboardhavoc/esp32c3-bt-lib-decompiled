@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
- * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
- * Upstream date: 2025-12-17 10:51:37 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_frm_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,7 +38,7 @@ void r_lld_con_frm_isr(uint param_1,int param_2)
   
   iVar5 = *(int *)(&lld_con_env + param_1 * 4);
   if (iVar5 == 0) {
-    r_assert_err(0,"lld_con.c",0xc4e);
+    r_assert_err(0,"lld_con.c",0xc4f);
     return;
   }
   r_sch_arb_remove(iVar5,1);
@@ -98,7 +98,7 @@ void r_lld_con_frm_isr(uint param_1,int param_2)
         iVar8 = uVar15 + *(ushort *)(iVar5 + 0x7e);
         *(short *)(iVar5 + 0x7e) = (short)((uint)(iVar8 * 0x10000) >> 0x10);
         *(undefined1 *)(iVar5 + 0x96) = 1;
-        r_ble_log_internal_x2(0x40430074,(uint)*(ushort *)(iVar5 + 0x7c) | iVar8 * 0x10000,param_1);
+        r_ble_log_internal_x2(0x404300d7,(uint)*(ushort *)(iVar5 + 0x7c) | iVar8 * 0x10000,param_1);
       }
     }
     for (; (iVar11 - uVar6 & 0xfffffff) < 0x7ffffff;
@@ -152,7 +152,7 @@ void r_lld_con_frm_isr(uint param_1,int param_2)
                  0x40;
         uVar17 = uVar10 * 2;
         if (uVar12 != 0) {
-          *(undefined2 *)(&DAT_00015080 + iVar11) = 0;
+          *(undefined2 *)(&DAT_00015078 + iVar11) = 0;
         }
         if ((*(ushort *)(iVar5 + 0x84) & 2) == 0) {
           uVar17 = uVar17 + (uint)*(ushort *)(iVar5 + 0x70) * 0x271;
@@ -165,14 +165,14 @@ _L235:
              ((uVar12 == 0 ||
               ((bVar4 = false, *(ushort *)(iVar5 + 0x7c) == 0 && (*(short *)(iVar5 + 0x98) == -1))))
              )) {
-            uVar17 = uVar17 + ((int)((uint)*(ushort *)(&DAT_00015080 + iVar11) *
+            uVar17 = uVar17 + ((int)((uint)*(ushort *)(&DAT_00015078 + iVar11) *
                                      (uint)*(ushort *)(iVar5 + 0x70) * 0x271) >> 1) +
                               (uint)*(ushort *)(iVar5 + 0x70) * 0x271;
             uVar20 = *(int *)(iVar5 + 100) * 0x271;
             if (uVar20 < uVar17) {
               uVar17 = uVar20;
             }
-            *(ushort *)(&DAT_00015080 + iVar11) = *(ushort *)(&DAT_00015080 + iVar11) + 1;
+            *(ushort *)(&DAT_00015078 + iVar11) = *(ushort *)(&DAT_00015078 + iVar11) + 1;
             goto _L235;
           }
         }
@@ -181,7 +181,7 @@ _L235:
           uVar17 = uVar17 + (uint)*(ushort *)(iVar5 + 0x40) * 0x271;
         }
         else if ((!bVar4) && (((uint)(*(int *)(iVar5 + 100) * 0x271) >> 1) - 300 <= uVar10)) {
-          r_ble_log_internal_x3(0x40430075,(uint)*(ushort *)(iVar5 + 0x7c) | param_1 << 0x10);
+          r_ble_log_internal_x3(0x404300d8,(uint)*(ushort *)(iVar5 + 0x7c) | param_1 << 0x10);
         }
         uVar20 = (uVar17 >> 1) / 0x271;
         uVar10 = uVar6 - uVar20 & 0xfffffff;
@@ -233,7 +233,7 @@ _L235:
     }
     iVar11 = 0;
 _L185:
-    r_ble_log_internal_x2(0x40430076,*(undefined4 *)(iVar5 + 0x7c),iVar11 << 8 | param_1);
+    r_ble_log_internal_x2(0x404300d9,*(undefined4 *)(iVar5 + 0x7c),iVar11 << 8 | param_1);
     if (iVar11 != 0) {
       *(undefined1 *)(iVar5 + 0x8f) = 0;
       *(uint *)(iVar5 + 0x48) = uVar6;
@@ -253,7 +253,7 @@ _L185:
   if (iVar5 == 0) {
     return;
   }
-  r_ble_log_internal_x1(0x40030084,iVar11 << 0x10 | 0x100U | param_1);
+  r_ble_log_internal_x1(0x400300e6,iVar11 << 0x10 | 0x100U | param_1);
   uVar17 = param_1 << 8 | 1;
   puVar7 = (undefined1 *)r_ke_msg_alloc(0x212,uVar17,0xff,1);
   *puVar7 = (char)iVar11;
@@ -287,11 +287,11 @@ _L185:
     if ((uVar3 & 3) == 3) {
       iVar8 = r_emi_get_mem_addr_by_offset(0x1400);
       r_ble_util_buf_llcp_tx_free(*(undefined2 *)(iVar16 + 4 + iVar8));
-      uVar9 = 0x7db;
+      uVar9 = 0x7dc;
       if (*(int *)(iVar5 + 0x24) != 0) goto _L159;
     }
     else {
-      uVar9 = 0x7e4;
+      uVar9 = 0x7e5;
       if ((uVar3 & 3) == 0) {
 _L159:
         r_assert_err(0,"lld_con.c",uVar9);

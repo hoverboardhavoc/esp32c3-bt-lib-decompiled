@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> llm_adv.o -> lld_adv_end_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -65,7 +65,7 @@ undefined4 lld_adv_end_ind_handler_hack(byte *param_1)
   bStack_67 = *(byte *)((int)puVar9 + 0x3e);
   puVar3 = (undefined1 *)*puVar9;
   r_ble_log_internal_x1
-            (0x406e012d,
+            (0x406e018b,
              CONCAT13(*(undefined1 *)(puVar9 + 0x10),CONCAT12(bStack_67,CONCAT11(bVar17,bVar1))));
   iVar12 = *(int *)(_p_llm_env + 8) + iVar16;
   if (*(char *)(iVar12 + 0x40) == '\x03') {
@@ -86,7 +86,7 @@ _L130:
       }
     }
     uVar15 = uVar15 | 0x100;
-    uVar4 = 0x404e012e;
+    uVar4 = 0x404e018c;
     *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar16 + 0x40) = 1;
 _L133:
     r_ble_log_internal_x1(uVar4,uVar15);
@@ -96,7 +96,7 @@ _L43:
       if ((*(char *)(iVar12 + 0x40) != '\x02') ||
          ((uint)*(byte *)(iVar12 + 0x3e) != (uint)bStack_67)) {
         *(undefined1 *)(*(int *)(_p_llm_env + 8) + (uint)bStack_67 * 0x44 + 0x40) = 0;
-        r_ble_log_internal_x1(0x404e0137,CONCAT11(*(undefined1 *)(iVar12 + 0x40),bVar1));
+        r_ble_log_internal_x1(0x404e0195,CONCAT11(*(undefined1 *)(iVar12 + 0x40),bVar1));
       }
     }
     bVar17 = 0;
@@ -107,15 +107,15 @@ _L43:
       if ((param_1[1] != 0x3c) && (param_1[1] != 0x43)) goto _L43;
       *(undefined1 *)(iVar12 + 0x40) = 1;
       uVar15 = uVar15 | 0x100;
-      uVar4 = 0x404e0136;
+      uVar4 = 0x404e0194;
       goto _L133;
     }
     pbVar8 = param_1 + 0x15;
     iVar12 = r_llm_is_dev_connected(pbVar8,param_1[0x37]);
     if (iVar12 != 0) {
       memset(&uStack_58,0,0x28);
-      r_ble_log_internal_x1(0x606e012f,param_1[0x37]);
-      r_ble_log_internal_hex(0x606e0130,6,pbVar8);
+      r_ble_log_internal_x1(0x606e018d,param_1[0x37]);
+      r_ble_log_internal_hex(0x606e018e,6,pbVar8);
       if ((*(ushort *)(puVar3 + 2) & 0xc) != 0) {
         r_assert_err(0,"llm_adv.c",0xaf9);
       }
@@ -154,7 +154,7 @@ _L43:
           }
           (*(code *)*_bt_rf_coex_hooks_p)(uVar15,uVar4,1);
         }
-        uVar4 = 0x404e0131;
+        uVar4 = 0x404e018f;
         uVar15 = (uint)CONCAT11(*(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar16 + 0x40),bVar1);
         goto _L133;
       }
@@ -177,8 +177,8 @@ _L43:
     bStack_34 = param_1[0x34];
     bStack_32 = param_1[0x36];
     bStack_31 = ((byte)(*(ushort *)(puVar3 + 2) >> 4) ^ 1) & 1;
-    r_ble_log_internal_x1(0x406e0132,param_1[0x37]);
-    r_ble_log_internal_hex(0x406e0133,6,pbVar8);
+    r_ble_log_internal_x1(0x406e0190,param_1[0x37]);
+    r_ble_log_internal_hex(0x406e0191,6,pbVar8);
     if (bStack_67 == 0xff) {
       r_assert_err(0,"llm_adv.c",0xbc6);
     }
@@ -190,7 +190,7 @@ _L43:
         if (iVar12 == 0) {
           *(byte *)(iVar13 + iVar16 + 0x3e) = bStack_67;
           *(undefined1 *)(iVar13 + uVar7 * 0x44 + 0x40) = 4;
-          r_ble_log_internal_x1(0x404e0134,uVar7 | 0x400);
+          r_ble_log_internal_x1(0x404e0192,uVar7 | 0x400);
         }
         else {
           r_assert_param(uVar15,*(undefined1 *)(iVar13 + uVar7 * 0x44 + 0x40),"llm_adv.c",0xb57);
@@ -206,7 +206,7 @@ _L43:
       *(byte *)(iVar12 + 0x41) = param_1[0x37];
       *(undefined1 *)(iVar12 + 0x40) = 9;
       *(undefined1 *)(iVar12 + 0x28) = 1;
-      r_ble_log_internal_x1(0x404e0135,uVar7 | 0x900);
+      r_ble_log_internal_x1(0x404e0193,uVar7 | 0x900);
       iVar12 = _p_llm_env;
       iVar13 = *(int *)(_p_llm_env + 8) + (uint)bStack_67 * 0x44;
       *(uint *)(iVar13 + 0x10) = (uint)*(ushort *)(param_1 + 0x1e) << 1;

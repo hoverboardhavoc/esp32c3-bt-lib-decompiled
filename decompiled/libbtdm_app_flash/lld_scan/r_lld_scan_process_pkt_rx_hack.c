@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_process_pkt_rx_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -85,7 +85,7 @@ void r_lld_scan_process_pkt_rx_hack(int param_1)
     }
     iVar10 = r_emi_get_mem_addr_by_offset(0x1000);
     r_ble_log_internal_x3
-              (0x20a100b2,
+              (0x20a10004,
                ((uint)(uVar15 < uVar12) + (int)((ulonglong)uVar14 * 0x271 >> 0x20)) * -0x80000000 |
                uVar15 >> 1,CONCAT22(*(undefined2 *)(iVar10 + iVar17),uVar3),
                (uint)CONCAT11(bVar2,*(undefined1 *)(iVar16 + 0x38)) | (uVar13 << 4 | uVar13) << 0x18
@@ -121,7 +121,7 @@ _L556:
         uStack_4c = 0;
         uStack_48 = 0;
         if ((8 < uVar12) || ((0x128U >> uVar12 & 1) != 0)) {
-          r_assert_err(0,"lld_scan.c",0x295);
+          r_assert_err(0,"lld_scan.c",0x296);
         }
         if (uVar12 < 7) {
           r_lld_scan_process_pkt_rx_legacy_adv();
@@ -133,7 +133,7 @@ _L556:
         iVar9 = r_emi_get_mem_addr_by_offset(0x1000);
         uVar3 = *(ushort *)(iVar9 + iVar17);
         uVar11 = r_emi_get_mem_addr_by_offset(uVar4);
-        r_ble_log_internal_hex(0x20a100b3,uVar3 >> 8,uVar11);
+        r_ble_log_internal_hex(0x20a10112,uVar3 >> 8,uVar11);
       }
       else if (((_DAT_60031048 & 8) != 0) &&
               (r_lld_continue_scan_rx_isr_end_process(param_1),

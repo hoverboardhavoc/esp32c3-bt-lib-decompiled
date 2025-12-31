@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> vhci.o -> API_vhci_host_send_packet
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ undefined4 API_vhci_host_send_packet(char *param_1,int param_2)
   
   iVar1 = r_sdk_config_get_opts();
   if (*(char *)(iVar1 + 0xc) == '\0') {
-    r_ble_log_internal_x1(0x800701c8,0);
+    r_ble_log_internal_x1(0x80070226,0);
     return 0xffffffff;
   }
   iVar1 = r_sdk_config_get_opts();
@@ -29,12 +29,12 @@ undefined4 API_vhci_host_send_packet(char *param_1,int param_2)
     if ((param_1 != (char *)0x0) && (param_2 != 0)) {
       if (_vhci_env_p == (undefined1 *)0x0) {
         cVar3 = '\0';
-        uVar2 = 0x800701cb;
+        uVar2 = 0x80070229;
       }
       else {
         iVar1 = r_vhci_check_packet_allow(param_1,param_2);
         if (iVar1 == 0) {
-          r_ble_log_internal_x1(0x800701cc,param_2);
+          r_ble_log_internal_x1(0x8007022a,param_2);
           return 0xfffffffd;
         }
         (**(code **)(_r_osi_funcs_p + 0x34))
@@ -47,16 +47,16 @@ undefined4 API_vhci_host_send_packet(char *param_1,int param_2)
           return 0;
         }
         r_btdm_task_post_hack(2,0,0,1);
-        uVar2 = 0x800701cd;
+        uVar2 = 0x8007022b;
       }
       r_ble_log_internal_x1(uVar2,cVar3);
       return 0xfffffffb;
     }
-    r_ble_log_internal_x2(0x800701ca,param_1,param_2);
+    r_ble_log_internal_x2(0x80070228,param_1,param_2);
   }
   else {
     iVar1 = r_sdk_config_get_opts();
-    r_ble_log_internal_x1(0x800701c9,*(undefined1 *)(iVar1 + 0x17));
+    r_ble_log_internal_x1(0x80070227,*(undefined1 *)(iVar1 + 0x17));
   }
   return 0xfffffffe;
 }

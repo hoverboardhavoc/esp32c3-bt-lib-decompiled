@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> ble_util_buf.o -> r_ble_util_buf_acl_tx_free_in_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ void r_ble_util_buf_acl_tx_free_in_isr(int param_1)
     (**(code **)(_r_osi_funcs_p + 0x14))(*(code **)(_r_osi_funcs_p + 0x14));
     r_co_list_push_front
               (_p_ble_util_buf_env + 0x10,((uVar1 & 0xff) + 0x21) * 8 + _p_ble_util_buf_env);
-                    /* WARNING: Could not recover jumptable at 0x000108ea. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000108fa. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
     return;

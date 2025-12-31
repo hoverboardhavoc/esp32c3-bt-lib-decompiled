@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_per_adv.o -> r_lld_per_adv_evt_canceled_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,15 +20,15 @@ void r_lld_per_adv_evt_canceled_cbk(int param_1)
   int iVar5;
   
   if (param_1 == 0) {
-    r_assert_err(0x10000,0x3e1);
+    r_assert_err(0x10000,0x3e2);
     return;
   }
   r_ble_log_internal_x1
-            (0x404400a9,
+            (0x40440109,
              (uint)*(byte *)(param_1 + 0x52) |
              (uint)*(byte *)(param_1 + 0x53) << 8 | (uint)*(byte *)(param_1 + 0x16) << 0x10);
   if (*(char *)(param_1 + 0x53) != '\0') {
-    r_assert_err(0,0x10000,0x3d7);
+    r_assert_err(0,0x10000,0x3d8);
   }
   bVar1 = *(byte *)(param_1 + 0x52);
   *(char *)(param_1 + 0x16) = *(char *)(param_1 + 0x16) + rwip_priority;
@@ -55,7 +55,7 @@ void r_lld_per_adv_evt_canceled_cbk(int param_1)
   iVar5 = 0;
 _L4:
   r_ble_log_internal_x1
-            (0x404400a2,
+            (0x40440103,
              (uint)*(byte *)(iVar2 + 0x53) << 0x18 | (uint)bVar1 | iVar5 << 8 | uVar3 << 0x10);
   if (iVar5 == 0) {
     r_assert_param(*(undefined4 *)(iVar2 + 4),iVar4,0x10000,0x13f);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_sync.o -> r_lld_sync_evt_start_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -38,7 +38,7 @@ void r_lld_sync_evt_start_cbk(int param_1)
     uVar4 = (uint)bVar1;
     iVar5 = uVar4 * 0x5a;
     r_ble_log_internal_x1
-              (0x404500d8,
+              (0x40450136,
                (uint)*(ushort *)(param_1 + 0x4a) |
                (uint)*(byte *)(param_1 + 99) << 0x18 | uVar4 << 0x10);
     r_lld_sync_scan_dynamic_pti_process(param_1,0);
@@ -77,7 +77,7 @@ void r_lld_sync_evt_start_cbk(int param_1)
     *(undefined1 *)(param_1 + 100) = 0;
     return;
   }
-  r_assert_err(0x10000,0x4ec);
+  r_assert_err(0x10000,0x4ed);
   return;
 }
 

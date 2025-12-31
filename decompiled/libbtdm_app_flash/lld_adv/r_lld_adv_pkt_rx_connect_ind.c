@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_adv.o -> r_lld_adv_pkt_rx_connect_ind
  *
  * (C) Espressif, Apache License 2.0.
@@ -84,7 +84,7 @@ undefined4 r_lld_adv_pkt_rx_connect_ind(uint param_1)
           if (((*(ushort *)(iVar4 + iVar2) >> 1 & 1) != 0) &&
              (iVar4 = r_emi_get_mem_addr_by_offset(0xc60),
              (*(ushort *)(iVar2 + iVar4) >> 0xb & 1) == 0)) {
-            r_assert_err(0,0x10000,0x824);
+            r_assert_err(0,0x10000,0x825);
           }
         }
         uStack_54 = 0;
@@ -100,16 +100,16 @@ _L778:
           uVar6 = (*(ushort *)(param_1 * 0x5a + 0x2c + iVar2) - 0xc60) / 0x34;
           uVar7 = uVar6 & 0xff;
           if (9 < uVar7) {
-            r_assert_err(0,0x10000,0x83b);
+            r_assert_err(0,0x10000,0x83c);
           }
           iVar4 = r_emi_get_mem_addr_by_offset(0xc60);
           iVar2 = (uVar6 & 0xff) * 0x34;
           if ((*(ushort *)(iVar4 + iVar2) >> 5 & 1) == 0) {
-            r_assert_err(0,0x10000,0x83c);
+            r_assert_err(0,0x10000,0x83d);
           }
           iVar4 = r_emi_get_mem_addr_by_offset(0xc60);
           if ((*(ushort *)(iVar2 + iVar4) >> 7 & 1) == 0) {
-            r_assert_err(0,0x10000,0x83d);
+            r_assert_err(0,0x10000,0x83e);
           }
           pvVar5 = (void *)r_emi_get_mem_addr_by_offset(uVar7 * 0x34 + 0xc8e);
           memcpy(&uStack_4c,pvVar5,6);
@@ -118,11 +118,11 @@ _L778:
         return 1;
       }
     }
-    r_ble_log_internal_x1(0x80a00062,(uint)bVar1 << 8 | param_1);
-    r_ble_log_internal_hex(0x80a00063,0x22,&uStack_44);
+    r_ble_log_internal_x1(0x80a000c5,(uint)bVar1 << 8 | param_1);
+    r_ble_log_internal_hex(0x80a000c6,0x22,&uStack_44);
   }
   else {
-    r_assert_err(0,0x10000,0x7f1);
+    r_assert_err(0,0x10000,0x7f2);
   }
   return 0;
 }

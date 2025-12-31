@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
- * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
- * Upstream date: 2025-12-17 10:51:37 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_tx_prog_new_packet_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -158,8 +158,8 @@ _L399:
           iVar8 = 3;
         }
         uVar16 = uVar7 + iVar8 & 0xffff;
-        (&DAT_00015085)[iVar15] = uVar14;
-        (&DAT_00015084)[iVar15] = bVar20;
+        (&DAT_0001507d)[iVar15] = uVar14;
+        (&DAT_0001507c)[iVar15] = bVar20;
         puVar9 = (ushort *)r_emi_get_mem_addr_by_offset(uVar16);
         uVar3 = *puVar9;
         uVar13 = (uint)*(ushort *)(iVar25 + 0x44);
@@ -174,7 +174,7 @@ _L399:
             *puVar11 = (char)((uint)iVar8 >> 0x10);
             puVar11[1] = (char)(uVar7 >> 8);
             *(short *)(iVar25 + 0x44) = (short)((uint)iVar8 >> 0x10);
-            r_ble_log_internal_x2(0x40a3007a,uVar7 << 0x10 | uVar13,param_2 << 8 | param_1);
+            r_ble_log_internal_x2(0x40a300dc,uVar7 << 0x10 | uVar13,param_2 << 8 | param_1);
           }
         }
         else {
@@ -189,7 +189,7 @@ _L399:
           bVar20 = *(byte *)(iVar25 + 0x46);
           pbVar10 = (byte *)r_emi_get_mem_addr_by_offset(uVar7);
           r_ble_log_internal_x2
-                    (0x80a3007b,CONCAT22(uVar5,uVar3),
+                    (0x80a300dd,CONCAT22(uVar5,uVar3),
                      (uint)*pbVar10 << 0x18 | (uint)bVar20 << 8 | param_2 << 0x10 | param_1);
           r_lld_con_llcp_ind_info_clear(param_1);
         }
@@ -206,7 +206,7 @@ _L412:
     *(char *)(iVar25 + 0x92) = *(char *)(iVar25 + 0x92) + '\x01';
     iVar8 = r_emi_get_mem_addr_by_offset(0x1400);
     r_ble_log_internal_x2
-              (0x40e3007c,(uint)*(ushort *)(iVar8 + iVar23 + 2) | param_1 << 0x10 | param_2 << 0x18,
+              (0x40e300de,(uint)*(ushort *)(iVar8 + iVar23 + 2) | param_1 << 0x10 | param_2 << 0x18,
                uVar21);
   } while( true );
 }

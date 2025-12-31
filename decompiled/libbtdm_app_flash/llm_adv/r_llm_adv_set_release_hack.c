@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> llm_adv.o -> r_llm_adv_set_release_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,7 +23,7 @@ void r_llm_adv_set_release_hack(uint param_1)
   
   memset((void *)(*(int *)(_p_llm_env + 8) + param_1 * 0x44 + 4),0,6);
   iVar2 = param_1 * 0x44;
-  r_ble_log_internal_x1(0x404e0138,param_1);
+  r_ble_log_internal_x1(0x404e0196,param_1);
   if (*(short *)(*(int *)(_p_llm_env + 8) + iVar2 + 0x28) != 0) {
     r_ble_util_buf_adv_tx_free();
     *(undefined4 *)(*(int *)(_p_llm_env + 8) + iVar2 + 0x28) = 0;
@@ -72,13 +72,13 @@ void r_llm_adv_set_release_hack(uint param_1)
     r_bt_rtp_deregister_rule_cs_idx(uVar5);
     r_bt_rma_deregister_rule_cs_idx(uVar5);
     r_ble_log_internal_x1
-              (0x404e0139,CONCAT11(*(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar4 + 0x40),bVar1));
+              (0x404e0197,CONCAT11(*(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar4 + 0x40),bVar1));
   }
   *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar2 + 0x40) = 0;
   r_bt_rtp_deregister_rule_cs_idx(param_1);
   r_bt_rma_deregister_rule_cs_idx(param_1);
   r_ble_log_internal_x1
-            (0x404e013a,(uint)*(byte *)(*(int *)(_p_llm_env + 8) + iVar2 + 0x40) << 8 | param_1);
+            (0x404e0198,(uint)*(byte *)(*(int *)(_p_llm_env + 8) + iVar2 + 0x40) << 8 | param_1);
   return;
 }
 

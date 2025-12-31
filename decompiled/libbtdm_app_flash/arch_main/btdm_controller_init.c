@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
+ * Upstream date: 2025-12-31 14:03:52 +0800
+ * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_controller_init
  *
  * (C) Espressif, Apache License 2.0.
@@ -81,7 +81,7 @@ undefined4 btdm_controller_init(int *param_1)
           _btdm_env_p = (int *)(**(code **)(_r_osi_funcs_p + 0x74))
                                          (0x28,*(code **)(_r_osi_funcs_p + 0x74));
           if (_btdm_env_p == (int *)0x0) {
-            uVar10 = 0x80a801bf;
+            uVar10 = 0x80a8021d;
           }
           else {
             memset(_btdm_env_p,0,0x28);
@@ -99,7 +99,7 @@ undefined4 btdm_controller_init(int *param_1)
             }
             iVar9 = r_hci_tl_env_init();
             if ((iVar9 == 0) || ((uVar11 & 1) == 0)) {
-              uVar10 = 0x80a801c0;
+              uVar10 = 0x80a8021e;
             }
             else {
               iVar9 = r_sdk_config_get_opts();
@@ -173,7 +173,7 @@ undefined4 btdm_controller_init(int *param_1)
                   piVar7 = _btdm_env_p;
                   piVar6[9] = iVar9;
                   if ((void *)piVar7[9] == (void *)0x0) {
-                    uVar10 = 0x80a801c2;
+                    uVar10 = 0x80a80220;
                     goto _L350;
                   }
                   memset((void *)piVar7[9],0,0xc);
@@ -189,7 +189,7 @@ undefined4 btdm_controller_init(int *param_1)
                 iStack_2c = _btdm_env_p[5];
                 iStack_28 = _btdm_env_p[6];
                 iStack_24 = _btdm_env_p[7];
-                r_ble_log_internal_hex(0x40a801c3,0x20,&uStack_40);
+                r_ble_log_internal_hex(0x40a80221,0x20,&uStack_40);
                 _g_rw_init_sem =
                      (**(code **)(_r_osi_funcs_p + 0x24))(1,0,*(code **)(_r_osi_funcs_p + 0x24));
                 if (_g_rw_init_sem == 0) {
@@ -231,7 +231,7 @@ undefined4 btdm_controller_init(int *param_1)
                         (**(code **)(_r_osi_funcs_p + 0x34))
                                   (_g_rw_init_sem,10000,*(code **)(_r_osi_funcs_p + 0x34));
                         iVar9 = r_sdk_config_get_opts();
-                        r_ble_log_internal_x2(0x40a801c5,0,*(undefined1 *)(iVar9 + 0xb));
+                        r_ble_log_internal_x2(0x40a80223,0,*(undefined1 *)(iVar9 + 0xb));
                         return 0;
                       }
                     }
@@ -239,7 +239,7 @@ undefined4 btdm_controller_init(int *param_1)
                 }
                 goto _L243;
               }
-              uVar10 = 0x80a801c1;
+              uVar10 = 0x80a8021f;
             }
           }
 _L350:
@@ -301,7 +301,7 @@ _L351:
   uVar10 = 0xfffffffd;
 _L243:
   btdm_controller_deinit_internal();
-  r_ble_log_internal_x1(0x80a801c6,uVar10);
+  r_ble_log_internal_x1(0x80a80224,uVar10);
   return uVar10;
 }
 
