@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit ebd6043a8e3c3bbde45ee483895303b9c1229ab5
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ebd6043a8e3c3bbde45ee483895303b9c1229ab5
+ * Upstream date: 2026-02-06 15:59:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b7de11e)
  * Source: libbtdm_app -> osi.o -> btdm_osi_funcs_register
  *
  * (C) Espressif, Apache License 2.0.
@@ -22,10 +22,10 @@ undefined4 btdm_osi_funcs_register(int *param_1)
     return 0xffffffff;
   }
   if (3 < _g_bt_plf_log_level) {
-    ets_printf(0x10000,0xfadebead," VERSION %08x\n");
+    ets_printf(0x10000,0xfadebead,"VERSION %08x\n");
   }
   if (*param_1 == -0x5214153) {
-    if ((char *)param_1[1] == " VERSION %08x\n") {
+    if ((char *)param_1[1] == "VERSION %08x\n") {
       _r_osi_funcs_p = param_1;
       return 0;
     }

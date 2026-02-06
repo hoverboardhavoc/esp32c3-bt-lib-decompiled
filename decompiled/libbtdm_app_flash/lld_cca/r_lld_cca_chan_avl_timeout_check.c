@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit ebd6043a8e3c3bbde45ee483895303b9c1229ab5
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ebd6043a8e3c3bbde45ee483895303b9c1229ab5
+ * Upstream date: 2026-02-06 15:59:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b7de11e)
  * Source: libbtdm_app_flash -> lld_cca.o -> r_lld_cca_chan_avl_timeout_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,7 +29,7 @@ void r_lld_cca_chan_avl_timeout_check(int param_1,int param_2)
     }
     if ((*pbVar2 & 2) == 0) {
       if (*(ushort *)(iVar1 + 4) >> 0xc == 4) {
-        (**(code **)(_r_osi_funcs_p + 0xe0))(0x50,*(code **)(_r_osi_funcs_p + 0xe0));
+        (**(code **)(_r_osi_funcs_p + 0xe4))(0x50,*(code **)(_r_osi_funcs_p + 0xe4));
         r_lld_cca_force_tx(1);
         *pbVar2 = *pbVar2 | 0x10;
         return;

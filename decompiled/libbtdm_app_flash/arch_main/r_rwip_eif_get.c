@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit ebd6043a8e3c3bbde45ee483895303b9c1229ab5
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ebd6043a8e3c3bbde45ee483895303b9c1229ab5
+ * Upstream date: 2026-02-06 15:59:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b7de11e)
  * Source: libbtdm_app_flash -> arch_main.o -> r_rwip_eif_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -16,7 +16,7 @@ undefined * r_rwip_eif_get(int param_1)
 
 {
   if (param_1 != 0) {
-    r_assert_param(0,"arch_main.c",0x8ab);
+    r_assert_param(0,"arch_main.c",0x8ae);
   }
   _g_eif_api = *(undefined4 *)(_r_h4tl_eif_p + 0x18);
   _DAT_000131b4 = *(undefined4 *)(_r_h4tl_eif_p + 0x1c);

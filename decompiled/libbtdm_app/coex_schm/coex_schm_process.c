@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit ebd6043a8e3c3bbde45ee483895303b9c1229ab5
+ * https://github.com/espressif/esp32c3-bt-lib/commit/ebd6043a8e3c3bbde45ee483895303b9c1229ab5
+ * Upstream date: 2026-02-06 15:59:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b7de11e)
  * Source: libbtdm_app -> coex_schm.o -> coex_schm_process
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,12 +21,12 @@ void coex_schm_process(void)
   int iVar4;
   int iVar5;
   
-  iVar5 = (**(code **)(_r_osi_funcs_p + 0xe8))(*(code **)(_r_osi_funcs_p + 0xe8));
+  iVar5 = (**(code **)(_r_osi_funcs_p + 0xec))(*(code **)(_r_osi_funcs_p + 0xec));
   if (iVar5 != 0) {
     coex_schm_btdm_env = 1;
                     /* WARNING: Could not recover jumptable at 0x0001015a. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(code **)(_r_osi_funcs_p + 0xec))(*(code **)(_r_osi_funcs_p + 0xec));
+    (**(code **)(_r_osi_funcs_p + 0xf0))(*(code **)(_r_osi_funcs_p + 0xf0));
     return;
   }
   DAT_000101f7 = 0;
