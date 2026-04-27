@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_ext_pkt_prepare
  *
  * (C) Espressif, Apache License 2.0.
@@ -64,18 +64,18 @@ void r_lld_adv_ext_pkt_prepare
     uVar9 = uVar3 + 3;
   }
   if (in_stack_00000000 == 0) {
-    if (in_stack_00000004 != 0) goto _L474;
-    if (uVar9 == 0) goto _L477;
+    if (in_stack_00000004 != 0) goto _L476;
+    if (uVar9 == 0) goto _L479;
   }
   else {
     uVar9 = uVar9 + 0x12;
     if (in_stack_00000004 != 0) {
-_L474:
+_L476:
       uVar9 = uVar9 + 1;
     }
   }
   uVar9 = uVar9 + 1 & 0xff;
-_L477:
+_L479:
   if ((0xfe < *in_stack_00000010 + uVar9) && (param_8 == 0)) {
     if (uVar9 == 0) {
       uVar9 = 1;

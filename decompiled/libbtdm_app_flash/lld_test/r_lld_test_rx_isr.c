@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld_test.o -> r_lld_test_rx_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -23,7 +23,7 @@ void r_lld_test_rx_isr(void)
     }
     return;
   }
-  r_assert_err(0,0x10000,0x1e8);
+  r_assert_err(0,0x10000,0x1ec);
   return;
 }
 

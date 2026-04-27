@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_start_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ int r_lld_scan_start_eco(uint param_1,int param_2)
   undefined4 *puVar11;
   
   iVar5 = r_lld_scan_start();
-  if (iVar5 != 0) goto _L926;
+  if (iVar5 != 0) goto _L930;
   iVar6 = r_ble_ll_qa_config_get();
   uVar4 = (uint)*(ushort *)(iVar6 + 0x20);
   if (uVar4 == 0) {
@@ -37,12 +37,12 @@ int r_lld_scan_start_eco(uint param_1,int param_2)
       _DAT_60031124 = 0x10001;
       iVar6 = r_sdk_config_get_opts_ext();
       uVar4 = (uint)*(ushort *)(iVar6 + 0x14);
-      goto _L951;
+      goto _L955;
     }
   }
   else {
     _DAT_60031124 = 0x10001;
-_L951:
+_L955:
     if ((uVar4 & 0xfffffe00) != 0) {
       r_assert_err(0,"lld_scan.c",0x29ed);
     }
@@ -68,7 +68,7 @@ _L951:
         bVar1 = *(byte *)(iVar9 + 0x38);
         iVar7 = r_emi_get_mem_addr_by_offset(0x400);
         r_ble_log_internal_x2
-                  (0x40010110,CONCAT22(*(undefined2 *)((uint)bVar1 * 0x5a + 0x2c + iVar7),uVar3),
+                  (0x4001013a,CONCAT22(*(undefined2 *)((uint)bVar1 * 0x5a + 0x2c + iVar7),uVar3),
                    *(undefined1 *)(iVar9 + 0x38));
       }
       puVar11 = puVar11 + 1;
@@ -76,10 +76,10 @@ _L951:
       iVar6 = 1;
     }
   }
-_L926:
+_L930:
   r_lld_scan_start_hook_part_0_isra_0(iVar5,param_2);
   r_ble_log_internal_x3
-            (0x40010111,_DAT_60031124,_DAT_60031364 & 0x1ff,
+            (0x4001013b,_DAT_60031124,_DAT_60031364 & 0x1ff,
              iVar5 << 0x10 | (uint)*(byte *)(param_2 + 7) << 8 | param_1);
   return iVar5;
 }

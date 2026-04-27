@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_try_sched_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -92,7 +92,7 @@ void r_lld_scan_try_sched_hack(int param_1,int param_2,int param_3)
   uVar6 = *(uint *)(iVar9 + 8);
   *(uint *)(iVar4 + 0x10) = uVar11;
   if ((uVar6 < 0x10000000) && ((*(int *)(iVar4 + 4) - uVar6 & 0xfffffff) < 0x7ffffff)) {
-                    /* WARNING: Could not recover jumptable at 0x00010914. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010920. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_ip_funcs_p + 0x3e4))(*(code **)(_r_ip_funcs_p + 0x3e4));
     return;
@@ -177,9 +177,9 @@ void r_lld_scan_try_sched_hack(int param_1,int param_2,int param_3)
     *(undefined2 *)(iVar4 + 0x36) = 0;
     return;
   }
-                    /* WARNING: Could not recover jumptable at 0x00010c94. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010ca0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x3f3,*(code **)(_r_plf_funcs_p + 8));
+  (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x405,*(code **)(_r_plf_funcs_p + 8));
   return;
 }
 

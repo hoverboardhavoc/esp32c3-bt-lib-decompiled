@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llm_scan.o -> f_lld_sync_start_req_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -67,7 +67,7 @@ undefined4 f_lld_sync_start_req_handler(byte *param_1)
     (**(code **)(_r_ip_funcs_p + 0x170))(*param_1,&pbStack_30,*(code **)(_r_ip_funcs_p + 0x170));
   }
   else if (cVar1 != '\0') {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"llm_scan.c",0xa68,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"llm_scan.c",0xa76,*(code **)(_r_plf_funcs_p + 8));
   }
   return 0;
 }

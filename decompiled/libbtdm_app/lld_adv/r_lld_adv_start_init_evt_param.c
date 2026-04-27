@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_start_init_evt_param
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,7 +43,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
   *(char *)(iVar2 + 0x87) = (char)param_1;
   *(undefined4 *)(iVar2 + 0x20) = uVar7;
   *(undefined4 *)(iVar2 + 0x18) = uVar10;
-  bVar9 = DAT_00017055;
+  bVar9 = DAT_00017059;
   uVar1 = sch_slice_params;
   *(undefined4 *)(iVar2 + 0x1c) = 0;
   *(undefined1 *)(iVar2 + 0x16) = uVar1;
@@ -73,7 +73,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
   uVar3 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
   *(ushort *)(iVar2 + 0x76) = *(ushort *)(iVar2 + 0x76) & 0xf000 | uVar3 & 0xfff;
   if ((*(byte *)(param_2 + 0x25) & 0xf0) != 0) {
-    (**(code **)(_r_plf_funcs_p + 0xc))(0xf000,"lld_adv.c",0xc0b,*(code **)(_r_plf_funcs_p + 0xc));
+    (**(code **)(_r_plf_funcs_p + 0xc))(0xf000,"lld_adv.c",0xc62,*(code **)(_r_plf_funcs_p + 0xc));
   }
   iVar4 = _r_plf_funcs_p;
   *(ushort *)(iVar2 + 0x76) =
@@ -88,7 +88,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
     pcVar11 = *(code **)(iVar4 + 0xf0);
     iVar4 = (*pcVar11)(pcVar11);
     if (*(char *)(iVar4 + 0x18) == '\0') {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0xc19,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_adv.c",0xc70,*(code **)(_r_plf_funcs_p + 8));
     }
     *(bool *)(iVar2 + 0x95) = *(char *)(iVar2 + 0x8f) != '\0';
     (**(code **)(_r_ip_funcs_p + 0x1ac))
@@ -103,9 +103,9 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
       *(undefined4 *)(iVar2 + 0x3c) = 0;
       *(undefined1 *)(iVar2 + 0x4a) = uVar1;
       *(undefined4 *)(iVar2 + 0x44) = *(undefined4 *)(iVar2 + 0x10);
-      *(ushort *)(iVar2 + 0x48) = DAT_00017059 & 0xf | 0x6000;
+      *(ushort *)(iVar2 + 0x48) = DAT_0001705d & 0xf | 0x6000;
     }
-    goto _L1054;
+    goto _L1081;
   }
   uVar13 = (uint)*(byte *)(iVar2 + 0x87) * 9 & 0xff;
   uVar8 = uVar13 + 1 & 0xff;
@@ -118,7 +118,7 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
     break;
   default:
     pcVar11 = *(code **)(iVar4 + 8);
-    (*pcVar11)(0,"lld_adv.c",0xc52,pcVar11);
+    (*pcVar11)(0,"lld_adv.c",0xca9,pcVar11);
     break;
   case 2:
     uVar3 = 6;
@@ -135,10 +135,10 @@ void r_lld_adv_start_init_evt_param(int param_1,int param_2)
     *(uint *)(iVar2 + 0x10) =
          (uint)*(byte *)(iVar2 + 0x93) * 0x72e + -300 + (uint)_sdk_cfg_priv_opts;
     uVar12 = *(byte *)(param_2 + 0x1f) & 1;
-    goto _L1061;
+    goto _L1088;
   }
   uVar12 = 0;
-_L1061:
+_L1088:
   bVar9 = *(byte *)(param_2 + 0x1e);
   iVar16 = uVar13 * 0xe;
   iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
@@ -149,7 +149,7 @@ _L1061:
       sVar6 = *(short *)(param_2 + 0x10);
       pcVar11 = *(code **)(_r_ip_funcs_p + 0x17c);
       uVar3 = *(ushort *)(param_2 + 0x14) & 0xff;
-      goto _L1097;
+      goto _L1124;
     }
     iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
     *(undefined2 *)(iVar16 + 4 + iVar4) = 0;
@@ -182,7 +182,7 @@ _L1061:
     memcpy(__dest,(void *)(param_2 + 6),6);
     pcVar11 = *(code **)(_r_ip_funcs_p + 0x17c);
     uVar3 = 6;
-_L1097:
+_L1124:
     (*pcVar11)(param_1,uVar3,sVar6,0,0,pcVar11);
   }
   bVar9 = *(byte *)(param_2 + 0x1e);
@@ -254,8 +254,8 @@ _L1097:
   uVar3 = *(ushort *)(iVar2 + iVar16);
   iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
   *(ushort *)(iVar16 + iVar2) = (ushort)(((uint)uVar3 << 0x11) >> 0x11);
-_L1054:
-                    /* WARNING: Could not recover jumptable at 0x0001519c. Too many branches */
+_L1081:
+                    /* WARNING: Could not recover jumptable at 0x000154e8. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_ip_funcs_p + 0x810))(0,param_1,param_2,*(code **)(_r_ip_funcs_p + 0x810));
   return;

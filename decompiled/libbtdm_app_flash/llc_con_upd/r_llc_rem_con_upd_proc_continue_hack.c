@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> r_llc_rem_con_upd_proc_continue_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void r_llc_rem_con_upd_proc_continue_hack(int param_1,int param_2,int param_3)
+void r_llc_rem_con_upd_proc_continue_hack(uint param_1,int param_2,int param_3)
 
 {
   ushort uVar1;
@@ -25,7 +25,7 @@ void r_llc_rem_con_upd_proc_continue_hack(int param_1,int param_2,int param_3)
   iVar3 = r_llc_proc_get(1);
   iVar8 = *(int *)(&llc_env + param_1 * 4);
   r_ble_log_internal_x2
-            (0x404f0082,(uint)*(ushort *)(iVar8 + 0x42) | param_1 << 0x10 | param_2 << 0x18,param_3)
+            (0x404f0088,(uint)*(ushort *)(iVar8 + 0x42) | param_1 << 0x10 | param_2 << 0x18,param_3)
   ;
   if (param_2 == 0xb) {
     r_llc_proc_state_set(iVar3,param_1,0xb);
@@ -33,8 +33,10 @@ void r_llc_rem_con_upd_proc_continue_hack(int param_1,int param_2,int param_3)
   }
   iVar4 = r_llc_proc_state_get(iVar3);
   if (iVar4 != param_2) {
+    iVar8 = r_llc_proc_state_get(iVar3);
+    r_ble_log_internal_x1(0x804f0089,param_2 << 0x10 | param_1 | iVar8 << 8);
     r_llc_proc_state_get(iVar3);
-    r_assert_warn(param_2,"llc_con_upd.c",0x1ef);
+    r_assert_warn(param_2,"llc_con_upd.c",0x1f5);
     return;
   }
   uVar5 = r_llc_proc_state_get(iVar3);
@@ -98,8 +100,10 @@ _L169:
     }
     if (1 < (uVar5 - 10 & 0xff)) {
 _L170:
+      iVar8 = r_llc_proc_state_get(iVar3);
+      r_ble_log_internal_x1(0x804f008a,iVar8 << 8 | param_1);
       uVar6 = r_llc_proc_state_get(iVar3);
-      r_assert_param(param_1,uVar6,"llc_con_upd.c",0x26c);
+      r_assert_param(param_1,uVar6,"llc_con_upd.c",0x274);
       return;
     }
   }

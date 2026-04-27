@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_process_pkt_rx_adv_rep_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -50,7 +50,7 @@ void r_lld_scan_process_pkt_rx_adv_rep_hack(int param_1,undefined1 param_2,int p
         iVar8 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
         if (((*(ushort *)(iVar8 + iVar12) >> 6 & 1) == 0) &&
            ((*(char *)(iVar6 + 0x70) == '\0' || ((*(byte *)(iVar6 + 0x67) & 0xc0) == 0xc0))))
-        goto _L107;
+        goto _L106;
       }
       if (*(char *)(param_4 + 8) != -1) {
         pcVar11 = *(code **)(_r_plf_funcs_p + 0xbc);
@@ -70,12 +70,12 @@ void r_lld_scan_process_pkt_rx_adv_rep_hack(int param_1,undefined1 param_2,int p
         memcpy(pvVar9,(void *)(iVar6 + 0x58),0x2c);
         if (*(char *)(iVar6 + 0x6e) == '\x02') {
           uVar10 = 2;
-_L110:
+_L109:
           (**(code **)(_r_ip_funcs_p + 0x3d8))(iVar6,uVar10,*(code **)(_r_ip_funcs_p + 0x3d8));
         }
         else {
           uVar10 = 3;
-          if (*(char *)(iVar6 + 0x6e) == '\0') goto _L110;
+          if (*(char *)(iVar6 + 0x6e) == '\0') goto _L109;
         }
         cVar1 = *(char *)(param_4 + 5);
         *(char *)((int)pvVar9 + 0x20) = cVar1;
@@ -92,17 +92,17 @@ _L110:
         *(undefined1 *)((int)pvVar9 + 0x14) = *(undefined1 *)(_lld_scan_env + 0xd);
         (**(code **)(_r_modules_funcs_p + 0xe0))(pvVar9,*(code **)(_r_modules_funcs_p + 0xe0));
       }
-      if (*(char *)(iVar6 + 0x6e) != -1) goto _L113;
+      if (*(char *)(iVar6 + 0x6e) != -1) goto _L112;
     }
     else {
-_L107:
+_L106:
       *(undefined1 *)(iVar6 + 0x6e) = 0xff;
     }
   }
   *(undefined2 *)(iVar6 + 0x36) = 0x673;
   *(undefined1 *)(iVar6 + 0x3d) = 0;
   *(undefined1 *)(iVar6 + 0x3e) = 0;
-_L113:
+_L112:
   *(undefined1 *)(iVar6 + 0x3f) = param_2;
   return;
 }

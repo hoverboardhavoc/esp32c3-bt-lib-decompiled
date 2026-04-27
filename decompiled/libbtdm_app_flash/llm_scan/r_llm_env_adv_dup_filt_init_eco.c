@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llm_scan.o -> r_llm_env_adv_dup_filt_init_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -25,7 +25,7 @@ undefined4 r_llm_env_adv_dup_filt_init_eco(void)
     if (*(int *)(_p_llm_env + 0xcc) == 0) {
       return 1;
     }
-    r_assert_err(0,"llm_scan.c",0x69a);
+    r_assert_err(0,"llm_scan.c",0x6a8);
     return 1;
   }
   if (*(int *)(_p_llm_env + 0xcc) == 0) {

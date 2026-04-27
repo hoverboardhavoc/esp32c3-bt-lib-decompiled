@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld_test.o -> r_lld_test_set_tx_power
  *
  * (C) Espressif, Apache License 2.0.
@@ -20,7 +20,7 @@ void r_lld_test_set_tx_power(int param_1,undefined4 param_2)
   ushort uVar3;
   int iVar4;
   
-  uVar3 = (*_r_osi_funcs_p)(param_2,param_1,_r_osi_funcs_p);
+  uVar3 = (*_r_ble_util_buf_acl_tx_free)(param_2,param_1,_r_ble_util_buf_acl_tx_free);
   iVar4 = r_emi_get_mem_addr_by_offset(0x400);
   iVar2 = param_1 * 0x5a + 0x18;
   uVar1 = *(ushort *)(iVar4 + iVar2);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llc_phy_upd.o -> f_llc_op_phy_upd_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,7 +29,7 @@ undefined4 f_llc_op_phy_upd_ind_handler(int param_1,uint param_2)
       iVar2 = r_llc_proc_state_get(param_1);
       if ((iVar2 != 0) && (iVar2 = r_llc_proc_state_get(param_1), iVar2 != 1)) {
         uVar1 = r_llc_proc_state_get(param_1);
-        r_assert_param(param_2,uVar1,"llc_phy_upd.c",0x5e5);
+        r_assert_param(param_2,uVar1,"llc_phy_upd.c",0x5ee);
       }
       r_llc_proc_reg(param_2,0,param_1);
       uVar1 = r_llc_proc_state_get(param_1);

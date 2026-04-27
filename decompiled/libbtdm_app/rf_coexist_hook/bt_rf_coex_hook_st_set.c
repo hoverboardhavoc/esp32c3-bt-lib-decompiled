@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> rf_coexist_hook.o -> bt_rf_coex_hook_st_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,8 +36,8 @@ void bt_rf_coex_hook_st_set(uint param_1,uint param_2,int param_3)
   if (param_2 == 8) {
     if (param_3 != 0) goto _L49;
     s_ble_st_group_map = 0;
-    DAT_000104d8 = 0;
-    DAT_000104dc = 0;
+    DAT_00010500 = 0;
+    DAT_00010504 = 0;
     pcVar7 = *(code **)(_r_osi_funcs_p + 0xbc);
     coex_hook_act_id_map = 0;
     uVar6 = 0xffffffff;

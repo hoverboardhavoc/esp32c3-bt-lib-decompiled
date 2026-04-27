@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llc_phy_upd.o -> hci_le_set_phy_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -46,14 +46,14 @@ undefined4 hci_le_set_phy_cmd_handler(uint param_1,int param_2,undefined4 param_
   uVar6 = param_1 << 8;
   if (((*(byte *)(iVar5 + 0xd) <= param_1) || (*(int *)(&llc_env + iVar8) == 0)) ||
      ((*(byte *)(*(int *)(&llc_env + iVar8) + 0x44) & 3) == 3)) {
-    r_ble_log_internal_x1(0x800300a9,uVar6 | 0xc);
+    r_ble_log_internal_x1(0x800300c2,uVar6 | 0xc);
     uVar9 = 0xc;
     goto _L237;
   }
   bVar1 = *(byte *)(iVar7 + 0x45);
   uVar9 = bVar1 & 0x40;
   if ((bVar1 & 0x40) != 0) {
-    r_ble_log_internal_x1(0x800300aa,(uint)bVar1 << 0x10 | uVar6 | 0x3a);
+    r_ble_log_internal_x1(0x800300c3,(uint)bVar1 << 0x10 | uVar6 | 0x3a);
     uVar9 = 0x3a;
     goto _L237;
   }
@@ -64,7 +64,7 @@ undefined4 hci_le_set_phy_cmd_handler(uint param_1,int param_2,undefined4 param_
       if ((bVar1 & 2) == 0) {
         if (*(byte *)(param_2 + 4) != (*(byte *)(param_2 + 4) & 7)) {
 _L243:
-          r_ble_log_internal_x1(0x800300ac,uVar6 | 0x70011);
+          r_ble_log_internal_x1(0x800300c5,uVar6 | 0x70011);
           uVar9 = 0x11;
           goto _L237;
         }
@@ -72,7 +72,7 @@ _L243:
 _L244:
         if ((*(byte *)(param_2 + 4) & uVar2) == 0) {
 _L246:
-          r_ble_log_internal_x1(0x800300ad,uVar2 << 0x10 | uVar6 | 0x1a);
+          r_ble_log_internal_x1(0x800300c6,uVar2 << 0x10 | uVar6 | 0x1a);
           uVar9 = 0x1a;
           goto _L237;
         }
@@ -107,7 +107,7 @@ _L250:
     }
   }
   r_ble_log_internal_x2
-            (0x800300ab,(uint)*(byte *)(param_2 + 3) << 0x18 | (uint)bVar1 << 0x10 | uVar6 | 0x12,
+            (0x800300c4,(uint)*(byte *)(param_2 + 3) << 0x18 | (uint)bVar1 << 0x10 | uVar6 | 0x12,
              *(undefined1 *)(param_2 + 4));
   uVar9 = 0x12;
 _L237:

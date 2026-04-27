@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> vshci_task.o -> r_vnd_hci_command_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ undefined4 r_vnd_hci_command_handler(uint param_1)
           if (*(code **)(puVar3 + 2) == (code *)0x0) {
             return 0;
           }
-                    /* WARNING: Could not recover jumptable at 0x000111a4. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000111fc. Too many branches */
                     /* WARNING: Treating indirect jump as call */
           uVar1 = (**(code **)(puVar3 + 2))(param_1);
           return uVar1;

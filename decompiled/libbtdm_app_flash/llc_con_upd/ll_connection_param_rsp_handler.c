@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> ll_connection_param_rsp_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -31,7 +31,7 @@ undefined4 ll_connection_param_rsp_handler(undefined4 param_1,int param_2)
     uVar1 = *(ushort *)(param_2 + 2);
     sVar2 = *(short *)(param_2 + 6);
     uVar3 = *(ushort *)(param_2 + 8);
-    iVar6 = r_llc_con_upd_param_in_range(param_1,uVar8,uVar1,sVar2,uVar3);
+    iVar6 = r_llc_con_upd_param_in_range_hack(param_1,uVar8,uVar1,sVar2,uVar3);
     uVar9 = 0x1e;
     if (iVar6 != 0) {
       uVar9 = 0x20;

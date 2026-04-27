@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llm_adv.o -> hci_le_set_per_adv_param_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -40,7 +40,7 @@ _L752:
     if (*param_1 < 0xf0) {
       iVar3 = r_llm_adv_hdl_to_id(0);
       if (iVar3 == 0xff) {
-        r_ble_log_internal_x1(0x802e0174,(uint)*param_1 << 8 | 0xff0042);
+        r_ble_log_internal_x1(0x802e019f,(uint)*param_1 << 8 | 0xff0042);
         uVar1 = 0x42;
         goto _L754;
       }
@@ -49,7 +49,7 @@ _L752:
       if (bStack_2d == 0xff) {
         uVar1 = r_llm_activity_free_get(&bStack_2d);
         if (uVar1 != 0) {
-          r_ble_log_internal_x1(0x802e0175,(uint)bStack_2d << 0x10 | iVar3 << 8 | uVar1);
+          r_ble_log_internal_x1(0x802e01a0,(uint)bStack_2d << 0x10 | iVar3 << 8 | uVar1);
           goto _L754;
         }
         iVar3 = *(int *)(_p_llm_env + 8);
@@ -59,7 +59,7 @@ _L752:
       else if (*(char *)(*(int *)(_p_llm_env + 8) + (uint)bStack_2d * 0x44 + 0x40) != '\n')
       goto _L752;
       if (((*param_1 < 0xf0) && (*(ushort *)(param_1 + 2) <= *(ushort *)(param_1 + 4))) &&
-         ((*(ushort *)(*(int *)(*(int *)(_p_llm_env + 8) + iVar6) + 2) & 0x20) == 0)) {
+         ((*(ushort *)(*(int *)(*(int *)(_p_llm_env + 8) + iVar6) + 2) & 0x33) == 0)) {
         iVar3 = *(int *)(*(int *)(_p_llm_env + 8) + (uint)bStack_2d * 0x44);
         if (iVar3 != 0) {
           r_ke_msg_free(iVar3 + -0xc);
@@ -68,7 +68,7 @@ _L752:
         iVar3 = *(int *)(_p_llm_env + 8);
         *(byte **)((uint)bStack_2d * 0x44 + iVar3) = param_1;
         *(undefined1 *)(iVar3 + (uint)bStack_2d * 0x44 + 0x40) = 10;
-        r_ble_log_internal_x1(0x404e0176,bStack_2d | 0xa00);
+        r_ble_log_internal_x1(0x404e01a1,bStack_2d | 0xa00);
         if ((_bt_rf_coex_hooks_p != 0) && (*(int *)(_bt_rf_coex_hooks_p + 4) != 0)) {
           piVar5 = (int *)((uint)bStack_2d * 0x44 + *(int *)(_p_llm_env + 8));
           iVar3 = *(int *)(*(int *)(_p_llm_env + 8) + iVar6);
@@ -91,7 +91,7 @@ _L752:
       }
     }
     else {
-      r_ble_log_internal_x1(0x802e0173,(uint)*param_1 << 8 | 0x12);
+      r_ble_log_internal_x1(0x802e019e,(uint)*param_1 << 8 | 0x12);
     }
     uVar1 = 0x12;
   }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld_sync.o -> r_lld_sync_process_pkt_rx_pkt_check
  *
  * (C) Espressif, Apache License 2.0.
@@ -48,16 +48,16 @@ void r_lld_sync_process_pkt_rx_pkt_check(uint param_1,int param_2)
   iVar7 = r_emi_get_mem_addr_by_offset(0x1000);
   sVar1 = *(short *)(iVar16 + 0x12 + iVar7);
   if ((uVar13 & 0x603d) != 0) {
-    r_ble_log_internal_x1(0x20a50130,param_1 << 0x10 | uVar19 << 0x18 | (uint)uVar13);
+    r_ble_log_internal_x1(0x20a5015a,param_1 << 0x10 | uVar19 << 0x18 | (uint)uVar13);
     return;
   }
   uVar21 = uVar19 << 8 | param_1;
-  r_ble_log_internal_x1(0x20a5012d,uVar21);
+  r_ble_log_internal_x1(0x20a50157,uVar21);
   iVar8 = r_emi_get_mem_addr_by_offset(0x1000);
   iVar7 = iVar16 + 4;
   uVar13 = *(ushort *)(iVar8 + iVar7);
   uVar9 = r_emi_get_mem_addr_by_offset(sVar1);
-  r_ble_log_internal_hex(0x20a5012e,uVar13 >> 8,uVar9);
+  r_ble_log_internal_hex(0x20a50158,uVar13 >> 8,uVar9);
   iVar8 = r_emi_get_mem_addr_by_offset(0x1000);
   if ((*(ushort *)(iVar8 + iVar7) & 0xf) != 7) {
     r_assert_err(0,0x10000,0x1d5);
@@ -98,7 +98,7 @@ void r_lld_sync_process_pkt_rx_pkt_check(uint param_1,int param_2)
     }
     *(short *)(puVar10 + 6) = (short)((uVar18 >> 1) % uVar14);
     puVar10[10] = *(undefined1 *)(iVar22 + 0x5a);
-    r_ble_log_internal_x2(0x4005012f,*(undefined4 *)(iVar22 + 0x44),param_2 << 0x10 | uVar21);
+    r_ble_log_internal_x2(0x40050159,*(undefined4 *)(iVar22 + 0x44),param_2 << 0x10 | uVar21);
   }
   else {
     uVar21 = *(uint *)(iVar22 + 0x40) >> 1;
@@ -172,7 +172,7 @@ void r_lld_sync_process_pkt_rx_pkt_check(uint param_1,int param_2)
       puVar10[0x1a] = (char)sVar17;
     }
   }
-  pcVar3 = _rwip_prog_delay;
+  pcVar3 = _r_lld_read_clock;
   iVar7 = r_emi_get_mem_addr_by_offset(0x1000);
   uVar6 = (*pcVar3)(*(ushort *)(iVar16 + 6 + iVar7) & 0xff);
   puVar10[0xc] = uVar6;

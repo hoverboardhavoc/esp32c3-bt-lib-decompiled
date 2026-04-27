@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_white_list_rem
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,7 +34,7 @@ void r_lld_white_list_rem(int param_1,undefined4 param_2,int param_3)
       *(ushort *)(iVar3 + iVar2) = (ushort)(((uint)uVar1 << 0x11) >> 0x11);
     }
     iVar3 = r_emi_get_mem_addr_by_offset(0xc00);
-    r_ble_log_internal_x1(0x408800b8,param_1 << 0x10 | (uint)*(ushort *)(iVar2 + iVar3));
+    r_ble_log_internal_x1(0x408800d1,param_1 << 0x10 | (uint)*(ushort *)(iVar2 + iVar3));
     uVar4 = r_lld_ral_search(param_2,param_3);
     if (uVar4 < 10) {
       iVar2 = r_emi_get_mem_addr_by_offset(0xc60);
@@ -45,7 +45,7 @@ void r_lld_white_list_rem(int param_1,undefined4 param_2,int param_3)
     return;
   }
   _DAT_60031000 = _DAT_60031000 | 0x400;
-  r_ble_log_internal_x0(0x408800b9);
+  r_ble_log_internal_x0(0x408800d2);
   return;
 }
 

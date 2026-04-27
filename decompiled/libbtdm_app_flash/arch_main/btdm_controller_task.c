@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_controller_task
  *
  * (C) Espressif, Apache License 2.0.
@@ -60,7 +60,7 @@ void btdm_controller_task(void)
             s_btdm_state = 2;
             (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
             iVar2 = r_sdk_config_get_opts();
-            uVar3 = 0x40e80218;
+            uVar3 = 0x40e80243;
             uVar4 = (uint)*(byte *)(iVar2 + 0xc) | s_btdm_state << 8;
           }
           else if (bStack_38 == 10) {
@@ -73,20 +73,20 @@ void btdm_controller_task(void)
             (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
             iVar2 = r_sdk_config_get_opts();
             uVar4 = (uint)*(byte *)(iVar2 + 0xc) | s_btdm_state << 8;
-            uVar3 = 0x41080219;
+            uVar3 = 0x41080244;
           }
           else if (bStack_38 == 8) {
             rw_stop();
             s_btdm_state = 0;
             (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
-            uVar3 = 0x40c8021b;
+            uVar3 = 0x40c80246;
             uVar4 = s_btdm_state;
           }
           else {
             rw_pre_main();
             s_btdm_state = 1;
             (**(code **)(_r_osi_funcs_p + 0x38))(_g_rw_init_sem,*(code **)(_r_osi_funcs_p + 0x38));
-            uVar3 = 0x40a8021a;
+            uVar3 = 0x40a80245;
             uVar4 = s_btdm_state;
           }
           r_ble_log_internal_x1(uVar3,uVar4);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * https://github.com/espressif/esp32c3-bt-lib/commit/eeb2782618e0ab8cf0cf609c98c6a0c86d691a6c
- * Upstream date: 2024-10-20 16:32:16 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(52ee788)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_adv.o -> lld_adv_aux_offset_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,18 +12,17 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-int lld_adv_aux_offset_set(uint param_1)
+undefined4 lld_adv_aux_offset_set(uint param_1)
 
 {
   int iVar1;
+  undefined4 uVar2;
   
   iVar1 = (**(code **)(_r_ip_funcs_p + 0x914))(*(code **)(_r_ip_funcs_p + 0x914));
-  if ((param_1 == 0xffffffff) || ((param_1 < 0xff1 && (0x12a < param_1 - 1)))) {
+  if ((param_1 == 0xffffffff) || ((uVar2 = 0x12, param_1 < 0xff1 && (0x12a < param_1 - 1)))) {
     *(uint *)(iVar1 + 0x1c) = param_1;
+    uVar2 = 0;
   }
-  else {
-    iVar1 = 0x12;
-  }
-  return iVar1;
+  return uVar2;
 }
 

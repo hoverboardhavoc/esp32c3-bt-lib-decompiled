@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_scan.o -> ble_ll_scan_channel_setting
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,16 +12,18 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-void ble_ll_scan_channel_setting(uint param_1)
+void ble_ll_scan_channel_setting(int param_1)
 
 {
   int iVar1;
+  ushort uVar2;
   
   iVar1 = (**(code **)(_r_ip_funcs_p + 0x914))(*(code **)(_r_ip_funcs_p + 0x914));
-  if (param_1 != 0) {
-    param_1 = (uint)*(byte *)(param_1 + 0x14977);
+  uVar2 = 0;
+  if ((param_1 - 0x25U & 0xffff) < 3) {
+    uVar2 = (ushort)*(byte *)(param_1 + 0x149eb);
   }
-  *(short *)(iVar1 + 0x18) = (short)param_1;
+  *(ushort *)(iVar1 + 0x18) = uVar2;
   return;
 }
 

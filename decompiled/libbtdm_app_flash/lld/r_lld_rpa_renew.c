@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld.o -> r_lld_rpa_renew
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,9 +19,9 @@ void r_lld_rpa_renew(void)
   int iVar2;
   undefined4 uVar3;
   
-  r_ble_log_internal_x1(0x202800b5,_lld_rpa_renew_env);
+  r_ble_log_internal_x1(0x202800ce,_lld_rpa_renew_env);
   if (_lld_rpa_renew_env != 0) {
-    r_assert_warn(0,0,"lld.c",0x560);
+    r_assert_warn(0,0,"lld.c",0x564);
     return;
   }
   iVar2 = r_ke_malloc(0x30,0);
@@ -40,7 +40,7 @@ void r_lld_rpa_renew(void)
     *(undefined4 *)(iVar2 + 8) = 0;
     iVar2 = r_sch_arb_insert(iVar2);
     if (iVar2 != 0) {
-      r_assert_err(0,"lld.c",0x55a);
+      r_assert_err(0,"lld.c",0x55e);
       return;
     }
   }

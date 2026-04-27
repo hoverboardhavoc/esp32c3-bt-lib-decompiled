@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> emi.o -> r_emi_free_em_mapping_by_offset
  *
  * (C) Espressif, Apache License 2.0.
@@ -80,7 +80,7 @@ void r_emi_free_em_mapping_by_offset(undefined4 param_1)
     r_assert_err(0,0x10000,0x27c1);
   }
   *puVar2 = *puVar2 & 0xfffc0000;
-  r_ble_log_internal_x3(0x2068022d,param_1,*puVar2,uVar3);
+  r_ble_log_internal_x3(0x20680258,param_1,*puVar2,uVar3);
   return;
 }
 

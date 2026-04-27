@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit ebd6043a8e3c3bbde45ee483895303b9c1229ab5
- * https://github.com/espressif/esp32c3-bt-lib/commit/ebd6043a8e3c3bbde45ee483895303b9c1229ab5
- * Upstream date: 2026-02-06 15:59:42 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(b7de11e)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> arch_main.o -> btdm_ble_power_down_dma_copy
  *
  * (C) Espressif, Apache License 2.0.
@@ -26,7 +26,7 @@ void btdm_ble_power_down_dma_copy(int param_1)
               (0x60011800,bb_agc_mem_addr,0x2d,1,*(code **)(_r_osi_funcs_p + 0xdc));
     do {
     } while ((_DAT_60042000 & 0x80) == 0);
-                    /* WARNING: Could not recover jumptable at 0x00011994. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000119a0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(_r_osi_funcs_p + 0xd4))(*(code **)(_r_osi_funcs_p + 0xd4));
     return;
@@ -46,7 +46,7 @@ void btdm_ble_power_down_dma_copy(int param_1)
   uVar1 = (**(code **)(_r_osi_funcs_p + 0x88))(*(code **)(_r_osi_funcs_p + 0x88));
   _DAT_6003117c = uVar1 & 0x3fffff | 0x80000000;
   if (_DAT_6003100c == 0) {
-    r_assert_err(0,"arch_main.c",0x3a7);
+    r_assert_err(0,"arch_main.c",0x3c2);
   }
   return;
 }

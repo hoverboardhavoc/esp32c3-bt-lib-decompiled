@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llm_scan.o -> f_lld_per_adv_rep_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -29,8 +29,8 @@ undefined4 f_lld_per_adv_rep_ind_handler(byte *param_1)
   code *pcVar12;
   bool bVar13;
   int iVar14;
-  int *__src;
   uint uVar15;
+  int *__src;
   uint uVar16;
   uint uVar17;
   uint uVar18;
@@ -38,22 +38,23 @@ undefined4 f_lld_per_adv_rep_ind_handler(byte *param_1)
   undefined1 auStack_48 [20];
   
   bVar1 = *param_1;
-  uVar16 = (uint)bVar1;
-  iVar14 = uVar16 * 0x44;
+  uVar15 = (uint)bVar1;
+  iVar14 = uVar15 * 0x44;
   piVar10 = (int *)(*(int *)(_p_llm_env + 8) + iVar14);
   if ((char)piVar10[0x10] == '\x0e') {
+    if (llm_sync_cancel_cc_act_id == uVar15) goto _L815;
     uVar2 = *(undefined1 *)((int)piVar10 + 0x41);
     __src = piVar10 + 1;
     (**(code **)(_r_modules_funcs_p + 0xd8))(*piVar10 + -0xc,*(code **)(_r_modules_funcs_p + 0xd8));
     *(undefined4 *)(*(int *)(_p_llm_env + 8) + iVar14) = 0;
-    (**(code **)(_r_ip_funcs_p + 0x3e0))(uVar16,*(code **)(_r_ip_funcs_p + 0x3e0));
+    (**(code **)(_r_ip_funcs_p + 0x3e0))(uVar15,*(code **)(_r_ip_funcs_p + 0x3e0));
     iVar11 = *(int *)(_p_llm_env + 8) + iVar14;
     *(undefined1 *)(iVar11 + 0x40) = 0xf;
     *(undefined2 *)(iVar11 + 0x2a) = 0xff;
     if ((_bt_rf_coex_hooks_p != (undefined4 *)0x0) && ((code *)*_bt_rf_coex_hooks_p != (code *)0x0))
     {
-      (*(code *)*_bt_rf_coex_hooks_p)(uVar16,5,1);
-      (*(code *)*_bt_rf_coex_hooks_p)(uVar16,6,0,(code *)*_bt_rf_coex_hooks_p);
+      (*(code *)*_bt_rf_coex_hooks_p)(uVar15,5,1);
+      (*(code *)*_bt_rf_coex_hooks_p)(uVar15,6,0,(code *)*_bt_rf_coex_hooks_p);
     }
     uVar3 = *(ushort *)(param_1 + 4);
     uVar4 = *(ushort *)(param_1 + 6);
@@ -97,9 +98,9 @@ undefined4 f_lld_per_adv_rep_ind_handler(byte *param_1)
     uVar18 = (uint)param_1[0xe];
     uVar17 = (uint)param_1[0x18];
     do {
-      uVar15 = uVar18;
+      uVar16 = uVar18;
       if (0xf7 < uVar18) {
-        uVar15 = 0xf7;
+        uVar16 = 0xf7;
       }
       puVar6 = (undefined1 *)
                (**(code **)(_r_modules_funcs_p + 200))
@@ -114,11 +115,11 @@ undefined4 f_lld_per_adv_rep_ind_handler(byte *param_1)
         bVar9 = param_1[0xd];
       }
       puVar6[7] = bVar9;
-      puVar6[8] = (char)uVar15;
-      memcpy(puVar6 + 9,(void *)(*(int *)(param_1 + 0x14) + uVar17),uVar15);
+      puVar6[8] = (char)uVar16;
+      memcpy(puVar6 + 9,(void *)(*(int *)(param_1 + 0x14) + uVar17),uVar16);
       (**(code **)(_r_ip_funcs_p + 0x8c))(puVar6,*(code **)(_r_ip_funcs_p + 0x8c));
-      uVar18 = uVar18 - uVar15 & 0xff;
-      uVar17 = uVar17 + uVar15 & 0xff;
+      uVar18 = uVar18 - uVar16 & 0xff;
+      uVar17 = uVar17 + uVar16 & 0xff;
     } while (uVar18 != 0);
     iVar19 = *(int *)(_p_llm_env + 8) + iVar14;
     uVar18 = *(uint *)(iVar19 + 0x10);
@@ -166,16 +167,17 @@ undefined4 f_lld_per_adv_rep_ind_handler(byte *param_1)
           }
         }
         else {
-          uVar15 = param_1[0x1a] + uVar18 & 0xff;
-          memcpy(auStack_48,(void *)((uVar15 + 2 & 0xff) + iVar11),5);
+          uVar16 = param_1[0x1a] + uVar18 & 0xff;
+          memcpy(auStack_48,(void *)((uVar16 + 2 & 0xff) + iVar11),5);
           (**(code **)(_r_ip_funcs_p + 0x138))
-                    (uVar16,auStack_48,*(undefined2 *)((uVar15 + 7 & 0xff) + iVar11),
+                    (uVar15,auStack_48,*(undefined2 *)((uVar16 + 7 & 0xff) + iVar11),
                      *(code **)(_r_ip_funcs_p + 0x138));
           bVar13 = true;
         }
       }
     }
   }
+_L815:
   if ((param_1[0xe] != 0) || (param_1[0x19] != 0)) {
     (**(code **)(_r_ip_funcs_p + 0x104))
               (*(undefined2 *)(param_1 + 0x10),*(undefined4 *)(param_1 + 0x14),

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_adv_data_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,7 +42,7 @@ void r_lld_adv_adv_data_set(int param_1,int param_2,undefined2 param_3,int param
     UNRECOVERED_JUMPTABLE = *(code **)(iVar5 + 0x1ac);
     *(undefined2 *)(iVar10 + 0x7e) = param_3;
     (*UNRECOVERED_JUMPTABLE)(*(undefined1 *)(iVar10 + 0x87),UNRECOVERED_JUMPTABLE);
-    goto _L548;
+    goto _L550;
   }
   iVar5 = uVar4 * 0xe;
   uVar9 = 0;
@@ -59,22 +59,22 @@ void r_lld_adv_adv_data_set(int param_1,int param_2,undefined2 param_3,int param
   *(undefined2 *)(iVar7 + iVar5 + 4) = param_3;
   if ((*(ushort *)(iVar10 + 0x74) & 4) == 0) {
     iVar10 = (**(code **)(_r_modules_funcs_p + 0x1a0))(2,*(code **)(_r_modules_funcs_p + 0x1a0));
-    if (iVar10 == 0) goto _L548;
+    if (iVar10 == 0) goto _L550;
     if (2 < _g_bt_plf_log_level) {
       uVar1 = *(undefined1 *)(iVar10 + 5);
       uVar2 = *(undefined1 *)(iVar10 + 4);
       pcVar8 = "TX PTI [LDC ADV] [EN%d] [%d] \n";
-      goto _L583;
+      goto _L585;
     }
   }
   else {
     iVar10 = (**(code **)(_r_modules_funcs_p + 0x1a0))(3,*(code **)(_r_modules_funcs_p + 0x1a0));
-    if (iVar10 == 0) goto _L548;
+    if (iVar10 == 0) goto _L550;
     if (2 < _g_bt_plf_log_level) {
       uVar1 = *(undefined1 *)(iVar10 + 5);
       uVar2 = *(undefined1 *)(iVar10 + 4);
       pcVar8 = "TX PTI [HDC ADV] [EN%d] [%d] \n";
-_L583:
+_L585:
       ets_printf(pcVar8,uVar2,uVar1);
     }
   }
@@ -93,7 +93,7 @@ _L583:
   uVar6 = *(ushort *)(iVar10 + iVar5);
   iVar10 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
   *(ushort *)(iVar10 + iVar5) = uVar6 & 0xefff | (ushort)bVar3 << 0xc;
-_L548:
+_L550:
   if ((param_4 != 0) && (uVar9 != 0)) {
     if (param_5 == 0) {
       UNRECOVERED_JUMPTABLE = *(code **)(_r_ip_funcs_p + 0xd8);

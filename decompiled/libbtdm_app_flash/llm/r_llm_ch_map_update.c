@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llm.o -> r_llm_ch_map_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -34,10 +34,10 @@ void r_llm_ch_map_update(void)
   iVar4 = r_lld_read_clock();
   iVar6 = _p_llm_env;
   iVar5 = r_lld_ch_assess_data_get();
-  cVar2 = r_hci_ble_conhdl_unregister;
+  cVar2 = r_hci_send_2_host;
   iVar13 = _p_llm_env;
-  uVar14 = (uint)_DAT_000120c6;
-  uVar15 = (uint)_r_lld_res_list_peer_update_hack;
+  uVar14 = (uint)_DAT_000120b2;
+  uVar15 = (uint)_r_ke_msg_alloc;
   iVar3 = iVar6 + 0x1d;
   pcVar7 = (char *)(iVar5 + 0x94);
   uVar8 = 0;
@@ -45,21 +45,21 @@ void r_llm_ch_map_update(void)
     iVar9 = ((int)uVar8 >> 3) + iVar6;
     uVar12 = uVar8 & 7;
     if (((int)(uint)*(byte *)(iVar9 + 0x18) >> uVar12 & 1U) == 0) {
-_L430:
+_L436:
       bVar11 = ~(byte)(1 << uVar12) & *(byte *)(iVar9 + 0x1d);
-_L429:
+_L435:
       *(byte *)(iVar9 + 0x1d) = bVar11;
     }
     else if (*(char *)(iVar13 + 0xd9) != '\0') {
       uVar10 = iVar4 - *(int *)(uVar8 * 4 + iVar5) & 0xfffffff;
       if (uVar10 < uVar14) {
-        if (*pcVar7 <= (char)cVar2) goto _L430;
+        if (*pcVar7 <= (char)cVar2) goto _L436;
       }
       else {
         *pcVar7 = '\0';
         if (uVar15 < uVar10) {
           bVar11 = (byte)(1 << uVar12) | *(byte *)(iVar9 + 0x1d);
-          goto _L429;
+          goto _L435;
         }
       }
     }
@@ -94,18 +94,18 @@ _L429:
     if (*(char *)(*(int *)(_p_llm_env + 8) + uVar8 * 0x44 + 0x40) == '\f') {
       iVar6 = r_sdk_config_get_opts_ext();
       if (*(char *)(iVar6 + 0x18) == '\0') {
-        r_assert_err(0,"llm.c",0x527);
+        r_assert_err(0,"llm.c",0x534);
       }
       r_lld_per_adv_ch_map_update(uVar8 & 0xff,iVar3);
     }
   }
   if (bVar1) {
-    r_ke_timer_set(4,0,(uint)_r_lld_white_list_add * 100);
+    r_ke_timer_set(4,0,(uint)_r_ke_timer_active * 100);
   }
   else {
     *(undefined1 *)(_p_llm_env + 0x22) = 0;
   }
-  r_ble_log_internal_hex(0x40080149,5,iVar3);
+  r_ble_log_internal_hex(0x40080174,5,iVar3);
   return;
 }
 

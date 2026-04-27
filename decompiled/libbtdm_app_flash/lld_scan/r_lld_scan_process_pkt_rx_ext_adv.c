@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_process_pkt_rx_ext_adv
  *
  * (C) Espressif, Apache License 2.0.
@@ -52,7 +52,7 @@ void r_lld_scan_process_pkt_rx_ext_adv(int param_1,uint param_2,int param_3,char
   *param_4 = (char)uVar22;
   iVar10 = r_emi_get_mem_addr_by_offset(0x1000);
   if (*(ushort *)(iVar10 + iVar18) >> 8 <= uVar22) {
-    r_assert_err(0,"lld_scan.c",0x858);
+    r_assert_err(0,"lld_scan.c",0x86a);
   }
   cVar13 = *param_4;
   if (cVar13 != '\0') {
@@ -71,7 +71,7 @@ void r_lld_scan_process_pkt_rx_ext_adv(int param_1,uint param_2,int param_3,char
   if (bVar12 != 2) {
     if (2 < bVar12) {
       if (bVar12 != 3) {
-        r_assert_err(0,"lld_scan.c",0x87f);
+        r_assert_err(0,"lld_scan.c",0x891);
         return;
       }
       iVar10 = *(int *)(_lld_scan_env + param_1 * 4);
@@ -85,11 +85,11 @@ void r_lld_scan_process_pkt_rx_ext_adv(int param_1,uint param_2,int param_3,char
       if (0x672 < (uVar16 & 0xffff)) {
         *(undefined1 *)(iVar10 + 0x6e) = 2;
         param_4[5] = (bVar12 + 0x72) - (char)((uint)iVar18 >> 0x10);
-        goto _L325;
+        goto _L324;
       }
       if (*param_4 == '\0') {
         *(char *)(iVar10 + 0x6e) = (char)(((*(byte *)(iVar10 + 0x6d) >> 3 ^ 1) & 1) << 1);
-        goto _L325;
+        goto _L324;
       }
       uVar22 = *(ushort *)(param_4 + 6);
       sVar15 = 0;
@@ -103,17 +103,17 @@ void r_lld_scan_process_pkt_rx_ext_adv(int param_1,uint param_2,int param_3,char
         sVar15 = sVar15 + 1;
       }
       if ((uVar22 >> 0xb & 1) == 0) {
-        if ((*(byte *)(iVar10 + 0x6d) & 8) != 0) goto _L299;
+        if ((*(byte *)(iVar10 + 0x6d) & 8) != 0) goto _L298;
       }
       else {
         psVar8 = (short *)r_emi_get_mem_addr_by_offset(sVar2 + sVar15);
         if (*(short *)(iVar10 + 0x34) == *psVar8) {
           sVar15 = sVar15 + 2;
-_L299:
+_L298:
           if ((*(ushort *)(param_4 + 6) & 0x1000) == 0) {
             *(undefined1 *)(iVar10 + 0x6e) = 0;
             *(undefined1 *)(iVar10 + 0x3d) = 0;
-            goto _L304;
+            goto _L303;
           }
           pvVar5 = (void *)r_emi_get_mem_addr_by_offset(sVar2 + sVar15);
           memcpy(&stack0xffffffdc,pvVar5,3);
@@ -122,19 +122,19 @@ _L299:
             if (*(byte *)(iVar10 + 0x41) < 7) {
               iVar18 = r_lld_calc_aux_rx(iVar10 + 0x48,param_3,unaff_s7);
               uVar11 = 1;
-              if (iVar18 != 0) goto _L324;
+              if (iVar18 != 0) goto _L323;
             }
             *(undefined1 *)(iVar10 + 0x6e) = 2;
           }
           else {
             *(uint *)(iVar10 + 0x2c) = unaff_s7;
             uVar11 = 2;
-_L324:
+_L323:
             *(undefined1 *)(iVar10 + 0x3e) = uVar11;
           }
           *(undefined1 *)(iVar10 + 0x3d) = 3;
           sVar15 = sVar15 + 3;
-_L304:
+_L303:
           if ((*(ushort *)(param_4 + 6) & 0x2000) != 0) {
             sVar15 = sVar15 + 0x12;
           }
@@ -148,7 +148,7 @@ _L304:
       }
       *(undefined1 *)(iVar10 + 0x6e) = 2;
       param_4[5] = '\0';
-_L325:
+_L324:
       *(undefined1 *)(iVar10 + 0x3d) = 0;
       return;
     }
@@ -222,7 +222,7 @@ _L325:
       }
       sVar20 = sVar15 + 2;
       if (*(char *)(iVar10 + 0x6e) == -1) {
-        if ((*(ushort *)(param_4 + 6) & 0x1000) == 0) goto _L477;
+        if ((*(ushort *)(param_4 + 6) & 0x1000) == 0) goto _L476;
       }
       else {
         if ((*(ushort *)(param_4 + 6) & 0x1000) == 0) {
@@ -234,7 +234,7 @@ _L325:
             *(undefined1 *)(iVar10 + 0x6e) = 0;
             *(undefined1 *)(iVar10 + 0x3d) = 2;
           }
-          goto _L477;
+          goto _L476;
         }
         pvVar5 = (void *)r_emi_get_mem_addr_by_offset(sVar2 + sVar20);
         memcpy(auStack_44,pvVar5,3);
@@ -242,19 +242,19 @@ _L325:
         if ((*(ushort *)(iVar19 + 2 + iVar18) >> 9 & 1) == 0) {
           iVar18 = r_lld_calc_aux_rx(iVar10 + 0x48,param_3);
           uVar11 = 1;
-          if (iVar18 != 0) goto _L526;
+          if (iVar18 != 0) goto _L525;
           *(undefined1 *)(iVar10 + 0x6e) = 2;
         }
         else {
           *(undefined4 *)(iVar10 + 0x2c) = auStack_44[0];
           uVar11 = 2;
-_L526:
+_L525:
           *(undefined1 *)(iVar10 + 0x3e) = uVar11;
         }
         *(undefined1 *)(iVar10 + 0x3d) = 3;
       }
       sVar20 = sVar15 + 5;
-_L477:
+_L476:
       if ((*(ushort *)(param_4 + 6) & 0x2000) != 0) {
         uVar22 = *(ushort *)(iVar10 + 0x68);
         if ((bVar1 || pbVar9 == (byte *)0x0) ||
@@ -273,7 +273,7 @@ _L477:
               *(undefined2 *)(iVar10 + 0x76) = *(undefined2 *)(pbVar9 + 6);
             }
             r_ke_msg_free(pbVar9 + -0xc);
-            r_ble_log_internal_x0(0x80a1011d);
+            r_ble_log_internal_x0(0x80a10147);
           }
           else {
             *pbVar9 = *_lld_scan_sync_env;
@@ -294,7 +294,7 @@ _L477:
               uVar17 = (int)(((uVar16 & 0xffff) + (uint)_DAT_000150ce * -2) * 0x10000) >> 0x10;
             }
             if (0x751 < (uVar17 + 0x4e1 & 0xffff)) {
-              r_assert_err(0,"lld_scan.c",0x701);
+              r_assert_err(0,"lld_scan.c",0x713);
             }
             for (; (int)uVar17 < 0; uVar17 = (int)(((uVar17 & 0xffff) + 0x271) * 0x10000) >> 0x10) {
               *(uint *)(pbVar9 + 0x18) = *(int *)(pbVar9 + 0x18) - 1U & 0xfffffff;
@@ -311,7 +311,7 @@ _L477:
             r_ke_free(_lld_scan_sync_env);
             _lld_scan_sync_env = (byte *)0x0;
             r_ble_log_internal_x2
-                      (0x40a1011c,*(undefined4 *)(pbVar9 + 0x18),
+                      (0x40a10146,*(undefined4 *)(pbVar9 + 0x18),
                        (uint)*(ushort *)(pbVar9 + 0x1c) |
                        (uint)*pbVar9 << 0x10 | (uint)pbVar9[0x1f] << 0x18);
           }
@@ -343,12 +343,12 @@ _L477:
     param_4[1] = (char)uVar14;
     if (uVar14 == 1) {
       bVar12 = *(byte *)(iVar10 + 0x6d) | 1;
-_L252:
+_L251:
       *(byte *)(iVar10 + 0x6d) = bVar12;
     }
     else if (uVar14 == 2) {
       bVar12 = *(byte *)(iVar10 + 0x6d) | 2;
-      goto _L252;
+      goto _L251;
     }
     *(undefined1 *)(iVar10 + 0x6a) = 0;
     if (*param_4 == '\0') {
@@ -405,13 +405,13 @@ _L252:
         iVar18 = r_emi_get_mem_addr_by_offset(0x1000);
         if ((*(ushort *)(iVar19 + 2 + iVar18) >> 9 & 1) == 0) {
           if (2 < (unaff_s7 >> 0x15 & 7)) {
-_L220:
+_L219:
             *(undefined1 *)(iVar10 + 0x6e) = 0xff;
             return;
           }
           iVar18 = r_lld_calc_aux_rx(iVar10 + 0x48,param_3);
           uVar11 = 1;
-          if (iVar18 == 0) goto _L220;
+          if (iVar18 == 0) goto _L219;
         }
         else {
           *(uint *)(iVar10 + 0x2c) = unaff_s7;
@@ -430,13 +430,13 @@ _L220:
       }
       else {
         if ((*(char *)(iVar10 + 0x3b) != '\0') && ((param_4[1] != '\0' || ((uVar22 & 0x1000) != 0)))
-           ) goto _L226;
+           ) goto _L225;
         puVar7 = (undefined1 *)r_emi_get_mem_addr_by_offset(sVar2 + sVar15);
         uVar11 = *puVar7;
       }
       *(undefined1 *)(iVar10 + 0x73) = uVar11;
     }
-_L226:
+_L225:
     *(char *)(iVar10 + 0x6f) = param_4[8];
     param_4[5] = '\0';
     return;
@@ -482,7 +482,7 @@ _L226:
   if ((uVar22 & 0x1000) == 0) {
     *(undefined1 *)(iVar10 + 0x6e) = 0;
     *(undefined1 *)(iVar10 + 0x3d) = 0;
-    goto _L269;
+    goto _L268;
   }
   pvVar5 = (void *)r_emi_get_mem_addr_by_offset(sVar2 + sVar15);
   memcpy(&stack0xffffffcc,pvVar5,3);
@@ -490,18 +490,18 @@ _L226:
   if ((*(ushort *)(iVar19 + 2 + iVar18) >> 9 & 1) == 0) {
     iVar18 = r_lld_calc_aux_rx(iVar10 + 0x48,param_3);
     uVar11 = 1;
-    if (iVar18 != 0) goto _L289;
+    if (iVar18 != 0) goto _L288;
     *(undefined1 *)(iVar10 + 0x6e) = 2;
   }
   else {
     *(undefined4 *)(iVar10 + 0x2c) = in_stack_ffffffcc;
     uVar11 = 2;
-_L289:
+_L288:
     *(undefined1 *)(iVar10 + 0x3e) = uVar11;
   }
   *(undefined1 *)(iVar10 + 0x3d) = 3;
   sVar15 = sVar15 + 3;
-_L269:
+_L268:
   if ((*(ushort *)(param_4 + 6) & 0x2000) != 0) {
     sVar15 = sVar15 + 0x12;
   }

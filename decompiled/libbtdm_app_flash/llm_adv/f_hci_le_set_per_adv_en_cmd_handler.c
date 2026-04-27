@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llm_adv.o -> f_hci_le_set_per_adv_en_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -49,7 +49,7 @@ undefined4 f_hci_le_set_per_adv_en_cmd_handler(byte *param_1,undefined4 param_2)
   iVar5 = r_llm_adv_hdl_to_id(0);
   if (iVar5 == 0xff) {
     uVar7 = 0xff42;
-    uVar6 = 0x802e017b;
+    uVar6 = 0x802e01a6;
   }
   else {
     iVar11 = iVar5 * 0x44;
@@ -63,7 +63,7 @@ undefined4 f_hci_le_set_per_adv_en_cmd_handler(byte *param_1,undefined4 param_2)
         if (*param_1 == 0) {
           if (*(char *)(iVar3 + 0x40) == '\v') {
             *(undefined1 *)(iVar3 + 0x40) = 10;
-            r_ble_log_internal_x1(0x404e0183,uVar7 | 0xa00);
+            r_ble_log_internal_x1(0x404e01ae,uVar7 | 0xa00);
           }
           else {
             if (*(char *)(iVar3 + 0x40) != '\f') {
@@ -78,7 +78,7 @@ undefined4 f_hci_le_set_per_adv_en_cmd_handler(byte *param_1,undefined4 param_2)
                 r_lld_adv_sync_info_update(iVar5,uVar7,0);
               }
               *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar10 + 0x40) = 0xd;
-              r_ble_log_internal_x1(0x404e0184,uVar7 | 0xd00);
+              r_ble_log_internal_x1(0x404e01af,uVar7 | 0xd00);
               if ((_bt_rf_coex_hooks_p != (undefined4 *)0x0) &&
                  ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
                 (*(code *)*_bt_rf_coex_hooks_p)(uVar7,4,0);
@@ -100,7 +100,7 @@ _L852:
           if (*(char *)(iVar3 + 0x40) != '\r') {
             if (*(char *)(iVar3 + 0x40) == '\n') {
               *(undefined1 *)(iVar3 + 0x40) = 0xb;
-              r_ble_log_internal_x1(0x404e0180,uVar7 | 0xb00);
+              r_ble_log_internal_x1(0x404e01ab,uVar7 | 0xb00);
             }
             if ((*(ushort *)(iVar4 + 2) & 0x13) == 0) {
               piVar8 = (int *)(iVar11 + *(int *)(_p_llm_env + 8));
@@ -119,7 +119,7 @@ _L852:
                 uStack_40 = (ushort)bVar1;
                 iVar11 = r_sch_plan_req(&iStack_50);
                 if (iVar11 != 0) {
-                  r_ble_log_internal_x3(0x802e0181,iStack_4c,uStack_48,uVar7 << 8 | 0xd);
+                  r_ble_log_internal_x3(0x802e01ac,iStack_4c,uStack_48,uVar7 << 8 | 0xd);
                   iVar3 = 0xd;
                   goto _L843;
                 }
@@ -134,7 +134,7 @@ _L852:
                 if (iVar3 != 0) goto _L843;
                 iVar10 = *(int *)(_p_llm_env + 8) + iVar10;
                 *(undefined1 *)(iVar10 + 0x40) = 0xc;
-                r_ble_log_internal_x1(0x404e0182,uVar7 | 0xc00);
+                r_ble_log_internal_x1(0x404e01ad,uVar7 | 0xc00);
                 r_lld_adv_sync_info_update(iVar5,uVar7,local_60);
                 *(ushort *)(iVar10 + 0x20) = (ushort)bVar1;
                 *(undefined4 *)(iVar10 + 0x24) = 0;
@@ -153,24 +153,24 @@ _L852:
             goto _L852;
           }
           uVar7 = uVar7 << 8 | 0xd000c;
-          uVar6 = 0x802e017f;
+          uVar6 = 0x802e01aa;
         }
         else {
           uVar7 = uVar2 | 0xc0000;
-          uVar6 = 0x802e017e;
+          uVar6 = 0x802e01a9;
         }
         r_ble_log_internal_x1(uVar6,uVar7);
       }
       else {
         r_ble_log_internal_x2
-                  (0x802e017d,iVar5 << 0x18 | (uint)*(ushort *)(iVar3 + 0x2c) | 0xc0000,uVar7);
+                  (0x802e01a8,iVar5 << 0x18 | (uint)*(ushort *)(iVar3 + 0x2c) | 0xc0000,uVar7);
       }
 _L886:
       iVar3 = 0xc;
       goto _L843;
     }
     uVar7 = iVar5 << 8 | 0xff0042;
-    uVar6 = 0x802e017c;
+    uVar6 = 0x802e01a7;
   }
   r_ble_log_internal_x1(uVar6,uVar7);
   iVar3 = 0x42;

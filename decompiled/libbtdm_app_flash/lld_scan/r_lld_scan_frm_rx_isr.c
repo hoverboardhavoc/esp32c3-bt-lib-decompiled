@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_frm_rx_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,7 +39,7 @@ void r_lld_scan_frm_rx_isr(int param_1)
   undefined2 uStack_44;
   
   if ((_lld_scan_env == 0) || (*(int *)(_lld_scan_env + param_1 * 4) == 0)) {
-    r_assert_err(0,"lld_scan.c",0xa00);
+    r_assert_err(0,"lld_scan.c",0xa12);
     return;
   }
   iVar16 = *(int *)(param_1 * 4 + _lld_scan_env);
@@ -104,7 +104,7 @@ void r_lld_scan_frm_rx_isr(int param_1)
           r_lld_ext_scan_dynamic_pti_reset(iVar16);
           uVar13 = (uint)bVar2;
         }
-_L556:
+_L555:
         uVar14 = 0x128U >> uVar12 & 1;
       }
       else {
@@ -113,7 +113,7 @@ _L556:
         iVar9 = r_emi_get_mem_addr_by_offset(0x1000);
         uVar13 = (uint)((uVar5 & 0x3f) < *(ushort *)(iVar9 + iVar17) >> 8);
         uVar14 = uVar8;
-        if (uVar12 < 9) goto _L556;
+        if (uVar12 < 9) goto _L555;
       }
       iVar9 = r_sdk_config_get_opts_ext();
       if ((*(char *)(iVar9 + 0x18) == '\0') && (6 < uVar12)) {
@@ -125,7 +125,7 @@ _L556:
         uStack_4c = 0;
         uStack_48 = 0;
         if ((8 < uVar12) || ((0x128U >> uVar12 & 1) != 0)) {
-          r_assert_err(0,"lld_scan.c",0x296);
+          r_assert_err(0,"lld_scan.c",0x29c);
         }
         if (uVar12 < 7) {
           r_lld_scan_process_pkt_rx_legacy_adv();
@@ -137,7 +137,7 @@ _L556:
         iVar9 = r_emi_get_mem_addr_by_offset(0x1000);
         uVar3 = *(ushort *)(iVar9 + iVar17);
         uVar11 = r_emi_get_mem_addr_by_offset(uVar4);
-        r_ble_log_internal_hex(0x20a10112,uVar3 >> 8,uVar11);
+        r_ble_log_internal_hex(0x20a1013c,uVar3 >> 8,uVar11);
       }
       else if (((_DAT_60031048 & 8) != 0) &&
               (r_lld_continue_scan_rx_isr_end_process(param_1),

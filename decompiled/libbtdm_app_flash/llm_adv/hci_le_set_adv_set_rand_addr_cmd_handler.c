@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llm_adv.o -> hci_le_set_adv_set_rand_addr_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,11 +15,10 @@
 undefined4 hci_le_set_adv_set_rand_addr_cmd_handler(undefined1 *param_1,undefined4 param_2)
 
 {
-  char cVar1;
-  uint uVar2;
+  uint uVar1;
+  int *piVar2;
   int iVar3;
   undefined4 uVar4;
-  int iVar5;
   
   iVar3 = r_sdk_config_get_opts_ext();
   if (*(char *)(iVar3 + 0x18) == '\0') {
@@ -28,18 +27,17 @@ undefined4 hci_le_set_adv_set_rand_addr_cmd_handler(undefined1 *param_1,undefine
   }
   if (*(char *)(_p_llm_env + 0xd7) != '\x01') {
     *(undefined1 *)(_p_llm_env + 0xd7) = 2;
-    uVar2 = r_llm_adv_hdl_to_id(*param_1,0);
     uVar4 = 0x42;
-    iVar5 = *(int *)(*(int *)(_p_llm_env + 8) + uVar2 * 0x44);
+    uVar1 = r_llm_adv_hdl_to_id(*param_1,0);
     iVar3 = r_sdk_config_get_opts();
-    if (*(byte *)(iVar3 + 0xd) <= uVar2) goto _L445;
-    iVar3 = *(int *)(_p_llm_env + 8) + uVar2 * 0x44;
-    cVar1 = *(char *)(iVar3 + 0x40);
-    if ((cVar1 != '\x02') || (*(short *)(iVar5 + 2) == 0)) {
-      memcpy((void *)(iVar3 + 4),param_1 + 1,6);
+    if (*(byte *)(iVar3 + 0xd) <= uVar1) goto _L445;
+    piVar2 = (int *)(*(int *)(_p_llm_env + 8) + uVar1 * 0x44);
+    iVar3 = piVar2[0x10];
+    if (((char)iVar3 != '\x02') || ((*(ushort *)(*piVar2 + 2) & 1) == 0)) {
+      memcpy(piVar2 + 1,param_1 + 1,6);
       uVar4 = 0;
-      if (cVar1 == '\x02') {
-        r_lld_adv_rand_addr_update(uVar2,*(undefined4 *)(param_1 + 1),*(undefined2 *)(param_1 + 5));
+      if ((char)iVar3 == '\x02') {
+        r_lld_adv_rand_addr_update(uVar1,*(undefined4 *)(param_1 + 1),*(undefined2 *)(param_1 + 5));
       }
       goto _L445;
     }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> ll_connection_param_req_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ int ll_connection_param_req_handler(int param_1,int param_2)
   iVar3 = r_llc_proc_id_get(1);
   iVar6 = 0x24;
   if (iVar3 == 0) {
-    iVar3 = r_llc_con_upd_param_in_range
+    iVar3 = r_llc_con_upd_param_in_range_hack
                       (param_1,*(undefined2 *)(param_2 + 4),*(undefined2 *)(param_2 + 2),
                        *(undefined2 *)(param_2 + 6),*(undefined2 *)(param_2 + 8));
     iVar6 = 0x1e;

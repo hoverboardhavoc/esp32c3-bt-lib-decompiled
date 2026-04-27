@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llm_scan.o -> r_llm_scan_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -66,24 +66,24 @@ void r_llm_scan_start(int param_1,undefined1 param_2)
   uStack_14 = *(undefined1 *)(_p_llm_env + 0xc6);
   uStack_22 = param_2;
   if (bStack_16 == 2) {
-_L366:
+_L365:
     uStack_28 = *(undefined4 *)(_p_llm_env + 0xc);
     uStack_24 = *(undefined2 *)(_p_llm_env + 0x10);
   }
   else {
     if (bStack_16 < 3) {
-      if (bStack_16 == 0) goto _L366;
+      if (bStack_16 == 0) goto _L365;
     }
     else if (bStack_16 != 3) {
-      r_assert_param(0,"llm_scan.c",0x937);
-      goto _L370;
+      r_assert_param(0,"llm_scan.c",0x945);
+      goto _L369;
     }
     memcpy(&uStack_28,(void *)(_p_llm_env + 0x12),6);
   }
-_L370:
+_L369:
   iVar2 = r_lld_scan_start_eco(param_1,&uStack_28);
   if (iVar2 != 0) {
-    r_assert_err(0,"llm_scan.c",0x93f);
+    r_assert_err(0,"llm_scan.c",0x94d);
   }
   return;
 }

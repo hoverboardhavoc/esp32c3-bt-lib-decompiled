@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llc_feat_exch.o -> r_llc_loc_feats_exch_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void r_llc_loc_feats_exch_proc_continue(int param_1,undefined4 param_2)
+void r_llc_loc_feats_exch_proc_continue(uint param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -33,8 +33,10 @@ void r_llc_loc_feats_exch_proc_continue(int param_1,undefined4 param_2)
     r_llc_proc_timer_set(param_1,0,0);
   }
   else {
+    iVar2 = r_llc_proc_state_get(iVar1);
+    r_ble_log_internal_x1(0x804f00aa,iVar2 << 8 | param_1);
     uVar3 = r_llc_proc_state_get(iVar1);
-    r_assert_param(param_1,uVar3,"llc_feat_exch.c",0x102);
+    r_assert_param(param_1,uVar3,"llc_feat_exch.c",0x104);
     param_2 = 0x1f;
   }
   if (*(char *)(iVar1 + 8) != '\0') {

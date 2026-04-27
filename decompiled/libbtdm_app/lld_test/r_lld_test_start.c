@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_test.o -> r_lld_test_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,7 +39,7 @@ undefined4 r_lld_test_start(char *param_1)
                           (0x2c,0,*(code **)(_r_modules_funcs_p + 0x120));
   _lld_test_env = __s;
   if (__s == (void *)0x0) {
-    (**(code **)(_r_plf_funcs_p + 8))("lld_test.c",0x31b,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))("lld_test.c",799,*(code **)(_r_plf_funcs_p + 8));
     return 0xc;
   }
   uVar4 = (**(code **)(_r_ip_funcs_p + 0x264))(*(code **)(_r_ip_funcs_p + 0x264));
@@ -135,7 +135,7 @@ _L93:
         if (uVar11 == 0) goto _L93;
       }
       else if (3 < (uVar11 - 4 & 0xff)) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_test.c",0x2c3,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_test.c",0x2c7,*(code **)(_r_plf_funcs_p + 8));
         goto _L97;
       }
       bVar2 = param_1[2];
@@ -213,7 +213,7 @@ _L97:
     (*pcVar9)(0,0x1c,pcVar9);
   }
   else {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_test.c",0x2ed,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_test.c",0x2f1,*(code **)(_r_plf_funcs_p + 8));
   }
   iVar8 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x400,*(code **)(_r_plf_funcs_p + 0xbc));
   *(undefined2 *)(iVar8 + 0xc) = 0x4129;
@@ -264,7 +264,7 @@ _L110:
   *(undefined4 *)((int)__s + 4) = uVar4;
   iVar8 = (**(code **)(pcVar9 + 0x6b0))(__s,*(code **)(pcVar9 + 0x6b0));
   if (iVar8 != 0) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_test.c",0x314,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_test.c",0x318,*(code **)(_r_plf_funcs_p + 8));
     return 0;
   }
   *(undefined1 *)((int)__s + 0x2a) = 0;

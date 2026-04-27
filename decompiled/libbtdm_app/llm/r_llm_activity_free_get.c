@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llm.o -> r_llm_activity_free_get
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ undefined4 r_llm_activity_free_get(byte *param_1)
     iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
     iVar5 = _p_llm_env;
     if (*(byte *)(iVar3 + 0xd) <= uVar2) {
-_L421:
+_L427:
       bVar1 = *param_1;
       iVar5 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
       uVar4 = 0;
@@ -47,7 +47,7 @@ _L421:
       *(undefined4 *)((uVar2 + 0x1800c4cb) * 4) = 0;
       (**(code **)(_r_modules_funcs_p + 0x1d8))(uVar2,*(code **)(_r_modules_funcs_p + 0x1d8));
       (**(code **)(_r_modules_funcs_p + 0x200))(uVar2,*(code **)(_r_modules_funcs_p + 0x200));
-      goto _L421;
+      goto _L427;
     }
     uVar2 = *param_1 + 1 & 0xff;
   } while( true );

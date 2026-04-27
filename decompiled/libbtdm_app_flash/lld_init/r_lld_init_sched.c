@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld_init.o -> r_lld_init_sched
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,12 +36,12 @@ void r_lld_init_sched(int param_1,int param_2,int param_3)
     *(uint *)(iVar2 + 0x10) =
          ((uint)*(ushort *)(&lld_init_max_aux_dur_tab + (uint)*(byte *)(iVar2 + 0x4d) * 2) +
          *(int *)(iVar2 + 0x48)) * 2 + (uint)_sdk_cfg_priv_opts;
-    bVar8 = DAT_0001303e;
-    if (DAT_0001303e < *(byte *)(iVar2 + 0x16)) {
+    bVar8 = DAT_00013042;
+    if (DAT_00013042 < *(byte *)(iVar2 + 0x16)) {
       bVar8 = *(byte *)(iVar2 + 0x16);
     }
     *(byte *)(iVar2 + 0x16) = bVar8;
-    *(ushort *)(iVar2 + 0x14) = DAT_0001303f & 0xf | 0x2000;
+    *(ushort *)(iVar2 + 0x14) = DAT_00013043 & 0xf | 0x2000;
     iVar6 = r_sch_arb_insert(iVar2);
     if (iVar6 == 0) {
       uVar9 = (uint)*(byte *)(iVar2 + 0x4d);
@@ -100,11 +100,11 @@ void r_lld_init_sched(int param_1,int param_2,int param_3)
   }
   *(uint *)(iVar2 + 0x10) = uVar9;
   if (param_3 == 0) {
-    *(undefined1 *)(iVar2 + 0x16) = DAT_00013042;
+    *(undefined1 *)(iVar2 + 0x16) = DAT_00013046;
     *(undefined4 *)(iVar2 + 0x28) = *(undefined4 *)(iVar2 + 4);
   }
   iVar6 = (uint)bVar1 * 0x5a;
-  *(ushort *)(iVar2 + 0x14) = DAT_00013043 & 0xf | 0x6000;
+  *(ushort *)(iVar2 + 0x14) = DAT_00013047 & 0xf | 0x6000;
   *(undefined1 *)(iVar2 + 0x3e) = 1;
   iVar5 = r_emi_get_mem_addr_by_offset(0x400);
   *(short *)(iVar6 + 0x20 + iVar5) = (short)uVar4;

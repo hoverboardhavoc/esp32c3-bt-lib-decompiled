@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llm_adv.o -> r_llm_adv_set_release_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -72,7 +72,7 @@ void r_llm_adv_set_release_hack(int param_1)
   }
   *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar2 + 0x40) = 0;
   (**(code **)(_r_modules_funcs_p + 0x200))(param_1,*(code **)(_r_modules_funcs_p + 0x200));
-                    /* WARNING: Could not recover jumptable at 0x00013494. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00013484. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0x1d8))(param_1,*(code **)(_r_modules_funcs_p + 0x1d8));
   return;

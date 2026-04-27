@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
- * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
- * Upstream date: 2025-12-17 10:51:37 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> lld_con_param_upd_cfm_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ undefined4 lld_con_param_upd_cfm_handler(uint param_1)
     if ((iVar1 != 5) && (iVar1 = r_llc_proc_id_get(param_1,1), iVar1 != 5)) {
       uVar2 = r_llc_proc_id_get(param_1,0);
       uVar3 = r_llc_proc_id_get(param_1,1);
-      r_assert_param(uVar2,uVar3,"llc_con_upd.c",0x6af);
+      r_assert_param(uVar2,uVar3,"llc_con_upd.c",0x6b8);
     }
     iVar1 = r_llc_proc_id_get(param_1,0);
     if (iVar1 == 5) {

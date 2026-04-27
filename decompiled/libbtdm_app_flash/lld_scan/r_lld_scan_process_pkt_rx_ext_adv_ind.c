@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld_scan.o -> r_lld_scan_process_pkt_rx_ext_adv_ind
  *
  * (C) Espressif, Apache License 2.0.
@@ -49,12 +49,12 @@ void r_lld_scan_process_pkt_rx_ext_adv_ind(int param_1,int param_2,char *param_3
   param_3[1] = (char)uVar11;
   if (uVar11 == 1) {
     bVar9 = *(byte *)(iVar4 + 0x6d) | 1;
-_L252:
+_L251:
     *(byte *)(iVar4 + 0x6d) = bVar9;
   }
   else if (uVar11 == 2) {
     bVar9 = *(byte *)(iVar4 + 0x6d) | 2;
-    goto _L252;
+    goto _L251;
   }
   *(undefined1 *)(iVar4 + 0x6a) = 0;
   if (*param_3 == '\0') {
@@ -109,13 +109,13 @@ _L252:
       iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
       if ((*(ushort *)(iVar13 + 2 + iVar5) >> 9 & 1) == 0) {
         if (2 < (auStack_24[0] >> 0x15 & 7)) {
-_L220:
+_L219:
           *(undefined1 *)(iVar4 + 0x6e) = 0xff;
           return;
         }
         iVar5 = r_lld_calc_aux_rx(iVar4 + 0x48,param_2);
         uVar10 = 1;
-        if (iVar5 == 0) goto _L220;
+        if (iVar5 == 0) goto _L219;
       }
       else {
         *(uint *)(iVar4 + 0x2c) = auStack_24[0];
@@ -134,13 +134,13 @@ _L220:
     }
     else {
       if ((*(char *)(iVar4 + 0x3b) != '\0') && ((param_3[1] != '\0' || ((uVar2 & 0x1000) != 0))))
-      goto _L226;
+      goto _L225;
       puVar8 = (undefined1 *)r_emi_get_mem_addr_by_offset(sVar1 + sVar12);
       uVar10 = *puVar8;
     }
     *(undefined1 *)(iVar4 + 0x73) = uVar10;
   }
-_L226:
+_L225:
   *(char *)(iVar4 + 0x6f) = param_3[8];
   param_3[5] = '\0';
   return;

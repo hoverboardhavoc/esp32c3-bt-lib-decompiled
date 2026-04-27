@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 9b50531537e755792ac827d00d233eab499a0b37
- * https://github.com/espressif/esp32c3-bt-lib/commit/9b50531537e755792ac827d00d233eab499a0b37
- * Upstream date: 2025-12-17 10:51:37 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(5106725)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_evt_time_update_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -19,27 +19,32 @@ void r_lld_con_evt_time_update_eco(int param_1)
   int iVar2;
   int iVar3;
   uint uVar4;
+  uint uVar5;
   
   iVar2 = *(int *)(&lld_con_env + param_1 * 4);
   r_lld_con_evt_time_update();
   iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   iVar1 = _r_ip_funcs_p;
   if (*(char *)(iVar3 + 0x15) == '\0') {
+    uVar5 = (uint)*(byte *)(iVar2 + 0x93);
+    if (uVar5 == 3) {
+      uVar5 = 2;
+    }
     uVar4 = (uint)*(ushort *)(iVar2 + 0x88);
     if ((uint)*(ushort *)(iVar2 + 0x88) < (uint)*(ushort *)(iVar2 + 0x8a)) {
       uVar4 = (uint)*(ushort *)(iVar2 + 0x8a);
     }
-    uVar4 = (uVar4 + 0x96 + (uint)*(ushort *)(&fixed_tx_time + (uint)*(byte *)(iVar2 + 0x93) * 2)) *
-            2 + (uint)_sdk_cfg_priv_opts;
-    if (uVar4 < 0x9c4) {
-      uVar4 = 0x9c4;
+    uVar5 = (uVar4 + 0x96 + (uint)*(ushort *)(&fixed_tx_time + uVar5 * 2)) * 2 +
+            (uint)_sdk_cfg_priv_opts;
+    if (uVar5 < 0x9c4) {
+      uVar5 = 0x9c4;
     }
-    *(uint *)(iVar2 + 0x5c) = uVar4;
-    *(uint *)(iVar2 + 0x10) = uVar4;
-                    /* WARNING: Could not recover jumptable at 0x0001153e. Too many branches */
+    *(uint *)(iVar2 + 0x5c) = uVar5;
+    *(uint *)(iVar2 + 0x10) = uVar5;
+                    /* WARNING: Could not recover jumptable at 0x0001154e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(iVar1 + 0x72c))
-              (4,*(undefined1 *)(iVar2 + 0x8e),*(undefined4 *)(iVar2 + 100),uVar4 & 0xffff,0,
+              (4,*(undefined1 *)(iVar2 + 0x8e),*(undefined4 *)(iVar2 + 100),uVar5 & 0xffff,0,
                *(code **)(iVar1 + 0x72c));
     return;
   }

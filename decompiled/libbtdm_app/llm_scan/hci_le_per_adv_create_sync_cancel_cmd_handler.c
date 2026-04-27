@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llm_scan.o -> hci_le_per_adv_create_sync_cancel_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,6 +43,7 @@ undefined4 hci_le_per_adv_create_sync_cancel_cmd_handler(undefined4 param_1,unde
                     (param_1,0,param_2,*(code **)(_r_modules_funcs_p + 0xd0));
           return 1;
         }
+        llm_sync_cancel_cc_act_id = (undefined1)uVar1;
         if (_bt_rf_coex_hooks_p == (undefined4 *)0x0) {
           return 0;
         }

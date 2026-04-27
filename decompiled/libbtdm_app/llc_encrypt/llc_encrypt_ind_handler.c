@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llc_encrypt.o -> llc_encrypt_ind_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -61,7 +61,7 @@ _L281:
         }
         pcVar7 = *(code **)(_r_plf_funcs_p + 0xc);
         uVar2 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar4,*(code **)(_r_ip_funcs_p + 0x680));
-        (*pcVar7)(param_3,uVar2,"llc_encrypt.c",0x8bf);
+        (*pcVar7)(param_3,uVar2,"llc_encrypt.c",0x8c4);
       }
       pcVar7 = *(code **)(_r_ip_funcs_p + 0x594);
       goto _L283;
@@ -93,7 +93,7 @@ _L282:
     }
     pcVar7 = *(code **)(_r_plf_funcs_p + 0xc);
     uVar2 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar4,*(code **)(_r_ip_funcs_p + 0x680));
-    (*pcVar7)(param_3,uVar2,"llc_encrypt.c",0x8da);
+    (*pcVar7)(param_3,uVar2,"llc_encrypt.c",0x8df);
   }
   pcVar7 = *(code **)(_r_ip_funcs_p + 0x59c);
 _L283:

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llm_adv.o -> hci_le_set_adv_param_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -39,7 +39,7 @@ undefined4 hci_le_set_adv_param_cmd_handler(ushort *param_1,undefined4 param_2)
       if (iVar5 == 0xff) {
         uVar7 = r_llm_activity_free_get(&bStack_3d);
         if (uVar7 != 0) {
-          r_ble_log_internal_x1(0x802e014d,(uint)bStack_3d << 8 | uVar7);
+          r_ble_log_internal_x1(0x802e0178,(uint)bStack_3d << 8 | uVar7);
           goto _L253;
         }
         r_llm_adv_set_dft_params();
@@ -47,7 +47,7 @@ undefined4 hci_le_set_adv_param_cmd_handler(ushort *param_1,undefined4 param_2)
       else {
         uVar7 = (uint)*(byte *)(*(int *)(_p_llm_env + 8) + iVar5 * 0x44 + 0x40);
         if (uVar7 != 1) {
-          r_ble_log_internal_x1(0x802e014c,uVar7 << 0x10 | iVar5 << 8 | 0xc);
+          r_ble_log_internal_x1(0x802e0177,uVar7 << 0x10 | iVar5 << 8 | 0xc);
           goto _L235;
         }
       }
@@ -65,7 +65,7 @@ undefined4 hci_le_set_adv_param_cmd_handler(ushort *param_1,undefined4 param_2)
               iVar5 = r_co_bdaddr_compare((void *)((int)param_1 + 7),&co_null_bdaddr);
               if (iVar5 != 0) {
                 r_ble_log_internal_x1
-                          (0x802e014e,(uint)bStack_3d << 8 | (uint)(byte)param_1[2] << 0x10 | 0x12);
+                          (0x802e0179,(uint)bStack_3d << 8 | (uint)(byte)param_1[2] << 0x10 | 0x12);
                 goto _L273;
               }
             }
@@ -108,7 +108,7 @@ _L249:
               r_assert_param(bVar2,0,"llm_adv.c",0xf4);
             }
             *(undefined1 *)(*(int *)(_p_llm_env + 8) + (uint)bStack_3d * 0x44 + 0x40) = 1;
-            r_ble_log_internal_x1(0x404e014f,bStack_3d | 0x100);
+            r_ble_log_internal_x1(0x404e017a,bStack_3d | 0x100);
             if ((_bt_rf_coex_hooks_p != 0) && (*(code **)(_bt_rf_coex_hooks_p + 4) != (code *)0x0))
             {
               iVar5 = *(int *)(*(int *)(_p_llm_env + 8) + (uint)bStack_3d * 0x44);

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llm_adv.o -> hci_le_set_ext_adv_data_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -67,12 +67,12 @@ undefined4 hci_le_set_ext_adv_data_cmd_handler(undefined1 *param_1,undefined4 pa
     if (1 < (byte)(bVar1 - 3)) goto _L487;
     if (((uVar5 & 0x11) == 1) && (iVar7 = r_llm_adv_con_len_check(), iVar7 != 0)) {
       uVar10 = (uint)*(ushort *)(iStack_30 + 2) | (uint)(byte)param_1[3] << 0x18;
-      uVar9 = 0x802e0163;
+      uVar9 = 0x802e018e;
     }
     else {
       if (((*(ushort *)(iStack_30 + 2) & 0x1c) != 0x10) || ((byte)param_1[3] < 0x20)) goto _L462;
       uVar10 = (uint)(byte)param_1[3] << 0x18 | (uint)*(ushort *)(iStack_30 + 2);
-      uVar9 = 0x802e0164;
+      uVar9 = 0x802e018f;
     }
     r_ble_log_internal_x1(uVar9,uVar10 | 0x120000);
     uVar9 = 0x12;
@@ -86,7 +86,7 @@ _L462:
   }
   iVar7 = *(int *)(_p_llm_env + 8) + iVar11;
   if ((uint)*(ushort *)(iVar7 + 0x30) < (uint)*(ushort *)(iVar7 + 0x2e) + (uint)(byte)param_1[3]) {
-    r_ble_log_internal_x2(0x802e0165,iVar8 << 8 | (uint)(byte)param_1[3] << 0x10 | 7);
+    r_ble_log_internal_x2(0x802e0190,iVar8 << 8 | (uint)(byte)param_1[3] << 0x10 | 7);
     if (*(short *)(*(int *)(_p_llm_env + 8) + iVar11 + 0x2c) != 0) {
       r_ble_util_buf_adv_tx_free();
       *(undefined4 *)(*(int *)(_p_llm_env + 8) + iVar11 + 0x2c) = 0;

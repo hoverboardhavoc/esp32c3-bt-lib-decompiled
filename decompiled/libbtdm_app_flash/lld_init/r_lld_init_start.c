@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld_init.o -> r_lld_init_start
  *
  * (C) Espressif, Apache License 2.0.
@@ -110,21 +110,21 @@ undefined4 r_lld_init_start(undefined2 *param_1)
         pvVar14 = (void *)r_ke_malloc(0x54,0);
         *__s = (int)pvVar14;
         if (pvVar14 == (void *)0x0) {
-          r_assert_err(0x10000,0x6fb);
+          r_assert_err(0x10000,0x6fc);
           uVar13 = 0;
         }
         else {
           memset(pvVar14,0,0x54);
           *(code **)((int)pvVar14 + 0x20) = r_lld_init_evt_canceled_cbk;
           *(code **)((int)pvVar14 + 0x18) = r_lld_init_evt_start_cbk;
-          *(undefined1 *)((int)pvVar14 + 0x16) = DAT_00013042;
+          *(undefined1 *)((int)pvVar14 + 0x16) = DAT_00013046;
           uVar33 = param_1[0xd];
           uVar19 = (uint)uVar33 * 0x4e2;
           if (_sch_slice_params < uVar19) {
             uVar19 = (uint)_sch_slice_params;
           }
           *(uint *)((int)pvVar14 + 0x10) = uVar19;
-          *(ushort *)((int)pvVar14 + 0x14) = DAT_00013043 & 0xf | 0x6000;
+          *(ushort *)((int)pvVar14 + 0x14) = DAT_00013047 & 0xf | 0x6000;
           uVar8 = param_1[0xc];
           *(ushort *)((int)pvVar14 + 0x2e) = uVar33;
           *(uint *)((int)pvVar14 + 0x24) = (uint)uVar33;
@@ -167,20 +167,20 @@ undefined4 r_lld_init_start(undefined2 *param_1)
         pvVar14 = (void *)r_ke_malloc(0x54,0);
         __s[1] = (int)pvVar14;
         if (pvVar14 == (void *)0x0) {
-          r_assert_err(0x10000,0x75c);
+          r_assert_err(0x10000,0x75d);
         }
         else {
           memset(pvVar14,0,0x54);
           *(code **)((int)pvVar14 + 0x20) = r_lld_init_evt_canceled_cbk;
           *(code **)((int)pvVar14 + 0x18) = r_lld_init_evt_start_cbk;
-          *(undefined1 *)((int)pvVar14 + 0x16) = DAT_00013042;
+          *(undefined1 *)((int)pvVar14 + 0x16) = DAT_00013046;
           uVar33 = param_1[uVar13 * 6 + 0xd];
           uVar19 = (uint)uVar33 * 0x4e2;
           if (_sch_slice_params < uVar19) {
             uVar19 = (uint)_sch_slice_params;
           }
           *(uint *)((int)pvVar14 + 0x10) = uVar19;
-          *(ushort *)((int)pvVar14 + 0x14) = DAT_00013043 & 0xf | 0x6000;
+          *(ushort *)((int)pvVar14 + 0x14) = DAT_00013047 & 0xf | 0x6000;
           uVar8 = param_1[uVar13 * 6 + 0xc];
           *(ushort *)((int)pvVar14 + 0x2e) = uVar33;
           *(uint *)((int)pvVar14 + 0x24) = (uint)uVar33;
@@ -472,7 +472,7 @@ _L415:
             uVar12 = (uint)*(ushort *)(iVar32 + 0x2e) * 2 + uVar12 & 0xfffffff;
           }
           else {
-            r_assert_err(0,0x10000,0x839);
+            r_assert_err(0,0x10000,0x83a);
           }
           bVar1 = *(byte *)(iVar32 + 0x52);
           iVar24 = r_emi_get_mem_addr_by_offset(0x400);
@@ -481,14 +481,14 @@ _L415:
           iVar24 = r_emi_get_mem_addr_by_offset(0x400);
           uVar25 = 0;
           r_ble_log_internal_x2
-                    (0x40010102,CONCAT22(*(undefined2 *)((uint)bVar1 * 0x5a + 0x2c + iVar24),uVar8),
+                    (0x4001012b,CONCAT22(*(undefined2 *)((uint)bVar1 * 0x5a + 0x2c + iVar24),uVar8),
                      *(undefined1 *)(iVar32 + 0x52));
         }
         __s = __s + 1;
       } while (__s != piVar20);
       goto _L300;
     }
-    r_assert_err(0x10000,0x843);
+    r_assert_err(0x10000,0x844);
   }
   uVar25 = 0xc;
 _L300:

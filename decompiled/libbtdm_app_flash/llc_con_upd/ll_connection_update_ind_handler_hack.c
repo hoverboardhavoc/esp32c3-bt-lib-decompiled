@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> ll_connection_update_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -21,7 +21,7 @@ undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,uint pa
   uint uVar4;
   
   uVar4 = (uint)*(ushort *)(param_2 + 4);
-  iVar1 = r_llc_con_upd_param_in_range
+  iVar1 = r_llc_con_upd_param_in_range_hack
                     (uVar4,uVar4,*(undefined2 *)(param_2 + 6),*(undefined2 *)(param_2 + 8));
   if (iVar1 == 0) {
     return 0x20;
@@ -48,7 +48,7 @@ undefined4 ll_connection_update_ind_handler_hack(int param_1,int param_2,uint pa
       if (2 < _g_bt_plf_log_level) {
         ets_printf("con_upd: %u %u %u\n",param_1,param_3,*(undefined2 *)(param_2 + 10));
       }
-      r_ble_log_internal_x2(0x804f0085,(uint)*(ushort *)(param_2 + 10) << 0x10 | param_3,param_1);
+      r_ble_log_internal_x2(0x804f008d,(uint)*(ushort *)(param_2 + 10) << 0x10 | param_3,param_1);
     }
     iVar1 = r_llc_proc_id_get(param_1,0);
     if (iVar1 == 5) {

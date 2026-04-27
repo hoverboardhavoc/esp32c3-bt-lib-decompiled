@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_sync.o -> r_lld_sync_frm_eof_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void r_lld_sync_frm_eof_isr(int param_1,undefined4 param_2,undefined4 param_3)
   if (iVar3 == 0) {
     iVar3 = *(int *)(&lld_sync_env + param_1 * 4);
     if (iVar3 == 0) {
-      (**(code **)(_r_plf_funcs_p + 8))(0x10000,0x446,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0x10000,0x448,*(code **)(_r_plf_funcs_p + 8));
     }
     else {
       bVar1 = *(byte *)(iVar3 + 0x55);

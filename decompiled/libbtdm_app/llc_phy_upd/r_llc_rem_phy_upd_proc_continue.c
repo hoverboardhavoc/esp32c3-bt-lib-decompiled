@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llc_phy_upd.o -> r_llc_rem_phy_upd_proc_continue
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,7 +41,7 @@ void r_llc_rem_phy_upd_proc_continue(int param_1,int param_2,int param_3)
     if (iVar5 != param_2) {
       pcVar11 = *(code **)(_r_plf_funcs_p + 0x10);
       (**(code **)(_r_ip_funcs_p + 0x680))(iVar4,*(code **)(_r_ip_funcs_p + 0x680));
-      (*pcVar11)(param_2,"llc_phy_upd.c",0x273);
+      (*pcVar11)(param_2,"llc_phy_upd.c",0x279);
       goto _L12;
     }
     iVar5 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar4,*(code **)(_r_ip_funcs_p + 0x680));
@@ -72,7 +72,7 @@ void r_llc_rem_phy_upd_proc_continue(int param_1,int param_2,int param_3)
         goto _L12;
       }
       (**(code **)(_r_plf_funcs_p + 0xc))
-                (*(undefined1 *)(iVar4 + 0xd),*(undefined1 *)(iVar4 + 0xc),"llc_phy_upd.c",0x2df,
+                (*(undefined1 *)(iVar4 + 0xd),*(undefined1 *)(iVar4 + 0xc),"llc_phy_upd.c",0x2e7,
                  *(code **)(_r_plf_funcs_p + 0xc));
     }
     else if (iVar5 == 7) {
@@ -91,7 +91,7 @@ void r_llc_rem_phy_upd_proc_continue(int param_1,int param_2,int param_3)
         param_3 = 0x1f;
         pcVar11 = *(code **)(_r_plf_funcs_p + 0xc);
         uVar7 = (**(code **)(_r_ip_funcs_p + 0x680))(iVar4,*(code **)(_r_ip_funcs_p + 0x680));
-        (*pcVar11)(param_1,uVar7,"llc_phy_upd.c",0x2f8);
+        (*pcVar11)(param_1,uVar7,"llc_phy_upd.c",0x300);
         goto _L12;
       }
       uVar3 = *(ushort *)(iVar10 + 0x42);

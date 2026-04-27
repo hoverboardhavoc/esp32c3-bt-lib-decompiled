@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llm_scan.o -> hci_le_rmv_dev_from_per_adv_list_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ undefined4 hci_le_rmv_dev_from_per_adv_list_cmd_handler(byte *param_1,undefined4
     return 0;
   }
   bVar4 = 0x12;
-  if ((0xf < param_1[7]) || (bVar4 = 0x12, 1 < *param_1)) goto _L322;
+  if ((0xf < param_1[7]) || (bVar4 = 0x12, 1 < *param_1)) goto _L321;
   if (*(char *)(_p_llm_env + 0xd7) != '\x01') {
     *(undefined1 *)(_p_llm_env + 0xd7) = 2;
     uVar2 = r_llm_activity_syncing_get(0x12);
@@ -48,18 +48,18 @@ undefined4 hci_le_rmv_dev_from_per_adv_list_cmd_handler(byte *param_1,undefined4
             bVar4 = bVar1 & 2;
             if ((bVar1 & 2) == 0) {
               *(byte *)(iVar3 + 0x2d) = bVar1 & 0xfa;
-              goto _L322;
+              goto _L321;
             }
             *(byte *)(iVar3 + 0x2d) = bVar1 & 0xfb;
           }
           bVar4 = 0;
         }
       }
-      goto _L322;
+      goto _L321;
     }
   }
   bVar4 = 0xc;
-_L322:
+_L321:
   r_llm_cmd_cmp_send(param_2,bVar4);
   return 0;
 }

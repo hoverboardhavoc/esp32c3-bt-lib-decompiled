@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> ke_timer.o -> r_ke_timer_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,7 +43,7 @@ void r_ke_timer_set(uint param_1,uint param_2,uint param_3)
   iVar4 = r_ke_time();
   *(uint *)(iVar3 + 8) = iVar4 + uVar2 & 0x7fffff;
   r_ke_queue_insert(&ke_env,iVar3,0x10000);
-  r_ble_log_internal_x3(0x208a0211,uVar2,*(undefined4 *)(iVar3 + 8),param_2 << 0x10 | param_1);
+  r_ble_log_internal_x3(0x208a023c,uVar2,*(undefined4 *)(iVar3 + 8),param_2 << 0x10 | param_1);
   if ((bVar1) || (iVar3 == _r_ke_msg_send_basic)) {
     r_rwip_timer_10ms_set(*(undefined4 *)(_r_ke_msg_send_basic + 8));
   }

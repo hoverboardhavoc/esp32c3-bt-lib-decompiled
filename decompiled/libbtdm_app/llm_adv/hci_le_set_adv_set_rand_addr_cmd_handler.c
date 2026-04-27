@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llm_adv.o -> hci_le_set_adv_set_rand_addr_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -15,33 +15,32 @@
 undefined4 hci_le_set_adv_set_rand_addr_cmd_handler(undefined1 *param_1,undefined4 param_2)
 
 {
-  char cVar1;
-  uint uVar2;
-  int iVar3;
+  uint uVar1;
+  int iVar2;
+  int *piVar3;
   int iVar4;
   undefined4 uVar5;
   
   iVar4 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
-  iVar3 = _r_ip_funcs_p;
+  iVar2 = _r_ip_funcs_p;
   if (*(char *)(iVar4 + 0x18) == '\0') {
     (**(code **)(_r_ip_funcs_p + 0x4b8))(param_2,0xc,*(code **)(_r_ip_funcs_p + 0x4b8));
     return 0;
   }
   if (*(char *)(_p_llm_env + 0xd7) != '\x01') {
     *(undefined1 *)(_p_llm_env + 0xd7) = 2;
-    uVar2 = (**(code **)(iVar3 + 0x544))(*param_1,0,*(code **)(iVar3 + 0x544));
     uVar5 = 0x42;
-    iVar4 = *(int *)(*(int *)(_p_llm_env + 8) + uVar2 * 0x44);
-    iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
-    if (*(byte *)(iVar3 + 0xd) <= uVar2) goto _L198;
-    iVar3 = *(int *)(_p_llm_env + 8) + uVar2 * 0x44;
-    cVar1 = *(char *)(iVar3 + 0x40);
-    if ((cVar1 != '\x02') || (*(short *)(iVar4 + 2) == 0)) {
-      memcpy((void *)(iVar3 + 4),param_1 + 1,6);
+    uVar1 = (**(code **)(iVar2 + 0x544))(*param_1,0,*(code **)(iVar2 + 0x544));
+    iVar2 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
+    if (*(byte *)(iVar2 + 0xd) <= uVar1) goto _L198;
+    piVar3 = (int *)(*(int *)(_p_llm_env + 8) + uVar1 * 0x44);
+    iVar2 = piVar3[0x10];
+    if (((char)iVar2 != '\x02') || ((*(ushort *)(*piVar3 + 2) & 1) == 0)) {
+      memcpy(piVar3 + 1,param_1 + 1,6);
       uVar5 = 0;
-      if (cVar1 == '\x02') {
+      if ((char)iVar2 == '\x02') {
         (**(code **)(_r_ip_funcs_p + 0x1d0))
-                  (uVar2,*(undefined4 *)(param_1 + 1),*(undefined2 *)(param_1 + 5),
+                  (uVar1,*(undefined4 *)(param_1 + 1),*(undefined2 *)(param_1 + 5),
                    *(code **)(_r_ip_funcs_p + 0x1d0));
       }
       goto _L198;

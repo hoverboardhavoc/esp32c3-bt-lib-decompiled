@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llm_scan.o -> lld_per_adv_rx_end_ind_handler_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -79,11 +79,12 @@ undefined4 lld_per_adv_rx_end_ind_handler_hack(byte *param_1,undefined4 param_2,
       }
     }
     else {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"llm_scan.c",0xbcf,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"llm_scan.c",0xbef,*(code **)(_r_plf_funcs_p + 8));
     }
-    goto _L845;
+    goto _L849;
   }
   if (param_1[1] == 0) {
+    llm_sync_cancel_cc_act_id = 0xff;
     (**(code **)(_r_ip_funcs_p + 0x4b8))(0x2045,0,param_2,param_3,*(code **)(_r_ip_funcs_p + 0x4b8))
     ;
     puVar7 = (undefined2 *)
@@ -100,11 +101,12 @@ undefined4 lld_per_adv_rx_end_ind_handler_hack(byte *param_1,undefined4 param_2,
     puVar7[7] = 6;
     *(undefined1 *)(puVar7 + 8) = 0;
     iVar3 = _r_ip_funcs_p;
-_L858:
+_L862:
     (**(code **)(iVar3 + 0x8c))(puVar7,*(code **)(iVar3 + 0x8c));
   }
   else {
     if (param_1[1] == 8) {
+      llm_sync_cancel_cc_act_id = 0xff;
       puVar7 = (undefined2 *)
                (**(code **)(_r_modules_funcs_p + 200))
                          (0x1104,0,0x3e,0x12,*(code **)(_r_modules_funcs_p + 200));
@@ -119,16 +121,16 @@ _L858:
       puVar7[7] = 6;
       iVar3 = _r_ip_funcs_p;
       *(undefined1 *)(puVar7 + 8) = 0;
-      goto _L858;
+      goto _L862;
     }
     (**(code **)(_r_plf_funcs_p + 0xc))
-              ((uint)bVar1,"llm_scan.c",0xbc4,*(code **)(_r_plf_funcs_p + 0xc));
+              ((uint)bVar1,"llm_scan.c",0xbe4,*(code **)(_r_plf_funcs_p + 0xc));
   }
   (**(code **)(_r_modules_funcs_p + 0xd8))
             (*(int *)(*(int *)(_p_llm_env + 8) + iVar8) + -0xc,*(code **)(_r_modules_funcs_p + 0xd8)
             );
   *(undefined4 *)(*(int *)(_p_llm_env + 8) + iVar8) = 0;
-_L845:
+_L849:
   *(undefined1 *)(*(int *)(_p_llm_env + 8) + iVar8 + 0x40) = 0;
   return 0;
 }

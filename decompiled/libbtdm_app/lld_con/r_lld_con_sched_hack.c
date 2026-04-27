@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_sched_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,10 +36,11 @@ void r_lld_con_sched_hack(int param_1,int param_2,int param_3)
   if ((uVar1 & 2) == 0) {
     *(undefined1 *)(iVar3 + 0x16) = 0x1f;
   }
-  if (((uVar1 & 3) == 3) && (*(undefined1 *)(iVar3 + 0x96) = 0, param_3 != 0)) {
+  if ((((uVar1 & 3) == 3) && (*(undefined1 *)(iVar3 + 0x96) = 0, param_3 != 0)) &&
+     ((uVar1 & 0x4000) != 0)) {
     uVar2 = *(ushort *)(iVar3 + 0x72);
-    if ((uVar2 != 0) &&
-       ((((uVar1 & 0x404) == 0x400 && ((uVar1 & 8) == 0)) && (*(char *)(iVar3 + 0x46) == '\0')))) {
+    if (((uVar2 != 0) && ((uVar1 & 0x404) == 0x400)) &&
+       (((uVar1 & 8) == 0 && (*(char *)(iVar3 + 0x46) == '\0')))) {
       uVar10 = (uint)uVar2 * *(int *)(iVar3 + 100) + uVar10 & 0xfffffff;
       *(ushort *)(iVar3 + 0x7e) = uVar2 + *(short *)(iVar3 + 0x7e);
       *(undefined1 *)(iVar3 + 0x96) = 1;
@@ -88,7 +89,7 @@ void r_lld_con_sched_hack(int param_1,int param_2,int param_3)
       if ((*(ushort *)(iVar3 + 0x84) & 2) == 0) {
         uVar5 = 0x3e;
       }
-                    /* WARNING: Could not recover jumptable at 0x000102f6. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000102fc. Too many branches */
                     /* WARNING: Treating indirect jump as call */
       (**(code **)(_r_ip_funcs_p + 800))(param_1,1,uVar5,*(code **)(_r_ip_funcs_p + 800));
       return;

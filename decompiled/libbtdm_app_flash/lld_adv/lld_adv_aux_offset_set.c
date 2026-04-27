@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit d2414a5dd958b32ca53382b441d24d97a0345a55
- * https://github.com/espressif/esp32c3-bt-lib/commit/d2414a5dd958b32ca53382b441d24d97a0345a55
- * Upstream date: 2025-03-20 20:11:19 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(03d0f8a6)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld_adv.o -> lld_adv_aux_offset_set
  *
  * (C) Espressif, Apache License 2.0.
@@ -12,13 +12,15 @@
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
-uint lld_adv_aux_offset_set(uint param_1)
+undefined4 lld_adv_aux_offset_set(uint param_1)
 
 {
-  if ((param_1 != 0xffffffff) && ((0xff0 < param_1 || (param_1 - 1 < 299)))) {
-    return 0x12;
+  undefined4 uVar1;
+  
+  if ((param_1 == 0xffffffff) || ((uVar1 = 0x12, param_1 < 0xff1 && (0x12a < param_1 - 1)))) {
+    uVar1 = 0;
+    _g_ble_ext_config = param_1;
   }
-  _g_ble_ext_config = param_1;
-  return param_1;
+  return uVar1;
 }
 

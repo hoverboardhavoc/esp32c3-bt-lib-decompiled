@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llc_con_upd.o -> r_llc_rem_con_upd_proc_continue_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -36,7 +36,7 @@ void r_llc_rem_con_upd_proc_continue_hack(int param_1,int param_2,int param_3)
   if (iVar3 != param_2) {
     UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 0x10);
     param_1 = (**(code **)(_r_ip_funcs_p + 0x680))(__src,*(code **)(_r_ip_funcs_p + 0x680));
-    uVar5 = 0x1ef;
+    uVar5 = 0x1f5;
     goto _L113;
   }
   uVar4 = (**(code **)(_r_ip_funcs_p + 0x680))(__src,*(code **)(_r_ip_funcs_p + 0x680));
@@ -67,7 +67,7 @@ _L101:
                            *(undefined2 *)((int)__src + 0xc),*(undefined2 *)((int)__src + 0xe),
                            *(undefined2 *)((int)__src + 0x24),*(code **)(_r_ip_funcs_p + 0x378));
       if (param_3 == 0) {
-                    /* WARNING: Could not recover jumptable at 0x00010b96. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010b9e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
         (**(code **)(_r_ip_funcs_p + 0x684))(__src,param_1,10,*(code **)(_r_ip_funcs_p + 0x684));
         return;
@@ -89,7 +89,7 @@ _L102:
           llc_ll_connection_param_rsp_pdu_send(param_1,__src);
           (**(code **)(_r_ip_funcs_p + 0x684))(__src,param_1,9,*(code **)(_r_ip_funcs_p + 0x684));
           (**(code **)(_r_ip_funcs_p + 0x68c))(param_1,1,1,*(code **)(_r_ip_funcs_p + 0x68c));
-                    /* WARNING: Could not recover jumptable at 0x00010c3a. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010c42. Too many branches */
                     /* WARNING: Treating indirect jump as call */
           (**(code **)(_r_ip_funcs_p + 0x3c8))
                     (param_1,*(undefined2 *)((int)__src + 8),*(code **)(_r_ip_funcs_p + 0x3c8));
@@ -114,9 +114,9 @@ _L102:
 _L103:
       UNRECOVERED_JUMPTABLE = *(code **)(_r_plf_funcs_p + 0xc);
       param_2 = (**(code **)(_r_ip_funcs_p + 0x680))(__src,*(code **)(_r_ip_funcs_p + 0x680));
-      uVar5 = 0x26c;
+      uVar5 = 0x274;
 _L113:
-                    /* WARNING: Could not recover jumptable at 0x00010aaa. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010ab2. Too many branches */
                     /* WARNING: Treating indirect jump as call */
       (*UNRECOVERED_JUMPTABLE)(param_1,param_2,"llc_con_upd.c",uVar5,UNRECOVERED_JUMPTABLE);
       return;
@@ -125,7 +125,7 @@ _L113:
   (**(code **)(_r_ip_funcs_p + 0x5f0))(param_1,param_3,__src,*(code **)(_r_ip_funcs_p + 0x5f0));
   *(ushort *)(iVar6 + 0x42) = *(ushort *)(iVar6 + 0x42) & 0xffef;
 _L110:
-                    /* WARNING: Could not recover jumptable at 0x00010ce8. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00010cf0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_ip_funcs_p + 0x690))(param_1,1,*(code **)(_r_ip_funcs_p + 0x690));
   return;

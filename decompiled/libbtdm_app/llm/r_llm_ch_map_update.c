@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llm.o -> r_llm_ch_map_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,21 +45,21 @@ void r_llm_ch_map_update(void)
     iVar8 = ((int)uVar7 >> 3) + iVar5;
     uVar11 = uVar7 & 7;
     if (((int)(uint)*(byte *)(iVar8 + 0x18) >> uVar11 & 1U) == 0) {
-_L414:
+_L420:
       bVar10 = ~(byte)(1 << uVar11) & *(byte *)(iVar8 + 0x1d);
-_L413:
+_L419:
       *(byte *)(iVar8 + 0x1d) = bVar10;
     }
     else if (*(char *)(iVar12 + 0xd9) != '\0') {
       uVar9 = iVar3 - *(int *)(uVar7 * 4 + iVar4) & 0xfffffff;
       if (uVar9 < uVar14) {
-        if (*pcVar6 <= cVar2) goto _L414;
+        if (*pcVar6 <= cVar2) goto _L420;
       }
       else {
         *pcVar6 = '\0';
         if (uVar15 < uVar9) {
           bVar10 = (byte)(1 << uVar11) | *(byte *)(iVar8 + 0x1d);
-          goto _L413;
+          goto _L419;
         }
       }
     }
@@ -94,7 +94,7 @@ _L413:
     if (*(char *)(*(int *)(_p_llm_env + 8) + uVar7 * 0x44 + 0x40) == '\f') {
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xf0))(*(code **)(_r_plf_funcs_p + 0xf0));
       if (*(char *)(iVar5 + 0x18) == '\0') {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"llm.c",0x527,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,"llm.c",0x534,*(code **)(_r_plf_funcs_p + 8));
       }
       (**(code **)(_r_ip_funcs_p + 0x2c8))(uVar7 & 0xff,iVar13,*(code **)(_r_ip_funcs_p + 0x2c8));
     }
@@ -103,7 +103,7 @@ _L413:
     *(undefined1 *)(_p_llm_env + 0x22) = 0;
     return;
   }
-                    /* WARNING: Could not recover jumptable at 0x000112d2. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011332. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_modules_funcs_p + 0xc4))
             (4,0,(uint)_DAT_0001206c * 100,*(code **)(_r_modules_funcs_p + 0xc4));

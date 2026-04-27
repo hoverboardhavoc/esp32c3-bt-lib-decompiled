@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * https://github.com/espressif/esp32c3-bt-lib/commit/b09bf658a78c1c234d5ba7b3174f0dca7dd80c6b
- * Upstream date: 2025-04-28 11:55:39 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llc_disconnect.o -> r_llc_disconnect_proc_err_cb
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void r_llc_disconnect_proc_err_cb(int param_1,int param_2,char *param_3)
+void r_llc_disconnect_proc_err_cb(uint param_1,int param_2,char *param_3)
 
 {
   char cVar1;
@@ -40,8 +40,10 @@ void r_llc_disconnect_proc_err_cb(int param_1,int param_2,char *param_3)
         r_llc_disconnect(param_1,*(undefined1 *)(iVar2 + 9),1);
       }
       else {
+        iVar5 = r_llc_proc_state_get(iVar2);
+        r_ble_log_internal_x1(0x804f0092,iVar5 << 8 | param_1);
         uVar4 = r_llc_proc_state_get(iVar2);
-        r_assert_param(param_1,uVar4,"llc_disconnect.c",0xc0);
+        r_assert_param(param_1,uVar4,"llc_disconnect.c",0xc2);
       }
     }
     r_llc_proc_unreg(param_1,0);
@@ -50,7 +52,7 @@ void r_llc_disconnect_proc_err_cb(int param_1,int param_2,char *param_3)
   if ((param_2 - 1U & 0xff) < 3) {
     return;
   }
-  r_assert_param("llc_disconnect.c",0xf9);
+  r_assert_param("llc_disconnect.c",0xfb);
   return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 6470c01165cf4edeed5d826ce4082a90deb92efd
- * https://github.com/espressif/esp32c3-bt-lib/commit/6470c01165cf4edeed5d826ce4082a90deb92efd
- * Upstream date: 2024-10-25 10:35:57 +0800
- * Upstream subject: feat(bt): Support ble controller run in flash(d752deac)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llc_disconnect.o -> r_llc_ll_terminate_ind_ack
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,7 +10,7 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-void r_llc_ll_terminate_ind_ack(int param_1)
+void r_llc_ll_terminate_ind_ack(uint param_1)
 
 {
   int iVar1;
@@ -36,8 +36,10 @@ void r_llc_ll_terminate_ind_ack(int param_1)
     r_llc_disconnect(param_1,*(undefined1 *)(iVar1 + 9),1);
   }
   else {
+    iVar2 = r_llc_proc_state_get(iVar1);
+    r_ble_log_internal_x1(0x804f0092,iVar2 << 8 | param_1);
     uVar3 = r_llc_proc_state_get(iVar1);
-    r_assert_param(param_1,uVar3,"llc_disconnect.c",0xc0);
+    r_assert_param(param_1,uVar3,"llc_disconnect.c",0xc2);
   }
   r_llc_proc_unreg(param_1,0);
   return;

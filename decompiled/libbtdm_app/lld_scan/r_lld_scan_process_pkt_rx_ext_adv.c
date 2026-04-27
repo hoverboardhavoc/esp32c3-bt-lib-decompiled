@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_scan.o -> r_lld_scan_process_pkt_rx_ext_adv
  *
  * (C) Espressif, Apache License 2.0.
@@ -40,7 +40,7 @@ void r_lld_scan_process_pkt_rx_ext_adv(int param_1,uint param_2,int param_3,char
   *param_4 = (char)uVar8;
   iVar2 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1000,*(code **)(_r_plf_funcs_p + 0xbc));
   if (*(ushort *)(iVar2 + iVar5) >> 8 <= uVar8) {
-    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x858,*(code **)(_r_plf_funcs_p + 8));
+    (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x86a,*(code **)(_r_plf_funcs_p + 8));
   }
   cVar3 = *param_4;
   if (cVar3 != '\0') {
@@ -69,14 +69,14 @@ void r_lld_scan_process_pkt_rx_ext_adv(int param_1,uint param_2,int param_3,char
   }
   else {
     if (bVar1 != 3) {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x87f,*(code **)(_r_plf_funcs_p + 8));
-      goto _L531;
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_scan.c",0x891,*(code **)(_r_plf_funcs_p + 8));
+      goto _L530;
     }
     pcVar4 = *(code **)(_r_ip_funcs_p + 0x41c);
   }
   (*pcVar4)(param_1,param_2,param_3,param_4,pcVar4);
-_L531:
-                    /* WARNING: Could not recover jumptable at 0x00012494. Too many branches */
+_L530:
+                    /* WARNING: Could not recover jumptable at 0x000124a0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(code **)(_r_ip_funcs_p + 0x7f8))
             (0,param_1,param_2,param_3,param_4,*(code **)(_r_ip_funcs_p + 0x7f8));

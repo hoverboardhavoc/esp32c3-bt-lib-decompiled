@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> lld_sync.o -> r_lld_sync_process_pkt_rx_aux_sync_ind
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,7 +28,7 @@ void r_lld_sync_process_pkt_rx_aux_sync_ind(int param_1,int param_2)
   iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
   uVar4 = param_1 << 0x10 | (uint)bVar1 << 0x18;
   uVar2 = *(ushort *)((uint)bVar1 * 0x14 + 2 + iVar5);
-  r_ble_log_internal_x2(0x20a5012b,uVar2 | uVar4,param_2);
+  r_ble_log_internal_x2(0x20a50155,uVar2 | uVar4,param_2);
   if ((param_2 != 0) && ((uVar2 & 1) == 0)) {
     bVar1 = *(byte *)(_p_lld_env + 0xd8);
     iVar5 = r_emi_get_mem_addr_by_offset(0x1000);
@@ -44,8 +44,8 @@ void r_lld_sync_process_pkt_rx_aux_sync_ind(int param_1,int param_2)
     uVar3 = ((uint)*(ushort *)(&lld_exp_sync_pos_tab + (uint)*(byte *)(iVar7 + 0x58) * 2) * -2 +
             0x270) - (*(ushort *)((uint)bVar1 * 0x14 + 0xc + iVar5) & 0x3ff);
     iVar5 = (int)(uVar3 * 0x10000) >> 0x10;
-    if ((((byte)r_rwip_active_check & 4) != 0) && ((*(byte *)(iVar7 + 0x58) - 2 & 0xff) < 2)) {
-      iVar5 = (int)(((uVar3 & 0xffff) + (uint)_DAT_0001307a * -2) * 0x10000) >> 0x10;
+    if ((((byte)r_assert_param & 4) != 0) && ((*(byte *)(iVar7 + 0x58) - 2 & 0xff) < 2)) {
+      iVar5 = (int)(((uVar3 & 0xffff) + (uint)_DAT_0001307e * -2) * 0x10000) >> 0x10;
     }
     uVar3 = uVar6;
     if (0x751 < (iVar5 + 0x4e1U & 0xffff)) {
@@ -59,7 +59,7 @@ void r_lld_sync_process_pkt_rx_aux_sync_ind(int param_1,int param_2)
     *(uint *)(iVar7 + 0x38) = uVar6;
     *(uint *)(iVar7 + 0x44) = uVar3;
     *(undefined2 *)(iVar7 + 0x52) = 0;
-    r_ble_log_internal_x2(0x2045012c,uVar6,*(ushort *)(iVar7 + 0x4a) | uVar4);
+    r_ble_log_internal_x2(0x20450156,uVar6,*(ushort *)(iVar7 + 0x4a) | uVar4);
     return;
   }
   return;

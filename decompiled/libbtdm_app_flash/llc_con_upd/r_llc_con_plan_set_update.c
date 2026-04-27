@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llc_con_upd.o -> r_llc_con_plan_set_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -43,10 +43,10 @@ _L69:
   uVar4 = (uint)*(ushort *)(iVar8 + 0xe);
   uVar5 = uVar4 * 2;
   if (iVar2 == 0) {
-    r_assert_err(0,"llc_con_upd.c",0x39c);
+    r_assert_err(0,"llc_con_upd.c",0x3a5);
   }
   if (uVar4 == 0) {
-    r_assert_err(0,"llc_con_upd.c",0x39d);
+    r_assert_err(0,"llc_con_upd.c",0x3a6);
   }
   r_sch_plan_rem(iVar2);
   uVar1 = *(ushort *)(iVar8 + 0x42);

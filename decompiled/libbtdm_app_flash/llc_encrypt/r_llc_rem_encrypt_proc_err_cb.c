@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 72599d583c232ea78d6461b5b502426c6e5a1ec9
- * https://github.com/espressif/esp32c3-bt-lib/commit/72599d583c232ea78d6461b5b502426c6e5a1ec9
- * Upstream date: 2025-05-19 16:27:45 +0800
- * Upstream subject: Update bt lib for ESP32-C3 and ESP32-S3(6cfabcd8)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llc_encrypt.o -> r_llc_rem_encrypt_proc_err_cb
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,8 @@ void r_llc_rem_encrypt_proc_err_cb(uint param_1,int param_2,char *param_3)
   }
   else {
     if (2 < (param_2 - 1U & 0xff)) {
-      r_assert_param("llc_encrypt.c",0x614);
+      r_ble_log_internal_x1(0x804f009e,param_2 << 8 | param_1);
+      r_assert_param(param_1,param_2,"llc_encrypt.c",0x616);
       return;
     }
     if ((*(byte *)(*(int *)(&llc_env + param_1 * 4) + 0x44) & 3) == 0) {
@@ -64,10 +65,10 @@ void r_llc_rem_encrypt_proc_err_cb(uint param_1,int param_2,char *param_3)
       *(ushort *)(iVar8 + 0x42) = *(ushort *)(iVar8 + 0x42) & 0xfdff;
       return;
     }
-    if (iVar5 == 0x12) goto _L111;
+    if (iVar5 == 0x12) goto _L115;
   }
   else {
-_L111:
+_L115:
     *puVar4 = ~(ushort)(1 << (param_1 & 0x1f)) & *puVar4;
   }
   iVar8 = *(int *)(&llc_env + param_1 * 4);
@@ -78,7 +79,7 @@ _L111:
       r_llc_disconnect(param_1,0x3d,1);
       cVar6 = '=';
     }
-    goto _L74;
+    goto _L78;
   }
   cVar1 = r_llc_proc_state_get(iVar3);
   switch(cVar1 + -10) {
@@ -93,7 +94,7 @@ _L111:
       r_llc_llcp_state_set(param_1,2,2);
       r_llc_iv_skd_rand_gen(param_1);
       uVar2 = 0xd;
-      goto _L104;
+      goto _L108;
     }
     r_lld_con_rx_enc(param_1,0);
     r_llc_llcp_state_set(param_1,2,1);
@@ -109,26 +110,26 @@ _L111:
     r_llc_iv_skd_rand_gen(param_1);
     r_llc_proc_state_set(iVar3,param_1,0xd);
     uVar2 = 0;
-    goto _L106;
+    goto _L110;
   case '\x03':
     iVar5 = r_llm_le_evt_mask_check(4);
     if (iVar5 != 0) {
       llc_ll_enc_rsp_pdu_send(param_1,iVar3 + 0x30,iVar3 + 0x24);
       r_llc_hci_ltk_request_evt_send(param_1,*(undefined2 *)(iVar3 + 0x38),iVar3 + 8);
       uVar2 = 0xe;
-      goto _L104;
+      goto _L108;
     }
-    goto _L88;
+    goto _L92;
   case '\x04':
     if (cVar6 == '\0') {
       r_llc_sk_gen(param_1,iVar3 + 0x10,iVar3 + 0x28);
       uVar2 = 0xf;
-      goto _L104;
+      goto _L108;
     }
-_L88:
+_L92:
     r_llc_ll_reject_ind_pdu_send(param_1,3,6,r_llc_ll_reject_ind_ack_handler);
     uVar2 = 0x12;
-_L104:
+_L108:
     r_llc_proc_state_set(iVar3,param_1,uVar2);
     return;
   case '\x05':
@@ -138,7 +139,7 @@ _L104:
     r_llc_proc_state_set(iVar3,param_1,0x10);
     r_llc_proc_timer_set(param_1,1,1);
     uVar7 = *(ushort *)(iVar8 + 0x42) | 0x200;
-    goto _L103;
+    goto _L107;
   case '\x06':
     r_llc_proc_timer_set(param_1,1,0);
     r_lld_con_tx_enc(param_1,1);
@@ -146,10 +147,10 @@ _L104:
     r_llc_llcp_send_eco(param_1,&stack0xffffffec,r_llc_ll_start_enc_rsp_ack_handler);
     return;
   case '\a':
-    goto _L74;
+    goto _L78;
   case '\b':
     cVar6 = '\x06';
-    goto _L74;
+    goto _L78;
   default:
     uVar2 = r_llc_proc_state_get(iVar3);
     r_assert_param(param_1,uVar2,"llc_encrypt.c",0x473);
@@ -157,10 +158,10 @@ _L104:
   }
   r_llc_proc_state_set(iVar3,param_1,uVar2);
   uVar2 = 1;
-_L106:
+_L110:
   r_llc_proc_timer_set(param_1,1,uVar2);
   return;
-_L74:
+_L78:
   iVar5 = r_sdk_config_get_opts();
   if (((param_1 < *(byte *)(iVar5 + 0xd)) && (*(int *)(&llc_env + param_1 * 4) != 0)) &&
      ((*(byte *)(*(int *)(&llc_env + param_1 * 4) + 0x44) & 3) != 3)) {
@@ -175,7 +176,7 @@ _L74:
   }
   r_llc_proc_unreg(param_1,1);
   uVar7 = *(ushort *)(iVar8 + 0x42) & 0xfdff;
-_L103:
+_L107:
   *(ushort *)(iVar8 + 0x42) = uVar7;
   return;
 }

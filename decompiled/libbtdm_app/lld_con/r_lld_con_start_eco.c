@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit db872ab1620e1656f51d7a69c5a0576a6f369501
- * https://github.com/espressif/esp32c3-bt-lib/commit/db872ab1620e1656f51d7a69c5a0576a6f369501
- * Upstream date: 2025-04-23 17:25:53 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(edf923e)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_start_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -33,8 +33,11 @@ undefined1 r_lld_con_start_eco(int param_1,undefined4 param_2)
   if (iVar3 == 0) {
     iVar3 = r_lld_con_start(param_1,param_2);
     auStack_21[0] = (undefined1)iVar3;
-    if ((iVar3 == 0) && (*(int *)(&lld_con_env + param_1 * 4) != 0)) {
-      *(undefined2 *)(*(int *)(&lld_con_env + param_1 * 4) + 0x98) = 0xffff;
+    if (iVar3 == 0) {
+      if (*(int *)(&lld_con_env + param_1 * 4) != 0) {
+        *(undefined2 *)(*(int *)(&lld_con_env + param_1 * 4) + 0x98) = 0xffff;
+        *(undefined4 *)(lld_con_fake_rx + param_1 * 4) = 0;
+      }
     }
     (**(code **)(_r_ip_funcs_p + 0x828))
               (0,auStack_21,param_1,param_2,*(code **)(_r_ip_funcs_p + 0x828));

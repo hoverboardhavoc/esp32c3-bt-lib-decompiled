@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_llcp_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -27,7 +27,7 @@ undefined1 r_lld_con_llcp_tx(int param_1,undefined4 param_2)
   }
   else {
     if (*(int *)(iVar1 + 0x24) != 0) {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0xe7c,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0xf82,*(code **)(_r_plf_funcs_p + 8));
     }
     *(undefined4 *)(iVar1 + 0x24) = param_2;
     *(ushort *)(iVar1 + 0x84) = *(ushort *)(iVar1 + 0x84) | 8;
@@ -40,19 +40,19 @@ undefined1 r_lld_con_llcp_tx(int param_1,undefined4 param_2)
         (**(code **)(_r_ip_funcs_p + 0x6b8))(uVar4,0,*(code **)(_r_ip_funcs_p + 0x6b8));
         while (*(uint *)(iVar1 + 100) < (*(int *)(iVar1 + 0x48) - iVar2 & 0xfffffffU)) {
           if (*(short *)(iVar1 + 0x7e) == 0) {
-            (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0xe98,*(code **)(_r_plf_funcs_p + 8));
+            (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0xf9e,*(code **)(_r_plf_funcs_p + 8));
           }
           *(uint *)(iVar1 + 0x48) = *(int *)(iVar1 + 0x48) - *(int *)(iVar1 + 100) & 0xfffffff;
           *(short *)(iVar1 + 0x7e) = *(short *)(iVar1 + 0x7e) + -1;
         }
         (**(code **)(_r_ip_funcs_p + 0x3a8))(param_1,iVar2,0,*(code **)(_r_ip_funcs_p + 0x3a8));
         uVar3 = 0;
-        goto _L720;
+        goto _L758;
       }
     }
     uVar3 = 0;
   }
-_L720:
+_L758:
   (**(code **)(_r_osi_funcs_p + 0x18))(*(code **)(_r_osi_funcs_p + 0x18));
   return uVar3;
 }

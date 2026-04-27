@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llm_init.o -> f_hci_le_create_con_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -80,9 +80,9 @@ undefined4 f_hci_le_create_con_cmd_handler(ushort *param_1,undefined4 param_2)
         uVar7 = (uint)param_1[8];
         if (((((((param_1[7] <= uVar7) && ((ushort)(param_1[1] - 4) < 0x3ffd)) &&
                ((ushort)(*param_1 - 4) < 0x3ffd)) &&
-              ((param_1[0xb] <= param_1[0xc] && (5 < param_1[7])))) &&
-             ((uVar7 < 0xc81 && (((param_1[10] - 10 & 0xffff) < 0xc77 && (param_1[9] < 500)))))) &&
-            (bStack_99 < 4)) &&
+              ((param_1[0xb] <= param_1[0xc] && ((uint)_g_ble_con_interval_min <= (uint)param_1[7]))
+              )) && ((uVar7 < 0xc81 && (((param_1[10] - 10 & 0xffff) < 0xc77 && (param_1[9] < 500)))
+                     ))) && (bStack_99 < 4)) &&
            ((((byte)param_1[6] < 4 && ((ushort)(param_1[9] + 1) * uVar7 < (uint)param_1[10] << 2))
             && ((((byte)param_1[6] & 1) == 0 ||
                 (iVar4 = (*(code *)*_r_modules_funcs_p)
@@ -92,20 +92,20 @@ undefined4 f_hci_le_create_con_cmd_handler(ushort *param_1,undefined4 param_2)
           ;
           if (iVar6 != 0) goto _L42;
           uStack_90 = (uint)param_1[7] << 1;
+          uStack_8c = (uint)param_1[8] << 1;
           uVar7 = (uint)param_1[0xb];
           if (uStack_90 < param_1[0xb]) {
             uVar7 = uStack_90;
           }
-          if (uVar7 < 2) {
-            uVar7 = 2;
+          if (uVar7 < 5) {
+            uVar7 = 5;
           }
-          uStack_8c = (uint)param_1[8] << 1;
           uVar9 = (uint)param_1[0xc];
           if (uStack_8c < param_1[0xc]) {
             uVar9 = uStack_8c;
           }
-          if (uVar9 < 2) {
-            uVar9 = 2;
+          if (uVar9 < 5) {
+            uVar9 = 5;
           }
           uStack_80 = (ushort)bStack_9a;
           uStack_7e = 0;
@@ -116,7 +116,7 @@ undefined4 f_hci_le_create_con_cmd_handler(ushort *param_1,undefined4 param_2)
           iVar6 = 0xd;
           if (iVar4 != 0) goto _L42;
           if (*(int *)(*(int *)(_p_llm_env + 8) + (uint)bStack_9a * 0x44) != 0) {
-            (**(code **)(_r_plf_funcs_p + 8))(0x10000,0xd4,*(code **)(_r_plf_funcs_p + 8));
+            (**(code **)(_r_plf_funcs_p + 8))(0x10000,0xda,*(code **)(_r_plf_funcs_p + 8));
           }
           uVar8 = (uint)bStack_9a;
           iVar4 = *(int *)(_p_llm_env + 8);
@@ -153,7 +153,7 @@ _L37:
               }
               else if (bVar1 != 3) {
                 (**(code **)(_r_plf_funcs_p + 0xc))
-                          (bVar1,0,0x10000,0xfe,*(code **)(_r_plf_funcs_p + 0xc));
+                          (bVar1,0,0x10000,0x104,*(code **)(_r_plf_funcs_p + 0xc));
                 goto _L36;
               }
               memcpy((void *)(iVar6 + (uint)bStack_9a * 0x44 + 4),(void *)(iVar4 + 0x12),6);

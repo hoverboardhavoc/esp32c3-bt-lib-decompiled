@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 3ff529142f6e2707d57b10eb87ac8d86e9098b88
- * https://github.com/espressif/esp32c3-bt-lib/commit/3ff529142f6e2707d57b10eb87ac8d86e9098b88
- * Upstream date: 2025-06-05 11:04:06 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(4713a69)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> llm.o -> r_llm_link_disc
  *
  * (C) Espressif, Apache License 2.0.
@@ -46,7 +46,7 @@ void r_llm_link_disc(int param_1)
   iVar3 = (**(code **)(_r_plf_funcs_p + 0x38))(*(code **)(_r_plf_funcs_p + 0x38));
   if (((*(byte *)(iVar3 + 0xd) <= uVar4) && (_bt_rf_coex_hooks_p != (undefined4 *)0x0)) &&
      ((code *)*_bt_rf_coex_hooks_p != (code *)0x0)) {
-                    /* WARNING: Could not recover jumptable at 0x00011100. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x0001115e. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (*(code *)*_bt_rf_coex_hooks_p)(param_1,7,0);
     return;

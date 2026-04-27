@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * https://github.com/espressif/esp32c3-bt-lib/commit/16cda80aab0a008093592b7e304c77dcb3ac9ea4
- * Upstream date: 2025-12-31 14:03:52 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(1bb2f50)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app_flash -> llm_scan.o -> f_hci_le_per_adv_create_sync_cmd_handler
  *
  * (C) Espressif, Apache License 2.0.
@@ -28,16 +28,16 @@ undefined1 f_hci_le_per_adv_create_sync_cmd_handler(byte *param_1,undefined4 par
   if ((((0x3ff6 < (ushort)(*(short *)(param_1 + 0xc) - 10U)) || (1 < (bVar1 | param_1[2]))) ||
       (0xf < param_1[1])) || (499 < *(ushort *)(param_1 + 10))) {
     r_ble_log_internal_x2
-              (0x802e01e2,CONCAT22(*(ushort *)(param_1 + 10),*(short *)(param_1 + 0xc)),
+              (0x802e020d,CONCAT22(*(ushort *)(param_1 + 10),*(short *)(param_1 + 0xc)),
                (uint)param_1[2] << 8 | (uint)bVar1 << 0x18 | (uint)param_1[1] << 0x10 | 0x12);
     uVar7 = 0;
     uVar3 = 0x12;
-    goto _L248;
+    goto _L247;
   }
   if ((bVar1 == 1) && (iVar4 = llm_is_pal_empty(), iVar4 != 0)) {
     uVar3 = 0x10c;
-    uVar5 = 0x802e01e3;
-_L267:
+    uVar5 = 0x802e020e;
+_L266:
     r_ble_log_internal_x1(uVar5,uVar3);
   }
   else if (*(char *)(_p_llm_env + 0xd7) != '\x01') {
@@ -47,7 +47,7 @@ _L267:
     if ((uint)*(byte *)(iVar4 + 0xd) <= (uint)abStack_21[0]) {
       if ((*param_1 == 0) &&
          (iVar4 = r_llm_is_dev_synced(param_1 + 3,param_1[2],param_1[1]), iVar4 != 0)) {
-        r_ble_log_internal_x1(0x802e01e5,(uint)*param_1 << 8 | 0xb);
+        r_ble_log_internal_x1(0x802e0210,(uint)*param_1 << 8 | 0xb);
         uVar3 = 0xb;
         uVar7 = 0;
       }
@@ -56,9 +56,10 @@ _L267:
         uVar6 = (uint)abStack_21[0];
         if (uVar3 == 0) {
           *(undefined1 *)(*(int *)(_p_llm_env + 8) + uVar6 * 0x44 + 0x40) = 0xe;
-          r_ble_log_internal_x1(0x404e01e7,uVar6 | 0xe00);
+          llm_sync_cancel_cc_act_id = 0xff;
+          r_ble_log_internal_x1(0x404e0212,uVar6 | 0xe00);
           if (*(int *)(*(int *)(_p_llm_env + 8) + (uint)abStack_21[0] * 0x44) != 0) {
-            r_assert_err(0,"llm_scan.c",0x379);
+            r_assert_err(0,"llm_scan.c",900);
           }
           bVar1 = param_1[5];
           bVar2 = param_1[7];
@@ -74,19 +75,19 @@ _L267:
           }
         }
         else {
-          r_ble_log_internal_x1(0x802e01e6,uVar6 << 8 | uVar3);
+          r_ble_log_internal_x1(0x802e0211,uVar6 << 8 | uVar3);
           uVar7 = 0;
         }
       }
-      goto _L248;
+      goto _L247;
     }
     uVar3 = (uint)abStack_21[0] << 8 | 0xc;
-    uVar5 = 0x802e01e4;
-    goto _L267;
+    uVar5 = 0x802e020f;
+    goto _L266;
   }
   uVar7 = 0;
   uVar3 = 0xc;
-_L248:
+_L247:
   r_llm_cmd_stat_send(param_2,uVar3);
   return uVar7;
 }

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 0c68809d62e432427de97b5294f6619307f62f40
- * https://github.com/espressif/esp32c3-bt-lib/commit/0c68809d62e432427de97b5294f6619307f62f40
- * Upstream date: 2025-07-01 15:07:54 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2edb0b0)
+ * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
+ * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
+ * Upstream date: 2026-04-27 15:45:42 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
  * Source: libbtdm_app -> lld_adv.o -> r_lld_adv_start_update_filter_policy_hack
  *
  * (C) Espressif, Apache License 2.0.
@@ -37,7 +37,7 @@ void r_lld_adv_start_update_filter_policy_hack(int param_1,int param_2)
       iVar4 = 1;
       sVar7 = (short)uVar3 * 0x34 + 0xc60;
       uVar6 = 1;
-      goto _L92;
+      goto _L94;
     }
     if (((*(ushort *)(iVar9 + 0x74) & 4) != 0) &&
        (iVar4 = (**(code **)(_r_plf_funcs_p + 0xbc))(0xc60,*(code **)(_r_plf_funcs_p + 0xbc)),
@@ -46,7 +46,7 @@ void r_lld_adv_start_update_filter_policy_hack(int param_1,int param_2)
       iVar9 = 1;
       iVar4 = 0;
       sVar7 = (short)((uVar3 * 0x34 + 0xc60) * 0x10000 >> 0x10);
-      goto _L92;
+      goto _L94;
     }
   }
   if (*(char *)(param_2 + 0x27) == '\0') {
@@ -58,7 +58,7 @@ void r_lld_adv_start_update_filter_policy_hack(int param_1,int param_2)
   iVar9 = 0;
   iVar4 = 0;
   sVar7 = 0;
-_L92:
+_L94:
   bVar1 = *(byte *)(param_2 + 0x20);
   bVar2 = *(byte *)(param_2 + 0x27);
   iVar8 = param_1 * 0x5a;
