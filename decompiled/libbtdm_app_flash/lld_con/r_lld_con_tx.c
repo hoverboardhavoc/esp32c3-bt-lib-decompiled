@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
- * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
- * Upstream date: 2026-04-27 15:45:42 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
+ * Last changed at upstream commit 7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * https://github.com/espressif/esp32c3-bt-lib/commit/7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * Upstream date: 2026-05-19 17:43:45 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(bc853c5)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -42,24 +42,24 @@ void r_lld_con_tx(int param_1)
     if ((uVar2 & 3) == 3) {
       r_ble_util_buf_llcp_tx_free(uVar10);
       uVar7 = 0x20c;
-_L393:
+_L397:
       r_ke_msg_send_basic(uVar7,param_1 << 8 | 1,0xff);
     }
     else if ((uVar2 & 3) == 0) {
-      r_assert_err(0,"lld_con.c",0xb1c);
+      r_assert_err(0,"lld_con.c",0xb42);
     }
     else {
       iVar5 = r_emi_get_mem_addr_by_offset(0x1400);
       uVar6 = (uint)(*(ushort *)(iVar5 + iVar9) >> 8);
       if (uVar6 < 5) {
-        if (uVar6 == 0) goto _L369;
+        if (uVar6 == 0) goto _L373;
       }
       else if ((*(ushort *)(iVar3 + 0x84) & 0x40) != 0) {
         uVar6 = uVar6 - 4 & 0xffff;
       }
       iVar5 = *(int *)(iVar3 + 0x28);
       if (iVar5 == 0) {
-        r_assert_err(0,"lld_con.c",0xafc);
+        r_assert_err(0,"lld_con.c",0xb22);
       }
       if ((*(ushort *)(iVar5 + 6) & 0x3ff) + (uint)*(ushort *)(iVar5 + 4) <= uVar10 + uVar6) {
         r_co_list_pop_front(iVar3 + 0x28);
@@ -68,10 +68,10 @@ _L393:
         }
         r_ble_util_buf_acl_tx_free_in_isr(*(undefined2 *)(iVar5 + 4));
         uVar7 = 0x20e;
-        goto _L393;
+        goto _L397;
       }
     }
-_L369:
+_L373:
     iVar5 = r_emi_get_mem_addr_by_offset(0x1400);
     uVar2 = *(ushort *)(iVar5 + iVar9);
     iVar5 = r_emi_get_mem_addr_by_offset(0x1400);

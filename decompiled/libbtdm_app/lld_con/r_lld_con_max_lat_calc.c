@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
- * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
- * Upstream date: 2026-04-27 15:45:42 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
+ * Last changed at upstream commit 7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * https://github.com/espressif/esp32c3-bt-lib/commit/7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * Upstream date: 2026-05-19 17:43:45 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(bc853c5)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_max_lat_calc
  *
  * (C) Espressif, Apache License 2.0.
@@ -24,7 +24,7 @@ void r_lld_con_max_lat_calc(int param_1)
     uVar1 = (500000 - 0x8e300 / *(uint *)(iVar2 + 100)) /
             ((uint)*(ushort *)(_p_lld_env + 0xd4) + (uint)*(ushort *)(iVar2 + 0x7a)) - 1;
     if (*(uint *)(iVar2 + 0x68) <= *(uint *)(iVar2 + 100)) {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x72c,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x752,*(code **)(_r_plf_funcs_p + 8));
     }
     uVar3 = *(uint *)(iVar2 + 0x68) / *(uint *)(iVar2 + 100) - 1;
     if (*(ushort *)(iVar2 + 0x72) < uVar3) {
@@ -35,9 +35,9 @@ void r_lld_con_max_lat_calc(int param_1)
     }
     *(short *)(iVar2 + 0x72) = (short)uVar3;
     if (499 < uVar3) {
-                    /* WARNING: Could not recover jumptable at 0x000110e0. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x00011136. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x734,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0x75a,*(code **)(_r_plf_funcs_p + 8));
       return;
     }
   }

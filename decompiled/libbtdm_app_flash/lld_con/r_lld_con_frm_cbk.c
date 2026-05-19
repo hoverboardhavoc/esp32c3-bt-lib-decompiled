@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
- * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
- * Upstream date: 2026-04-27 15:45:42 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
+ * Last changed at upstream commit 7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * https://github.com/espressif/esp32c3-bt-lib/commit/7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * Upstream date: 2026-05-19 17:43:45 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(bc853c5)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_frm_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -44,7 +44,7 @@ void r_lld_con_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
   undefined2 uStack_36;
   
   if (4 < param_3) {
-    r_assert_param(param_3,"lld_con.c",0xe66);
+    r_assert_param(param_3,"lld_con.c",0xe8c);
     return;
   }
   param_2 = param_2 & 0xff;
@@ -57,7 +57,7 @@ void r_lld_con_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
     break;
   case 2:
     if (*(int *)(&lld_con_env + param_2 * 4) == 0) {
-      r_assert_param(0,"lld_con.c",0xd6d);
+      r_assert_param(0,"lld_con.c",0xd93);
       return;
     }
     iVar23 = r_rwip_time_get(param_1);
@@ -153,7 +153,7 @@ void r_lld_con_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
     return;
   case 3:
     if (*(int *)(&lld_con_env + param_2 * 4) == 0) {
-      r_assert_param(0,"lld_con.c",0xd87);
+      r_assert_param(0,"lld_con.c",0xdad);
       return;
     }
     r_lld_con_tx_eco(param_1);
@@ -245,7 +245,7 @@ void r_lld_con_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
       uVar20 = *(uint *)(iVar23 + 4) * 0x271;
       uVar17 = *(int *)(iVar23 + 8) + uVar20;
       iVar24 = (uint)(uVar17 < uVar20) + (int)((ulonglong)*(uint *)(iVar23 + 4) * 0x271 >> 0x20);
-_L622:
+_L635:
       uVar17 = iVar24 << 0x1f | uVar17 >> 1;
     }
     else {
@@ -255,7 +255,7 @@ _L622:
         iVar24 = (uint)(uVar17 < uVar20) +
                  (int)((ulonglong)*(uint *)(iVar23 + 0x54) * 0x271 >> 0x20) +
                  ((int)*(short *)(iVar23 + 0x6e) >> 0x1f);
-        goto _L622;
+        goto _L635;
       }
       uVar20 = *(uint *)(iVar23 + 4) * 0x271;
       uVar17 = *(int *)(iVar23 + 8) + uVar20;

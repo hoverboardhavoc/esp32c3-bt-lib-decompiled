@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
- * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
- * Upstream date: 2026-04-27 15:45:42 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
+ * Last changed at upstream commit 7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * https://github.com/espressif/esp32c3-bt-lib/commit/7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * Upstream date: 2026-05-19 17:43:45 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(bc853c5)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_evt_time_update_eco
  *
  * (C) Espressif, Apache License 2.0.
@@ -41,7 +41,7 @@ void r_lld_con_evt_time_update_eco(int param_1)
     }
     *(uint *)(iVar2 + 0x5c) = uVar5;
     *(uint *)(iVar2 + 0x10) = uVar5;
-                    /* WARNING: Could not recover jumptable at 0x0001154e. Too many branches */
+                    /* WARNING: Could not recover jumptable at 0x000115a4. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(code **)(iVar1 + 0x72c))
               (4,*(undefined1 *)(iVar2 + 0x8e),*(undefined4 *)(iVar2 + 100),uVar5 & 0xffff,0,

@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
- * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
- * Upstream date: 2026-04-27 15:45:42 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
+ * Last changed at upstream commit 7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * https://github.com/espressif/esp32c3-bt-lib/commit/7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * Upstream date: 2026-05-19 17:43:45 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(bc853c5)
  * Source: libbtdm_app -> lld_con.o -> r_lld_con_tx
  *
  * (C) Espressif, Apache License 2.0.
@@ -45,24 +45,24 @@ void r_lld_con_tx(int param_1)
       (**(code **)(_r_ip_funcs_p + 0xf8))(uVar11,*(code **)(_r_ip_funcs_p + 0xf8));
       pcVar9 = *(code **)(_r_modules_funcs_p + 0xe4);
       uVar7 = 0x20c;
-_L453:
+_L457:
       (*pcVar9)(uVar7,param_1 << 8 | 1,0xff,pcVar9);
     }
     else if ((uVar2 & 3) == 0) {
-      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0xb1c,*(code **)(_r_plf_funcs_p + 8));
+      (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0xb42,*(code **)(_r_plf_funcs_p + 8));
     }
     else {
       iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
       uVar6 = (uint)(*(ushort *)(iVar5 + iVar10) >> 8);
       if (uVar6 < 5) {
-        if (uVar6 == 0) goto _L429;
+        if (uVar6 == 0) goto _L433;
       }
       else if ((*(ushort *)(iVar3 + 0x84) & 0x40) != 0) {
         uVar6 = uVar6 - 4 & 0xffff;
       }
       iVar5 = *(int *)(iVar3 + 0x28);
       if (iVar5 == 0) {
-        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0xafc,*(code **)(_r_plf_funcs_p + 8));
+        (**(code **)(_r_plf_funcs_p + 8))(0,"lld_con.c",0xb22,*(code **)(_r_plf_funcs_p + 8));
       }
       if ((*(ushort *)(iVar5 + 6) & 0x3ff) + (uint)*(ushort *)(iVar5 + 4) <= uVar11 + uVar6) {
         (**(code **)(_r_modules_funcs_p + 0x40))(iVar3 + 0x28,*(code **)(_r_modules_funcs_p + 0x40))
@@ -74,10 +74,10 @@ _L453:
                   (*(undefined2 *)(iVar5 + 4),*(code **)(_r_ip_funcs_p + 0xd0));
         pcVar9 = *(code **)(_r_modules_funcs_p + 0xe4);
         uVar7 = 0x20e;
-        goto _L453;
+        goto _L457;
       }
     }
-_L429:
+_L433:
     iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));
     uVar2 = *(ushort *)(iVar5 + iVar10);
     iVar5 = (**(code **)(_r_plf_funcs_p + 0xbc))(0x1400,*(code **)(_r_plf_funcs_p + 0xbc));

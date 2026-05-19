@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 58d499bba1019a80a622df60aa38f59c1e4565ba
- * https://github.com/espressif/esp32c3-bt-lib/commit/58d499bba1019a80a622df60aa38f59c1e4565ba
- * Upstream date: 2026-04-27 15:45:42 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(2f683593)
+ * Last changed at upstream commit 7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * https://github.com/espressif/esp32c3-bt-lib/commit/7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * Upstream date: 2026-05-19 17:43:45 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(bc853c5)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_frm_skip_isr
  *
  * (C) Espressif, Apache License 2.0.
@@ -10,15 +10,15 @@
  * Decompiler output may be incomplete or differ from original semantics.
  */
 
-/* WARNING: Removing unreachable block (ram,0x00010d40) */
-/* WARNING: Removing unreachable block (ram,0x00010d46) */
-/* WARNING: Removing unreachable block (ram,0x00010d4c) */
-/* WARNING: Removing unreachable block (ram,0x00010d58) */
-/* WARNING: Removing unreachable block (ram,0x00010d5c) */
-/* WARNING: Removing unreachable block (ram,0x00010d5e) */
-/* WARNING: Removing unreachable block (ram,0x00010fa6) */
-/* WARNING: Removing unreachable block (ram,0x0001112a) */
-/* WARNING: Removing unreachable block (ram,0x0001112e) */
+/* WARNING: Removing unreachable block (ram,0x00010d92) */
+/* WARNING: Removing unreachable block (ram,0x00010d98) */
+/* WARNING: Removing unreachable block (ram,0x00010d9e) */
+/* WARNING: Removing unreachable block (ram,0x00010daa) */
+/* WARNING: Removing unreachable block (ram,0x00010dae) */
+/* WARNING: Removing unreachable block (ram,0x00010db0) */
+/* WARNING: Removing unreachable block (ram,0x00010ff8) */
+/* WARNING: Removing unreachable block (ram,0x0001117c) */
+/* WARNING: Removing unreachable block (ram,0x00011180) */
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
 
 void r_lld_con_frm_skip_isr(uint param_1)
@@ -46,12 +46,12 @@ void r_lld_con_frm_skip_isr(uint param_1)
   
   iVar6 = *(int *)(&lld_con_env + param_1 * 4);
   if (iVar6 == 0) {
-    r_assert_err(0,"lld_con.c",0xdb8);
+    r_assert_err(0,"lld_con.c",0xdde);
     return;
   }
   iVar9 = r_lld_read_clock();
   if (1 < (byte)(*(char *)(iVar6 + 0x8f) - 1U)) {
-    r_assert_err(0,"lld_con.c",0xd9e);
+    r_assert_err(0,"lld_con.c",0xdc4);
   }
   r_sch_arb_remove(iVar6,1);
   if (*(char *)(iVar6 + 0x8f) == '\x02') {
@@ -132,21 +132,21 @@ void r_lld_con_frm_skip_isr(uint param_1)
         uVar15 = uVar11 * 2;
         if ((*(ushort *)(iVar6 + 0x84) & 2) == 0) {
           uVar15 = uVar15 + (uint)*(ushort *)(iVar6 + 0x70) * 0x271;
-_L240:
+_L244:
           bVar4 = true;
         }
         else {
           bVar4 = false;
           if (*(ushort *)(iVar6 + 0x7c) < 7) {
-            uVar15 = uVar15 + ((int)((uint)*(ushort *)(&DAT_0001564c + iVar9) *
+            uVar15 = uVar15 + ((int)((uint)*(ushort *)(&DAT_00015804 + iVar9) *
                                      (uint)*(ushort *)(iVar6 + 0x70) * 0x271) >> 1) +
                               (uint)*(ushort *)(iVar6 + 0x70) * 0x271;
             uVar18 = *(int *)(iVar6 + 100) * 0x271;
             if (uVar18 < uVar15) {
               uVar15 = uVar18;
             }
-            *(ushort *)(&DAT_0001564c + iVar9) = *(ushort *)(&DAT_0001564c + iVar9) + 1;
-            goto _L240;
+            *(ushort *)(&DAT_00015804 + iVar9) = *(ushort *)(&DAT_00015804 + iVar9) + 1;
+            goto _L244;
           }
         }
         if (((*(char *)(iVar6 + 0x46) == '\x01') && (*(char *)(iVar6 + 0x42) != '\0')) &&
@@ -171,7 +171,7 @@ _L240:
       iVar12 = r_sch_arb_insert(iVar6);
       if (iVar12 == 0) {
         iVar9 = 1;
-        goto _L187;
+        goto _L191;
       }
       *(char *)(iVar6 + 0x16) = *(char *)(iVar6 + 0x16) + rwip_priority;
       uVar16 = *(int *)(iVar6 + 100) + uVar16 & 0xfffffff;
@@ -205,7 +205,7 @@ _L240:
       }
     }
     iVar9 = 0;
-_L187:
+_L191:
     r_ble_log_internal_x2(0x404300f7,*(undefined4 *)(iVar6 + 0x7c),iVar9 << 8 | param_1);
     if (iVar9 != 0) {
       *(undefined1 *)(iVar6 + 0x8f) = 0;
@@ -266,13 +266,13 @@ _L187:
     if ((uVar3 & 3) == 3) {
       iVar8 = r_emi_get_mem_addr_by_offset(0x1400);
       r_ble_util_buf_llcp_tx_free(*(undefined2 *)(iVar12 + 4 + iVar8));
-      uVar10 = 0x875;
-      if (*(int *)(iVar6 + 0x24) != 0) goto _L161;
+      uVar10 = 0x89b;
+      if (*(int *)(iVar6 + 0x24) != 0) goto _L165;
     }
     else {
-      uVar10 = 0x87e;
+      uVar10 = 0x8a4;
       if ((uVar3 & 3) == 0) {
-_L161:
+_L165:
         r_assert_err(0,"lld_con.c",uVar10);
       }
     }

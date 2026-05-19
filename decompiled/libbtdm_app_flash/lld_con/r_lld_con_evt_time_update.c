@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * https://github.com/espressif/esp32c3-bt-lib/commit/099a7e1ab87dd977754fc4ad35678ab7ebf2f2a2
- * Upstream date: 2025-11-03 14:51:49 +0800
- * Upstream subject: feat(bt): Update bt lib for ESP32-C3 and ESP32-S3(0871069)
+ * Last changed at upstream commit 7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * https://github.com/espressif/esp32c3-bt-lib/commit/7e73ebf92e5aa995065351043c13d2ac0f00772e
+ * Upstream date: 2026-05-19 17:43:45 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(bc853c5)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_evt_time_update
  *
  * (C) Espressif, Apache License 2.0.
@@ -65,12 +65,12 @@ void r_lld_con_evt_time_update(int param_1)
       uVar8 = (uint)DAT_0001604d;
       if ((uVar8 != 0) && (uVar8 < uVar3)) {
         uVar3 = uVar3 - uVar8;
-        goto _L96;
+        goto _L100;
       }
     }
     uVar3 = uVar3 - uVar7;
   }
-_L96:
+_L100:
   if ((*(ushort *)(iVar2 + 0x84) & 1) != 0) {
     uVar8 = (uint)*(ushort *)(iVar2 + 0x74);
     uVar3 = uVar3 - ((((uint)*(ushort *)(_p_lld_env + 0xd4) + (uint)*(ushort *)(iVar2 + 0x7a)) *
