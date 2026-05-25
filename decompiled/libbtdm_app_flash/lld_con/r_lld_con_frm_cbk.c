@@ -1,8 +1,8 @@
 /*
- * Last changed at upstream commit 7e73ebf92e5aa995065351043c13d2ac0f00772e
- * https://github.com/espressif/esp32c3-bt-lib/commit/7e73ebf92e5aa995065351043c13d2ac0f00772e
- * Upstream date: 2026-05-19 17:43:45 +0800
- * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(bc853c5)
+ * Last changed at upstream commit 0a08c4b32f3666003080b662a1a61794da24ff0f
+ * https://github.com/espressif/esp32c3-bt-lib/commit/0a08c4b32f3666003080b662a1a61794da24ff0f
+ * Upstream date: 2026-05-25 14:11:16 +0800
+ * Upstream subject: fix(bt): Update bt lib for ESP32-C3 and ESP32-S3(51d9dfde)
  * Source: libbtdm_app_flash -> lld_con.o -> r_lld_con_frm_cbk
  *
  * (C) Espressif, Apache License 2.0.
@@ -44,7 +44,7 @@ void r_lld_con_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
   undefined2 uStack_36;
   
   if (4 < param_3) {
-    r_assert_param(param_3,"lld_con.c",0xe8c);
+    r_assert_param(param_3,"lld_con.c",0xe90);
     return;
   }
   param_2 = param_2 & 0xff;
@@ -57,7 +57,7 @@ void r_lld_con_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
     break;
   case 2:
     if (*(int *)(&lld_con_env + param_2 * 4) == 0) {
-      r_assert_param(0,"lld_con.c",0xd93);
+      r_assert_param(0,"lld_con.c",0xd97);
       return;
     }
     iVar23 = r_rwip_time_get(param_1);
@@ -100,7 +100,7 @@ void r_lld_con_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
           }
           if (((int)((extraout_a1 - (0x270 - (*(ushort *)(iVar22 + 0xc + iVar9) & 0x3ff))) +
                      uVar16 * uVar19 + (uint)_DAT_0001608e * 2) <= iVar18) ||
-             ((((lld_con_fake_rx[iVar11 + 2] & 0x26) == 0 && (((*puVar21 ^ uVar3) & 0xff) == 0)) &&
+             ((((lld_con_fake_rx[iVar11 + 2] & 0x2e) == 0 && (((*puVar21 ^ uVar3) & 0xff) == 0)) &&
               (*puVar21 >> 8 != 0)))) {
             *(ushort *)(iVar14 + 0x84) = *(ushort *)(iVar14 + 0x84) | 0x8000;
             lld_con_fake_rx[iVar11 + 2] = (char)uVar15;
@@ -153,7 +153,7 @@ void r_lld_con_frm_cbk(undefined4 param_1,uint param_2,uint param_3)
     return;
   case 3:
     if (*(int *)(&lld_con_env + param_2 * 4) == 0) {
-      r_assert_param(0,"lld_con.c",0xdad);
+      r_assert_param(0,"lld_con.c",0xdb1);
       return;
     }
     r_lld_con_tx_eco(param_1);
